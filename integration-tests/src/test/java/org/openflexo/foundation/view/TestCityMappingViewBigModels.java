@@ -60,7 +60,6 @@ import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
 import org.openflexo.foundation.fml.rt.action.ModelSlotInstanceConfiguration.DefaultModelSlotInstanceConfigurationOption;
 import org.openflexo.foundation.fml.rt.rm.ViewResource;
-import org.openflexo.foundation.resource.FileSystemBasedResourceCenter;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.technologyadapter.FlexoModelResource;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
@@ -74,7 +73,7 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 	public static FlexoProject project;
 	private static FlexoEditor editor;
 	private static ViewPoint cityMappingVP;
-	private static RepositoryFolder<ViewResource> viewFolder;
+	private static RepositoryFolder<ViewResource, ?> viewFolder;
 	private static View view;
 
 	/**
@@ -141,7 +140,7 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 		addRepositoryFolder.doAction();
 		assertTrue(addRepositoryFolder.hasActionExecutionSucceeded());
 		viewFolder = addRepositoryFolder.getNewFolder();
-		assertTrue(viewFolder.getFile().exists());
+		assertTrue(((File) viewFolder.getSerializationArtefact()).exists());
 	}
 
 	@Test
@@ -178,8 +177,7 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 		view = viewRes.getView();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project, ((ViewResource) view.getResource()).getProject());
-		assertEquals(project, view.getProject());
+		assertEquals(project, ((ViewResource) view.getResource()).getResourceCenter());
 	}
 
 	@Test
@@ -201,13 +199,8 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 		TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration1 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
 				.getModelSlotInstanceConfiguration(emfModelSlot1);
 		emfModelSlotConfiguration1.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-		File modelFile1 = new File(((FileSystemBasedResourceCenter) resourceCenter).getRootDirectory(),
-				"TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/generated_10khTry8.city1");
-		System.out.println("Searching " + modelFile1.getAbsolutePath());
-		assertTrue(modelFile1.exists());
-		System.out.println("Searching " + modelFile1.toURI().toString());
-		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
-				.getModelWithURI(modelFile1.toURI().toString());
+		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager().getModelWithURI(
+				"http://openflexo.org/test/TestResourceCenter/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/generated_10khTry8.city1");
 		assertNotNull(modelResource1);
 		emfModelSlotConfiguration1.setModelResource(modelResource1);
 		assertTrue(emfModelSlotConfiguration1.isValidConfiguration());
@@ -216,13 +209,8 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 		TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration2 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
 				.getModelSlotInstanceConfiguration(emfModelSlot2);
 		emfModelSlotConfiguration2.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-		File modelFile2 = new File(((FileSystemBasedResourceCenter) resourceCenter).getRootDirectory(),
-				"TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city2/generated_10khTry8.city2");
-		System.out.println("Searching " + modelFile2.getAbsolutePath());
-		assertTrue(modelFile2.exists());
-		System.out.println("Searching " + modelFile2.toURI().toString());
-		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager()
-				.getModelWithURI(modelFile2.toURI().toString());
+		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager().getModelWithURI(
+				"http://openflexo.org/test/TestResourceCenter/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city2/generated_10khTry8.city2");
 		assertNotNull(modelResource2);
 		emfModelSlotConfiguration2.setModelResource(modelResource2);
 		assertTrue(emfModelSlotConfiguration2.isValidConfiguration());

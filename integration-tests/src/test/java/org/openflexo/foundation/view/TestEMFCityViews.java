@@ -82,7 +82,7 @@ import org.openflexo.test.TestOrder;
 public class TestEMFCityViews extends OpenflexoProjectAtRunTimeTestCase {
 
 	private static ViewPoint cityViewsViewPoint;
-	private static RepositoryFolder<ViewResource> viewFolder;
+	private static RepositoryFolder<ViewResource, ?> viewFolder;
 	private static View view;
 	private static FlexoEditor editor;
 	private static FlexoProject project;
@@ -121,8 +121,8 @@ public class TestEMFCityViews extends OpenflexoProjectAtRunTimeTestCase {
 		addRepositoryFolder.setNewFolderName("NewViewFolder");
 		addRepositoryFolder.doAction();
 		assertTrue(addRepositoryFolder.hasActionExecutionSucceeded());
-		RepositoryFolder<ViewResource> viewFolder = addRepositoryFolder.getNewFolder();
-		assertTrue(viewFolder.getFile().exists());
+		RepositoryFolder<ViewResource, ?> viewFolder = addRepositoryFolder.getNewFolder();
+		assertTrue(((File) viewFolder.getSerializationArtefact()).exists());
 
 		// Create View
 		CreateViewInFolder addView = CreateViewInFolder.actionType.makeNewAction(viewFolder, null, editor);
@@ -156,9 +156,7 @@ public class TestEMFCityViews extends OpenflexoProjectAtRunTimeTestCase {
 		View view = viewRes.getView();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project1, ((ViewResource) view.getResource()).getProject());
-		assertEquals(project1, view.getProject());
-
+		assertEquals(project1, ((ViewResource) view.getResource()).getResourceCenter());
 	}
 
 	@Test
@@ -219,9 +217,7 @@ public class TestEMFCityViews extends OpenflexoProjectAtRunTimeTestCase {
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceTitle(), newVirtualModelInstance.getTitle());
 		assertEquals(createVirtualModelInstance.getVirtualModel(), cityView1VM);
 		assertTrue(((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getFlexoIODelegate().exists());
-		assertEquals(project, ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getProject());
-		assertEquals(project, newVirtualModelInstance.getProject());
-
+		assertEquals(project, ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
 	}
 
 	private ViewPoint loadViewPoint(String viewPointURI) {

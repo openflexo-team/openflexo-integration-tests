@@ -45,6 +45,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
@@ -57,7 +59,9 @@ import org.openflexo.foundation.fml.rt.View;
 import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
 import org.openflexo.foundation.fml.rt.rm.ViewResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
+import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.model.action.CreateDiagram;
+import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
@@ -106,8 +110,8 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		addRepositoryFolder.setNewFolderName("NewViewFolder");
 		addRepositoryFolder.doAction();
 		assertTrue(addRepositoryFolder.hasActionExecutionSucceeded());
-		RepositoryFolder<ViewResource> viewFolder = addRepositoryFolder.getNewFolder();
-		assertTrue(viewFolder.getFile().exists());
+		RepositoryFolder<ViewResource, ?> viewFolder = addRepositoryFolder.getNewFolder();
+		assertTrue(((File) viewFolder.getSerializationArtefact()).exists());
 
 		// Create View
 		CreateViewInFolder addView = CreateViewInFolder.actionType.makeNewAction(viewFolder, null, editor);
@@ -138,14 +142,15 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		View view = viewRes.getView();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project, ((ViewResource) view.getResource()).getProject());
-		assertEquals(project, view.getProject());
+		assertEquals(project, ((ViewResource) view.getResource()).getResourceCenter());
 
 		// CreateDiagram
 		System.out.println("Create diagram, view=" + view + " editor=" + editor);
 		System.out.println("editor project = " + editor.getProject());
-		System.out.println("view project = " + view.getProject());
-		CreateDiagram createDiagram = CreateDiagram.actionType.makeNewAction(view.getProject().getRootFolder(), null, editor);
+		DiagramTechnologyAdapter diagramTA = serviceManager.getTechnologyAdapterService()
+				.getTechnologyAdapter(DiagramTechnologyAdapter.class);
+		RepositoryFolder<DiagramResource, ?> diagramFolder = diagramTA.getDiagramRepository(editor.getProject()).getRootFolder();
+		CreateDiagram createDiagram = CreateDiagram.actionType.makeNewAction(diagramFolder, null, editor);
 		createDiagram.setDiagramName("TestNewDiagram");
 		createDiagram.setDiagramTitle("A nice title for a new diagram");
 		// TODO : rewrite all of this
