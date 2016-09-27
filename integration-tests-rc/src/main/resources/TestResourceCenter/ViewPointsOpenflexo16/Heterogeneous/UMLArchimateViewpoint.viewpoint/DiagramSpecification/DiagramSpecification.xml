@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DiagramSpecification id="1" name="DiagramSpecification" modelVersion="1.0">
+  <EditionPattern id="2" name="Actor">
+    <DropScheme id="3" target="top" name="dropActorAtTopLevel" label="dropActorAtTopLevel" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+      <TextFieldParameter id="4" name="name" label="name" usePaletteLabelAsDefaultValue="false" isRequired="false" />
+      <URIParameter id="5" base="parameters.name" name="uri" label="uri" usePaletteLabelAsDefaultValue="false" isRequired="true">
+        <AddressedEMFModelSlot id="6" isRequired="true" isReadOnly="false" name="emfArchimateModelslot" metaModelURI="http://www.bolton.ac.uk/archimate" />
+      </URIParameter>
+      <AddShape id="7" container="topLevel" extendParentBoundsToHostThisShape="false" assignation="shape">
+        <AddressedDiagramModelSlot idref="8" />
+      </AddShape>
+      <AddEMFObjectIndividual id="9" assignation="emfArchimateRole">
+        <AddressedEMFModelSlot idref="6" />
+        <DataPropertyAssertion id="10" dataPropertyURI="http://www.bolton.ac.uk/archimate/Nameable/name" value="parameters.name" />
+      </AddEMFObjectIndividual>
+      <AddOWLIndividual id="11" assignation="owlUMLRole" individualName="parameters.uri">
+        <AddressedOWLModelSlot idref="12" />
+        <DataPropertyAssertion id="13" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#name" value="parameters.name" />
+      </AddOWLIndividual>
+    </DropScheme>
+    <ContainedShapePatternRole id="14" patternRole="shape" name="shape" exampleLabel="">
+      <ShapeGraphicalRepresentation id="15" className="org.openflexo.vpm.view.widget.EditionPatternPreviewShapeGR" x="76.0" y="8.0" width="65.79009900990098" height="60.7819858712716" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="true" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="false" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="true" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
+        <ForegroundStyle id="16" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+        <ImageBackgroundStyle id="17" imageFile="../Img/Crystal_Clear_app_kuser.png" scaleX="0.5139851485148514" scaleY="0.4748592646193094" deltaX="0.0" deltaY="0.0" imageBackgroundType="TRANSPARENT" imageBackgroundColor="255,255,255" fitToShape="true" useTransparency="false" transparencyLevel="0.5" />
+        <SelectedForegroundStyle id="18" noStroke="false" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+        <SelectedColorBackgroundStyle id="19" color="254,247,217" useTransparency="false" transparencyLevel="0.5" />
+        <FocusedForegroundStyle id="20" noStroke="false" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+        <FocusedColorBackgroundStyle id="21" color="254,247,217" useTransparency="false" transparencyLevel="0.5" />
+        <Border id="22" top="20" bottom="20" left="20" right="20" />
+        <RectangleShape id="23" isRounded="false" arcSize="30.0" />
+        <ShadowStyle id="24" drawShadow="false" shadowDarkness="150" shadowDepth="2" shadowBlur="4" />
+        <TextStyle id="25" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" />
+      </ShapeGraphicalRepresentation>
+      <AddressedDiagramModelSlot id="8" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://UML_Archimate_Viewpoint/DiagramSpecification" />
+      <GRSpec id="26" featureName="label" value="emfArchimateRole.name" readOnly="false" />
+    </ContainedShapePatternRole>
+    <ContainedOWLIndividualPatternRole id="27" name="owlUMLRole" patternRole="owlUMLRole" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Actor">
+      <AddressedOWLModelSlot id="12" isRequired="true" isReadOnly="false" name="owlUMLModelslot" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl" />
+    </ContainedOWLIndividualPatternRole>
+    <ContainedEMFObjectIndividualPatternRole id="28" name="emfArchimateRole" patternRole="emfArchimateRole" ontologicType="http://www.bolton.ac.uk/archimate/BusinessActor">
+      <AddressedEMFModelSlot idref="6" />
+    </ContainedEMFObjectIndividualPatternRole>
+    <PrimaryConceptOWLIndividualPatternRole idref="27" />
+    <PrimaryRepresentationShapePatternRole idref="14" />
+    <Inspector id="29" inspectorTitle="Actor" />
+  </EditionPattern>
+  <EditionPattern id="30" name="Function">
+    <DropScheme id="31" target="top" name="drop" label="drop" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+      <TextFieldParameter id="32" name="name" label="name" usePaletteLabelAsDefaultValue="false" isRequired="false" />
+      <URIParameter id="33" base="parameters.name" name="uri" label="uri" usePaletteLabelAsDefaultValue="false" isRequired="true">
+        <AddressedOWLModelSlot idref="12" />
+      </URIParameter>
+      <AddShape id="34" container="topLevel" extendParentBoundsToHostThisShape="false" assignation="shape">
+        <AddressedDiagramModelSlot idref="8" />
+      </AddShape>
+      <AddEMFObjectIndividual id="35" assignation="businessFunction">
+        <AddressedEMFModelSlot idref="6" />
+        <DataPropertyAssertion id="36" dataPropertyURI="http://www.bolton.ac.uk/archimate/Nameable/name" value="parameters.name" />
+      </AddEMFObjectIndividual>
+      <AddOWLIndividual id="37" assignation="usecase" individualName="parameters.uri">
+        <AddressedOWLModelSlot idref="12" />
+        <DataPropertyAssertion id="38" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#name" value="parameters.name" />
+      </AddOWLIndividual>
+    </DropScheme>
+    <DeletionScheme id="39" name="defaultDeleteGROnly" label="defaultDeleteGROnly" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+      <DeleteAction id="40" object="shape" />
+    </DeletionScheme>
+    <DeletionScheme id="41" name="defaultDeleteGRandModel" label="defaultDeleteGRandModel" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+      <DeleteAction id="42" object="shape" />
+    </DeletionScheme>
+    <ContainedShapePatternRole id="43" patternRole="shape" name="shape" exampleLabel="">
+      <ShapeGraphicalRepresentation id="44" className="org.openflexo.vpm.view.widget.EditionPatternPreviewShapeGR" x="14.0" y="17.0" width="60.0" height="50.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="true" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="false" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="true" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
+        <ForegroundStyle id="45" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+        <ImageBackgroundStyle id="46" imageFile="../Img/48px-Crystal_Clear_action_configure.png" scaleX="1.25" scaleY="1.0416666666666667" deltaX="0.0" deltaY="0.0" imageBackgroundType="TRANSPARENT" imageBackgroundColor="255,255,255" fitToShape="true" useTransparency="false" transparencyLevel="0.5" />
+        <SelectedForegroundStyle id="47" noStroke="false" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+        <SelectedColorBackgroundStyle id="48" color="254,247,217" useTransparency="false" transparencyLevel="0.5" />
+        <FocusedForegroundStyle id="49" noStroke="false" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+        <FocusedColorBackgroundStyle id="50" color="254,247,217" useTransparency="false" transparencyLevel="0.5" />
+        <Border id="51" top="20" bottom="20" left="20" right="20" />
+        <RectangleShape idref="23" />
+        <ShadowStyle id="52" drawShadow="false" shadowDarkness="150" shadowDepth="2" shadowBlur="4" />
+        <TextStyle id="53" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" />
+      </ShapeGraphicalRepresentation>
+      <AddressedDiagramModelSlot idref="8" />
+      <GRSpec id="54" featureName="label" value="businessFunction.name" readOnly="false" />
+    </ContainedShapePatternRole>
+    <ContainedEMFObjectIndividualPatternRole id="55" name="businessFunction" patternRole="businessFunction" ontologicType="http://www.bolton.ac.uk/archimate/BusinessFunction">
+      <AddressedEMFModelSlot idref="6" />
+    </ContainedEMFObjectIndividualPatternRole>
+    <ContainedOWLIndividualPatternRole id="56" name="usecase" patternRole="usecase" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#UseCase">
+      <AddressedOWLModelSlot idref="12" />
+    </ContainedOWLIndividualPatternRole>
+    <PrimaryConceptEMFObjectIndividualPatternRole idref="55" />
+    <PrimaryRepresentationShapePatternRole idref="43" />
+    <Inspector id="57" inspectorTitle="Function" />
+  </EditionPattern>
+  <EditionPattern id="58" name="IsInChargeOf">
+    <LinkScheme id="59" fromTarget="http://UML_Archimate_Viewpoint/DiagramSpecification#Actor" toTarget="http://UML_Archimate_Viewpoint/DiagramSpecification#Function" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="defaultLink" label="defaultLink" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+      <URIParameter id="60" base="&quot;association&quot;" name="uri" label="uri" usePaletteLabelAsDefaultValue="false" isRequired="true">
+        <AddressedOWLModelSlot idref="12" />
+      </URIParameter>
+      <AddConnector id="61" fromShape="fromTarget.shape" toShape="toTarget.shape" assignation="isInChargeOf">
+        <AddressedDiagramModelSlot idref="8" />
+      </AddConnector>
+      <AddEMFObjectIndividual id="62" assignation="emfAssociation">
+        <AddressedEMFModelSlot idref="6" />
+        <ObjectPropertyAssertion id="63" objectPropertyURI="http://www.bolton.ac.uk/archimate/Relationship/source" object="fromTarget.emfArchimateRole" />
+        <ObjectPropertyAssertion id="64" objectPropertyURI="http://www.bolton.ac.uk/archimate/Relationship/target" object="toTarget.businessFunction" />
+      </AddEMFObjectIndividual>
+      <AddOWLIndividual id="65" assignation="owlAssociation" individualName="parameters.uri">
+        <AddressedOWLModelSlot idref="12" />
+        <ObjectPropertyAssertion id="66" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#ownedEnd" object="fromTarget.owlUMLRole" />
+        <ObjectPropertyAssertion id="67" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#ownedEnd" object="toTarget.usecase" />
+      </AddOWLIndividual>
+    </LinkScheme>
+    <DeletionScheme id="68" name="defaultDeleteGROnly" label="defaultDeleteGROnly" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+      <DeleteAction id="69" object="isInChargeOf" />
+    </DeletionScheme>
+    <DeletionScheme id="70" name="defaultDeleteGRandModel" label="defaultDeleteGRandModel" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+      <DeleteAction id="71" object="isInChargeOf" />
+    </DeletionScheme>
+    <ContainedConnectorPatternRole id="72" patternRole="isInChargeOf" name="isInChargeOf" exampleLabel="isInChargeOf">
+      <ConnectorGraphicalRepresentation id="73" className="org.openflexo.vpm.view.widget.EditionPatternPreviewConnectorGR" hasSelectedForeground="false" hasFocusedForeground="false" startSymbol="NONE" endSymbol="PLAIN_ARROW" middleSymbol="NONE" startSymbolSize="10.0" endSymbolSize="15.0" middleSymbolSize="10.0" relativeMiddleSymbolLocation="0.5" applyForegroundToSymbols="true" identifier="object_2" layer="64" hasText="true" text="isInChargeOf" isMultilineAllowed="true" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
+        <ForegroundStyle id="74" noStroke="false" color="51,153,255" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="SMALL_DASHES" useTransparency="false" transparencyLevel="0.5" />
+        <SelectedForegroundStyle id="75" noStroke="false" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+        <FocusedForegroundStyle id="76" noStroke="false" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+        <StartShapeGraphicalRepresentation id="77" className="org.openflexo.vpm.view.widget.EditionPatternConnectorFromArtefactGR" x="80.0" y="80.0" width="20.0" height="20.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="true" locationConstraints="FREELY_MOVABLE" dimensionConstraints="CONSTRAINED_DIMENSIONS" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="true" allowToLeaveBounds="true" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="true" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="false" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
+          <ForegroundStyle id="78" noStroke="false" color="255,204,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+          <ColorBackgroundStyle id="79" color="255,255,204" useTransparency="false" transparencyLevel="0.5" />
+          <SelectedForegroundStyle id="80" noStroke="false" color="255,204,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+          <SelectedColorBackgroundStyle id="81" color="255,255,204" useTransparency="false" transparencyLevel="0.5" />
+          <FocusedForegroundStyle id="82" noStroke="false" color="255,204,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+          <FocusedColorBackgroundStyle id="83" color="255,255,204" useTransparency="false" transparencyLevel="0.5" />
+          <Border id="84" top="20" bottom="20" left="20" right="20" />
+          <CircleShape id="85" />
+          <ShadowStyle id="86" drawShadow="true" shadowDarkness="150" shadowDepth="2" shadowBlur="4" />
+          <TextStyle id="87" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" />
+        </StartShapeGraphicalRepresentation>
+        <EndShapeGraphicalRepresentation id="88" className="org.openflexo.vpm.view.widget.EditionPatternConnectorToArtefactGR" x="350.0" y="80.0" width="20.0" height="20.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="true" locationConstraints="FREELY_MOVABLE" dimensionConstraints="CONSTRAINED_DIMENSIONS" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="true" allowToLeaveBounds="true" identifier="object_1" layer="1" hasText="true" isMultilineAllowed="true" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="false" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
+          <ForegroundStyle id="89" noStroke="false" color="255,204,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+          <ColorBackgroundStyle id="90" color="255,255,204" useTransparency="false" transparencyLevel="0.5" />
+          <SelectedForegroundStyle id="91" noStroke="false" color="255,204,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+          <SelectedColorBackgroundStyle id="92" color="255,255,204" useTransparency="false" transparencyLevel="0.5" />
+          <FocusedForegroundStyle id="93" noStroke="false" color="255,204,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
+          <FocusedColorBackgroundStyle id="94" color="255,255,204" useTransparency="false" transparencyLevel="0.5" />
+          <Border id="95" top="20" bottom="20" left="20" right="20" />
+          <CircleShape idref="85" />
+          <ShadowStyle id="96" drawShadow="true" shadowDarkness="150" shadowDepth="2" shadowBlur="4" />
+          <TextStyle id="97" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" />
+        </EndShapeGraphicalRepresentation>
+        <ArcConnector id="98" cpPosition="0.4908534781793465,0.4034179746728754" cp1RelativeToStartObject="0.9995864107832677,0.4796673129987186" cp2RelativeToEndObject="3.837783468068623E-4,0.48041349799000865" areBoundsAdjustable="false" />
+        <TextStyle id="99" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" />
+      </ConnectorGraphicalRepresentation>
+      <ArtifactFromShapeGraphicalRepresentation idref="77" />
+      <ArtifactToShapeGraphicalRepresentation idref="88" />
+      <AddressedDiagramModelSlot idref="8" />
+      <GRSpec id="100" featureName="label" value="&quot;isInChargeOf&quot;" readOnly="true" />
+    </ContainedConnectorPatternRole>
+    <ContainedEMFObjectIndividualPatternRole id="101" name="emfAssociation" patternRole="emfAssociation" ontologicType="http://www.bolton.ac.uk/archimate/AssociationRelationship">
+      <AddressedEMFModelSlot idref="6" />
+    </ContainedEMFObjectIndividualPatternRole>
+    <ContainedOWLIndividualPatternRole id="102" name="owlAssociation" patternRole="owlAssociation" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Association">
+      <AddressedOWLModelSlot idref="12" />
+    </ContainedOWLIndividualPatternRole>
+    <PrimaryConceptEMFObjectIndividualPatternRole idref="101" />
+    <PrimaryRepresentationConnectorPatternRole idref="72" />
+    <Inspector id="103" inspectorTitle="IsInChargeOf" />
+  </EditionPattern>
+  <LocalizedDictionary id="104" />
+  <DiagramModelSlot idref="8" />
+  <EMFModelSlot idref="6" />
+  <OWLModelSlot idref="12" />
+  <Inspector id="105" inspectorTitle="DiagramSpecification" />
+</DiagramSpecification>

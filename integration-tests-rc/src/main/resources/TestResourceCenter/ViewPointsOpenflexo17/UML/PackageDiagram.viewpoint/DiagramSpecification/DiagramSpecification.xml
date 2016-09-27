@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" userID="FLX" useSpecificDescriptions="false" flexoID="-1" name="DiagramSpecification">
+  <FlexoConcept id="1" userID="FLX" useSpecificDescriptions="false" flexoID="20" name="Package">
+    <Inspector id="2" flexoID="1" userID="FLX" useSpecificDescriptions="false" inspectorTitle="Package">
+      <TextField id="3" flexoID="4" name="uri" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="package.uriName" label="uri">
+        <Inspector idref="2" />
+      </TextField>
+      <TextField id="4" flexoID="5" name="package" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="package.name" label="package">
+        <Inspector idref="2" />
+      </TextField>
+    </Inspector>
+    <ShapeRole id="5" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStratgey="Clone" flexoID="18" name="shape">
+      <ShapeGraphicalRepresentation id="6" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="66.49508196721311" hasFocusedBackground="false" text="label" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="123.61395646606914" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" layer="1" absoluteTextX="0.0" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="33.50491803278689" maximalWidth="Infinity" x="108.0">
+        <FocusedForegroundStyle id="7" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="true" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedImageBackgroundStyle id="8" scaleX="0.3349971719947673" scaleY="0.2805699661063844" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageBackgroundType="TRANSPARENT" deltaX="0.0" deltaY="0.0" />
+        <TextStyle id="9" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
+        <ShapeBorder id="10" bottom="5" left="5" right="5" top="5" />
+        <ForegroundStyle id="11" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="true" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="12" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="true" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedImageBackgroundStyle id="13" scaleX="0.3349971719947673" scaleY="0.2805699661063844" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageBackgroundType="TRANSPARENT" deltaX="0.0" deltaY="0.0" />
+        <RectangleShape id="14" arcSize="30.0" isRounded="false" />
+        <ShadowStyle id="15" shadowDepth="2" shadowBlur="4" drawShadow="false" shadowDarkness="150" />
+        <ImageBackgroundStyle id="16" scaleX="0.3349971719947673" scaleY="0.2805699661063844" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageBackgroundType="TRANSPARENT" deltaX="0.0" deltaY="0.0" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="17" featureName="label" flexoID="36" readOnly="false" userID="FLX" useSpecificDescriptions="false" value="package.name" />
+      <TypedDiagramModelSlot idref="18" />
+    </ShapeRole>
+    <OWLIndividualRole id="29" cloningStratgey="Clone" flexoID="19" name="package" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package">
+      <OWLModelSlot idref="23" />
+    </OWLIndividualRole>
+    <DropScheme id="20" useSpecificDescriptions="false" width="800" userID="FLX" label="drop" definePopupDefaultSize="false" height="600" flexoID="6" skipConfirmationPanel="true" name="drop" target="top">
+      <TextFieldParameter id="21" flexoID="37" isRequired="false" name="name" userID="FLX" useSpecificDescriptions="false" label="package_name" defaultValue="&quot;Package&quot;" />
+      <URIParameter id="22" useSpecificDescriptions="false" userID="FLX" label="uri" base="parameters.name" flexoID="38" isRequired="true" name="uri">
+        <OWLModelSlot idref="23" />
+      </URIParameter>
+      <AddOWLIndividual id="24" userID="FLX" useSpecificDescriptions="false" individualName="parameters.uri" flexoID="21" assignation="package">
+        <OWLModelSlot idref="23" />
+        <DataPropertyAssertion id="25" flexoID="22" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#name" userID="FLX" useSpecificDescriptions="false" value="parameters.name" />
+        <DataPropertyAssertion idref="25" />
+      </AddOWLIndividual>
+      <AddShape id="26" flexoID="23" assignation="shape" container="topLevel" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false">
+        <TypedDiagramModelSlot idref="18" />
+      </AddShape>
+    </DropScheme>
+  </FlexoConcept>
+  <FlexoConcept id="30" userID="FLX" useSpecificDescriptions="false" flexoID="29" name="ImportPackage">
+    <Inspector id="31" flexoID="8" userID="FLX" useSpecificDescriptions="false" inspectorTitle="Package import">
+      <TextField id="32" flexoID="11" name="source" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="package.name" label="source_package">
+        <Inspector idref="31" />
+      </TextField>
+      <TextField id="33" flexoID="12" name="imported" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="importedPackage.name" label="imported_package">
+        <Inspector idref="31" />
+      </TextField>
+    </Inspector>
+    <OWLIndividualRole id="34" cloningStratgey="Clone" flexoID="24" name="package" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package">
+      <OWLModelSlot idref="23" />
+    </OWLIndividualRole>
+    <OWLIndividualRole id="35" cloningStratgey="Clone" flexoID="25" name="importedPackage" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package">
+      <OWLModelSlot idref="23" />
+    </OWLIndividualRole>
+    <OWLIndividualRole id="36" cloningStratgey="Clone" flexoID="26" name="packageImport" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#PackageImport">
+      <OWLModelSlot idref="23" />
+    </OWLIndividualRole>
+    <ObjectPropertyStatementRole id="37" cloningStratgey="Clone" flexoID="27" name="import" useSpecificDescriptions="false" userID="FLX" objectProperty="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#packageImport">
+      <OWLModelSlot idref="23" />
+    </ObjectPropertyStatementRole>
+    <ConnectorRole id="38" exampleLabel="label" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Clone" flexoID="28" name="connector">
+      <ConnectorGraphicalRepresentation id="39" lineWrap="false" horizontalTextAlignment="CENTER" transparency="1.0" drawControlPointsWhenFocused="true" isVisible="true" isReadOnly="false" paragraphAlignment="CENTER" hasSelectedForeground="false" verticalTextAlignment="MIDDLE" hasFocusedForeground="false" applyForegroundToSymbols="true" absoluteTextX="-7.0" layer="64" absoluteTextY="-11.0" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" continuousTextEditing="true" isMultilineAllowed="false" identifier="object_2">
+        <SelectedForegroundStyle id="40" dashStyle="BIG_DASHES" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="41" dashStyle="BIG_DASHES" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <LineConnectorSpecification id="42" relativeMiddleSymbolLocation="0.5" startSymbolSize="10.0" middleSymbol="NONE" cp1RelativeToStartObject="0.9965753021614381,0.5584206237836987" lineConnectorType="MINIMAL_LENGTH" middleSymbolSize="10.0" endSymbolSize="10.0" cp2RelativeToEndObject="0.0017271208775611058,0.5415227399268701" startSymbol="NONE" endSymbol="NONE" />
+        <TextStyle id="43" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
+        <ForegroundStyle id="44" dashStyle="BIG_DASHES" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="45" featureName="label" flexoID="39" readOnly="true" userID="FLX" useSpecificDescriptions="false" value="&quot;import&quot;" />
+      <TypedDiagramModelSlot idref="18" />
+    </ConnectorRole>
+    <LinkScheme id="46" northDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl#Package" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl#Package" useSpecificDescriptions="false" width="800" userID="FLX" label="ImportPackage" definePopupDefaultSize="false" southDirectionSupported="true" westDirectionSupported="true" isAvailableWithFloatingPalette="true" flexoID="13" height="600" skipConfirmationPanel="false" name="ImportPackage" eastDirectionSupported="true">
+      <URIParameter id="47" useSpecificDescriptions="false" userID="FLX" label="uri" base="&quot;PackageImport&quot;" flexoID="40" isRequired="true" name="uri">
+        <OWLModelSlot idref="23" />
+      </URIParameter>
+      <DeclareFlexoRole id="48" userID="FLX" useSpecificDescriptions="false" object="fromTarget.package" flexoID="30" assignation="package" />
+      <DeclareFlexoRole id="49" userID="FLX" useSpecificDescriptions="false" object="toTarget.package" flexoID="31" assignation="importedPackage" />
+      <AddOWLIndividual id="50" userID="FLX" useSpecificDescriptions="false" individualName="parameters.uri" flexoID="33" assignation="packageImport">
+        <ObjectPropertyAssertion id="51" flexoID="32" userID="FLX" useSpecificDescriptions="false" object="importedPackage" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#importedPackage" />
+        <ObjectPropertyAssertion idref="51" />
+        <OWLModelSlot idref="23" />
+      </AddOWLIndividual>
+      <AddObjectPropertyStatement id="52" subject="package" useSpecificDescriptions="false" userID="FLX" object="packageImport" flexoID="34" assignation="import" />
+      <AddConnector id="53" userID="FLX" useSpecificDescriptions="false" flexoID="35" assignation="connector" fromShape="fromTarget.shape" toShape="toTarget.shape">
+        <TypedDiagramModelSlot idref="18" />
+      </AddConnector>
+    </LinkScheme>
+  </FlexoConcept>
+  <Inspector id="54" flexoID="-1" userID="FLX" useSpecificDescriptions="false" inspectorTitle="DiagramSpecification" />
+  <ModelSlot_OWLModelSlot id="23" cloningStratgey="Reference" flexoID="15" isRequired="false" name="owl" useSpecificDescriptions="false" userID="FLX" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl" isReadOnly="false" />
+  <ModelSlot_TypedDiagramModelSlot id="18" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Reference" flexoID="16" isRequired="true" name="typedDiagramModelSlot" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isReadOnly="false">
+    <FMLDiagramPaletteElementBinding id="19" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#Package" userID="FLX" useSpecificDescriptions="false" flexoID="2">
+      <DropScheme idref="20" />
+      <FMLDiagramPaletteElementBindingParameter id="27" flexoID="3" useSpecificDescriptions="false" userID="FLX" />
+      <FMLDiagramPaletteElementBindingParameter id="28" flexoID="4" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
+    </FMLDiagramPaletteElementBinding>
+  </ModelSlot_TypedDiagramModelSlot>
+</VirtualModel>

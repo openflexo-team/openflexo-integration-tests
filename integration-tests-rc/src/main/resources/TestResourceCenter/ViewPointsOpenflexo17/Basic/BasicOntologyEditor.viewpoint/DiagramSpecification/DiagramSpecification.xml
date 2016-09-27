@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" userID="FLX" useSpecificDescriptions="false" flexoID="-1" name="DiagramSpecification">
+  <FlexoConcept id="1" userID="FLX" useSpecificDescriptions="false" flexoID="26" name="Concept">
+    <Inspector id="2" flexoID="1" userID="FLX" useSpecificDescriptions="false" inspectorTitle="Concept" renderer="instance.individual.uriName">
+      <TextField id="3" flexoID="4" description="" name="conceptName" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="individual.uriName" label="name">
+        <Inspector idref="2" />
+      </TextField>
+    </Inspector>
+    <ShapeRole id="4" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStratgey="Clone" flexoID="24" name="shape">
+      <ShapeGraphicalRepresentation id="5" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="36.22950819672131" hasFocusedBackground="false" text="label" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="99.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="0.0" layer="1" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="34.0" maximalWidth="Infinity" x="158.0">
+        <FocusedForegroundStyle id="6" dashStyle="PLAIN_STROKE" color="0,51,255" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.6" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedColorBackgroundStyle id="7" color="204,255,255" transparencyLevel="0.5" useTransparency="true" />
+        <TextStyle id="8" orientation="0" color="0,51,102" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
+        <ShapeBorder id="9" bottom="5" left="5" right="5" top="5" />
+        <ForegroundStyle id="10" dashStyle="PLAIN_STROKE" color="0,51,255" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.6" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="11" dashStyle="PLAIN_STROKE" color="0,51,255" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.6" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="12" color="204,255,255" transparencyLevel="0.5" useTransparency="true" />
+        <RectangleShape id="13" arcSize="20.0" isRounded="true" />
+        <ShadowStyle id="14" shadowDepth="2" shadowBlur="4" drawShadow="true" shadowDarkness="150" />
+        <ColorBackgroundStyle id="15" color="204,255,255" transparencyLevel="0.5" useTransparency="true" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="16" featureName="label" flexoID="180" readOnly="false" userID="FLX" useSpecificDescriptions="false" value="individual.name" />
+      <TypedDiagramModelSlot idref="17" />
+    </ShapeRole>
+    <OWLIndividualRole id="27" cloningStratgey="Clone" flexoID="25" name="individual" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl#Concept">
+      <OWLModelSlot idref="22" />
+    </OWLIndividualRole>
+    <DropScheme id="19" useSpecificDescriptions="false" width="800" userID="FLX" label="DropConceptAtTopLevel" definePopupDefaultSize="false" height="600" flexoID="5" skipConfirmationPanel="true" name="DropConceptAtTopLevel" target="top">
+      <TextFieldParameter id="20" flexoID="40" isRequired="false" name="conceptName" userID="FLX" useSpecificDescriptions="false" label="concept_name" defaultValue="&quot;concept&quot;" />
+      <URIParameter id="21" useSpecificDescriptions="false" userID="FLX" label="uri" base="parameters.conceptName" flexoID="41" isRequired="true" name="conceptURI">
+        <OWLModelSlot idref="22" />
+      </URIParameter>
+      <AddShape id="23" flexoID="27" assignation="shape" container="topLevel" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false">
+        <TypedDiagramModelSlot idref="17" />
+      </AddShape>
+      <AddOWLIndividual id="24" userID="FLX" useSpecificDescriptions="false" individualName="parameters.conceptURI" flexoID="28" assignation="individual">
+        <OWLModelSlot idref="22" />
+      </AddOWLIndividual>
+    </DropScheme>
+  </FlexoConcept>
+  <FlexoConcept id="28" userID="FLX" useSpecificDescriptions="false" flexoID="31" name="IsARelationship">
+    <Inspector id="29" flexoID="7" userID="FLX" useSpecificDescriptions="false" inspectorTitle="&quot;Is A&quot; relationship">
+      <TextField id="30" flexoID="10" description="" name="childConcept" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="isA.subject.uriName" label="child_concept">
+        <Inspector idref="29" />
+      </TextField>
+      <TextField id="31" flexoID="11" description="" name="parentConcept" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="isA.object.uriName" label="parent_concept">
+        <Inspector idref="29" />
+      </TextField>
+    </Inspector>
+    <ConnectorRole id="32" exampleLabel="label" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Clone" flexoID="29" name="connector">
+      <ConnectorGraphicalRepresentation id="33" lineWrap="false" horizontalTextAlignment="CENTER" transparency="1.0" drawControlPointsWhenFocused="true" isVisible="true" isReadOnly="false" paragraphAlignment="CENTER" hasSelectedForeground="false" verticalTextAlignment="MIDDLE" text="label" applyForegroundToSymbols="true" hasFocusedForeground="false" layer="64" absoluteTextX="2.0" absoluteTextY="-13.0" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" continuousTextEditing="true" isMultilineAllowed="false" identifier="object_2">
+        <SelectedForegroundStyle id="34" dashStyle="PLAIN_STROKE" color="0,102,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="35" dashStyle="PLAIN_STROKE" color="0,102,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <LineConnectorSpecification id="36" relativeMiddleSymbolLocation="0.5" startSymbolSize="10.0" middleSymbol="NONE" lineConnectorType="MINIMAL_LENGTH" middleSymbolSize="10.0" endSymbolSize="10.0" startSymbol="NONE" endSymbol="NONE" />
+        <TextStyle id="37" orientation="0" color="0,153,51" backgroundColor="255,255,255" font="Lucida Sans,0,10" isBackgroundColored="false" />
+        <ForegroundStyle id="38" dashStyle="PLAIN_STROKE" color="0,102,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="39" featureName="label" flexoID="181" readOnly="true" userID="FLX" useSpecificDescriptions="false" value="&quot;is a&quot;" />
+      <TypedDiagramModelSlot idref="17" />
+    </ConnectorRole>
+    <ObjectPropertyStatementRole id="40" cloningStratgey="Clone" flexoID="30" name="isA" useSpecificDescriptions="false" userID="FLX" objectProperty="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl#semanticRelation">
+      <OWLModelSlot idref="22" />
+    </ObjectPropertyStatementRole>
+    <LinkScheme id="41" northDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl#Concept" useSpecificDescriptions="false" width="800" userID="FLX" label="LinkTwoConceptByIsARelationShip" definePopupDefaultSize="false" southDirectionSupported="true" westDirectionSupported="true" isAvailableWithFloatingPalette="true" flexoID="12" height="600" skipConfirmationPanel="true" name="LinkTwoConceptByIsARelationShip" eastDirectionSupported="true">
+      <AddConnector id="42" userID="FLX" useSpecificDescriptions="false" flexoID="32" assignation="connector" fromShape="fromTarget.shape" toShape="toTarget.shape">
+        <TypedDiagramModelSlot idref="17" />
+      </AddConnector>
+      <AddObjectPropertyStatement id="43" subject="fromTarget.individual" useSpecificDescriptions="false" userID="FLX" object="toTarget.individual" flexoID="110" assignation="isA">
+        <OWLModelSlot idref="22" />
+      </AddObjectPropertyStatement>
+    </LinkScheme>
+  </FlexoConcept>
+  <FlexoConcept id="44" userID="FLX" useSpecificDescriptions="false" flexoID="34" name="HasRelationship">
+    <Inspector id="45" flexoID="13" userID="FLX" useSpecificDescriptions="false" inspectorTitle="&quot;Has&quot; relationship">
+      <TextField id="46" flexoID="16" name="statement" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="has.displayableRepresentation" label="statement">
+        <Inspector idref="45" />
+      </TextField>
+      <TextField id="47" flexoID="17" description="" name="owner" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="has.subject.uriName" label="owner">
+        <Inspector idref="45" />
+      </TextField>
+      <TextField id="48" flexoID="18" name="object" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="has.object.uriName" label="object">
+        <Inspector idref="45" />
+      </TextField>
+      <TextField id="49" flexoID="21" name="property" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="has.property.uRI" label="property">
+        <Inspector idref="45" />
+      </TextField>
+    </Inspector>
+    <ConnectorRole id="50" exampleLabel="label" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Clone" flexoID="33" name="connector">
+      <ConnectorGraphicalRepresentation id="51" lineWrap="false" horizontalTextAlignment="CENTER" transparency="1.0" drawControlPointsWhenFocused="true" isVisible="true" isReadOnly="false" paragraphAlignment="CENTER" hasSelectedForeground="false" verticalTextAlignment="MIDDLE" text="label" applyForegroundToSymbols="true" hasFocusedForeground="false" layer="64" absoluteTextX="2.0" absoluteTextY="-11.0" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" continuousTextEditing="true" isMultilineAllowed="false" identifier="object_2">
+        <SelectedForegroundStyle id="52" dashStyle="PLAIN_STROKE" color="204,102,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.2000000000000002" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="53" dashStyle="PLAIN_STROKE" color="204,102,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.2000000000000002" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <LineConnectorSpecification id="54" relativeMiddleSymbolLocation="0.5" startSymbolSize="10.0" middleSymbol="NONE" lineConnectorType="MINIMAL_LENGTH" middleSymbolSize="10.0" endSymbolSize="10.0" startSymbol="NONE" endSymbol="NONE" />
+        <TextStyle id="55" orientation="0" color="204,102,0" backgroundColor="255,255,255" font="Lucida Sans,0,10" isBackgroundColored="false" />
+        <ForegroundStyle id="56" dashStyle="PLAIN_STROKE" color="204,102,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.2000000000000002" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="57" featureName="label" flexoID="182" readOnly="true" userID="FLX" useSpecificDescriptions="false" value="&quot;has&quot;" />
+      <TypedDiagramModelSlot idref="17" />
+    </ConnectorRole>
+    <ObjectPropertyStatementRole id="58" cloningStratgey="Clone" flexoID="98" description="" name="has" useSpecificDescriptions="false" userID="FLX" objectProperty="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl#has">
+      <OWLModelSlot idref="22" />
+    </ObjectPropertyStatementRole>
+    <LinkScheme id="59" northDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl#Concept" useSpecificDescriptions="false" width="800" userID="FLX" label="LinkTwoConceptByHasRelationShip" definePopupDefaultSize="false" southDirectionSupported="true" westDirectionSupported="true" isAvailableWithFloatingPalette="true" flexoID="22" height="600" skipConfirmationPanel="true" description="" name="LinkTwoConceptByHasRelationShip" eastDirectionSupported="true">
+      <AddConnector id="60" userID="FLX" useSpecificDescriptions="false" flexoID="36" assignation="connector" fromShape="fromTarget.shape" toShape="toTarget.shape">
+        <TypedDiagramModelSlot idref="17" />
+      </AddConnector>
+      <AddObjectPropertyStatement id="61" subject="fromTarget.individual" useSpecificDescriptions="false" userID="FLX" object="toTarget.individual" flexoID="122" assignation="has">
+        <OWLModelSlot idref="22" />
+      </AddObjectPropertyStatement>
+    </LinkScheme>
+  </FlexoConcept>
+  <Inspector id="62" flexoID="-1" userID="FLX" useSpecificDescriptions="false" inspectorTitle="DiagramSpecification" />
+  <ModelSlot_OWLModelSlot id="22" cloningStratgey="Reference" flexoID="39" isRequired="true" name="basicOntologyi" useSpecificDescriptions="false" userID="FLX" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl" isReadOnly="false" />
+  <ModelSlot_TypedDiagramModelSlot id="17" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Reference" flexoID="38" isRequired="true" name="typedDiagramModelSlot" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isReadOnly="false">
+    <FMLDiagramPaletteElementBinding id="18" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl/DiagramSpecification/DiagramSpecification.diagramspecification/BasicOntology.palette#Concept" userID="FLX" useSpecificDescriptions="false" flexoID="2">
+      <DropScheme idref="19" />
+      <FMLDiagramPaletteElementBindingParameter id="25" flexoID="3" useSpecificDescriptions="false" userID="FLX" />
+      <FMLDiagramPaletteElementBindingParameter id="26" flexoID="4" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
+    </FMLDiagramPaletteElementBinding>
+  </ModelSlot_TypedDiagramModelSlot>
+</VirtualModel>

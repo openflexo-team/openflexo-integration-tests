@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>Integration Test environment</name>
+	<description>Integration Test environment: provides an environment with all modules and all technology adapters</description>
+    <parent>
+        <groupId>org.openflexo.packaging</groupId>
+        <artifactId>openflexo-packaging</artifactId>
+		<version>1.7.1-SNAPSHOT</version>
+    </parent>
+	<artifactId>integration-tests</artifactId>
+	<!-- <packaging>pom</packaging> -->
+	<dependencies>
+	
+		<!--  We list here all modules we want to include in our integration test environment -->
+	
+	    <dependency>
+            <groupId>org.openflexo</groupId>
+            <artifactId>flexovieweditor</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+	
+	    <dependency>
+            <groupId>org.openflexo</groupId>
+            <artifactId>flexoviewpointmodeler</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.openflexo</groupId>
+            <artifactId>free-modelling-editor</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+	
+	
+		<!--  We list here all technology adapters we want to include in our integration test environment -->
+	
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>flexodiagram</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>emfconnector</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>xmlconnector</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+ 		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>owlconnector</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+ 		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>excelconnector</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+ 		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>powerpointconnector</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>flexo-foundation</artifactId>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>flexo-ui</artifactId>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>flexoutils</artifactId>
+			<version>${connie.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>owlconnector</artifactId>
+			<version>${ta.version}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
