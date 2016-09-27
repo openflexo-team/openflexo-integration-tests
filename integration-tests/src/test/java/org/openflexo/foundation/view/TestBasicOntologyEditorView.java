@@ -68,7 +68,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 	public static FlexoProject project;
 	private static FlexoEditor editor;
 	private static ViewPoint basicOntologyEditor;
-	private static RepositoryFolder<ViewResource> viewFolder;
+	private static RepositoryFolder<ViewResource, ?> viewFolder;
 	private static View view;
 
 	/**
@@ -131,7 +131,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		addRepositoryFolder.doAction();
 		assertTrue(addRepositoryFolder.hasActionExecutionSucceeded());
 		viewFolder = addRepositoryFolder.getNewFolder();
-		assertTrue(viewFolder.getFile().exists());
+		assertTrue(((File) viewFolder.getSerializationArtefact()).exists());
 	}
 
 	@Test
