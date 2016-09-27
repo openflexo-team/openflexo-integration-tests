@@ -541,8 +541,8 @@ public class TestViewPointValidationModelInIntegrationContext extends OpenflexoT
 				.getModelEntity(org.openflexo.foundation.ontology.fml.editionaction.ObjectPropertyAssertion.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.powerpoint.fml.editionaction.SelectPowerpointSlide.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.FlexoProjectObject.class) != null);
+		// assertTrue(validationModel.getValidationModelFactory().getModelContext()
+		// .getModelEntity(org.openflexo.foundation.FlexoProjectObject.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.ExcelSheetRole.class) != null);
 
