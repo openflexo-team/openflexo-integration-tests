@@ -61,7 +61,6 @@ import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
 import org.openflexo.foundation.fml.rt.action.ModelSlotInstanceConfiguration.DefaultModelSlotInstanceConfigurationOption;
 import org.openflexo.foundation.fml.rt.rm.ViewResource;
 import org.openflexo.foundation.fml.rt.rm.VirtualModelInstanceResource;
-import org.openflexo.foundation.resource.FileSystemBasedResourceCenter;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.technologyadapter.FlexoModelResource;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
@@ -182,13 +181,10 @@ public class TestEMFCityViews extends OpenflexoProjectAtRunTimeTestCase {
 				TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration1 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
 						.getModelSlotInstanceConfiguration(emfModelSlot1);
 				emfModelSlotConfiguration1.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-				File modelFile1 = new File(((FileSystemBasedResourceCenter) resourceCenter).getRootDirectory(),
-						"TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/my.city1");
-				System.out.println("Searching " + modelFile1.getAbsolutePath());
-				assertTrue(modelFile1.exists());
-				System.out.println("Searching " + modelFile1.toURI().toString());
-				FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
-						.getModelWithURI(modelFile1.toURI().toString());
+				System.out.println(
+						"Searching http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/my.city1");
+				FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager().getModelWithURI(
+						"http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/my.city1");
 				assertNotNull(modelResource1);
 				emfModelSlotConfiguration1.setModelResource(modelResource1);
 				assertTrue(emfModelSlotConfiguration1.isValidConfiguration());
