@@ -72,13 +72,12 @@ import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
 /**
- * Test instanciation of CityViews View to test EMF and Diagram
+ * Test instanciation of CityViews View to test EMF and Diagram, in Jar (classpath) context
  * 
- * @author xtof
+ * @author xtof, sylvain
  */
-
 @RunWith(OrderedRunner.class)
-public class TestEMFCityViews extends OpenflexoProjectAtRunTimeTestCase {
+public class TestEMFCityViewsInJarContext extends OpenflexoProjectAtRunTimeTestCase {
 
 	private static ViewPoint cityViewsViewPoint;
 	private static RepositoryFolder<ViewResource, ?> viewFolder;
@@ -95,7 +94,8 @@ public class TestEMFCityViews extends OpenflexoProjectAtRunTimeTestCase {
 
 		log("test0InstantiateResourceCenter()");
 
-		instanciateTestServiceManager();
+		// We are connected directely to the resource center embedded in a jar in the classpath
+		instanciateBareTestServiceManager();
 	}
 
 	/**
@@ -218,10 +218,9 @@ public class TestEMFCityViews extends OpenflexoProjectAtRunTimeTestCase {
 
 	private ViewPoint loadViewPoint(String viewPointURI) {
 		log("Testing ViewPoint loading: " + viewPointURI);
-		System.out.println("resourceCenter=" + resourceCenter);
-		System.out.println("resourceCenter.getViewPointRepository()=" + resourceCenter.getViewPointRepository());
-		ViewPointResource viewPointResource = resourceCenter.getViewPointRepository().getResource(viewPointURI);
+		ViewPointResource viewPointResource = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
 		assertNotNull(viewPointResource);
+		System.out.println("Found ViewPoint in " + viewPointResource.getFlexoIODelegate().getSerializationArtefact());
 		assertFalse(viewPointResource.isLoaded());
 		ViewPoint viewPoint = viewPointResource.getViewPoint();
 		assertTrue(viewPointResource.isLoaded());
