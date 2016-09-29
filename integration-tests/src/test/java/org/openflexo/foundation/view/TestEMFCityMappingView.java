@@ -82,9 +82,9 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
 		log("test0InstantiateResourceCenter()");
 
-		// TODO: create a project where all those tests don't need a manual import of projects
-		// TODO: copy all test VP in tmp dir and work with those VP instead of polling GIT workspace
-		instanciateTestServiceManager();
+		// We are connected directely to the resource center embedded in a jar in the classpath
+		// We use the ResourceCenter deployed in integration-tests-rc
+		instanciateBareTestServiceManager();
 	}
 
 	/**
@@ -245,8 +245,6 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
 	private ViewPoint loadViewPoint(String viewPointURI) {
 		log("Testing ViewPoint loading: " + viewPointURI);
-		System.out.println("resourceCenter=" + resourceCenter);
-		System.out.println("resourceCenter.getViewPointRepository()=" + resourceCenter.getViewPointRepository());
 		ViewPointResource viewPointResource = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
 		assertNotNull(viewPointResource);
 		assertFalse(viewPointResource.isLoaded());

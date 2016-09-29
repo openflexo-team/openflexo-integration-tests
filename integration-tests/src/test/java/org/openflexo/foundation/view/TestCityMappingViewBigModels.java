@@ -85,7 +85,9 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 
 		log("test0InstantiateResourceCenter()");
 
-		instanciateTestServiceManager();
+		// We are connected directely to the resource center embedded in a jar in the classpath
+		// We use the ResourceCenter deployed in integration-tests-rc
+		instanciateBareTestServiceManager();
 	}
 
 	@Test
@@ -197,7 +199,7 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 				.getModelSlotInstanceConfiguration(emfModelSlot1);
 		emfModelSlotConfiguration1.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
 		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager().getModelWithURI(
-				"http://openflexo.org/test/TestResourceCenter/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/generated_10khTry8.city1");
+				"http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/generated_10khTry8.city1");
 		assertNotNull(modelResource1);
 		emfModelSlotConfiguration1.setModelResource(modelResource1);
 		assertTrue(emfModelSlotConfiguration1.isValidConfiguration());
@@ -207,7 +209,7 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 				.getModelSlotInstanceConfiguration(emfModelSlot2);
 		emfModelSlotConfiguration2.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
 		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager().getModelWithURI(
-				"http://openflexo.org/test/TestResourceCenter/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city2/generated_10khTry8.city2");
+				"http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city2/generated_10khTry8.city2");
 		assertNotNull(modelResource2);
 		emfModelSlotConfiguration2.setModelResource(modelResource2);
 		assertTrue(emfModelSlotConfiguration2.isValidConfiguration());

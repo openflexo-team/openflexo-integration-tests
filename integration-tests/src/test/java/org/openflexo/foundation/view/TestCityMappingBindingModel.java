@@ -95,7 +95,9 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		log("test0InstantiateResourceCenter()");
 
-		instanciateTestServiceManager();
+		// We are connected directely to the resource center embedded in a jar in the classpath
+		// We use the ResourceCenter deployed in integration-tests-rc
+		instanciateBareTestServiceManager();
 	}
 
 	@Test
