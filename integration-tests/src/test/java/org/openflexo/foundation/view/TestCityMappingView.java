@@ -167,11 +167,6 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		String viewPointURI = "http://www.thalesgroup.com/openflexo/emf/CityMapping";
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		// System.out.println("resourceCenter=" + resourceCenter);
-		// System.out.println("resourceCenter.getViewPointRepository()=" + resourceCenter.getViewPointRepository());
-
-		// ViewPointResource vpRes = resourceCenter.getViewPointRepository().getResource(viewPointURI);
-
 		ViewPointResource vpRes = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI, ViewPoint.class);
 
 		assertNotNull(vpRes);

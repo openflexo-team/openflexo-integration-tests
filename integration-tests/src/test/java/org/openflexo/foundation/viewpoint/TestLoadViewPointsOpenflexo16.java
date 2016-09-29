@@ -46,7 +46,6 @@ import java.util.logging.Logger;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openflexo.foundation.FlexoServiceManager;
 import org.openflexo.foundation.OpenflexoTestCase;
 import org.openflexo.foundation.fml.ViewPoint;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -65,8 +64,6 @@ public class TestLoadViewPointsOpenflexo16 extends OpenflexoTestCase {
 
 	protected static final Logger logger = Logger.getLogger(TestLoadViewPointsOpenflexo16.class.getPackage().getName());
 
-	public static FlexoServiceManager serviceManager;
-
 	/**
 	 * Instantiate test resource center
 	 */
@@ -82,10 +79,7 @@ public class TestLoadViewPointsOpenflexo16 extends OpenflexoTestCase {
 
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		System.out.println("resourceCenter=" + resourceCenter);
-		System.out.println("resourceCenter.getViewPointRepository()=" + resourceCenter.getViewPointRepository());
-
-		ViewPointResource vpRes = resourceCenter.getViewPointRepository().getResource(viewPointURI);
+		ViewPointResource vpRes = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());

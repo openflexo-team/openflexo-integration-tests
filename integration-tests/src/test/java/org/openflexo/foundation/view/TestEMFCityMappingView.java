@@ -247,7 +247,7 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		log("Testing ViewPoint loading: " + viewPointURI);
 		System.out.println("resourceCenter=" + resourceCenter);
 		System.out.println("resourceCenter.getViewPointRepository()=" + resourceCenter.getViewPointRepository());
-		ViewPointResource viewPointResource = resourceCenter.getViewPointRepository().getResource(viewPointURI);
+		ViewPointResource viewPointResource = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
 		assertNotNull(viewPointResource);
 		assertFalse(viewPointResource.isLoaded());
 		ViewPoint viewPoint = viewPointResource.getViewPoint();

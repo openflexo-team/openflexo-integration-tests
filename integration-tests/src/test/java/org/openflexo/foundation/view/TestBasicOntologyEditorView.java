@@ -101,10 +101,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		System.out.println("resourceCenter=" + resourceCenter);
-		System.out.println("resourceCenter.getViewPointRepository()=" + resourceCenter.getViewPointRepository());
-
-		ViewPointResource vpRes = resourceCenter.getViewPointRepository().getResource(viewPointURI);
+		ViewPointResource vpRes = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
