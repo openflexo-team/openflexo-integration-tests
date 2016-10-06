@@ -6,7 +6,7 @@
 	<description>Integration Test environment: provides an environment with all modules and all technology adapters</description>
 	<parent>
 		<groupId>org.openflexo</groupId>
-		<artifactId>openflexo-integration-tests</artifactId>
+		<artifactId>openflexo-component</artifactId>
 		<version>1.8.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>integration-tests</artifactId>
