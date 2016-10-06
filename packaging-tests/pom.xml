@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.openflexo</groupId>
+		<artifactId>openflexo-production</artifactId>
+		<version>0.4-SNAPSHOT</version>
+	</parent>
+	<properties>
+		<main.class>org.openflexo.TestApplication</main.class>
+	</properties>
+	<artifactId>packaging-tests</artifactId>
+	<name>Packaging :: Build Test Installers</name>
+	<description>This project is a way to test packaging tools used to create software distribution for Openflexo.</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>packaging-tools</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openflexo</groupId>
+			<artifactId>pamela-core</artifactId>
+			<version>1.2</version>
+		</dependency>
+	</dependencies>
+	<profiles>
+		<profile>
+			<id>snapshot-profile</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<!-- ************ Places where to upload files for component Maven site -->
+			<distributionManagement>
+				<site>
+					<id>openflexo-production.website</id>
+					<url>scp://server-one.openflexo.org/home/www/sites/openflexo-production/SNAPSHOT/packaging-tests/</url>
+				</site>
+			</distributionManagement>
+		</profile>
+		<profile>
+			<id>RC-profile</id>
+			<activation>
+				<property>
+					<name>performRC</name>
+				</property>
+			</activation>
+			<!-- ************ Places where to upload files for component Maven site -->
+			<distributionManagement>
+				<site>
+					<id>openflexo-production.website</id>
+					<url>scp://server-one.openflexo.org/home/www/sites/openflexo-production/SNAPSHOT/packaging-tests/</url>
+				</site>
+			</distributionManagement>
+		</profile>
+		<profile>
+			<id>release-profile</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+				</property>
+			</activation>
+			<!-- ************ Places where to upload files for component Maven site -->
+			<distributionManagement>
+				<site>
+					<id>openflexo-production.website</id>
+					<url>scp://server-one.openflexo.org/home/www/sites/openflexo-production/${project.version}/packaging-tests/</url>
+				</site>
+			</distributionManagement>
+		</profile>
+	</profiles>
+</project>

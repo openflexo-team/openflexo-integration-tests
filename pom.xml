@@ -21,6 +21,7 @@
      <modules>
           <module>integration-tests</module>
           <module>integration-tests-rc</module>
+          <module>packaging-tests</module>
      </modules>
  
 	<build>

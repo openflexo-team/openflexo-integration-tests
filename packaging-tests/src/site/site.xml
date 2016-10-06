@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="Maven" xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+   
+  <bannerLeft>
+	<name>Openflexo-Tools-Configuration</name>
+	<src>${openflexo-production.logo}</src>
+	<href>https://openflexo.org/tiki/Openflexo-Production</href>
+  </bannerLeft> 
+  <bannerRight>
+    <name>Openflexo</name>
+    <src>${organization.logo}</src>
+    <href>http://openflexo.org/</href>
+  </bannerRight>
+
+  <skin>
+    <groupId>org.openflexo</groupId>
+    <artifactId>openflexo-skin</artifactId>
+    <version>1.3-SNAPSHOT</version>
+  </skin>
+
+	<custom>
+		<openflexo-skin>
+			<sideMenus>true</sideMenus>
+			<localMenu>/inc/html/developersMenu.html</localMenu>
+			<displayBreadCrumbs>true</displayBreadCrumbs>
+			<includeVersionLinks>true</includeVersionLinks>
+		</openflexo-skin>
+	</custom>
+
+
+  <body>
+    <links>
+      <item name="Openflexo" href="http://www.openflexo.org"/>
+    </links>
+<!--
+    <menu name="Usage">
+      <item name="Usage simple" href="usage.html" />
+      <item name="FAQ" href="http://maven.apache.org/archetype/maven-archetype-plugin/specification/specification.html"/>
+    </menu>	
+-->
+<!--
+    <menu name="Maintenance">
+      <item name="pre-requis" 		href="pre_requis.html" />
+      <item name="structure"    	href="structure.html" />
+      <item name="conception" 		href="conception.html" />
+      <item name="production"   	href="production.html" />
+      <item name="test" 		href="test.html" />
+      <item name="documentation" 	href="documentation_archetype.html" />
+      <item name="maintenance" 		href="maintenance.html" />
+      <item name="gconf" 		href="gconf.html" />
+      <item name="liens" 		href="liens.html" />
+      <item name="TODO" 		href="todo.html" />
+    </menu>	
+-->
+  
+ <menu name=""
+			img="https://developers.openflexo.org/images/components/openflexo-production/openflexo-production_64x64.png">
+ </menu>
+  
+  <menu name="Links" >
+      <item name="Openflexo main site" href="http://www.openflexo.org"/>
+      <item name="Openflexo-Production" href="https://openflexo-production.openflexo.org/"/>
+  </menu>
+
+ <!--   <menu ref="parent" /> -->
+    <menu ref="reports" />
+<!--    <menu ref="plugins" /> -->
+  </body>
+</project>
