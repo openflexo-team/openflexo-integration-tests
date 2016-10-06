@@ -10,6 +10,7 @@
 		<dependencySet>
 			<includes>
 				<include>*:pom:*</include>
+				<include>*.md</include>
 			</includes>
 			<outputDirectory>poms</outputDirectory>
 		</dependencySet>
