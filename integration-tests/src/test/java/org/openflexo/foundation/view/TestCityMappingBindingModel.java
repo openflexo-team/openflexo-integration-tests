@@ -131,10 +131,11 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		System.out.println("FML=" + syncScheme.getFMLRepresentation());
 
-		assertEquals(9, syncScheme.getBindingModel().getBindingVariablesCount());
+		assertEquals(10, syncScheme.getBindingModel().getBindingVariablesCount());
 		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.REFLEXIVE_ACCESS_PROPERTY));
 		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(VirtualModelBindingModel.REFLEXIVE_ACCESS_PROPERTY));
 		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.PROJECT_PROPERTY));
+		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.RC_PROPERTY));
 		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.VIEW_PROPERTY));
 		assertEquals(ViewType.getViewType(cityMappingVP),
 				syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.VIEW_PROPERTY).getType());
@@ -160,8 +161,8 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		// System.out.println("IterationAction: " + iterationAction.getFMLRepresentation());
 
-		assertEquals(9, iterationAction.getBindingModel().getBindingVariablesCount());
-		assertEquals(10, iterationAction.getInferedBindingModel().getBindingVariablesCount());
+		assertEquals(10, iterationAction.getBindingModel().getBindingVariablesCount());
+		assertEquals(11, iterationAction.getInferedBindingModel().getBindingVariablesCount());
 
 		SelectEMFObjectIndividual fetchRequest1 = (SelectEMFObjectIndividual) iterationAction.getIterationAction();
 		assertNotNull(fetchRequest1);
@@ -176,19 +177,19 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		// System.out.println("fetchRequest1=" + fetchRequest1.getFMLRepresentation());
 
-		assertEquals(9, fetchRequest1.getBindingModel().getBindingVariablesCount());
+		assertEquals(10, fetchRequest1.getBindingModel().getBindingVariablesCount());
 
 		// System.out.println("fetchRequest2=" + fetchRequest2.getFMLRepresentation());
 
 		DeclarationAction<?> declaration = (DeclarationAction<?>) ((Sequence) iterationAction.getControlGraph()).getControlGraph1();
 		SelectEMFObjectIndividual fetchRequest2 = (SelectEMFObjectIndividual) declaration.getAssignableAction();
 
-		assertEquals(10, fetchRequest2.getBindingModel().getBindingVariablesCount());
+		assertEquals(11, fetchRequest2.getBindingModel().getBindingVariablesCount());
 		assertNotNull(fetchRequest2.getBindingModel().bindingVariableNamed("city1"));
 
 		for (FetchRequestCondition c : fetchRequest2.getConditions()) {
 			System.out.println("condition: " + c.getCondition() + " bm=" + c.getBindingModel());
-			assertEquals(11, c.getBindingModel().getBindingVariablesCount());
+			assertEquals(12, c.getBindingModel().getBindingVariablesCount());
 			assertNotNull(c.getBindingModel().bindingVariableNamed(FetchRequestCondition.SELECTED));
 			assertTrue(c.getCondition().isValid());
 		}
@@ -207,8 +208,8 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		// System.out.println("IterationAction: " + iterationAction.getFMLRepresentation());
 
-		assertEquals(9, iterationAction.getBindingModel().getBindingVariablesCount());
-		assertEquals(10, iterationAction.getInferedBindingModel().getBindingVariablesCount());
+		assertEquals(10, iterationAction.getBindingModel().getBindingVariablesCount());
+		assertEquals(11, iterationAction.getInferedBindingModel().getBindingVariablesCount());
 
 		/*for (int i = 0; i < iterationAction.getInferedBindingModel().getBindingVariablesCount(); i++) {
 			System.out.println("1 / Variable at " + i + " = " + iterationAction.getInferedBindingModel().getBindingVariableAt(i));
@@ -228,7 +229,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 			/*for (int i = 0; i < criteria.getBindingModel().getBindingVariablesCount(); i++) {
 				System.out.println("2 / Variable at " + i + " = " + criteria.getBindingModel().getBindingVariableAt(i));
 			}*/
-			assertEquals(11, criteria.getBindingModel().getBindingVariablesCount());
+			assertEquals(12, criteria.getBindingModel().getBindingVariablesCount());
 			assertNotNull(criteria.getBindingModel().bindingVariableNamed("matchingCitiesInModel2"));
 			assertTrue(criteria.getValue().isValid());
 		}
