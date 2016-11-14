@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" userID="FLX" modelVersion="1.0" version="0.1" flexoID="2" description="Document that contains the clients for one salesman to visit" name="VisitSheet">
+  <Inspector id="1" flexoID="1" userID="FLX" inspectorTitle="VisitSheet" />
+  <ModelSlot_BasicExcelModelSlot id="2" userID="FLX" cloningStrategy="Reference" flexoID="6" isRequired="true" description="Excel sheet for this visit sheet" name="workBook" cardinality="ZeroOne">
+    <BasicExcelModelSlot idref="2" />
+  </ModelSlot_BasicExcelModelSlot>
+</VirtualModel>
