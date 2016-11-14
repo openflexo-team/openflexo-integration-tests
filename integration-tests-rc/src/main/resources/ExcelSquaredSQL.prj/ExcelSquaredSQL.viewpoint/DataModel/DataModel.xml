@@ -14,12 +14,13 @@
   <FlexoConcept id="9" userID="FLX" flexoID="57" name="Salesman">
     <Inspector id="10" flexoID="58" userID="FLX" inspectorTitle="Salesman" />
     <JDBCLineRole id="11" userID="FLX" cloningStrategy="Reference" flexoID="78" description="Salesman in SQL database" name="sql" cardinality="ZeroOne" />
-    <CreationScheme id="12" userID="FLX" width="800" label="create" height="600" flexoID="61" name="create">
-      <BehaviourControlGraph_EmptyControlGraph id="13" flexoID="63" userID="FLX" />
+    <PrimitiveRole id="12" userID="FLX" cloningStrategy="Clone" flexoID="79" description="Salesman last name" primitiveType="String" name="lastname" cardinality="ZeroOne" />
+    <CreationScheme id="13" userID="FLX" width="800" label="create" height="600" flexoID="61" name="create">
+      <BehaviourControlGraph_EmptyControlGraph id="14" flexoID="63" userID="FLX" />
     </CreationScheme>
-    <DeletionScheme id="14" userID="FLX" width="800" label="deletion" height="600" flexoID="62" name="deletion">
-      <BehaviourControlGraph_EmptyControlGraph id="15" flexoID="64" userID="FLX" />
+    <DeletionScheme id="15" userID="FLX" width="800" label="deletion" height="600" flexoID="62" name="deletion">
+      <BehaviourControlGraph_EmptyControlGraph id="16" flexoID="64" userID="FLX" />
     </DeletionScheme>
   </FlexoConcept>
-  <Inspector id="16" flexoID="1" userID="FLX" inspectorTitle="DataModel" />
+  <Inspector id="17" flexoID="1" userID="FLX" inspectorTitle="DataModel" />
 </VirtualModel>
