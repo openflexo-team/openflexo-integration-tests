@@ -20,45 +20,45 @@
       <GRSpec id="16" featureName="label" flexoID="5" userID="FLX" value="name" />
       <TypedDiagramModelSlot idref="17" />
     </ShapeRole>
-    <PrimitiveRole id="27" userID="FLX" cloningStrategy="Clone" flexoID="20" primitiveType="String" name="name" cardinality="ZeroOne" />
-    <DropScheme id="28" userID="FLX" width="800" label="drop" height="600" flexoID="4" skipConfirmationPanel="false" name="drop" target="top">
-      <BehaviourControlGraph_Sequence id="29" flexoID="22" userID="FLX">
-        <ControlGraph1_AssignationAction id="30" userID="FLX" flexoID="23" ownerContext="controlGraph1" assign="shape">
-          <AssignableAction_AddShape id="31" flexoID="24" userID="FLX">
+    <PrimitiveRole id="36" userID="FLX" cloningStrategy="Clone" flexoID="20" primitiveType="String" name="name" cardinality="ZeroOne" />
+    <DropScheme id="37" userID="FLX" width="800" label="drop" height="600" flexoID="4" skipConfirmationPanel="false" name="drop" target="top">
+      <BehaviourControlGraph_Sequence id="38" flexoID="22" userID="FLX">
+        <ControlGraph1_AssignationAction id="39" userID="FLX" flexoID="23" ownerContext="controlGraph1" assign="shape">
+          <AssignableAction_AddShape id="40" flexoID="24" userID="FLX">
             <TypedDiagramModelSlot idref="17" />
           </AssignableAction_AddShape>
         </ControlGraph1_AssignationAction>
-        <ControlGraph2_AssignationAction id="32" userID="FLX" flexoID="25" ownerContext="controlGraph2" assign="name">
-          <AssignableAction_ExpressionAction id="33" expression="parameters.conceptName" flexoID="26" userID="FLX" />
+        <ControlGraph2_AssignationAction id="41" userID="FLX" flexoID="25" ownerContext="controlGraph2" assign="name">
+          <AssignableAction_ExpressionAction id="42" expression="parameters.conceptName" flexoID="26" userID="FLX" />
         </ControlGraph2_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <TextFieldParameter id="34" userID="FLX" type="java.lang.String" flexoID="27" name="conceptName" defaultValue="&quot;conceptName&quot;" widget="TEXT_FIELD" />
+      <TextFieldParameter id="43" userID="FLX" type="java.lang.String" flexoID="27" name="conceptName" defaultValue="&quot;conceptName&quot;" widget="TEXT_FIELD" />
     </DropScheme>
-    <DeletionScheme id="35" userID="FLX" width="800" label="delete" height="600" flexoID="29" name="delete">
-      <BehaviourControlGraph_DeleteAction id="36" flexoID="28" userID="FLX" object="shape" />
+    <DeletionScheme id="44" userID="FLX" width="800" label="delete" height="600" flexoID="29" name="delete">
+      <BehaviourControlGraph_DeleteAction id="45" flexoID="28" userID="FLX" object="shape" />
     </DeletionScheme>
   </FlexoConcept>
-  <FlexoConcept id="37" userID="FLX" flexoID="35" name="UseCase">
-    <Inspector id="38" flexoID="30" userID="FLX" inspectorTitle="UseCase" renderer="instance.name">
-      <TextField id="39" userID="FLX" data="name" label="name" type="java.lang.String" flexoID="31" name="name" widget="TEXT_FIELD" />
-      <TextArea id="40" userID="FLX" data="description" label="description" type="java.lang.String" flexoID="32" name="description" widget="TEXT_AREA" />
+  <FlexoConcept id="46" userID="FLX" flexoID="35" name="UseCase">
+    <Inspector id="47" flexoID="30" userID="FLX" inspectorTitle="UseCase" renderer="instance.name">
+      <TextField id="48" userID="FLX" data="name" label="name" type="java.lang.String" flexoID="31" name="name" widget="TEXT_FIELD" />
+      <TextArea id="49" userID="FLX" data="description" label="description" type="java.lang.String" flexoID="32" name="description" widget="TEXT_AREA" />
     </Inspector>
-    <ShapeRole id="41" exampleLabel="label" userID="FLX" cloningStrategy="Clone" flexoID="33" name="shape" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="42" relativeTextX="0.5" height="45.0" width="99.830220713073" allowToLeaveBounds="false" relativeTextY="0.5" identifier="1f4a6e75" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="10.0" x="10.0">
-        <FocusedForegroundStyle id="43" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorBackgroundStyle id="44" color="254,247,217" transparencyLevel="0.5" />
-        <TextStyle id="45" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
-        <ForegroundStyle id="46" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="47" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="48" color="254,247,217" transparencyLevel="0.5" />
-        <OvalShape id="49" />
-        <ShadowStyle id="50" />
-        <ColorBackgroundStyle id="51" color="254,247,217" transparencyLevel="0.5" />
+    <ShapeRole id="50" exampleLabel="label" userID="FLX" cloningStrategy="Clone" flexoID="33" name="shape" cardinality="ZeroOne">
+      <ShapeGraphicalRepresentation id="51" relativeTextX="0.5" height="45.0" width="99.830220713073" allowToLeaveBounds="false" relativeTextY="0.5" identifier="1f4a6e75" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="10.0" x="10.0">
+        <FocusedForegroundStyle id="52" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedColorBackgroundStyle id="53" color="254,247,217" transparencyLevel="0.5" />
+        <TextStyle id="54" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+        <ForegroundStyle id="55" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="56" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="57" color="254,247,217" transparencyLevel="0.5" />
+        <OvalShape id="58" />
+        <ShadowStyle id="59" />
+        <ColorBackgroundStyle id="60" color="254,247,217" transparencyLevel="0.5" />
       </ShapeGraphicalRepresentation>
-      <GRSpec id="52" featureName="label" flexoID="7" userID="FLX" value="name" />
+      <GRSpec id="61" featureName="label" flexoID="7" userID="FLX" value="name" />
       <TypedDiagramModelSlot idref="17" />
     </ShapeRole>
-    <PrimitiveRole id="53" userID="FLX" cloningStrategy="Clone" flexoID="34" primitiveType="String" name="name" cardinality="ZeroOne" />
+    <PrimitiveRole id="62" userID="FLX" cloningStrategy="Clone" flexoID="34" primitiveType="String" name="name" cardinality="ZeroOne" />
     <DropScheme id="19" userID="FLX" width="800" label="drop" height="600" flexoID="6" skipConfirmationPanel="false" name="drop" target="top">
       <BehaviourControlGraph_Sequence id="20" flexoID="13" userID="FLX">
         <ControlGraph1_AssignationAction id="21" userID="FLX" flexoID="14" ownerContext="controlGraph1" assign="shape">
@@ -72,15 +72,57 @@
       </BehaviourControlGraph_Sequence>
       <TextFieldParameter id="25" userID="FLX" type="java.lang.String" flexoID="18" name="conceptName" defaultValue="&quot;conceptName&quot;" widget="TEXT_FIELD" />
     </DropScheme>
-    <DeletionScheme id="54" userID="FLX" width="800" label="delete" height="600" flexoID="37" name="delete">
-      <BehaviourControlGraph_DeleteAction id="55" flexoID="36" userID="FLX" object="shape" />
+    <DeletionScheme id="63" userID="FLX" width="800" label="delete" height="600" flexoID="37" name="delete">
+      <BehaviourControlGraph_DeleteAction id="64" flexoID="36" userID="FLX" object="shape" />
     </DeletionScheme>
   </FlexoConcept>
-  <Inspector id="56" flexoID="1" userID="FLX" inspectorTitle="MyFreeModel" />
+  <FlexoConcept id="65" userID="FLX" flexoID="53" name="Actor">
+    <Inspector id="66" flexoID="47" userID="FLX" inspectorTitle="Actor" renderer="instance.name">
+      <TextField id="67" userID="FLX" data="name" label="name" type="java.lang.String" flexoID="48" name="name" widget="TEXT_FIELD" />
+      <TextArea id="68" userID="FLX" data="description" label="description" type="java.lang.String" flexoID="49" name="description" widget="TEXT_AREA" />
+    </Inspector>
+    <ShapeRole id="69" exampleLabel="label" userID="FLX" cloningStrategy="Clone" flexoID="51" name="shape" cardinality="ZeroOne">
+      <ShapeGraphicalRepresentation id="70" relativeTextX="0.5" height="45.0" width="60.0" allowToLeaveBounds="false" relativeTextY="0.5" identifier="6fd94412" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" layer="1" absoluteTextX="32.0" absoluteTextY="-5.0" y="10.0" x="10.0">
+        <FocusedForegroundStyle id="71" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedImageBackgroundStyle id="72" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+        <TextStyle id="73" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+        <ForegroundStyle id="74" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="75" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedImageBackgroundStyle id="76" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+        <RectangleShape id="77" />
+        <ShadowStyle id="78" drawShadow="false" />
+        <ImageBackgroundStyle id="79" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../Images/Actor.gif" imageBackgroundType="TRANSPARENT" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="80" featureName="label" flexoID="50" userID="FLX" value="name" />
+      <TypedDiagramModelSlot idref="17" />
+    </ShapeRole>
+    <PrimitiveRole id="81" userID="FLX" cloningStrategy="Clone" flexoID="52" primitiveType="String" name="name" cardinality="ZeroOne" />
+    <DropScheme id="28" userID="FLX" width="800" label="drop" height="600" flexoID="38" skipConfirmationPanel="false" name="drop" target="top">
+      <BehaviourControlGraph_Sequence id="29" flexoID="40" userID="FLX">
+        <ControlGraph1_AssignationAction id="30" userID="FLX" flexoID="41" ownerContext="controlGraph1" assign="shape">
+          <AssignableAction_AddShape id="31" flexoID="42" userID="FLX">
+            <TypedDiagramModelSlot idref="17" />
+          </AssignableAction_AddShape>
+        </ControlGraph1_AssignationAction>
+        <ControlGraph2_AssignationAction id="32" userID="FLX" flexoID="43" ownerContext="controlGraph2" assign="name">
+          <AssignableAction_ExpressionAction id="33" expression="parameters.conceptName" flexoID="44" userID="FLX" />
+        </ControlGraph2_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <TextFieldParameter id="34" userID="FLX" type="java.lang.String" flexoID="45" name="conceptName" defaultValue="&quot;conceptName&quot;" widget="TEXT_FIELD" />
+    </DropScheme>
+    <DeletionScheme id="82" userID="FLX" width="800" label="delete" height="600" flexoID="55" name="delete">
+      <BehaviourControlGraph_DeleteAction id="83" flexoID="54" userID="FLX" object="shape" />
+    </DeletionScheme>
+  </FlexoConcept>
+  <Inspector id="84" flexoID="1" userID="FLX" inspectorTitle="MyFreeModel" />
   <ModelSlot_TypedDiagramModelSlot id="17" userID="FLX" cloningStrategy="Reference" flexoID="3" isRequired="true" name="diagram" metaModelURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/DiagramSpecification/MyFreeModel" cardinality="ZeroOne">
     <FMLDiagramPaletteElementBinding id="18" paletteElementId="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/DiagramSpecification/MyFreeModel/Concepts.palette#UseCase" userID="FLX" flexoID="12">
       <DropScheme idref="19" />
       <FMLDiagramPaletteElementBindingParameter id="26" flexoID="19" userID="FLX" />
+    </FMLDiagramPaletteElementBinding>
+    <FMLDiagramPaletteElementBinding id="27" paletteElementId="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/DiagramSpecification/MyFreeModel/Concepts.palette#Actor" userID="FLX" flexoID="39">
+      <DropScheme idref="28" />
+      <FMLDiagramPaletteElementBindingParameter id="35" flexoID="46" userID="FLX" />
     </FMLDiagramPaletteElementBinding>
     <TypedDiagramModelSlot idref="17" />
   </ModelSlot_TypedDiagramModelSlot>
