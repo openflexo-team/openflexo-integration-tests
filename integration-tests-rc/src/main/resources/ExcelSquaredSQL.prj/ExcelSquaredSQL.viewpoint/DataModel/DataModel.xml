@@ -32,4 +32,12 @@
     </BehaviourControlGraph_AssignationAction>
     <GenericBehaviourParameter id="22" userID="FLX" type="org.openflexo.foundation.resource.FlexoResourceType&lt;org.openflexo.technologyadapter.jdbc.model.JDBCConnection&gt;" flexoID="83" container="view" name="connection" widget="CUSTOM_WIDGET" />
   </CreationScheme>
+  <SynchronizationScheme id="23" userID="FLX" width="800" label="synchronizationScheme" height="600" flexoID="89" description="Synchronize data fr" name="synchronizationScheme">
+    <BehaviourControlGraph_IterationAction id="24" iteratorName="line" userID="FLX" flexoID="97">
+      <ControlGraph_LogAction id="25" flexoID="105" ownerContext="controlGraph" logString="(&quot;Line &quot; + line)" logLevel="INFO" userID="FLX" />
+      <Iteration_SelectJDBCLine id="26" userID="FLX" table="connection.schema.getTable(&quot;CLIENT&quot;)" flexoID="100" ownerContext="iterationControlGraph">
+        <JDBCModelSlot idref="18" />
+      </Iteration_SelectJDBCLine>
+    </BehaviourControlGraph_IterationAction>
+  </SynchronizationScheme>
 </VirtualModel>
