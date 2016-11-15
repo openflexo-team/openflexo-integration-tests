@@ -23,4 +23,13 @@
     </DeletionScheme>
   </FlexoConcept>
   <Inspector id="17" flexoID="1" userID="FLX" inspectorTitle="DataModel" />
+  <ModelSlot_JDBCModelSlot id="18" userID="FLX" cloningStrategy="Reference" flexoID="80" isRequired="true" description="Database source for model" container="view" name="connection" cardinality="ZeroOne">
+    <JDBCModelSlot idref="18" />
+  </ModelSlot_JDBCModelSlot>
+  <CreationScheme id="19" userID="FLX" width="800" label="create" height="600" flexoID="81" description="Create new data model" name="create">
+    <BehaviourControlGraph_AssignationAction id="20" userID="FLX" flexoID="85" assign="connection">
+      <AssignableAction_ExpressionAction id="21" expression="parameters.connection" flexoID="84" userID="FLX" />
+    </BehaviourControlGraph_AssignationAction>
+    <GenericBehaviourParameter id="22" userID="FLX" type="org.openflexo.foundation.resource.FlexoResourceType&lt;org.openflexo.technologyadapter.jdbc.model.JDBCConnection&gt;" flexoID="83" container="view" name="connection" widget="CUSTOM_WIDGET" />
+  </CreationScheme>
 </VirtualModel>
