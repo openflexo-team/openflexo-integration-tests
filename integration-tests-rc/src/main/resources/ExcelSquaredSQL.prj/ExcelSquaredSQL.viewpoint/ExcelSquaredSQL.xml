@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewPoint id="0" userID="FLX" modelVersion="1.0" version="0.1" flexoID="3" name="ExcelSquaredSQL" uri="http://www.openflexo.org/2016/ExcelSquaredSQL">
+  <Inspector id="1" flexoID="2" userID="FLX" inspectorTitle="ExcelSquaredSQL" />
+  <FlexoConceptInstanceRole id="2" userID="FLX" virtualModelInstance="view" cloningStrategy="Reference" flexoID="7" name="dataModel" flexoConceptTypeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel" cardinality="ZeroOne" />
+  <ModelSlot_VirtualModelInstanceModelSlot id="3" userID="FLX" cloningStrategy="Reference" flexoID="8" isRequired="true" container="view" name="visitSheets" virtualModelURI="http://www.openflexo.org/2016/ExcelSquaredSQL/VisitSheet" cardinality="ZeroMany">
+    <VirtualModelInstanceModelSlot idref="3" />
+  </ModelSlot_VirtualModelInstanceModelSlot>
+  <ModelSlot_JDBCModelSlot id="4" userID="FLX" cloningStrategy="Reference" flexoID="14" isRequired="true" description="JDBC connection to database" name="connection" cardinality="ZeroOne">
+    <JDBCModelSlot idref="4" />
+  </ModelSlot_JDBCModelSlot>
+  <CreationScheme id="5" userID="FLX" width="800" label="createFromAddress" height="600" flexoID="9" description="Creates a View for a given address to the JDBC database" name="createFromAddress">
+    <BehaviourControlGraph_Sequence id="6" flexoID="24" userID="FLX">
+      <ControlGraph1_AssignationAction id="7" userID="FLX" flexoID="18" ownerContext="controlGraph1" assign="connection">
+        <AssignableAction_CreateJDBCResource id="8" relativePath="jdbc" userID="FLX" flexoID="17" resourceName="&quot;connection.jdbc&quot;" resourceCenter="project">
+          <JDBCModelSlot idref="4" />
+        </AssignableAction_CreateJDBCResource>
+      </ControlGraph1_AssignationAction>
+      <ControlGraph2_AssignationAction id="9" userID="FLX" flexoID="23" ownerContext="controlGraph2" assign="dataModel">
+        <AssignableAction_AddFlexoConceptInstance id="10" userID="FLX" virtualModelInstance="view" flexoID="22" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel.create">
+          <VirtualModelInstanceModelSlot idref="3" />
+          <AddFlexoConceptInstanceParameter id="11" flexoID="89" userID="FLX" value="connection" paramName="connection" />
+        </AssignableAction_AddFlexoConceptInstance>
+      </ControlGraph2_AssignationAction>
+    </BehaviourControlGraph_Sequence>
+    <GenericBehaviourParameter id="12" userID="FLX" type="java.lang.String" flexoID="15" name="address" defaultValue="&quot;jdbc:hsqldb:hsql://localhost/&quot;" widget="CUSTOM_WIDGET" />
+  </CreationScheme>
+</ViewPoint>
