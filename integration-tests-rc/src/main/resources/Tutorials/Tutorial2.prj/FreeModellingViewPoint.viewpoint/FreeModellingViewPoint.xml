@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewPoint id="0" userID="FLX" modelVersion="1.0" version="0.1" flexoID="3" description="This is the generic ViewPoint storing all FreeModelling meta-models" name="FreeModellingViewPoint" uri="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint">
+  <Inspector id="1" flexoID="2" userID="FLX" inspectorTitle="FreeModellingViewPoint" />
+</ViewPoint>
