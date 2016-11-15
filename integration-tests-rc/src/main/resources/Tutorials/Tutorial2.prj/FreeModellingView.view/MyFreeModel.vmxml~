@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModelInstance id="0" flexoConceptURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel" userID="FLX" modelVersion="1.0" version="0.1" flexoID="1" virtualModelURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel" />
+<VirtualModelInstance id="0" flexoConceptURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel" userID="FLX" modelVersion="1.0" version="0.1" title="MyFreeModel" flexoID="1" virtualModelURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel">
+  <TypeAwareModelSlotInstance id="1" modelURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram" flexoID="2" modelSlotName="diagram" userID="FLX" />
+</VirtualModelInstance>

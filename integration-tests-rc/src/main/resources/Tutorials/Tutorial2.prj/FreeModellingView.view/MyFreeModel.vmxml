@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VirtualModelInstance id="0" flexoConceptURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel" userID="FLX" modelVersion="1.0" version="0.1" title="MyFreeModel" flexoID="1" virtualModelURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel">
-  <TypeAwareModelSlotInstance id="1" modelURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram" flexoID="2" modelSlotName="diagram" userID="FLX" />
+  <FlexoConceptInstance id="1" flexoID="3" flexoConceptURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel#None" userID="FLX">
+    <ModelObjectActorReference id="2" flexoID="8" userID="FLX" roleName="shape" objectReference="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram#FLX_2" />
+    <PrimitiveActorReference id="3" flexoID="9" userID="FLX" roleName="name" valueAsString="Customer" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="4" flexoID="4" flexoConceptURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel#UseCase" userID="FLX">
+    <ModelObjectActorReference id="5" flexoID="10" userID="FLX" roleName="shape" objectReference="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram#FLX_3" />
+    <PrimitiveActorReference id="6" flexoID="11" userID="FLX" roleName="name" valueAsString="Provide menu" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="7" flexoID="5" flexoConceptURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel#UseCase" userID="FLX">
+    <ModelObjectActorReference id="8" flexoID="12" userID="FLX" roleName="shape" objectReference="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram#FLX_4" />
+    <PrimitiveActorReference id="9" flexoID="13" userID="FLX" roleName="name" valueAsString="Order meal" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="10" flexoID="6" flexoConceptURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel#UseCase" userID="FLX">
+    <ModelObjectActorReference id="11" flexoID="14" userID="FLX" roleName="shape" objectReference="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram#FLX_5" />
+    <PrimitiveActorReference id="12" flexoID="15" userID="FLX" roleName="name" valueAsString="Deliver meal" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="13" flexoID="7" flexoConceptURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/FreeModellingViewPoint.viewpoint/MyFreeModel#None" userID="FLX">
+    <ModelObjectActorReference id="14" flexoID="16" userID="FLX" roleName="shape" objectReference="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram#FLX_6" />
+    <PrimitiveActorReference id="15" flexoID="17" userID="FLX" roleName="name" valueAsString="Restaurant" />
+  </FlexoConceptInstance>
+  <TypeAwareModelSlotInstance id="16" modelURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram" flexoID="2" modelSlotName="diagram" userID="FLX" />
 </VirtualModelInstance>

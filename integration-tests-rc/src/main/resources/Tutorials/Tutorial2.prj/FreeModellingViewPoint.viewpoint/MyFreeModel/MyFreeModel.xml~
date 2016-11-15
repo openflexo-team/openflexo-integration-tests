@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VirtualModel id="0" userID="FLX" modelVersion="1.0" version="0.1" flexoID="2" name="MyFreeModel">
   <Inspector id="1" flexoID="1" userID="FLX" inspectorTitle="MyFreeModel" />
+  <ModelSlot_TypedDiagramModelSlot id="2" userID="FLX" cloningStrategy="Reference" flexoID="3" isRequired="true" name="diagram" metaModelURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/DiagramSpecification/MyFreeModel" cardinality="ZeroOne">
+    <TypedDiagramModelSlot idref="2" />
+  </ModelSlot_TypedDiagramModelSlot>
 </VirtualModel>

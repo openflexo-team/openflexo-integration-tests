@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Diagram id="0" userID="FLX" uri="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram" flexoID="1" name="MyFreeModel.diagram" />
+<Diagram id="0" diagramSpecificationURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/DiagramSpecification/MyFreeModel" userID="FLX" uri="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram" flexoID="1" name="MyFreeModel.diagram">
+  <DrawingGraphicalRepresentation id="1" backgroundColor="255,255,255" dimensionConstraints="FREELY_RESIZABLE" rectangleSelectingSelectionColor="0,0,255" selectionColor="0,0,255" focusColor="255,0,0" drawWorkingArea="false" identifier="7c2b13ad">
+    <TextStyle id="2" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+  </DrawingGraphicalRepresentation>
+</Diagram>
