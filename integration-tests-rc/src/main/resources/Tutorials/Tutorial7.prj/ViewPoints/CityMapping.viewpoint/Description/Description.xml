@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" userID="FLX" useSpecificDescriptions="false" flexoID="-1" name="Description">
+  <Inspector id="1" flexoID="-1" userID="FLX" useSpecificDescriptions="false" inspectorTitle="Description" />
+  <ModelSlot_TypedDiagramModelSlot id="2" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Reference" flexoID="1" isRequired="true" name="typedDiagramModelSlot" metaModelURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Description/Description.diagramspecification" isReadOnly="false" />
+</VirtualModel>
