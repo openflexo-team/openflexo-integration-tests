@@ -51,21 +51,22 @@
   <SynchronizationScheme id="33" userID="FLX" width="800" label="synchronizationScheme" height="600" flexoID="89" description="Synchronize data fr" name="synchronizationScheme">
     <BehaviourControlGraph_Sequence id="34" flexoID="159" userID="FLX">
       <ControlGraph1_IterationAction id="35" iteratorName="line" userID="FLX" flexoID="97" ownerContext="controlGraph1">
-        <ControlGraph_Sequence id="36" flexoID="140" ownerContext="controlGraph" userID="FLX">
-          <ControlGraph1_LogAction id="37" flexoID="105" ownerContext="controlGraph1" logString="(&quot;Client &quot; + line.getValue(&quot;name&quot;).value)" logLevel="INFO" userID="FLX" />
-          <ControlGraph2_MatchFlexoConceptInstance id="38" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="135" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Client.create" ownerContext="controlGraph2">
-            <MatchingCriteria id="39" flexoID="137" userID="FLX" patternRoleName="sql" />
-            <MatchingCriteria id="40" flexoID="139" userID="FLX" value="line.getValue(&quot;id&quot;).getIntValue()" patternRoleName="id" />
-            <CreateFlexoConceptInstanceParameter id="41" flexoID="136" userID="FLX" value="line" paramName="sql" />
-          </ControlGraph2_MatchFlexoConceptInstance>
-        </ControlGraph_Sequence>
-        <Iteration_SelectJDBCLine id="42" userID="FLX" table="connection.schema.getTable(&quot;CLIENT&quot;)" flexoID="100" ownerContext="iterationControlGraph">
+        <ControlGraph_MatchFlexoConceptInstance id="36" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="135" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Client.create" ownerContext="controlGraph">
+          <MatchingCriteria id="37" flexoID="137" userID="FLX" patternRoleName="sql" />
+          <MatchingCriteria id="38" flexoID="139" userID="FLX" value="line.getValue(&quot;id&quot;).getIntValue()" patternRoleName="id" />
+          <CreateFlexoConceptInstanceParameter id="39" flexoID="136" userID="FLX" value="line" paramName="sql" />
+        </ControlGraph_MatchFlexoConceptInstance>
+        <Iteration_SelectJDBCLine id="40" userID="FLX" table="connection.schema.getTable(&quot;CLIENT&quot;)" flexoID="100" ownerContext="iterationControlGraph">
           <JDBCModelSlot idref="28" />
         </Iteration_SelectJDBCLine>
       </ControlGraph1_IterationAction>
-      <ControlGraph2_IterationAction id="43" iteratorName="line" userID="FLX" flexoID="150" ownerContext="controlGraph2">
-        <ControlGraph_EmptyControlGraph id="44" flexoID="154" ownerContext="controlGraph" userID="FLX" />
-        <Iteration_SelectJDBCLine id="45" userID="FLX" table="connection.schema.getTable(&quot;SALESMAN&quot;)" flexoID="153" ownerContext="iterationControlGraph">
+      <ControlGraph2_IterationAction id="41" iteratorName="line" userID="FLX" flexoID="150" ownerContext="controlGraph2">
+        <ControlGraph_MatchFlexoConceptInstance id="42" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="170" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Salesman.create" ownerContext="controlGraph">
+          <MatchingCriteria id="43" flexoID="172" userID="FLX" patternRoleName="sql" />
+          <MatchingCriteria id="44" flexoID="173" userID="FLX" value="line.getValue(&quot;id&quot;).getIntValue()" patternRoleName="id" />
+          <CreateFlexoConceptInstanceParameter id="45" flexoID="171" userID="FLX" value="line" paramName="sql" />
+        </ControlGraph_MatchFlexoConceptInstance>
+        <Iteration_SelectJDBCLine id="46" userID="FLX" table="connection.schema.getTable(&quot;SALESMAN&quot;)" flexoID="153" ownerContext="iterationControlGraph">
           <JDBCModelSlot idref="28" />
         </Iteration_SelectJDBCLine>
       </ControlGraph2_IterationAction>
