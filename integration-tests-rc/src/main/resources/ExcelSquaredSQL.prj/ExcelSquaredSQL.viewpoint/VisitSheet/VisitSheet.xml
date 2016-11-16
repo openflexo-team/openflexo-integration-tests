@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VirtualModel id="0" userID="FLX" modelVersion="1.0" version="0.1" flexoID="2" description="Document that contains the clients for one salesman to visit" name="VisitSheet">
   <Inspector id="1" flexoID="1" userID="FLX" inspectorTitle="VisitSheet" />
-  <FlexoConceptInstanceRole id="2" userID="FLX" virtualModelInstance="view.dataModel" cloningStrategy="Reference" flexoID="7" name="salesman" flexoConceptTypeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Salesman" cardinality="One">
+  <FlexoConceptInstanceRole id="2" userID="FLX" virtualModelInstance="view.dataModel" cloningStrategy="Reference" flexoID="7" name="salesman" cardinality="One">
     <BasicExcelModelSlot idref="3" />
   </FlexoConceptInstanceRole>
   <ModelSlot_BasicExcelModelSlot id="3" userID="FLX" cloningStrategy="Reference" flexoID="6" isRequired="true" description="Excel sheet for this visit sheet" name="workBook" cardinality="ZeroOne">
@@ -13,7 +13,7 @@
         <AssignableAction_ExpressionAction id="7" expression="parameters.salesman" flexoID="11" userID="FLX" />
       </ControlGraph1_AssignationAction>
       <ControlGraph2_AssignationAction id="8" userID="FLX" flexoID="16" ownerContext="controlGraph2" assign="workBook">
-        <AssignableAction_CreateExcelResource id="9" relativePath="visitSheets" userID="FLX" flexoID="14" resourceName="(salesman.lastname + &quot;_visit_sheet&quot;)" resourceCenter="project">
+        <AssignableAction_CreateExcelResource id="9" relativePath="visitSheets" userID="FLX" flexoID="14" resourceName="(parameters.salesman.lastname + &quot;_visit_sheet&quot;)" resourceCenter="project">
           <BasicExcelModelSlot idref="3" />
         </AssignableAction_CreateExcelResource>
       </ControlGraph2_AssignationAction>
