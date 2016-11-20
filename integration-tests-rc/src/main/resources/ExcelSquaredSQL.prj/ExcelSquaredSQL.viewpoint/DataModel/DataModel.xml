@@ -25,7 +25,7 @@
     <PrimitiveRole id="17" userID="FLX" cloningStrategy="Clone" flexoID="79" description="Salesman last name" primitiveType="Integer" name="id" cardinality="One" />
     <ExpressionProperty id="18" expression="sql.getValue(&quot;lastname&quot;).value" flexoID="179" description="Salesman name" name="lastname" userID="FLX" />
     <ExpressionProperty id="19" expression="sql.getValue(&quot;firstname&quot;).value" flexoID="184" description="Salesman firstname" name="firstname" userID="FLX" />
-    <ExpressionProperty id="20" expression="connection.schema.getTable(&quot;CLIENT&quot;)" flexoID="185" description="List of clients for the salesman" name="clients" userID="FLX" />
+    <ExpressionProperty id="20" expression="connection.schema.getTable(&quot;CLIENT&quot;).select((&quot;salesman = &quot; + id))" flexoID="185" description="List of clients for the salesman" name="clients" userID="FLX" />
     <CreationScheme id="21" userID="FLX" width="800" label="create" height="600" flexoID="61" name="create">
       <BehaviourControlGraph_Sequence id="22" flexoID="168" userID="FLX">
         <ControlGraph1_AssignationAction id="23" userID="FLX" flexoID="165" ownerContext="controlGraph1" assign="sql">
