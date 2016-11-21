@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" userID="FLX" modelVersion="1.0" version="0.1" flexoID="2" description="ExcelSquaredSQL UI" name="UI">
+  <Inspector id="1" flexoID="1" userID="FLX" inspectorTitle="UI" />
+  <ModelSlot_FIBComponentModelSlot id="2" templateComponentURI="http://www.openflexo.org/projects/2016/11/ExcelSquaredSQL_1478204287589/ExcelSquaredSQL.viewpoint/ui.fib" userID="FLX" cloningStrategy="Reference" flexoID="4" isRequired="true" name="ui" cardinality="ZeroOne">
+    <VariableAssignment id="3" variableType="org.openflexo.foundation.fml.ViewType&lt;http://www.openflexo.org/2016/ExcelSquaredSQL&gt;" flexoID="3" userID="FLX" value="view" variable="data" />
+    <FIBComponentModelSlot idref="2" />
+  </ModelSlot_FIBComponentModelSlot>
+  <CreationScheme id="4" userID="FLX" width="800" label="init" height="600" flexoID="7" name="init">
+    <BehaviourControlGraph_AssignationAction id="5" userID="FLX" flexoID="5" assign="ui">
+      <AssignableAction_ConfigureGINAFIBComponent id="6" flexoID="6" userID="FLX">
+        <FIBComponentModelSlot idref="2" />
+      </AssignableAction_ConfigureGINAFIBComponent>
+    </BehaviourControlGraph_AssignationAction>
+  </CreationScheme>
+  <DeletionScheme id="7" userID="FLX" width="800" label="deletion" height="600" flexoID="12" name="deletion">
+    <BehaviourControlGraph_EmptyControlGraph id="8" flexoID="11" userID="FLX" />
+  </DeletionScheme>
+</VirtualModel>

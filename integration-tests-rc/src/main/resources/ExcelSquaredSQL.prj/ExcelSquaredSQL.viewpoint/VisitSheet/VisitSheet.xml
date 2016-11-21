@@ -13,11 +13,14 @@
         <AssignableAction_ExpressionAction id="7" expression="parameters.salesman" flexoID="11" userID="FLX" />
       </ControlGraph1_AssignationAction>
       <ControlGraph2_AssignationAction id="8" userID="FLX" flexoID="16" ownerContext="controlGraph2" assign="workBook">
-        <AssignableAction_CreateExcelResource id="9" relativePath="visitSheets" userID="FLX" flexoID="14" resourceName="(salesman.lastname + &quot;_visit_sheet&quot;)" resourceCenter="project">
+        <AssignableAction_CreateExcelResource id="9" relativePath="visitSheets" userID="FLX" flexoID="14" resourceName="(parameters.salesman.lastname + &quot;_visit_sheet&quot;)" resourceCenter="project">
           <BasicExcelModelSlot idref="3" />
         </AssignableAction_CreateExcelResource>
       </ControlGraph2_AssignationAction>
     </BehaviourControlGraph_Sequence>
     <GenericBehaviourParameter id="10" userID="FLX" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Salesman&gt;" flexoID="10" container="view.dataModel" name="salesman" widget="CUSTOM_WIDGET" />
   </CreationScheme>
+  <DeletionScheme id="11" userID="FLX" width="800" label="deletion" height="600" flexoID="19" name="deletion">
+    <BehaviourControlGraph_EmptyControlGraph id="12" flexoID="18" userID="FLX" />
+  </DeletionScheme>
 </VirtualModel>

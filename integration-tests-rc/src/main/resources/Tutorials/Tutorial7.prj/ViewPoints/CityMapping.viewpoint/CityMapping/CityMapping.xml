@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VirtualModel id="0" userID="FLX" modelVersion="1.0" version="0.1" flexoID="264" name="CityMapping">
-  <FlexoConcept id="1" userID="FLX" flexoID="35" name="City">
+  <FlexoConcept id="1" userID="FLX" flexoID="35" description="Encodes the mapping:&#xA;- between an instance of City class from city1 metamodel&#xA;- and an instance of City class from city2 metamodel&#xA;&#xA;Two instances matches if the name of both equals (ignoring case)." name="City">
     <Constraint id="2" flexoID="32" userID="FLX" constraint="(cityInModel1.name.toUpperCase = cityInModel2.name.toUpperCase)" />
     <Inspector id="3" flexoID="1" userID="FLX" inspectorTitle="City" renderer="((instance.cityInModel1 != null) ? ((instance.cityInModel2 != null) ? (instance.cityInModel1.name + &quot; [sync]&quot;) : (instance.cityInModel1.name + &quot; [model1]&quot;)) : (instance.cityInModel2.name + &quot; [model2]&quot;))" />
     <EMFObjectIndividualRole id="4" userID="FLX" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/City" cloningStrategy="Clone" flexoID="33" name="cityInModel1" cardinality="ZeroOne">
@@ -167,208 +167,210 @@
       <EMFModelSlot idref="7" />
     </EMFObjectIndividualRole>
   </FlexoConcept>
-  <Inspector id="101" flexoID="3" userID="FLX" inspectorTitle="CityMapping" />
+  <Constraint id="101" flexoID="295" userID="FLX" constraint="(model1 != null)" />
+  <Constraint id="102" flexoID="296" userID="FLX" constraint="(model2 != null)" />
+  <Inspector id="103" flexoID="3" userID="FLX" inspectorTitle="CityMapping" />
   <ModelSlot_EMFModelSlot id="5" userID="FLX" cloningStrategy="Reference" flexoID="161" isRequired="true" name="model1" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city1" cardinality="ZeroOne">
     <EMFModelSlot idref="5" />
   </ModelSlot_EMFModelSlot>
   <ModelSlot_EMFModelSlot id="7" userID="FLX" cloningStrategy="Reference" flexoID="162" isRequired="true" name="model2" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city2" cardinality="ZeroOne">
     <EMFModelSlot idref="7" />
   </ModelSlot_EMFModelSlot>
-  <SynchronizationScheme id="102" userID="FLX" width="800" label="synchronization" height="600" flexoID="74" skipConfirmationPanel="false" name="synchronization">
-    <BehaviourControlGraph_Sequence id="103" flexoID="4" userID="FLX">
-      <ControlGraph1_IterationAction id="104" iteratorName="city1" userID="FLX" flexoID="26" ownerContext="controlGraph1">
-        <ControlGraph_Sequence id="105" flexoID="5" ownerContext="controlGraph" userID="FLX">
-          <ControlGraph1_DeclarationAction id="106" flexoID="6" ownerContext="controlGraph1" variable="matchingCitiesInModel2" userID="FLX">
-            <AssignableAction_SelectEMFObjectIndividual id="107" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City" flexoID="77" variableName="matchingCitiesInModel2" userID="FLX" assignation="matchingCitiesInModel2">
-              <Condition id="108" flexoID="7" condition="(selected.name.toUpperCase = city1.name.toUpperCase)" userID="FLX" />
+  <SynchronizationScheme id="104" userID="FLX" width="800" label="synchronization" height="600" flexoID="74" skipConfirmationPanel="false" name="synchronization">
+    <BehaviourControlGraph_Sequence id="105" flexoID="4" userID="FLX">
+      <ControlGraph1_IterationAction id="106" iteratorName="city1" userID="FLX" flexoID="26" ownerContext="controlGraph1">
+        <ControlGraph_Sequence id="107" flexoID="5" ownerContext="controlGraph" userID="FLX">
+          <ControlGraph1_DeclarationAction id="108" flexoID="6" ownerContext="controlGraph1" variable="matchingCitiesInModel2" userID="FLX">
+            <AssignableAction_SelectEMFObjectIndividual id="109" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City" flexoID="77" variableName="matchingCitiesInModel2" userID="FLX" assignation="matchingCitiesInModel2">
+              <Condition id="110" flexoID="7" condition="(selected.name.toUpperCase = city1.name.toUpperCase)" userID="FLX" />
               <EMFModelSlot idref="7" />
             </AssignableAction_SelectEMFObjectIndividual>
           </ControlGraph1_DeclarationAction>
-          <ControlGraph2_Sequence id="109" flexoID="8" ownerContext="controlGraph2" userID="FLX">
-            <ControlGraph1_ConditionalAction id="110" flexoID="78" ownerContext="controlGraph1" condition="(matchingCitiesInModel2.size = 0)" userID="FLX">
-              <ThenControlGraph_MatchFlexoConceptInstance id="111" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="81" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City.createFromEMF" ownerContext="thenControlGraph" name="">
-                <MatchingCriteria id="112" flexoID="79" userID="FLX" value="city1" patternRoleName="cityInModel1" />
-                <MatchingCriteria id="113" flexoID="80" userID="FLX" value="null" patternRoleName="cityInModel2" />
-                <CreateFlexoConceptInstanceParameter id="114" flexoID="82" userID="FLX" value="city1" paramName="cityInModel1" />
-                <CreateFlexoConceptInstanceParameter id="115" flexoID="83" userID="FLX" value="null" paramName="cityInModel2" />
+          <ControlGraph2_Sequence id="111" flexoID="8" ownerContext="controlGraph2" userID="FLX">
+            <ControlGraph1_ConditionalAction id="112" flexoID="78" ownerContext="controlGraph1" condition="(matchingCitiesInModel2.size = 0)" userID="FLX">
+              <ThenControlGraph_MatchFlexoConceptInstance id="113" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="81" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City.createFromEMF" ownerContext="thenControlGraph" name="">
+                <MatchingCriteria id="114" flexoID="79" userID="FLX" value="city1" patternRoleName="cityInModel1" />
+                <MatchingCriteria id="115" flexoID="80" userID="FLX" value="null" patternRoleName="cityInModel2" />
+                <CreateFlexoConceptInstanceParameter id="116" flexoID="82" userID="FLX" value="city1" paramName="cityInModel1" />
+                <CreateFlexoConceptInstanceParameter id="117" flexoID="83" userID="FLX" value="null" paramName="cityInModel2" />
               </ThenControlGraph_MatchFlexoConceptInstance>
             </ControlGraph1_ConditionalAction>
-            <ControlGraph2_Sequence id="116" flexoID="9" ownerContext="controlGraph2" userID="FLX">
-              <ControlGraph1_ConditionalAction id="117" flexoID="84" ownerContext="controlGraph1" condition="(matchingCitiesInModel2.size = 1)" userID="FLX">
-                <ThenControlGraph_MatchFlexoConceptInstance id="118" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="87" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City.createFromEMF" ownerContext="thenControlGraph">
-                  <MatchingCriteria id="119" flexoID="85" userID="FLX" value="city1" patternRoleName="cityInModel1" />
-                  <MatchingCriteria id="120" flexoID="86" userID="FLX" value="matchingCitiesInModel2.get(0)" patternRoleName="cityInModel2" />
-                  <CreateFlexoConceptInstanceParameter id="121" flexoID="88" userID="FLX" value="city1" paramName="cityInModel1" />
-                  <CreateFlexoConceptInstanceParameter id="122" flexoID="89" userID="FLX" value="matchingCitiesInModel2.get(0)" paramName="cityInModel2" />
+            <ControlGraph2_Sequence id="118" flexoID="9" ownerContext="controlGraph2" userID="FLX">
+              <ControlGraph1_ConditionalAction id="119" flexoID="84" ownerContext="controlGraph1" condition="(matchingCitiesInModel2.size = 1)" userID="FLX">
+                <ThenControlGraph_MatchFlexoConceptInstance id="120" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="87" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City.createFromEMF" ownerContext="thenControlGraph">
+                  <MatchingCriteria id="121" flexoID="85" userID="FLX" value="city1" patternRoleName="cityInModel1" />
+                  <MatchingCriteria id="122" flexoID="86" userID="FLX" value="matchingCitiesInModel2.get(0)" patternRoleName="cityInModel2" />
+                  <CreateFlexoConceptInstanceParameter id="123" flexoID="88" userID="FLX" value="city1" paramName="cityInModel1" />
+                  <CreateFlexoConceptInstanceParameter id="124" flexoID="89" userID="FLX" value="matchingCitiesInModel2.get(0)" paramName="cityInModel2" />
                 </ThenControlGraph_MatchFlexoConceptInstance>
               </ControlGraph1_ConditionalAction>
-              <ControlGraph2_Sequence id="123" flexoID="10" ownerContext="controlGraph2" userID="FLX">
-                <ControlGraph1_DeclarationAction id="124" flexoID="11" ownerContext="controlGraph1" variable="tempList" userID="FLX">
-                  <AssignableAction_SelectFlexoConceptInstance id="125" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="90" variableName="tempList" assignation="tempList" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City">
-                    <Condition id="126" flexoID="12" condition="(selected.cityInModel1 = city1)" userID="FLX" />
+              <ControlGraph2_Sequence id="125" flexoID="10" ownerContext="controlGraph2" userID="FLX">
+                <ControlGraph1_DeclarationAction id="126" flexoID="11" ownerContext="controlGraph1" variable="tempList" userID="FLX">
+                  <AssignableAction_SelectFlexoConceptInstance id="127" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="90" variableName="tempList" assignation="tempList" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City">
+                    <Condition id="128" flexoID="12" condition="(selected.cityInModel1 = city1)" userID="FLX" />
                   </AssignableAction_SelectFlexoConceptInstance>
                 </ControlGraph1_DeclarationAction>
-                <ControlGraph2_Sequence id="127" flexoID="13" ownerContext="controlGraph2" userID="FLX">
-                  <ControlGraph1_DeclarationAction id="128" flexoID="14" ownerContext="controlGraph1" variable="currentCity" userID="FLX">
-                    <AssignableAction_ExpressionAction id="129" expression="tempList.get(0)" flexoID="15" userID="FLX" />
+                <ControlGraph2_Sequence id="129" flexoID="13" ownerContext="controlGraph2" userID="FLX">
+                  <ControlGraph1_DeclarationAction id="130" flexoID="14" ownerContext="controlGraph1" variable="currentCity" userID="FLX">
+                    <AssignableAction_ExpressionAction id="131" expression="tempList.get(0)" flexoID="15" userID="FLX" />
                   </ControlGraph1_DeclarationAction>
-                  <ControlGraph2_IterationAction id="130" iteratorName="house1" userID="FLX" flexoID="92" ownerContext="controlGraph2">
-                    <ControlGraph_Sequence id="131" flexoID="16" ownerContext="controlGraph" userID="FLX">
-                      <ControlGraph1_ConditionalAction id="132" flexoID="93" ownerContext="controlGraph1" condition="(house1.type.name = &quot;Appartment&quot;)" userID="FLX">
-                        <ThenControlGraph_Sequence id="133" flexoID="17" ownerContext="thenControlGraph" userID="FLX">
-                          <ControlGraph1_DeclarationAction id="134" flexoID="18" ownerContext="controlGraph1" variable="matchingAppartmentsInModel2" userID="FLX">
-                            <AssignableAction_SelectEMFObjectIndividual id="135" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/Appartment" flexoID="94" variableName="matchingAppartmentsInModel2" userID="FLX" assignation="matchingAppartmentsInModel2">
-                              <Condition id="136" flexoID="19" condition="(selected.label = house1.info)" userID="FLX" />
+                  <ControlGraph2_IterationAction id="132" iteratorName="house1" userID="FLX" flexoID="92" ownerContext="controlGraph2">
+                    <ControlGraph_Sequence id="133" flexoID="16" ownerContext="controlGraph" userID="FLX">
+                      <ControlGraph1_ConditionalAction id="134" flexoID="93" ownerContext="controlGraph1" condition="(house1.type.name = &quot;Appartment&quot;)" userID="FLX">
+                        <ThenControlGraph_Sequence id="135" flexoID="17" ownerContext="thenControlGraph" userID="FLX">
+                          <ControlGraph1_DeclarationAction id="136" flexoID="18" ownerContext="controlGraph1" variable="matchingAppartmentsInModel2" userID="FLX">
+                            <AssignableAction_SelectEMFObjectIndividual id="137" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/Appartment" flexoID="94" variableName="matchingAppartmentsInModel2" userID="FLX" assignation="matchingAppartmentsInModel2">
+                              <Condition id="138" flexoID="19" condition="(selected.label = house1.info)" userID="FLX" />
                               <EMFModelSlot idref="7" />
                             </AssignableAction_SelectEMFObjectIndividual>
                           </ControlGraph1_DeclarationAction>
-                          <ControlGraph2_Sequence id="137" flexoID="20" ownerContext="controlGraph2" userID="FLX">
-                            <ControlGraph1_ConditionalAction id="138" flexoID="95" ownerContext="controlGraph1" condition="(matchingAppartmentsInModel2.size = 0)" userID="FLX">
-                              <ThenControlGraph_MatchFlexoConceptInstance id="139" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="99" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Appartment.creation" ownerContext="thenControlGraph">
-                                <MatchingCriteria id="140" flexoID="96" userID="FLX" value="house1" patternRoleName="houseInModel1" />
-                                <MatchingCriteria id="141" flexoID="97" userID="FLX" value="null" patternRoleName="appartmentInModel2" />
-                                <MatchingCriteria id="142" flexoID="98" userID="FLX" value="currentCity" patternRoleName="city" />
-                                <CreateFlexoConceptInstanceParameter id="143" flexoID="100" userID="FLX" value="house1" paramName="houseInModel1" />
-                                <CreateFlexoConceptInstanceParameter id="144" flexoID="101" userID="FLX" value="null" paramName="appartmentInModel2" />
-                                <CreateFlexoConceptInstanceParameter id="145" flexoID="102" userID="FLX" value="currentCity" paramName="cityParameter" />
+                          <ControlGraph2_Sequence id="139" flexoID="20" ownerContext="controlGraph2" userID="FLX">
+                            <ControlGraph1_ConditionalAction id="140" flexoID="95" ownerContext="controlGraph1" condition="(matchingAppartmentsInModel2.size = 0)" userID="FLX">
+                              <ThenControlGraph_MatchFlexoConceptInstance id="141" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="99" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Appartment.creation" ownerContext="thenControlGraph">
+                                <MatchingCriteria id="142" flexoID="96" userID="FLX" value="house1" patternRoleName="houseInModel1" />
+                                <MatchingCriteria id="143" flexoID="97" userID="FLX" value="null" patternRoleName="appartmentInModel2" />
+                                <MatchingCriteria id="144" flexoID="98" userID="FLX" value="currentCity" patternRoleName="city" />
+                                <CreateFlexoConceptInstanceParameter id="145" flexoID="100" userID="FLX" value="house1" paramName="houseInModel1" />
+                                <CreateFlexoConceptInstanceParameter id="146" flexoID="101" userID="FLX" value="null" paramName="appartmentInModel2" />
+                                <CreateFlexoConceptInstanceParameter id="147" flexoID="102" userID="FLX" value="currentCity" paramName="cityParameter" />
                               </ThenControlGraph_MatchFlexoConceptInstance>
                             </ControlGraph1_ConditionalAction>
-                            <ControlGraph2_ConditionalAction id="146" flexoID="103" ownerContext="controlGraph2" condition="(matchingAppartmentsInModel2.size = 1)" userID="FLX">
-                              <ThenControlGraph_MatchFlexoConceptInstance id="147" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="107" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Appartment.creation" ownerContext="thenControlGraph">
-                                <MatchingCriteria id="148" flexoID="104" userID="FLX" value="house1" patternRoleName="houseInModel1" />
-                                <MatchingCriteria id="149" flexoID="105" userID="FLX" value="matchingAppartmentsInModel2.get(0)" patternRoleName="appartmentInModel2" />
-                                <MatchingCriteria id="150" flexoID="106" userID="FLX" value="currentCity" patternRoleName="city" />
-                                <CreateFlexoConceptInstanceParameter id="151" flexoID="108" userID="FLX" value="house1" paramName="houseInModel1" />
-                                <CreateFlexoConceptInstanceParameter id="152" flexoID="109" userID="FLX" value="matchingAppartmentsInModel2.get(0)" paramName="appartmentInModel2" />
-                                <CreateFlexoConceptInstanceParameter id="153" flexoID="110" userID="FLX" value="currentCity" paramName="cityParameter" />
+                            <ControlGraph2_ConditionalAction id="148" flexoID="103" ownerContext="controlGraph2" condition="(matchingAppartmentsInModel2.size = 1)" userID="FLX">
+                              <ThenControlGraph_MatchFlexoConceptInstance id="149" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="107" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Appartment.creation" ownerContext="thenControlGraph">
+                                <MatchingCriteria id="150" flexoID="104" userID="FLX" value="house1" patternRoleName="houseInModel1" />
+                                <MatchingCriteria id="151" flexoID="105" userID="FLX" value="matchingAppartmentsInModel2.get(0)" patternRoleName="appartmentInModel2" />
+                                <MatchingCriteria id="152" flexoID="106" userID="FLX" value="currentCity" patternRoleName="city" />
+                                <CreateFlexoConceptInstanceParameter id="153" flexoID="108" userID="FLX" value="house1" paramName="houseInModel1" />
+                                <CreateFlexoConceptInstanceParameter id="154" flexoID="109" userID="FLX" value="matchingAppartmentsInModel2.get(0)" paramName="appartmentInModel2" />
+                                <CreateFlexoConceptInstanceParameter id="155" flexoID="110" userID="FLX" value="currentCity" paramName="cityParameter" />
                               </ThenControlGraph_MatchFlexoConceptInstance>
                             </ControlGraph2_ConditionalAction>
                           </ControlGraph2_Sequence>
                         </ThenControlGraph_Sequence>
                       </ControlGraph1_ConditionalAction>
-                      <ControlGraph2_ConditionalAction id="154" flexoID="111" ownerContext="controlGraph2" condition="(house1.type.name = &quot;Mansion&quot;)" userID="FLX">
-                        <ThenControlGraph_Sequence id="155" flexoID="21" ownerContext="thenControlGraph" userID="FLX">
-                          <ControlGraph1_DeclarationAction id="156" flexoID="22" ownerContext="controlGraph1" variable="matchingMansionsInModel2" userID="FLX">
-                            <AssignableAction_SelectEMFObjectIndividual id="157" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/Mansion" flexoID="112" variableName="matchingMansionsInModel2" userID="FLX" assignation="matchingMansionsInModel2">
-                              <Condition id="158" flexoID="23" condition="(selected.number.toString = house1.info)" userID="FLX" />
+                      <ControlGraph2_ConditionalAction id="156" flexoID="111" ownerContext="controlGraph2" condition="(house1.type.name = &quot;Mansion&quot;)" userID="FLX">
+                        <ThenControlGraph_Sequence id="157" flexoID="21" ownerContext="thenControlGraph" userID="FLX">
+                          <ControlGraph1_DeclarationAction id="158" flexoID="22" ownerContext="controlGraph1" variable="matchingMansionsInModel2" userID="FLX">
+                            <AssignableAction_SelectEMFObjectIndividual id="159" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/Mansion" flexoID="112" variableName="matchingMansionsInModel2" userID="FLX" assignation="matchingMansionsInModel2">
+                              <Condition id="160" flexoID="23" condition="(selected.number.toString = house1.info)" userID="FLX" />
                               <EMFModelSlot idref="7" />
                             </AssignableAction_SelectEMFObjectIndividual>
                           </ControlGraph1_DeclarationAction>
-                          <ControlGraph2_Sequence id="159" flexoID="24" ownerContext="controlGraph2" userID="FLX">
-                            <ControlGraph1_ConditionalAction id="160" flexoID="113" ownerContext="controlGraph1" condition="(matchingMansionsInModel2.size = 0)" userID="FLX">
-                              <ThenControlGraph_MatchFlexoConceptInstance id="161" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="117" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Mansion.creation" ownerContext="thenControlGraph">
-                                <MatchingCriteria id="162" flexoID="114" userID="FLX" value="house1" patternRoleName="houseInModel1" />
-                                <MatchingCriteria id="163" flexoID="115" userID="FLX" value="null" patternRoleName="mansionInModel2" />
-                                <MatchingCriteria id="164" flexoID="116" userID="FLX" value="currentCity" patternRoleName="city" />
-                                <CreateFlexoConceptInstanceParameter id="165" flexoID="118" userID="FLX" value="house1" paramName="houseInModel1" />
-                                <CreateFlexoConceptInstanceParameter id="166" flexoID="119" userID="FLX" value="null" paramName="mansionInModel2" />
-                                <CreateFlexoConceptInstanceParameter id="167" flexoID="120" userID="FLX" value="currentCity" paramName="cityParameter" />
+                          <ControlGraph2_Sequence id="161" flexoID="24" ownerContext="controlGraph2" userID="FLX">
+                            <ControlGraph1_ConditionalAction id="162" flexoID="113" ownerContext="controlGraph1" condition="(matchingMansionsInModel2.size = 0)" userID="FLX">
+                              <ThenControlGraph_MatchFlexoConceptInstance id="163" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="117" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Mansion.creation" ownerContext="thenControlGraph">
+                                <MatchingCriteria id="164" flexoID="114" userID="FLX" value="house1" patternRoleName="houseInModel1" />
+                                <MatchingCriteria id="165" flexoID="115" userID="FLX" value="null" patternRoleName="mansionInModel2" />
+                                <MatchingCriteria id="166" flexoID="116" userID="FLX" value="currentCity" patternRoleName="city" />
+                                <CreateFlexoConceptInstanceParameter id="167" flexoID="118" userID="FLX" value="house1" paramName="houseInModel1" />
+                                <CreateFlexoConceptInstanceParameter id="168" flexoID="119" userID="FLX" value="null" paramName="mansionInModel2" />
+                                <CreateFlexoConceptInstanceParameter id="169" flexoID="120" userID="FLX" value="currentCity" paramName="cityParameter" />
                               </ThenControlGraph_MatchFlexoConceptInstance>
                             </ControlGraph1_ConditionalAction>
-                            <ControlGraph2_ConditionalAction id="168" flexoID="121" ownerContext="controlGraph2" condition="(matchingMansionsInModel2.size = 1)" userID="FLX">
-                              <ThenControlGraph_MatchFlexoConceptInstance id="169" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="125" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Mansion.creation" ownerContext="thenControlGraph">
-                                <MatchingCriteria id="170" flexoID="122" userID="FLX" value="house1" patternRoleName="houseInModel1" />
-                                <MatchingCriteria id="171" flexoID="123" userID="FLX" value="matchingMansionsInModel2.get(0)" patternRoleName="mansionInModel2" />
-                                <MatchingCriteria id="172" flexoID="124" userID="FLX" value="currentCity" patternRoleName="city" />
-                                <CreateFlexoConceptInstanceParameter id="173" flexoID="126" userID="FLX" value="house1" paramName="houseInModel1" />
-                                <CreateFlexoConceptInstanceParameter id="174" flexoID="127" userID="FLX" value="matchingMansionsInModel2.get(0)" paramName="mansionInModel2" />
-                                <CreateFlexoConceptInstanceParameter id="175" flexoID="128" userID="FLX" value="currentCity" paramName="cityParameter" />
+                            <ControlGraph2_ConditionalAction id="170" flexoID="121" ownerContext="controlGraph2" condition="(matchingMansionsInModel2.size = 1)" userID="FLX">
+                              <ThenControlGraph_MatchFlexoConceptInstance id="171" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="125" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Mansion.creation" ownerContext="thenControlGraph">
+                                <MatchingCriteria id="172" flexoID="122" userID="FLX" value="house1" patternRoleName="houseInModel1" />
+                                <MatchingCriteria id="173" flexoID="123" userID="FLX" value="matchingMansionsInModel2.get(0)" patternRoleName="mansionInModel2" />
+                                <MatchingCriteria id="174" flexoID="124" userID="FLX" value="currentCity" patternRoleName="city" />
+                                <CreateFlexoConceptInstanceParameter id="175" flexoID="126" userID="FLX" value="house1" paramName="houseInModel1" />
+                                <CreateFlexoConceptInstanceParameter id="176" flexoID="127" userID="FLX" value="matchingMansionsInModel2.get(0)" paramName="mansionInModel2" />
+                                <CreateFlexoConceptInstanceParameter id="177" flexoID="128" userID="FLX" value="currentCity" paramName="cityParameter" />
                               </ThenControlGraph_MatchFlexoConceptInstance>
                             </ControlGraph2_ConditionalAction>
                           </ControlGraph2_Sequence>
                         </ThenControlGraph_Sequence>
                       </ControlGraph2_ConditionalAction>
                     </ControlGraph_Sequence>
-                    <Iteration_ExpressionAction id="176" expression="city1.houses" flexoID="25" ownerContext="iterationControlGraph" userID="FLX" />
+                    <Iteration_ExpressionAction id="178" expression="city1.houses" flexoID="25" ownerContext="iterationControlGraph" userID="FLX" />
                   </ControlGraph2_IterationAction>
                 </ControlGraph2_Sequence>
               </ControlGraph2_Sequence>
             </ControlGraph2_Sequence>
           </ControlGraph2_Sequence>
         </ControlGraph_Sequence>
-        <Iteration_SelectEMFObjectIndividual id="177" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City" flexoID="76" ownerContext="iterationControlGraph" userID="FLX">
+        <Iteration_SelectEMFObjectIndividual id="179" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City" flexoID="76" ownerContext="iterationControlGraph" userID="FLX">
           <EMFModelSlot idref="5" />
         </Iteration_SelectEMFObjectIndividual>
       </ControlGraph1_IterationAction>
-      <ControlGraph2_Sequence id="178" flexoID="27" ownerContext="controlGraph2" userID="FLX">
-        <ControlGraph1_IterationAction id="179" iteratorName="residentInModel1" userID="FLX" flexoID="32" ownerContext="controlGraph1">
-          <ControlGraph_Sequence id="180" flexoID="28" ownerContext="controlGraph" userID="FLX">
-            <ControlGraph1_DeclarationAction id="181" flexoID="29" ownerContext="controlGraph1" variable="matchingHousesWithSameResident" userID="FLX">
-              <AssignableAction_SelectEMFObjectIndividual id="182" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/House" flexoID="131" variableName="matchingHousesWithSameResident" userID="FLX" assignation="matchingHousesWithSameResident">
-                <Condition id="183" flexoID="30" condition="(selected.owner.toUpperCase = residentInModel1.name.toUpperCase)" userID="FLX" />
+      <ControlGraph2_Sequence id="180" flexoID="27" ownerContext="controlGraph2" userID="FLX">
+        <ControlGraph1_IterationAction id="181" iteratorName="residentInModel1" userID="FLX" flexoID="32" ownerContext="controlGraph1">
+          <ControlGraph_Sequence id="182" flexoID="28" ownerContext="controlGraph" userID="FLX">
+            <ControlGraph1_DeclarationAction id="183" flexoID="29" ownerContext="controlGraph1" variable="matchingHousesWithSameResident" userID="FLX">
+              <AssignableAction_SelectEMFObjectIndividual id="184" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/House" flexoID="131" variableName="matchingHousesWithSameResident" userID="FLX" assignation="matchingHousesWithSameResident">
+                <Condition id="185" flexoID="30" condition="(selected.owner.toUpperCase = residentInModel1.name.toUpperCase)" userID="FLX" />
                 <EMFModelSlot idref="7" />
               </AssignableAction_SelectEMFObjectIndividual>
             </ControlGraph1_DeclarationAction>
-            <ControlGraph2_Sequence id="184" flexoID="31" ownerContext="controlGraph2" userID="FLX">
-              <ControlGraph1_ConditionalAction id="185" flexoID="132" ownerContext="controlGraph1" condition="(matchingHousesWithSameResident.size = 0)" userID="FLX">
-                <ThenControlGraph_MatchFlexoConceptInstance id="186" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="135" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Resident.creation" ownerContext="thenControlGraph">
-                  <MatchingCriteria id="187" flexoID="133" userID="FLX" value="residentInModel1" patternRoleName="residentInModel1" />
-                  <MatchingCriteria id="188" flexoID="134" userID="FLX" value="null" patternRoleName="houseInModel2" />
-                  <CreateFlexoConceptInstanceParameter id="189" flexoID="136" userID="FLX" value="residentInModel1" paramName="residentInModel1" />
-                  <CreateFlexoConceptInstanceParameter id="190" flexoID="137" userID="FLX" value="null" paramName="houseInModel2" />
+            <ControlGraph2_Sequence id="186" flexoID="31" ownerContext="controlGraph2" userID="FLX">
+              <ControlGraph1_ConditionalAction id="187" flexoID="132" ownerContext="controlGraph1" condition="(matchingHousesWithSameResident.size = 0)" userID="FLX">
+                <ThenControlGraph_MatchFlexoConceptInstance id="188" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="135" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Resident.creation" ownerContext="thenControlGraph">
+                  <MatchingCriteria id="189" flexoID="133" userID="FLX" value="residentInModel1" patternRoleName="residentInModel1" />
+                  <MatchingCriteria id="190" flexoID="134" userID="FLX" value="null" patternRoleName="houseInModel2" />
+                  <CreateFlexoConceptInstanceParameter id="191" flexoID="136" userID="FLX" value="residentInModel1" paramName="residentInModel1" />
+                  <CreateFlexoConceptInstanceParameter id="192" flexoID="137" userID="FLX" value="null" paramName="houseInModel2" />
                 </ThenControlGraph_MatchFlexoConceptInstance>
               </ControlGraph1_ConditionalAction>
-              <ControlGraph2_ConditionalAction id="191" flexoID="138" ownerContext="controlGraph2" condition="(matchingHousesWithSameResident.size &gt;= 1)" userID="FLX">
-                <ThenControlGraph_MatchFlexoConceptInstance id="192" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="141" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Resident.creation" ownerContext="thenControlGraph" name="">
-                  <MatchingCriteria id="193" flexoID="139" userID="FLX" value="residentInModel1" patternRoleName="residentInModel1" />
-                  <MatchingCriteria id="194" flexoID="140" userID="FLX" value="matchingHousesWithSameResident.get(0)" patternRoleName="houseInModel2" />
-                  <CreateFlexoConceptInstanceParameter id="195" flexoID="142" userID="FLX" value="residentInModel1" paramName="residentInModel1" />
-                  <CreateFlexoConceptInstanceParameter id="196" flexoID="143" userID="FLX" value="matchingHousesWithSameResident.get(0)" paramName="houseInModel2" />
+              <ControlGraph2_ConditionalAction id="193" flexoID="138" ownerContext="controlGraph2" condition="(matchingHousesWithSameResident.size &gt;= 1)" userID="FLX">
+                <ThenControlGraph_MatchFlexoConceptInstance id="194" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="141" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#Resident.creation" ownerContext="thenControlGraph" name="">
+                  <MatchingCriteria id="195" flexoID="139" userID="FLX" value="residentInModel1" patternRoleName="residentInModel1" />
+                  <MatchingCriteria id="196" flexoID="140" userID="FLX" value="matchingHousesWithSameResident.get(0)" patternRoleName="houseInModel2" />
+                  <CreateFlexoConceptInstanceParameter id="197" flexoID="142" userID="FLX" value="residentInModel1" paramName="residentInModel1" />
+                  <CreateFlexoConceptInstanceParameter id="198" flexoID="143" userID="FLX" value="matchingHousesWithSameResident.get(0)" paramName="houseInModel2" />
                 </ThenControlGraph_MatchFlexoConceptInstance>
               </ControlGraph2_ConditionalAction>
             </ControlGraph2_Sequence>
           </ControlGraph_Sequence>
-          <Iteration_SelectEMFObjectIndividual id="197" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/Resident" flexoID="130" ownerContext="iterationControlGraph" userID="FLX">
+          <Iteration_SelectEMFObjectIndividual id="199" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/Resident" flexoID="130" ownerContext="iterationControlGraph" userID="FLX">
             <EMFModelSlot idref="5" />
           </Iteration_SelectEMFObjectIndividual>
         </ControlGraph1_IterationAction>
-        <ControlGraph2_IterationAction id="198" iteratorName="city2" userID="FLX" flexoID="36" ownerContext="controlGraph2">
-          <ControlGraph_Sequence id="199" flexoID="33" ownerContext="controlGraph" userID="FLX">
-            <ControlGraph1_DeclarationAction id="200" flexoID="34" ownerContext="controlGraph1" variable="matchingCitiesInModel1" userID="FLX">
-              <AssignableAction_SelectEMFObjectIndividual id="201" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City" flexoID="146" variableName="matchingCitiesInModel1" userID="FLX" assignation="matchingCitiesInModel1">
-                <Condition id="202" flexoID="35" condition="(selected.name = city2.name)" userID="FLX" />
+        <ControlGraph2_IterationAction id="200" iteratorName="city2" userID="FLX" flexoID="36" ownerContext="controlGraph2">
+          <ControlGraph_Sequence id="201" flexoID="33" ownerContext="controlGraph" userID="FLX">
+            <ControlGraph1_DeclarationAction id="202" flexoID="34" ownerContext="controlGraph1" variable="matchingCitiesInModel1" userID="FLX">
+              <AssignableAction_SelectEMFObjectIndividual id="203" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City" flexoID="146" variableName="matchingCitiesInModel1" userID="FLX" assignation="matchingCitiesInModel1">
+                <Condition id="204" flexoID="35" condition="(selected.name = city2.name)" userID="FLX" />
                 <EMFModelSlot idref="5" />
               </AssignableAction_SelectEMFObjectIndividual>
             </ControlGraph1_DeclarationAction>
-            <ControlGraph2_ConditionalAction id="203" flexoID="147" ownerContext="controlGraph2" condition="(matchingCitiesInModel1.size = 0)" userID="FLX">
-              <ThenControlGraph_MatchFlexoConceptInstance id="204" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="150" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City.createFromEMF" ownerContext="thenControlGraph">
-                <MatchingCriteria id="205" flexoID="148" userID="FLX" value="null" patternRoleName="cityInModel1" />
-                <MatchingCriteria id="206" flexoID="149" userID="FLX" value="city2" patternRoleName="cityInModel2" />
-                <CreateFlexoConceptInstanceParameter id="207" flexoID="151" userID="FLX" value="null" paramName="cityInModel1" />
-                <CreateFlexoConceptInstanceParameter id="208" flexoID="152" userID="FLX" value="city2" paramName="cityInModel2" />
+            <ControlGraph2_ConditionalAction id="205" flexoID="147" ownerContext="controlGraph2" condition="(matchingCitiesInModel1.size = 0)" userID="FLX">
+              <ThenControlGraph_MatchFlexoConceptInstance id="206" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="150" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City.createFromEMF" ownerContext="thenControlGraph">
+                <MatchingCriteria id="207" flexoID="148" userID="FLX" value="null" patternRoleName="cityInModel1" />
+                <MatchingCriteria id="208" flexoID="149" userID="FLX" value="city2" patternRoleName="cityInModel2" />
+                <CreateFlexoConceptInstanceParameter id="209" flexoID="151" userID="FLX" value="null" paramName="cityInModel1" />
+                <CreateFlexoConceptInstanceParameter id="210" flexoID="152" userID="FLX" value="city2" paramName="cityInModel2" />
               </ThenControlGraph_MatchFlexoConceptInstance>
             </ControlGraph2_ConditionalAction>
           </ControlGraph_Sequence>
-          <Iteration_SelectEMFObjectIndividual id="209" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City" flexoID="145" ownerContext="iterationControlGraph" userID="FLX">
+          <Iteration_SelectEMFObjectIndividual id="211" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City" flexoID="145" ownerContext="iterationControlGraph" userID="FLX">
             <EMFModelSlot idref="7" />
           </Iteration_SelectEMFObjectIndividual>
         </ControlGraph2_IterationAction>
       </ControlGraph2_Sequence>
     </BehaviourControlGraph_Sequence>
   </SynchronizationScheme>
-  <ActionScheme id="210" userID="FLX" width="800" label="Synchronize model2 from model 1" height="600" flexoID="153" skipConfirmationPanel="false" name="synchronizeModel2FromModel1">
-    <BehaviourControlGraph_Sequence id="211" flexoID="37" userID="FLX">
-      <ControlGraph1_DeclarationAction id="212" flexoID="38" ownerContext="controlGraph1" variable="nonExistantCitiesInModel2" userID="FLX">
-        <AssignableAction_SelectFlexoConceptInstance id="213" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="154" variableName="nonExistantCitiesInModel2" assignation="nonExistantCitiesInModel2" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City">
-          <Condition id="214" flexoID="39" condition="(selected.cityInModel2 = null)" userID="FLX" />
+  <ActionScheme id="212" userID="FLX" width="800" label="Synchronize model2 from model 1" height="600" flexoID="153" skipConfirmationPanel="false" name="synchronizeModel2FromModel1">
+    <BehaviourControlGraph_Sequence id="213" flexoID="37" userID="FLX">
+      <ControlGraph1_DeclarationAction id="214" flexoID="38" ownerContext="controlGraph1" variable="nonExistantCitiesInModel2" userID="FLX">
+        <AssignableAction_SelectFlexoConceptInstance id="215" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="154" variableName="nonExistantCitiesInModel2" assignation="nonExistantCitiesInModel2" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City">
+          <Condition id="216" flexoID="39" condition="(selected.cityInModel2 = null)" userID="FLX" />
         </AssignableAction_SelectFlexoConceptInstance>
       </ControlGraph1_DeclarationAction>
-      <ControlGraph2_IterationAction id="215" iteratorName="nonExistantCity" userID="FLX" flexoID="155" ownerContext="controlGraph2">
-        <ControlGraph_ExpressionAction id="216" expression="nonExistantCity.generateModel2FromModel1()" flexoID="40" ownerContext="controlGraph" userID="FLX" />
-        <Iteration_ExpressionAction id="217" expression="nonExistantCitiesInModel2" flexoID="41" ownerContext="iterationControlGraph" userID="FLX" />
+      <ControlGraph2_IterationAction id="217" iteratorName="nonExistantCity" userID="FLX" flexoID="155" ownerContext="controlGraph2">
+        <ControlGraph_ExpressionAction id="218" expression="nonExistantCity.generateModel2FromModel1()" flexoID="40" ownerContext="controlGraph" userID="FLX" />
+        <Iteration_ExpressionAction id="219" expression="nonExistantCitiesInModel2" flexoID="41" ownerContext="iterationControlGraph" userID="FLX" />
       </ControlGraph2_IterationAction>
     </BehaviourControlGraph_Sequence>
   </ActionScheme>
-  <ActionScheme id="218" userID="FLX" width="800" label="synchronizeModel1FromModel2" height="600" flexoID="157" skipConfirmationPanel="false" name="synchronizeModel1FromModel2">
-    <BehaviourControlGraph_Sequence id="219" flexoID="42" userID="FLX">
-      <ControlGraph1_DeclarationAction id="220" flexoID="43" ownerContext="controlGraph1" variable="nonExistingCitiesInModel1" userID="FLX">
-        <AssignableAction_SelectFlexoConceptInstance id="221" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="158" variableName="nonExistingCitiesInModel1" assignation="nonExistingCitiesInModel1" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City">
-          <Condition id="222" flexoID="44" condition="(selected.cityInModel1 = null)" userID="FLX" />
+  <ActionScheme id="220" userID="FLX" width="800" label="synchronizeModel1FromModel2" height="600" flexoID="157" skipConfirmationPanel="false" name="synchronizeModel1FromModel2">
+    <BehaviourControlGraph_Sequence id="221" flexoID="42" userID="FLX">
+      <ControlGraph1_DeclarationAction id="222" flexoID="43" ownerContext="controlGraph1" variable="nonExistingCitiesInModel1" userID="FLX">
+        <AssignableAction_SelectFlexoConceptInstance id="223" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="158" variableName="nonExistingCitiesInModel1" assignation="nonExistingCitiesInModel1" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City">
+          <Condition id="224" flexoID="44" condition="(selected.cityInModel1 = null)" userID="FLX" />
         </AssignableAction_SelectFlexoConceptInstance>
       </ControlGraph1_DeclarationAction>
-      <ControlGraph2_IterationAction id="223" iteratorName="nonExistingCity" userID="FLX" flexoID="159" ownerContext="controlGraph2">
-        <ControlGraph_ExpressionAction id="224" expression="nonExistingCity.generateModel1FromModel2()" flexoID="45" ownerContext="controlGraph" userID="FLX" />
-        <Iteration_ExpressionAction id="225" expression="nonExistingCitiesInModel1" flexoID="46" ownerContext="iterationControlGraph" userID="FLX" />
+      <ControlGraph2_IterationAction id="225" iteratorName="nonExistingCity" userID="FLX" flexoID="159" ownerContext="controlGraph2">
+        <ControlGraph_ExpressionAction id="226" expression="nonExistingCity.generateModel1FromModel2()" flexoID="45" ownerContext="controlGraph" userID="FLX" />
+        <Iteration_ExpressionAction id="227" expression="nonExistingCitiesInModel1" flexoID="46" ownerContext="iterationControlGraph" userID="FLX" />
       </ControlGraph2_IterationAction>
     </BehaviourControlGraph_Sequence>
   </ActionScheme>
