@@ -9,19 +9,41 @@
     <JDBCModelSlot idref="4" />
   </ModelSlot_JDBCModelSlot>
   <CreationScheme id="5" userID="FLX" width="800" label="createFromAddress" height="600" flexoID="9" description="Creates a View for a given address to the JDBC database" name="createFromAddress">
-    <BehaviourControlGraph_Sequence id="6" flexoID="24" userID="FLX">
+    <BehaviourControlGraph_Sequence id="6" flexoID="97" ownerContext="controlGraph1" userID="FLX">
       <ControlGraph1_AssignationAction id="7" userID="FLX" flexoID="18" ownerContext="controlGraph1" assign="connection">
         <AssignableAction_CreateJDBCResource id="8" relativePath="jdbc" userID="FLX" flexoID="17" resourceName="&quot;connection.jdbc&quot;" resourceCenter="project">
           <JDBCModelSlot idref="4" />
         </AssignableAction_CreateJDBCResource>
       </ControlGraph1_AssignationAction>
-      <ControlGraph2_AssignationAction id="9" userID="FLX" flexoID="23" ownerContext="controlGraph2" assign="dataModel">
-        <AssignableAction_AddFlexoConceptInstance id="10" userID="FLX" virtualModelInstance="view" flexoID="22" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel.create">
+      <ControlGraph2_AssignationAction id="9" userID="FLX" flexoID="96" ownerContext="controlGraph2" assign="dataModel">
+        <AssignableAction_AddVirtualModelInstance id="10" virtualModelInstanceTitle="&quot;Model&quot;" userID="FLX" virtualModelInstance="view" flexoID="95" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel.create" virtualModelInstanceName="&quot;model&quot;">
           <VirtualModelInstanceModelSlot idref="3" />
-          <AddFlexoConceptInstanceParameter id="11" flexoID="89" userID="FLX" value="connection" paramName="connection" />
-        </AssignableAction_AddFlexoConceptInstance>
+          <AddFlexoConceptInstanceParameter id="11" flexoID="225" userID="FLX" paramName="connection" />
+        </AssignableAction_AddVirtualModelInstance>
       </ControlGraph2_AssignationAction>
     </BehaviourControlGraph_Sequence>
-    <GenericBehaviourParameter id="12" userID="FLX" type="java.lang.String" flexoID="15" name="address" defaultValue="&quot;jdbc:hsqldb:hsql://localhost/&quot;" widget="CUSTOM_WIDGET" />
+    <GenericBehaviourParameter id="12" userID="FLX" type="java.lang.String" flexoID="15" name="address" defaultValue="&quot;jdbc:hsqldb:hsql://localhost/&quot;" widget="TEXT_FIELD" />
   </CreationScheme>
+  <ActionScheme id="13" userID="FLX" width="800" label="createVisitSheet" height="600" flexoID="100" description="Create or retreive a visitSheet" name="createVisitSheet">
+    <BehaviourControlGraph_Sequence id="14" flexoID="120" userID="FLX">
+      <ControlGraph1_DeclarationAction id="15" flexoID="108" ownerContext="controlGraph1" variable="exisiting" userID="FLX">
+        <AssignableAction_SelectVirtualModelInstance id="16" userID="FLX" flexoID="104" view="view" virtualModelTypeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/VisitSheet">
+          <Condition id="17" flexoID="107" condition="(parameters.salesman = selected.salesman)" userID="FLX" />
+          <VirtualModelInstanceModelSlot idref="3" />
+        </AssignableAction_SelectVirtualModelInstance>
+      </ControlGraph1_DeclarationAction>
+      <ControlGraph2_ConditionalAction id="18" flexoID="110" ownerContext="controlGraph2" condition="exisiting.isEmpty" userID="FLX">
+        <ElseControlGraph_ReturnStatement id="19" flexoID="119" ownerContext="elseControlGraph" userID="FLX">
+          <AssignableAction_ExpressionAction id="20" expression="exisiting.get(0)" flexoID="118" userID="FLX" />
+        </ElseControlGraph_ReturnStatement>
+        <ThenControlGraph_ReturnStatement id="21" flexoID="117" ownerContext="thenControlGraph" userID="FLX">
+          <AssignableAction_AddVirtualModelInstance id="22" virtualModelInstanceTitle="(&quot;VisitSheet &quot; + parameters.salesman.id)" userID="FLX" virtualModelInstance="view" flexoID="116" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/VisitSheet.create" virtualModelInstanceName="(&quot;VisitSheet &quot; + parameters.salesman.id)">
+            <VirtualModelInstanceModelSlot idref="3" />
+            <AddFlexoConceptInstanceParameter id="23" flexoID="22" userID="FLX" value="parameters.salesman" paramName="salesman" />
+          </AssignableAction_AddVirtualModelInstance>
+        </ThenControlGraph_ReturnStatement>
+      </ControlGraph2_ConditionalAction>
+    </BehaviourControlGraph_Sequence>
+    <GenericBehaviourParameter id="24" userID="FLX" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Salesman&gt;" flexoID="102" isRequired="true" container="view" name="salesman" widget="CUSTOM_WIDGET" />
+  </ActionScheme>
 </ViewPoint>
