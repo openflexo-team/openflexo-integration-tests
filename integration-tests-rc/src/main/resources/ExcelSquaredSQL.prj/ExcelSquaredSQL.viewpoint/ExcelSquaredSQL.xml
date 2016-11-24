@@ -18,7 +18,7 @@
       <ControlGraph2_AssignationAction id="9" userID="FLX" flexoID="96" ownerContext="controlGraph2" assign="dataModel">
         <AssignableAction_AddVirtualModelInstance id="10" virtualModelInstanceTitle="&quot;Model&quot;" userID="FLX" virtualModelInstance="view" flexoID="95" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel.create" virtualModelInstanceName="&quot;model&quot;">
           <VirtualModelInstanceModelSlot idref="3" />
-          <AddFlexoConceptInstanceParameter id="11" flexoID="225" userID="FLX" paramName="connection" />
+          <AddFlexoConceptInstanceParameter id="11" flexoID="225" userID="FLX" value="view.connection" paramName="connection" />
         </AssignableAction_AddVirtualModelInstance>
       </ControlGraph2_AssignationAction>
     </BehaviourControlGraph_Sequence>
