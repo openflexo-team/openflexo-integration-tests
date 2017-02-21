@@ -38,19 +38,17 @@
 
 package org.openflexo.foundation.viewpoint;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.logging.Logger;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openflexo.foundation.OpenflexoTestCase;
 import org.openflexo.foundation.fml.ViewPoint;
 import org.openflexo.foundation.fml.rm.ViewPointResource;
+import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestViewpointsOpenflexo17 extends OpenflexoTestCase {
@@ -93,7 +91,7 @@ public class TestViewpointsOpenflexo17 extends OpenflexoTestCase {
 
 		ViewPoint basicOntologyEditor = testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl");
 		assertNotNull(basicOntologyEditor);
-		System.out.println("Read resource " + ((ViewPointResource) basicOntologyEditor.getResource()).getFlexoIODelegate().toString());
+		System.out.println("Read resource " + ((ViewPointResource) basicOntologyEditor.getResource()).getIODelegate().toString());
 
 		// TODO: rewrite this
 

@@ -3,20 +3,20 @@ dependencies {
     testCompile testUtils()
     testCompile flexoUi()
     testCompile flexoUiTest()
+    testCompile flexoFoundationTest()
     testCompile owlConnector()
+    testCompile flexoDiagram()
+    testCompile emfConnector()
+    testCompile excelConnector()
+    testCompile xmlConnector()
+    testCompile powerpointConnector()
+
+    testCompile openflexo("flexovieweditor")
+    testCompile openflexo("flexoviewpointmodeler")
+    testCompile openflexo("freemodellingeditor")
+    testCompile openflexo("informationspacemodule")
 
     testRuntime project(':integration-tests-rc')
 
-    testRuntime openflexo("flexovieweditor")
-    testRuntime openflexo("flexoviewpointmodeler")
-    testRuntime openflexo("freemodellingeditor")
-    testRuntime openflexo("informationspacemodule")
-
-    testRuntime flexoDiagram()
-    testRuntime emfConnector()
-    testRuntime xmlConnector()
-    testRuntime owlConnector()
-    testRuntime excelConnector()
-    testRuntime powerpointConnector()
 }
 

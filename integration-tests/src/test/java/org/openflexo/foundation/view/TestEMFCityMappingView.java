@@ -40,30 +40,30 @@
 
 package org.openflexo.foundation.view;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
-import org.openflexo.foundation.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.foundation.action.AddRepositoryFolder;
+import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.ViewPoint;
 import org.openflexo.foundation.fml.rm.ViewPointResource;
+import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.View;
 import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
 import org.openflexo.foundation.fml.rt.rm.ViewResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
+import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.model.action.CreateDiagram;
 import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
+import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.*;
 
 /**
  * Test instanciation of City Mapping View with 2 EMF
@@ -84,7 +84,9 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
 		// We use the ResourceCenter deployed in integration-tests-rc
-		instanciateBareTestServiceManager();
+		instanciateTestServiceManager(
+				FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class
+		);
 	}
 
 	/**
@@ -102,7 +104,7 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		ViewPoint cityMappingViewPoint = loadViewPoint("http://www.thalesgroup.com/openflexo/emf/CityMapping");
 		assertNotNull(cityMappingViewPoint);
 		System.out
-				.println("Found view point in " + ((ViewPointResource) cityMappingViewPoint.getResource()).getFlexoIODelegate().toString());
+				.println("Found view point in " + ((ViewPointResource) cityMappingViewPoint.getResource()).getIODelegate().toString());
 
 		// Create View Folder
 		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType.makeNewAction(project.getViewLibrary().getRootFolder(),
@@ -121,12 +123,12 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		addView.doAction();
 		assertTrue(addView.hasActionExecutionSucceeded());
 		View newView = addView.getNewView();
-		System.out.println("New view " + newView + " created in " + ((ViewResource) newView.getResource()).getFlexoIODelegate().toString());
+		System.out.println("New view " + newView + " created in " + ((ViewResource) newView.getResource()).getIODelegate().toString());
 		assertNotNull(newView);
 		assertEquals(addView.getNewViewName(), newView.getName());
 		assertEquals(addView.getNewViewTitle(), newView.getTitle());
 		assertEquals(addView.getViewpointResource().getViewPoint(), cityMappingViewPoint);
-		assertTrue(((ViewResource) newView.getResource()).getFlexoIODelegate().exists());
+		assertTrue(((ViewResource) newView.getResource()).getIODelegate().exists());
 
 		// Reload Project
 		editor = reloadProject(project.getProjectDirectory());

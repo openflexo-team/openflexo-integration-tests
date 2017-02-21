@@ -38,26 +38,24 @@
 
 package org.openflexo.foundation.viewpoint;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.logging.Logger;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openflexo.foundation.OpenflexoTestCase;
 import org.openflexo.foundation.fml.ViewPoint;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rm.ViewPointResource;
 import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.resource.FlexoResource;
+import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.technologyadapter.diagram.metamodel.DiagramPalette;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.rm.DiagramPaletteResource;
 import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestLoadViewPointsOpenflexo17 extends OpenflexoTestCase {

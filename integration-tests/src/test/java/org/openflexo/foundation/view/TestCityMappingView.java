@@ -39,24 +39,19 @@
 
 package org.openflexo.foundation.view;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
-import org.openflexo.foundation.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.foundation.action.AddRepositoryFolder;
+import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.SynchronizationScheme;
 import org.openflexo.foundation.fml.ViewPoint;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rm.ViewPointResource;
+import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.View;
 import org.openflexo.foundation.fml.rt.VirtualModelInstance;
@@ -71,8 +66,13 @@ import org.openflexo.foundation.resource.SaveResourceException;
 import org.openflexo.foundation.technologyadapter.FlexoModelResource;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
 import org.openflexo.foundation.technologyadapter.TypeAwareModelSlotInstanceConfiguration;
+import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
+import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
@@ -150,7 +150,9 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
 		// We use the ResourceCenter deployed in integration-tests-rc
-		instanciateBareTestServiceManager();
+		instanciateTestServiceManager(
+				FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class
+		);
 	}
 
 	@Test
@@ -183,7 +185,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 	@TestOrder(4)
 	public void test2LoadCityMappingViewPoint() {
 		assertNotNull(cityMappingVP);
-		System.out.println("Found view point in " + ((ViewPointResource) cityMappingVP.getResource()).getFlexoIODelegate().toString());
+		System.out.println("Found view point in " + ((ViewPointResource) cityMappingVP.getResource()).getIODelegate().toString());
 
 		VirtualModel cityMappingVM = cityMappingVP.getVirtualModelNamed("CityMapping");
 		assertNotNull(cityMappingVM);
@@ -215,12 +217,12 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		addView.doAction();
 		assertTrue(addView.hasActionExecutionSucceeded());
 		View newView = addView.getNewView();
-		System.out.println("New view " + newView + " created in " + ((ViewResource) newView.getResource()).getFlexoIODelegate().toString());
+		System.out.println("New view " + newView + " created in " + ((ViewResource) newView.getResource()).getIODelegate().toString());
 		assertNotNull(newView);
 		assertEquals(addView.getNewViewName(), newView.getName());
 		assertEquals(addView.getNewViewTitle(), newView.getTitle());
 		assertEquals(addView.getViewpointResource().getViewPoint(), cityMappingVP);
-		assertTrue(((ViewResource) newView.getResource()).getFlexoIODelegate().exists());
+		assertTrue(((ViewResource) newView.getResource()).getIODelegate().exists());
 	}
 
 	@Test
@@ -294,12 +296,12 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		assertTrue(createVirtualModelInstance.hasActionExecutionSucceeded());
 		VirtualModelInstance newVirtualModelInstance = createVirtualModelInstance.getNewVirtualModelInstance();
 		System.out.println("New VirtualModelInstance " + newVirtualModelInstance + " created in "
-				+ ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getFlexoIODelegate().toString());
+				+ ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().toString());
 		assertNotNull(newVirtualModelInstance);
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceName(), newVirtualModelInstance.getName());
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceTitle(), newVirtualModelInstance.getTitle());
 		assertEquals(createVirtualModelInstance.getVirtualModel(), cityMappingVM);
-		assertTrue(((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getFlexoIODelegate().exists());
+		assertTrue(((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
 		assertEquals(project, ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
 
 		FlexoConcept cityEP = cityMappingVM.getFlexoConcept("City");

@@ -38,18 +38,11 @@
 
 package org.openflexo.foundation.view;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
-import org.openflexo.foundation.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.foundation.action.AddRepositoryFolder;
 import org.openflexo.foundation.fml.ViewPoint;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -65,11 +58,15 @@ import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.technologyadapter.FlexoModelResource;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
 import org.openflexo.foundation.technologyadapter.TypeAwareModelSlotInstanceConfiguration;
+import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlotInstanceConfiguration;
 import org.openflexo.technologyadapter.emf.EMFModelSlot;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.*;
 
 /**
  * Test instanciation of CityViews View to test EMF and Diagram, in File-System context
@@ -112,7 +109,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		// Load CityMapping ViewPoint
 		cityViewsViewPoint = loadViewPoint("http://www.openflexo.org/cityviews");
 		assertNotNull(cityViewsViewPoint);
-		System.out.println("Found view point in " + ((ViewPointResource) cityViewsViewPoint.getResource()).getFlexoIODelegate().toString());
+		System.out.println("Found view point in " + ((ViewPointResource) cityViewsViewPoint.getResource()).getIODelegate().toString());
 
 		// Create View Folder
 		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType.makeNewAction(project.getViewLibrary().getRootFolder(),
@@ -131,12 +128,12 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		addView.doAction();
 		assertTrue(addView.hasActionExecutionSucceeded());
 		view = addView.getNewView();
-		System.out.println("New view " + view + " created in " + ((ViewResource) view.getResource()).getFlexoIODelegate().toString());
+		System.out.println("New view " + view + " created in " + ((ViewResource) view.getResource()).getIODelegate().toString());
 		assertNotNull(view);
 		assertEquals(addView.getNewViewName(), view.getName());
 		assertEquals(addView.getNewViewTitle(), view.getTitle());
 		assertEquals(addView.getViewpointResource().getViewPoint(), cityViewsViewPoint);
-		assertTrue(((ViewResource) view.getResource()).getFlexoIODelegate().exists());
+		assertTrue(((ViewResource) view.getResource()).getIODelegate().exists());
 
 		// Reload Project
 		FlexoEditor editor1 = reloadProject(project.getProjectDirectory());
@@ -207,12 +204,12 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		assertTrue(createVirtualModelInstance.hasActionExecutionSucceeded());
 		VirtualModelInstance newVirtualModelInstance = createVirtualModelInstance.getNewVirtualModelInstance();
 		System.out.println("New VirtualModelInstance " + newVirtualModelInstance + " created in "
-				+ ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getFlexoIODelegate().toString());
+				+ ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().toString());
 		assertNotNull(newVirtualModelInstance);
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceName(), newVirtualModelInstance.getName());
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceTitle(), newVirtualModelInstance.getTitle());
 		assertEquals(createVirtualModelInstance.getVirtualModel(), cityView1VM);
-		assertTrue(((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getFlexoIODelegate().exists());
+		assertTrue(((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
 		assertEquals(project, ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
 	}
 
@@ -220,7 +217,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		log("Testing ViewPoint loading: " + viewPointURI);
 		ViewPointResource viewPointResource = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
 		assertNotNull(viewPointResource);
-		System.out.println("Found ViewPoint in " + viewPointResource.getFlexoIODelegate().getSerializationArtefact());
+		System.out.println("Found ViewPoint in " + viewPointResource.getIODelegate().getSerializationArtefact());
 		assertFalse(viewPointResource.isLoaded());
 		ViewPoint viewPoint = viewPointResource.getViewPoint();
 		assertTrue(viewPointResource.isLoaded());

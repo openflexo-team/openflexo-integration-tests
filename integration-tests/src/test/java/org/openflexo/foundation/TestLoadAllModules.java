@@ -38,19 +38,14 @@
 
 package org.openflexo.foundation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
 import java.util.logging.Logger;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openflexo.OpenflexoTestCaseWithGUI;
 import org.openflexo.fme.FMEModule;
 import org.openflexo.fme.FreeModellingEditor;
 import org.openflexo.foundation.resource.FlexoResourceCenterService;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
+import org.openflexo.gina.test.OpenflexoTestCaseWithGUI;
 import org.openflexo.ism.ISMModule;
 import org.openflexo.ism.InformationSpaceModule;
 import org.openflexo.module.FlexoModule;
@@ -64,6 +59,9 @@ import org.openflexo.ve.ViewEditor;
 import org.openflexo.view.controller.TechnologyAdapterControllerService;
 import org.openflexo.vpm.VPMModule;
 import org.openflexo.vpm.ViewPointModeller;
+
+
+import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {

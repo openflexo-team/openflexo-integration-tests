@@ -38,19 +38,14 @@
 
 package org.openflexo.foundation.view;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.connie.BindingModel;
 import org.openflexo.connie.BindingVariable;
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.foundation.fml.ActionScheme;
 import org.openflexo.foundation.fml.CreationScheme;
+import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.SynchronizationScheme;
@@ -70,14 +65,20 @@ import org.openflexo.foundation.fml.editionaction.DeclarationAction;
 import org.openflexo.foundation.fml.editionaction.ExpressionAction;
 import org.openflexo.foundation.fml.editionaction.FetchRequestCondition;
 import org.openflexo.foundation.fml.rm.ViewPointResource;
+import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.editionaction.MatchFlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.editionaction.MatchingCriteria;
 import org.openflexo.foundation.ontology.IFlexoOntologyClass;
+import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
+import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.technologyadapter.emf.fml.EMFObjectIndividualRole;
 import org.openflexo.technologyadapter.emf.fml.editionaction.SelectEMFObjectIndividual;
 import org.openflexo.technologyadapter.emf.model.EMFModel;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCase {
@@ -97,7 +98,9 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
 		// We use the ResourceCenter deployed in integration-tests-rc
-		instanciateBareTestServiceManager();
+		instanciateTestServiceManager(
+				FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class
+		);
 	}
 
 	@Test

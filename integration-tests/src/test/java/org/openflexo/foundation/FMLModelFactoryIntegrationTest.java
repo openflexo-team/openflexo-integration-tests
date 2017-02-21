@@ -38,13 +38,8 @@
 
 package org.openflexo.foundation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
 import java.util.Iterator;
 import java.util.logging.Logger;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.fml.FMLModelFactory;
@@ -53,6 +48,7 @@ import org.openflexo.foundation.resource.FlexoResourceCenterService;
 import org.openflexo.foundation.technologyadapter.DefaultTechnologyAdapterService;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapter;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
+import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.logging.FlexoLogger;
 import org.openflexo.model.ModelContext;
 import org.openflexo.model.ModelEntity;
@@ -66,6 +62,9 @@ import org.openflexo.technologyadapter.powerpoint.PowerpointTechnologyAdapter;
 import org.openflexo.technologyadapter.xml.XMLTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.*;
 
 /**
  * Test instanciation of FMLModelFactory<br>

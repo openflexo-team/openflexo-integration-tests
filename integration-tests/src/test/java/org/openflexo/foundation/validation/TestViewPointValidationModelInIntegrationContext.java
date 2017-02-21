@@ -38,13 +38,10 @@
 
 package org.openflexo.foundation.validation;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openflexo.foundation.OpenflexoTestCase;
 import org.openflexo.foundation.fml.FMLValidationModel;
+import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.model.exceptions.ModelDefinitionException;
 import org.openflexo.model.validation.ValidationRule;
 import org.openflexo.model.validation.ValidationRuleSet;
@@ -55,6 +52,10 @@ import org.openflexo.technologyadapter.diagram.fml.editionaction.AddShape;
 import org.openflexo.technologyadapter.diagram.fml.editionaction.GraphicalAction;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This unit test is intented to test ViewPoint validation model in integration context (all technology adapters are loaded)

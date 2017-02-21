@@ -39,31 +39,31 @@
 
 package org.openflexo.foundation.view;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
-import org.openflexo.foundation.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.foundation.action.AddRepositoryFolder;
+import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.ViewPoint;
 import org.openflexo.foundation.fml.rm.ViewPointResource;
+import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.View;
 import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
 import org.openflexo.foundation.fml.rt.rm.ViewResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
+import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.diagram.model.Diagram;
 import org.openflexo.technologyadapter.diagram.model.action.CreateDiagram;
 import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
+import org.openflexo.technologyadapter.owl.OWLTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+
+
+import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCase {
@@ -85,7 +85,10 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
 		// We use the ResourceCenter deployed in integration-tests-rc
-		instanciateBareTestServiceManager();
+		instanciateTestServiceManager(
+				FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, OWLTechnologyAdapter.class
+		);
+
 	}
 
 	@Test
@@ -119,7 +122,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		basicOntologyEditor = loadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl");
 		assertNotNull(basicOntologyEditor);
 		System.out
-				.println("Found view point in " + ((ViewPointResource) basicOntologyEditor.getResource()).getFlexoIODelegate().toString());
+				.println("Found view point in " + ((ViewPointResource) basicOntologyEditor.getResource()).getIODelegate().toString());
 	}
 
 	@Test
@@ -144,12 +147,12 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		addView.doAction();
 		assertTrue(addView.hasActionExecutionSucceeded());
 		View newView = addView.getNewView();
-		System.out.println("New view " + newView + " created in " + ((ViewResource) newView.getResource()).getFlexoIODelegate().toString());
+		System.out.println("New view " + newView + " created in " + ((ViewResource) newView.getResource()).getIODelegate().toString());
 		assertNotNull(newView);
 		assertEquals(addView.getNewViewName(), newView.getName());
 		assertEquals(addView.getNewViewTitle(), newView.getTitle());
 		assertEquals(addView.getViewpointResource().getViewPoint(), basicOntologyEditor);
-		assertTrue(((ViewResource) newView.getResource()).getFlexoIODelegate().exists());
+		assertTrue(((ViewResource) newView.getResource()).getIODelegate().exists());
 	}
 
 	public void test5ReloadProject() {
@@ -201,11 +204,11 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		assertTrue(createDiagram.hasActionExecutionSucceeded());
 		Diagram newDiagram = createDiagram.getNewDiagram();
 		System.out.println("New diagram " + newDiagram + " created in "
-				+ ((DiagramResource) newDiagram.getResource()).getFlexoIODelegate().toString());
+				+ ((DiagramResource) newDiagram.getResource()).getIODelegate().toString());
 		assertNotNull(newDiagram);
 		assertEquals(createDiagram.getDiagramName(), newDiagram.getName());
 		assertEquals(createDiagram.getDiagramTitle(), newDiagram.getTitle());
 		// assertEquals(createDiagram.getDiagramSpecification(), basicOntologyEditor.getDefaultDiagramSpecification());
-		assertTrue(((DiagramResource) newDiagram.getResource()).getFlexoIODelegate().exists());
+		assertTrue(((DiagramResource) newDiagram.getResource()).getIODelegate().exists());
 	}
 }
