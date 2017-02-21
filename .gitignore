@@ -1,4 +1,8 @@
+**/build
+
+/.gradle/
 /.project
 /.settings
 
 *.iml
+*.idea/
