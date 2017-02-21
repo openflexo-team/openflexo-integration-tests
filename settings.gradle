@@ -1,0 +1,4 @@
+include 'integration-tests-rc'
+include 'integration-tests'
+include 'packaging-tests'
+
