@@ -51,9 +51,9 @@ import org.openflexo.test.TestOrder;
 import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
-public class TestViewpointsOpenflexo17 extends OpenflexoTestCase {
+public class TestViewpoints extends OpenflexoTestCase {
 
-	protected static final Logger logger = Logger.getLogger(TestViewpointsOpenflexo17.class.getPackage().getName());
+	protected static final Logger logger = Logger.getLogger(TestViewpoints.class.getPackage().getName());
 
 	/**
 	 * Instantiate test resource center

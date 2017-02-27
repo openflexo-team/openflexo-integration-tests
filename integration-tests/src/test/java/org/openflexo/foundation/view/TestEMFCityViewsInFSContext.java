@@ -38,7 +38,13 @@
 
 package org.openflexo.foundation.view;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
@@ -65,9 +71,6 @@ import org.openflexo.technologyadapter.emf.EMFModelSlot;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
-
-import static org.junit.Assert.*;
-
 /**
  * Test instanciation of CityViews View to test EMF and Diagram, in File-System context
  * 
@@ -91,7 +94,6 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 
 		log("test0InstantiateResourceCenter()");
 
-		// Because we test in File-System context, we first copy the ResourceCenter on the disk
 		instanciateTestServiceManager();
 	}
 
@@ -178,10 +180,9 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 				TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration1 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
 						.getModelSlotInstanceConfiguration(emfModelSlot1);
 				emfModelSlotConfiguration1.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-				System.out.println(
-						"Searching http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/my.city1");
-				FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager().getModelWithURI(
-						"http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/my.city1");
+				System.out.println("Searching http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
+				FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
+						.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
 				assertNotNull(modelResource1);
 				emfModelSlotConfiguration1.setModelResource(modelResource1);
 				assertTrue(emfModelSlotConfiguration1.isValidConfiguration());

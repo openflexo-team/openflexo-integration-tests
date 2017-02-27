@@ -39,7 +39,13 @@
 
 package org.openflexo.foundation.view;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
@@ -70,9 +76,6 @@ import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
-
-
-import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
@@ -150,9 +153,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
 		// We use the ResourceCenter deployed in integration-tests-rc
-		instanciateTestServiceManager(
-				FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class
-		);
+		instanciateTestServiceManager(FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class);
 	}
 
 	@Test
@@ -271,10 +272,9 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration1 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
 				.getModelSlotInstanceConfiguration(emfModelSlot1);
 		emfModelSlotConfiguration1.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-		System.out.println(
-				"Searching http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/my.city1");
-		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager().getModelWithURI(
-				"http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city1/my.city1");
+		System.out.println("Searching http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
+		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
+				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
 		assertNotNull(modelResource1);
 		emfModelSlotConfiguration1.setModelResource(modelResource1);
 		assertTrue(emfModelSlotConfiguration1.isValidConfiguration());
@@ -283,10 +283,9 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration2 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
 				.getModelSlotInstanceConfiguration(emfModelSlot2);
 		emfModelSlotConfiguration2.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-		System.out.println(
-				"Searching http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city2/first.city2");
-		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager().getModelWithURI(
-				"http://openflexo.org/integration-tests/TestResourceCenter/ViewPointsOpenflexo17/EMF/Model/city2/first.city2");
+		System.out.println("Searching http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city2/first.city2");
+		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager()
+				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city2/first.city2");
 		assertNotNull(modelResource2);
 		emfModelSlotConfiguration2.setModelResource(modelResource2);
 		assertTrue(emfModelSlotConfiguration2.isValidConfiguration());
