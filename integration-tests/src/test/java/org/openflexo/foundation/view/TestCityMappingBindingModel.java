@@ -38,6 +38,11 @@
 
 package org.openflexo.foundation.view;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.connie.BindingModel;
@@ -69,6 +74,8 @@ import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.editionaction.MatchFlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.editionaction.MatchingCriteria;
 import org.openflexo.foundation.ontology.IFlexoOntologyClass;
+import org.openflexo.foundation.resource.FlexoResource;
+import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.technologyadapter.emf.fml.EMFObjectIndividualRole;
@@ -76,9 +83,6 @@ import org.openflexo.technologyadapter.emf.fml.editionaction.SelectEMFObjectIndi
 import org.openflexo.technologyadapter.emf.model.EMFModel;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
-
-
-import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCase {
@@ -98,9 +102,15 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
 		// We use the ResourceCenter deployed in integration-tests-rc
-		instanciateTestServiceManager(
-				FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class
-		);
+		instanciateTestServiceManager(FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class);
+
+		for (FlexoResourceCenter<?> rc : serviceManager.getResourceCenterService().getResourceCenters()) {
+			System.out.println("rc: " + rc);
+			for (FlexoResource<?> r : rc.getAllResources(null)) {
+				System.out.println("  > " + r);
+			}
+		}
+
 	}
 
 	@Test

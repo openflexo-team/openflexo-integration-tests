@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DiagramSpecification id="1" name="Description" modelVersion="1.0">
-  <LocalizedDictionary id="2" />
-  <DiagramModelSlot id="3" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.thalesgroup.com/openflexo16/emf/CityMapping/Description" />
-  <Inspector id="4" inspectorTitle="Description" />
-</DiagramSpecification>
