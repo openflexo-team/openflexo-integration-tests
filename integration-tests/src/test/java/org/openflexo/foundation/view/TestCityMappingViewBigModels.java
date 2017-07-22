@@ -223,8 +223,8 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 		/*
 		System.out.println("exception thrown=" + createVirtualModelInstance.getThrownException());
 		assertTrue(createVirtualModelInstance.hasActionExecutionSucceeded());
-		VirtualModelInstance newVirtualModelInstance = createVirtualModelInstance.getNewVirtualModelInstance();
-		System.out.println("New VirtualModelInstance " + newVirtualModelInstance + " created in "
+		FMLRTVirtualModelInstance newVirtualModelInstance = createVirtualModelInstance.getNewVirtualModelInstance();
+		System.out.println("New FMLRTVirtualModelInstance " + newVirtualModelInstance + " created in "
 				+ ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().toString());
 		assertNotNull(newVirtualModelInstance);
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceName(), newVirtualModelInstance.getName());
