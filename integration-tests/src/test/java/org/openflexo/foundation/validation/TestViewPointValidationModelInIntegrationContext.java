@@ -350,7 +350,7 @@ public class TestViewPointValidationModelInIntegrationContext extends OpenflexoT
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.editionaction.DiagramAction.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.rt.VirtualModelInstance.class) != null);
+				.getModelEntity(org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.editionaction.AddConcept.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()

@@ -56,7 +56,7 @@ import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rm.ViewPointResource;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.View;
-import org.openflexo.foundation.fml.rt.VirtualModelInstance;
+import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
 import org.openflexo.foundation.fml.rt.action.ModelSlotInstanceConfiguration.DefaultModelSlotInstanceConfigurationOption;
@@ -207,8 +207,8 @@ public class TestEMFCityViewsInJarContext extends OpenflexoProjectAtRunTimeTestC
 		createVirtualModelInstance.doAction();
 		System.out.println("exception thrown=" + createVirtualModelInstance.getThrownException());
 		assertTrue(createVirtualModelInstance.hasActionExecutionSucceeded());
-		VirtualModelInstance newVirtualModelInstance = createVirtualModelInstance.getNewVirtualModelInstance();
-		System.out.println("New VirtualModelInstance " + newVirtualModelInstance + " created in "
+		FMLRTVirtualModelInstance newVirtualModelInstance = createVirtualModelInstance.getNewVirtualModelInstance();
+		System.out.println("New FMLRTVirtualModelInstance " + newVirtualModelInstance + " created in "
 				+ ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().toString());
 		assertNotNull(newVirtualModelInstance);
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceName(), newVirtualModelInstance.getName());
