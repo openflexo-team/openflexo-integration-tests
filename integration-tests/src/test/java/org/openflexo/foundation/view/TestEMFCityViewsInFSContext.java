@@ -50,16 +50,12 @@ import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.action.AddRepositoryFolder;
-import org.openflexo.foundation.fml.ViewPoint;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.ViewPointResource;
-import org.openflexo.foundation.fml.rt.View;
+import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
-import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
 import org.openflexo.foundation.fml.rt.action.ModelSlotInstanceConfiguration.DefaultModelSlotInstanceConfigurationOption;
-import org.openflexo.foundation.fml.rt.rm.ViewResource;
-import org.openflexo.foundation.fml.rt.rm.VirtualModelInstanceResource;
+import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.technologyadapter.FlexoModelResource;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
@@ -79,9 +75,9 @@ import org.openflexo.test.TestOrder;
 @RunWith(OrderedRunner.class)
 public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCase {
 
-	private static ViewPoint cityViewsViewPoint;
-	private static RepositoryFolder<ViewResource, ?> viewFolder;
-	private static View view;
+	private static VirtualModel cityViewsViewPoint;
+	private static RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> viewFolder;
+	private static FMLRTVirtualModelInstance view;
 	private static FlexoEditor editor;
 	private static FlexoProject project;
 
@@ -106,36 +102,37 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		// CreateProject
 		editor = createProject("TestCreateView");
 		project = editor.getProject();
-		assertNotNull(project.getViewLibrary());
+		assertNotNull(project.getVirtualModelInstanceRepository());
 
 		// Load CityMapping ViewPoint
 		cityViewsViewPoint = loadViewPoint("http://www.openflexo.org/cityviews");
 		assertNotNull(cityViewsViewPoint);
-		System.out.println("Found view point in " + ((ViewPointResource) cityViewsViewPoint.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + ((VirtualModelResource) cityViewsViewPoint.getResource()).getIODelegate().toString());
 
 		// Create View Folder
-		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType.makeNewAction(project.getViewLibrary().getRootFolder(),
-				null, editor);
+		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType
+				.makeNewAction(project.getVirtualModelInstanceRepository().getRootFolder(), null, editor);
 		addRepositoryFolder.setNewFolderName("NewViewFolder");
 		addRepositoryFolder.doAction();
 		assertTrue(addRepositoryFolder.hasActionExecutionSucceeded());
-		RepositoryFolder<ViewResource, ?> viewFolder = addRepositoryFolder.getNewFolder();
+		RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> viewFolder = addRepositoryFolder.getNewFolder();
 		assertTrue(((File) viewFolder.getSerializationArtefact()).exists());
 
 		// Create View
-		CreateViewInFolder addView = CreateViewInFolder.actionType.makeNewAction(viewFolder, null, editor);
-		addView.setNewViewName("TestNewView");
-		addView.setNewViewTitle("A nice title for a new view");
-		addView.setViewpointResource((ViewPointResource) cityViewsViewPoint.getResource());
+		CreateBasicVirtualModelInstance addView = CreateBasicVirtualModelInstance.actionType.makeNewAction(viewFolder, null, editor);
+		addView.setNewVirtualModelInstanceName("TestNewView");
+		addView.setNewVirtualModelInstanceTitle("A nice title for a new view");
+		addView.setVirtualModel(cityViewsViewPoint);
 		addView.doAction();
 		assertTrue(addView.hasActionExecutionSucceeded());
-		view = addView.getNewView();
-		System.out.println("New view " + view + " created in " + ((ViewResource) view.getResource()).getIODelegate().toString());
+		FMLRTVirtualModelInstance newView = addView.getNewVirtualModelInstance();
+		System.out.println("New view " + newView + " created in "
+				+ ((FMLRTVirtualModelInstanceResource) newView.getResource()).getIODelegate().toString());
 		assertNotNull(view);
-		assertEquals(addView.getNewViewName(), view.getName());
-		assertEquals(addView.getNewViewTitle(), view.getTitle());
-		assertEquals(addView.getViewpointResource().getViewPoint(), cityViewsViewPoint);
-		assertTrue(((ViewResource) view.getResource()).getIODelegate().exists());
+		assertEquals(addView.getNewVirtualModelInstanceName(), view.getName());
+		assertEquals(addView.getNewVirtualModelInstanceTitle(), view.getTitle());
+		assertEquals(addView.getVirtualModel(), cityViewsViewPoint);
+		assertTrue(((FMLRTVirtualModelInstanceResource) view.getResource()).getIODelegate().exists());
 
 		// Reload Project
 		FlexoEditor editor1 = reloadProject(project.getProjectDirectory());
@@ -143,18 +140,18 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		// NOTE: this is strange => ask Syl
 		assertTrue(editor1 != editor);
 		assertTrue(project1 != project);
-		assertNotNull(project1.getViewLibrary());
-		assertEquals(1, project1.getViewLibrary().getRootFolder().getChildren().size());
-		viewFolder = project1.getViewLibrary().getRootFolder().getChildren().get(0);
+		assertNotNull(project1.getVirtualModelInstanceRepository());
+		assertEquals(1, project1.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
+		viewFolder = project1.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
 		assertEquals(1, viewFolder.getResources().size());
-		ViewResource viewRes = viewFolder.getResources().get(0);
-		assertEquals(viewRes, project1.getViewLibrary().getResource(viewRes.getURI()));
+		FMLRTVirtualModelInstanceResource viewRes = viewFolder.getResources().get(0);
+		assertEquals(viewRes, project1.getVirtualModelInstanceRepository().getResource(viewRes.getURI()));
 		assertNotNull(viewRes);
 		assertFalse(viewRes.isLoaded());
-		View view = viewRes.getView();
+		FMLRTVirtualModelInstance view = viewRes.getVirtualModelInstance();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project1, ((ViewResource) view.getResource()).getResourceCenter());
+		assertEquals(project1, ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
 	}
 
 	@Test
@@ -205,22 +202,21 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		assertTrue(createVirtualModelInstance.hasActionExecutionSucceeded());
 		FMLRTVirtualModelInstance newVirtualModelInstance = createVirtualModelInstance.getNewVirtualModelInstance();
 		System.out.println("New FMLRTVirtualModelInstance " + newVirtualModelInstance + " created in "
-				+ ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().toString());
+				+ ((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().toString());
 		assertNotNull(newVirtualModelInstance);
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceName(), newVirtualModelInstance.getName());
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceTitle(), newVirtualModelInstance.getTitle());
 		assertEquals(createVirtualModelInstance.getVirtualModel(), cityView1VM);
-		assertTrue(((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
-		assertEquals(project, ((VirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
+		assertTrue(((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
+		assertEquals(project, ((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
 	}
 
-	private ViewPoint loadViewPoint(String viewPointURI) {
+	private VirtualModel loadViewPoint(String viewPointURI) {
 		log("Testing ViewPoint loading: " + viewPointURI);
-		ViewPointResource viewPointResource = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
+		VirtualModelResource viewPointResource = (VirtualModelResource) serviceManager.getResourceManager().getResource(viewPointURI);
 		assertNotNull(viewPointResource);
-		System.out.println("Found ViewPoint in " + viewPointResource.getIODelegate().getSerializationArtefact());
 		assertFalse(viewPointResource.isLoaded());
-		ViewPoint viewPoint = viewPointResource.getViewPoint();
+		VirtualModel viewPoint = viewPointResource.getVirtualModel();
 		assertTrue(viewPointResource.isLoaded());
 		return viewPoint;
 	}

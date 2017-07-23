@@ -40,19 +40,25 @@
 
 package org.openflexo.foundation.view;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.action.AddRepositoryFolder;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
-import org.openflexo.foundation.fml.ViewPoint;
-import org.openflexo.foundation.fml.rm.ViewPointResource;
+import org.openflexo.foundation.fml.VirtualModel;
+import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
-import org.openflexo.foundation.fml.rt.View;
-import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
-import org.openflexo.foundation.fml.rt.rm.ViewResource;
+import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
@@ -61,9 +67,6 @@ import org.openflexo.technologyadapter.diagram.rm.DiagramResource;
 import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
-
-
-import static org.junit.Assert.*;
 
 /**
  * Test instanciation of City Mapping View with 2 EMF
@@ -84,9 +87,7 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
 		// We use the ResourceCenter deployed in integration-tests-rc
-		instanciateTestServiceManager(
-				FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class
-		);
+		instanciateTestServiceManager(FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class);
 	}
 
 	/**
@@ -98,53 +99,53 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		// CreateProject
 		FlexoEditor editor = createProject("TestCreateView");
 		FlexoProject project = editor.getProject();
-		assertNotNull(project.getViewLibrary());
+		assertNotNull(project.getVirtualModelInstanceRepository());
 
 		// Load CityMapping ViewPoint
-		ViewPoint cityMappingViewPoint = loadViewPoint("http://www.thalesgroup.com/openflexo/emf/CityMapping");
+		VirtualModel cityMappingViewPoint = loadViewPoint("http://www.thalesgroup.com/openflexo/emf/CityMapping");
 		assertNotNull(cityMappingViewPoint);
-		System.out
-				.println("Found view point in " + ((ViewPointResource) cityMappingViewPoint.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + ((VirtualModelResource) cityMappingViewPoint.getResource()).getIODelegate().toString());
 
 		// Create View Folder
-		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType.makeNewAction(project.getViewLibrary().getRootFolder(),
-				null, editor);
+		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType
+				.makeNewAction(project.getVirtualModelInstanceRepository().getRootFolder(), null, editor);
 		addRepositoryFolder.setNewFolderName("NewViewFolder");
 		addRepositoryFolder.doAction();
 		assertTrue(addRepositoryFolder.hasActionExecutionSucceeded());
-		RepositoryFolder<ViewResource, ?> viewFolder = addRepositoryFolder.getNewFolder();
+		RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> viewFolder = addRepositoryFolder.getNewFolder();
 		assertTrue(((File) viewFolder.getSerializationArtefact()).exists());
 
 		// Create View
-		CreateViewInFolder addView = CreateViewInFolder.actionType.makeNewAction(viewFolder, null, editor);
-		addView.setNewViewName("TestNewView");
-		addView.setNewViewTitle("A nice title for a new view");
-		addView.setViewpointResource((ViewPointResource) cityMappingViewPoint.getResource());
+		CreateBasicVirtualModelInstance addView = CreateBasicVirtualModelInstance.actionType.makeNewAction(viewFolder, null, editor);
+		addView.setNewVirtualModelInstanceName("TestNewView");
+		addView.setNewVirtualModelInstanceTitle("A nice title for a new view");
+		addView.setVirtualModel(cityMappingViewPoint);
 		addView.doAction();
 		assertTrue(addView.hasActionExecutionSucceeded());
-		View newView = addView.getNewView();
-		System.out.println("New view " + newView + " created in " + ((ViewResource) newView.getResource()).getIODelegate().toString());
+		FMLRTVirtualModelInstance newView = addView.getNewVirtualModelInstance();
+		System.out.println("New view " + newView + " created in "
+				+ ((FMLRTVirtualModelInstanceResource) newView.getResource()).getIODelegate().toString());
 		assertNotNull(newView);
-		assertEquals(addView.getNewViewName(), newView.getName());
-		assertEquals(addView.getNewViewTitle(), newView.getTitle());
-		assertEquals(addView.getViewpointResource().getViewPoint(), cityMappingViewPoint);
-		assertTrue(((ViewResource) newView.getResource()).getIODelegate().exists());
+		assertEquals(addView.getNewVirtualModelInstanceName(), newView.getName());
+		assertEquals(addView.getNewVirtualModelInstanceTitle(), newView.getTitle());
+		assertEquals(addView.getVirtualModel(), cityMappingViewPoint);
+		assertTrue(((FMLRTVirtualModelInstanceResource) newView.getResource()).getIODelegate().exists());
 
 		// Reload Project
 		editor = reloadProject(project.getProjectDirectory());
 		project = editor.getProject();
-		assertNotNull(project.getViewLibrary());
-		assertEquals(1, project.getViewLibrary().getRootFolder().getChildren().size());
-		viewFolder = project.getViewLibrary().getRootFolder().getChildren().get(0);
+		assertNotNull(project.getVirtualModelInstanceRepository());
+		assertEquals(1, project.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
+		viewFolder = project.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
 		assertEquals(1, viewFolder.getResources().size());
-		ViewResource viewRes = viewFolder.getResources().get(0);
-		assertEquals(viewRes, project.getViewLibrary().getResource(viewRes.getURI()));
+		FMLRTVirtualModelInstanceResource viewRes = viewFolder.getResources().get(0);
+		assertEquals(viewRes, project.getVirtualModelInstanceRepository().getResource(viewRes.getURI()));
 		assertNotNull(viewRes);
 		assertFalse(viewRes.isLoaded());
-		View view = viewRes.getView();
+		FMLRTVirtualModelInstance view = viewRes.getVirtualModelInstance();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project, ((ViewResource) view.getResource()).getResourceCenter());
+		assertEquals(project, ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
 
 		// CreateDiagram
 		System.out.println("Create diagram, view=" + view + " editor=" + editor);
@@ -245,12 +246,12 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		*/
 	}
 
-	private ViewPoint loadViewPoint(String viewPointURI) {
+	private VirtualModel loadViewPoint(String viewPointURI) {
 		log("Testing ViewPoint loading: " + viewPointURI);
-		ViewPointResource viewPointResource = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
+		VirtualModelResource viewPointResource = (VirtualModelResource) serviceManager.getResourceManager().getResource(viewPointURI);
 		assertNotNull(viewPointResource);
 		assertFalse(viewPointResource.isLoaded());
-		ViewPoint viewPoint = viewPointResource.getViewPoint();
+		VirtualModel viewPoint = viewPointResource.getVirtualModel();
 		assertTrue(viewPointResource.isLoaded());
 		return viewPoint;
 	}
