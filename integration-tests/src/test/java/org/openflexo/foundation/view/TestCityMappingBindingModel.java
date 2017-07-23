@@ -54,14 +54,9 @@ import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.SynchronizationScheme;
-import org.openflexo.foundation.fml.ViewPoint;
-import org.openflexo.foundation.fml.ViewType;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.VirtualModelInstanceType;
 import org.openflexo.foundation.fml.binding.EditionActionBindingModel;
 import org.openflexo.foundation.fml.binding.FlexoBehaviourBindingModel;
-import org.openflexo.foundation.fml.binding.ViewPointBindingModel;
-import org.openflexo.foundation.fml.binding.VirtualModelBindingModel;
 import org.openflexo.foundation.fml.controlgraph.ConditionalAction;
 import org.openflexo.foundation.fml.controlgraph.IterationAction;
 import org.openflexo.foundation.fml.controlgraph.Sequence;
@@ -69,7 +64,7 @@ import org.openflexo.foundation.fml.editionaction.AssignationAction;
 import org.openflexo.foundation.fml.editionaction.DeclarationAction;
 import org.openflexo.foundation.fml.editionaction.ExpressionAction;
 import org.openflexo.foundation.fml.editionaction.FetchRequestCondition;
-import org.openflexo.foundation.fml.rm.ViewPointResource;
+import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.editionaction.MatchFlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.editionaction.MatchingCriteria;
@@ -88,7 +83,7 @@ import org.openflexo.test.TestOrder;
 public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCase {
 
 	private static FlexoEditor editor;
-	private static ViewPoint cityMappingVP;
+	private static VirtualModel cityMappingVP;
 	private static SynchronizationScheme syncScheme;
 
 	/**
@@ -119,12 +114,12 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		String viewPointURI = "http://www.thalesgroup.com/openflexo/emf/CityMapping";
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		ViewPointResource vpRes = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
+		VirtualModelResource vpRes = (VirtualModelResource) serviceManager.getResourceManager().getResource(viewPointURI);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		ViewPoint vp = vpRes.getViewPoint();
+		VirtualModel vp = vpRes.getVirtualModel();
 		assertTrue(vpRes.isLoaded());
 		cityMappingVP = vp;
 
@@ -144,23 +139,12 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		System.out.println("FML=" + syncScheme.getFMLRepresentation());
 
-		assertEquals(10, syncScheme.getBindingModel().getBindingVariablesCount());
-		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.REFLEXIVE_ACCESS_PROPERTY));
-		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(VirtualModelBindingModel.REFLEXIVE_ACCESS_PROPERTY));
-		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.PROJECT_PROPERTY));
-		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.RC_PROPERTY));
-		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.VIEW_PROPERTY));
-		assertEquals(ViewType.getViewType(cityMappingVP),
-				syncScheme.getBindingModel().bindingVariableNamed(ViewPointBindingModel.VIEW_PROPERTY).getType());
-		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(VirtualModelBindingModel.VIRTUAL_MODEL_INSTANCE_PROPERTY));
-		assertEquals(VirtualModelInstanceType.getFlexoConceptInstanceType(cityMapping),
-				syncScheme.getBindingModel().bindingVariableNamed(VirtualModelBindingModel.VIRTUAL_MODEL_INSTANCE_PROPERTY).getType());
+		assertEquals(5, syncScheme.getBindingModel().getBindingVariablesCount());
 		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed("model1"));
 		assertEquals(EMFModel.class, syncScheme.getBindingModel().bindingVariableNamed("model1").getType());
 		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed("model2"));
 		assertEquals(EMFModel.class, syncScheme.getBindingModel().bindingVariableNamed("model2").getType());
 		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_PROPERTY));
-		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed(FlexoBehaviourBindingModel.PARAMETERS_DEFINITION_PROPERTY));
 
 	}
 
@@ -360,7 +344,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	@TestOrder(10)
 	public void checkViewPointValidity() {
 		System.out.println("cityMappingVP FML=" + cityMappingVP.getFMLRepresentation());
-		assertViewPointIsValid(cityMappingVP);
+		assertVirtualModelIsValid(cityMappingVP);
 	}
 
 }

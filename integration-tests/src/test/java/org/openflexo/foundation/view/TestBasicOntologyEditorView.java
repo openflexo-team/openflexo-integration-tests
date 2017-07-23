@@ -39,19 +39,25 @@
 
 package org.openflexo.foundation.view;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.action.AddRepositoryFolder;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
-import org.openflexo.foundation.fml.ViewPoint;
-import org.openflexo.foundation.fml.rm.ViewPointResource;
+import org.openflexo.foundation.fml.VirtualModel;
+import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
-import org.openflexo.foundation.fml.rt.View;
-import org.openflexo.foundation.fml.rt.action.CreateViewInFolder;
-import org.openflexo.foundation.fml.rt.rm.ViewResource;
+import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
@@ -62,17 +68,14 @@ import org.openflexo.technologyadapter.owl.OWLTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
-
-import static org.junit.Assert.*;
-
 @RunWith(OrderedRunner.class)
 public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCase {
 
 	public static FlexoProject project;
 	private static FlexoEditor editor;
-	private static ViewPoint basicOntologyEditor;
-	private static RepositoryFolder<ViewResource, ?> viewFolder;
-	private static View view;
+	private static VirtualModel basicOntologyEditor;
+	private static RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> viewFolder;
+	private static FMLRTVirtualModelInstance view;
 
 	/**
 	 * Instantiate test resource center
@@ -85,9 +88,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
 		// We use the ResourceCenter deployed in integration-tests-rc
-		instanciateTestServiceManager(
-				FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, OWLTechnologyAdapter.class
-		);
+		instanciateTestServiceManager(FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, OWLTechnologyAdapter.class);
 
 	}
 
@@ -97,19 +98,19 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		editor = createProject("TestCreateView");
 		project = editor.getProject();
 
-		assertNotNull(project.getViewLibrary());
+		assertNotNull(project.getVirtualModelInstanceRepository());
 	}
 
-	private ViewPoint loadViewPoint(String viewPointURI) {
+	private VirtualModel loadViewPoint(String viewPointURI) {
 
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		ViewPointResource vpRes = (ViewPointResource) serviceManager.getResourceManager().getResource(viewPointURI);
+		VirtualModelResource vpRes = (VirtualModelResource) serviceManager.getResourceManager().getResource(viewPointURI);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		ViewPoint vp = vpRes.getViewPoint();
+		VirtualModel vp = vpRes.getVirtualModel();
 		assertTrue(vpRes.isLoaded());
 
 		return vp;
@@ -121,15 +122,14 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 	public void test2LoadBasicOntologyEditorViewPoint() {
 		basicOntologyEditor = loadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl");
 		assertNotNull(basicOntologyEditor);
-		System.out
-				.println("Found view point in " + ((ViewPointResource) basicOntologyEditor.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + ((VirtualModelResource) basicOntologyEditor.getResource()).getIODelegate().toString());
 	}
 
 	@Test
 	@TestOrder(4)
 	public void test3CreateViewFolder() {
-		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType.makeNewAction(project.getViewLibrary().getRootFolder(),
-				null, editor);
+		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType
+				.makeNewAction(project.getVirtualModelInstanceRepository().getRootFolder(), null, editor);
 		addRepositoryFolder.setNewFolderName("NewViewFolder");
 		addRepositoryFolder.doAction();
 		assertTrue(addRepositoryFolder.hasActionExecutionSucceeded());
@@ -140,36 +140,37 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 	@Test
 	@TestOrder(5)
 	public void test4CreateView() {
-		CreateViewInFolder addView = CreateViewInFolder.actionType.makeNewAction(viewFolder, null, editor);
-		addView.setNewViewName("TestNewView");
-		addView.setNewViewTitle("A nice title for a new view");
-		addView.setViewpointResource((ViewPointResource) basicOntologyEditor.getResource());
+		CreateBasicVirtualModelInstance addView = CreateBasicVirtualModelInstance.actionType.makeNewAction(viewFolder, null, editor);
+		addView.setNewVirtualModelInstanceName("TestNewView");
+		addView.setNewVirtualModelInstanceTitle("A nice title for a new view");
+		addView.setVirtualModel(basicOntologyEditor);
 		addView.doAction();
 		assertTrue(addView.hasActionExecutionSucceeded());
-		View newView = addView.getNewView();
-		System.out.println("New view " + newView + " created in " + ((ViewResource) newView.getResource()).getIODelegate().toString());
+		FMLRTVirtualModelInstance newView = addView.getNewVirtualModelInstance();
+		System.out.println("New view " + newView + " created in "
+				+ ((FMLRTVirtualModelInstanceResource) newView.getResource()).getIODelegate().toString());
 		assertNotNull(newView);
-		assertEquals(addView.getNewViewName(), newView.getName());
-		assertEquals(addView.getNewViewTitle(), newView.getTitle());
-		assertEquals(addView.getViewpointResource().getViewPoint(), basicOntologyEditor);
-		assertTrue(((ViewResource) newView.getResource()).getIODelegate().exists());
+		assertEquals(addView.getNewVirtualModelInstanceName(), newView.getName());
+		assertEquals(addView.getNewVirtualModelInstanceTitle(), newView.getTitle());
+		assertEquals(addView.getVirtualModel(), basicOntologyEditor);
+		assertTrue(((FMLRTVirtualModelInstanceResource) newView.getResource()).getIODelegate().exists());
 	}
 
 	public void test5ReloadProject() {
 		editor = reloadProject(project.getProjectDirectory());
 		project = editor.getProject();
-		assertNotNull(project.getViewLibrary());
-		assertEquals(1, project.getViewLibrary().getRootFolder().getChildren().size());
-		viewFolder = project.getViewLibrary().getRootFolder().getChildren().get(0);
+		assertNotNull(project.getVirtualModelInstanceRepository());
+		assertEquals(1, project.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
+		viewFolder = project.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
 		assertEquals(1, viewFolder.getResources().size());
-		ViewResource viewRes = viewFolder.getResources().get(0);
-		assertEquals(viewRes, project.getViewLibrary().getResource(viewRes.getURI()));
+		FMLRTVirtualModelInstanceResource viewRes = viewFolder.getResources().get(0);
+		assertEquals(viewRes, project.getVirtualModelInstanceRepository().getResource(viewRes.getURI()));
 		assertNotNull(viewRes);
 		assertFalse(viewRes.isLoaded());
-		view = viewRes.getView();
+		view = viewRes.getVirtualModelInstance();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project, ((ViewResource) view.getResource()).getResourceCenter());
+		assertEquals(project, ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
 	}
 
 	/*public void test6CreateVirtualModel() {
@@ -203,8 +204,8 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		// createDiagram.getThrownException().printStackTrace();
 		assertTrue(createDiagram.hasActionExecutionSucceeded());
 		Diagram newDiagram = createDiagram.getNewDiagram();
-		System.out.println("New diagram " + newDiagram + " created in "
-				+ ((DiagramResource) newDiagram.getResource()).getIODelegate().toString());
+		System.out.println(
+				"New diagram " + newDiagram + " created in " + ((DiagramResource) newDiagram.getResource()).getIODelegate().toString());
 		assertNotNull(newDiagram);
 		assertEquals(createDiagram.getDiagramName(), newDiagram.getName());
 		assertEquals(createDiagram.getDiagramTitle(), newDiagram.getTitle());
