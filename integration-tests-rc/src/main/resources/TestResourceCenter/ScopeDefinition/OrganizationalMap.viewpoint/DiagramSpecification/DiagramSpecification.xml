@@ -3,10 +3,9 @@
   <FlexoConcept id="2" name="OrganizationalUnit" userID="FLX">
     <DropScheme id="3" target="top" name="dropOrganizationalUnitAtTopLevel" label="dropOrganizationalUnitAtTopLevel" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600" userID="FLX">
       <URIParameter id="4" base="&quot;OrganizationalUnit&quot;" name="uri" label="uri" usePaletteLabelAsDefaultValue="false" isRequired="true" userID="FLX">
-        <OWLModelSlot id="5" isRequired="false" isReadOnly="false" name="owl" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" userID="FLX" />
       </URIParameter>
       <AddOWLIndividual id="6" assignation="organizationalUnit" individualName="parameters.uri" userID="FLX">
-        <OWLModelSlot idref="5" userID="FLX" />
+        <OWLModelSlot id="5" isRequired="false" isReadOnly="false" name="owl" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" userID="FLX" />
         <DataPropertyAssertion id="7" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" value="&quot;Organizational Unit&quot;" userID="FLX" />
       </AddOWLIndividual>
       <AddShape id="8" container="topLevel" extendParentBoundsToHostThisShape="false" assignation="shape" userID="FLX">

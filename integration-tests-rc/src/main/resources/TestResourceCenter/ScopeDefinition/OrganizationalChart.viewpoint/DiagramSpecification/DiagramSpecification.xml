@@ -6,12 +6,11 @@
       <TextFieldParameter id="4" name="firstName" label="First name" usePaletteLabelAsDefaultValue="false" isRequired="false" userID="FLX" />
       <TextFieldParameter id="5" name="lastName" label="Last name" usePaletteLabelAsDefaultValue="false" isRequired="false" userID="FLX" />
       <URIParameter id="6" base="(parameters.firstName + parameters.lastName)" name="uri" label="uri" usePaletteLabelAsDefaultValue="false" isRequired="true" userID="FLX">
-        <OWLModelSlot id="7" isRequired="false" isReadOnly="false" name="owl" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" userID="FLX" />
       </URIParameter>
       <IndividualParameter id="8" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" name="position" label="position" usePaletteLabelAsDefaultValue="false" isRequired="false" userID="FLX" />
       <AddOWLIndividual id="9" assignation="actor" individualName="parameters.uri" userID="FLX">
-        <OWLModelSlot idref="7" userID="FLX" />
-        <DataPropertyAssertion id="10" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#firstName" value="parameters.firstName" userID="FLX" />
+       <OWLModelSlot id="7" isRequired="false" isReadOnly="false" name="owl" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" userID="FLX" />
+       <DataPropertyAssertion id="10" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#firstName" value="parameters.firstName" userID="FLX" />
         <DataPropertyAssertion id="11" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#lastName" value="parameters.lastName" userID="FLX" />
         <ObjectPropertyAssertion id="12" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPosition" object="parameters.position" userID="FLX" />
       </AddOWLIndividual>
