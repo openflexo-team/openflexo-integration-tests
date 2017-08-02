@@ -57,13 +57,13 @@ import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
 /**
- * This unit test is intented to test ViewPoint validation model in integration context (all technology adapters are loaded)
+ * This unit test is intented to test FML validation model in integration context (all technology adapters are loaded)
  * 
  * @author sylvain
  * 
  */
 @RunWith(OrderedRunner.class)
-public class TestViewPointValidationModelInIntegrationContext extends OpenflexoTestCase {
+public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCase {
 
 	static FMLValidationModel validationModel;
 
@@ -146,8 +146,6 @@ public class TestViewPointValidationModelInIntegrationContext extends OpenflexoT
 				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.shapes.Arc.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.editionaction.SelectExcelRow.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.FlexoProperty.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.FreeDiagramModelSlot.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
