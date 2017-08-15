@@ -7,8 +7,8 @@ use org.openflexo.technologyadapter.emf.EMFModelSlot;
 @VirtualModel(uri="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml")
 public class Mapping {
 
-  ModelSlot model1 type=EMFModelSlot$EMFModelSlotImpl_$$_jvste0e_90 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city1" required=true readOnly=false;
-  ModelSlot model2 type=EMFModelSlot$EMFModelSlotImpl_$$_jvste0e_90 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city2" required=true readOnly=false;
+  ModelSlot model1 type=EMFModelSlot$EMFModelSlotImpl_$$_jvste0e_86 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city1" required=true readOnly=false;
+  ModelSlot model2 type=EMFModelSlot$EMFModelSlotImpl_$$_jvste0e_86 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city2" required=true readOnly=false;
 
   @SynchronizationScheme  
   Void synchronization() {  
@@ -124,7 +124,7 @@ public class Mapping {
   }  
 
   @FlexoConcept  
-  public class Appartment {  
+  public class Appartment extends House  {  
   
     FlexoRole houseInModel1 as Individual conformTo House from model1 ;  
     FlexoRole appartmentInModel2 as Individual conformTo Appartment from model2 ;  
@@ -147,7 +147,7 @@ public class Mapping {
   }  
 
   @FlexoConcept  
-  public class Mansion {  
+  public class Mansion extends House  {  
   
     FlexoRole houseInModel1 as Individual conformTo House from model1 ;  
     FlexoRole mansionInModel2 as Individual conformTo Mansion from model2 ;  

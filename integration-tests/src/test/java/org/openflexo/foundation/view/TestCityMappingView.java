@@ -129,7 +129,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		assertNotNull(cityMappingVP);
 		System.out.println("Found view point in " + ((VirtualModelResource) cityMappingVP.getResource()).getIODelegate().toString());
 
-		VirtualModel cityMappingVM = cityMappingVP.getVirtualModelNamed("CityMapping");
+		VirtualModel cityMappingVM = cityMappingVP.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMappingVM);
 
 		SynchronizationScheme ss = cityMappingVM.getSynchronizationScheme();
@@ -205,7 +205,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		createVirtualModelInstance.setNewVirtualModelInstanceName("TestNewVirtualModel");
 		createVirtualModelInstance.setNewVirtualModelInstanceTitle("A nice title for a new virtual model instance");
 
-		VirtualModel cityMappingVM = cityMappingVP.getVirtualModelNamed("CityMapping");
+		VirtualModel cityMappingVM = cityMappingVP.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMappingVM);
 
 		createVirtualModelInstance.setVirtualModel(cityMappingVM);
