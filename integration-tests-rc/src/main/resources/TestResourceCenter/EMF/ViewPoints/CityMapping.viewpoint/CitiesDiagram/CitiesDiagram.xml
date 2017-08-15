@@ -15,7 +15,7 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="13" featureName="label" readOnly="true" value="city.render" userID="FLX" flexoID="126" />
     </ShapeRole>
-    <FlexoConceptInstanceRole id="14" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="114" />
+    <FlexoConceptInstanceRole id="14" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping#City" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="114" />
     <CreationScheme id="15" skipConfirmationPanel="false" name="creation" width="800" label="creation" height="600" userID="FLX" flexoID="4">
       <BehaviourControlGraph_Sequence id="16" userID="FLX" flexoID="76">
         <ControlGraph2_AssignationAction id="17" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="79">
@@ -52,7 +52,7 @@
   <DeletionScheme id="36" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="46" />
   <SynchronizationScheme id="37" skipConfirmationPanel="false" name="synchronize" width="800" label="synchronize" height="600" userID="FLX" flexoID="22">
     <BehaviourControlGraph_IterationAction id="38" iteratorName="cityFC" userID="FLX" flexoID="27">
-      <Iteration_SelectFlexoConceptInstance id="39" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#City" receiver="mappingmodel" ownerContext="iterationControlGraph" userID="FLX" flexoID="29" />
+      <Iteration_SelectFlexoConceptInstance id="39" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping#City" receiver="mappingmodel" ownerContext="iterationControlGraph" userID="FLX" flexoID="29" />
       <ControlGraph_MatchFlexoConceptInstance id="40" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CitiesDiagram#CityGR.creation" receiver="virtualModelInstance" ownerContext="controlGraph" userID="FLX" description="" flexoID="34">
         <MatchingCriteria id="41" patternRoleName="shape" userID="FLX" flexoID="37" />
         <MatchingCriteria id="42" patternRoleName="city" value="cityFC" userID="FLX" flexoID="38" />
