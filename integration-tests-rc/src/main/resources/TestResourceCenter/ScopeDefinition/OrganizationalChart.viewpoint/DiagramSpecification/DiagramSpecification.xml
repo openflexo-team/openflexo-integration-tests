@@ -1,174 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="1" name="DiagramSpecification" modelVersion="1.0" userID="FLX">
-  <FlexoConcept id="2" name="Actor" userID="FLX">
-    <DropScheme id="3" target="top" name="dropActorAtTopLevel" label="dropActorAtTopLevel" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600" userID="FLX">
-      <description userID="FLX">Creates a new actor in organization unit</description>
-      <TextFieldParameter id="4" name="firstName" label="First name" usePaletteLabelAsDefaultValue="false" isRequired="false" userID="FLX" />
-      <TextFieldParameter id="5" name="lastName" label="Last name" usePaletteLabelAsDefaultValue="false" isRequired="false" userID="FLX" />
-      <URIParameter id="6" base="(parameters.firstName + parameters.lastName)" name="uri" label="uri" usePaletteLabelAsDefaultValue="false" isRequired="true" userID="FLX">
-        <OWLModelSlot id="7" isRequired="false" isReadOnly="false" name="owl" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" userID="FLX" />
-      </URIParameter>
-      <IndividualParameter id="8" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" name="position" label="position" usePaletteLabelAsDefaultValue="false" isRequired="false" userID="FLX" />
-      <AddOWLIndividual id="9" assignation="actor" individualName="parameters.uri" userID="FLX">
-        <OWLModelSlot idref="7" userID="FLX" />
-        <DataPropertyAssertion id="10" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#firstName" value="parameters.firstName" userID="FLX" />
-        <DataPropertyAssertion id="11" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#lastName" value="parameters.lastName" userID="FLX" />
-        <ObjectPropertyAssertion id="12" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPosition" object="parameters.position" userID="FLX" />
-      </AddOWLIndividual>
-      <AddShape id="13" container="topLevel" extendParentBoundsToHostThisShape="false" assignation="shape" userID="FLX">
-        <TypedDiagramModelSlot idref="118" userID="FLX" />
-      </AddShape>
-      <AddShape id="15" container="topLevel" extendParentBoundsToHostThisShape="false" assignation="positionLabel" userID="FLX">
-        <TypedDiagramModelSlot idref="118" userID="FLX" />
-      </AddShape>
-      <AddShape id="16" extendParentBoundsToHostThisShape="false" assignation="nameLabel" userID="FLX">
-        <TypedDiagramModelSlot idref="118" userID="FLX" />
-      </AddShape>
-      <AddShape id="17" extendParentBoundsToHostThisShape="false" assignation="icon" userID="FLX">
-        <TypedDiagramModelSlot idref="118" userID="FLX" />
-      </AddShape>
+<VirtualModel id="0" modelVersion="1.0" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="1">
+  <FlexoConcept id="1" name="Actor" userID="FLX" flexoID="42">
+    <OWLIndividualRole id="2" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Actor" cloningStrategy="Clone" cardinality="ZeroOne" name="actor" userID="FLX" flexoID="6" />
+    <ShapeRole id="3" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="7">
+      <ShapeGraphicalRepresentation id="4" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="10.0" y="10.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="170.9725117248567" height="58.60160965794768" identifier="object_0" layer="1">
+        <SelectedColorGradientBackgroundStyle id="5" color1="255,153,153" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <ForegroundStyle id="6" color="204,0,51" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.500000001490116" />
+        <FocusedColorGradientBackgroundStyle id="7" color1="255,153,153" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <ShadowStyle id="8" />
+        <FocusedForegroundStyle id="9" color="204,0,51" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.500000001490116" />
+        <SelectedForegroundStyle id="10" color="204,0,51" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.500000001490116" />
+        <ColorGradientBackgroundStyle id="11" color1="255,153,153" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape id="12" isRounded="true" arcSize="20.0" />
+        <TextStyle id="13" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+      </ShapeGraphicalRepresentation>
+    </ShapeRole>
+    <ShapeRole id="14" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="8">
+      <ParentShapeRole idref="3" />
+      <ShapeGraphicalRepresentation id="15" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" yConstraints="((parent.height - this.height) / 2)" xConstraints="((parent.width - this.width) - 10)" x="61.48625586242835" y="5.300804828973838" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="48.0" height="48.0" identifier="object_0_0" layer="2" isSelectable="false" isFocusable="false">
+        <SelectedImageBackgroundStyle id="16" fitToShape="true" imageFile="PositionM.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <ForegroundStyle id="17" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedImageBackgroundStyle id="18" fitToShape="true" imageFile="PositionM.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <ShadowStyle id="19" drawShadow="false" />
+        <FocusedForegroundStyle id="20" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="21" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="22" fitToShape="true" imageFile="PositionM.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape id="23" isRounded="true" />
+        <TextStyle id="24" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+      </ShapeGraphicalRepresentation>
+    </ShapeRole>
+    <ShapeRole id="25" exampleLabel="Name" cloningStrategy="Clone" cardinality="ZeroOne" name="nameLabel" userID="FLX" flexoID="10">
+      <ParentShapeRole idref="3" />
+      <ShapeGraphicalRepresentation id="26" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" yConstraints="((parent.height / 2) - 20)" heightConstraints="20" xConstraints="(((parent.width - 48) - this.width) / 2)" x="29.98625586242835" y="19.30080482897384" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="111.0" height="20.0" identifier="object_0_1" layer="2" text="Name" isSelectable="false" isFocusable="false">
+        <SelectedNoneBackgroundStyle id="27" transparencyLevel="0.5" />
+        <ForegroundStyle id="28" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedNoneBackgroundStyle id="29" transparencyLevel="0.5" />
+        <ShadowStyle id="30" drawShadow="false" />
+        <FocusedForegroundStyle id="31" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="32" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <NoneBackgroundStyle id="33" transparencyLevel="0.5" />
+        <RectangleShape id="34" />
+        <TextStyle id="35" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans Demibold,1,13" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="36" featureName="label" readOnly="true" value="((actor.firstName + &quot; &quot;) + actor.lastName)" userID="FLX" flexoID="9" />
+    </ShapeRole>
+    <ShapeRole id="37" exampleLabel="Title" cloningStrategy="Clone" cardinality="ZeroOne" name="positionLabel" userID="FLX" flexoID="12">
+      <ParentShapeRole idref="3" />
+      <ShapeGraphicalRepresentation id="38" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" yConstraints="(parent.height / 2)" heightConstraints="20" xConstraints="(((parent.width - 48) - this.width) / 2)" x="19.353299709670196" y="19.30080482897384" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="132.2659123055163" height="20.0" identifier="object_0_2" layer="2" text="Title" isSelectable="false" isFocusable="false">
+        <SelectedNoneBackgroundStyle id="39" transparencyLevel="0.5" />
+        <ForegroundStyle id="40" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedNoneBackgroundStyle id="41" transparencyLevel="0.5" />
+        <ShadowStyle id="42" drawShadow="false" />
+        <FocusedForegroundStyle id="43" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="44" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <NoneBackgroundStyle id="45" transparencyLevel="0.5" />
+        <RectangleShape idref="34" />
+        <TextStyle id="46" backgroundColor="255,255,255" color="102,102,102" font="Lucida Sans Demibold,2,11" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="47" featureName="label" readOnly="true" value="actor.hasPosition.positionName" userID="FLX" flexoID="11" />
+    </ShapeRole>
+    <DropScheme id="48" target="top" skipConfirmationPanel="false" name="dropActorAtTopLevel" width="800" label="dropActorAtTopLevel" height="600" userID="FLX" flexoID="34">
+      <BehaviourControlGraph_Sequence id="49" userID="FLX" flexoID="29">
+        <ControlGraph2_Sequence id="50" ownerContext="controlGraph2" userID="FLX" flexoID="23">
+          <ControlGraph2_Sequence id="51" ownerContext="controlGraph2" userID="FLX" flexoID="20">
+            <ControlGraph2_Sequence id="52" ownerContext="controlGraph2" userID="FLX" flexoID="17">
+              <ControlGraph2_AssignationAction id="53" assign="icon" ownerContext="controlGraph2" userID="FLX" flexoID="14">
+                <AssignableAction_AddShape id="54" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="13" />
+              </ControlGraph2_AssignationAction>
+              <ControlGraph1_AssignationAction id="55" assign="nameLabel" ownerContext="controlGraph1" userID="FLX" flexoID="16">
+                <AssignableAction_AddShape id="56" receiver="typedDiagramModelSlot" assignation="nameLabel" userID="FLX" flexoID="15" />
+              </ControlGraph1_AssignationAction>
+            </ControlGraph2_Sequence>
+            <ControlGraph1_AssignationAction id="57" assign="positionLabel" ownerContext="controlGraph1" userID="FLX" flexoID="19">
+              <AssignableAction_AddShape id="58" container="topLevel" receiver="typedDiagramModelSlot" assignation="positionLabel" userID="FLX" flexoID="18" />
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="59" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="22">
+            <AssignableAction_AddShape id="60" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="21" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="61" assign="actor" ownerContext="controlGraph1" userID="FLX" flexoID="28">
+          <AssignableAction_AddOWLIndividual id="62" individualName="parameters.uri" receiver="owl" assignation="actor" userID="FLX" flexoID="27">
+            <DataPropertyAssertion id="63" value="parameters.firstName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#firstName" userID="FLX" flexoID="24" />
+            <DataPropertyAssertion id="64" value="parameters.lastName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#lastName" userID="FLX" flexoID="25" />
+            <ObjectPropertyAssertion id="65" object="parameters.position" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPosition" userID="FLX" flexoID="26" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="66" widget="TEXT_FIELD" name="firstName" type="java.lang.String" userID="FLX" flexoID="30" />
+      <GenericBehaviourParameter id="67" widget="TEXT_FIELD" name="lastName" type="java.lang.String" userID="FLX" flexoID="31" />
+      <GenericBehaviourParameter id="68" isRequired="true" widget="URI" name="uri" type="java.lang.String" userID="FLX" flexoID="32" />
+      <GenericBehaviourParameter id="69" widget="CUSTOM_WIDGET" name="position" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="33" />
     </DropScheme>
-    <NavigationScheme id="18" targetObject="ownedProcess" conditional="(ownedProcess != null)" name="OpenOwnedProcess" label="OpenOwnedProcess" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600" userID="FLX" />
-    <OWLIndividualRole id="19" name="actor" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Actor" userID="FLX">
-      <OWLModelSlot idref="7" userID="FLX" />
-    </OWLIndividualRole>
-    <ShapeRole id="20" name="shape" exampleLabel="" userID="FLX">
-      <ShapeGraphicalRepresentation id="21" x="10.0" y="10.0" width="170.9725117248567" height="58.60160965794768" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true" userID="FLX">
-        <ForegroundStyle id="22" noStroke="false" color="204,0,51" lineWidth="1.500000001490116" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <ColorGradientBackgroundStyle id="23" color1="255,153,153" color2="255,255,255" direction="NORTH_SOUTH" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedForegroundStyle id="24" noStroke="false" color="204,0,51" lineWidth="1.500000001490116" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedColorGradientBackgroundStyle id="25" color1="255,153,153" color2="255,255,255" direction="NORTH_SOUTH" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedForegroundStyle id="26" noStroke="false" color="204,0,51" lineWidth="1.500000001490116" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedColorGradientBackgroundStyle id="27" color1="255,153,153" color2="255,255,255" direction="NORTH_SOUTH" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <ShapeBorder id="28" top="20" bottom="20" left="20" right="20" userID="FLX" />
-        <RectangleShape id="29" isRounded="true" arcSize="20.0" userID="FLX" />
-        <ShadowStyle id="30" drawShadow="true" shadowDarkness="150" shadowDepth="2" shadowBlur="4" userID="FLX" />
-        <TextStyle id="31" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
-      </ShapeGraphicalRepresentation>
-      <TypedDiagramModelSlot idref="118" isRequired="true" isReadOnly="false" userID="FLX" />
-    </ShapeRole>
-    <ShapeRole id="32" name="icon" exampleLabel="" userID="FLX">
-      <ShapeGraphicalRepresentation id="33" x="112.9725117248567" y="5.300804828973838" width="48.0" height="48.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="UNMOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="((parent.width - this.width) - 10)" yConstraints="((parent.height - this.height) / 2)" identifier="object_0_0" layer="2" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="false" isFocusable="false" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true" userID="FLX">
-        <ForegroundStyle id="34" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <ImageBackgroundStyle id="35" imageFile="PositionM.png" scaleX="1.0" scaleY="1.0" deltaX="0.0" deltaY="0.0" imageBackgroundType="TRANSPARENT" imageBackgroundColor="255,255,255" fitToShape="true" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedForegroundStyle id="36" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedImageBackgroundStyle id="37" imageFile="PositionM.png" scaleX="1.0" scaleY="1.0" deltaX="0.0" deltaY="0.0" imageBackgroundType="TRANSPARENT" imageBackgroundColor="255,255,255" fitToShape="true" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedForegroundStyle id="38" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedImageBackgroundStyle id="39" imageFile="PositionM.png" scaleX="1.0" scaleY="1.0" deltaX="0.0" deltaY="0.0" imageBackgroundType="TRANSPARENT" imageBackgroundColor="255,255,255" fitToShape="true" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <ShapeBorder id="40" top="20" bottom="20" left="20" right="20" userID="FLX" />
-        <RectangleShape id="41" isRounded="true" arcSize="30.0" userID="FLX" />
-        <ShadowStyle id="42" drawShadow="false" shadowDarkness="150" shadowDepth="2" shadowBlur="4" userID="FLX" />
-        <TextStyle id="43" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
-      </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="20" userID="FLX" />
-      <TypedDiagramModelSlot idref="118" userID="FLX" />
-    </ShapeRole>
-    <ShapeRole id="44" name="nameLabel" exampleLabel="Name" userID="FLX">
-      <ShapeGraphicalRepresentation id="45" x="5.986255862428351" y="9.300804828973838" width="111.0" height="20.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="UNMOVABLE" dimensionConstraints="UNRESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="(((parent.width - 48) - this.width) / 2)" yConstraints="((parent.height / 2) - 20)" heightConstraints="20" identifier="object_0_1" layer="2" hasText="true" text="Name" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="false" isFocusable="false" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true" userID="FLX">
-        <ForegroundStyle id="46" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <NoneBackgroundStyle id="47" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedForegroundStyle id="48" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedNoneBackgroundStyle id="49" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedForegroundStyle id="50" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedNoneBackgroundStyle id="51" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <ShapeBorder id="52" top="20" bottom="20" left="20" right="20" userID="FLX" />
-        <RectangleShape id="53" isRounded="false" arcSize="30.0" userID="FLX" />
-        <ShadowStyle id="54" drawShadow="false" shadowDarkness="150" shadowDepth="2" shadowBlur="4" userID="FLX" />
-        <TextStyle id="55" font="Lucida Sans Demibold,1,13" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
-      </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="20" userID="FLX" />
-      <TypedDiagramModelSlot idref="118" userID="FLX" />
-      <GRSpec id="56" featureName="label" value="((actor.firstName + &quot; &quot;) + actor.lastName)" readOnly="true" userID="FLX" />
-    </ShapeRole>
-    <ShapeRole id="57" name="positionLabel" exampleLabel="Title" userID="FLX">
-      <ShapeGraphicalRepresentation id="58" x="-4.646700290329804" y="29.30080482897384" width="132.2659123055163" height="20.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="UNMOVABLE" dimensionConstraints="UNRESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="(((parent.width - 48) - this.width) / 2)" yConstraints="(parent.height / 2)" heightConstraints="20" identifier="object_0_2" layer="2" hasText="true" text="Title" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="false" isFocusable="false" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true" userID="FLX">
-        <ForegroundStyle id="59" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <NoneBackgroundStyle id="60" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedForegroundStyle id="61" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedNoneBackgroundStyle id="62" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedForegroundStyle id="63" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedNoneBackgroundStyle id="64" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <ShapeBorder id="65" top="20" bottom="20" left="20" right="20" userID="FLX" />
-        <RectangleShape idref="53" userID="FLX" />
-        <ShadowStyle id="66" drawShadow="false" shadowDarkness="150" shadowDepth="2" shadowBlur="4" userID="FLX" />
-        <TextStyle id="67" font="Lucida Sans Demibold,2,11" color="102,102,102" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
-      </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="20" userID="FLX" />
-      <TypedDiagramModelSlot idref="118" userID="FLX" />
-      <GRSpec id="68" featureName="label" value="actor.hasPosition.positionName" readOnly="true" userID="FLX" />
-    </ShapeRole>
-    <ContainedFlexoModelObjectPatternRole id="69" flexoModelObjectType="Process" name="ownedProcess" userID="FLX" />
-    <Inspector id="70" inspectorTitle="Actor" userID="FLX">
-      <TextField id="71" name="firstName" label="First name" readOnly="false" data="actor.firstName" userID="FLX" />
-      <TextField id="72" name="lastName" label="Last name" readOnly="false" data="actor.lastName" userID="FLX" />
-      <TextField id="73" name="uri" label="uri" readOnly="false" data="actor.uriName" userID="FLX" />
-      <Individual id="74" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" name="position" label="position" readOnly="false" data="actor.hasPosition" userID="FLX" />
-      <TextField id="75" name="organizationUnit" label="organization_unit" readOnly="true" data="actor.hasPosition.isInvolvedInOrganizationUnit.uriName" userID="FLX" />
-      <FlexoObject id="76" flexoObjectType="Process" name="ownedProcess" label="ownedProcess" readOnly="false" data="ownedProcess" userID="FLX" />
+    <NavigationScheme id="70" targetObject="ownedProcess" conditional="(ownedProcess != null)" skipConfirmationPanel="false" name="OpenOwnedProcess" width="800" label="OpenOwnedProcess" height="600" userID="FLX" flexoID="35" />
+    <Inspector id="71" inspectorTitle="Actor" userID="FLX" flexoID="41">
+      <GenericInspectorEntry id="72" widget="TEXT_FIELD" data="actor.firstName" name="firstName" label="firstName" type="java.lang.String" userID="FLX" flexoID="36" />
+      <GenericInspectorEntry id="73" widget="TEXT_FIELD" data="actor.lastName" name="lastName" label="lastName" type="java.lang.String" userID="FLX" flexoID="37" />
+      <GenericInspectorEntry id="74" widget="TEXT_FIELD" data="actor.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="38" />
+      <GenericInspectorEntry id="75" widget="CUSTOM_WIDGET" data="actor.hasPosition" name="position" label="position" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="39" />
+      <GenericInspectorEntry id="76" widget="TEXT_FIELD" readOnly="true" data="actor.hasPosition.isInvolvedInOrganizationUnit.uriName" name="organizationUnit" label="organizationUnit" type="java.lang.String" userID="FLX" flexoID="40" />
     </Inspector>
   </FlexoConcept>
-  <FlexoConcept id="77" name="CollaboratorLink" userID="FLX">
-    <LinkScheme id="78" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl#Actor" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl#Actor" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="linkActorToActor" label="linkActorToActor" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600" userID="FLX">
-      <AddConnector id="79" fromShape="fromTarget.shape" toShape="toTarget.shape" assignation="connector" userID="FLX">
-        <TypedDiagramModelSlot idref="118" userID="FLX" />
-      </AddConnector>
-      <AddObjectPropertyStatement id="80" object="toTarget.actor" assignation="hasCollaboratorStatement" subject="fromTarget.actor" userID="FLX" />
-      <AddObjectPropertyStatement id="81" object="fromTarget.actor" assignation="hasManagerStatement" subject="toTarget.actor" userID="FLX" />
-    </LinkScheme>
-    <ObjectPropertyStatementRole id="82" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasCollaborator" name="hasCollaboratorStatement" userID="FLX">
-      <OWLModelSlot idref="7" userID="FLX" />
-    </ObjectPropertyStatementRole>
-    <ConnectorRole id="83" name="connector" exampleLabel="" userID="FLX">
-      <ConnectorGraphicalRepresentation id="84" hasSelectedForeground="false" hasFocusedForeground="false" startSymbol="NONE" endSymbol="FILLED_ARROW" middleSymbol="NONE" startSymbolSize="10.0" endSymbolSize="10.0" middleSymbolSize="10.0" relativeMiddleSymbolLocation="0.5" applyForegroundToSymbols="true" identifier="object_2" layer="64" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true" userID="FLX">
-        <ForegroundStyle id="85" noStroke="false" color="102,102,102" lineWidth="1.6000000014901161" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <SelectedForegroundStyle id="86" noStroke="false" color="102,102,102" lineWidth="1.6000000014901161" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <FocusedForegroundStyle id="87" noStroke="false" color="102,102,102" lineWidth="1.6000000014901161" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
-        <RectPolylinConnector id="88" rectPolylinConstraints="VERTICAL_LAYOUT" straightLineWhenPossible="true" adjustability="AUTO_LAYOUT" startOrientation="SOUTH" endOrientation="NORTH" isRounded="true" arcSize="10" isStartingLocationFixed="true" isEndingLocationFixed="true" isStartingLocationDraggable="false" isEndingLocationDraggable="false" fixedStartLocation="0.45967047054620336,0.9999999999999999" fixedEndLocation="0.5,0.0" userID="FLX" />
-        <TextStyle id="89" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
+  <FlexoConcept id="77" name="CollaboratorLink" userID="FLX" flexoID="57">
+    <ObjectPropertyStatementRole id="78" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasCollaborator" cloningStrategy="Clone" cardinality="ZeroOne" name="hasCollaboratorStatement" userID="FLX" flexoID="43" />
+    <ConnectorRole id="79" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="44">
+      <ConnectorGraphicalRepresentation id="80" identifier="object_2" layer="64">
+        <ForegroundStyle id="81" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.6000000014901161" />
+        <FocusedForegroundStyle id="82" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.6000000014901161" />
+        <SelectedForegroundStyle id="83" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.6000000014901161" />
+        <TextStyle id="84" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ConnectorGraphicalRepresentation>
-      <TypedDiagramModelSlot idref="118" userID="FLX" />
     </ConnectorRole>
-    <ObjectPropertyStatementRole id="111" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasManager" name="hasManagerStatement" userID="FLX">
-      <OWLModelSlot idref="7" userID="FLX" />
-    </ObjectPropertyStatementRole>
-    <Inspector id="112" inspectorTitle="CollaboratorLink" userID="FLX">
-      <TextField id="113" name="statement" label="statement" readOnly="true" data="hasCollaboratorStatement.displayableRepresentation.toString" userID="FLX" />
+    <ObjectPropertyStatementRole id="85" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasManager" cloningStrategy="Clone" cardinality="ZeroOne" name="hasManagerStatement" userID="FLX" flexoID="45" />
+    <LinkScheme id="86" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl#Actor" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl#Actor" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="linkActorToActor" width="800" label="linkActorToActor" height="600" userID="FLX" flexoID="54">
+      <BehaviourControlGraph_Sequence id="87" userID="FLX" flexoID="53">
+        <ControlGraph2_Sequence id="88" ownerContext="controlGraph2" userID="FLX" flexoID="50">
+          <ControlGraph2_AssignationAction id="89" assign="hasManagerStatement" ownerContext="controlGraph2" userID="FLX" flexoID="47">
+            <AssignableAction_AddObjectPropertyStatement id="90" object="fromTarget.actor" subject="toTarget.actor" assignation="hasManagerStatement" userID="FLX" flexoID="46" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="91" assign="hasCollaboratorStatement" ownerContext="controlGraph1" userID="FLX" flexoID="49">
+            <AssignableAction_AddObjectPropertyStatement id="92" object="toTarget.actor" subject="fromTarget.actor" assignation="hasCollaboratorStatement" userID="FLX" flexoID="48" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="93" assign="connector" ownerContext="controlGraph1" userID="FLX" flexoID="52">
+          <AssignableAction_AddConnector id="94" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="connector" userID="FLX" flexoID="51" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+    </LinkScheme>
+    <Inspector id="95" inspectorTitle="CollaboratorLink" userID="FLX" flexoID="56">
+      <GenericInspectorEntry id="96" widget="TEXT_FIELD" readOnly="true" data="hasCollaboratorStatement.displayableRepresentation.toString" name="statement" label="statement" type="java.lang.String" userID="FLX" flexoID="55" />
     </Inspector>
   </FlexoConcept>
-  <LocalizedDictionary id="114" userID="FLX" />
-  <ModelSlot_OWLModelSlot idref="7" userID="FLX" />
-  <ModelSlot_VirtualModelModelSlot virtualModelURI="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification" name="virtualModelInstance" id="14" userID="FLX" />
-  <Inspector id="116" inspectorTitle="DiagramSpecification" userID="FLX" />
-  <ModelSlot_TypedDiagramModelSlot metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification" name="typedDiagramModelSlot" id="118" userID="FLX">
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+  <UseModelSlotDeclaration id="97" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="98" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <OWLModelSlot id="99" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="58" />
+  <TypedDiagramModelSlot id="100" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="69">
+    <FMLDiagramPaletteElementBinding id="101" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="59">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="102" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="60">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="103" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="61">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="104" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="62">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="105" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="63">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="106" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="64">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="107" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="65">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="108" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="66">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="109" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="67">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX">
-      <DropScheme idref="3" userID="FLX" />
+    <FMLDiagramPaletteElementBinding id="110" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="68">
+      <DropScheme idref="48" />
     </FMLDiagramPaletteElementBinding>
-  </ModelSlot_TypedDiagramModelSlot>
+  </TypedDiagramModelSlot>
+  <Inspector id="111" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="2" />
 </VirtualModel>

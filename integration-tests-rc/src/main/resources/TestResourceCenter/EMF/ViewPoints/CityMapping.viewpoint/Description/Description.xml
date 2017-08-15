@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" userID="FLX" useSpecificDescriptions="false" flexoID="-1" name="Description">
-  <Inspector id="1" flexoID="-1" userID="FLX" useSpecificDescriptions="false" inspectorTitle="Description" />
-  <ModelSlot_TypedDiagramModelSlot id="2" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Reference" flexoID="1" isRequired="true" name="typedDiagramModelSlot" metaModelURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Description/Description.diagramspecification" isReadOnly="false" />
+<VirtualModel id="0" modelVersion="1.0" version="0.1" name="Description" userID="FLX" flexoID="2">
+  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <TypedDiagramModelSlot id="2" metaModelURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Description/Description.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="1" />
+  <Inspector id="3" inspectorTitle="Description" userID="FLX" flexoID="3" />
 </VirtualModel>

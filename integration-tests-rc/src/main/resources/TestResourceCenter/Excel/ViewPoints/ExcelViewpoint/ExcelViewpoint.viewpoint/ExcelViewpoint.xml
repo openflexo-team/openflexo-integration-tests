@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ViewPoint id="0" useSpecificDescriptions="false" userID="FLX" modelVersion="1.0" version="0.1" isAbstract="false" flexoID="1" description="" name="ExcelViewpoint" uri="http://ExcelViewpoint">
-  <Inspector id="1" flexoID="5" useSpecificDescriptions="false" userID="FLX" inspectorTitle="ExcelViewpoint" />
+<ViewPoint id="0" modelVersion="1.0" uri="http://ExcelViewpoint" version="0.1" name="ExcelViewpoint" userID="FLX" description="" flexoID="1">
+  <Inspector id="1" inspectorTitle="ExcelViewpoint" userID="FLX" flexoID="5" />
 </ViewPoint>

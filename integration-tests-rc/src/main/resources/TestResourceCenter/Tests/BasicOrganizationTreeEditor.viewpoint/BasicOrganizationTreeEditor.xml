@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ViewPoint id="0" flexoID="1" description="" name="BasicOrganizationTreeEditor" useSpecificDescriptions="false" userID="FLX" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor" />
+<ViewPoint id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor" version="0.1" name="BasicOrganizationTreeEditor" userID="FLX" description="" flexoID="1">
+  <Inspector id="1" inspectorTitle="BasicOrganizationTreeEditor" userID="FLX" flexoID="3" />
+</ViewPoint>

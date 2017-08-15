@@ -1,258 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="362" name="City2_View">
-  <FlexoConcept id="1" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="11" name="CityGR">
-    <Inspector id="2" flexoID="1" useSpecificDescriptions="false" userID="FLX" inspectorTitle="CityGR" renderer="(&quot;City: &quot; + city.name)" />
-    <EMFObjectIndividualRole id="3" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/City" flexoID="2" name="city" cardinality="ZeroOne">
-      <EMFModelSlot idref="4" />
-    </EMFObjectIndividualRole>
-    <ShapeRole id="5" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="9" name="shape" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="6" minimalHeight="0.0" relativeTextX="0.5500000007450581" transparency="1.0" drawControlPointsWhenFocused="true" height="128.0" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="398.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="LEFT" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" layer="1" absoluteTextX="0.0" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="2.0" maximalWidth="Infinity" x="6.0">
-        <FocusedForegroundStyle id="7" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorBackgroundStyle id="8" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="9" orientation="0" color="0,153,153" backgroundColor="255,255,255" font="Segoe Print Bold,1,16" isBackgroundColored="false" />
-        <ShapeBorder id="10" bottom="0" left="0" right="0" top="0" />
-        <ForegroundStyle id="11" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="12" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="13" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape id="14" arcSize="30.0" isRounded="true" />
-        <ShadowStyle id="15" shadowDepth="2" shadowBlur="4" drawShadow="true" shadowDarkness="150" />
-        <ColorBackgroundStyle id="16" color="254,254,254" transparencyLevel="0.5" useTransparency="false" />
+<VirtualModel id="0" modelVersion="1.0" version="0.1" name="City2_View" userID="FLX" flexoID="362">
+  <FlexoConcept id="1" name="CityGR" userID="FLX" flexoID="11">
+    <EMFObjectIndividualRole id="2" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/City" cloningStrategy="Clone" cardinality="ZeroOne" name="city" userID="FLX" flexoID="2" />
+    <ShapeRole id="3" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="9">
+      <ShapeGraphicalRepresentation id="4" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="6.0" y="2.0" relativeTextX="0.5500000007450581" dimensionConstraints="FREELY_RESIZABLE" width="398.0" height="128.0" identifier="object_0" lineWrap="true" horizontalTextAlignment="LEFT" layer="1" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="5" color="192,192,192" transparencyLevel="0.5" />
+        <ForegroundStyle id="6" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="7" color="192,192,192" transparencyLevel="0.5" />
+        <ShadowStyle id="8" />
+        <FocusedForegroundStyle id="9" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="10" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorBackgroundStyle id="11" color="254,254,254" transparencyLevel="0.5" />
+        <RectangleShape id="12" isRounded="true" />
+        <TextStyle id="13" backgroundColor="255,255,255" color="0,153,153" font="Segoe Print Bold,1,16" />
       </ShapeGraphicalRepresentation>
-      <GRSpec id="17" featureName="label" flexoID="411" readOnly="false" useSpecificDescriptions="false" userID="FLX" value="city.name" />
-      <TypedDiagramModelSlot idref="18" />
+      <GRSpec id="14" featureName="label" value="city.name" userID="FLX" flexoID="417" />
     </ShapeRole>
-    <ShapeRole id="55" exampleLabel="" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="10" name="icon" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="56" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" widthConstraints="50" drawControlPointsWhenFocused="true" height="50.0" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="50.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0_0" yConstraints="0" lineWrap="true" locationConstraints="UNMOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="UNRESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" layer="1" absoluteTextX="0.0" absoluteTextY="0.0" heightConstraints="50" xConstraints="0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="0.0" maximalWidth="Infinity" x="0.0">
-        <FocusedForegroundStyle id="57" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorBackgroundStyle id="58" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="59" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="SansSerif,1,11" isBackgroundColored="false" />
-        <ShapeBorder id="60" bottom="0" left="0" right="0" top="0" />
-        <ForegroundStyle id="61" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="true" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="62" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="63" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <CircleShape id="64" />
-        <ShadowStyle id="65" shadowDepth="2" shadowBlur="4" drawShadow="false" shadowDarkness="150" />
-        <ImageBackgroundStyle id="66" scaleX="0.390625" scaleY="0.390625" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageFile="../icons/City.png" deltaX="0.0" imageBackgroundType="OPAQUE" deltaY="0.0" />
+    <ShapeRole id="15" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="10">
+      <ParentShapeRole idref="3" />
+      <ShapeGraphicalRepresentation id="16" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" widthConstraints="50" adaptBoundsToContents="false" yConstraints="0" heightConstraints="50" xConstraints="0" x="174.0" y="39.0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="50.0" height="50.0" identifier="object_0_0" lineWrap="true" layer="1" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="17" color="192,192,192" transparencyLevel="0.5" />
+        <ForegroundStyle id="18" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="19" color="192,192,192" transparencyLevel="0.5" />
+        <ShadowStyle id="20" drawShadow="false" />
+        <FocusedForegroundStyle id="21" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="22" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="23" scaleX="0.390625" scaleY="0.390625" fitToShape="true" imageFile="../icons/City.png" imageBackgroundColor="255,255,255" imageBackgroundType="OPAQUE" transparencyLevel="0.5" />
+        <CircleShape id="24" />
+        <TextStyle id="25" backgroundColor="255,255,255" color="0,0,0" font="SansSerif,1,11" />
       </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="5" />
-      <TypedDiagramModelSlot idref="18" />
     </ShapeRole>
-    <DropScheme id="20" userID="FLX" useSpecificDescriptions="false" width="800" label="dropCityAtTopLevel" definePopupDefaultSize="false" height="600" flexoID="4" skipConfirmationPanel="false" name="dropCityAtTopLevel" target="top">
-      <BehaviourControlGraph_Sequence id="21" flexoID="337" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="22" userID="FLX" useSpecificDescriptions="false" flexoID="338" ownerContext="controlGraph1" assign="shape">
-          <AssignableAction_AddShape id="23" flexoID="5" container="topLevel" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-            <TypedDiagramModelSlot idref="18" />
-          </AssignableAction_AddShape>
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_Sequence id="24" flexoID="339" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_AssignationAction id="25" userID="FLX" useSpecificDescriptions="false" flexoID="340" ownerContext="controlGraph1" assign="icon">
-            <AssignableAction_AddShape id="26" flexoID="6" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="icon">
-              <TypedDiagramModelSlot idref="18" />
-            </AssignableAction_AddShape>
-          </ControlGraph1_AssignationAction>
-          <ControlGraph2_AssignationAction id="27" userID="FLX" useSpecificDescriptions="false" flexoID="341" ownerContext="controlGraph2" assign="city">
-            <AssignableAction_AddEMFObjectIndividual id="28" userID="FLX" useSpecificDescriptions="false" individualName="&quot;A New City&quot;" flexoID="7" assignation="city">
-              <EMFModelSlot idref="4" />
-              <DataPropertyAssertion id="29" flexoID="26" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City/name" userID="FLX" useSpecificDescriptions="false" value="parameters.cityName" />
+    <DropScheme id="26" target="top" skipConfirmationPanel="false" name="dropCityAtTopLevel" width="800" label="dropCityAtTopLevel" height="600" userID="FLX" flexoID="4">
+      <BehaviourControlGraph_Sequence id="27" userID="FLX" flexoID="337">
+        <ControlGraph2_Sequence id="28" ownerContext="controlGraph2" userID="FLX" flexoID="339">
+          <ControlGraph2_AssignationAction id="29" assign="city" ownerContext="controlGraph2" userID="FLX" flexoID="341">
+            <AssignableAction_AddEMFObjectIndividual id="30" individualName="&quot;A New City&quot;" receiver="city2model" assignation="city" userID="FLX" flexoID="7">
+              <DataPropertyAssertion id="31" value="parameters.cityName" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City/name" userID="FLX" flexoID="26" />
             </AssignableAction_AddEMFObjectIndividual>
           </ControlGraph2_AssignationAction>
-        </ControlGraph2_Sequence>
-      </BehaviourControlGraph_Sequence>
-      <TextFieldParameter id="30" flexoID="25" isRequired="false" name="cityName" useSpecificDescriptions="false" userID="FLX" label="cityName" />
-    </DropScheme>
-    <CreationScheme id="67" userID="FLX" useSpecificDescriptions="false" width="800" label="createFromEMF" definePopupDefaultSize="false" height="600" flexoID="34" skipConfirmationPanel="false" name="createFromEMF">
-      <BehaviourControlGraph_Sequence id="68" flexoID="352" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="69" userID="FLX" useSpecificDescriptions="false" flexoID="353" ownerContext="controlGraph1" assign="shape">
-          <AssignableAction_AddShape id="70" flexoID="39" container="virtualModelInstance.typedDiagramModelSlot" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-            <TypedDiagramModelSlot idref="18" />
-          </AssignableAction_AddShape>
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_Sequence id="71" flexoID="354" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_AssignationAction id="72" userID="FLX" useSpecificDescriptions="false" flexoID="355" ownerContext="controlGraph1" assign="icon">
-            <AssignableAction_AddShape id="73" flexoID="40" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="icon">
-              <TypedDiagramModelSlot idref="18" />
-            </AssignableAction_AddShape>
+          <ControlGraph1_AssignationAction id="32" assign="icon" ownerContext="controlGraph1" userID="FLX" flexoID="340">
+            <AssignableAction_AddShape id="33" container="shape" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="6" />
           </ControlGraph1_AssignationAction>
-          <ControlGraph2_AssignationAction id="74" userID="FLX" useSpecificDescriptions="false" flexoID="356" ownerContext="controlGraph2" assign="city">
-            <AssignableAction_ExpressionAction id="75" expression="parameters.indiv" flexoID="357" userID="FLX" useSpecificDescriptions="false" />
-          </ControlGraph2_AssignationAction>
         </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="34" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="338">
+          <AssignableAction_AddShape id="35" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="5" />
+        </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <IndividualParameter id="76" userID="FLX" useSpecificDescriptions="false" label="indiv" conceptURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City" flexoID="37" isRequired="false" name="indiv">
-        <EMFModelSlot idref="4" />
-      </IndividualParameter>
+      <GenericBehaviourParameter id="36" widget="TEXT_FIELD" name="cityName" type="java.lang.String" userID="FLX" flexoID="418" />
+    </DropScheme>
+    <CreationScheme id="37" skipConfirmationPanel="false" name="createFromEMF" width="800" label="createFromEMF" height="600" userID="FLX" flexoID="34">
+      <BehaviourControlGraph_Sequence id="38" userID="FLX" flexoID="352">
+        <ControlGraph2_Sequence id="39" ownerContext="controlGraph2" userID="FLX" flexoID="354">
+          <ControlGraph2_AssignationAction id="40" assign="city" ownerContext="controlGraph2" userID="FLX" flexoID="356">
+            <AssignableAction_ExpressionAction id="41" expression="parameters.indiv" userID="FLX" flexoID="357" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="42" assign="icon" ownerContext="controlGraph1" userID="FLX" flexoID="355">
+            <AssignableAction_AddShape id="43" container="shape" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="40" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="44" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="353">
+          <AssignableAction_AddShape id="45" container="virtualModelInstance.typedDiagramModelSlot" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="39" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="46" widget="CUSTOM_WIDGET" name="indiv" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="419" />
     </CreationScheme>
+    <Inspector id="47" renderer="(&quot;City: &quot; + city.name)" inspectorTitle="CityGR" userID="FLX" flexoID="1" />
   </FlexoConcept>
-  <FlexoConcept id="77" useSpecificDescriptions="false" userID="FLX" isAbstract="true" flexoID="73" name="HouseGR">
-    <Inspector id="78" flexoID="70" useSpecificDescriptions="false" userID="FLX" inspectorTitle="HouseGR" />
+  <FlexoConcept id="48" name="HouseGR" isAbstract="true" userID="FLX" flexoID="73">
+    <Inspector id="49" inspectorTitle="HouseGR" userID="FLX" flexoID="70" />
   </FlexoConcept>
-  <FlexoConcept id="79" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="78" name="MansionGR">
-    <Inspector id="80" flexoID="75" useSpecificDescriptions="false" userID="FLX" inspectorTitle="MansionGR" renderer="(&quot;Mansion N° &quot; + mansion.number.toString)" />
-    <ParentFlexoConcept idref="77" />
-    <EMFObjectIndividualRole id="81" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/Mansion" flexoID="94" name="mansion" cardinality="ZeroOne">
-      <EMFModelSlot idref="4" />
-    </EMFObjectIndividualRole>
-    <ShapeRole id="82" exampleLabel="A very long label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="224" name="shape" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="83" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="111.85454545454546" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="183.76470588235296" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="5ecdc1f7" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="LEFT" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" layer="1" absoluteTextX="0.0" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="1.0" maximalWidth="Infinity" x="1.0">
-        <FocusedForegroundStyle id="84" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorBackgroundStyle id="85" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="86" orientation="0" color="0,102,102" backgroundColor="255,255,255" font="SansSerif.bolditalic,3,16" isBackgroundColored="false" />
-        <ShapeBorder id="87" bottom="2" left="2" right="2" top="2" />
-        <ForegroundStyle id="88" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="89" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="90" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape id="91" arcSize="30.0" isRounded="true" />
-        <ShadowStyle id="92" shadowDepth="2" shadowBlur="4" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="93" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.5" useTransparency="false" color2="255,204,102" color1="255,255,255" />
+  <FlexoConcept id="50" name="MansionGR" userID="FLX" flexoID="78">
+    <EMFObjectIndividualRole id="51" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/Mansion" cloningStrategy="Clone" cardinality="ZeroOne" name="mansion" userID="FLX" flexoID="94" />
+    <ShapeRole id="52" exampleLabel="A very long label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="224">
+      <ShapeGraphicalRepresentation id="53" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="1.0" y="1.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="183.76470588235296" height="111.85454545454546" identifier="5ecdc1f7" horizontalTextAlignment="LEFT" layer="1">
+        <SelectedColorBackgroundStyle id="54" color="192,192,192" transparencyLevel="0.5" />
+        <ForegroundStyle id="55" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="56" color="192,192,192" transparencyLevel="0.5" />
+        <ShadowStyle id="57" />
+        <FocusedForegroundStyle id="58" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="59" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="60" color1="255,255,255" color2="255,204,102" direction="NORTH_WEST_SOUTH_EAST" transparencyLevel="0.5" />
+        <RectangleShape id="61" isRounded="true" />
+        <TextStyle id="62" backgroundColor="255,255,255" color="0,102,102" font="SansSerif.bolditalic,3,16" />
       </ShapeGraphicalRepresentation>
-      <GRSpec id="94" featureName="label" flexoID="412" readOnly="true" useSpecificDescriptions="false" userID="FLX" value="(&quot;Mansion N°&quot; + mansion.number.toString)" />
-      <TypedDiagramModelSlot idref="18" />
+      <GRSpec id="63" featureName="label" readOnly="true" value="(&quot;Mansion N°&quot; + mansion.number.toString)" userID="FLX" flexoID="420" />
     </ShapeRole>
-    <ShapeRole id="95" exampleLabel="" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="237" name="icon" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="96" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="30.0" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="30.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="71568f20" yConstraints="0" lineWrap="false" locationConstraints="UNMOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="UNRESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" layer="2" absoluteTextX="0.0" absoluteTextY="0.0" xConstraints="0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="0.0" maximalWidth="Infinity" x="0.0">
-        <FocusedForegroundStyle id="97" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorBackgroundStyle id="98" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="99" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="SansSerif,1,11" isBackgroundColored="false" />
-        <ShapeBorder id="100" bottom="2" left="2" right="2" top="2" />
-        <ForegroundStyle id="101" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="true" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="102" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="103" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape id="104" arcSize="30.0" isRounded="false" />
-        <ShadowStyle id="105" shadowDepth="2" shadowBlur="4" drawShadow="false" shadowDarkness="150" />
-        <ImageBackgroundStyle id="106" scaleX="0.625" scaleY="0.625" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageFile="../icons/Mansion.png" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
+    <ShapeRole id="64" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="237">
+      <ShapeGraphicalRepresentation id="65" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" yConstraints="0" xConstraints="0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="30.0" height="30.0" identifier="71568f20" layer="2">
+        <SelectedColorBackgroundStyle id="66" color="192,192,192" transparencyLevel="0.5" />
+        <ForegroundStyle id="67" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="68" color="192,192,192" transparencyLevel="0.5" />
+        <ShadowStyle id="69" drawShadow="false" />
+        <FocusedForegroundStyle id="70" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="71" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="72" scaleX="0.625" scaleY="0.625" fitToShape="true" imageFile="../icons/Mansion.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape id="73" />
+        <TextStyle id="74" backgroundColor="255,255,255" color="0,0,0" font="SansSerif,1,11" />
       </ShapeGraphicalRepresentation>
-      <TypedDiagramModelSlot idref="18" />
     </ShapeRole>
-    <DropScheme id="44" userID="FLX" useSpecificDescriptions="false" width="800" label="dropMansionInCity" definePopupDefaultSize="false" height="600" flexoID="105" skipConfirmationPanel="false" name="dropMansionInCity" target="http://www.openflexo.org/cityviews/City2_View#CityGR">
-      <ShapeRole idref="5" />
-      <BehaviourControlGraph_Sequence id="45" flexoID="347" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="46" userID="FLX" useSpecificDescriptions="false" flexoID="348" ownerContext="controlGraph1" assign="mansion">
-          <AssignableAction_AddEMFObjectIndividual id="47" userID="FLX" useSpecificDescriptions="false" flexoID="114" container="target.city.houses" assignation="mansion">
-            <EMFModelSlot idref="4" />
-            <DataPropertyAssertion id="48" flexoID="112" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city2/Mansion/number" userID="FLX" useSpecificDescriptions="false" value="parameters.MansionNumber.intValue" />
+    <DropScheme id="75" target="http://www.openflexo.org/cityviews/City2_View#CityGR" skipConfirmationPanel="false" name="dropMansionInCity" width="800" label="dropMansionInCity" height="600" userID="FLX" flexoID="105">
+      <ShapeRole idref="3" />
+      <BehaviourControlGraph_Sequence id="76" userID="FLX" flexoID="347">
+        <ControlGraph2_Sequence id="77" ownerContext="controlGraph2" userID="FLX" flexoID="349">
+          <ControlGraph2_AssignationAction id="78" assign="icon" ownerContext="controlGraph2" userID="FLX" flexoID="351">
+            <AssignableAction_AddShape id="79" container="shape" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="276" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="80" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="350">
+            <AssignableAction_AddShape id="81" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="275" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="82" assign="mansion" ownerContext="controlGraph1" userID="FLX" flexoID="348">
+          <AssignableAction_AddEMFObjectIndividual id="83" container="target.city.houses" receiver="city2model" assignation="mansion" userID="FLX" flexoID="114">
+            <DataPropertyAssertion id="84" value="parameters.MansionNumber.intValue" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city2/Mansion/number" userID="FLX" flexoID="112" />
           </AssignableAction_AddEMFObjectIndividual>
         </ControlGraph1_AssignationAction>
-        <ControlGraph2_Sequence id="49" flexoID="349" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_AssignationAction id="50" userID="FLX" useSpecificDescriptions="false" flexoID="350" ownerContext="controlGraph1" assign="shape">
-            <AssignableAction_AddShape id="51" flexoID="275" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-              <TypedDiagramModelSlot idref="18" />
-            </AssignableAction_AddShape>
-          </ControlGraph1_AssignationAction>
-          <ControlGraph2_AssignationAction id="52" userID="FLX" useSpecificDescriptions="false" flexoID="351" ownerContext="controlGraph2" assign="icon">
-            <AssignableAction_AddShape id="53" flexoID="276" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="icon">
-              <TypedDiagramModelSlot idref="18" />
-            </AssignableAction_AddShape>
-          </ControlGraph2_AssignationAction>
-        </ControlGraph2_Sequence>
       </BehaviourControlGraph_Sequence>
-      <IntegerParameter id="54" flexoID="113" isRequired="true" name="MansionNumber" useSpecificDescriptions="false" userID="FLX" label="MansionNumber" defaultValue="0" />
+      <GenericBehaviourParameter id="85" isRequired="true" widget="INTEGER" defaultValue="0" name="MansionNumber" type="java.lang.Integer" userID="FLX" flexoID="421" />
     </DropScheme>
-    <DeletionScheme id="107" userID="FLX" useSpecificDescriptions="false" width="800" label="deletion" definePopupDefaultSize="false" height="600" flexoID="292" skipConfirmationPanel="false" name="deletion">
-      <BehaviourControlGraph_Sequence id="108" flexoID="358" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_DeleteAction id="109" flexoID="293" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="mansion" />
-        <ControlGraph2_Sequence id="110" flexoID="359" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_DeleteAction id="111" flexoID="294" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="shape" />
-          <ControlGraph2_DeleteAction id="112" flexoID="295" ownerContext="controlGraph2" useSpecificDescriptions="false" userID="FLX" object="icon" />
+    <DeletionScheme id="86" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="292">
+      <BehaviourControlGraph_Sequence id="87" userID="FLX" flexoID="358">
+        <ControlGraph2_Sequence id="88" ownerContext="controlGraph2" userID="FLX" flexoID="359">
+          <ControlGraph2_DeleteAction id="89" object="icon" ownerContext="controlGraph2" userID="FLX" flexoID="295" />
+          <ControlGraph1_DeleteAction id="90" object="shape" ownerContext="controlGraph1" userID="FLX" flexoID="294" />
         </ControlGraph2_Sequence>
+        <ControlGraph1_DeleteAction id="91" object="mansion" ownerContext="controlGraph1" userID="FLX" flexoID="293" />
       </BehaviourControlGraph_Sequence>
     </DeletionScheme>
+    <Inspector id="92" renderer="(&quot;Mansion N° &quot; + mansion.number.toString)" inspectorTitle="MansionGR" userID="FLX" flexoID="75" />
   </FlexoConcept>
-  <FlexoConcept id="113" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="155" description="&lt;html&gt;&#xA;  &lt;head&gt;&#xA;&#xA;  &lt;/head&gt;&#xA;  &lt;body&gt;&#xA;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xA;      &#xA;    &lt;/p&gt;&#xA;  &lt;/body&gt;&#xA;&lt;/html&gt;&#xA;" name="AppartmentGR">
-    <Inspector id="114" flexoID="150" useSpecificDescriptions="false" userID="FLX" inspectorTitle="AppartmentGR" renderer="(&quot;Appartement: &quot; + appartment.label)" />
-    <ParentFlexoConcept idref="77" />
-    <EMFObjectIndividualRole id="115" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/Appartment" flexoID="157" name="appartment" cardinality="ZeroOne">
-      <EMFModelSlot idref="4" />
-    </EMFObjectIndividualRole>
-    <ShapeRole id="116" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="158" name="shape" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="117" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="94.62941176470586" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="147.776" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="false" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="7388fb98" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" layer="1" absoluteTextX="0.0" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="2.0" maximalWidth="Infinity" x="3.0">
-        <FocusedForegroundStyle id="118" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorBackgroundStyle id="119" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="120" orientation="0" color="0,153,153" backgroundColor="255,255,255" font="Lucida Sans Demibold,1,16" isBackgroundColored="false" />
-        <ShapeBorder id="121" bottom="2" left="2" right="2" top="2" />
-        <ForegroundStyle id="122" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="123" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="124" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape id="125" arcSize="20.0" isRounded="true" />
-        <ShadowStyle id="126" shadowDepth="2" shadowBlur="4" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="127" direction="SOUTH_WEST_NORTH_EAST" transparencyLevel="0.5" useTransparency="false" color2="255,255,153" color1="255,255,255" />
+  <FlexoConcept id="93" name="AppartmentGR" userID="FLX" description="&lt;html&gt;&#xA;  &lt;head&gt;&#xA;&#xA;  &lt;/head&gt;&#xA;  &lt;body&gt;&#xA;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xA;      &#xA;    &lt;/p&gt;&#xA;  &lt;/body&gt;&#xA;&lt;/html&gt;&#xA;" flexoID="155">
+    <EMFObjectIndividualRole id="94" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/Appartment" cloningStrategy="Clone" cardinality="ZeroOne" name="appartment" userID="FLX" flexoID="157" />
+    <ShapeRole id="95" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="158">
+      <ShapeGraphicalRepresentation id="96" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="3.0" y="2.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="147.776" height="94.62941176470586" identifier="7388fb98" layer="1">
+        <SelectedColorBackgroundStyle id="97" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="98" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="99" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="100" />
+        <FocusedForegroundStyle id="101" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="102" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="103" color1="255,255,255" color2="255,255,153" direction="SOUTH_WEST_NORTH_EAST" transparencyLevel="0.5" />
+        <RectangleShape id="104" isRounded="true" arcSize="20.0" />
+        <TextStyle id="105" backgroundColor="255,255,255" color="0,153,153" font="Lucida Sans Demibold,1,16" />
       </ShapeGraphicalRepresentation>
-      <GRSpec id="128" featureName="label" flexoID="413" readOnly="false" useSpecificDescriptions="false" userID="FLX" value="appartment.label" />
-      <TypedDiagramModelSlot idref="18" />
+      <GRSpec id="106" featureName="label" value="appartment.label" userID="FLX" flexoID="422" />
     </ShapeRole>
-    <ShapeRole id="129" exampleLabel="" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="249" name="icon" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="130" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="40.0" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="40.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="64970d6f" yConstraints="0" lineWrap="false" locationConstraints="UNMOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="UNRESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" layer="2" absoluteTextX="0.0" absoluteTextY="0.0" xConstraints="0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="0.0" maximalWidth="Infinity" x="0.0">
-        <FocusedForegroundStyle id="131" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorBackgroundStyle id="132" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="133" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="SansSerif,1,11" isBackgroundColored="false" />
-        <ShapeBorder id="134" bottom="2" left="2" right="2" top="2" />
-        <ForegroundStyle id="135" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="true" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="136" dashStyle="PLAIN_STROKE" color="0,0,0" transparencyLevel="0.5" noStroke="false" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="137" color="192,192,192" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape id="138" arcSize="30.0" isRounded="false" />
-        <ShadowStyle id="139" shadowDepth="2" shadowBlur="4" drawShadow="false" shadowDarkness="150" />
-        <ImageBackgroundStyle id="140" scaleX="0.6153846153846154" scaleY="0.6153846153846154" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageFile="../icons/Apartment.png" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
+    <ShapeRole id="107" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="249">
+      <ShapeGraphicalRepresentation id="108" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" yConstraints="0" xConstraints="0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="40.0" height="40.0" identifier="64970d6f" layer="2">
+        <SelectedColorBackgroundStyle id="109" color="192,192,192" transparencyLevel="0.5" />
+        <ForegroundStyle id="110" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="111" color="192,192,192" transparencyLevel="0.5" />
+        <ShadowStyle id="112" drawShadow="false" />
+        <FocusedForegroundStyle id="113" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="114" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="115" scaleX="0.6153846153846154" scaleY="0.6153846153846154" fitToShape="true" imageFile="../icons/Apartment.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape id="116" />
+        <TextStyle id="117" backgroundColor="255,255,255" color="0,0,0" font="SansSerif,1,11" />
       </ShapeGraphicalRepresentation>
-      <TypedDiagramModelSlot idref="18" />
     </ShapeRole>
-    <DropScheme id="32" userID="FLX" useSpecificDescriptions="false" width="800" label="dropAppartmentGRInCity" definePopupDefaultSize="false" height="600" flexoID="154" skipConfirmationPanel="false" description="" name="dropAppartmentGRInCity" target="http://www.openflexo.org/cityviews/City2_View#CityGR">
-      <ShapeRole idref="5" />
-      <BehaviourControlGraph_Sequence id="33" flexoID="342" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="34" userID="FLX" useSpecificDescriptions="false" flexoID="343" ownerContext="controlGraph1" assign="appartment">
-          <AssignableAction_AddEMFObjectIndividual id="35" userID="FLX" useSpecificDescriptions="false" individualName="parameters.uri" flexoID="160" container="target.city.houses" assignation="appartment">
-            <EMFModelSlot idref="4" />
-            <DataPropertyAssertion id="36" flexoID="273" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city2/Appartment/label" userID="FLX" useSpecificDescriptions="false" value="parameters.name" />
+    <DropScheme id="118" target="http://www.openflexo.org/cityviews/City2_View#CityGR" skipConfirmationPanel="false" name="dropAppartmentGRInCity" width="800" label="dropAppartmentGRInCity" height="600" userID="FLX" description="" flexoID="154">
+      <ShapeRole idref="3" />
+      <BehaviourControlGraph_Sequence id="119" userID="FLX" flexoID="342">
+        <ControlGraph2_Sequence id="120" ownerContext="controlGraph2" userID="FLX" flexoID="344">
+          <ControlGraph2_AssignationAction id="121" assign="icon" ownerContext="controlGraph2" userID="FLX" flexoID="346">
+            <AssignableAction_AddShape id="122" container="shape" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="272" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="123" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="345">
+            <AssignableAction_AddShape id="124" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="161" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="125" assign="appartment" ownerContext="controlGraph1" userID="FLX" flexoID="343">
+          <AssignableAction_AddEMFObjectIndividual id="126" container="target.city.houses" individualName="parameters.uri" receiver="city2model" assignation="appartment" userID="FLX" flexoID="160">
+            <DataPropertyAssertion id="127" value="parameters.name" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city2/Appartment/label" userID="FLX" flexoID="273" />
           </AssignableAction_AddEMFObjectIndividual>
         </ControlGraph1_AssignationAction>
-        <ControlGraph2_Sequence id="37" flexoID="344" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_AssignationAction id="38" userID="FLX" useSpecificDescriptions="false" flexoID="345" ownerContext="controlGraph1" assign="shape">
-            <AssignableAction_AddShape id="39" flexoID="161" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-              <TypedDiagramModelSlot idref="18" />
-            </AssignableAction_AddShape>
-          </ControlGraph1_AssignationAction>
-          <ControlGraph2_AssignationAction id="40" userID="FLX" useSpecificDescriptions="false" flexoID="346" ownerContext="controlGraph2" assign="icon">
-            <AssignableAction_AddShape id="41" flexoID="272" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="icon">
-              <TypedDiagramModelSlot idref="18" />
-            </AssignableAction_AddShape>
-          </ControlGraph2_AssignationAction>
-        </ControlGraph2_Sequence>
       </BehaviourControlGraph_Sequence>
-      <TextFieldParameter id="42" flexoID="274" isRequired="true" name="name" useSpecificDescriptions="false" userID="FLX" label="name" defaultValue="&quot;An Appartment&quot;" />
+      <GenericBehaviourParameter id="128" isRequired="true" widget="TEXT_FIELD" defaultValue="&quot;An Appartment&quot;" name="name" type="java.lang.String" userID="FLX" flexoID="423" />
     </DropScheme>
-    <DeletionScheme id="141" userID="FLX" useSpecificDescriptions="false" width="800" label="deletion" definePopupDefaultSize="false" height="600" flexoID="299" skipConfirmationPanel="false" name="deletion">
-      <BehaviourControlGraph_Sequence id="142" flexoID="360" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_DeleteAction id="143" flexoID="300" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="appartment" />
-        <ControlGraph2_Sequence id="144" flexoID="361" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_DeleteAction id="145" flexoID="301" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="shape" />
-          <ControlGraph2_DeleteAction id="146" flexoID="302" ownerContext="controlGraph2" useSpecificDescriptions="false" userID="FLX" object="icon" />
+    <DeletionScheme id="129" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="299">
+      <BehaviourControlGraph_Sequence id="130" userID="FLX" flexoID="360">
+        <ControlGraph2_Sequence id="131" ownerContext="controlGraph2" userID="FLX" flexoID="361">
+          <ControlGraph2_DeleteAction id="132" object="icon" ownerContext="controlGraph2" userID="FLX" flexoID="302" />
+          <ControlGraph1_DeleteAction id="133" object="shape" ownerContext="controlGraph1" userID="FLX" flexoID="301" />
         </ControlGraph2_Sequence>
+        <ControlGraph1_DeleteAction id="134" object="appartment" ownerContext="controlGraph1" userID="FLX" flexoID="300" />
       </BehaviourControlGraph_Sequence>
     </DeletionScheme>
+    <Inspector id="135" renderer="(&quot;Appartement: &quot; + appartment.label)" inspectorTitle="AppartmentGR" userID="FLX" flexoID="150" />
   </FlexoConcept>
-  <Inspector id="147" flexoID="14" useSpecificDescriptions="false" userID="FLX" inspectorTitle="City2_View" />
-  <ModelSlot_EMFModelSlot id="4" flexoID="3" isRequired="true" useSpecificDescriptions="false" userID="FLX" name="city2model" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city2" isReadOnly="false" cloningStrategy="Reference" cardinality="ZeroOne" />
-  <ModelSlot_TypedDiagramModelSlot id="18" userID="FLX" useSpecificDescriptions="false" cloningStrategy="Reference" flexoID="8" isRequired="true" name="typedDiagramModelSlot" metaModelURI="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification" isReadOnly="false" cardinality="ZeroOne">
-    <FMLDiagramPaletteElementBinding id="19" paletteElementId="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification/CityTwo_View.palette#New City" useSpecificDescriptions="false" userID="FLX" flexoID="4">
-      <DropScheme idref="20" />
+  <UseModelSlotDeclaration id="136" modelSlotClass="org.openflexo.technologyadapter.emf.EMFModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="137" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <EMFModelSlot id="138" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city2" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="city2model" userID="FLX" flexoID="3" />
+  <TypedDiagramModelSlot id="139" metaModelURI="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="8">
+    <FMLDiagramPaletteElementBinding id="140" paletteElementId="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification/CityTwo_View.palette#New City" userID="FLX" flexoID="4">
+      <DropScheme idref="26" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="31" paletteElementId="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification/CityTwo_View.palette#New Appartment" useSpecificDescriptions="false" userID="FLX" flexoID="6">
-      <DropScheme idref="32" />
+    <FMLDiagramPaletteElementBinding id="141" paletteElementId="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification/CityTwo_View.palette#New Appartment" userID="FLX" flexoID="6">
+      <DropScheme idref="118" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="43" paletteElementId="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification/CityTwo_View.palette#New Mansion" useSpecificDescriptions="false" userID="FLX" flexoID="8">
-      <DropScheme idref="44" />
+    <FMLDiagramPaletteElementBinding id="142" paletteElementId="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification/CityTwo_View.palette#New Mansion" userID="FLX" flexoID="8">
+      <DropScheme idref="75" />
     </FMLDiagramPaletteElementBinding>
-  </ModelSlot_TypedDiagramModelSlot>
-  <SynchronizationScheme id="148" userID="FLX" useSpecificDescriptions="false" width="800" label="synchronization" definePopupDefaultSize="false" height="600" flexoID="27" skipConfirmationPanel="false" name="synchronization">
-    <BehaviourControlGraph_IterationAction id="149" iteratorName="item" useSpecificDescriptions="false" userID="FLX" flexoID="15">
-      <ControlGraph_MatchFlexoConceptInstance id="150" userID="FLX" useSpecificDescriptions="false" virtualModelInstance="virtualModelInstance" flexoID="33" creationSchemeURI="http://www.openflexo.org/cityviews/City2_View#CityGR.createFromEMF" ownerContext="controlGraph">
-        <MatchingCriteria id="151" flexoID="28" useSpecificDescriptions="false" userID="FLX" value="item" patternRoleName="city" />
-        <MatchingCriteria id="152" flexoID="29" useSpecificDescriptions="false" userID="FLX" patternRoleName="shape" />
-        <MatchingCriteria id="153" flexoID="30" useSpecificDescriptions="false" userID="FLX" patternRoleName="icon" />
-        <CreateFlexoConceptInstanceParameter id="154" flexoID="41" userID="FLX" useSpecificDescriptions="false" value="item" paramName="indiv" />
+  </TypedDiagramModelSlot>
+  <SynchronizationScheme id="143" skipConfirmationPanel="false" name="synchronization" width="800" label="synchronization" height="600" userID="FLX" flexoID="27">
+    <BehaviourControlGraph_IterationAction id="144" iteratorName="item" userID="FLX" flexoID="15">
+      <Iteration_SelectEMFObjectIndividual id="145" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City" receiver="city2model" ownerContext="iterationControlGraph" userID="FLX" flexoID="32" />
+      <ControlGraph_MatchFlexoConceptInstance id="146" creationSchemeURI="http://www.openflexo.org/cityviews/City2_View#CityGR.createFromEMF" receiver="virtualModelInstance" ownerContext="controlGraph" userID="FLX" flexoID="33">
+        <MatchingCriteria id="147" patternRoleName="city" value="item" userID="FLX" flexoID="28" />
+        <MatchingCriteria id="148" patternRoleName="shape" userID="FLX" flexoID="29" />
+        <MatchingCriteria id="149" patternRoleName="icon" userID="FLX" flexoID="30" />
+        <CreateFlexoConceptInstanceParameter id="150" paramName="indiv" value="item" userID="FLX" flexoID="41" />
       </ControlGraph_MatchFlexoConceptInstance>
-      <Iteration_SelectEMFObjectIndividual id="155" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city2/City" flexoID="32" ownerContext="iterationControlGraph" useSpecificDescriptions="false" userID="FLX">
-        <EMFModelSlot idref="4" />
-      </Iteration_SelectEMFObjectIndividual>
     </BehaviourControlGraph_IterationAction>
   </SynchronizationScheme>
-  <DeletionScheme id="156" userID="FLX" useSpecificDescriptions="false" width="800" label="delete" definePopupDefaultSize="false" height="600" flexoID="48" skipConfirmationPanel="false" name="delete" />
+  <DeletionScheme id="151" skipConfirmationPanel="false" name="delete" width="800" label="delete" height="600" userID="FLX" flexoID="48" />
+  <Inspector id="152" inspectorTitle="City2_View" userID="FLX" flexoID="14" />
 </VirtualModel>

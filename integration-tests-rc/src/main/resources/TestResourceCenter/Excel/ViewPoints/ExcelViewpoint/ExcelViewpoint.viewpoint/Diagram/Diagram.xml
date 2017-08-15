@@ -1,559 +1,446 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="165" name="IdentityDiagram">
-  <FlexoConcept id="1" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="37" name="Sheet">
-    <Inspector id="2" flexoID="1" useSpecificDescriptions="false" userID="FLX" inspectorTitle="Sheet" />
-    <ShapeRole id="3" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="35" name="shape" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="4" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="198.67746288798918" hasFocusedBackground="false" verticalTextAlignment="TOP" adjustMinimalWidthToLabelWidth="true" width="204.739638682253" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="true" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="105.0" layer="1" absoluteTextY="144.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="66.58704453441294" maximalWidth="Infinity" x="92.61742826780016">
-        <FocusedForegroundStyle id="5" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="6" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="7" orientation="0" color="255,255,255" backgroundColor="255,255,255" font="Lucida Sans Regular,0,20" isBackgroundColored="false" />
-        <ShapeBorder id="8" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="9" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="10" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="11" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape id="12" arcSize="30.0" isRounded="false" />
-        <ShadowStyle id="13" shadowBlur="4" shadowDepth="2" drawShadow="false" shadowDarkness="150" />
-        <ImageBackgroundStyle id="14" scaleX="0.25592454835281625" scaleY="0.24834682860998647" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageFile="../../../icons_excel/file-icon.png" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
+<VirtualModel id="0" modelVersion="1.0" version="0.1" name="Diagram" userID="FLX" flexoID="165">
+  <FlexoConcept id="1" name="Sheet" userID="FLX" flexoID="37">
+    <ShapeRole id="2" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="35">
+      <ShapeGraphicalRepresentation id="3" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="92.61742826780016" y="66.58704453441294" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="204.739638682253" height="198.67746288798918" identifier="object_0" lineWrap="true" absoluteTextY="144.0" absoluteTextX="105.0" layer="1" isMultilineAllowed="true" verticalTextAlignment="TOP">
+        <SelectedColorBackgroundStyle id="4" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="5" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="6" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="7" drawShadow="false" />
+        <FocusedForegroundStyle id="8" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="9" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="10" scaleX="0.25592454835281625" scaleY="0.24834682860998647" fitToShape="true" imageFile="../../../icons_excel/file-icon.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape id="11" />
+        <TextStyle id="12" backgroundColor="255,255,255" color="255,255,255" font="Lucida Sans Regular,0,20" />
       </ShapeGraphicalRepresentation>
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ExcelSheetRole id="81" flexoID="36" useSpecificDescriptions="false" userID="FLX" name="sheet" cloningStrategy="Reference" cardinality="ZeroOne">
-      <BasicExcelModelSlot idref="23" />
-    </ExcelSheetRole>
-    <DropScheme id="35" userID="FLX" useSpecificDescriptions="false" width="800" label="Create a new sheet" definePopupDefaultSize="false" height="600" flexoID="4" skipConfirmationPanel="false" name="drop" target="top">
-      <BehaviourControlGraph_Sequence id="36" flexoID="166" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="37" userID="FLX" useSpecificDescriptions="false" flexoID="167" ownerContext="controlGraph1" assign="sheet">
-          <AssignableAction_AddExcelSheet id="38" useSpecificDescriptions="false" userID="FLX" flexoID="38" override="false" assignation="sheet" sheetName="parameters.name">
-            <BasicExcelModelSlot idref="23" />
-          </AssignableAction_AddExcelSheet>
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_AssignationAction id="39" userID="FLX" useSpecificDescriptions="false" flexoID="168" ownerContext="controlGraph2" assign="shape">
-          <AssignableAction_AddShape id="40" flexoID="39" container="topLevel" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-            <TypedDiagramModelSlot idref="15" />
-          </AssignableAction_AddShape>
+    <ExcelSheetRole id="13" cloningStrategy="Reference" cardinality="ZeroOne" name="sheet" userID="FLX" flexoID="36" />
+    <DropScheme id="14" target="top" skipConfirmationPanel="false" name="drop" width="800" label="Create a new sheet" height="600" userID="FLX" flexoID="4">
+      <BehaviourControlGraph_Sequence id="15" userID="FLX" flexoID="166">
+        <ControlGraph2_AssignationAction id="16" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="168">
+          <AssignableAction_AddShape id="17" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="39" />
         </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="18" assign="sheet" ownerContext="controlGraph1" userID="FLX" flexoID="167">
+          <AssignableAction_AddExcelSheet id="19" sheetName="parameters.name" receiver="excelMS" assignation="sheet" userID="FLX" flexoID="38" />
+        </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <TextFieldParameter id="41" flexoID="138" isRequired="false" name="name" useSpecificDescriptions="false" userID="FLX" label="name" />
+      <GenericBehaviourParameter id="20" widget="TEXT_FIELD" name="name" type="java.lang.String" userID="FLX" flexoID="249" />
     </DropScheme>
-    <CreationScheme id="82" userID="FLX" useSpecificDescriptions="false" width="800" label="creation" definePopupDefaultSize="false" height="600" flexoID="5" skipConfirmationPanel="false" name="creation">
-      <BehaviourControlGraph_Sequence id="83" flexoID="169" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="84" userID="FLX" useSpecificDescriptions="false" flexoID="170" ownerContext="controlGraph1" assign="sheet">
-          <AssignableAction_ExpressionAction id="85" expression="parameters.technologyObject" flexoID="238" userID="FLX" useSpecificDescriptions="false" />
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_AssignationAction id="86" userID="FLX" useSpecificDescriptions="false" flexoID="171" ownerContext="controlGraph2" assign="shape">
-          <AssignableAction_AddShape id="87" flexoID="41" container="virtualModelInstance.typedDiagramModelSlot" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-            <TypedDiagramModelSlot idref="15" />
-          </AssignableAction_AddShape>
+    <CreationScheme id="21" skipConfirmationPanel="false" name="creation" width="800" label="creation" height="600" userID="FLX" flexoID="5">
+      <BehaviourControlGraph_Sequence id="22" userID="FLX" flexoID="169">
+        <ControlGraph2_AssignationAction id="23" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="171">
+          <AssignableAction_AddShape id="24" container="virtualModelInstance.typedDiagramModelSlot" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="41" />
         </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="25" assign="sheet" ownerContext="controlGraph1" userID="FLX" flexoID="170">
+          <AssignableAction_ExpressionAction id="26" expression="parameters.technologyObject" userID="FLX" flexoID="238" />
+        </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <TechnologyObjectParameter id="88" userID="FLX" useSpecificDescriptions="false" label="technologyObject" flexoID="145" isRequired="false" name="technologyObject">
-        <BasicExcelModelSlot idref="23" />
-      </TechnologyObjectParameter>
+      <GenericBehaviourParameter id="27" widget="CUSTOM_WIDGET" name="technologyObject" type="java.lang.Object" userID="FLX" flexoID="250" />
     </CreationScheme>
-    <DeletionScheme id="89" userID="FLX" useSpecificDescriptions="false" width="800" label="deletion" definePopupDefaultSize="false" height="600" flexoID="6" skipConfirmationPanel="false" name="deletion">
-      <BehaviourControlGraph_DeleteAction id="90" flexoID="42" useSpecificDescriptions="false" userID="FLX" object="shape" />
+    <DeletionScheme id="28" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="6">
+      <BehaviourControlGraph_DeleteAction id="29" object="shape" userID="FLX" flexoID="42" />
     </DeletionScheme>
+    <Inspector id="30" inspectorTitle="Sheet" userID="FLX" flexoID="1" />
   </FlexoConcept>
-  <FlexoConcept id="91" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="45" name="Cell">
-    <Inspector id="92" flexoID="9" useSpecificDescriptions="false" userID="FLX" inspectorTitle="Cell" />
-    <ShapeRole id="93" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="43" name="shape" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="94" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="44.06593406593407" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="48.11881188118812" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="0.0" layer="2" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="9.0" maximalWidth="Infinity" x="32.0">
-        <FocusedForegroundStyle id="95" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="96" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="97" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="98" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="99" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="100" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="101" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape idref="12" />
-        <ShadowStyle id="102" shadowBlur="4" shadowDepth="2" drawShadow="false" shadowDarkness="150" />
-        <ImageBackgroundStyle id="103" scaleX="1.0024752475247525" scaleY="0.9180402930402932" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageFile="../../../icons_excel/48px-Crystal_Clear_app_kpersonalizer.png" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
+  <FlexoConcept id="31" name="Cell" userID="FLX" flexoID="45">
+    <ShapeRole id="32" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="43">
+      <ShapeGraphicalRepresentation id="33" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="32.0" y="9.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="48.11881188118812" height="44.06593406593407" identifier="object_0" lineWrap="true" layer="2" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="34" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="35" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="36" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="37" drawShadow="false" />
+        <FocusedForegroundStyle id="38" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="39" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="40" scaleX="1.0024752475247525" scaleY="0.9180402930402932" fitToShape="true" imageFile="../../../icons_excel/48px-Crystal_Clear_app_kpersonalizer.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape idref="11" />
+        <TextStyle id="41" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ExcelCellRole id="104" flexoID="44" useSpecificDescriptions="false" userID="FLX" name="cell" cloningStrategy="Reference" cardinality="ZeroOne">
-      <BasicExcelModelSlot idref="23" />
-    </ExcelCellRole>
-    <DeletionScheme id="105" userID="FLX" useSpecificDescriptions="false" width="800" label="deletion" definePopupDefaultSize="false" height="600" flexoID="12" skipConfirmationPanel="false" name="deletion">
-      <BehaviourControlGraph_DeleteAction id="106" flexoID="46" useSpecificDescriptions="false" userID="FLX" object="shape" />
+    <ExcelCellRole id="42" cloningStrategy="Reference" cardinality="ZeroOne" name="cell" userID="FLX" flexoID="44" />
+    <DeletionScheme id="43" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="12">
+      <BehaviourControlGraph_DeleteAction id="44" object="shape" userID="FLX" flexoID="46" />
     </DeletionScheme>
-    <CreationScheme id="107" userID="FLX" useSpecificDescriptions="false" width="800" label="creation" definePopupDefaultSize="false" height="600" flexoID="13" skipConfirmationPanel="false" name="creation">
-      <BehaviourControlGraph_Sequence id="108" flexoID="174" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="109" userID="FLX" useSpecificDescriptions="false" flexoID="175" ownerContext="controlGraph1" assign="cell">
-          <AssignableAction_ExpressionAction id="110" expression="parameters.technologyObject" flexoID="239" userID="FLX" useSpecificDescriptions="false" />
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_AssignationAction id="111" userID="FLX" useSpecificDescriptions="false" flexoID="176" ownerContext="controlGraph2" assign="shape">
-          <AssignableAction_AddShape id="112" flexoID="48" container="parentSheet.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-            <TypedDiagramModelSlot idref="15" />
-          </AssignableAction_AddShape>
+    <CreationScheme id="45" skipConfirmationPanel="false" name="creation" width="800" label="creation" height="600" userID="FLX" flexoID="13">
+      <BehaviourControlGraph_Sequence id="46" userID="FLX" flexoID="174">
+        <ControlGraph2_AssignationAction id="47" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="176">
+          <AssignableAction_AddShape id="48" container="parentSheet.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="48" />
         </ControlGraph2_AssignationAction>
-      </BehaviourControlGraph_Sequence>
-      <TechnologyObjectParameter id="113" userID="FLX" useSpecificDescriptions="false" label="technologyObject" flexoID="147" isRequired="false" name="technologyObject">
-        <BasicExcelModelSlot idref="23" />
-      </TechnologyObjectParameter>
-    </CreationScheme>
-    <DropScheme id="114" userID="FLX" useSpecificDescriptions="false" width="800" label="dropInASheet" definePopupDefaultSize="false" height="600" flexoID="14" skipConfirmationPanel="false" name="dropInASheet" target="http://ExcelViewpoint/IdentityDiagram#Sheet">
-      <BehaviourControlGraph_Sequence id="115" flexoID="177" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="116" userID="FLX" useSpecificDescriptions="false" flexoID="178" ownerContext="controlGraph1" assign="shape">
-          <AssignableAction_AddShape id="117" flexoID="49" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-            <TypedDiagramModelSlot idref="15" />
-          </AssignableAction_AddShape>
+        <ControlGraph1_AssignationAction id="49" assign="cell" ownerContext="controlGraph1" userID="FLX" flexoID="175">
+          <AssignableAction_ExpressionAction id="50" expression="parameters.technologyObject" userID="FLX" flexoID="239" />
         </ControlGraph1_AssignationAction>
-        <ControlGraph2_Sequence id="118" flexoID="179" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_AssignationAction id="119" userID="FLX" useSpecificDescriptions="false" flexoID="180" ownerContext="controlGraph1" assign="cell">
-            <AssignableAction_AddExcelCell id="120" cellType="String" userID="FLX" useSpecificDescriptions="false" isRowIndex="true" flexoID="50" assignation="cell">
-              <BasicExcelModelSlot idref="23" />
-            </AssignableAction_AddExcelCell>
-          </ControlGraph1_AssignationAction>
-          <ControlGraph2_Sequence id="121" flexoID="181" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-            <ControlGraph1_CellStyleAction id="122" subject="cell" useSpecificDescriptions="false" userID="FLX" cellStyle="Alignment" flexoID="51" ownerContext="controlGraph1">
-              <BasicExcelModelSlot idref="23" />
-            </ControlGraph1_CellStyleAction>
-            <ControlGraph2_Sequence id="123" flexoID="182" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-              <ControlGraph1_CellStyleAction id="124" subject="cell" useSpecificDescriptions="false" userID="FLX" cellStyle="BorderRight" flexoID="52" ownerContext="controlGraph1">
-                <BasicExcelModelSlot idref="23" />
-              </ControlGraph1_CellStyleAction>
-              <ControlGraph2_Sequence id="125" flexoID="183" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                <ControlGraph1_CellStyleAction id="126" subject="cell" useSpecificDescriptions="false" userID="FLX" cellStyle="BorderTop" flexoID="53" ownerContext="controlGraph1">
-                  <BasicExcelModelSlot idref="23" />
-                </ControlGraph1_CellStyleAction>
-                <ControlGraph2_CellStyleAction id="127" subject="cell" useSpecificDescriptions="false" userID="FLX" cellStyle="Background" flexoID="54" ownerContext="controlGraph2" value="20">
-                  <BasicExcelModelSlot idref="23" />
-                </ControlGraph2_CellStyleAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="51" widget="CUSTOM_WIDGET" name="technologyObject" type="java.lang.Object" userID="FLX" flexoID="251" />
+    </CreationScheme>
+    <DropScheme id="52" target="http://ExcelViewpoint/IdentityDiagram#Sheet" skipConfirmationPanel="false" name="dropInASheet" width="800" label="dropInASheet" height="600" userID="FLX" flexoID="14">
+      <BehaviourControlGraph_Sequence id="53" userID="FLX" flexoID="177">
+        <ControlGraph2_Sequence id="54" ownerContext="controlGraph2" userID="FLX" flexoID="179">
+          <ControlGraph2_Sequence id="55" ownerContext="controlGraph2" userID="FLX" flexoID="181">
+            <ControlGraph2_Sequence id="56" ownerContext="controlGraph2" userID="FLX" flexoID="182">
+              <ControlGraph2_Sequence id="57" ownerContext="controlGraph2" userID="FLX" flexoID="183">
+                <ControlGraph2_CellStyleAction id="58" subject="cell" cellColorStyle="255,255,255" value="20" cellStyle="Background" receiver="excelMS" ownerContext="controlGraph2" userID="FLX" flexoID="54" />
+                <ControlGraph1_CellStyleAction id="59" subject="cell" cellColorStyle="255,255,255" cellStyle="BorderTop" receiver="excelMS" ownerContext="controlGraph1" userID="FLX" flexoID="53" />
               </ControlGraph2_Sequence>
+              <ControlGraph1_CellStyleAction id="60" subject="cell" cellColorStyle="255,255,255" cellStyle="BorderRight" receiver="excelMS" ownerContext="controlGraph1" userID="FLX" flexoID="52" />
             </ControlGraph2_Sequence>
+            <ControlGraph1_CellStyleAction id="61" subject="cell" cellColorStyle="255,255,255" cellStyle="Alignment" receiver="excelMS" ownerContext="controlGraph1" userID="FLX" flexoID="51" />
           </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="62" assign="cell" ownerContext="controlGraph1" userID="FLX" flexoID="180">
+            <AssignableAction_AddExcelCell id="63" cellType="String" isRowIndex="true" receiver="excelMS" assignation="cell" userID="FLX" flexoID="50" />
+          </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="64" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="178">
+          <AssignableAction_AddShape id="65" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="49" />
+        </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <IntegerParameter id="128" flexoID="148" isRequired="false" name="rowIndex" useSpecificDescriptions="false" userID="FLX" label="rowIndex" defaultValue="0" />
-      <IntegerParameter id="129" flexoID="149" isRequired="false" name="columnIndex" useSpecificDescriptions="false" userID="FLX" label="columnIndex" defaultValue="0" />
-      <TextFieldParameter id="130" flexoID="150" isRequired="false" name="value" useSpecificDescriptions="false" userID="FLX" label="value" />
+      <GenericBehaviourParameter id="66" widget="INTEGER" defaultValue="0" name="rowIndex" type="java.lang.Integer" userID="FLX" flexoID="252" />
+      <GenericBehaviourParameter id="67" widget="INTEGER" defaultValue="0" name="columnIndex" type="java.lang.Integer" userID="FLX" flexoID="253" />
+      <GenericBehaviourParameter id="68" widget="TEXT_FIELD" name="value" type="java.lang.String" userID="FLX" flexoID="254" />
     </DropScheme>
+    <Inspector id="69" inspectorTitle="Cell" userID="FLX" flexoID="9" />
   </FlexoConcept>
-  <FlexoConcept id="131" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="57" name="Row">
-    <Inspector id="132" flexoID="17" useSpecificDescriptions="false" userID="FLX" inspectorTitle="Row" />
-    <ShapeRole id="133" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="55" name="shape" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="134" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="60.879120879120876" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="153.66227831574366" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="0.0" layer="1" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="-9.0" maximalWidth="Infinity" x="-8.0">
-        <FocusedForegroundStyle id="135" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="136" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="137" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="138" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="139" dashStyle="SMALL_DASHES" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.500000001490116" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="140" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="141" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape idref="12" />
-        <ShadowStyle id="142" shadowBlur="4" shadowDepth="2" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="143" direction="NORTH_SOUTH" transparencyLevel="0.5" useTransparency="false" color2="255,255,255" color1="204,204,255" />
+  <FlexoConcept id="70" name="Row" userID="FLX" flexoID="57">
+    <ShapeRole id="71" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="55">
+      <ShapeGraphicalRepresentation id="72" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="-8.0" y="-9.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="153.66227831574366" height="60.879120879120876" identifier="object_0" lineWrap="true" layer="1" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="73" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="74" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="SMALL_DASHES" capStyle="CAP_SQUARE" lineWidth="1.500000001490116" />
+        <FocusedColorBackgroundStyle id="75" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="76" />
+        <FocusedForegroundStyle id="77" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="78" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="79" color1="204,204,255" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape idref="11" />
+        <TextStyle id="80" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ExcelRowRole id="144" flexoID="56" useSpecificDescriptions="false" userID="FLX" name="row" cloningStrategy="Reference" cardinality="ZeroOne">
-      <BasicExcelModelSlot idref="23" />
-    </ExcelRowRole>
-    <DropScheme id="17" userID="FLX" useSpecificDescriptions="false" width="800" label="drop" definePopupDefaultSize="false" height="600" flexoID="20" skipConfirmationPanel="false" name="dropAtTopLevel" target="top">
-      <BehaviourControlGraph_Sequence id="18" flexoID="184" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="19" userID="FLX" useSpecificDescriptions="false" flexoID="185" ownerContext="controlGraph1" assign="shape">
-          <AssignableAction_AddShape id="20" flexoID="58" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-            <TypedDiagramModelSlot idref="15" />
-          </AssignableAction_AddShape>
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_AssignationAction id="21" userID="FLX" useSpecificDescriptions="false" flexoID="186" ownerContext="controlGraph2" assign="row">
-          <AssignableAction_AddExcelRow id="22" useSpecificDescriptions="false" userID="FLX" flexoID="59" excelSheet="parameters.editionPatternInstance.sheet" assignation="row">
-            <BasicExcelModelSlot idref="23" />
-          </AssignableAction_AddExcelRow>
+    <ExcelRowRole id="81" cloningStrategy="Reference" cardinality="ZeroOne" name="row" userID="FLX" flexoID="56" />
+    <DropScheme id="82" target="top" skipConfirmationPanel="false" name="dropAtTopLevel" width="800" label="drop" height="600" userID="FLX" flexoID="20">
+      <BehaviourControlGraph_Sequence id="83" userID="FLX" flexoID="184">
+        <ControlGraph2_AssignationAction id="84" assign="row" ownerContext="controlGraph2" userID="FLX" flexoID="186">
+          <AssignableAction_AddExcelRow id="85" excelSheet="parameters.editionPatternInstance.sheet" receiver="excelMS" assignation="row" userID="FLX" flexoID="59" />
         </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="86" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="185">
+          <AssignableAction_AddShape id="87" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="58" />
+        </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <IntegerParameter id="24" flexoID="134" isRequired="false" name="index" useSpecificDescriptions="false" userID="FLX" label="index" defaultValue="1" />
-      <FlexoConceptInstanceParameter id="25" userID="FLX" useSpecificDescriptions="false" label="editionPatternInstance" flexoID="135" isRequired="false" name="editionPatternInstance" flexoConceptTypeURI="http://ExcelViewpoint/Diagram#Sheet" />
+      <GenericBehaviourParameter id="88" widget="INTEGER" defaultValue="1" name="index" type="java.lang.Integer" userID="FLX" flexoID="255" />
+      <GenericBehaviourParameter id="89" widget="CUSTOM_WIDGET" name="editionPatternInstance" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;null&gt;" userID="FLX" flexoID="256" />
     </DropScheme>
-    <DeletionScheme id="145" userID="FLX" useSpecificDescriptions="false" width="800" label="deletion" definePopupDefaultSize="false" height="600" flexoID="21" skipConfirmationPanel="false" name="deletion">
-      <BehaviourControlGraph_DeleteAction id="146" flexoID="60" useSpecificDescriptions="false" userID="FLX" object="shape" />
+    <DeletionScheme id="90" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="21">
+      <BehaviourControlGraph_DeleteAction id="91" object="shape" userID="FLX" flexoID="60" />
     </DeletionScheme>
-    <DropScheme id="27" userID="FLX" useSpecificDescriptions="false" width="800" label="dropInASheet" definePopupDefaultSize="false" height="600" flexoID="22" skipConfirmationPanel="false" name="dropInASheet" target="http://ExcelViewpoint/Diagram#Sheet">
-      <BehaviourControlGraph_Sequence id="28" flexoID="187" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="29" userID="FLX" useSpecificDescriptions="false" flexoID="188" ownerContext="controlGraph1" assign="shape">
-          <AssignableAction_AddShape id="30" flexoID="61" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-            <TypedDiagramModelSlot idref="15" />
-          </AssignableAction_AddShape>
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_AssignationAction id="31" userID="FLX" useSpecificDescriptions="false" flexoID="189" ownerContext="controlGraph2" assign="row">
-          <AssignableAction_AddExcelRow id="32" useSpecificDescriptions="false" userID="FLX" flexoID="62" excelSheet="target.sheet" assignation="row">
-            <BasicExcelModelSlot idref="23" />
-          </AssignableAction_AddExcelRow>
+    <DropScheme id="92" target="http://ExcelViewpoint/Diagram#Sheet" skipConfirmationPanel="false" name="dropInASheet" width="800" label="dropInASheet" height="600" userID="FLX" flexoID="22">
+      <BehaviourControlGraph_Sequence id="93" userID="FLX" flexoID="187">
+        <ControlGraph2_AssignationAction id="94" assign="row" ownerContext="controlGraph2" userID="FLX" flexoID="189">
+          <AssignableAction_AddExcelRow id="95" excelSheet="target.sheet" receiver="excelMS" assignation="row" userID="FLX" flexoID="62" />
         </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="96" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="188">
+          <AssignableAction_AddShape id="97" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="61" />
+        </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <IntegerParameter id="33" flexoID="137" isRequired="false" name="rowIndex" useSpecificDescriptions="false" userID="FLX" label="rowIndex" defaultValue="0" />
+      <GenericBehaviourParameter id="98" widget="INTEGER" defaultValue="0" name="rowIndex" type="java.lang.Integer" userID="FLX" flexoID="257" />
     </DropScheme>
-    <CreationScheme id="147" userID="FLX" useSpecificDescriptions="false" width="800" label="creationRow" definePopupDefaultSize="false" height="600" flexoID="23" skipConfirmationPanel="false" name="creationRow">
-      <BehaviourControlGraph_AssignationAction id="148" userID="FLX" useSpecificDescriptions="false" flexoID="190" assign="row">
-        <AssignableAction_ExpressionAction id="149" expression="parameters.row" flexoID="240" userID="FLX" useSpecificDescriptions="false" />
+    <CreationScheme id="99" skipConfirmationPanel="false" name="creationRow" width="800" label="creationRow" height="600" userID="FLX" flexoID="23">
+      <BehaviourControlGraph_AssignationAction id="100" assign="row" userID="FLX" flexoID="190">
+        <AssignableAction_ExpressionAction id="101" expression="parameters.row" userID="FLX" flexoID="240" />
       </BehaviourControlGraph_AssignationAction>
-      <TechnologyObjectParameter id="150" userID="FLX" useSpecificDescriptions="false" label="row" flexoID="152" isRequired="false" name="row">
-        <BasicExcelModelSlot idref="23" />
-      </TechnologyObjectParameter>
+      <GenericBehaviourParameter id="102" widget="CUSTOM_WIDGET" name="row" type="java.lang.Object" userID="FLX" flexoID="258" />
     </CreationScheme>
+    <Inspector id="103" inspectorTitle="Row" userID="FLX" flexoID="17" />
   </FlexoConcept>
-  <FlexoConcept id="151" useSpecificDescriptions="false" userID="FLX" isAbstract="false" flexoID="75" name="Person">
-    <Inspector id="152" flexoID="27" useSpecificDescriptions="false" userID="FLX" inspectorTitle="Person" />
-    <ShapeRole id="153" exampleLabel="" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="64" name="shape" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="154" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="160.3382220891949" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="210.4950495049505" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="false" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="0.0" layer="1" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="0.0" maximalWidth="Infinity" x="189.5049504950495">
-        <FocusedForegroundStyle id="155" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="156" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="157" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="158" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="159" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.500000001490116" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="160" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="161" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape id="162" arcSize="30.0" isRounded="true" />
-        <ShadowStyle id="163" shadowBlur="4" shadowDepth="2" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="164" direction="NORTH_SOUTH" transparencyLevel="0.5" useTransparency="false" color2="255,255,255" color1="204,255,255" />
+  <FlexoConcept id="104" name="Person" userID="FLX" flexoID="75">
+    <ShapeRole id="105" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="64">
+      <ShapeGraphicalRepresentation id="106" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="189.5049504950495" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="210.4950495049505" height="160.3382220891949" identifier="object_0" lineWrap="true" layer="1" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="107" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="108" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.500000001490116" />
+        <FocusedColorBackgroundStyle id="109" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="110" />
+        <FocusedForegroundStyle id="111" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="112" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="113" color1="204,255,255" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape id="114" isRounded="true" />
+        <TextStyle id="115" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ShapeRole id="165" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="65" name="shape2" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="166" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="37.14285714285715" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="42.178217821782184" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="false" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0_0" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="true" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="112.0" layer="2" absoluteTextY="35.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="8.0" maximalWidth="Infinity" x="17.0">
-        <FocusedForegroundStyle id="167" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="168" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="169" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="170" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="171" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="172" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="173" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape idref="12" />
-        <ShadowStyle id="174" shadowBlur="4" shadowDepth="2" drawShadow="false" shadowDarkness="150" />
-        <ImageBackgroundStyle id="175" scaleX="0.3295173267326733" scaleY="0.2901785714285715" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" useTransparency="false" imageFile="../../../icons_excel/Crystal_Clear_app_kuser.png" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
+    <ShapeRole id="116" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape2" userID="FLX" flexoID="65">
+      <ParentShapeRole idref="105" />
+      <ShapeGraphicalRepresentation id="117" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" allowToLeaveBounds="false" adaptBoundsToContents="false" x="84.15841584158414" y="61.59768247316887" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="42.178217821782184" height="37.14285714285715" identifier="object_0_0" lineWrap="true" absoluteTextY="35.0" absoluteTextX="112.0" layer="2" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="118" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="119" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="120" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="121" drawShadow="false" />
+        <FocusedForegroundStyle id="122" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="123" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="124" scaleX="0.3295173267326733" scaleY="0.2901785714285715" fitToShape="true" imageFile="../../../icons_excel/Crystal_Clear_app_kuser.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape idref="11" />
+        <TextStyle id="125" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="153" />
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ShapeRole id="176" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="66" name="shape3" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="177" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="38.13186813186813" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="51.0891089108911" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="false" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0_1" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="0.0" layer="2" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="10.0" maximalWidth="Infinity" x="149.9108910891089">
-        <FocusedForegroundStyle id="178" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="179" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="180" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="181" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="182" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="183" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="184" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape idref="12" />
-        <ShadowStyle id="185" shadowBlur="4" shadowDepth="2" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="186" direction="NORTH_SOUTH" transparencyLevel="0.5" useTransparency="false" color2="255,255,255" color1="204,204,255" />
+    <ShapeRole id="126" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape3" userID="FLX" flexoID="66">
+      <ParentShapeRole idref="105" />
+      <ShapeGraphicalRepresentation id="127" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="79.7029702970297" y="61.10317697866338" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="51.0891089108911" height="38.13186813186813" identifier="object_0_1" lineWrap="true" layer="2" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="128" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="129" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="130" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="131" />
+        <FocusedForegroundStyle id="132" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="133" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="134" color1="204,204,255" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape idref="11" />
+        <TextStyle id="135" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="153" />
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ShapeRole id="187" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="67" name="shape4" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="188" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="29.23076923076924" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="184.77023487102076" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="false" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0_2" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="0.0" layer="2" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="55.0" maximalWidth="Infinity" x="14.999999999999972">
-        <FocusedForegroundStyle id="189" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="190" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="191" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="192" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="193" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="194" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="195" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape idref="12" />
-        <ShadowStyle id="196" shadowBlur="4" shadowDepth="2" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="197" direction="NORTH_SOUTH" transparencyLevel="0.5" useTransparency="false" color2="255,255,255" color1="255,204,204" />
+    <ShapeRole id="136" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape4" userID="FLX" flexoID="67">
+      <ParentShapeRole idref="105" />
+      <ShapeGraphicalRepresentation id="137" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="12.862407316964863" y="65.55372642921282" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="184.77023487102076" height="29.23076923076924" identifier="object_0_2" lineWrap="true" layer="2" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="138" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="139" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="140" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="141" />
+        <FocusedForegroundStyle id="142" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="143" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="144" color1="255,204,204" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape idref="11" />
+        <TextStyle id="145" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="153" />
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ShapeRole id="198" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="68" name="shape5" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="199" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="27.25274725274724" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="184.75247524752479" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="false" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0_3" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="0.0" layer="2" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="123.0" maximalWidth="Infinity" x="13.0">
-        <FocusedForegroundStyle id="200" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="201" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="202" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="203" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="204" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="205" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="206" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape idref="12" />
-        <ShadowStyle id="207" shadowBlur="4" shadowDepth="2" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="208" direction="NORTH_SOUTH" transparencyLevel="0.5" useTransparency="false" color2="255,255,255" color1="255,255,204" />
+    <ShapeRole id="146" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape5" userID="FLX" flexoID="68">
+      <ParentShapeRole idref="105" />
+      <ShapeGraphicalRepresentation id="147" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="12.87128712871285" y="66.54273741822382" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="184.75247524752479" height="27.25274725274724" identifier="object_0_3" lineWrap="true" layer="2" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="148" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="149" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="150" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="151" />
+        <FocusedForegroundStyle id="152" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="153" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="154" color1="255,255,204" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape idref="11" />
+        <TextStyle id="155" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="153" />
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ShapeRole id="209" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStrategy="Clone" flexoID="69" name="shape6" cardinality="ZeroOne">
-      <ShapeGraphicalRepresentation id="210" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="27.252747252747255" hasFocusedBackground="false" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="184.75247524752479" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="false" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0_4" lineWrap="true" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="false" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="0.0" layer="2" absoluteTextY="0.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="true" y="89.0" maximalWidth="Infinity" x="13.0">
-        <FocusedForegroundStyle id="211" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedColorBackgroundStyle id="212" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <TextStyle id="213" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="214" bottom="20" left="20" right="20" top="20" />
-        <ForegroundStyle id="215" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <SelectedForegroundStyle id="216" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" capStyle="CAP_SQUARE" joinStyle="JOIN_MITER" />
-        <FocusedColorBackgroundStyle id="217" color="254,247,217" transparencyLevel="0.5" useTransparency="false" />
-        <RectangleShape idref="12" />
-        <ShadowStyle id="218" shadowBlur="4" shadowDepth="2" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="219" direction="NORTH_SOUTH" transparencyLevel="0.5" useTransparency="false" color2="255,255,255" color1="255,204,153" />
+    <ShapeRole id="156" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape6" userID="FLX" flexoID="69">
+      <ParentShapeRole idref="105" />
+      <ShapeGraphicalRepresentation id="157" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="12.87128712871285" y="66.54273741822382" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="184.75247524752479" height="27.252747252747255" identifier="object_0_4" lineWrap="true" layer="2" isMultilineAllowed="true">
+        <SelectedColorBackgroundStyle id="158" color="254,247,217" transparencyLevel="0.5" />
+        <ForegroundStyle id="159" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="160" color="254,247,217" transparencyLevel="0.5" />
+        <ShadowStyle id="161" />
+        <FocusedForegroundStyle id="162" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="163" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="164" color1="255,204,153" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape idref="11" />
+        <TextStyle id="165" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <ParentShapeRole idref="153" />
-      <TypedDiagramModelSlot idref="15" />
     </ShapeRole>
-    <ExcelRowRole id="220" flexoID="70" useSpecificDescriptions="false" userID="FLX" name="row" cloningStrategy="Reference" cardinality="ZeroOne">
-      <BasicExcelModelSlot idref="23" />
-    </ExcelRowRole>
-    <ExcelCellRole id="221" flexoID="71" useSpecificDescriptions="false" userID="FLX" name="name" cloningStrategy="Reference" cardinality="ZeroOne">
-      <BasicExcelModelSlot idref="23" />
-    </ExcelCellRole>
-    <ExcelCellRole id="222" flexoID="72" useSpecificDescriptions="false" userID="FLX" name="city" cloningStrategy="Reference" cardinality="ZeroOne">
-      <BasicExcelModelSlot idref="23" />
-    </ExcelCellRole>
-    <ExcelCellRole id="223" flexoID="73" useSpecificDescriptions="false" userID="FLX" name="age" cloningStrategy="Reference" cardinality="ZeroOne">
-      <BasicExcelModelSlot idref="23" />
-    </ExcelCellRole>
-    <ExcelCellRole id="224" flexoID="74" useSpecificDescriptions="false" userID="FLX" name="activity" cloningStrategy="Reference" cardinality="ZeroOne">
-      <BasicExcelModelSlot idref="23" />
-    </ExcelCellRole>
-    <DropScheme id="43" userID="FLX" useSpecificDescriptions="false" width="800" label="dropPersonAtTopLevel" definePopupDefaultSize="false" height="600" flexoID="30" skipConfirmationPanel="false" name="dropPersonAtTopLevel" target="http://ExcelViewpoint/IdentityDiagram#Sheet">
-      <BehaviourControlGraph_Sequence id="44" flexoID="191" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="45" userID="FLX" useSpecificDescriptions="false" flexoID="192" ownerContext="controlGraph1" assign="row">
-          <AssignableAction_AddExcelRow id="46" useSpecificDescriptions="false" userID="FLX" flexoID="76" excelSheet="target.sheet" assignation="row">
-            <BasicExcelModelSlot idref="23" />
-          </AssignableAction_AddExcelRow>
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_Sequence id="47" flexoID="193" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_AssignationAction id="48" userID="FLX" useSpecificDescriptions="false" flexoID="194" ownerContext="controlGraph1" assign="name">
-            <AssignableAction_AddExcelCell id="49" cellType="String" userID="FLX" useSpecificDescriptions="false" isRowIndex="false" row="row" flexoID="77" assignation="name">
-              <BasicExcelModelSlot idref="23" />
-            </AssignableAction_AddExcelCell>
-          </ControlGraph1_AssignationAction>
-          <ControlGraph2_Sequence id="50" flexoID="195" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-            <ControlGraph1_AssignationAction id="51" userID="FLX" useSpecificDescriptions="false" flexoID="196" ownerContext="controlGraph1" assign="city">
-              <AssignableAction_AddExcelCell id="52" cellType="String" userID="FLX" useSpecificDescriptions="false" isRowIndex="false" row="row" flexoID="78" assignation="city">
-                <BasicExcelModelSlot idref="23" />
-              </AssignableAction_AddExcelCell>
-            </ControlGraph1_AssignationAction>
-            <ControlGraph2_Sequence id="53" flexoID="197" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-              <ControlGraph1_AssignationAction id="54" userID="FLX" useSpecificDescriptions="false" flexoID="198" ownerContext="controlGraph1" assign="age">
-                <AssignableAction_AddExcelCell id="55" cellType="String" userID="FLX" useSpecificDescriptions="false" isRowIndex="false" row="row" flexoID="79" assignation="age">
-                  <BasicExcelModelSlot idref="23" />
-                </AssignableAction_AddExcelCell>
-              </ControlGraph1_AssignationAction>
-              <ControlGraph2_Sequence id="56" flexoID="199" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                <ControlGraph1_AssignationAction id="57" userID="FLX" useSpecificDescriptions="false" flexoID="200" ownerContext="controlGraph1" assign="activity">
-                  <AssignableAction_AddExcelCell id="58" cellType="String" userID="FLX" useSpecificDescriptions="false" isRowIndex="false" row="row" flexoID="80" assignation="activity">
-                    <BasicExcelModelSlot idref="23" />
-                  </AssignableAction_AddExcelCell>
-                </ControlGraph1_AssignationAction>
-                <ControlGraph2_Sequence id="59" flexoID="201" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                  <ControlGraph1_AssignationAction id="60" userID="FLX" useSpecificDescriptions="false" flexoID="202" ownerContext="controlGraph1" assign="shape">
-                    <AssignableAction_AddShape id="61" flexoID="81" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-                      <TypedDiagramModelSlot idref="15" />
-                    </AssignableAction_AddShape>
-                  </ControlGraph1_AssignationAction>
-                  <ControlGraph2_Sequence id="62" flexoID="203" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                    <ControlGraph1_AssignationAction id="63" userID="FLX" useSpecificDescriptions="false" flexoID="204" ownerContext="controlGraph1" assign="shape2">
-                      <AssignableAction_AddShape id="64" flexoID="82" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape2">
-                        <TypedDiagramModelSlot idref="15" />
-                      </AssignableAction_AddShape>
-                    </ControlGraph1_AssignationAction>
-                    <ControlGraph2_Sequence id="65" flexoID="205" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                      <ControlGraph1_AssignationAction id="66" userID="FLX" useSpecificDescriptions="false" flexoID="206" ownerContext="controlGraph1" assign="shape3">
-                        <AssignableAction_AddShape id="67" flexoID="83" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape3">
-                          <TypedDiagramModelSlot idref="15" />
-                        </AssignableAction_AddShape>
-                      </ControlGraph1_AssignationAction>
-                      <ControlGraph2_Sequence id="68" flexoID="207" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                        <ControlGraph1_AssignationAction id="69" userID="FLX" useSpecificDescriptions="false" flexoID="208" ownerContext="controlGraph1" assign="shape4">
-                          <AssignableAction_AddShape id="70" flexoID="84" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape4">
-                            <TypedDiagramModelSlot idref="15" />
-                          </AssignableAction_AddShape>
-                        </ControlGraph1_AssignationAction>
-                        <ControlGraph2_Sequence id="71" flexoID="209" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                          <ControlGraph1_AssignationAction id="72" userID="FLX" useSpecificDescriptions="false" flexoID="210" ownerContext="controlGraph1" assign="shape5">
-                            <AssignableAction_AddShape id="73" flexoID="85" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape5">
-                              <TypedDiagramModelSlot idref="15" />
-                            </AssignableAction_AddShape>
-                          </ControlGraph1_AssignationAction>
-                          <ControlGraph2_AssignationAction id="74" userID="FLX" useSpecificDescriptions="false" flexoID="211" ownerContext="controlGraph2" assign="shape6">
-                            <AssignableAction_AddShape id="75" flexoID="86" container="shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape6">
-                              <TypedDiagramModelSlot idref="15" />
-                            </AssignableAction_AddShape>
+    <ExcelRowRole id="166" cloningStrategy="Reference" cardinality="ZeroOne" name="row" userID="FLX" flexoID="70" />
+    <ExcelCellRole id="167" cloningStrategy="Reference" cardinality="ZeroOne" name="name" userID="FLX" flexoID="71" />
+    <ExcelCellRole id="168" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="72" />
+    <ExcelCellRole id="169" cloningStrategy="Reference" cardinality="ZeroOne" name="age" userID="FLX" flexoID="73" />
+    <ExcelCellRole id="170" cloningStrategy="Reference" cardinality="ZeroOne" name="activity" userID="FLX" flexoID="74" />
+    <DropScheme id="171" target="http://ExcelViewpoint/IdentityDiagram#Sheet" skipConfirmationPanel="false" name="dropPersonAtTopLevel" width="800" label="dropPersonAtTopLevel" height="600" userID="FLX" flexoID="30">
+      <BehaviourControlGraph_Sequence id="172" userID="FLX" flexoID="191">
+        <ControlGraph2_Sequence id="173" ownerContext="controlGraph2" userID="FLX" flexoID="193">
+          <ControlGraph2_Sequence id="174" ownerContext="controlGraph2" userID="FLX" flexoID="195">
+            <ControlGraph2_Sequence id="175" ownerContext="controlGraph2" userID="FLX" flexoID="197">
+              <ControlGraph2_Sequence id="176" ownerContext="controlGraph2" userID="FLX" flexoID="199">
+                <ControlGraph2_Sequence id="177" ownerContext="controlGraph2" userID="FLX" flexoID="201">
+                  <ControlGraph2_Sequence id="178" ownerContext="controlGraph2" userID="FLX" flexoID="203">
+                    <ControlGraph2_Sequence id="179" ownerContext="controlGraph2" userID="FLX" flexoID="205">
+                      <ControlGraph2_Sequence id="180" ownerContext="controlGraph2" userID="FLX" flexoID="207">
+                        <ControlGraph2_Sequence id="181" ownerContext="controlGraph2" userID="FLX" flexoID="209">
+                          <ControlGraph2_AssignationAction id="182" assign="shape6" ownerContext="controlGraph2" userID="FLX" flexoID="211">
+                            <AssignableAction_AddShape id="183" container="shape" receiver="typedDiagramModelSlot" assignation="shape6" userID="FLX" flexoID="86" />
                           </ControlGraph2_AssignationAction>
+                          <ControlGraph1_AssignationAction id="184" assign="shape5" ownerContext="controlGraph1" userID="FLX" flexoID="210">
+                            <AssignableAction_AddShape id="185" container="shape" receiver="typedDiagramModelSlot" assignation="shape5" userID="FLX" flexoID="85" />
+                          </ControlGraph1_AssignationAction>
                         </ControlGraph2_Sequence>
+                        <ControlGraph1_AssignationAction id="186" assign="shape4" ownerContext="controlGraph1" userID="FLX" flexoID="208">
+                          <AssignableAction_AddShape id="187" container="shape" receiver="typedDiagramModelSlot" assignation="shape4" userID="FLX" flexoID="84" />
+                        </ControlGraph1_AssignationAction>
                       </ControlGraph2_Sequence>
+                      <ControlGraph1_AssignationAction id="188" assign="shape3" ownerContext="controlGraph1" userID="FLX" flexoID="206">
+                        <AssignableAction_AddShape id="189" container="shape" receiver="typedDiagramModelSlot" assignation="shape3" userID="FLX" flexoID="83" />
+                      </ControlGraph1_AssignationAction>
                     </ControlGraph2_Sequence>
+                    <ControlGraph1_AssignationAction id="190" assign="shape2" ownerContext="controlGraph1" userID="FLX" flexoID="204">
+                      <AssignableAction_AddShape id="191" container="shape" receiver="typedDiagramModelSlot" assignation="shape2" userID="FLX" flexoID="82" />
+                    </ControlGraph1_AssignationAction>
                   </ControlGraph2_Sequence>
+                  <ControlGraph1_AssignationAction id="192" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="202">
+                    <AssignableAction_AddShape id="193" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="81" />
+                  </ControlGraph1_AssignationAction>
                 </ControlGraph2_Sequence>
+                <ControlGraph1_AssignationAction id="194" assign="activity" ownerContext="controlGraph1" userID="FLX" flexoID="200">
+                  <AssignableAction_AddExcelCell id="195" cellType="String" row="row" receiver="excelMS" assignation="activity" userID="FLX" flexoID="80" />
+                </ControlGraph1_AssignationAction>
               </ControlGraph2_Sequence>
+              <ControlGraph1_AssignationAction id="196" assign="age" ownerContext="controlGraph1" userID="FLX" flexoID="198">
+                <AssignableAction_AddExcelCell id="197" cellType="String" row="row" receiver="excelMS" assignation="age" userID="FLX" flexoID="79" />
+              </ControlGraph1_AssignationAction>
             </ControlGraph2_Sequence>
+            <ControlGraph1_AssignationAction id="198" assign="city" ownerContext="controlGraph1" userID="FLX" flexoID="196">
+              <AssignableAction_AddExcelCell id="199" cellType="String" row="row" receiver="excelMS" assignation="city" userID="FLX" flexoID="78" />
+            </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="200" assign="name" ownerContext="controlGraph1" userID="FLX" flexoID="194">
+            <AssignableAction_AddExcelCell id="201" cellType="String" row="row" receiver="excelMS" assignation="name" userID="FLX" flexoID="77" />
+          </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="202" assign="row" ownerContext="controlGraph1" userID="FLX" flexoID="192">
+          <AssignableAction_AddExcelRow id="203" excelSheet="target.sheet" receiver="excelMS" assignation="row" userID="FLX" flexoID="76" />
+        </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <TextFieldParameter id="76" flexoID="139" isRequired="false" name="name" useSpecificDescriptions="false" userID="FLX" label="firstName" />
-      <TextFieldParameter id="77" flexoID="140" isRequired="false" name="city" useSpecificDescriptions="false" userID="FLX" label="city" />
-      <IntegerParameter id="78" flexoID="141" isRequired="false" name="age" useSpecificDescriptions="false" userID="FLX" label="age" defaultValue="20" />
-      <TextFieldParameter id="79" flexoID="142" isRequired="false" name="activity" useSpecificDescriptions="false" userID="FLX" label="activity" />
-      <IntegerParameter id="80" flexoID="143" isRequired="false" name="index" useSpecificDescriptions="false" userID="FLX" label="index" defaultValue="1" />
+      <GenericBehaviourParameter id="204" widget="TEXT_FIELD" name="name" type="java.lang.String" userID="FLX" flexoID="259" />
+      <GenericBehaviourParameter id="205" widget="TEXT_FIELD" name="city" type="java.lang.String" userID="FLX" flexoID="260" />
+      <GenericBehaviourParameter id="206" widget="INTEGER" defaultValue="20" name="age" type="java.lang.Integer" userID="FLX" flexoID="261" />
+      <GenericBehaviourParameter id="207" widget="TEXT_FIELD" name="activity" type="java.lang.String" userID="FLX" flexoID="262" />
+      <GenericBehaviourParameter id="208" widget="INTEGER" defaultValue="1" name="index" type="java.lang.Integer" userID="FLX" flexoID="263" />
     </DropScheme>
-    <CreationScheme id="225" userID="FLX" useSpecificDescriptions="false" width="800" label="creation" definePopupDefaultSize="false" height="600" flexoID="31" skipConfirmationPanel="false" name="creation">
-      <BehaviourControlGraph_Sequence id="226" flexoID="212" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_AssignationAction id="227" userID="FLX" useSpecificDescriptions="false" flexoID="213" ownerContext="controlGraph1" assign="row">
-          <AssignableAction_ExpressionAction id="228" expression="parameters.row" flexoID="241" userID="FLX" useSpecificDescriptions="false" />
-        </ControlGraph1_AssignationAction>
-        <ControlGraph2_Sequence id="229" flexoID="214" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_AssignationAction id="230" userID="FLX" useSpecificDescriptions="false" flexoID="215" ownerContext="controlGraph1" assign="activity">
-            <AssignableAction_ExpressionAction id="231" expression="parameters.activity" flexoID="242" userID="FLX" useSpecificDescriptions="false" />
-          </ControlGraph1_AssignationAction>
-          <ControlGraph2_Sequence id="232" flexoID="216" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-            <ControlGraph1_AssignationAction id="233" userID="FLX" useSpecificDescriptions="false" flexoID="217" ownerContext="controlGraph1" assign="age">
-              <AssignableAction_ExpressionAction id="234" expression="parameters.age" flexoID="243" userID="FLX" useSpecificDescriptions="false" />
-            </ControlGraph1_AssignationAction>
-            <ControlGraph2_Sequence id="235" flexoID="218" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-              <ControlGraph1_AssignationAction id="236" userID="FLX" useSpecificDescriptions="false" flexoID="219" ownerContext="controlGraph1" assign="name">
-                <AssignableAction_ExpressionAction id="237" expression="parameters.name" flexoID="244" userID="FLX" useSpecificDescriptions="false" />
-              </ControlGraph1_AssignationAction>
-              <ControlGraph2_Sequence id="238" flexoID="220" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                <ControlGraph1_AssignationAction id="239" userID="FLX" useSpecificDescriptions="false" flexoID="221" ownerContext="controlGraph1" assign="city">
-                  <AssignableAction_ExpressionAction id="240" expression="parameters.city" flexoID="245" userID="FLX" useSpecificDescriptions="false" />
-                </ControlGraph1_AssignationAction>
-                <ControlGraph2_Sequence id="241" flexoID="222" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                  <ControlGraph1_AssignationAction id="242" userID="FLX" useSpecificDescriptions="false" flexoID="223" ownerContext="controlGraph1" assign="shape">
-                    <AssignableAction_AddShape id="243" flexoID="92" container="flexoBehaviourInstance.personExcelSheet.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape">
-                      <TypedDiagramModelSlot idref="15" />
-                    </AssignableAction_AddShape>
-                  </ControlGraph1_AssignationAction>
-                  <ControlGraph2_Sequence id="244" flexoID="224" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                    <ControlGraph1_AssignationAction id="245" userID="FLX" useSpecificDescriptions="false" flexoID="225" ownerContext="controlGraph1" assign="shape4">
-                      <AssignableAction_AddShape id="246" flexoID="93" container="flexoBehaviourInstance.personExcelSheet.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape4">
-                        <TypedDiagramModelSlot idref="15" />
-                      </AssignableAction_AddShape>
-                    </ControlGraph1_AssignationAction>
-                    <ControlGraph2_Sequence id="247" flexoID="226" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                      <ControlGraph1_AssignationAction id="248" userID="FLX" useSpecificDescriptions="false" flexoID="227" ownerContext="controlGraph1" assign="shape3">
-                        <AssignableAction_AddShape id="249" flexoID="94" container="flexoBehaviourInstance.personExcelSheet.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape3">
-                          <TypedDiagramModelSlot idref="15" />
-                        </AssignableAction_AddShape>
-                      </ControlGraph1_AssignationAction>
-                      <ControlGraph2_Sequence id="250" flexoID="228" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                        <ControlGraph1_AssignationAction id="251" userID="FLX" useSpecificDescriptions="false" flexoID="229" ownerContext="controlGraph1" assign="shape2">
-                          <AssignableAction_AddShape id="252" flexoID="95" container="shape2" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape2">
-                            <TypedDiagramModelSlot idref="15" />
-                          </AssignableAction_AddShape>
-                        </ControlGraph1_AssignationAction>
-                        <ControlGraph2_Sequence id="253" flexoID="230" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                          <ControlGraph1_AssignationAction id="254" userID="FLX" useSpecificDescriptions="false" flexoID="231" ownerContext="controlGraph1" assign="shape5">
-                            <AssignableAction_AddShape id="255" flexoID="96" container="flexoBehaviourInstance.personExcelSheet.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape5">
-                              <TypedDiagramModelSlot idref="15" />
-                            </AssignableAction_AddShape>
-                          </ControlGraph1_AssignationAction>
-                          <ControlGraph2_AssignationAction id="256" userID="FLX" useSpecificDescriptions="false" flexoID="232" ownerContext="controlGraph2" assign="shape6">
-                            <AssignableAction_AddShape id="257" flexoID="97" container="shape6" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" assignation="shape6">
-                              <TypedDiagramModelSlot idref="15" />
-                            </AssignableAction_AddShape>
+    <CreationScheme id="209" skipConfirmationPanel="false" name="creation" width="800" label="creation" height="600" userID="FLX" flexoID="31">
+      <BehaviourControlGraph_Sequence id="210" userID="FLX" flexoID="212">
+        <ControlGraph2_Sequence id="211" ownerContext="controlGraph2" userID="FLX" flexoID="214">
+          <ControlGraph2_Sequence id="212" ownerContext="controlGraph2" userID="FLX" flexoID="216">
+            <ControlGraph2_Sequence id="213" ownerContext="controlGraph2" userID="FLX" flexoID="218">
+              <ControlGraph2_Sequence id="214" ownerContext="controlGraph2" userID="FLX" flexoID="220">
+                <ControlGraph2_Sequence id="215" ownerContext="controlGraph2" userID="FLX" flexoID="222">
+                  <ControlGraph2_Sequence id="216" ownerContext="controlGraph2" userID="FLX" flexoID="224">
+                    <ControlGraph2_Sequence id="217" ownerContext="controlGraph2" userID="FLX" flexoID="226">
+                      <ControlGraph2_Sequence id="218" ownerContext="controlGraph2" userID="FLX" flexoID="228">
+                        <ControlGraph2_Sequence id="219" ownerContext="controlGraph2" userID="FLX" flexoID="230">
+                          <ControlGraph2_AssignationAction id="220" assign="shape6" ownerContext="controlGraph2" userID="FLX" flexoID="232">
+                            <AssignableAction_AddShape id="221" container="shape6" receiver="typedDiagramModelSlot" assignation="shape6" userID="FLX" flexoID="97" />
                           </ControlGraph2_AssignationAction>
+                          <ControlGraph1_AssignationAction id="222" assign="shape5" ownerContext="controlGraph1" userID="FLX" flexoID="231">
+                            <AssignableAction_AddShape id="223" container="flexoBehaviourInstance.personExcelSheet.shape" receiver="typedDiagramModelSlot" assignation="shape5" userID="FLX" flexoID="96" />
+                          </ControlGraph1_AssignationAction>
                         </ControlGraph2_Sequence>
+                        <ControlGraph1_AssignationAction id="224" assign="shape2" ownerContext="controlGraph1" userID="FLX" flexoID="229">
+                          <AssignableAction_AddShape id="225" container="shape2" receiver="typedDiagramModelSlot" assignation="shape2" userID="FLX" flexoID="95" />
+                        </ControlGraph1_AssignationAction>
                       </ControlGraph2_Sequence>
+                      <ControlGraph1_AssignationAction id="226" assign="shape3" ownerContext="controlGraph1" userID="FLX" flexoID="227">
+                        <AssignableAction_AddShape id="227" container="flexoBehaviourInstance.personExcelSheet.shape" receiver="typedDiagramModelSlot" assignation="shape3" userID="FLX" flexoID="94" />
+                      </ControlGraph1_AssignationAction>
                     </ControlGraph2_Sequence>
+                    <ControlGraph1_AssignationAction id="228" assign="shape4" ownerContext="controlGraph1" userID="FLX" flexoID="225">
+                      <AssignableAction_AddShape id="229" container="flexoBehaviourInstance.personExcelSheet.shape" receiver="typedDiagramModelSlot" assignation="shape4" userID="FLX" flexoID="93" />
+                    </ControlGraph1_AssignationAction>
                   </ControlGraph2_Sequence>
+                  <ControlGraph1_AssignationAction id="230" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="223">
+                    <AssignableAction_AddShape id="231" container="flexoBehaviourInstance.personExcelSheet.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="92" />
+                  </ControlGraph1_AssignationAction>
                 </ControlGraph2_Sequence>
+                <ControlGraph1_AssignationAction id="232" assign="city" ownerContext="controlGraph1" userID="FLX" flexoID="221">
+                  <AssignableAction_ExpressionAction id="233" expression="parameters.city" userID="FLX" flexoID="245" />
+                </ControlGraph1_AssignationAction>
               </ControlGraph2_Sequence>
+              <ControlGraph1_AssignationAction id="234" assign="name" ownerContext="controlGraph1" userID="FLX" flexoID="219">
+                <AssignableAction_ExpressionAction id="235" expression="parameters.name" userID="FLX" flexoID="244" />
+              </ControlGraph1_AssignationAction>
             </ControlGraph2_Sequence>
+            <ControlGraph1_AssignationAction id="236" assign="age" ownerContext="controlGraph1" userID="FLX" flexoID="217">
+              <AssignableAction_ExpressionAction id="237" expression="parameters.age" userID="FLX" flexoID="243" />
+            </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="238" assign="activity" ownerContext="controlGraph1" userID="FLX" flexoID="215">
+            <AssignableAction_ExpressionAction id="239" expression="parameters.activity" userID="FLX" flexoID="242" />
+          </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="240" assign="row" ownerContext="controlGraph1" userID="FLX" flexoID="213">
+          <AssignableAction_ExpressionAction id="241" expression="parameters.row" userID="FLX" flexoID="241" />
+        </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
-      <IntegerParameter id="258" flexoID="158" isRequired="false" name="index" useSpecificDescriptions="false" userID="FLX" label="index" defaultValue="1" />
-      <TechnologyObjectParameter id="259" userID="FLX" useSpecificDescriptions="false" label="row" flexoID="159" isRequired="false" name="row">
-        <BasicExcelModelSlot idref="23" />
-      </TechnologyObjectParameter>
-      <TechnologyObjectParameter id="260" userID="FLX" useSpecificDescriptions="false" label="activity" flexoID="160" isRequired="false" name="activity">
-        <BasicExcelModelSlot idref="23" />
-      </TechnologyObjectParameter>
-      <TechnologyObjectParameter id="261" userID="FLX" useSpecificDescriptions="false" label="age" flexoID="161" isRequired="false" name="age">
-        <BasicExcelModelSlot idref="23" />
-      </TechnologyObjectParameter>
-      <TechnologyObjectParameter id="262" userID="FLX" useSpecificDescriptions="false" label="city" flexoID="162" isRequired="false" name="city">
-        <BasicExcelModelSlot idref="23" />
-      </TechnologyObjectParameter>
-      <TechnologyObjectParameter id="263" userID="FLX" useSpecificDescriptions="false" label="name" flexoID="163" isRequired="false" name="name">
-        <BasicExcelModelSlot idref="23" />
-      </TechnologyObjectParameter>
+      <GenericBehaviourParameter id="242" widget="INTEGER" defaultValue="1" name="index" type="java.lang.Integer" userID="FLX" flexoID="264" />
+      <GenericBehaviourParameter id="243" widget="CUSTOM_WIDGET" name="row" type="java.lang.Object" userID="FLX" flexoID="265" />
+      <GenericBehaviourParameter id="244" widget="CUSTOM_WIDGET" name="activity" type="java.lang.Object" userID="FLX" flexoID="266" />
+      <GenericBehaviourParameter id="245" widget="CUSTOM_WIDGET" name="age" type="java.lang.Object" userID="FLX" flexoID="267" />
+      <GenericBehaviourParameter id="246" widget="CUSTOM_WIDGET" name="city" type="java.lang.Object" userID="FLX" flexoID="268" />
+      <GenericBehaviourParameter id="247" widget="CUSTOM_WIDGET" name="name" type="java.lang.Object" userID="FLX" flexoID="269" />
     </CreationScheme>
-    <DeletionScheme id="264" userID="FLX" useSpecificDescriptions="false" width="800" label="deletion" definePopupDefaultSize="false" height="600" flexoID="32" skipConfirmationPanel="false" name="deletion">
-      <BehaviourControlGraph_Sequence id="265" flexoID="233" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_DeleteAction id="266" flexoID="98" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="shape2" />
-        <ControlGraph2_Sequence id="267" flexoID="234" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_DeleteAction id="268" flexoID="99" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="shape3" />
-          <ControlGraph2_Sequence id="269" flexoID="235" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-            <ControlGraph1_DeleteAction id="270" flexoID="100" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="shape4" />
-            <ControlGraph2_Sequence id="271" flexoID="236" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-              <ControlGraph1_DeleteAction id="272" flexoID="101" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="shape5" />
-              <ControlGraph2_Sequence id="273" flexoID="237" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-                <ControlGraph1_DeleteAction id="274" flexoID="102" ownerContext="controlGraph1" useSpecificDescriptions="false" userID="FLX" object="shape6" />
-                <ControlGraph2_DeleteAction id="275" flexoID="103" ownerContext="controlGraph2" useSpecificDescriptions="false" userID="FLX" object="shape" />
+    <DeletionScheme id="248" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="32">
+      <BehaviourControlGraph_Sequence id="249" userID="FLX" flexoID="233">
+        <ControlGraph2_Sequence id="250" ownerContext="controlGraph2" userID="FLX" flexoID="234">
+          <ControlGraph2_Sequence id="251" ownerContext="controlGraph2" userID="FLX" flexoID="235">
+            <ControlGraph2_Sequence id="252" ownerContext="controlGraph2" userID="FLX" flexoID="236">
+              <ControlGraph2_Sequence id="253" ownerContext="controlGraph2" userID="FLX" flexoID="237">
+                <ControlGraph2_DeleteAction id="254" object="shape" ownerContext="controlGraph2" userID="FLX" flexoID="103" />
+                <ControlGraph1_DeleteAction id="255" object="shape6" ownerContext="controlGraph1" userID="FLX" flexoID="102" />
               </ControlGraph2_Sequence>
+              <ControlGraph1_DeleteAction id="256" object="shape5" ownerContext="controlGraph1" userID="FLX" flexoID="101" />
             </ControlGraph2_Sequence>
+            <ControlGraph1_DeleteAction id="257" object="shape4" ownerContext="controlGraph1" userID="FLX" flexoID="100" />
           </ControlGraph2_Sequence>
+          <ControlGraph1_DeleteAction id="258" object="shape3" ownerContext="controlGraph1" userID="FLX" flexoID="99" />
         </ControlGraph2_Sequence>
+        <ControlGraph1_DeleteAction id="259" object="shape2" ownerContext="controlGraph1" userID="FLX" flexoID="98" />
       </BehaviourControlGraph_Sequence>
     </DeletionScheme>
+    <Inspector id="260" inspectorTitle="Person" userID="FLX" flexoID="27" />
   </FlexoConcept>
-  <Inspector id="276" flexoID="3" useSpecificDescriptions="false" userID="FLX" inspectorTitle="Diagram" />
-  <FlexoConceptInstanceRole id="277" flexoID="104" useSpecificDescriptions="false" userID="FLX" name="personExcelSheet" flexoConceptTypeURI="http://ExcelViewpoint/IdentityDiagram#Sheet" cloningStrategy="Reference" cardinality="ZeroOne" />
-  <ModelSlot_BasicExcelModelSlot id="23" flexoID="136" isRequired="true" useSpecificDescriptions="false" userID="FLX" name="excelMS" isReadOnly="false" cloningStrategy="Reference" cardinality="ZeroOne" />
-  <ModelSlot_TypedDiagramModelSlot id="15" userID="FLX" useSpecificDescriptions="false" cloningStrategy="Reference" flexoID="144" isRequired="true" name="typedDiagramModelSlot" metaModelURI="http://ExcelViewpoint/Diagram/Diagram.diagramspecification" isReadOnly="false" cardinality="ZeroOne">
-    <FMLDiagramPaletteElementBinding id="16" paletteElementId="http://ExcelViewpoint/Diagram/Diagram.diagramspecification/Palette.palette#Row" useSpecificDescriptions="false" userID="FLX" flexoID="2">
-      <DropScheme idref="17" />
+  <UseModelSlotDeclaration id="261" modelSlotClass="org.openflexo.technologyadapter.excel.BasicExcelModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="262" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <FlexoConceptInstanceRole id="263" flexoConceptTypeURI="http://ExcelViewpoint/IdentityDiagram#Sheet" cloningStrategy="Reference" cardinality="ZeroOne" name="personExcelSheet" userID="FLX" flexoID="104" />
+  <BasicExcelModelSlot id="264" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="excelMS" userID="FLX" flexoID="136" />
+  <TypedDiagramModelSlot id="265" metaModelURI="http://ExcelViewpoint/Diagram/Diagram.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="144">
+    <FMLDiagramPaletteElementBinding id="266" paletteElementId="http://ExcelViewpoint/Diagram/Diagram.diagramspecification/Palette.palette#Row" userID="FLX" flexoID="2">
+      <DropScheme idref="82" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="26" paletteElementId="http://ExcelViewpoint/Diagram/Diagram.diagramspecification/Palette.palette#Cell" useSpecificDescriptions="false" userID="FLX" flexoID="3">
-      <DropScheme idref="27" />
+    <FMLDiagramPaletteElementBinding id="267" paletteElementId="http://ExcelViewpoint/Diagram/Diagram.diagramspecification/Palette.palette#Cell" userID="FLX" flexoID="3">
+      <DropScheme idref="92" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="34" paletteElementId="http://ExcelViewpoint/Diagram/Diagram.diagramspecification/Palette.palette#Sheet" useSpecificDescriptions="false" userID="FLX" flexoID="4">
-      <DropScheme idref="35" />
+    <FMLDiagramPaletteElementBinding id="268" paletteElementId="http://ExcelViewpoint/Diagram/Diagram.diagramspecification/Palette.palette#Sheet" userID="FLX" flexoID="4">
+      <DropScheme idref="14" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="42" paletteElementId="http://ExcelViewpoint/Diagram/Diagram.diagramspecification/Palette.palette#Person" useSpecificDescriptions="false" userID="FLX" flexoID="5">
-      <DropScheme idref="43" />
+    <FMLDiagramPaletteElementBinding id="269" paletteElementId="http://ExcelViewpoint/Diagram/Diagram.diagramspecification/Palette.palette#Person" userID="FLX" flexoID="5">
+      <DropScheme idref="171" />
     </FMLDiagramPaletteElementBinding>
-  </ModelSlot_TypedDiagramModelSlot>
-  <SynchronizationScheme id="278" userID="FLX" useSpecificDescriptions="false" width="800" label="synchronization" definePopupDefaultSize="false" height="600" flexoID="105" skipConfirmationPanel="false" name="synchronization">
-    <BehaviourControlGraph_Sequence id="279" flexoID="20" userID="FLX" useSpecificDescriptions="false">
-      <ControlGraph1_DeclarationAction id="280" flexoID="6" ownerContext="controlGraph1" variable="sheets" useSpecificDescriptions="false" userID="FLX">
-        <AssignableAction_SelectExcelSheet id="281" variableName="sheets" flexoID="106" userID="FLX" useSpecificDescriptions="false" assignation="sheets">
-          <BasicExcelModelSlot idref="23" />
-        </AssignableAction_SelectExcelSheet>
-      </ControlGraph1_DeclarationAction>
-      <ControlGraph2_Sequence id="282" flexoID="21" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-        <ControlGraph1_DeclarationAction id="283" flexoID="7" ownerContext="controlGraph1" variable="firstSheet" useSpecificDescriptions="false" userID="FLX">
-          <AssignableAction_ExpressionAction id="284" expression="sheets.get(0)" flexoID="10" userID="FLX" useSpecificDescriptions="false" />
-        </ControlGraph1_DeclarationAction>
-        <ControlGraph2_Sequence id="285" flexoID="22" ownerContext="controlGraph2" userID="FLX" useSpecificDescriptions="false">
-          <ControlGraph1_AssignationAction id="286" userID="FLX" useSpecificDescriptions="false" flexoID="8" ownerContext="controlGraph1" assign="personExcelSheet">
-            <AssignableAction_MatchFlexoConceptInstance id="287" userID="FLX" useSpecificDescriptions="false" virtualModelInstance="virtualModelInstance" flexoID="110" creationSchemeURI="http://ExcelViewpoint/IdentityDiagram#Sheet.creation" assignation="personExcelSheet">
-              <MatchingCriteria id="288" flexoID="108" useSpecificDescriptions="false" userID="FLX" patternRoleName="shape" />
-              <MatchingCriteria id="289" flexoID="109" useSpecificDescriptions="false" userID="FLX" value="firstSheet" patternRoleName="sheet" />
-              <CreateFlexoConceptInstanceParameter id="290" flexoID="111" userID="FLX" useSpecificDescriptions="false" value="firstSheet" paramName="technologyObject" />
+  </TypedDiagramModelSlot>
+  <SynchronizationScheme id="270" skipConfirmationPanel="false" name="synchronization" width="800" label="synchronization" height="600" userID="FLX" flexoID="105">
+    <BehaviourControlGraph_Sequence id="271" userID="FLX" flexoID="20">
+      <ControlGraph2_Sequence id="272" ownerContext="controlGraph2" userID="FLX" flexoID="21">
+        <ControlGraph2_Sequence id="273" ownerContext="controlGraph2" userID="FLX" flexoID="22">
+          <ControlGraph2_IterationAction id="274" iteratorName="row" ownerContext="controlGraph2" userID="FLX" flexoID="9">
+            <Iteration_SelectExcelRow id="275" excelSheet="firstSheet" receiver="excelMS" ownerContext="iterationControlGraph" userID="FLX" flexoID="113">
+              <Condition id="276" condition="(selected.rowIndex &gt; 0)" userID="FLX" flexoID="38" />
+            </Iteration_SelectExcelRow>
+            <ControlGraph_MatchFlexoConceptInstance id="277" creationSchemeURI="http://ExcelViewpoint/IdentityDiagram#Person.creation" receiver="virtualModelInstance" ownerContext="controlGraph" userID="FLX" flexoID="125">
+              <MatchingCriteria id="278" patternRoleName="shape" userID="FLX" flexoID="114" />
+              <MatchingCriteria id="279" patternRoleName="shape2" userID="FLX" flexoID="115" />
+              <MatchingCriteria id="280" patternRoleName="shape3" userID="FLX" flexoID="116" />
+              <MatchingCriteria id="281" patternRoleName="shape4" userID="FLX" flexoID="117" />
+              <MatchingCriteria id="282" patternRoleName="shape5" userID="FLX" flexoID="118" />
+              <MatchingCriteria id="283" patternRoleName="shape6" userID="FLX" flexoID="119" />
+              <MatchingCriteria id="284" patternRoleName="row" value="row" userID="FLX" flexoID="120" />
+              <MatchingCriteria id="285" patternRoleName="name" value="row.excelCells.get(1)" userID="FLX" flexoID="121" />
+              <MatchingCriteria id="286" patternRoleName="city" value="row.excelCells.get(4)" userID="FLX" flexoID="122" />
+              <MatchingCriteria id="287" patternRoleName="age" value="row.excelCells.get(3)" userID="FLX" flexoID="123" />
+              <MatchingCriteria id="288" patternRoleName="activity" value="row.excelCells.get(2)" userID="FLX" flexoID="124" />
+              <CreateFlexoConceptInstanceParameter id="289" paramName="index" userID="FLX" flexoID="126" />
+              <CreateFlexoConceptInstanceParameter id="290" paramName="row" value="row" userID="FLX" flexoID="127" />
+              <CreateFlexoConceptInstanceParameter id="291" paramName="activity" value="row.excelCells.get(2)" userID="FLX" flexoID="128" />
+              <CreateFlexoConceptInstanceParameter id="292" paramName="age" value="row.excelCells.get(3)" userID="FLX" flexoID="129" />
+              <CreateFlexoConceptInstanceParameter id="293" paramName="city" value="row.excelCells.get(4)" userID="FLX" flexoID="130" />
+              <CreateFlexoConceptInstanceParameter id="294" paramName="name" value="row.excelCells.get(1)" userID="FLX" flexoID="131" />
+            </ControlGraph_MatchFlexoConceptInstance>
+          </ControlGraph2_IterationAction>
+          <ControlGraph1_AssignationAction id="295" assign="personExcelSheet" ownerContext="controlGraph1" userID="FLX" flexoID="8">
+            <AssignableAction_MatchFlexoConceptInstance id="296" creationSchemeURI="http://ExcelViewpoint/IdentityDiagram#Sheet.creation" receiver="virtualModelInstance" assignation="personExcelSheet" userID="FLX" flexoID="110">
+              <MatchingCriteria id="297" patternRoleName="shape" userID="FLX" flexoID="108" />
+              <MatchingCriteria id="298" patternRoleName="sheet" value="firstSheet" userID="FLX" flexoID="109" />
+              <CreateFlexoConceptInstanceParameter id="299" paramName="technologyObject" value="firstSheet" userID="FLX" flexoID="111" />
             </AssignableAction_MatchFlexoConceptInstance>
           </ControlGraph1_AssignationAction>
-          <ControlGraph2_IterationAction id="291" iteratorName="row" useSpecificDescriptions="false" userID="FLX" flexoID="9" ownerContext="controlGraph2">
-            <ControlGraph_MatchFlexoConceptInstance id="292" userID="FLX" useSpecificDescriptions="false" virtualModelInstance="virtualModelInstance" flexoID="125" creationSchemeURI="http://ExcelViewpoint/IdentityDiagram#Person.creation" ownerContext="controlGraph">
-              <MatchingCriteria id="293" flexoID="114" useSpecificDescriptions="false" userID="FLX" patternRoleName="shape" />
-              <MatchingCriteria id="294" flexoID="115" useSpecificDescriptions="false" userID="FLX" patternRoleName="shape2" />
-              <MatchingCriteria id="295" flexoID="116" useSpecificDescriptions="false" userID="FLX" patternRoleName="shape3" />
-              <MatchingCriteria id="296" flexoID="117" useSpecificDescriptions="false" userID="FLX" patternRoleName="shape4" />
-              <MatchingCriteria id="297" flexoID="118" useSpecificDescriptions="false" userID="FLX" patternRoleName="shape5" />
-              <MatchingCriteria id="298" flexoID="119" useSpecificDescriptions="false" userID="FLX" patternRoleName="shape6" />
-              <MatchingCriteria id="299" flexoID="120" useSpecificDescriptions="false" userID="FLX" value="row" patternRoleName="row" />
-              <MatchingCriteria id="300" flexoID="121" useSpecificDescriptions="false" userID="FLX" value="row.excelCells.get(1)" patternRoleName="name" />
-              <MatchingCriteria id="301" flexoID="122" useSpecificDescriptions="false" userID="FLX" value="row.excelCells.get(4)" patternRoleName="city" />
-              <MatchingCriteria id="302" flexoID="123" useSpecificDescriptions="false" userID="FLX" value="row.excelCells.get(3)" patternRoleName="age" />
-              <MatchingCriteria id="303" flexoID="124" useSpecificDescriptions="false" userID="FLX" value="row.excelCells.get(2)" patternRoleName="activity" />
-              <CreateFlexoConceptInstanceParameter id="304" flexoID="126" userID="FLX" useSpecificDescriptions="false" paramName="index" />
-              <CreateFlexoConceptInstanceParameter id="305" flexoID="127" userID="FLX" useSpecificDescriptions="false" value="row" paramName="row" />
-              <CreateFlexoConceptInstanceParameter id="306" flexoID="128" userID="FLX" useSpecificDescriptions="false" value="row.excelCells.get(2)" paramName="activity" />
-              <CreateFlexoConceptInstanceParameter id="307" flexoID="129" userID="FLX" useSpecificDescriptions="false" value="row.excelCells.get(3)" paramName="age" />
-              <CreateFlexoConceptInstanceParameter id="308" flexoID="130" userID="FLX" useSpecificDescriptions="false" value="row.excelCells.get(4)" paramName="city" />
-              <CreateFlexoConceptInstanceParameter id="309" flexoID="131" userID="FLX" useSpecificDescriptions="false" value="row.excelCells.get(1)" paramName="name" />
-            </ControlGraph_MatchFlexoConceptInstance>
-            <Iteration_SelectExcelRow id="310" flexoID="113" ownerContext="iterationControlGraph" excelSheet="firstSheet" userID="FLX" useSpecificDescriptions="false">
-              <Condition id="311" flexoID="38" condition="(selected.rowIndex &gt; 0)" useSpecificDescriptions="false" userID="FLX" />
-              <BasicExcelModelSlot idref="23" />
-            </Iteration_SelectExcelRow>
-          </ControlGraph2_IterationAction>
         </ControlGraph2_Sequence>
+        <ControlGraph1_DeclarationAction id="300" variable="firstSheet" ownerContext="controlGraph1" userID="FLX" flexoID="7">
+          <AssignableAction_ExpressionAction id="301" expression="sheets.get(0)" userID="FLX" flexoID="10" />
+        </ControlGraph1_DeclarationAction>
       </ControlGraph2_Sequence>
+      <ControlGraph1_DeclarationAction id="302" variable="sheets" ownerContext="controlGraph1" userID="FLX" flexoID="6">
+        <AssignableAction_SelectExcelSheet id="303" receiver="excelMS" variableName="sheets" assignation="sheets" userID="FLX" flexoID="106" />
+      </ControlGraph1_DeclarationAction>
     </BehaviourControlGraph_Sequence>
-    <TechnologyObjectParameter id="312" userID="FLX" useSpecificDescriptions="false" label="age" flexoID="164" isRequired="false" name="age" />
+    <GenericBehaviourParameter id="304" widget="CUSTOM_WIDGET" name="age" type="java.lang.Object" userID="FLX" flexoID="270" />
   </SynchronizationScheme>
-  <DeletionScheme id="313" userID="FLX" useSpecificDescriptions="false" width="800" label="deletion" definePopupDefaultSize="false" height="600" flexoID="132" skipConfirmationPanel="false" name="deletion" />
+  <DeletionScheme id="305" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="132" />
+  <Inspector id="306" inspectorTitle="Diagram" userID="FLX" flexoID="3" />
 </VirtualModel>

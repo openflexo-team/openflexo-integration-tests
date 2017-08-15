@@ -1,290 +1,245 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" userID="FLX" useSpecificDescriptions="false" flexoID="-1" name="DiagramSpecification">
-  <FlexoConcept id="1" userID="FLX" useSpecificDescriptions="false" flexoID="38" name="BOTCompany">
-    <Inspector id="2" flexoID="1" userID="FLX" useSpecificDescriptions="false" inspectorTitle="Company">
-      <TextField id="3" flexoID="4" name="uri" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="company.uriName" label="uri">
-        <Inspector idref="2" />
-      </TextField>
-      <TextField id="4" flexoID="5" name="company_name" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="company.companyName" label="company_name">
-        <Inspector idref="2" />
-      </TextField>
+<VirtualModel id="0" modelVersion="1.0" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="117">
+  <FlexoConcept id="1" name="BOTCompany" userID="FLX" flexoID="38">
+    <OWLIndividualRole id="2" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTCompany" cloningStrategy="Clone" cardinality="ZeroOne" name="company" userID="FLX" flexoID="36" />
+    <ShapeRole id="3" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="37">
+      <ShapeGraphicalRepresentation id="4" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="123.0" y="9.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="224.79787851510477" height="90.9883344883345" identifier="object_0" absoluteTextY="13.0" absoluteTextX="115.0" layer="1" text="label">
+        <SelectedColorGradientBackgroundStyle id="5" color1="255,255,102" color2="255,204,204" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.5" />
+        <ForegroundStyle id="6" color="102,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedColorGradientBackgroundStyle id="7" color1="255,255,102" color2="255,204,204" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.5" />
+        <ShadowStyle id="8" />
+        <FocusedForegroundStyle id="9" color="102,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="10" color="102,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="11" color1="255,255,102" color2="255,204,204" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.5" />
+        <RectangleShape id="12" isRounded="true" arcSize="15.0" />
+        <TextStyle id="13" backgroundColor="255,255,255" color="102,0,0" font="SansSerif,0,11" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="14" featureName="label" value="company.companyName" userID="FLX" flexoID="122" />
+    </ShapeRole>
+    <DropScheme id="15" target="top" skipConfirmationPanel="false" name="DropBOTCompanyAtTopLevel" width="800" label="DropBOTCompanyAtTopLevel" height="600" userID="FLX" flexoID="6">
+      <BehaviourControlGraph_Sequence id="16" userID="FLX" flexoID="125">
+        <ControlGraph2_AssignationAction id="17" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="123">
+          <AssignableAction_AddShape id="18" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="41" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="19" assign="company" ownerContext="controlGraph1" userID="FLX" flexoID="124">
+          <AssignableAction_AddOWLIndividual id="20" individualName="parameters.companyURI" receiver="basicOrg" assignation="company" userID="FLX" flexoID="39">
+            <DataPropertyAssertion id="21" value="parameters.companyName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#companyName" userID="FLX" flexoID="40" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="22" widget="TEXT_FIELD" defaultValue="&quot;My Company&quot;" name="companyName" type="java.lang.String" userID="FLX" flexoID="126" />
+      <GenericBehaviourParameter id="23" isRequired="true" widget="URI" name="companyURI" type="java.lang.String" userID="FLX" flexoID="127" />
+    </DropScheme>
+    <Inspector id="24" inspectorTitle="Company" userID="FLX" flexoID="1">
+      <GenericInspectorEntry id="25" widget="TEXT_FIELD" data="company.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="128" />
+      <GenericInspectorEntry id="26" widget="TEXT_FIELD" data="company.companyName" name="company_name" label="company_name" type="java.lang.String" userID="FLX" flexoID="129" />
     </Inspector>
-    <OWLIndividualRole id="5" cloningStratgey="Clone" flexoID="36" name="company" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTCompany">
-      <OWLModelSlot idref="6" />
-    </OWLIndividualRole>
-    <ShapeRole id="7" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStratgey="Clone" flexoID="37" name="shape">
-      <ShapeGraphicalRepresentation id="8" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="90.9883344883345" hasFocusedBackground="false" text="label" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="224.79787851510477" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="true" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="115.0" layer="1" absoluteTextY="13.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="9.0" maximalWidth="Infinity" x="123.0">
-        <FocusedForegroundStyle id="9" dashStyle="PLAIN_STROKE" color="102,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorGradientBackgroundStyle id="10" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.5" useTransparency="true" color2="255,204,204" color1="255,255,102" />
-        <TextStyle id="11" orientation="0" color="102,0,0" backgroundColor="255,255,255" font="SansSerif,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="12" bottom="5" left="5" right="5" top="5" />
-        <ForegroundStyle id="13" dashStyle="PLAIN_STROKE" color="102,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="14" dashStyle="PLAIN_STROKE" color="102,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorGradientBackgroundStyle id="15" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.5" useTransparency="true" color2="255,204,204" color1="255,255,102" />
-        <RectangleShape id="16" arcSize="15.0" isRounded="true" />
-        <ShadowStyle id="17" shadowDepth="2" shadowBlur="4" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="18" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.5" useTransparency="true" color2="255,204,204" color1="255,255,102" />
-      </ShapeGraphicalRepresentation>
-      <GRSpec id="19" featureName="label" flexoID="111" readOnly="false" userID="FLX" useSpecificDescriptions="false" value="company.companyName" />
-      <TypedDiagramModelSlot idref="20" />
-    </ShapeRole>
-    <DropScheme id="22" useSpecificDescriptions="false" width="800" userID="FLX" label="DropBOTCompanyAtTopLevel" definePopupDefaultSize="false" height="600" flexoID="6" skipConfirmationPanel="false" name="DropBOTCompanyAtTopLevel" target="top">
-      <TextFieldParameter id="23" flexoID="88" isRequired="false" name="companyName" userID="FLX" useSpecificDescriptions="false" label="company_name" defaultValue="&quot;My Company&quot;" />
-      <URIParameter id="24" useSpecificDescriptions="false" userID="FLX" label="uri" base="parameters.companyName" flexoID="89" isRequired="true" name="companyURI">
-        <OWLModelSlot idref="6" />
-      </URIParameter>
-      <AddOWLIndividual id="25" userID="FLX" useSpecificDescriptions="false" individualName="parameters.companyURI" flexoID="39" assignation="company">
-        <OWLModelSlot idref="6" />
-        <DataPropertyAssertion id="26" flexoID="40" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#companyName" userID="FLX" useSpecificDescriptions="false" value="parameters.companyName" />
-      </AddOWLIndividual>
-      <AddShape id="27" flexoID="41" assignation="shape" container="topLevel" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false">
-        <TypedDiagramModelSlot idref="20" />
-      </AddShape>
-    </DropScheme>
   </FlexoConcept>
-  <FlexoConcept id="93" userID="FLX" useSpecificDescriptions="false" flexoID="44" name="BOTDepartment">
-    <Inspector id="94" flexoID="8" userID="FLX" useSpecificDescriptions="false" inspectorTitle="Department">
-      <TextField id="95" flexoID="11" name="uri" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="department.uriName" label="uri">
-        <Inspector idref="94" />
-      </TextField>
-      <TextField id="96" flexoID="12" name="department_name" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="department.name" label="department_name">
-        <Inspector idref="94" />
-      </TextField>
-      <TextField id="97" flexoID="13" name="is_contained_in" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="department.isContainedIn.uriName" label="is_contained_in">
-        <Inspector idref="94" />
-      </TextField>
+  <FlexoConcept id="27" name="BOTDepartment" userID="FLX" flexoID="44">
+    <OWLIndividualRole id="28" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment" cloningStrategy="Clone" cardinality="ZeroOne" name="department" userID="FLX" flexoID="42" />
+    <ShapeRole id="29" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="43">
+      <ShapeGraphicalRepresentation id="30" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="163.0" y="27.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="176.0" height="58.0" identifier="object_0" absoluteTextY="16.0" absoluteTextX="89.0" layer="1" text="label">
+        <SelectedColorGradientBackgroundStyle id="31" color1="0,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+        <ForegroundStyle id="32" color="0,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedColorGradientBackgroundStyle id="33" color1="0,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+        <ShadowStyle id="34" />
+        <FocusedForegroundStyle id="35" color="0,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="36" color="0,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="37" color1="0,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+        <RectangleShape id="38" isRounded="true" arcSize="15.0" />
+        <TextStyle id="39" backgroundColor="255,255,255" color="0,51,51" font="SansSerif,0,11" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="40" featureName="label" value="department.name" userID="FLX" flexoID="130" />
+    </ShapeRole>
+    <DropScheme id="41" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTCompany" name="DropBOTDepartmentInBOTCompany" width="800" label="DropBOTDepartmentInBOTCompany" height="600" userID="FLX" flexoID="14">
+      <BehaviourControlGraph_Sequence id="42" userID="FLX" flexoID="133">
+        <ControlGraph2_AssignationAction id="43" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="131">
+          <AssignableAction_AddShape id="44" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="48" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="45" assign="department" ownerContext="controlGraph1" userID="FLX" flexoID="132">
+          <AssignableAction_AddOWLIndividual id="46" individualName="parameters.departmentURI" receiver="basicOrg" assignation="department" userID="FLX" flexoID="46">
+            <DataPropertyAssertion id="47" value="parameters.departmentName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" userID="FLX" flexoID="47" />
+            <ObjectPropertyAssertion id="48" object="target.company" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" userID="FLX" flexoID="45" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="49" widget="TEXT_FIELD" defaultValue="&quot;My Department&quot;" name="departmentName" type="java.lang.String" userID="FLX" flexoID="134" />
+      <GenericBehaviourParameter id="50" isRequired="true" widget="URI" name="departmentURI" type="java.lang.String" userID="FLX" flexoID="135" />
+    </DropScheme>
+    <Inspector id="51" inspectorTitle="Department" userID="FLX" flexoID="8">
+      <GenericInspectorEntry id="52" widget="TEXT_FIELD" data="department.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="136" />
+      <GenericInspectorEntry id="53" widget="TEXT_FIELD" data="department.name" name="department_name" label="department_name" type="java.lang.String" userID="FLX" flexoID="137" />
+      <GenericInspectorEntry id="54" widget="TEXT_FIELD" data="department.isContainedIn.uriName" name="is_contained_in" label="is_contained_in" type="java.lang.String" userID="FLX" flexoID="138" />
     </Inspector>
-    <OWLIndividualRole id="98" cloningStratgey="Clone" flexoID="42" name="department" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment">
-      <OWLModelSlot idref="6" />
-    </OWLIndividualRole>
-    <ShapeRole id="99" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStratgey="Clone" flexoID="43" name="shape">
-      <ShapeGraphicalRepresentation id="100" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="58.0" hasFocusedBackground="false" text="label" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="176.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="true" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="89.0" layer="1" absoluteTextY="16.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="27.0" maximalWidth="Infinity" x="163.0">
-        <FocusedForegroundStyle id="101" dashStyle="PLAIN_STROKE" color="0,102,102" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorGradientBackgroundStyle id="102" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.2" useTransparency="true" color2="255,255,255" color1="0,153,153" />
-        <TextStyle id="103" orientation="0" color="0,51,51" backgroundColor="255,255,255" font="SansSerif,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="104" bottom="5" left="5" right="5" top="5" />
-        <ForegroundStyle id="105" dashStyle="PLAIN_STROKE" color="0,102,102" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="106" dashStyle="PLAIN_STROKE" color="0,102,102" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorGradientBackgroundStyle id="107" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.2" useTransparency="true" color2="255,255,255" color1="0,153,153" />
-        <RectangleShape id="108" arcSize="15.0" isRounded="true" />
-        <ShadowStyle id="109" shadowDepth="2" shadowBlur="4" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="110" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.2" useTransparency="true" color2="255,255,255" color1="0,153,153" />
-      </ShapeGraphicalRepresentation>
-      <GRSpec id="111" featureName="label" flexoID="112" readOnly="false" userID="FLX" useSpecificDescriptions="false" value="department.name" />
-      <TypedDiagramModelSlot idref="20" />
-    </ShapeRole>
-    <DropScheme id="31" useSpecificDescriptions="false" width="800" userID="FLX" label="DropBOTDepartmentInBOTCompany" definePopupDefaultSize="false" height="600" flexoID="14" skipConfirmationPanel="true" name="DropBOTDepartmentInBOTCompany" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTCompany">
-      <TextFieldParameter id="32" flexoID="91" isRequired="false" name="departmentName" userID="FLX" useSpecificDescriptions="false" label="department_name" defaultValue="&quot;My Department&quot;" />
-      <URIParameter id="33" useSpecificDescriptions="false" userID="FLX" label="uri" base="parameters.departmentName" flexoID="92" isRequired="true" name="departmentURI">
-        <OWLModelSlot idref="6" />
-      </URIParameter>
-      <AddOWLIndividual id="34" userID="FLX" useSpecificDescriptions="false" individualName="parameters.departmentURI" flexoID="46" assignation="department">
-        <ObjectPropertyAssertion id="35" flexoID="45" userID="FLX" useSpecificDescriptions="false" object="target.company" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" />
-        <OWLModelSlot idref="6" />
-        <DataPropertyAssertion id="36" flexoID="47" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" userID="FLX" useSpecificDescriptions="false" value="parameters.departmentName" />
-      </AddOWLIndividual>
-      <AddShape id="37" flexoID="48" assignation="shape" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false">
-        <TypedDiagramModelSlot idref="20" />
-      </AddShape>
-    </DropScheme>
   </FlexoConcept>
-  <FlexoConcept id="112" userID="FLX" useSpecificDescriptions="false" flexoID="51" description="&lt;html&gt;&#xA;  &lt;head&gt;&#xA;&#xA;  &lt;/head&gt;&#xA;  &lt;body&gt;&#xA;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xA;      &#xA;    &lt;/p&gt;&#xA;  &lt;/body&gt;&#xA;&lt;/html&gt;&#xA;" name="BOTSubDepartment">
-    <Inspector id="113" flexoID="18" userID="FLX" useSpecificDescriptions="false" inspectorTitle="Sub-department">
-      <TextField id="114" flexoID="21" name="uri" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="subDepartment.uriName" label="uri">
-        <Inspector idref="113" />
-      </TextField>
-      <TextField id="115" flexoID="22" name="sub-department name" useSpecificDescriptions="false" userID="FLX" readOnly="false" data="subDepartment.name" label="sub-department name">
-        <Inspector idref="113" />
-      </TextField>
-      <TextField id="116" flexoID="23" name="is_contained_in" useSpecificDescriptions="false" userID="FLX" readOnly="true" data="subDepartment.isContainedIn.uriName" label="is_contained_in">
-        <Inspector idref="113" />
-      </TextField>
+  <FlexoConcept id="55" name="BOTSubDepartment" userID="FLX" description="&lt;html&gt;&#xA;  &lt;head&gt;&#xA;&#xA;  &lt;/head&gt;&#xA;  &lt;body&gt;&#xA;    &lt;p style=&quot;margin-top: 0&quot;&gt;&#xA;      &#xA;    &lt;/p&gt;&#xA;  &lt;/body&gt;&#xA;&lt;/html&gt;&#xA;" flexoID="51">
+    <OWLIndividualRole id="56" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTSubDepartment" cloningStrategy="Clone" cardinality="ZeroOne" name="subDepartment" userID="FLX" flexoID="49" />
+    <ShapeRole id="57" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="50">
+      <ShapeGraphicalRepresentation id="58" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="147.0" y="28.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="176.0" height="58.0" identifier="object_0" absoluteTextY="15.0" absoluteTextX="87.0" layer="1" text="label">
+        <SelectedColorGradientBackgroundStyle id="59" color1="255,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+        <ForegroundStyle id="60" color="102,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedColorGradientBackgroundStyle id="61" color1="255,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+        <ShadowStyle id="62" />
+        <FocusedForegroundStyle id="63" color="102,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="64" color="102,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="65" color1="255,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+        <RectangleShape idref="38" />
+        <TextStyle id="66" backgroundColor="255,255,255" color="102,0,0" font="SansSerif,0,11" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="67" featureName="label" value="subDepartment.name" userID="FLX" flexoID="139" />
+    </ShapeRole>
+    <DropScheme id="68" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTDepartment" skipConfirmationPanel="false" name="DropBOTSubDepartmentInBOTDepartment" width="800" label="DropBOTSubDepartmentInBOTDepartment" height="600" userID="FLX" flexoID="24">
+      <BehaviourControlGraph_Sequence id="69" userID="FLX" flexoID="142">
+        <ControlGraph2_AssignationAction id="70" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="140">
+          <AssignableAction_AddShape id="71" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="55" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="72" assign="subDepartment" ownerContext="controlGraph1" userID="FLX" flexoID="141">
+          <AssignableAction_AddOWLIndividual id="73" individualName="parameters.subDepartmentURI" receiver="basicOrg" assignation="subDepartment" userID="FLX" flexoID="53">
+            <DataPropertyAssertion id="74" value="parameters.subDepartmentName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" userID="FLX" flexoID="54" />
+            <ObjectPropertyAssertion id="75" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" userID="FLX" flexoID="52" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="76" widget="TEXT_FIELD" defaultValue="&quot;My sub-department&quot;" name="subDepartmentName" type="java.lang.String" userID="FLX" flexoID="143" />
+      <GenericBehaviourParameter id="77" isRequired="true" widget="URI" name="subDepartmentURI" type="java.lang.String" userID="FLX" flexoID="144" />
+    </DropScheme>
+    <Inspector id="78" inspectorTitle="Sub-department" userID="FLX" flexoID="18">
+      <GenericInspectorEntry id="79" widget="TEXT_FIELD" data="subDepartment.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="145" />
+      <GenericInspectorEntry id="80" widget="TEXT_FIELD" data="subDepartment.name" name="sub-department name" label="sub-department name" type="java.lang.String" userID="FLX" flexoID="146" />
+      <GenericInspectorEntry id="81" widget="TEXT_FIELD" readOnly="true" data="subDepartment.isContainedIn.uriName" name="is_contained_in" label="is_contained_in" type="java.lang.String" userID="FLX" flexoID="147" />
     </Inspector>
-    <OWLIndividualRole id="117" cloningStratgey="Clone" flexoID="49" name="subDepartment" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTSubDepartment">
-      <OWLModelSlot idref="6" />
-    </OWLIndividualRole>
-    <ShapeRole id="118" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStratgey="Clone" flexoID="50" name="shape">
-      <ShapeGraphicalRepresentation id="119" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="58.0" hasFocusedBackground="false" text="label" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="176.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="true" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="87.0" layer="1" absoluteTextY="15.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="28.0" maximalWidth="Infinity" x="147.0">
-        <FocusedForegroundStyle id="120" dashStyle="PLAIN_STROKE" color="102,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedColorGradientBackgroundStyle id="121" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.2" useTransparency="true" color2="255,255,255" color1="255,153,153" />
-        <TextStyle id="122" orientation="0" color="102,0,0" backgroundColor="255,255,255" font="SansSerif,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="123" bottom="5" left="5" right="5" top="5" />
-        <ForegroundStyle id="124" dashStyle="PLAIN_STROKE" color="102,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="125" dashStyle="PLAIN_STROKE" color="102,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedColorGradientBackgroundStyle id="126" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.2" useTransparency="true" color2="255,255,255" color1="255,153,153" />
-        <RectangleShape idref="108" />
-        <ShadowStyle id="127" shadowDepth="2" shadowBlur="4" drawShadow="true" shadowDarkness="150" />
-        <ColorGradientBackgroundStyle id="128" direction="SOUTH_EAST_NORTH_WEST" transparencyLevel="0.2" useTransparency="true" color2="255,255,255" color1="255,153,153" />
-      </ShapeGraphicalRepresentation>
-      <GRSpec id="129" featureName="label" flexoID="113" readOnly="false" userID="FLX" useSpecificDescriptions="false" value="subDepartment.name" />
-      <TypedDiagramModelSlot idref="20" />
-    </ShapeRole>
-    <DropScheme id="41" useSpecificDescriptions="false" width="800" userID="FLX" label="DropBOTSubDepartmentInBOTDepartment" definePopupDefaultSize="false" height="600" flexoID="24" skipConfirmationPanel="false" name="DropBOTSubDepartmentInBOTDepartment" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTDepartment">
-      <TextFieldParameter id="42" flexoID="94" isRequired="false" name="subDepartmentName" userID="FLX" useSpecificDescriptions="false" label="sub_department_name" defaultValue="&quot;My sub-department&quot;" />
-      <URIParameter id="43" useSpecificDescriptions="false" userID="FLX" label="uri" base="parameters.subDepartmentName" flexoID="95" isRequired="true" name="subDepartmentURI">
-        <OWLModelSlot idref="6" />
-      </URIParameter>
-      <AddOWLIndividual id="44" userID="FLX" useSpecificDescriptions="false" individualName="parameters.subDepartmentURI" flexoID="53" assignation="subDepartment">
-        <ObjectPropertyAssertion id="45" flexoID="52" userID="FLX" useSpecificDescriptions="false" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" />
-        <OWLModelSlot idref="6" />
-        <DataPropertyAssertion id="46" flexoID="54" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" userID="FLX" useSpecificDescriptions="false" value="parameters.subDepartmentName" />
-      </AddOWLIndividual>
-      <AddShape id="47" flexoID="55" assignation="shape" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false">
-        <TypedDiagramModelSlot idref="20" />
-      </AddShape>
-    </DropScheme>
   </FlexoConcept>
-  <FlexoConcept id="130" userID="FLX" useSpecificDescriptions="false" flexoID="61" name="Employee">
-    <Inspector id="131" flexoID="26" userID="FLX" useSpecificDescriptions="false" />
-    <OWLIndividualRole id="132" cloningStratgey="Clone" flexoID="56" name="employeeAsManager" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTManager">
-      <OWLModelSlot idref="6" />
-    </OWLIndividualRole>
-    <OWLIndividualRole id="133" cloningStratgey="Clone" flexoID="57" name="employeeAsWorker" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTWorker">
-      <OWLModelSlot idref="6" />
-    </OWLIndividualRole>
-    <OWLIndividualRole id="134" cloningStratgey="Clone" flexoID="58" name="person" useSpecificDescriptions="false" userID="FLX" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTPerson">
-      <OWLModelSlot idref="6" />
-    </OWLIndividualRole>
-    <ShapeRole id="135" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStratgey="Clone" flexoID="59" name="managerAsShape">
-      <ShapeGraphicalRepresentation id="136" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="38.96537613052885" hasFocusedBackground="false" text="label" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="173.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_0" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="true" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="23.0" layer="1" absoluteTextY="36.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="42.03462386947115" maximalWidth="Infinity" x="227.0">
-        <FocusedForegroundStyle id="137" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedImageBackgroundStyle id="138" scaleX="1.0" scaleY="1.0" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="false" useTransparency="false" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
-        <TextStyle id="139" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="140" bottom="5" left="5" right="5" top="5" />
-        <ForegroundStyle id="141" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="142" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedImageBackgroundStyle id="143" scaleX="1.0" scaleY="1.0" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="false" useTransparency="false" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
-        <RectangleShape id="144" arcSize="30.0" isRounded="false" />
-        <ShadowStyle id="145" shadowDepth="2" shadowBlur="4" drawShadow="false" shadowDarkness="150" />
-        <ImageBackgroundStyle id="146" scaleX="1.0" scaleY="1.0" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="false" useTransparency="false" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
+  <FlexoConcept id="82" name="Employee" userID="FLX" flexoID="61">
+    <OWLIndividualRole id="83" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTManager" cloningStrategy="Clone" cardinality="ZeroOne" name="employeeAsManager" userID="FLX" flexoID="56" />
+    <OWLIndividualRole id="84" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTWorker" cloningStrategy="Clone" cardinality="ZeroOne" name="employeeAsWorker" userID="FLX" flexoID="57" />
+    <OWLIndividualRole id="85" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTPerson" cloningStrategy="Clone" cardinality="ZeroOne" name="person" userID="FLX" flexoID="58" />
+    <ShapeRole id="86" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="managerAsShape" userID="FLX" flexoID="59">
+      <ShapeGraphicalRepresentation id="87" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="227.0" y="42.03462386947115" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="173.0" height="38.96537613052885" identifier="object_0" absoluteTextY="36.0" absoluteTextX="23.0" layer="1" text="label">
+        <SelectedImageBackgroundStyle id="88" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <ForegroundStyle id="89" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedImageBackgroundStyle id="90" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <ShadowStyle id="91" drawShadow="false" />
+        <FocusedForegroundStyle id="92" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="93" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="94" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape id="95" />
+        <TextStyle id="96" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <GRSpec id="147" featureName="label" flexoID="114" readOnly="false" userID="FLX" useSpecificDescriptions="false" value="employeeAsManager.roleName" />
-      <TypedDiagramModelSlot idref="20" />
+      <GRSpec id="97" featureName="label" value="employeeAsManager.roleName" userID="FLX" flexoID="148" />
     </ShapeRole>
-    <ShapeRole id="148" exampleLabel="label" useSpecificDescriptions="false" userID="FLX" cloningStratgey="Clone" flexoID="60" name="workerAsShape">
-      <ShapeGraphicalRepresentation id="149" minimalHeight="0.0" relativeTextX="0.5" transparency="1.0" drawControlPointsWhenFocused="true" height="38.96537613052885" hasFocusedBackground="false" text="label" verticalTextAlignment="MIDDLE" adjustMinimalWidthToLabelWidth="true" width="165.0" hasFocusedForeground="false" hasSelectedBackground="false" allowToLeaveBounds="true" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" relativeTextY="0.5" continuousTextEditing="true" minimalWidth="0.0" identifier="object_1" lineWrap="false" locationConstraints="FREELY_MOVABLE" adjustMinimalHeightToLabelHeight="true" horizontalTextAlignment="CENTER" adaptBoundsToContents="false" maximalHeight="Infinity" isVisible="true" dimensionConstraints="FREELY_RESIZABLE" isReadOnly="false" adjustMaximalHeightToLabelHeight="false" isFloatingLabel="true" hasSelectedForeground="false" paragraphAlignment="CENTER" absoluteTextX="23.0" layer="1" absoluteTextY="36.0" adjustMaximalWidthToLabelWidth="false" isMultilineAllowed="false" y="41.03462386947115" maximalWidth="Infinity" x="136.0">
-        <FocusedForegroundStyle id="150" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedImageBackgroundStyle id="151" scaleX="1.0" scaleY="1.0" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="false" useTransparency="false" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
-        <TextStyle id="152" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ShapeBorder id="153" bottom="5" left="5" right="5" top="5" />
-        <ForegroundStyle id="154" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="155" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedImageBackgroundStyle id="156" scaleX="1.0" scaleY="1.0" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="false" useTransparency="false" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
-        <RectangleShape idref="144" />
-        <ShadowStyle id="157" shadowDepth="2" shadowBlur="4" drawShadow="false" shadowDarkness="150" />
-        <ImageBackgroundStyle id="158" scaleX="1.0" scaleY="1.0" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="false" useTransparency="false" deltaX="0.0" imageBackgroundType="TRANSPARENT" deltaY="0.0" />
+    <ShapeRole id="98" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="workerAsShape" userID="FLX" flexoID="60">
+      <ShapeGraphicalRepresentation id="99" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="136.0" y="41.03462386947115" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="165.0" height="38.96537613052885" identifier="object_1" absoluteTextY="36.0" absoluteTextX="23.0" layer="1" text="label">
+        <SelectedImageBackgroundStyle id="100" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <ForegroundStyle id="101" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedImageBackgroundStyle id="102" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <ShadowStyle id="103" drawShadow="false" />
+        <FocusedForegroundStyle id="104" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="105" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="106" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape idref="95" />
+        <TextStyle id="107" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ShapeGraphicalRepresentation>
-      <GRSpec id="159" featureName="label" flexoID="115" readOnly="false" userID="FLX" useSpecificDescriptions="false" value="employeeAsWorker.roleName" />
-      <TypedDiagramModelSlot idref="20" />
+      <GRSpec id="108" featureName="label" value="employeeAsWorker.roleName" userID="FLX" flexoID="149" />
     </ShapeRole>
-    <DropScheme id="51" useSpecificDescriptions="false" width="800" userID="FLX" label="DropEmployeeInOrganization" definePopupDefaultSize="false" height="600" flexoID="29" skipConfirmationPanel="false" name="DropEmployeeInOrganization" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTDepartment">
-      <TextFieldParameter id="52" flexoID="98" isRequired="false" name="roleName" userID="FLX" useSpecificDescriptions="false" label="role_name" />
-      <URIParameter id="53" useSpecificDescriptions="false" userID="FLX" label="employee_uri" base="parameters.roleName" flexoID="99" isRequired="true" name="employeeURI">
-        <OWLModelSlot idref="6" />
-      </URIParameter>
-      <CheckBoxParameter id="54" flexoID="100" isRequired="false" name="isManager" userID="FLX" useSpecificDescriptions="false" label="is_manager" defaultValue="false" />
-      <CheckBoxParameter id="55" flexoID="101" isRequired="false" name="isHeadOfOrganization" userID="FLX" useSpecificDescriptions="false" conditional="(parameters.isManager = true)" label="is_head_of_organization" defaultValue="false" />
-      <CheckBoxParameter id="56" flexoID="102" isRequired="false" name="assignPerson" userID="FLX" useSpecificDescriptions="false" label="assign_employee" defaultValue="false" />
-      <TextFieldParameter id="57" flexoID="103" isRequired="false" name="employeeFirstName" userID="FLX" useSpecificDescriptions="false" conditional="(parameters.assignPerson = true)" label="employee_first_name" />
-      <TextFieldParameter id="58" flexoID="104" isRequired="false" name="employeeLastName" userID="FLX" useSpecificDescriptions="false" conditional="(parameters.assignPerson = true)" label="employee_last_name" />
-      <URIParameter id="59" useSpecificDescriptions="false" userID="FLX" label="person_uri" base="(parameters.employeeFirstName + parameters.employeeLastName)" flexoID="105" isRequired="true" name="personURI" conditional="(parameters.assignPerson = true)">
-        <OWLModelSlot idref="6" />
-      </URIParameter>
-      <AddOWLIndividual id="60" userID="FLX" useSpecificDescriptions="false" individualName="parameters.employeeURI" flexoID="65" assignation="employeeAsManager" conditional="(parameters.isManager = true)">
-        <ObjectPropertyAssertion id="61" flexoID="62" userID="FLX" useSpecificDescriptions="false" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" />
-        <ObjectPropertyAssertion id="62" flexoID="63" userID="FLX" useSpecificDescriptions="false" conditional="(parameters.isHeadOfOrganization = true)" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isHeadOf" />
-        <ObjectPropertyAssertion id="63" flexoID="64" userID="FLX" useSpecificDescriptions="false" conditional="(parameters.assignPerson = true)" object="person" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" />
-        <OWLModelSlot idref="6" />
-        <DataPropertyAssertion id="64" flexoID="66" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" userID="FLX" useSpecificDescriptions="false" value="parameters.roleName" />
-      </AddOWLIndividual>
-      <AddOWLIndividual id="65" userID="FLX" useSpecificDescriptions="false" individualName="parameters.employeeURI" flexoID="69" assignation="employeeAsWorker" conditional="(parameters.isManager = false)">
-        <ObjectPropertyAssertion id="66" flexoID="67" userID="FLX" useSpecificDescriptions="false" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" />
-        <ObjectPropertyAssertion id="67" flexoID="68" userID="FLX" useSpecificDescriptions="false" conditional="(parameters.assignPerson = true)" object="person" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" />
-        <OWLModelSlot idref="6" />
-        <DataPropertyAssertion id="68" flexoID="70" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" userID="FLX" useSpecificDescriptions="false" value="parameters.roleName" />
-      </AddOWLIndividual>
-      <AddOWLIndividual id="69" userID="FLX" useSpecificDescriptions="false" individualName="parameters.personURI" flexoID="73" assignation="person" conditional="(parameters.assignPerson = true)">
-        <ObjectPropertyAssertion id="70" flexoID="71" userID="FLX" useSpecificDescriptions="false" conditional="(parameters.isManager = true)" object="employeeAsManager" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" />
-        <ObjectPropertyAssertion id="71" flexoID="72" userID="FLX" useSpecificDescriptions="false" conditional="(parameters.isManager = false)" object="employeeAsWorker" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" />
-        <OWLModelSlot idref="6" />
-        <DataPropertyAssertion id="72" flexoID="74" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personFirstName" userID="FLX" useSpecificDescriptions="false" value="parameters.employeeFirstName" />
-        <DataPropertyAssertion id="73" flexoID="75" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personName" userID="FLX" useSpecificDescriptions="false" value="parameters.employeeLastName" />
-      </AddOWLIndividual>
-      <AddShape id="74" flexoID="76" assignation="managerAsShape" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" conditional="(parameters.isManager = true)">
-        <TypedDiagramModelSlot idref="20" />
-      </AddShape>
-      <AddShape id="75" flexoID="77" assignation="workerAsShape" container="target.shape" useSpecificDescriptions="false" userID="FLX" extendParentBoundsToHostThisShape="false" conditional="(parameters.isManager = false)">
-        <TypedDiagramModelSlot idref="20" />
-      </AddShape>
+    <DropScheme id="109" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTDepartment" skipConfirmationPanel="false" name="DropEmployeeInOrganization" width="800" label="DropEmployeeInOrganization" height="600" userID="FLX" flexoID="29">
+      <BehaviourControlGraph_Sequence id="110" userID="FLX" flexoID="158">
+        <ControlGraph2_Sequence id="111" ownerContext="controlGraph2" userID="FLX" flexoID="156">
+          <ControlGraph2_Sequence id="112" ownerContext="controlGraph2" userID="FLX" flexoID="154">
+            <ControlGraph2_Sequence id="113" ownerContext="controlGraph2" userID="FLX" flexoID="152">
+              <ControlGraph2_AssignationAction id="114" assign="workerAsShape" ownerContext="controlGraph2" userID="FLX" flexoID="150">
+                <AssignableAction_AddShape id="115" container="target.shape" receiver="typedDiagramModelSlot" assignation="workerAsShape" conditional="(parameters.isManager = false)" userID="FLX" flexoID="77" />
+              </ControlGraph2_AssignationAction>
+              <ControlGraph1_AssignationAction id="116" assign="managerAsShape" ownerContext="controlGraph1" userID="FLX" flexoID="151">
+                <AssignableAction_AddShape id="117" container="target.shape" receiver="typedDiagramModelSlot" assignation="managerAsShape" conditional="(parameters.isManager = true)" userID="FLX" flexoID="76" />
+              </ControlGraph1_AssignationAction>
+            </ControlGraph2_Sequence>
+            <ControlGraph1_AssignationAction id="118" assign="person" ownerContext="controlGraph1" userID="FLX" flexoID="153">
+              <AssignableAction_AddOWLIndividual id="119" individualName="parameters.personURI" receiver="basicOrg" assignation="person" conditional="(parameters.assignPerson = true)" userID="FLX" flexoID="73">
+                <DataPropertyAssertion id="120" value="parameters.employeeFirstName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personFirstName" userID="FLX" flexoID="74" />
+                <DataPropertyAssertion id="121" value="parameters.employeeLastName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personName" userID="FLX" flexoID="75" />
+                <ObjectPropertyAssertion id="122" object="employeeAsManager" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" conditional="(parameters.isManager = true)" userID="FLX" flexoID="71" />
+                <ObjectPropertyAssertion id="123" object="employeeAsWorker" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" conditional="(parameters.isManager = false)" userID="FLX" flexoID="72" />
+              </AssignableAction_AddOWLIndividual>
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="124" assign="employeeAsWorker" ownerContext="controlGraph1" userID="FLX" flexoID="155">
+            <AssignableAction_AddOWLIndividual id="125" individualName="parameters.employeeURI" receiver="basicOrg" assignation="employeeAsWorker" conditional="(parameters.isManager = false)" userID="FLX" flexoID="69">
+              <DataPropertyAssertion id="126" value="parameters.roleName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" userID="FLX" flexoID="70" />
+              <ObjectPropertyAssertion id="127" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" userID="FLX" flexoID="67" />
+              <ObjectPropertyAssertion id="128" object="person" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" conditional="(parameters.assignPerson = true)" userID="FLX" flexoID="68" />
+            </AssignableAction_AddOWLIndividual>
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="129" assign="employeeAsManager" ownerContext="controlGraph1" userID="FLX" flexoID="157">
+          <AssignableAction_AddOWLIndividual id="130" individualName="parameters.employeeURI" receiver="basicOrg" assignation="employeeAsManager" conditional="(parameters.isManager = true)" userID="FLX" flexoID="65">
+            <DataPropertyAssertion id="131" value="parameters.roleName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" userID="FLX" flexoID="66" />
+            <ObjectPropertyAssertion id="132" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" userID="FLX" flexoID="62" />
+            <ObjectPropertyAssertion id="133" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isHeadOf" conditional="(parameters.isHeadOfOrganization = true)" userID="FLX" flexoID="63" />
+            <ObjectPropertyAssertion id="134" object="person" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" conditional="(parameters.assignPerson = true)" userID="FLX" flexoID="64" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="135" widget="TEXT_FIELD" name="roleName" type="java.lang.String" userID="FLX" flexoID="159" />
+      <GenericBehaviourParameter id="136" isRequired="true" widget="URI" name="employeeURI" type="java.lang.String" userID="FLX" flexoID="160" />
+      <GenericBehaviourParameter id="137" widget="CHECKBOX" defaultValue="false" name="isManager" type="java.lang.Boolean" userID="FLX" flexoID="161" />
+      <GenericBehaviourParameter id="138" widget="CHECKBOX" defaultValue="false" name="isHeadOfOrganization" type="java.lang.Boolean" userID="FLX" flexoID="162" />
+      <GenericBehaviourParameter id="139" widget="CHECKBOX" defaultValue="false" name="assignPerson" type="java.lang.Boolean" userID="FLX" flexoID="163" />
+      <GenericBehaviourParameter id="140" widget="TEXT_FIELD" name="employeeFirstName" type="java.lang.String" userID="FLX" flexoID="164" />
+      <GenericBehaviourParameter id="141" widget="TEXT_FIELD" name="employeeLastName" type="java.lang.String" userID="FLX" flexoID="165" />
+      <GenericBehaviourParameter id="142" isRequired="true" widget="URI" name="personURI" type="java.lang.String" userID="FLX" flexoID="166" />
     </DropScheme>
+    <Inspector id="143" userID="FLX" flexoID="26" />
   </FlexoConcept>
-  <FlexoConcept id="160" userID="FLX" useSpecificDescriptions="false" flexoID="81" name="EmployeeHierarchicalRelationship">
-    <Inspector id="161" flexoID="31" userID="FLX" useSpecificDescriptions="false" />
-    <ObjectPropertyStatementRole id="162" cloningStratgey="Clone" flexoID="78" name="isResponsibleOf" useSpecificDescriptions="false" userID="FLX" objectProperty="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isResponsibleOf">
-      <OWLModelSlot idref="6" />
-    </ObjectPropertyStatementRole>
-    <ObjectPropertyStatementRole id="163" cloningStratgey="Clone" flexoID="79" name="isUnderResponsabilityOf" useSpecificDescriptions="false" userID="FLX" objectProperty="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isUnderResponsabilityOf">
-      <OWLModelSlot idref="6" />
-    </ObjectPropertyStatementRole>
-    <ConnectorRole id="164" exampleLabel="label" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Clone" flexoID="80" name="connector">
-      <ConnectorGraphicalRepresentation id="165" lineWrap="false" horizontalTextAlignment="CENTER" transparency="1.0" drawControlPointsWhenFocused="true" isVisible="true" isReadOnly="false" paragraphAlignment="CENTER" hasSelectedForeground="false" verticalTextAlignment="MIDDLE" text="label" hasFocusedForeground="false" applyForegroundToSymbols="true" layer="64" absoluteTextX="-2.0" absoluteTextY="-14.0" isFocusable="true" drawControlPointsWhenSelected="true" isSelectable="true" isLabelEditable="true" continuousTextEditing="true" isMultilineAllowed="false" identifier="object_2">
-        <SelectedForegroundStyle id="166" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <FocusedForegroundStyle id="167" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
-        <LineConnectorSpecification id="168" relativeMiddleSymbolLocation="0.5" startSymbolSize="10.0" middleSymbol="NONE" lineConnectorType="MINIMAL_LENGTH" middleSymbolSize="10.0" endSymbolSize="10.0" startSymbol="NONE" endSymbol="NONE" />
-        <TextStyle id="169" orientation="0" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" isBackgroundColored="false" />
-        <ForegroundStyle id="170" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="false" transparencyLevel="0.5" useTransparency="false" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+  <FlexoConcept id="144" name="EmployeeHierarchicalRelationship" userID="FLX" flexoID="81">
+    <ObjectPropertyStatementRole id="145" objectProperty="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isResponsibleOf" cloningStrategy="Clone" cardinality="ZeroOne" name="isResponsibleOf" userID="FLX" flexoID="78" />
+    <ObjectPropertyStatementRole id="146" objectProperty="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isUnderResponsabilityOf" cloningStrategy="Clone" cardinality="ZeroOne" name="isUnderResponsabilityOf" userID="FLX" flexoID="79" />
+    <ConnectorRole id="147" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="80">
+      <ConnectorGraphicalRepresentation id="148" identifier="object_2" absoluteTextY="-14.0" absoluteTextX="-2.0" layer="64" text="label">
+        <LineConnectorSpecification id="149" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+        <ForegroundStyle id="150" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="151" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="152" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <TextStyle id="153" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ConnectorGraphicalRepresentation>
-      <GRSpec id="171" featureName="label" flexoID="116" readOnly="true" userID="FLX" useSpecificDescriptions="false" value="&quot;is responsible of&quot;" />
-      <TypedDiagramModelSlot idref="20" />
+      <GRSpec id="154" featureName="label" readOnly="true" value="&quot;is responsible of&quot;" userID="FLX" flexoID="167" />
     </ConnectorRole>
-    <LinkScheme id="172" northDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#Employee" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#Employee" useSpecificDescriptions="false" width="800" userID="FLX" label="LinkTwoEmployeesByHierarchicalRelationship" definePopupDefaultSize="false" southDirectionSupported="true" westDirectionSupported="true" isAvailableWithFloatingPalette="true" flexoID="34" height="600" skipConfirmationPanel="false" name="LinkTwoEmployeesByHierarchicalRelationship" eastDirectionSupported="true">
-      <CheckBoxParameter id="173" flexoID="107" isRequired="false" name="makeInverseRelationship" userID="FLX" useSpecificDescriptions="false" label="make_inverse_relationship" />
-      <AddObjectPropertyStatement id="174" subject="fromTarget.employeeAsManager" useSpecificDescriptions="false" userID="FLX" object="toTarget.employeeAsWorker" flexoID="82" assignation="isResponsibleOf" />
-      <AddObjectPropertyStatement id="175" subject="toTarget.employeeAsWorker" useSpecificDescriptions="false" userID="FLX" object="fromTarget.employeeAsManager" flexoID="83" assignation="isUnderResponsabilityOf" conditional="(parameters.makeInverseRelationship = true)" />
-      <AddConnector id="176" userID="FLX" useSpecificDescriptions="false" flexoID="84" assignation="connector" fromShape="fromTarget.managerAsShape" toShape="toTarget.workerAsShape">
-        <TypedDiagramModelSlot idref="20" />
-      </AddConnector>
+    <LinkScheme id="155" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#Employee" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#Employee" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" skipConfirmationPanel="false" name="LinkTwoEmployeesByHierarchicalRelationship" width="800" label="LinkTwoEmployeesByHierarchicalRelationship" height="600" userID="FLX" flexoID="34">
+      <BehaviourControlGraph_Sequence id="156" userID="FLX" flexoID="172">
+        <ControlGraph2_Sequence id="157" ownerContext="controlGraph2" userID="FLX" flexoID="170">
+          <ControlGraph2_AssignationAction id="158" assign="connector" ownerContext="controlGraph2" userID="FLX" flexoID="168">
+            <AssignableAction_AddConnector id="159" fromShape="fromTarget.managerAsShape" toShape="toTarget.workerAsShape" receiver="typedDiagramModelSlot" assignation="connector" userID="FLX" flexoID="84" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="160" assign="isUnderResponsabilityOf" ownerContext="controlGraph1" userID="FLX" flexoID="169">
+            <AssignableAction_AddObjectPropertyStatement id="161" object="fromTarget.employeeAsManager" subject="toTarget.employeeAsWorker" assignation="isUnderResponsabilityOf" conditional="(parameters.makeInverseRelationship = true)" userID="FLX" flexoID="83" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="162" assign="isResponsibleOf" ownerContext="controlGraph1" userID="FLX" flexoID="171">
+          <AssignableAction_AddObjectPropertyStatement id="163" object="toTarget.employeeAsWorker" subject="fromTarget.employeeAsManager" assignation="isResponsibleOf" userID="FLX" flexoID="82" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="164" widget="CHECKBOX" name="makeInverseRelationship" type="java.lang.Boolean" userID="FLX" flexoID="173" />
     </LinkScheme>
+    <Inspector id="165" userID="FLX" flexoID="31" />
   </FlexoConcept>
-  <Inspector id="177" flexoID="-1" userID="FLX" useSpecificDescriptions="false" inspectorTitle="DiagramSpecification" />
-  <ModelSlot_OWLModelSlot id="6" cloningStratgey="Reference" flexoID="85" isRequired="true" name="basicOrg" useSpecificDescriptions="false" userID="FLX" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" isReadOnly="false" />
-  <ModelSlot_TypedDiagramModelSlot id="20" userID="FLX" useSpecificDescriptions="false" cloningStratgey="Reference" flexoID="87" isRequired="true" name="typedDiagramModelSlot" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isReadOnly="false">
-    <FMLDiagramPaletteElementBinding id="21" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Company" userID="FLX" useSpecificDescriptions="false" flexoID="2">
-      <DropScheme idref="22" />
-      <FMLDiagramPaletteElementBindingParameter id="28" flexoID="3" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="29" flexoID="4" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
+  <UseModelSlotDeclaration id="166" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="167" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <OWLModelSlot id="168" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="basicOrg" userID="FLX" flexoID="85" />
+  <TypedDiagramModelSlot id="169" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="87">
+    <FMLDiagramPaletteElementBinding id="170" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Company" userID="FLX" flexoID="2">
+      <DropScheme idref="15" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="30" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Department" userID="FLX" useSpecificDescriptions="false" flexoID="5">
-      <DropScheme idref="31" />
-      <FMLDiagramPaletteElementBindingParameter id="38" flexoID="6" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="39" flexoID="7" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
-    </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="40" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Sub-department" userID="FLX" useSpecificDescriptions="false" flexoID="8">
+    <FMLDiagramPaletteElementBinding id="171" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Department" userID="FLX" flexoID="5">
       <DropScheme idref="41" />
-      <FMLDiagramPaletteElementBindingParameter id="48" flexoID="9" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="49" flexoID="10" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="50" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#CEO" userID="FLX" useSpecificDescriptions="false" flexoID="11">
-      <DropScheme idref="51" />
-      <FMLDiagramPaletteElementBindingParameter id="76" flexoID="12" useSpecificDescriptions="false" userID="FLX" value="CEO" />
-      <FMLDiagramPaletteElementBindingParameter id="77" flexoID="13" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
-      <FMLDiagramPaletteElementBindingParameter id="78" flexoID="14" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="79" flexoID="15" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="80" flexoID="16" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="81" flexoID="17" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="82" flexoID="18" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="83" flexoID="19" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
+    <FMLDiagramPaletteElementBinding id="172" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Sub-department" userID="FLX" flexoID="8">
+      <DropScheme idref="68" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="84" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#Marketing executive" userID="FLX" useSpecificDescriptions="false" flexoID="20">
-      <DropScheme idref="51" />
-      <FMLDiagramPaletteElementBindingParameter id="85" flexoID="21" useSpecificDescriptions="false" userID="FLX" value="Marketing Executive" />
-      <FMLDiagramPaletteElementBindingParameter id="86" flexoID="22" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
-      <FMLDiagramPaletteElementBindingParameter id="87" flexoID="23" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="88" flexoID="28" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="89" flexoID="27" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="90" flexoID="24" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="91" flexoID="25" useSpecificDescriptions="false" userID="FLX" />
-      <FMLDiagramPaletteElementBindingParameter id="92" flexoID="26" useSpecificDescriptions="false" userID="FLX" value="&lt; Computed URI &gt;" />
+    <FMLDiagramPaletteElementBinding id="173" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#CEO" userID="FLX" flexoID="11">
+      <DropScheme idref="109" />
     </FMLDiagramPaletteElementBinding>
-  </ModelSlot_TypedDiagramModelSlot>
+    <FMLDiagramPaletteElementBinding id="174" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#Marketing executive" userID="FLX" flexoID="20">
+      <DropScheme idref="109" />
+    </FMLDiagramPaletteElementBinding>
+  </TypedDiagramModelSlot>
+  <Inspector id="175" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="118" />
 </VirtualModel>

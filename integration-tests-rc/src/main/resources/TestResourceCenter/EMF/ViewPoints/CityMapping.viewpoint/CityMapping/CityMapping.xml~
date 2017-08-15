@@ -64,7 +64,7 @@
   <FlexoConcept id="37" name="House" isAbstract="true" userID="FLX" flexoID="44">
     <Inspector id="38" inspectorTitle="House" userID="FLX" flexoID="9" />
   </FlexoConcept>
-  <FlexoConcept id="39" name="Appartment" userID="FLX" flexoID="50">
+  <FlexoConcept id="39" parentFlexoConceptsList="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#House" name="Appartment" userID="FLX" flexoID="50">
     <EMFObjectIndividualRole id="40" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/House" container="model1" cloningStrategy="Clone" cardinality="ZeroOne" name="houseInModel1" userID="FLX" flexoID="47">
       <EMFModelSlot idref="3" />
     </EMFObjectIndividualRole>
@@ -96,12 +96,11 @@
         <ControlGraph1_DeleteAction id="58" object="houseInModel1" ownerContext="controlGraph1" userID="FLX" flexoID="54" />
       </BehaviourControlGraph_Sequence>
     </DeletionScheme>
-    <ParentFlexoConcept idref="37" />
     <Inspector id="59" renderer="(&quot;Appartment -  &quot; + ((instance.houseInModel1 != null) ? ((instance.appartmentInModel2 != null) ? (instance.houseInModel1.info + &quot; [sync]&quot;) : (instance.houseInModel1.info + &quot; [model1]&quot;)) : (instance.appartmentInModel2.label + &quot; [model2]&quot;)))" inspectorTitle="Appartment" userID="FLX" flexoID="12" />
     <Constraint id="60" constraint="(houseInModel1.type.name = &quot;Appartment&quot;)" userID="FLX" flexoID="45" />
     <Constraint id="61" constraint="(houseInModel1.info = appartmentInModel2.label)" userID="FLX" flexoID="46" />
   </FlexoConcept>
-  <FlexoConcept id="62" name="Mansion" userID="FLX" flexoID="61">
+  <FlexoConcept id="62" parentFlexoConceptsList="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityMapping#House" name="Mansion" userID="FLX" flexoID="61">
     <EMFObjectIndividualRole id="63" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/House" container="model1" cloningStrategy="Clone" cardinality="ZeroOne" name="houseInModel1" userID="FLX" flexoID="58">
       <EMFModelSlot idref="3" />
     </EMFObjectIndividualRole>
@@ -133,7 +132,6 @@
         <ControlGraph1_DeleteAction id="81" object="houseInModel1" ownerContext="controlGraph1" userID="FLX" flexoID="65" />
       </BehaviourControlGraph_Sequence>
     </DeletionScheme>
-    <ParentFlexoConcept idref="37" />
     <Inspector id="82" renderer="(&quot;Mansion - &quot; + ((instance.houseInModel1 != null) ? ((instance.mansionInModel2 != null) ? (instance.houseInModel1.info + &quot; [sync]&quot;) : (instance.houseInModel1.info + &quot; [model1]&quot;)) : (instance.mansionInModel2.number.toString + &quot; [model2]&quot;)))" inspectorTitle="Mansion" userID="FLX" flexoID="18" />
     <Constraint id="83" constraint="(houseInModel1.type.name = &quot;Mansion&quot;)" userID="FLX" flexoID="56" />
     <Constraint id="84" constraint="(houseInModel1.info = mansionInModel2.number.toString)" userID="FLX" flexoID="57" />
@@ -164,7 +162,6 @@
     <EMFObjectIndividualRole id="99" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/Mayor" container="model1" cloningStrategy="Clone" cardinality="ZeroOne" name="mayor" userID="FLX" description="" flexoID="271">
       <EMFModelSlot idref="5" />
     </EMFObjectIndividualRole>
-    <ParentFlexoConcept idref="85" />
     <Inspector id="100" inspectorTitle="Mayor" userID="FLX" flexoID="27" />
   </FlexoConcept>
   <ModelSlot_EMFModelSlot id="3" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city1" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="model1" userID="FLX" flexoID="161">
