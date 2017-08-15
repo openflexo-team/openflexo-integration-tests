@@ -123,7 +123,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		assertTrue(vpRes.isLoaded());
 		cityMappingVP = vp;
 
-		VirtualModel cityMapping = vp.getVirtualModelNamed("CityMapping");
+		VirtualModel cityMapping = vp.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMapping);
 
 	}
@@ -131,7 +131,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	@Test
 	@TestOrder(3)
 	public void checkSynchronizationScheme() {
-		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("CityMapping");
+		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMapping);
 
 		syncScheme = cityMapping.getSynchronizationScheme();
@@ -237,7 +237,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	@TestOrder(5)
 	public void checkConceptAndRolesBindingModel() {
 
-		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("CityMapping");
+		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("Mapping");
 
 		FlexoConcept fc = cityMapping.getFlexoConcept("City");
 
@@ -271,7 +271,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	@TestOrder(6)
 	public void checkSynchronizeModel1FromModel2() {
 
-		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("CityMapping");
+		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMapping);
 
 		ActionScheme actionScheme = (ActionScheme) cityMapping.getFlexoBehaviour("synchronizeModel1FromModel2");
@@ -294,7 +294,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	@TestOrder(7)
 	public void checkSynchronizeModel2FromModel1() {
 
-		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("CityMapping");
+		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMapping);
 
 		ActionScheme actionScheme = (ActionScheme) cityMapping.getFlexoBehaviour("synchronizeModel2FromModel1");
@@ -317,7 +317,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	@TestOrder(8)
 	public void checkCityCreationScheme() {
 
-		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("CityMapping");
+		VirtualModel cityMapping = cityMappingVP.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMapping);
 
 		FlexoConcept city = cityMapping.getFlexoConcept("City");
