@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" URI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml" version="0.1" name="Mapping" userID="FLX" flexoID="264">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml" version="0.1" name="Mapping" userID="FLX" flexoID="264">
   <FlexoConcept id="1" name="City" userID="FLX" flexoID="35">
     <Inspector id="2" renderer="((instance.cityInModel1 != null) ? ((instance.cityInModel2 != null) ? (instance.cityInModel1.name + &quot; [sync]&quot;) : (instance.cityInModel1.name + &quot; [model1]&quot;)) : (instance.cityInModel2.name + &quot; [model2]&quot;))" inspectorTitle="City" userID="FLX" flexoID="1" />
     <EMFObjectIndividualRole id="3" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/City" container="model1" cloningStrategy="Clone" cardinality="ZeroOne" name="cityInModel1" userID="FLX" flexoID="33" />
