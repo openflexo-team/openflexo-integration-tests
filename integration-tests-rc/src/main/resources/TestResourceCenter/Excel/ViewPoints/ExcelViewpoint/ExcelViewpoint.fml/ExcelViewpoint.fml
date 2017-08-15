@@ -1,0 +1,8 @@
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://ExcelViewpoint")
+public class ExcelViewpoint {
+}

@@ -1,0 +1,201 @@
+use org.openflexo.technologyadapter.excel.BasicExcelModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://ExcelViewpoint/Diagram.fml")
+public class Diagram {
+
+  @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)  
+  public FlexoConceptInstanceType<NotFound:null> personExcelSheet;
+  @BasicExcelModelSlot(cardinality=ZeroOne,readOnly=false)  
+  public ExcelWorkbook excelMS;
+  @TypedDiagramModelSlot(metamodel="http://ExcelViewpoint/Diagram/Diagram.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<NotFound:null> typedDiagramModelSlot;
+
+  @SynchronizationScheme  
+  Void synchronization(Object age) {  
+    List<ExcelSheet> sheets = excelMS.XLS::SelectExcelSheet();    
+    ExcelSheet firstSheet = sheets.get(0);    
+    personExcelSheet = FML@RT::MatchFlexoConceptInstance as no type specified match=() using no creation scheme specified:no creation scheme specified(firstSheet);    
+    for (row : excelMS.XLS::SelectExcelRow where=(selected.rowIndex > 0)) {    
+      FML@RT::MatchFlexoConceptInstance as Person match=(row=row,name=row.excelCells.get(1),city=row.excelCells.get(4),age=row.excelCells.get(3),activity=row.excelCells.get(2)) using Person:creation(,row,row.excelCells.get(2),row.excelCells.get(3),row.excelCells.get(4),row.excelCells.get(1))    
+    }  
+  }  
+
+  @DeletionScheme  
+  void deletion() {  
+  
+  }  
+
+
+  @FlexoConcept  
+  public class Sheet {  
+  
+    FlexoRole shape as ShapeSpecification from Diagram;  
+    @ExcelSheetRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelSheet sheet;  
+  
+    @DropScheme    
+    Sheet:drop(String name) {    
+      sheet = excelMS.AddExcelSheet();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+    @CreationScheme    
+    Sheet:creation(Object technologyObject) {    
+      sheet = parameters.technologyObject;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete shape    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Cell {  
+  
+    FlexoRole shape as ShapeSpecification from Diagram;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell cell;  
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete shape    
+    }    
+  
+    @CreationScheme    
+    Cell:creation(Object technologyObject) {    
+      cell = parameters.technologyObject;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+    @DropScheme    
+    Cell:dropInASheet(Integer rowIndex, Integer columnIndex, String value) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      cell = excelMS.AddExcelCell();      
+      excelMS.CellStyleAction()      
+      excelMS.CellStyleAction()      
+      excelMS.CellStyleAction()      
+      excelMS.CellStyleAction()    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Row {  
+  
+    FlexoRole shape as ShapeSpecification from Diagram;  
+    @ExcelRowRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelRow row;  
+  
+    @DropScheme    
+    Row:dropAtTopLevel(Integer index, FlexoConceptInstanceType<NotFound:null> editionPatternInstance) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      row = excelMS.AddExcelRow();    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete shape    
+    }    
+  
+    @DropScheme    
+    Row:dropInASheet(Integer rowIndex) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      row = excelMS.AddExcelRow();    
+    }    
+  
+    @CreationScheme    
+    Row:creationRow(Object row) {    
+      row = parameters.row;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Person {  
+  
+    FlexoRole shape as ShapeSpecification from Diagram;  
+    FlexoRole shape2 as ShapeSpecification from Diagram;  
+    FlexoRole shape3 as ShapeSpecification from Diagram;  
+    FlexoRole shape4 as ShapeSpecification from Diagram;  
+    FlexoRole shape5 as ShapeSpecification from Diagram;  
+    FlexoRole shape6 as ShapeSpecification from Diagram;  
+    @ExcelRowRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelRow row;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell name;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell city;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell age;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell activity;  
+  
+    @DropScheme    
+    Person:dropPersonAtTopLevel(String name, String city, Integer age, String activity, Integer index) {    
+      row = excelMS.AddExcelRow();      
+      name = excelMS.AddExcelCell();      
+      city = excelMS.AddExcelCell();      
+      age = excelMS.AddExcelCell();      
+      activity = excelMS.AddExcelCell();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape2 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape3 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape4 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape5 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape6 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+    @CreationScheme    
+    Person:creation(Integer index, Object row, Object activity, Object age, Object city, Object name) {    
+      row = parameters.row;      
+      activity = parameters.activity;      
+      age = parameters.age;      
+      name = parameters.name;      
+      city = parameters.city;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape4 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape3 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape2 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape5 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape6 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete shape2      
+      delete shape3      
+      delete shape4      
+      delete shape5      
+      delete shape6      
+      delete shape    
+    }    
+  
+  }  
+
+}
