@@ -102,7 +102,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		for (FlexoResourceCenter<?> rc : serviceManager.getResourceCenterService().getResourceCenters()) {
 			System.out.println("rc: " + rc);
 			for (FlexoResource<?> r : rc.getAllResources(null)) {
-				System.out.println("  > " + r);
+				System.out.println("  > " + r.getURI() + " " + r);
 			}
 		}
 
