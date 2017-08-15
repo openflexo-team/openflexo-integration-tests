@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" modelVersion="1.0" URI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CitiesDiagram.fml" version="0.1" name="CitiesDiagram" userID="FLX" flexoID="61">
+  <FlexoConcept id="1" name="CityGR" userID="FLX" flexoID="10">
+    <Inspector id="2" renderer="(((city.cityInModel1 != null) ? (&quot;SyncCity (1) : &quot; + city.cityInModel1.name) : (&quot;SyncCity (2) : &quot; + city.cityInModel2.name)) + &quot;-&quot;)" inspectorTitle="CityGR" userID="FLX" flexoID="1" />
+    <FlexoConceptInstanceRole id="3" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml#City" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="114" />
+    <CreationScheme id="4" skipConfirmationPanel="false" name="creation" width="800" label="creation" height="600" userID="FLX" flexoID="4">
+      <BehaviourControlGraph_Sequence id="5" userID="FLX" flexoID="76">
+        <ControlGraph2_AssignationAction id="6" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="79" />
+        <ControlGraph1_AssignationAction id="7" assign="city" ownerContext="controlGraph1" userID="FLX" flexoID="77">
+          <AssignableAction_ExpressionAction id="8" expression="parameters.city" userID="FLX" flexoID="78" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="9" widget="CUSTOM_WIDGET" name="city" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;null&gt;" userID="FLX" flexoID="127" />
+    </CreationScheme>
+    <DeletionScheme id="10" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="5">
+      <BehaviourControlGraph_DeleteAction id="11" object="shape" userID="FLX" flexoID="13" />
+    </DeletionScheme>
+    <ActionScheme id="12" skipConfirmationPanel="false" name="synchronizeThatCity" width="800" label="synchronizeThatCity" height="600" userID="FLX" flexoID="42">
+      <BehaviourControlGraph_Sequence id="13" userID="FLX" flexoID="80">
+        <ControlGraph2_ExpressionAction id="14" expression="city.generateModel2FromModel1()" ownerContext="controlGraph2" userID="FLX" flexoID="82" />
+        <ControlGraph1_ExpressionAction id="15" expression="city.generateModel1FromModel2()" ownerContext="controlGraph1" userID="FLX" flexoID="81" />
+      </BehaviourControlGraph_Sequence>
+    </ActionScheme>
+    <ActionScheme id="16" skipConfirmationPanel="false" name="ChangeTheName" width="800" label="ChangeTheName" height="600" userID="FLX" flexoID="47">
+      <BehaviourControlGraph_Sequence id="17" userID="FLX" flexoID="83">
+        <ControlGraph2_AssignationAction id="18" assign="city.cityInModel2.name" ownerContext="controlGraph2" userID="FLX" flexoID="86">
+          <AssignableAction_ExpressionAction id="19" expression="parameters.newName" userID="FLX" flexoID="87" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="20" assign="city.cityInModel1.name" ownerContext="controlGraph1" userID="FLX" flexoID="84">
+          <AssignableAction_ExpressionAction id="21" expression="parameters.newName" userID="FLX" flexoID="85" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="22" widget="TEXT_FIELD" name="newName" type="java.lang.String" userID="FLX" flexoID="128" />
+    </ActionScheme>
+  </FlexoConcept>
+  <Inspector id="23" inspectorTitle="CitiesDiagram" userID="FLX" flexoID="23" />
+  <DeletionScheme id="24" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="46" />
+  <SynchronizationScheme id="25" skipConfirmationPanel="false" name="synchronize" width="800" label="synchronize" height="600" userID="FLX" flexoID="22">
+    <BehaviourControlGraph_IterationAction id="26" iteratorName="cityFC" userID="FLX" flexoID="27">
+      <Iteration_SelectFlexoConceptInstance id="27" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml#City" receiver="mappingmodel" ownerContext="iterationControlGraph" userID="FLX" flexoID="29" />
+      <ControlGraph_MatchFlexoConceptInstance id="28" creationSchemeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CitiesDiagram.fml#CityGR.creation" receiver="this" ownerContext="controlGraph" description="" userID="FLX" flexoID="34">
+        <MatchingCriteria id="29" patternRoleName="shape" userID="FLX" flexoID="37" />
+        <MatchingCriteria id="30" patternRoleName="city" value="cityFC" userID="FLX" flexoID="38" />
+        <CreateFlexoConceptInstanceParameter id="31" paramName="city" value="cityFC" userID="FLX" flexoID="116" />
+      </ControlGraph_MatchFlexoConceptInstance>
+    </BehaviourControlGraph_IterationAction>
+  </SynchronizationScheme>
+</VirtualModel>

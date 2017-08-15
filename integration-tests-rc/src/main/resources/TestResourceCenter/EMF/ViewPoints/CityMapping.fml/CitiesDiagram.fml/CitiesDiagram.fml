@@ -1,0 +1,53 @@
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.thalesgroup.com/openflexo/emf/CityMapping/CitiesDiagram.fml")
+public class CitiesDiagram {
+
+  @DeletionScheme  
+  void deletion() {  
+  
+  }  
+
+  @SynchronizationScheme  
+  Void synchronize() {  
+    for (cityFC : mappingmodel.SelectFlexoConceptInstance(type=City)) {    
+      FML@RT::MatchFlexoConceptInstance as CityGR match=(city=cityFC) using CityGR:creation(cityFC)    
+    }  
+  }  
+
+
+  @FlexoConcept  
+  public class CityGR {  
+  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<City> city;  
+  
+    @CreationScheme    
+    CityGR:creation(FlexoConceptInstanceType<NotFound:null> city) {    
+      city = parameters.city;      
+      shape = <no_assignable_action>;    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete shape    
+    }    
+  
+    @ActionScheme    
+    Void synchronizeThatCity() {    
+      city.generateModel1FromModel2()      
+      city.generateModel2FromModel1()    
+    }    
+  
+    @ActionScheme    
+    Void ChangeTheName(String newName) {    
+      city.cityInModel1.name = parameters.newName;      
+      city.cityInModel2.name = parameters.newName;    
+    }    
+  
+  }  
+
+}

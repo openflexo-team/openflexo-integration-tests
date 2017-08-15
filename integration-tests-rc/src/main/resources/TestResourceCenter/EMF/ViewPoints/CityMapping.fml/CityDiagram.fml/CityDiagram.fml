@@ -1,0 +1,168 @@
+use org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram.fml")
+public class CityDiagram {
+
+  @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)  
+  public FlexoConceptInstanceType<City> city;
+  @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)  
+  public FlexoConceptInstanceType<CityGR> cityGR;
+  @FMLRTVirtualModelInstanceModelSlot(cardinality=ZeroOne,readOnly=false)  
+  public VirtualModelInstanceType<Mapping> cityMapping;
+  @TypedDiagramModelSlot(metamodel="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram/CityDiagram.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<CityDiagram> typedDiagramModelSlot;
+
+  @CreationScheme  
+  CityDiagram:createNewDiagramWithSuppliedCity(FlexoConceptInstanceType<City> cityParameter) {  
+    city = parameters.cityParameter;  
+  }  
+
+  @CreationScheme  
+  CityDiagram:createNewDiagramRepresentingNewCity(String newCityName, String description) {  
+    FlexoConceptInstanceType<City> myNewCity = City.createANewOne(parameters.newCityName);    
+    CityGR.createCityGR(myNewCity)  
+  }  
+
+  @SynchronizationScheme  
+  Void synchronization() {  
+    cityGR = FML@RT::MatchFlexoConceptInstance as CityGR match=(city=city) using CityGR:createCityGR(city);    
+    for (appartment : cityMapping.SelectFlexoConceptInstance(type=Appartment,where=where=(selected.city = city))) {    
+      FML@RT::MatchFlexoConceptInstance as AppartmentGR match=(appartment=appartment) using AppartmentGR:createAppartmentGR(appartment)    
+    }    
+    for (mansion : cityMapping.SelectFlexoConceptInstance(type=Mansion,where=where=(selected.city = city))) {    
+      FML@RT::MatchFlexoConceptInstance as MansionGR match=(mansion=mansion) using MansionGR:createMansionGR(mansion)    
+    }  
+  }  
+
+  @DeletionScheme  
+  void deletion() {  
+  
+  }  
+
+
+  @FlexoConcept  
+  public class CityGR {  
+  
+    FlexoRole containerShape as ShapeSpecification from CityDiagram;  
+    FlexoRole icon as ShapeSpecification from CityDiagram;  
+    FlexoRole label as ShapeSpecification from CityDiagram;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<City> city;  
+  
+    @DropScheme    
+    CityGR:dropCityGRAtTopLevel(FlexoConceptInstanceType<City> city) {    
+      containerShape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = city.render;      
+      };      
+      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      city = parameters.city;    
+    }    
+  
+    @CreationScheme    
+    CityGR:createCityGR(FlexoConceptInstanceType<City> cityParameter) {    
+      containerShape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = city.render;      
+      };      
+      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      city = parameters.cityParameter;    
+    }    
+  
+    @DeletionScheme    
+    Void deletionFromDiagram() {    
+      delete icon      
+      delete label      
+      delete containerShape    
+    }    
+  
+    @DeletionScheme    
+    Void deletionFromModel() {    
+      delete icon      
+      delete label      
+      delete containerShape      
+      delete city    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class MansionGR {  
+  
+    FlexoRole shape as ShapeSpecification from CityDiagram;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<Mansion> mansion;  
+  
+    @DropScheme    
+    MansionGR:dropMansionInCity() {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = mansion.render;      
+      };    
+    }    
+  
+    @CreationScheme    
+    MansionGR:createMansionGR(FlexoConceptInstanceType<Mansion> mansionParam) {    
+      mansion = parameters.mansionParam;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = mansion.render;      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deletionFromDiagram() {    
+      delete shape    
+    }    
+  
+    @DeletionScheme    
+    Void deletionFromModel() {    
+      delete shape      
+      delete mansion    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class AppartmentGR {  
+  
+    FlexoRole shape as ShapeSpecification from CityDiagram;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<Appartment> appartment;  
+  
+    @DropScheme    
+    AppartmentGR:dropAppartmentGRAtTopLevel() {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = appartment.render;      
+      };    
+    }    
+  
+    @CreationScheme    
+    AppartmentGR:createAppartmentGR(FlexoConceptInstanceType<Appartment> appartmentParam) {    
+      appartment = parameters.appartmentParam;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = appartment.render;      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deletionFromDiagram() {    
+      delete shape    
+    }    
+  
+    @DeletionScheme    
+    Void deletionFromModel() {    
+      delete shape      
+      delete appartment    
+    }    
+  
+  }  
+
+}
