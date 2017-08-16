@@ -1,0 +1,181 @@
+use org.openflexo.technologyadapter.owl.OWLModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml")
+public class DiagramSpecification {
+
+  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_94 conformTo="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl" required=false readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+
+  @FlexoConcept  
+  public class ITEnablers {  
+  
+    FlexoRole itEnablers as Individual conformTo ITEnablers from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole label as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    ITEnablers:dropITEnablersAtTopLevel(String uri) {    
+      itEnablers = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = "IT Enablers";      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class EnablingChanges {  
+  
+    FlexoRole enablingChanges as Individual conformTo EnablingChanges from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole label as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    EnablingChanges:dropEnablingChangesAtTopLevel(String uri) {    
+      enablingChanges = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = "Enabling Changes";      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class BusinessChanges {  
+  
+    FlexoRole businessChanges as Individual conformTo BusinessChanges from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole label as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    BusinessChanges:dropBusinessChangesAtTopLevel(String uri) {    
+      businessChanges = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = "Business Changes";      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Benefits {  
+  
+    FlexoRole benefits as Individual conformTo Benefits from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole label as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    Benefits:dropBenefitsAtTopLevel(String uri) {    
+      benefits = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = "Benefits";      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class InvestmentObjectives {  
+  
+    FlexoRole investmentObjectives as Individual conformTo InvestmentObjectives from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole label as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    InvestmentObjectives:dropInvestmentObjectivesAtTopLevel(String uri) {    
+      investmentObjectives = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = "Investment Objectives";      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class BDNItem {  
+  
+    FlexoRole bdnItem as Individual conformTo BDNItem from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:containsItem containsItem;  
+  
+    @DropScheme    
+    BDNItem:dropBDNItemInITEnablers(String uri) {    
+      bdnItem = owl.AddOWLIndividual();      
+      containsItem = target.itEnablers.containsItem = bdnItem;;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = bdnItem.uriName;      
+      };    
+    }    
+  
+    @DropScheme    
+    BDNItem:dropBDNItemInEnablingChanges(String uri) {    
+      bdnItem = owl.AddOWLIndividual();      
+      containsItem = target.enablingChanges.containsItem = bdnItem;;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = bdnItem.uriName;      
+      };    
+    }    
+  
+    @DropScheme    
+    BDNItem:dropBDNItemInBusinessChanges(String uri) {    
+      bdnItem = owl.AddOWLIndividual();      
+      containsItem = target.businessChanges.containsItem = bdnItem;;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = bdnItem.uriName;      
+      };    
+    }    
+  
+    @DropScheme    
+    BDNItem:dropBDNItemInBenefits(String uri) {    
+      bdnItem = owl.AddOWLIndividual();      
+      containsItem = target.benefits.containsItem = bdnItem;;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = bdnItem.uriName;      
+      };    
+    }    
+  
+    @DropScheme    
+    BDNItem:dropBDNItemInInvestmentObjectives(String uri) {    
+      bdnItem = owl.AddOWLIndividual();      
+      containsItem = target.investmentObjectives.containsItem = bdnItem;;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = bdnItem.uriName;      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ItemDependancy {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:dependsOf dependsOfStatement;  
+    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
+  
+    @LinkScheme    
+    ItemDependancy:linkBDNItemToBDNItem() {    
+      dependsOfStatement = toTarget.bdnItem.dependsOf = fromTarget.bdnItem;;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };    
+    }    
+  
+  }  
+
+}
