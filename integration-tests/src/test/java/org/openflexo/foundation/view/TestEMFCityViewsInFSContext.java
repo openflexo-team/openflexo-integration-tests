@@ -125,10 +125,10 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		addView.setVirtualModel(cityViewsViewPoint);
 		addView.doAction();
 		assertTrue(addView.hasActionExecutionSucceeded());
-		FMLRTVirtualModelInstance newView = addView.getNewVirtualModelInstance();
-		System.out.println("New view " + newView + " created in "
-				+ ((FMLRTVirtualModelInstanceResource) newView.getResource()).getIODelegate().toString());
+		view = addView.getNewVirtualModelInstance();
 		assertNotNull(view);
+		System.out.println(
+				"New view " + view + " created in " + ((FMLRTVirtualModelInstanceResource) view.getResource()).getIODelegate().toString());
 		assertEquals(addView.getNewVirtualModelInstanceName(), view.getName());
 		assertEquals(addView.getNewVirtualModelInstanceTitle(), view.getTitle());
 		assertEquals(addView.getVirtualModel(), cityViewsViewPoint);
