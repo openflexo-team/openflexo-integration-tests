@@ -8,7 +8,7 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 @VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl/DiagramSpecification.fml")
 public class DiagramSpecification {
 
-  ModelSlot basicOntologyi type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_92 conformTo="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl" required=true readOnly=false;
+  ModelSlot basicOntologyi type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_95 conformTo="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl" required=true readOnly=false;
   @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
   public DiagramType<DiagramSpecification> typedDiagramModelSlot;
 
@@ -16,7 +16,7 @@ public class DiagramSpecification {
   public class Concept {  
   
     FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole individual as Individual conformTo Thing from basicOntologyi ;  
+    FlexoRole individual as Individual conformTo Concept from basicOntologyi ;  
   
     @DropScheme    
     Concept:DropConceptAtTopLevel(String name) {    
@@ -37,7 +37,7 @@ public class DiagramSpecification {
   
     @LinkScheme    
     IsARelationship:LinkTwoConceptByIsARelationShip() {    
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_90 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
         label = "is a";      
       };      
       isA = fromTarget.individual.semanticRelation = toTarget.individual;;    
@@ -54,7 +54,7 @@ public class DiagramSpecification {
   
     @LinkScheme    
     HasRelationship:LinkTwoConceptByHasRelationShip() {    
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_90 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
         label = "has";      
       };      
       has = fromTarget.individual.has = toTarget.individual;;    
