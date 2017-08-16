@@ -8,7 +8,7 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 @VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl/DiagramSpecification.fml")
 public class DiagramSpecification {
 
-  ModelSlot basicOntologyi type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_92 conformTo="http://www.w3.org/2002/07/owl" required=true readOnly=false;
+  ModelSlot basicOntologyi type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_92 conformTo="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl" required=true readOnly=false;
   @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
   public DiagramType<DiagramSpecification> typedDiagramModelSlot;
 
@@ -33,14 +33,14 @@ public class DiagramSpecification {
   
     FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
     @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public ObjectPropertyStatement isA;  
+    public Statement:semanticRelation isA;  
   
     @LinkScheme    
     IsARelationship:LinkTwoConceptByIsARelationShip() {    
       connector = AddConnector$AddConnectorImpl_$$_jvste0e_90 conformTo ConnectorSpecification from typedDiagramModelSlot {      
         label = "is a";      
       };      
-      isA = fromTarget.individual.<No Property> = toTarget.individual;;    
+      isA = fromTarget.individual.semanticRelation = toTarget.individual;;    
     }    
   
   }  
@@ -50,14 +50,14 @@ public class DiagramSpecification {
   
     FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
     @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public ObjectPropertyStatement has;  
+    public Statement:has has;  
   
     @LinkScheme    
     HasRelationship:LinkTwoConceptByHasRelationShip() {    
       connector = AddConnector$AddConnectorImpl_$$_jvste0e_90 conformTo ConnectorSpecification from typedDiagramModelSlot {      
         label = "has";      
       };      
-      has = fromTarget.individual.<No Property> = toTarget.individual;;    
+      has = fromTarget.individual.has = toTarget.individual;;    
     }    
   
   }  
