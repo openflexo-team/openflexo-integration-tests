@@ -1,0 +1,8 @@
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl")
+public class UseCaseDiagram {
+}

@@ -1,0 +1,106 @@
+use org.openflexo.technologyadapter.owl.OWLModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification.fml")
+public class DiagramSpecification {
+
+  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_96 conformTo="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl" required=false readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+
+  @FlexoConcept  
+  public class Actor {  
+  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole package as Individual conformTo Package from owl ;  
+    FlexoRole actor as Individual conformTo Actor from owl ;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:packagedElement packagedElement;  
+  
+    @DropScheme    
+    Actor:DropNewActor(String name, String uri, IFlexoOntologyIndividual packageParameter) {    
+      package = parameters.packageParameter;      
+      actor = owl.AddOWLIndividual();      
+      packagedElement = package.packagedElement = actor;;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = actor.name;      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deleteActor() {    
+      delete shape      
+      delete actor      
+      package = null;      
+      packagedElement = null;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class UseCase {  
+  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole package as Individual conformTo Package from owl ;  
+    FlexoRole useCase as Individual conformTo UseCase from owl ;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:packagedElement packagedElement;  
+  
+    @DropScheme    
+    UseCase:DropNewUseCase(String name, String uri, IFlexoOntologyIndividual packageParameter) {    
+      package = parameters.packageParameter;      
+      useCase = owl.AddOWLIndividual();      
+      packagedElement = package.packagedElement = useCase;;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = useCase.name;      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deleteUseCase() {    
+      delete shape      
+      delete useCase      
+      package = null;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ActorUseCaseAssociation {  
+  
+    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
+    FlexoRole actor as Individual conformTo Actor from owl ;  
+    FlexoRole useCase as Individual conformTo UseCase from owl ;  
+    FlexoRole association as Individual conformTo Association from owl ;  
+    FlexoRole package as Individual conformTo Package from owl ;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:packagedElement packagedElement;  
+    FlexoRole actorProperty as Individual conformTo Property from owl ;  
+    FlexoRole useCaseProperty as Individual conformTo Property from owl ;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:ownedEnd ownedEndForActor;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:ownedEnd ownedEndForUseCase;  
+  
+    @LinkScheme    
+    ActorUseCaseAssociation:associateActorToUseCase(IFlexoOntologyIndividual packageParameter, String associationURI, String actorPropertyURI, String useCasePropertyURI) {    
+      actor = fromTarget;      
+      useCase = toTarget;      
+      package = parameters.packageParameter;      
+      association = owl.AddOWLIndividual();      
+      packagedElement = package.packagedElement = association;;      
+      actorProperty = owl.AddOWLIndividual();      
+      useCaseProperty = owl.AddOWLIndividual();      
+      ownedEndForActor = association.ownedEnd = actorProperty;;      
+      ownedEndForUseCase = association.ownedEnd = useCaseProperty;;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_91 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };    
+    }    
+  
+  }  
+
+}
