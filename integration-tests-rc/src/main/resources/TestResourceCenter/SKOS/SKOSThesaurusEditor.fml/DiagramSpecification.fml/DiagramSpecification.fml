@@ -1,0 +1,157 @@
+use org.openflexo.technologyadapter.owl.OWLModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml")
+public class DiagramSpecification {
+
+  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_95 conformTo="http://www.w3.org/2004/02/skos/core" required=false readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+
+  @FlexoConcept  
+  public class ConceptScheme {  
+  
+    FlexoRole conceptScheme as Individual conformTo ConceptScheme from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    ConceptScheme:DropConceptSchemeAtTopLevel(String conceptSchemeName, String conceptSchemeURI, String preferedLabel, String alternativeLabel) {    
+      conceptScheme = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = conceptScheme.uriName;      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Concept {  
+  
+    FlexoRole ontologyConcept as Individual conformTo Concept from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    Concept:DropConceptAtTopLevel(String conceptName, String conceptURI, IFlexoOntologyIndividual conceptScheme, String preferedLabel, String alternativeLabel) {    
+      ontologyConcept = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = ontologyConcept.uriName;      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ConceptToConceptSchemeRelationship {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:topConceptOf topConceptOf;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:hasTopConcept hasTopConcept;  
+    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
+  
+    @LinkScheme    
+    ConceptToConceptSchemeRelationship:LinkAConceptToAConceptScheme(Boolean makeInverseRelationship) {    
+      topConceptOf = fromTarget.ontologyConcept.topConceptOf = toTarget.conceptScheme;;      
+      hasTopConcept = toTarget.conceptScheme.hasTopConcept = fromTarget.ontologyConcept;;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "top concept of";      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ConceptSpecialization {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:broader broader;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:broadMatch broadMatch;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:narrower narrower;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:narrowMatch narrowMatch;  
+    FlexoRole broaderConnector as ConnectorSpecification from DiagramSpecification;  
+    FlexoRole broadMatchConnector as ConnectorSpecification from DiagramSpecification;  
+  
+    @LinkScheme    
+    ConceptSpecialization:SpecializeAConcept(Boolean match, Boolean makeInverseRelationship) {    
+      broader = fromTarget.ontologyConcept.broader = toTarget.ontologyConcept;;      
+      broadMatch = fromTarget.ontologyConcept.broadMatch = toTarget.ontologyConcept;;      
+      narrower = toTarget.ontologyConcept.narrower = fromTarget.ontologyConcept;;      
+      narrowMatch = toTarget.ontologyConcept.narrowMatch = fromTarget.ontologyConcept;;      
+      broaderConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "broader";      
+      };      
+      broadMatchConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "broader match";      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ConceptGeneralization {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:narrower narrower;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:narrowMatch narrowMatch;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:broader broader;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:broadMatch broadMatch;  
+    FlexoRole narrowerConnector as ConnectorSpecification from DiagramSpecification;  
+    FlexoRole narrowMatchConnector as ConnectorSpecification from DiagramSpecification;  
+  
+    @LinkScheme    
+    ConceptGeneralization:GeneralizeAConcept(Boolean match, Boolean makeInverseRelationship) {    
+      narrower = fromTarget.ontologyConcept.narrower = toTarget.ontologyConcept;;      
+      narrowMatch = fromTarget.ontologyConcept.narrowMatch = toTarget.ontologyConcept;;      
+      broader = toTarget.ontologyConcept.broader = fromTarget.ontologyConcept;;      
+      broadMatch = toTarget.ontologyConcept.broadMatch = fromTarget.ontologyConcept;;      
+      narrowerConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "narrower";      
+      };      
+      narrowMatchConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "narrow match";      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ConceptRelatedRelationship {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:related related1;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:related related2;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:relatedMatch relatedMatch1;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:relatedMatch relatedMatch2;  
+    FlexoRole relatedConnector as ConnectorSpecification from DiagramSpecification;  
+    FlexoRole relatedMatchConnector as ConnectorSpecification from DiagramSpecification;  
+  
+    @LinkScheme    
+    ConceptRelatedRelationship:MakeTwoConceptRelatedToEachOther(Boolean match) {    
+      related1 = fromTarget.ontologyConcept.related = toTarget.ontologyConcept;;      
+      related2 = toTarget.ontologyConcept.related = fromTarget.ontologyConcept;;      
+      relatedMatch1 = fromTarget.ontologyConcept.relatedMatch = toTarget.ontologyConcept;;      
+      relatedMatch2 = toTarget.ontologyConcept.relatedMatch = fromTarget.ontologyConcept;;      
+      relatedConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "related";      
+      };      
+      relatedMatchConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "related match";      
+      };    
+    }    
+  
+  }  
+
+}

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="155">
+  <FlexoConcept id="1" name="ConceptScheme" userID="FLX" flexoID="45">
+    <Inspector id="2" inspectorTitle="Concept Scheme" userID="FLX" flexoID="1">
+      <GenericInspectorEntry id="3" widget="TEXT_FIELD" data="conceptScheme.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="168" />
+      <GenericInspectorEntry id="4" readOnly="true" widget="TEXT_FIELD" data="conceptScheme.label.toString" name="label" label="label" type="java.lang.String" userID="FLX" flexoID="169" />
+    </Inspector>
+    <OWLIndividualRole id="5" ontologicType="http://www.w3.org/2004/02/skos/core#ConceptScheme" cloningStrategy="Clone" cardinality="ZeroOne" name="conceptScheme" userID="FLX" flexoID="43" />
+    <ShapeRole id="6" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="44">
+      <ShapeGraphicalRepresentation id="7" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="175.0" y="40.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="143.0" height="41.14754098360656" identifier="object_0" layer="1" text="label">
+        <SelectedColorGradientBackgroundStyle id="8" color1="255,102,102" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" transparencyLevel="0.5" />
+        <ForegroundStyle id="9" color="204,0,51" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.6" />
+        <FocusedColorGradientBackgroundStyle id="10" color1="255,102,102" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" transparencyLevel="0.5" />
+        <ShadowStyle id="11" />
+        <FocusedForegroundStyle id="12" color="204,0,51" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.6" />
+        <SelectedForegroundStyle id="13" color="204,0,51" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.6" />
+        <ColorGradientBackgroundStyle id="14" color1="255,102,102" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" transparencyLevel="0.5" />
+        <RectangleShape id="15" isRounded="true" arcSize="20.0" />
+        <TextStyle id="16" backgroundColor="255,255,255" color="102,0,0" font="Lucida Sans,1,11" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="17" featureName="label" value="conceptScheme.uriName" userID="FLX" flexoID="291" />
+    </ShapeRole>
+    <DropScheme id="18" target="top" name="DropConceptSchemeAtTopLevel" width="800" label="DropConceptSchemeAtTopLevel" height="600" userID="FLX" flexoID="6">
+      <BehaviourControlGraph_Sequence id="19" userID="FLX" flexoID="163">
+        <ControlGraph2_AssignationAction id="20" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="161">
+          <AssignableAction_AddShape id="21" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="50" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="22" assign="conceptScheme" ownerContext="controlGraph1" userID="FLX" flexoID="162">
+          <AssignableAction_AddOWLIndividual id="23" individualName="parameters.conceptSchemeURI" receiver="owl" assignation="conceptScheme" userID="FLX" flexoID="46">
+            <DataPropertyAssertion id="24" value="parameters.conceptSchemeName" dataPropertyURI="http://www.w3.org/2000/01/rdf-schema#label" userID="FLX" flexoID="47" />
+            <DataPropertyAssertion id="25" value="parameters.preferedLabel" dataPropertyURI="http://www.w3.org/2004/02/skos/core#prefLabel" userID="FLX" flexoID="48" />
+            <DataPropertyAssertion id="26" value="parameters.alternativeLabel" dataPropertyURI="http://www.w3.org/2004/02/skos/core#altLabel" userID="FLX" flexoID="49" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="27" widget="TEXT_FIELD" name="conceptSchemeName" type="java.lang.String" userID="FLX" flexoID="164" />
+      <GenericBehaviourParameter id="28" isRequired="true" widget="URI" name="conceptSchemeURI" type="java.lang.String" userID="FLX" flexoID="165" />
+      <GenericBehaviourParameter id="29" widget="TEXT_FIELD" name="preferedLabel" type="java.lang.String" userID="FLX" flexoID="166" />
+      <GenericBehaviourParameter id="30" widget="TEXT_FIELD" name="alternativeLabel" type="java.lang.String" userID="FLX" flexoID="167" />
+    </DropScheme>
+  </FlexoConcept>
+  <FlexoConcept id="31" name="Concept" userID="FLX" flexoID="53">
+    <Inspector id="32" inspectorTitle="Concept" userID="FLX" flexoID="8">
+      <GenericInspectorEntry id="33" widget="TEXT_FIELD" data="ontologyConcept.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="179" />
+      <GenericInspectorEntry id="34" readOnly="true" widget="TEXT_FIELD" data="ontologyConcept.label.toString" name="label" label="label" type="java.lang.String" userID="FLX" flexoID="180" />
+    </Inspector>
+    <OWLIndividualRole id="35" ontologicType="http://www.w3.org/2004/02/skos/core#Concept" cloningStrategy="Clone" cardinality="ZeroOne" name="ontologyConcept" userID="FLX" flexoID="51" />
+    <ShapeRole id="36" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="52">
+      <ShapeGraphicalRepresentation id="37" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="161.0" y="39.73770491803279" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="99.0" height="34.26229508196721" identifier="object_0" layer="1">
+        <SelectedColorGradientBackgroundStyle id="38" color1="204,204,255" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" transparencyLevel="0.5" />
+        <ForegroundStyle id="39" color="102,102,255" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedColorGradientBackgroundStyle id="40" color1="204,204,255" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" transparencyLevel="0.5" />
+        <ShadowStyle id="41" />
+        <FocusedForegroundStyle id="42" color="102,102,255" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="43" color="102,102,255" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <ColorGradientBackgroundStyle id="44" color1="204,204,255" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" transparencyLevel="0.5" />
+        <RectangleShape id="45" isRounded="true" arcSize="20.0" />
+        <TextStyle id="46" backgroundColor="255,255,255" color="0,0,102" font="Lucida Sans,0,11" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="47" featureName="label" value="ontologyConcept.uriName" userID="FLX" flexoID="292" />
+    </ShapeRole>
+    <DropScheme id="48" target="top" name="DropConceptAtTopLevel" width="800" label="DropConceptAtTopLevel" height="600" userID="FLX" flexoID="13">
+      <BehaviourControlGraph_Sequence id="49" userID="FLX" flexoID="173">
+        <ControlGraph2_AssignationAction id="50" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="171">
+          <AssignableAction_AddShape id="51" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="59" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="52" assign="ontologyConcept" ownerContext="controlGraph1" userID="FLX" flexoID="172">
+          <AssignableAction_AddOWLIndividual id="53" individualName="parameters.conceptURI" receiver="owl" assignation="concept" description="" userID="FLX" flexoID="55">
+            <DataPropertyAssertion id="54" value="parameters.conceptName" dataPropertyURI="http://www.w3.org/2000/01/rdf-schema#label" userID="FLX" flexoID="56" />
+            <DataPropertyAssertion id="55" value="parameters.preferedLabel" dataPropertyURI="http://www.w3.org/2004/02/skos/core#prefLabel" userID="FLX" flexoID="57" />
+            <DataPropertyAssertion id="56" value="parameters.alternativeLabel" dataPropertyURI="http://www.w3.org/2004/02/skos/core#altLabel" userID="FLX" flexoID="145" />
+            <ObjectPropertyAssertion id="57" object="parameters.conceptScheme" objectPropertyURI="http://www.w3.org/2004/02/skos/core#inScheme" userID="FLX" flexoID="54" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="58" widget="TEXT_FIELD" name="conceptName" type="java.lang.String" userID="FLX" flexoID="174" />
+      <GenericBehaviourParameter id="59" isRequired="true" widget="URI" name="conceptURI" type="java.lang.String" userID="FLX" flexoID="175" />
+      <GenericBehaviourParameter id="60" widget="CUSTOM_WIDGET" name="conceptScheme" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="176" />
+      <GenericBehaviourParameter id="61" widget="TEXT_FIELD" name="preferedLabel" type="java.lang.String" userID="FLX" flexoID="177" />
+      <GenericBehaviourParameter id="62" widget="TEXT_FIELD" name="alternativeLabel" type="java.lang.String" userID="FLX" flexoID="178" />
+    </DropScheme>
+  </FlexoConcept>
+  <FlexoConcept id="63" name="ConceptToConceptSchemeRelationship" userID="FLX" flexoID="63">
+    <Inspector id="64" inspectorTitle="Top Concept Relationship" userID="FLX" flexoID="15">
+      <GenericInspectorEntry id="65" readOnly="true" widget="TEXT_FIELD" data="topConceptOf.object.uriName" name="concept_scheme" label="concept_scheme" type="java.lang.String" userID="FLX" flexoID="188" />
+      <GenericInspectorEntry id="66" readOnly="true" widget="TEXT_FIELD" data="topConceptOf.subject.uriName" name="concept" label="concept" type="java.lang.String" userID="FLX" flexoID="189" />
+    </Inspector>
+    <ObjectPropertyStatementRole id="67" objectProperty="http://www.w3.org/2004/02/skos/core#topConceptOf" cloningStrategy="Clone" cardinality="ZeroOne" name="topConceptOf" userID="FLX" flexoID="60" />
+    <ObjectPropertyStatementRole id="68" objectProperty="http://www.w3.org/2004/02/skos/core#hasTopConcept" cloningStrategy="Clone" cardinality="ZeroOne" name="hasTopConcept" userID="FLX" flexoID="61" />
+    <ConnectorRole id="69" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="62">
+      <ConnectorGraphicalRepresentation id="70" identifier="object_2" absoluteTextY="-13.0" absoluteTextX="1.0" layer="64">
+        <LineConnectorSpecification id="71" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+        <ForegroundStyle id="72" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="73" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="74" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <TextStyle id="75" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,9" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="76" featureName="label" readOnly="true" value="&quot;top concept of&quot;" userID="FLX" flexoID="293" />
+    </ConnectorRole>
+    <LinkScheme id="77" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml#ConceptScheme" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="LinkAConceptToAConceptScheme" width="800" label="LinkAConceptToAConceptScheme" height="600" userID="FLX" flexoID="20">
+      <BehaviourControlGraph_Sequence id="78" userID="FLX" flexoID="186">
+        <ControlGraph2_Sequence id="79" ownerContext="controlGraph2" userID="FLX" flexoID="184">
+          <ControlGraph2_AssignationAction id="80" assign="connector" ownerContext="controlGraph2" userID="FLX" flexoID="182">
+            <AssignableAction_AddConnector id="81" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="connector" userID="FLX" flexoID="66" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="82" assign="hasTopConcept" ownerContext="controlGraph1" userID="FLX" flexoID="183">
+            <AssignableAction_AddObjectPropertyStatement id="83" object="fromTarget.ontologyConcept" subject="toTarget.conceptScheme" receiver="owl" assignation="hasTopConcept" conditional="(parameters.makeInverseRelationship = true)" userID="FLX" flexoID="65" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="84" assign="topConceptOf" ownerContext="controlGraph1" userID="FLX" flexoID="185">
+          <AssignableAction_AddObjectPropertyStatement id="85" object="toTarget.conceptScheme" subject="fromTarget.ontologyConcept" receiver="owl" assignation="topConceptOf" userID="FLX" flexoID="64" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="86" widget="CHECKBOX" defaultValue="true" name="makeInverseRelationship" type="java.lang.Boolean" userID="FLX" flexoID="187" />
+    </LinkScheme>
+  </FlexoConcept>
+  <FlexoConcept id="87" name="ConceptSpecialization" userID="FLX" flexoID="73">
+    <Inspector id="88" inspectorTitle="Concept specialization" userID="FLX" flexoID="22">
+      <GenericInspectorEntry id="89" widget="TEXT_FIELD" data="broader.object.uriName" name="general" label="general" type="java.lang.String" userID="FLX" flexoID="205" />
+      <GenericInspectorEntry id="90" widget="TEXT_FIELD" data="broader.subject.uriName" name="specialized" label="specialized" type="java.lang.String" userID="FLX" flexoID="206" />
+    </Inspector>
+    <ObjectPropertyStatementRole id="91" objectProperty="http://www.w3.org/2004/02/skos/core#broader" cloningStrategy="Clone" cardinality="ZeroOne" name="broader" userID="FLX" flexoID="67" />
+    <ObjectPropertyStatementRole id="92" objectProperty="http://www.w3.org/2004/02/skos/core#broadMatch" cloningStrategy="Clone" cardinality="ZeroOne" name="broadMatch" userID="FLX" flexoID="68" />
+    <ObjectPropertyStatementRole id="93" objectProperty="http://www.w3.org/2004/02/skos/core#narrower" cloningStrategy="Clone" cardinality="ZeroOne" name="narrower" userID="FLX" flexoID="69" />
+    <ObjectPropertyStatementRole id="94" objectProperty="http://www.w3.org/2004/02/skos/core#narrowMatch" cloningStrategy="Clone" cardinality="ZeroOne" name="narrowMatch" userID="FLX" flexoID="70" />
+    <ConnectorRole id="95" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="broaderConnector" userID="FLX" flexoID="71">
+      <ConnectorGraphicalRepresentation id="96" identifier="object_2" absoluteTextY="-13.0" absoluteTextX="-4.0" layer="64">
+        <LineConnectorSpecification id="97" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+        <ForegroundStyle id="98" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="99" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="100" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <TextStyle id="101" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,9" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="102" featureName="label" readOnly="true" value="&quot;broader&quot;" userID="FLX" flexoID="294" />
+    </ConnectorRole>
+    <ConnectorRole id="103" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="broadMatchConnector" userID="FLX" flexoID="72">
+      <ConnectorGraphicalRepresentation id="104" identifier="object_5" absoluteTextY="-13.0" absoluteTextX="-5.0" layer="64">
+        <LineConnectorSpecification id="105" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+        <ForegroundStyle id="106" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="107" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="108" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <TextStyle id="109" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,9" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="110" featureName="label" readOnly="true" value="&quot;broader match&quot;" userID="FLX" flexoID="295" />
+    </ConnectorRole>
+    <LinkScheme id="111" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml#Concept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="SpecializeAConcept" width="800" label="SpecializeAConcept" height="600" userID="FLX" flexoID="27">
+      <BehaviourControlGraph_Sequence id="112" userID="FLX" flexoID="202">
+        <ControlGraph2_Sequence id="113" ownerContext="controlGraph2" userID="FLX" flexoID="200">
+          <ControlGraph2_Sequence id="114" ownerContext="controlGraph2" userID="FLX" flexoID="198">
+            <ControlGraph2_Sequence id="115" ownerContext="controlGraph2" userID="FLX" flexoID="196">
+              <ControlGraph2_Sequence id="116" ownerContext="controlGraph2" userID="FLX" flexoID="194">
+                <ControlGraph2_AssignationAction id="117" assign="broadMatchConnector" ownerContext="controlGraph2" userID="FLX" flexoID="192">
+                  <AssignableAction_AddConnector id="118" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="broadMatchConnector" conditional="(parameters.match = true)" userID="FLX" flexoID="79" />
+                </ControlGraph2_AssignationAction>
+                <ControlGraph1_AssignationAction id="119" assign="broaderConnector" ownerContext="controlGraph1" userID="FLX" flexoID="193">
+                  <AssignableAction_AddConnector id="120" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="broaderConnector" conditional="(parameters.match = false)" userID="FLX" flexoID="78" />
+                </ControlGraph1_AssignationAction>
+              </ControlGraph2_Sequence>
+              <ControlGraph1_AssignationAction id="121" assign="narrowMatch" ownerContext="controlGraph1" userID="FLX" flexoID="195">
+                <AssignableAction_AddObjectPropertyStatement id="122" object="fromTarget.ontologyConcept" subject="toTarget.ontologyConcept" receiver="owl" assignation="narrowMatch" conditional="((parameters.match = true) &amp; (parameters.makeInverseRelationship = true))" userID="FLX" flexoID="77" />
+              </ControlGraph1_AssignationAction>
+            </ControlGraph2_Sequence>
+            <ControlGraph1_AssignationAction id="123" assign="narrower" ownerContext="controlGraph1" userID="FLX" flexoID="197">
+              <AssignableAction_AddObjectPropertyStatement id="124" object="fromTarget.ontologyConcept" subject="toTarget.ontologyConcept" receiver="owl" assignation="narrower" conditional="((parameters.match = false) &amp; (parameters.makeInverseRelationship = true))" userID="FLX" flexoID="76" />
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="125" assign="broadMatch" ownerContext="controlGraph1" userID="FLX" flexoID="199">
+            <AssignableAction_AddObjectPropertyStatement id="126" object="toTarget.ontologyConcept" subject="fromTarget.ontologyConcept" receiver="owl" assignation="broadMatch" conditional="(parameters.match = true)" userID="FLX" flexoID="75" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="127" assign="broader" ownerContext="controlGraph1" userID="FLX" flexoID="201">
+          <AssignableAction_AddObjectPropertyStatement id="128" object="toTarget.ontologyConcept" subject="fromTarget.ontologyConcept" receiver="owl" assignation="broader" conditional="(parameters.match = false)" userID="FLX" flexoID="74" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="129" widget="CHECKBOX" defaultValue="false" name="match" type="java.lang.Boolean" userID="FLX" flexoID="203" />
+      <GenericBehaviourParameter id="130" widget="CHECKBOX" defaultValue="true" name="makeInverseRelationship" type="java.lang.Boolean" userID="FLX" flexoID="204" />
+    </LinkScheme>
+  </FlexoConcept>
+  <FlexoConcept id="131" name="ConceptGeneralization" userID="FLX" flexoID="86">
+    <Inspector id="132" inspectorTitle="Concept generalization" userID="FLX" flexoID="29">
+      <GenericInspectorEntry id="133" widget="TEXT_FIELD" data="narrower.object.uriName" name="specialized" label="specialized" type="java.lang.String" userID="FLX" flexoID="222" />
+      <GenericInspectorEntry id="134" widget="TEXT_FIELD" data="narrower.subject.uriName" name="general" label="general" type="java.lang.String" userID="FLX" flexoID="223" />
+    </Inspector>
+    <ObjectPropertyStatementRole id="135" objectProperty="http://www.w3.org/2004/02/skos/core#narrower" cloningStrategy="Clone" cardinality="ZeroOne" name="narrower" userID="FLX" flexoID="80" />
+    <ObjectPropertyStatementRole id="136" objectProperty="http://www.w3.org/2004/02/skos/core#narrowMatch" cloningStrategy="Clone" cardinality="ZeroOne" name="narrowMatch" userID="FLX" flexoID="81" />
+    <ObjectPropertyStatementRole id="137" objectProperty="http://www.w3.org/2004/02/skos/core#broader" cloningStrategy="Clone" cardinality="ZeroOne" name="broader" userID="FLX" flexoID="82" />
+    <ObjectPropertyStatementRole id="138" objectProperty="http://www.w3.org/2004/02/skos/core#broadMatch" cloningStrategy="Clone" cardinality="ZeroOne" name="broadMatch" userID="FLX" flexoID="83" />
+    <ConnectorRole id="139" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="narrowerConnector" userID="FLX" flexoID="84">
+      <ConnectorGraphicalRepresentation id="140" identifier="object_2" absoluteTextY="-12.0" absoluteTextX="-4.0" layer="64">
+        <LineConnectorSpecification id="141" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+        <ForegroundStyle id="142" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="143" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="144" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <TextStyle id="145" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,9" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="146" featureName="label" readOnly="true" value="&quot;narrower&quot;" userID="FLX" flexoID="296" />
+    </ConnectorRole>
+    <ConnectorRole id="147" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="narrowMatchConnector" userID="FLX" flexoID="85">
+      <ConnectorGraphicalRepresentation id="148" identifier="object_5" absoluteTextY="-12.0" absoluteTextX="-2.0" layer="64">
+        <LineConnectorSpecification id="149" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+        <ForegroundStyle id="150" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="151" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="152" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+        <TextStyle id="153" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,9" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="154" featureName="label" readOnly="true" value="&quot;narrow match&quot;" userID="FLX" flexoID="297" />
+    </ConnectorRole>
+    <LinkScheme id="155" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml#Concept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="GeneralizeAConcept" width="800" label="GeneralizeAConcept" height="600" userID="FLX" flexoID="34">
+      <BehaviourControlGraph_Sequence id="156" userID="FLX" flexoID="219">
+        <ControlGraph2_Sequence id="157" ownerContext="controlGraph2" userID="FLX" flexoID="217">
+          <ControlGraph2_Sequence id="158" ownerContext="controlGraph2" userID="FLX" flexoID="215">
+            <ControlGraph2_Sequence id="159" ownerContext="controlGraph2" userID="FLX" flexoID="213">
+              <ControlGraph2_Sequence id="160" ownerContext="controlGraph2" userID="FLX" flexoID="211">
+                <ControlGraph2_AssignationAction id="161" assign="narrowMatchConnector" ownerContext="controlGraph2" userID="FLX" flexoID="209">
+                  <AssignableAction_AddConnector id="162" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="narrowMatchConnector" conditional="(parameters.match = true)" userID="FLX" flexoID="92" />
+                </ControlGraph2_AssignationAction>
+                <ControlGraph1_AssignationAction id="163" assign="narrowerConnector" ownerContext="controlGraph1" userID="FLX" flexoID="210">
+                  <AssignableAction_AddConnector id="164" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="narrowerConnector" conditional="(parameters.match = false)" userID="FLX" flexoID="91" />
+                </ControlGraph1_AssignationAction>
+              </ControlGraph2_Sequence>
+              <ControlGraph1_AssignationAction id="165" assign="broadMatch" ownerContext="controlGraph1" userID="FLX" flexoID="212">
+                <AssignableAction_AddObjectPropertyStatement id="166" object="fromTarget.ontologyConcept" subject="toTarget.ontologyConcept" receiver="owl" assignation="broadMatch" conditional="((parameters.match = true) &amp; (parameters.makeInverseRelationship = true))" userID="FLX" flexoID="90" />
+              </ControlGraph1_AssignationAction>
+            </ControlGraph2_Sequence>
+            <ControlGraph1_AssignationAction id="167" assign="broader" ownerContext="controlGraph1" userID="FLX" flexoID="214">
+              <AssignableAction_AddObjectPropertyStatement id="168" object="fromTarget.ontologyConcept" subject="toTarget.ontologyConcept" receiver="owl" assignation="broader" conditional="((parameters.match = false) &amp; (parameters.makeInverseRelationship = true))" userID="FLX" flexoID="89" />
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="169" assign="narrowMatch" ownerContext="controlGraph1" userID="FLX" flexoID="216">
+            <AssignableAction_AddObjectPropertyStatement id="170" object="toTarget.ontologyConcept" subject="fromTarget.ontologyConcept" receiver="owl" assignation="narrowMatch" conditional="(parameters.match = true)" userID="FLX" flexoID="88" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="171" assign="narrower" ownerContext="controlGraph1" userID="FLX" flexoID="218">
+          <AssignableAction_AddObjectPropertyStatement id="172" object="toTarget.ontologyConcept" subject="fromTarget.ontologyConcept" receiver="owl" assignation="narrower" conditional="(parameters.match = false)" userID="FLX" flexoID="87" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="173" widget="CHECKBOX" defaultValue="false" name="match" type="java.lang.Boolean" userID="FLX" flexoID="220" />
+      <GenericBehaviourParameter id="174" widget="CHECKBOX" defaultValue="true" name="makeInverseRelationship" type="java.lang.Boolean" userID="FLX" flexoID="221" />
+    </LinkScheme>
+  </FlexoConcept>
+  <FlexoConcept id="175" name="ConceptRelatedRelationship" userID="FLX" flexoID="99">
+    <Inspector id="176" inspectorTitle="Related concepts" userID="FLX" flexoID="36">
+      <GenericInspectorEntry id="177" widget="TEXT_FIELD" data="related1.subject.uriName" name="concept1" label="concept1" type="java.lang.String" userID="FLX" flexoID="238" />
+      <GenericInspectorEntry id="178" widget="TEXT_FIELD" data="related1.object.uriName" name="concept2" label="concept2" type="java.lang.String" userID="FLX" flexoID="239" />
+    </Inspector>
+    <ObjectPropertyStatementRole id="179" objectProperty="http://www.w3.org/2004/02/skos/core#related" cloningStrategy="Clone" cardinality="ZeroOne" name="related1" userID="FLX" flexoID="93" />
+    <ObjectPropertyStatementRole id="180" objectProperty="http://www.w3.org/2004/02/skos/core#related" cloningStrategy="Clone" cardinality="ZeroOne" name="related2" userID="FLX" flexoID="94" />
+    <ObjectPropertyStatementRole id="181" objectProperty="http://www.w3.org/2004/02/skos/core#relatedMatch" cloningStrategy="Clone" cardinality="ZeroOne" name="relatedMatch1" userID="FLX" flexoID="95" />
+    <ObjectPropertyStatementRole id="182" objectProperty="http://www.w3.org/2004/02/skos/core#relatedMatch" cloningStrategy="Clone" cardinality="ZeroOne" name="relatedMatch2" userID="FLX" flexoID="96" />
+    <ConnectorRole id="183" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="relatedConnector" userID="FLX" flexoID="97">
+      <ConnectorGraphicalRepresentation id="184" identifier="object_2" absoluteTextY="-12.0" absoluteTextX="1.0" layer="64">
+        <LineConnectorSpecification id="185" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+        <ForegroundStyle id="186" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="MEDIUM_SPACED_DASHES" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="187" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="MEDIUM_SPACED_DASHES" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="188" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="MEDIUM_SPACED_DASHES" capStyle="CAP_SQUARE" />
+        <TextStyle id="189" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,9" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="190" featureName="label" readOnly="true" value="&quot;related&quot;" userID="FLX" flexoID="298" />
+    </ConnectorRole>
+    <ConnectorRole id="191" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="relatedMatchConnector" userID="FLX" flexoID="98">
+      <ConnectorGraphicalRepresentation id="192" identifier="object_5" absoluteTextY="-12.0" absoluteTextX="1.0" layer="64">
+        <LineConnectorSpecification id="193" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+        <ForegroundStyle id="194" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="MEDIUM_SPACED_DASHES" capStyle="CAP_SQUARE" />
+        <FocusedForegroundStyle id="195" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="MEDIUM_SPACED_DASHES" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="196" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="MEDIUM_SPACED_DASHES" capStyle="CAP_SQUARE" />
+        <TextStyle id="197" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,9" />
+      </ConnectorGraphicalRepresentation>
+      <GRSpec id="198" featureName="label" readOnly="true" value="&quot;related match&quot;" userID="FLX" flexoID="299" />
+    </ConnectorRole>
+    <LinkScheme id="199" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml#Concept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="MakeTwoConceptRelatedToEachOther" width="800" label="MakeTwoConceptRelatedToEachOther" height="600" userID="FLX" flexoID="41">
+      <BehaviourControlGraph_Sequence id="200" userID="FLX" flexoID="236">
+        <ControlGraph2_Sequence id="201" ownerContext="controlGraph2" userID="FLX" flexoID="234">
+          <ControlGraph2_Sequence id="202" ownerContext="controlGraph2" userID="FLX" flexoID="232">
+            <ControlGraph2_Sequence id="203" ownerContext="controlGraph2" userID="FLX" flexoID="230">
+              <ControlGraph2_Sequence id="204" ownerContext="controlGraph2" userID="FLX" flexoID="228">
+                <ControlGraph2_AssignationAction id="205" assign="relatedMatchConnector" ownerContext="controlGraph2" userID="FLX" flexoID="226">
+                  <AssignableAction_AddConnector id="206" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="relatedMatchConnector" conditional="(parameters.match = true)" userID="FLX" flexoID="105" />
+                </ControlGraph2_AssignationAction>
+                <ControlGraph1_AssignationAction id="207" assign="relatedConnector" ownerContext="controlGraph1" userID="FLX" flexoID="227">
+                  <AssignableAction_AddConnector id="208" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="relatedConnector" conditional="(parameters.match = false)" userID="FLX" flexoID="104" />
+                </ControlGraph1_AssignationAction>
+              </ControlGraph2_Sequence>
+              <ControlGraph1_AssignationAction id="209" assign="relatedMatch2" ownerContext="controlGraph1" userID="FLX" flexoID="229">
+                <AssignableAction_AddObjectPropertyStatement id="210" object="fromTarget.ontologyConcept" subject="toTarget.ontologyConcept" receiver="owl" assignation="relatedMatch2" conditional="(parameters.match = true)" userID="FLX" flexoID="103" />
+              </ControlGraph1_AssignationAction>
+            </ControlGraph2_Sequence>
+            <ControlGraph1_AssignationAction id="211" assign="relatedMatch1" ownerContext="controlGraph1" userID="FLX" flexoID="231">
+              <AssignableAction_AddObjectPropertyStatement id="212" object="toTarget.ontologyConcept" subject="fromTarget.ontologyConcept" receiver="owl" assignation="relatedMatch1" conditional="(parameters.match = true)" userID="FLX" flexoID="102" />
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="213" assign="related2" ownerContext="controlGraph1" userID="FLX" flexoID="233">
+            <AssignableAction_AddObjectPropertyStatement id="214" object="fromTarget.ontologyConcept" subject="toTarget.ontologyConcept" receiver="owl" assignation="related2" conditional="(parameters.match = false)" userID="FLX" flexoID="101" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="215" assign="related1" ownerContext="controlGraph1" userID="FLX" flexoID="235">
+          <AssignableAction_AddObjectPropertyStatement id="216" object="toTarget.ontologyConcept" subject="fromTarget.ontologyConcept" receiver="owl" assignation="related1" conditional="(parameters.match = false)" userID="FLX" flexoID="100" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="217" widget="CHECKBOX" defaultValue="false" name="match" type="java.lang.Boolean" userID="FLX" flexoID="237" />
+    </LinkScheme>
+  </FlexoConcept>
+  <UseModelSlotDeclaration id="218" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="219" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <Inspector id="220" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="156" />
+  <OWLModelSlot id="221" metaModelURI="http://www.w3.org/2004/02/skos/core" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="106" />
+  <TypedDiagramModelSlot id="222" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="108">
+    <FMLDiagramPaletteElementBinding id="223" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/SKOS.palette#Concept Scheme" userID="FLX" flexoID="2">
+      <DropScheme idref="18" />
+    </FMLDiagramPaletteElementBinding>
+    <FMLDiagramPaletteElementBinding id="224" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/SKOS.palette#Concept" userID="FLX" flexoID="7">
+      <DropScheme idref="48" />
+    </FMLDiagramPaletteElementBinding>
+  </TypedDiagramModelSlot>
+</VirtualModel>
