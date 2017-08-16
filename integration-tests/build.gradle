@@ -17,6 +17,6 @@ dependencies {
     testCompile openflexo("informationspacemodule")
 
     testRuntime project(':integration-tests-rc')
-
+    testRuntime openflexo("owlconnector-test-rc")
 }
 
