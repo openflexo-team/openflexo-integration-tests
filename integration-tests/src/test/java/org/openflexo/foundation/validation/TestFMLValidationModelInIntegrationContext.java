@@ -135,8 +135,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.TechnologySpecificFlexoBehaviour.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.inspector.IntegerInspectorEntry.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.DiagramRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.fge.shapes.Polygon.class) != null);
@@ -211,8 +209,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.inspector.ObjectPropertyInspectorEntry.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.inspector.TextAreaInspectorEntry.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.technologyadapter.FreeModelSlot.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.FreeXMLURIProcessor.class) != null);
@@ -257,14 +253,9 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.XMLMetaModelSlot.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.inspector.TextFieldInspectorEntry.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.IndividualRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.editionaction.ExecutionAction.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.fge.shapes.ComplexCurve.class) != null);
-		// assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(ShapeBorder.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.fge.shapes.RegularPolygon.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -331,8 +322,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FlexoConceptInstanceRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.ActionContainer.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.metamodel.XMLProperty.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.FreeXMLModelSlot.class) != null);
@@ -349,15 +338,11 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.inspector.PropertyInspectorEntry.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.inspector.FloatInspectorEntry.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FlexoConceptConstraint.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FlexoConceptBehaviouralFacet.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.powerpoint.fml.PowerpointShapeRole.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.inspector.CheckboxInspectorEntry.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.fml.editionaction.AddXMLIndividual.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -488,8 +473,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FlexoRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.controlgraph.FetchRequestIterationAction.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.inspector.InspectorEntry.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.owl.fml.DataPropertyStatementRole.class) != null);
@@ -499,8 +482,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 				.getModelEntity(org.openflexo.foundation.ontology.fml.editionaction.ObjectPropertyAssertion.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.powerpoint.fml.editionaction.SelectPowerpointSlide.class) != null);
-		// assertTrue(validationModel.getValidationModelFactory().getModelContext()
-		// .getModelEntity(org.openflexo.foundation.FlexoProjectObject.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.ExcelSheetRole.class) != null);
 
