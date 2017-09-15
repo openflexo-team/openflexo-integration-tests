@@ -38,30 +38,30 @@
 
 package org.openflexo.foundation;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.util.logging.Logger;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openflexo.eamodule.EAModule;
+import org.openflexo.eamodule.EnterpriseArchitectureModule;
 import org.openflexo.fme.FMEModule;
 import org.openflexo.fme.FreeModellingEditor;
 import org.openflexo.foundation.resource.FlexoResourceCenterService;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
 import org.openflexo.gina.test.OpenflexoTestCaseWithGUI;
-import org.openflexo.ism.ISMModule;
-import org.openflexo.ism.InformationSpaceModule;
 import org.openflexo.module.FlexoModule;
 import org.openflexo.module.ModuleLoader;
 import org.openflexo.module.ModuleLoadingException;
+import org.openflexo.om.OMModule;
+import org.openflexo.om.OpenflexoModeller;
 import org.openflexo.prefs.PreferencesService;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
-import org.openflexo.ve.VEModule;
-import org.openflexo.ve.ViewEditor;
 import org.openflexo.view.controller.TechnologyAdapterControllerService;
-import org.openflexo.vpm.VPMModule;
-import org.openflexo.vpm.ViewPointModeller;
-
-
-import static org.junit.Assert.*;
 
 @RunWith(OrderedRunner.class)
 public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {
@@ -94,60 +94,15 @@ public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {
 	}
 
 	/**
-	 * Try to load VPM module
+	 * Try to load {@link OpenflexoModeller} module
 	 */
 	@Test
 	@TestOrder(2)
-	public void testVPMModuleLoading() {
-		log("testVPMModuleLoading()");
+	public void testOMModuleLoading() {
+		log("testOMModuleLoading()");
 
 		try {
-			FlexoModule<VPMModule> loadedModule = moduleLoader.getModuleInstance(ViewPointModeller.INSTANCE);
-			if (loadedModule == null) {
-				fail();
-			}
-			// This module is not in the classpath, normal
-		} catch (ModuleLoadingException e) {
-			fail();
-		}
-
-		assertNotNull(serviceManager.getService(TechnologyAdapterControllerService.class));
-
-	}
-
-	/**
-	 * Try to load VE module
-	 */
-	@Test
-	@TestOrder(3)
-	public void testVEModuleLoading() {
-		log("testVEModuleLoading()");
-
-		try {
-			FlexoModule<VEModule> loadedModule = moduleLoader.getModuleInstance(ViewEditor.INSTANCE);
-			if (loadedModule == null) {
-				fail();
-			}
-			// This module is not in the classpath, normal
-		} catch (ModuleLoadingException e) {
-			e.printStackTrace();
-			fail();
-		}
-
-		assertNotNull(serviceManager.getService(TechnologyAdapterControllerService.class));
-
-	}
-
-	/**
-	 * Try to load FME module
-	 */
-	@Test
-	@TestOrder(4)
-	public void testISMModuleLoading() {
-		log("testISMModuleLoading()");
-
-		try {
-			FlexoModule<ISMModule> loadedModule = moduleLoader.getModuleInstance(InformationSpaceModule.INSTANCE);
+			FlexoModule<OMModule> loadedModule = moduleLoader.getModuleInstance(OpenflexoModeller.INSTANCE);
 			if (loadedModule == null) {
 				fail();
 			}
@@ -170,6 +125,28 @@ public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {
 
 		try {
 			FlexoModule<FMEModule> loadedModule = moduleLoader.getModuleInstance(FreeModellingEditor.INSTANCE);
+			if (loadedModule == null) {
+				fail();
+			}
+			// This module is not in the classpath, normal
+		} catch (ModuleLoadingException e) {
+			fail();
+		}
+
+		assertNotNull(serviceManager.getService(TechnologyAdapterControllerService.class));
+
+	}
+
+	/**
+	 * Try to load EAM module
+	 */
+	@Test
+	@TestOrder(6)
+	public void testEAModuleLoading() {
+		log("testEAModuleLoading()");
+
+		try {
+			FlexoModule<EAModule> loadedModule = moduleLoader.getModuleInstance(EnterpriseArchitectureModule.INSTANCE);
 			if (loadedModule == null) {
 				fail();
 			}

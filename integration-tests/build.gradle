@@ -11,11 +11,10 @@ dependencies {
     testCompile xmlConnector()
     testCompile powerpointConnector()
 
-    testCompile openflexo("flexovieweditor")
-    testCompile openflexo("flexoviewpointmodeler")
+    testCompile openflexo("openflexo-modeller")
     testCompile openflexo("freemodellingeditor")
-    testCompile openflexo("informationspacemodule")
-
+    testCompile openflexo("enterprise-architecture-module")
+    
     testRuntime project(':integration-tests-rc')
     testRuntime openflexo("owlconnector-test-rc")
 }

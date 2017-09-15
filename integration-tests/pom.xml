@@ -60,23 +60,6 @@
 			<version>${junit.version}</version>
 		</dependency>
 
-		<!-- We list here all modules we want to include in our integration test 
-			environment -->
-
-		<dependency>
-			<groupId>org.openflexo</groupId>
-			<artifactId>flexovieweditor</artifactId>
-			<scope>runtime</scope>
-			<version>${modules.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openflexo</groupId>
-			<artifactId>flexoviewpointmodeler</artifactId>
-			<scope>runtime</scope>
-			<version>${modules.version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.openflexo</groupId>
 			<artifactId>free-modelling-editor</artifactId>
@@ -86,7 +69,7 @@
 
 		<dependency>
 			<groupId>org.openflexo</groupId>
-			<artifactId>informationspacemodule</artifactId>
+			<artifactId>openflexo-modeller</artifactId>
 			<scope>runtime</scope>
 			<version>${modules.version}</version>
 		</dependency>
