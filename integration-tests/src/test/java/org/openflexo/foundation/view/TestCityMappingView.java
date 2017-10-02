@@ -60,14 +60,12 @@ import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.FlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
-import org.openflexo.foundation.fml.rt.action.ModelSlotInstanceConfiguration.DefaultModelSlotInstanceConfigurationOption;
 import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.RepositoryFolder;
 import org.openflexo.foundation.resource.SaveResourceException;
 import org.openflexo.foundation.technologyadapter.FlexoModelResource;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
-import org.openflexo.foundation.technologyadapter.TypeAwareModelSlotInstanceConfiguration;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
@@ -210,28 +208,6 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
 		createVirtualModelInstance.setVirtualModel(cityMappingVM);
 
-		ModelSlot emfModelSlot1 = cityMappingVM.getModelSlots().get(0);
-		TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration1 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
-				.getModelSlotInstanceConfiguration(emfModelSlot1);
-		emfModelSlotConfiguration1.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-		System.out.println("Searching http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
-		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
-				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
-		assertNotNull(modelResource1);
-		emfModelSlotConfiguration1.setModelResource(modelResource1);
-		assertTrue(emfModelSlotConfiguration1.isValidConfiguration());
-
-		ModelSlot emfModelSlot2 = cityMappingVM.getModelSlots().get(1);
-		TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration2 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
-				.getModelSlotInstanceConfiguration(emfModelSlot2);
-		emfModelSlotConfiguration2.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-		System.out.println("Searching http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city2/first.city2");
-		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager()
-				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city2/first.city2");
-		assertNotNull(modelResource2);
-		emfModelSlotConfiguration2.setModelResource(modelResource2);
-		assertTrue(emfModelSlotConfiguration2.isValidConfiguration());
-
 		createVirtualModelInstance.doAction();
 		System.out.println("exception thrown=" + createVirtualModelInstance.getThrownException());
 		assertTrue(createVirtualModelInstance.hasActionExecutionSucceeded());
@@ -244,6 +220,23 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		assertEquals(createVirtualModelInstance.getVirtualModel(), cityMappingVM);
 		assertTrue(((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
 		assertEquals(project, ((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
+
+		ModelSlot emfModelSlot1 = cityMappingVM.getModelSlots().get(0);
+		ModelSlot emfModelSlot2 = cityMappingVM.getModelSlots().get(1);
+		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
+				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
+		assertNotNull(modelResource1);
+		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager()
+				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city2/first.city2");
+		assertNotNull(modelResource2);
+
+		try {
+			newVirtualModelInstance.setFlexoPropertyValue(emfModelSlot1, modelResource1.getResourceData(null));
+			newVirtualModelInstance.setFlexoPropertyValue(emfModelSlot2, modelResource2.getResourceData(null));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		FlexoConcept cityEP = cityMappingVM.getFlexoConcept("City");
 		FlexoConcept houseEP = cityMappingVM.getFlexoConcept("House");

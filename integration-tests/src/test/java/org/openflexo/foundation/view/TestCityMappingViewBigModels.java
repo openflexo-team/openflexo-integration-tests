@@ -57,12 +57,8 @@ import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
-import org.openflexo.foundation.fml.rt.action.ModelSlotInstanceConfiguration.DefaultModelSlotInstanceConfigurationOption;
 import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
-import org.openflexo.foundation.technologyadapter.FlexoModelResource;
-import org.openflexo.foundation.technologyadapter.ModelSlot;
-import org.openflexo.foundation.technologyadapter.TypeAwareModelSlotInstanceConfiguration;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
@@ -195,26 +191,6 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 		assertNotNull(cityMappingVM);
 
 		createVirtualModelInstance.setVirtualModel(cityMappingVM);
-
-		ModelSlot emfModelSlot1 = cityMappingVM.getModelSlots().get(0);
-		TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration1 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
-				.getModelSlotInstanceConfiguration(emfModelSlot1);
-		emfModelSlotConfiguration1.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
-				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/generated_10khTry8.city1");
-		assertNotNull(modelResource1);
-		emfModelSlotConfiguration1.setModelResource(modelResource1);
-		assertTrue(emfModelSlotConfiguration1.isValidConfiguration());
-
-		ModelSlot emfModelSlot2 = cityMappingVM.getModelSlots().get(1);
-		TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration2 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
-				.getModelSlotInstanceConfiguration(emfModelSlot2);
-		emfModelSlotConfiguration2.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager()
-				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city2/generated_10khTry8.city2");
-		assertNotNull(modelResource2);
-		emfModelSlotConfiguration2.setModelResource(modelResource2);
-		assertTrue(emfModelSlotConfiguration2.isValidConfiguration());
 
 		// TODO : Fix Performance Issue with SelectEMFObjectIndividual
 

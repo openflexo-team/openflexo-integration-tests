@@ -1,0 +1,178 @@
+use org.openflexo.technologyadapter.emf.EMFModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.openflexo.org/cityviews/City1_View.fml")
+public class City1_View {
+
+  ModelSlot city1model type=EMFModelSlot$EMFModelSlotImpl_$$_jvst367_96 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city1" required=true readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<City1_View> typedDiagramModelSlot;
+
+  @SynchronizationScheme  
+  Void synchronization() {  
+    for (emfCity : SelectEMFObjectIndividual from city1model as City) {    
+      FlexoConceptInstanceType<CityGR> myCityFCI = FML@RT::MatchFlexoConceptInstance as CityGR match=(city=emfCity) using CityGR:createFromEMF(emfCity);      
+      for (anHouse : emfCity.houses) {      
+        if (myCityFCI != null) {        
+          FML@RT::MatchFlexoConceptInstance as HouseGR match=(house=anHouse) using HouseGR:createFromEMF(anHouse,myCityFCI)        
+        }      
+      }      
+      for (item : emfCity.residents) {      
+        FML@RT::MatchFlexoConceptInstance as ResidentGR match=(resident=item) using ResidentGR:createFromEMF(item,myCityFCI)      
+      }    
+    }  
+  }  
+
+  @DeletionScheme  
+  void delete() {  
+  
+  }  
+
+
+  @FlexoConcept  
+  public class CityGR {  
+  
+    FlexoRole city as Individual conformTo City from city1model ;  
+    FlexoRole shape as ShapeSpecification from City1_View;  
+    FlexoRole icon as ShapeSpecification from City1_View;  
+  
+    @DropScheme    
+    CityGR:dropAtTopLevel(String Name) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = city.name;      
+      };      
+      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      city = city1model.AddEMFObjectIndividual();    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete city      
+      delete icon      
+      delete shape    
+    }    
+  
+    @CreationScheme    
+    CityGR:createFromEMF(IFlexoOntologyIndividual indiv) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = city.name;      
+      };      
+      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      city = parameters.indiv;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class HouseGR {  
+  
+    FlexoRole house as Individual conformTo House from city1model ;  
+    FlexoRole shape as ShapeSpecification from City1_View;  
+    FlexoRole icon as ShapeSpecification from City1_View;  
+  
+    @DropScheme    
+    HouseGR:dropHouseInCity(String Information) {    
+      house = city1model.AddEMFObjectIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = house.info;      
+      };      
+      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete house      
+      delete icon      
+      delete shape    
+    }    
+  
+    @CreationScheme    
+    HouseGR:createFromEMF(IFlexoOntologyIndividual indiv, FlexoConceptInstanceType<CityGR> inCity) {    
+      house = parameters.indiv;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = house.info;      
+      };      
+      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ResidentGR {  
+  
+    FlexoRole resident as Individual conformTo Resident from city1model ;  
+    FlexoRole shape as ShapeSpecification from City1_View;  
+  
+    @DropScheme    
+    ResidentGR:dropResident(String Name) {    
+      resident = city1model.AddEMFObjectIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = resident.name;      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete resident      
+      delete shape    
+    }    
+  
+    @CreationScheme    
+    ResidentGR:createFromEMF(IFlexoOntologyIndividual indiv, FlexoConceptInstanceType<CityGR> cityFCI) {    
+      resident = parameters.indiv;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = resident.name;      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class HouseOwnerLinkGR {  
+  
+    FlexoRole link as ConnectorSpecification from City1_View;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<HouseGR> house;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<ResidentGR> owner;  
+  
+    @LinkScheme    
+    HouseOwnerLinkGR:link() {    
+      if (fromTarget.house.owner != null) {      
+        if (fromTarget.house.owner = toTarget.resident) {        
+          link = AddConnector$AddConnectorImpl_$$_jvst367_93 conformTo ConnectorSpecification from typedDiagramModelSlot {          
+          };          
+          link.label="Existe Déjà?"        
+        }        
+        if (fromTarget.house.owner != toTarget.resident) {        
+          fromTarget.house.owner = toTarget.resident;          
+          link = AddConnector$AddConnectorImpl_$$_jvst367_93 conformTo ConnectorSpecification from typedDiagramModelSlot {          
+          };          
+          link.label="Louche"        
+        }      
+      }      
+      if (fromTarget.house.owner = null) {      
+        fromTarget.house.owner = toTarget.resident;        
+        link = AddConnector$AddConnectorImpl_$$_jvst367_93 conformTo ConnectorSpecification from typedDiagramModelSlot {        
+        };      
+      }      
+      house = fromTarget;      
+      owner = toTarget;    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete link    
+    }    
+  
+  }  
+
+}

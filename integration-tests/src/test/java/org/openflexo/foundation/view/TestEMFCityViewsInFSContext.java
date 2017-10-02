@@ -54,16 +54,12 @@ import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
-import org.openflexo.foundation.fml.rt.action.ModelSlotInstanceConfiguration.DefaultModelSlotInstanceConfigurationOption;
 import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
-import org.openflexo.foundation.technologyadapter.FlexoModelResource;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
-import org.openflexo.foundation.technologyadapter.TypeAwareModelSlotInstanceConfiguration;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
-import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-import org.openflexo.technologyadapter.diagram.TypedDiagramModelSlotInstanceConfiguration;
 import org.openflexo.technologyadapter.emf.EMFModelSlot;
+import org.openflexo.technologyadapter.emf.rm.EMFModelResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
@@ -170,33 +166,6 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 
 		createVirtualModelInstance.setVirtualModel(cityView1VM);
 
-		for (ModelSlot ms : cityView1VM.getModelSlots()) {
-
-			if (ms instanceof EMFModelSlot) {
-				EMFModelSlot emfModelSlot1 = (EMFModelSlot) ms;
-				TypeAwareModelSlotInstanceConfiguration emfModelSlotConfiguration1 = (TypeAwareModelSlotInstanceConfiguration) createVirtualModelInstance
-						.getModelSlotInstanceConfiguration(emfModelSlot1);
-				emfModelSlotConfiguration1.setOption(DefaultModelSlotInstanceConfigurationOption.SelectExistingModel);
-				System.out.println("Searching http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
-				FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
-						.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
-				assertNotNull(modelResource1);
-				emfModelSlotConfiguration1.setModelResource(modelResource1);
-				assertTrue(emfModelSlotConfiguration1.isValidConfiguration());
-			}
-			if (ms instanceof TypedDiagramModelSlot) {
-
-				TypedDiagramModelSlot diagModelSlot1 = (TypedDiagramModelSlot) ms;
-
-				TypedDiagramModelSlotInstanceConfiguration diagramModelSlotInstanceConfiguration = (TypedDiagramModelSlotInstanceConfiguration) createVirtualModelInstance
-						.getModelSlotInstanceConfiguration(ms);
-				assertNotNull(diagramModelSlotInstanceConfiguration);
-				diagramModelSlotInstanceConfiguration.setOption(DefaultModelSlotInstanceConfigurationOption.CreatePrivateNewModel);
-				assertTrue(diagramModelSlotInstanceConfiguration.isValidConfiguration());
-
-			}
-		}
-
 		createVirtualModelInstance.doAction();
 		System.out.println("exception thrown=" + createVirtualModelInstance.getThrownException());
 		assertTrue(createVirtualModelInstance.hasActionExecutionSucceeded());
@@ -209,6 +178,18 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		assertEquals(createVirtualModelInstance.getVirtualModel(), cityView1VM);
 		assertTrue(((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
 		assertEquals(project, ((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
+
+		for (ModelSlot ms : cityView1VM.getModelSlots()) {
+
+			if (ms instanceof EMFModelSlot) {
+				// EMFModelSlot emfModelSlot1 = (EMFModelSlot) ms;
+				EMFModelResource modelResource1 = (EMFModelResource) project.getServiceManager().getResourceManager()
+						.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
+				assertNotNull(modelResource1);
+				newVirtualModelInstance.setFlexoPropertyValue(ms, modelResource1);
+			}
+		}
+
 	}
 
 	private VirtualModel loadViewPoint(String viewPointURI) {
