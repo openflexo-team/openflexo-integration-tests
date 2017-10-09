@@ -96,7 +96,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(
 				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.shapes.Star.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.ViewPointLocalizedEntry.class) != null);
+				.getModelEntity(org.openflexo.foundation.fml.FMLLocalizedEntry.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.fge.ContainerGraphicalRepresentation.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
