@@ -60,7 +60,7 @@
     <Inspector id="38" renderer="(&quot;Appartment -  &quot; + ((instance.houseInModel1 != null) ? ((instance.appartmentInModel2 != null) ? (instance.houseInModel1.info + &quot; [sync]&quot;) : (instance.houseInModel1.info + &quot; [model1]&quot;)) : (instance.appartmentInModel2.label + &quot; [model2]&quot;)))" inspectorTitle="Appartment" userID="FLX" flexoID="12" />
     <EMFObjectIndividualRole id="39" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/House" container="model1" cloningStrategy="Clone" cardinality="ZeroOne" name="houseInModel1" userID="FLX" flexoID="47" />
     <EMFObjectIndividualRole id="40" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/Appartment" container="model2" cloningStrategy="Clone" cardinality="ZeroOne" name="appartmentInModel2" userID="FLX" flexoID="48" />
-    <FlexoConceptInstanceRole id="41" virtualModelInstance="virtualModelInstance" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml#City" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="49" />
+    <FlexoConceptInstanceRole id="41" virtualModelInstance="container" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml#City" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="49" />
     <CreationScheme id="42" skipConfirmationPanel="false" name="creation" width="800" label="creation" height="600" userID="FLX" flexoID="15">
       <BehaviourControlGraph_Sequence id="43" userID="FLX" flexoID="241">
         <ControlGraph2_Sequence id="44" ownerContext="controlGraph2" userID="FLX" flexoID="244">
@@ -92,7 +92,7 @@
     <Inspector id="61" renderer="(&quot;Mansion - &quot; + ((instance.houseInModel1 != null) ? ((instance.mansionInModel2 != null) ? (instance.houseInModel1.info + &quot; [sync]&quot;) : (instance.houseInModel1.info + &quot; [model1]&quot;)) : (instance.mansionInModel2.number.toString + &quot; [model2]&quot;)))" inspectorTitle="Mansion" userID="FLX" flexoID="18" />
     <EMFObjectIndividualRole id="62" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/House" container="model1" cloningStrategy="Clone" cardinality="ZeroOne" name="houseInModel1" userID="FLX" flexoID="58" />
     <EMFObjectIndividualRole id="63" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city2/Mansion" container="model2" cloningStrategy="Clone" cardinality="ZeroOne" name="mansionInModel2" userID="FLX" flexoID="59" />
-    <FlexoConceptInstanceRole id="64" virtualModelInstance="virtualModelInstance" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml#City" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="60" />
+    <FlexoConceptInstanceRole id="64" virtualModelInstance="container" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml#City" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="60" />
     <CreationScheme id="65" skipConfirmationPanel="false" name="creation" width="800" label="creation" height="600" userID="FLX" flexoID="21">
       <BehaviourControlGraph_Sequence id="66" userID="FLX" flexoID="250">
         <ControlGraph2_Sequence id="67" ownerContext="controlGraph2" userID="FLX" flexoID="253">
