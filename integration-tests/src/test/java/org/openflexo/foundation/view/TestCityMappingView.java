@@ -74,7 +74,7 @@ import org.openflexo.test.TestOrder;
 @RunWith(OrderedRunner.class)
 public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
-	public static FlexoProject project;
+	public static FlexoProject<File> project;
 	private static FlexoEditor editor;
 	private static VirtualModel cityMappingVP;
 	private static RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> viewFolder;
@@ -97,8 +97,8 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 	@Test
 	@TestOrder(2)
 	public void test1CreateProject() {
-		editor = createProject("TestCreateView");
-		project = editor.getProject();
+		editor = createStandaloneProject("TestCreateView");
+		project = (FlexoProject<File>) editor.getProject();
 
 		assertNotNull(project.getVirtualModelInstanceRepository());
 	}
@@ -169,8 +169,8 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 	@Test
 	@TestOrder(7)
 	public void test5ReloadProject() {
-		editor = reloadProject(project.getProjectDirectory());
-		project = editor.getProject();
+		editor = reloadProject(project);
+		project = (FlexoProject<File>) editor.getProject();
 		assertNotNull(project.getVirtualModelInstanceRepository());
 		assertEquals(1, project.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
 		viewFolder = project.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
@@ -182,7 +182,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		view = viewRes.getVirtualModelInstance();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project, ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
+		assertEquals(project.getDelegateResourceCenter(), ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
 
 		for (FlexoResourceCenter<?> rc : serviceManager.getResourceCenterService().getResourceCenters()) {
 			System.out.println(" * RC: " + rc);
@@ -219,7 +219,8 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceTitle(), newVirtualModelInstance.getTitle());
 		assertEquals(createVirtualModelInstance.getVirtualModel(), cityMappingVM);
 		assertTrue(((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
-		assertEquals(project, ((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
+		assertEquals(project.getDelegateResourceCenter(),
+				((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
 
 		ModelSlot emfModelSlot1 = cityMappingVM.getModelSlots().get(0);
 		ModelSlot emfModelSlot2 = cityMappingVM.getModelSlots().get(1);

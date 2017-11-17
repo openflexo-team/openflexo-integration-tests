@@ -97,8 +97,8 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 	@TestOrder(2)
 	public void testEMFCityMapping() {
 		// CreateProject
-		FlexoEditor editor = createProject("TestCreateView");
-		FlexoProject project = editor.getProject();
+		FlexoEditor editor = createStandaloneProject("TestCreateView");
+		FlexoProject<File> project = (FlexoProject<File>) editor.getProject();
 		assertNotNull(project.getVirtualModelInstanceRepository());
 
 		// Load CityMapping ViewPoint
@@ -132,8 +132,8 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		assertTrue(((FMLRTVirtualModelInstanceResource) newView.getResource()).getIODelegate().exists());
 
 		// Reload Project
-		editor = reloadProject(project.getProjectDirectory());
-		project = editor.getProject();
+		editor = reloadProject(project);
+		project = (FlexoProject<File>) editor.getProject();
 		assertNotNull(project.getVirtualModelInstanceRepository());
 		assertEquals(1, project.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
 		viewFolder = project.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
@@ -145,7 +145,7 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		FMLRTVirtualModelInstance view = viewRes.getVirtualModelInstance();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project, ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
+		assertEquals(project.getDelegateResourceCenter(), ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
 
 		// CreateDiagram
 		System.out.println("Create diagram, view=" + view + " editor=" + editor);

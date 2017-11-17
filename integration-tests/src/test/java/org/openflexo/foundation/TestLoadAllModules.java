@@ -50,6 +50,7 @@ import org.openflexo.eamodule.EAModule;
 import org.openflexo.eamodule.EnterpriseArchitectureModule;
 import org.openflexo.fme.FMEModule;
 import org.openflexo.fme.FreeModellingEditor;
+import org.openflexo.foundation.project.ProjectLoader;
 import org.openflexo.foundation.resource.FlexoResourceCenterService;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
 import org.openflexo.gina.test.OpenflexoTestCaseWithGUI;

@@ -75,7 +75,8 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	private static RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> viewFolder;
 	private static FMLRTVirtualModelInstance view;
 	private static FlexoEditor editor;
-	private static FlexoProject project;
+	private static FlexoProject<File> project;
+	private static FlexoProject<File> reloadedProject;
 
 	/**
 	 * Instantiate test resource center
@@ -95,9 +96,12 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	@Test
 	@TestOrder(2)
 	public void test1EMFCityViewsViewCreation() {
+
+		log("test1EMFCityViewsViewCreation()");
+
 		// CreateProject
-		editor = createProject("TestCreateView");
-		project = editor.getProject();
+		editor = createStandaloneProject("TestCreateView");
+		project = (FlexoProject<File>) editor.getProject();
 		assertNotNull(project.getVirtualModelInstanceRepository());
 
 		// Load CityMapping ViewPoint
@@ -131,28 +135,31 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		assertTrue(((FMLRTVirtualModelInstanceResource) view.getResource()).getIODelegate().exists());
 
 		// Reload Project
-		FlexoEditor editor1 = reloadProject(project.getProjectDirectory());
-		FlexoProject project1 = editor1.getProject();
+		FlexoEditor editor1 = reloadProject(project);
+		reloadedProject = (FlexoProject<File>) editor1.getProject();
 		// NOTE: this is strange => ask Syl
 		assertTrue(editor1 != editor);
-		assertTrue(project1 != project);
-		assertNotNull(project1.getVirtualModelInstanceRepository());
-		assertEquals(1, project1.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
-		viewFolder = project1.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
+		assertTrue(reloadedProject != project);
+		assertNotNull(reloadedProject.getVirtualModelInstanceRepository());
+		assertEquals(1, reloadedProject.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
+		viewFolder = reloadedProject.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
 		assertEquals(1, viewFolder.getResources().size());
 		FMLRTVirtualModelInstanceResource viewRes = viewFolder.getResources().get(0);
-		assertEquals(viewRes, project1.getVirtualModelInstanceRepository().getResource(viewRes.getURI()));
+		assertEquals(viewRes, reloadedProject.getVirtualModelInstanceRepository().getResource(viewRes.getURI()));
 		assertNotNull(viewRes);
 		assertFalse(viewRes.isLoaded());
-		FMLRTVirtualModelInstance view = viewRes.getVirtualModelInstance();
+		view = viewRes.getVirtualModelInstance();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project1, ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
+		assertEquals(reloadedProject.getDelegateResourceCenter(),
+				((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
 	}
 
 	@Test
 	@TestOrder(3)
 	public void test3CreateVirtualModelInstance() {
+
+		log("test3CreateVirtualModelInstance()");
 
 		System.out.println("Create virtual model instance, view=" + view + " editor=" + editor);
 
@@ -177,7 +184,8 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		assertEquals(createVirtualModelInstance.getNewVirtualModelInstanceTitle(), newVirtualModelInstance.getTitle());
 		assertEquals(createVirtualModelInstance.getVirtualModel(), cityView1VM);
 		assertTrue(((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getIODelegate().exists());
-		assertEquals(project, ((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
+		assertEquals(reloadedProject.getDelegateResourceCenter(),
+				((FMLRTVirtualModelInstanceResource) newVirtualModelInstance.getResource()).getResourceCenter());
 
 		for (ModelSlot ms : cityView1VM.getModelSlots()) {
 

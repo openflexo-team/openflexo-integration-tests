@@ -67,7 +67,7 @@ import org.openflexo.test.TestOrder;
 @RunWith(OrderedRunner.class)
 public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestCase {
 
-	public static FlexoProject project;
+	public static FlexoProject<File> project;
 	private static FlexoEditor editor;
 	private static VirtualModel cityMappingVP;
 	private static RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> viewFolder;
@@ -90,8 +90,8 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 	@Test
 	@TestOrder(2)
 	public void test1CreateProject() {
-		editor = createProject("TestCreateView");
-		project = editor.getProject();
+		editor = createStandaloneProject("TestCreateView");
+		project = (FlexoProject<File>) editor.getProject();
 
 		assertNotNull(project.getVirtualModelInstanceRepository());
 	}
@@ -161,8 +161,8 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 	@Test
 	@TestOrder(7)
 	public void test5ReloadProject() {
-		editor = reloadProject(project.getProjectDirectory());
-		project = editor.getProject();
+		editor = reloadProject(project);
+		project = (FlexoProject<File>) editor.getProject();
 		assertNotNull(project.getVirtualModelInstanceRepository());
 		assertEquals(1, project.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
 		viewFolder = project.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
@@ -174,7 +174,7 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 		view = viewRes.getVirtualModelInstance();
 		assertTrue(viewRes.isLoaded());
 		assertNotNull(view);
-		assertEquals(project, ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
+		assertEquals(project.getDelegateResourceCenter(), ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
 	}
 
 	@Test
