@@ -109,8 +109,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 				.getModelEntity(org.openflexo.foundation.fml.FMLLocalizedDictionary.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.FGEStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.technologyadapter.excel.SemanticsExcelModelSlot.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.editionaction.AddToListAction.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.AddFlexoConceptInstanceParameter.class) != null);
@@ -196,8 +194,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 				.getModelEntity(org.openflexo.technologyadapter.emf.fml.EMFClassClassRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.owl.fml.OWLDataPropertyRole.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.technologyadapter.excel.fml.BusinessConceptInstanceRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.fml.editionaction.GetXMLDocumentRoot.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -370,8 +366,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.ExcelRowRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.technologyadapter.excel.fml.BusinessConceptTypeRole.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.DropScheme.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.fge.shapes.Circle.class) != null);
@@ -386,8 +380,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 				.getModelEntity(org.openflexo.technologyadapter.xml.metamodel.XMLType.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.fge.ColorBackgroundStyle.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.technologyadapter.excel.fml.editionaction.AddBusinessConceptInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.TypeAwareModelSlotInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
