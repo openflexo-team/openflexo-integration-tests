@@ -225,10 +225,10 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		ModelSlot emfModelSlot1 = cityMappingVM.getModelSlots().get(0);
 		ModelSlot emfModelSlot2 = cityMappingVM.getModelSlots().get(1);
 		FlexoModelResource<?, ?, ?, ?> modelResource1 = project.getServiceManager().getResourceManager()
-				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
+				.getModelWithURI("http://openflexo.org/integration-tests/EMF/Model/city1/my.city1");
 		assertNotNull(modelResource1);
 		FlexoModelResource<?, ?, ?, ?> modelResource2 = project.getServiceManager().getResourceManager()
-				.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city2/first.city2");
+				.getModelWithURI("http://openflexo.org/integration-tests/EMF/Model/city2/first.city2");
 		assertNotNull(modelResource2);
 
 		try {
