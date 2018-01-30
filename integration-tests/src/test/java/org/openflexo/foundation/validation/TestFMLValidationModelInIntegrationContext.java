@@ -475,11 +475,11 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 
 	@Test
 	@TestOrder(2)
-	public void testAddShapeValidationRules() throws ModelDefinitionException {
+	public void testAddShapeValidationRules() {
 		ValidationRuleSet<?> ruleSet = validationModel.getRuleSet(AddShape.class);
 		assertNotNull(ruleSet);
 		System.out.println("ruleSet=" + ruleSet + " size=" + ruleSet.getRulesCount());
-		for (ValidationRule r : ruleSet.getRules()) {
+		for (ValidationRule<?, ?> r : ruleSet.getRules()) {
 			System.out.println("> " + r);
 		}
 		assertTrue(ruleSet.containsRuleClass(AddShape.AddShapeActionMustAdressAValidShapeRole.class));
@@ -488,11 +488,11 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 
 	@Test
 	@TestOrder(3)
-	public void testAddConnectorValidationRules() throws ModelDefinitionException {
+	public void testAddConnectorValidationRules() {
 		ValidationRuleSet<?> ruleSet = validationModel.getRuleSet(AddConnector.class);
 		assertNotNull(ruleSet);
 		System.out.println("ruleSet=" + ruleSet + " size=" + ruleSet.getRulesCount());
-		for (ValidationRule r : ruleSet.getRules()) {
+		for (ValidationRule<?, ?> r : ruleSet.getRules()) {
 			System.out.println("> " + r);
 		}
 		assertTrue(ruleSet.containsRuleClass(AddConnector.AddConnectorActionMustAdressAValidConnectorRole.class));
@@ -502,11 +502,11 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 
 	@Test
 	@TestOrder(4)
-	public void testGraphicalActionValidationRules() throws ModelDefinitionException {
+	public void testGraphicalActionValidationRules() {
 		ValidationRuleSet<?> ruleSet = validationModel.getRuleSet(GraphicalAction.class);
 		assertNotNull(ruleSet);
 		System.out.println("ruleSet=" + ruleSet + " size=" + ruleSet.getRulesCount());
-		for (ValidationRule r : ruleSet.getRules()) {
+		for (ValidationRule<?, ?> r : ruleSet.getRules()) {
 			System.out.println("> " + r);
 		}
 		assertTrue(ruleSet.containsRuleClass(GraphicalAction.GraphicalActionMustHaveASubject.class));

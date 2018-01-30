@@ -104,7 +104,7 @@ public class FMLModelFactoryIntegrationTest extends OpenflexoTestCase {
 		assertNotNull(taService.getTechnologyAdapter(XMLTechnologyAdapter.class));
 	}
 
-	private void testVirtualModelModelFactoryWithTechnologyAdapter(TechnologyAdapter ta) {
+	private static void testVirtualModelModelFactoryWithTechnologyAdapter(TechnologyAdapter ta) {
 		assertNotNull(ta);
 		try {
 			System.out.println("Instanciating FMLModelFactory");
