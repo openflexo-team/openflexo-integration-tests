@@ -68,7 +68,6 @@ import org.openflexo.foundation.fml.rm.VirtualModelResource;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.editionaction.MatchFlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.editionaction.MatchingCriteria;
-import org.openflexo.foundation.ontology.IFlexoOntologyClass;
 import org.openflexo.foundation.resource.FlexoResource;
 import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
@@ -262,7 +261,8 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		if (fcRole instanceof EMFObjectIndividualRole) {
 			EMFObjectIndividualRole emfRole = (EMFObjectIndividualRole) fcRole;
 
-			IFlexoOntologyClass aType = emfRole.getOntologicType();
+			// Unused IFlexoOntologyClass aType =
+			emfRole.getOntologicType();
 		}
 
 	}
