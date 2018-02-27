@@ -479,7 +479,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		ValidationRuleSet<?> ruleSet = validationModel.getRuleSet(AddShape.class);
 		assertNotNull(ruleSet);
 		System.out.println("ruleSet=" + ruleSet + " size=" + ruleSet.getRulesCount());
-		for (ValidationRule<?, ?> r : ruleSet.getRules()) {
+		for (ValidationRule<?, ?> r : ruleSet) {
 			System.out.println("> " + r);
 		}
 		assertTrue(ruleSet.containsRuleClass(AddShape.AddShapeActionMustAdressAValidShapeRole.class));
@@ -492,7 +492,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		ValidationRuleSet<?> ruleSet = validationModel.getRuleSet(AddConnector.class);
 		assertNotNull(ruleSet);
 		System.out.println("ruleSet=" + ruleSet + " size=" + ruleSet.getRulesCount());
-		for (ValidationRule<?, ?> r : ruleSet.getRules()) {
+		for (ValidationRule<?, ?> r : ruleSet) {
 			System.out.println("> " + r);
 		}
 		assertTrue(ruleSet.containsRuleClass(AddConnector.AddConnectorActionMustAdressAValidConnectorRole.class));
@@ -506,7 +506,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		ValidationRuleSet<?> ruleSet = validationModel.getRuleSet(GraphicalAction.class);
 		assertNotNull(ruleSet);
 		System.out.println("ruleSet=" + ruleSet + " size=" + ruleSet.getRulesCount());
-		for (ValidationRule<?, ?> r : ruleSet.getRules()) {
+		for (ValidationRule<?, ?> r : ruleSet) {
 			System.out.println("> " + r);
 		}
 		assertTrue(ruleSet.containsRuleClass(GraphicalAction.GraphicalActionMustHaveASubject.class));
