@@ -47,7 +47,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.connie.BindingModel;
 import org.openflexo.connie.BindingVariable;
-import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.fml.ActionScheme;
 import org.openflexo.foundation.fml.CreationScheme;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
@@ -81,7 +80,7 @@ import org.openflexo.test.TestOrder;
 @RunWith(OrderedRunner.class)
 public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCase {
 
-	private static FlexoEditor editor;
+	// Unused private static FlexoEditor<?, ?, ?> editor;
 	private static VirtualModel cityMappingVP;
 	private static SynchronizationScheme syncScheme;
 
@@ -333,8 +332,8 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		assertTrue(seq.getControlGraph1() instanceof AssignationAction);
 		assertTrue(seq.getControlGraph2() instanceof AssignationAction);
 
-		AssignationAction assignation1 = (AssignationAction) seq.getControlGraph1();
-		AssignationAction assignation2 = (AssignationAction) seq.getControlGraph2();
+		AssignationAction<?> assignation1 = (AssignationAction<?>) seq.getControlGraph1();
+		AssignationAction<?> assignation2 = (AssignationAction<?>) seq.getControlGraph2();
 
 		assertEquals("cityInModel1", assignation1.getAssignation().toString());
 		assertEquals("cityInModel2", assignation2.getAssignation().toString());
