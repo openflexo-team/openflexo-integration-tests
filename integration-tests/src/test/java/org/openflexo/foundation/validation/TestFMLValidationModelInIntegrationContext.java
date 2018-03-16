@@ -76,7 +76,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		System.out.println("class number= " + validationModel.getValidationModelFactory().getModelContext().getEntityCount());
 
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.ForegroundStyle.class) != null);
+				.getModelEntity(org.openflexo.diana.ForegroundStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.GraphicalElementSpecification.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -94,20 +94,20 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.DeleteFlexoConceptInstance.class) != null);
 		assertTrue(
-				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.shapes.Star.class) != null);
+				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.shapes.Star.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FMLLocalizedEntry.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.ContainerGraphicalRepresentation.class) != null);
+				.getModelEntity(org.openflexo.diana.ContainerGraphicalRepresentation.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.ColorGradientBackgroundStyle.class) != null);
+				.getModelEntity(org.openflexo.diana.ColorGradientBackgroundStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.OverridingGraphicalRepresentation.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.AbstractCreationScheme.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FMLLocalizedDictionary.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.FGEStyle.class) != null);
+		assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.FGEStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.editionaction.AddToListAction.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -119,23 +119,23 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.editionaction.AddDiagramElementAction.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.connectors.CurveConnectorSpecification.class) != null);
+				.getModelEntity(org.openflexo.diana.connectors.CurveConnectorSpecification.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.Square.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.Square.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.fml.editionaction.XMLDataPropertyAssertion.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.NoneBackgroundStyle.class) != null);
+				.getModelEntity(org.openflexo.diana.NoneBackgroundStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.TechnologySpecificFlexoBehaviour.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.DiagramRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.Polygon.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.Polygon.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.editionaction.AddExcelSheet.class) != null);
 		assertTrue(
-				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.shapes.Arc.class) != null);
+				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.shapes.Arc.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.editionaction.SelectExcelRow.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -149,9 +149,9 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.editionaction.SelectExcelCell.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.ShapeSpecification.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.ShapeSpecification.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.Triangle.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.Triangle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.owl.fml.OWLClassRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -161,7 +161,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FlexoBehaviourParameter.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.GraphicalRepresentation.class) != null);
+				.getModelEntity(org.openflexo.diana.GraphicalRepresentation.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.DeleteFlexoConceptInstanceParameter.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -171,7 +171,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FlexoBehaviourObject.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.RectangularOctogon.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.RectangularOctogon.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.editionaction.AddShape.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -185,7 +185,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.owl.fml.ObjectPropertyStatementRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.ShapeGraphicalRepresentation.class) != null);
+				.getModelEntity(org.openflexo.diana.ShapeGraphicalRepresentation.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.editionaction.CreateDiagram.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -219,7 +219,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.owl.OWLModelSlot.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.connectors.ConnectorSpecification.class) != null);
+				.getModelEntity(org.openflexo.diana.connectors.ConnectorSpecification.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.editionaction.SelectExcelSheet.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -227,17 +227,17 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.emf.fml.EMFEnumClassRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.TextureBackgroundStyle.class) != null);
+				.getModelEntity(org.openflexo.diana.TextureBackgroundStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.SynchronizationScheme.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.editionaction.FetchRequestCondition.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.Chevron.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.Chevron.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.FlexoConceptInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.connectors.RectPolylinConnectorSpecification.class) != null);
+				.getModelEntity(org.openflexo.diana.connectors.RectPolylinConnectorSpecification.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.VirtualModelModelSlotInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -245,14 +245,14 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.IndividualRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.ComplexCurve.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.ComplexCurve.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.RegularPolygon.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.RegularPolygon.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.FMLRTModelSlot.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.GraphicalElementRole.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.TextStyle.class) != null);
+		assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.TextStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.controlgraph.ConditionalAction.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -280,13 +280,13 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.MatchFlexoConceptInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.Losange.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.Losange.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.owl.fml.OWLIndividualRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.PrimitiveRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.BackgroundStyle.class) != null);
+				.getModelEntity(org.openflexo.diana.BackgroundStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.fml.XMLActorReference.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -368,18 +368,18 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.DropScheme.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.Circle.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.Circle.class) != null);
 		assertTrue(
-				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.shapes.Plus.class) != null);
+				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.shapes.Plus.class) != null);
 		// assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(ConceptActorReference.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.shapes.Rectangle.class) != null);
+				.getModelEntity(org.openflexo.diana.shapes.Rectangle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.fml.XMLIndividualRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.metamodel.XMLType.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.ColorBackgroundStyle.class) != null);
+				.getModelEntity(org.openflexo.diana.ColorBackgroundStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.TypeAwareModelSlotInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -397,11 +397,11 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.editionaction.AbstractAssertion.class) != null);
 		assertTrue(
-				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.shapes.Oval.class) != null);
+				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.shapes.Oval.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.VirtualModelInstanceObject.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.connectors.CurvedPolylinConnectorSpecification.class) != null);
+				.getModelEntity(org.openflexo.diana.connectors.CurvedPolylinConnectorSpecification.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.resource.ResourceData.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -419,9 +419,9 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.editionaction.AddIndividual.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.BackgroundImageBackgroundStyle.class) != null);
+				.getModelEntity(org.openflexo.diana.BackgroundImageBackgroundStyle.class) != null);
 		assertTrue(
-				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.fge.ShadowStyle.class) != null);
+				validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.ShadowStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.ModelObjectActorReference.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -447,9 +447,9 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.NavigationScheme.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.ConnectorGraphicalRepresentation.class) != null);
+				.getModelEntity(org.openflexo.diana.ConnectorGraphicalRepresentation.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.fge.connectors.LineConnectorSpecification.class) != null);
+				.getModelEntity(org.openflexo.diana.connectors.LineConnectorSpecification.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.DiagramModelSlot.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
