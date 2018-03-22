@@ -107,7 +107,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 				.getModelEntity(org.openflexo.foundation.fml.AbstractCreationScheme.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FMLLocalizedDictionary.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.FGEStyle.class) != null);
+		assertTrue(validationModel.getValidationModelFactory().getModelContext().getModelEntity(org.openflexo.diana.DianaStyle.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.editionaction.AddToListAction.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
