@@ -16,6 +16,6 @@ dependencies {
     testCompile openflexo("enterprise-architecture-module")
     
     testRuntime project(':integration-tests-rc')
-    testRuntime openflexo("owlconnector-test-rc")
+    testRuntime owlConnectorRc()
 }
 
