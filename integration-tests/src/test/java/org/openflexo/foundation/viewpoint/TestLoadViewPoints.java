@@ -107,7 +107,7 @@ public class TestLoadViewPoints extends OpenflexoTestCase {
 	@Test
 	@TestOrder(2)
 	public void test1LoadBasicOntology() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl");
+		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 	}
 
 	/*@Test
