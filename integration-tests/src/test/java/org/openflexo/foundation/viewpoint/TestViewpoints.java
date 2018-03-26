@@ -90,7 +90,8 @@ public class TestViewpoints extends OpenflexoTestCase {
 	@TestOrder(2)
 	public void test1BasicOntologyEditor() {
 		log("test1BasicOntologyEditor()");
-		VirtualModel basicOntologyEditor = testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl");
+		VirtualModel basicOntologyEditor = testLoadViewPoint(
+				"http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 		assertNotNull(basicOntologyEditor);
 		System.out.println("Read resource " + ((VirtualModelResource) basicOntologyEditor.getResource()).getIODelegate().toString());
 
