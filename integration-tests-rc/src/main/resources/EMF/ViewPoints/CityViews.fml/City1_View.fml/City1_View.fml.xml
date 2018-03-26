@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <VirtualModel id="FLX-609" modelVersion="1.0" uri="http://www.openflexo.org/cityviews/City1_View.fml" version="0.1" name="City1_View" userID="FLX" flexoID="609">
+
+  <EMFModelSlot id="FLX-6" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city1" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="city1model" userID="FLX" flexoID="6" />
+  <TypedDiagramModelSlot id="FLX-28" metaModelURI="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="28">
+    <FMLDiagramPaletteElementBinding id="FLX-1" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New City" userID="FLX" flexoID="1">
+      <DropScheme idref="FLX-8" />
+    </FMLDiagramPaletteElementBinding>
+    <FMLDiagramPaletteElementBinding id="FLX-2" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New House (in City)" userID="FLX" flexoID="2">
+      <DropScheme idref="FLX-14" />
+    </FMLDiagramPaletteElementBinding>
+    <FMLDiagramPaletteElementBinding id="FLX-3" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New Resident (in City)" userID="FLX" flexoID="3">
+      <DropScheme idref="FLX-23" />
+    </FMLDiagramPaletteElementBinding>
+  </TypedDiagramModelSlot>
+
   <FlexoConcept id="FLX-31" name="CityGR" userID="FLX" flexoID="31">
     <Inspector id="FLX-3" renderer="instance.city.name" inspectorTitle="CityGR" userID="FLX" flexoID="3" />
     <EMFObjectIndividualRole id="FLX-5" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/City" cloningStrategy="Clone" cardinality="ZeroOne" name="city" userID="FLX" flexoID="5" />
@@ -269,18 +283,6 @@
   <UseModelSlotDeclaration id="55" modelSlotClass="org.openflexo.technologyadapter.emf.EMFModelSlot" userID="FLX" flexoID="-1" />
   <UseModelSlotDeclaration id="56" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="FLX-6" inspectorTitle="City1_View" userID="FLX" flexoID="6" />
-  <EMFModelSlot id="FLX-6" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city1" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="city1model" userID="FLX" flexoID="6" />
-  <TypedDiagramModelSlot id="FLX-28" metaModelURI="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="28">
-    <FMLDiagramPaletteElementBinding id="FLX-1" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New City" userID="FLX" flexoID="1">
-      <DropScheme idref="FLX-8" />
-    </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="FLX-2" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New House (in City)" userID="FLX" flexoID="2">
-      <DropScheme idref="FLX-14" />
-    </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="FLX-3" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New Resident (in City)" userID="FLX" flexoID="3">
-      <DropScheme idref="FLX-23" />
-    </FMLDiagramPaletteElementBinding>
-  </TypedDiagramModelSlot>
   <SynchronizationScheme id="FLX-152" skipConfirmationPanel="false" name="synchronization" width="800" label="synchronization" height="600" userID="FLX" flexoID="152">
     <BehaviourControlGraph_IterationAction id="FLX-13" iteratorName="emfCity" userID="FLX" flexoID="13">
       <Iteration_SelectEMFObjectIndividual id="FLX-157" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City" receiver="city1model" ownerContext="iterationControlGraph" userID="FLX" flexoID="157" />
