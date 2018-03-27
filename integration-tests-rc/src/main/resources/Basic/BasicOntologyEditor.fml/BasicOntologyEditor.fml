@@ -3,6 +3,6 @@
  * 
  * @version 0.1
  */
-@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl")
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml")
 public class BasicOntologyEditor {
 }

@@ -120,7 +120,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 	@Test
 	@TestOrder(3)
 	public void test2LoadBasicOntologyEditorViewPoint() {
-		basicOntologyEditor = loadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl");
+		basicOntologyEditor = loadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 		assertNotNull(basicOntologyEditor);
 		System.out.println("Found view point in " + ((VirtualModelResource) basicOntologyEditor.getResource()).getIODelegate().toString());
 	}

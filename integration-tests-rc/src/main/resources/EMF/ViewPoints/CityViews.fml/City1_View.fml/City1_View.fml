@@ -8,22 +8,15 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 @VirtualModel(uri="http://www.openflexo.org/cityviews/City1_View.fml")
 public class City1_View {
 
-  ModelSlot city1model type=EMFModelSlot$EMFModelSlotImpl_$$_jvst367_96 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city1" required=true readOnly=false;
+  ModelSlot city1model type=EMFModelSlot$EMFModelSlotImpl_$$_jvstbac_a1 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city1" required=true readOnly=false;
   @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification",cardinality=ZeroOne,readOnly=false)  
   public DiagramType<City1_View> typedDiagramModelSlot;
 
   @SynchronizationScheme  
   Void synchronization() {  
     for (emfCity : SelectEMFObjectIndividual from city1model as City) {    
-      FlexoConceptInstanceType<CityGR> myCityFCI = FML@RT::MatchFlexoConceptInstance as CityGR match=(city=emfCity) using CityGR:createFromEMF(emfCity);      
-      for (anHouse : emfCity.houses) {      
-        if (myCityFCI != null) {        
-          FML@RT::MatchFlexoConceptInstance as HouseGR match=(house=anHouse) using HouseGR:createFromEMF(anHouse,myCityFCI)        
-        }      
-      }      
-      for (item : emfCity.residents) {      
-        FML@RT::MatchFlexoConceptInstance as ResidentGR match=(resident=item) using ResidentGR:createFromEMF(item,myCityFCI)      
-      }    
+      MatchingSet matchingSet = this.initiateMatching(CityGR);      
+      FlexoConceptInstanceType<CityGR> myCityFCI = FML@RT::MatchFlexoConceptInstance as CityGR match=(city=emfCity) using CityGR:createFromEMF(emfCity);    
     }  
   }  
 
@@ -32,38 +25,42 @@ public class City1_View {
   
   }  
 
+  @ActionScheme  
+  void test() {  
+  
+  }  
+
 
   @FlexoConcept  
   public class CityGR {  
   
     FlexoRole city as Individual conformTo City from city1model ;  
-    FlexoRole shape as ShapeSpecification from City1_View;  
-    FlexoRole icon as ShapeSpecification from City1_View;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = city.name;      
+    }  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape icon {    
+    }  
   
     @DropScheme    
     CityGR:dropAtTopLevel(String Name) {    
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = city.name;      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();      
       city = city1model.AddEMFObjectIndividual();    
     }    
   
     @DeletionScheme    
     Void deletion() {    
-      delete city      
-      delete icon      
-      delete shape    
+      city.delete();      
+      icon.delete();      
+      shape.delete();    
     }    
   
     @CreationScheme    
     CityGR:createFromEMF(IFlexoOntologyIndividual indiv) {    
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = city.name;      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();      
       city = parameters.indiv;    
     }    
   
@@ -73,34 +70,33 @@ public class City1_View {
   public class HouseGR {  
   
     FlexoRole house as Individual conformTo House from city1model ;  
-    FlexoRole shape as ShapeSpecification from City1_View;  
-    FlexoRole icon as ShapeSpecification from City1_View;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = house.info;      
+    }  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape icon {    
+    }  
   
     @DropScheme    
     HouseGR:dropHouseInCity(String Information) {    
       house = city1model.AddEMFObjectIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = house.info;      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };    
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();    
     }    
   
     @DeletionScheme    
     Void deletion() {    
-      delete house      
-      delete icon      
-      delete shape    
+      house.delete();      
+      icon.delete();      
+      shape.delete();    
     }    
   
     @CreationScheme    
     HouseGR:createFromEMF(IFlexoOntologyIndividual indiv, FlexoConceptInstanceType<CityGR> inCity) {    
       house = parameters.indiv;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = house.info;      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };    
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();    
     }    
   
   }  
@@ -109,28 +105,27 @@ public class City1_View {
   public class ResidentGR {  
   
     FlexoRole resident as Individual conformTo Resident from city1model ;  
-    FlexoRole shape as ShapeSpecification from City1_View;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = resident.name;      
+    }  
   
     @DropScheme    
     ResidentGR:dropResident(String Name) {    
       resident = city1model.AddEMFObjectIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = resident.name;      
-      };    
+      shape = typedDiagramModelSlot.AddShape();    
     }    
   
     @DeletionScheme    
     Void deletion() {    
-      delete resident      
-      delete shape    
+      resident.delete();      
+      shape.delete();    
     }    
   
     @CreationScheme    
     ResidentGR:createFromEMF(IFlexoOntologyIndividual indiv, FlexoConceptInstanceType<CityGR> cityFCI) {    
       resident = parameters.indiv;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = resident.name;      
-      };    
+      shape = typedDiagramModelSlot.AddShape();    
     }    
   
   }  
@@ -138,7 +133,9 @@ public class City1_View {
   @FlexoConcept  
   public class HouseOwnerLinkGR {  
   
-    FlexoRole link as ConnectorSpecification from City1_View;  
+    @ConnectorRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramConnector link {    
+    }  
     @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
     public FlexoConceptInstanceType<HouseGR> house;  
     @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
@@ -148,21 +145,18 @@ public class City1_View {
     HouseOwnerLinkGR:link() {    
       if (fromTarget.house.owner != null) {      
         if (fromTarget.house.owner = toTarget.resident) {        
-          link = AddConnector$AddConnectorImpl_$$_jvst367_93 conformTo ConnectorSpecification from typedDiagramModelSlot {          
-          };          
+          link = typedDiagramModelSlot.AddConnector();          
           link.label="Existe Déjà?"        
         }        
         if (fromTarget.house.owner != toTarget.resident) {        
           fromTarget.house.owner = toTarget.resident;          
-          link = AddConnector$AddConnectorImpl_$$_jvst367_93 conformTo ConnectorSpecification from typedDiagramModelSlot {          
-          };          
+          link = typedDiagramModelSlot.AddConnector();          
           link.label="Louche"        
         }      
       }      
       if (fromTarget.house.owner = null) {      
         fromTarget.house.owner = toTarget.resident;        
-        link = AddConnector$AddConnectorImpl_$$_jvst367_93 conformTo ConnectorSpecification from typedDiagramModelSlot {        
-        };      
+        link = typedDiagramModelSlot.AddConnector();      
       }      
       house = fromTarget;      
       owner = toTarget;    
@@ -170,7 +164,7 @@ public class City1_View {
   
     @DeletionScheme    
     Void deletion() {    
-      delete link    
+      link.delete();    
     }    
   
   }  

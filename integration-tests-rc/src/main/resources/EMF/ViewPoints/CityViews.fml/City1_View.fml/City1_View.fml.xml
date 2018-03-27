@@ -1,35 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="FLX-609" modelVersion="1.0" uri="http://www.openflexo.org/cityviews/City1_View.fml" version="0.1" name="City1_View" userID="FLX" flexoID="609">
+<VirtualModel id="FLX-609" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="1.0" uri="http://www.openflexo.org/cityviews/City1_View.fml" version="0.1" name="City1_View" userID="FLX" flexoID="609">
+  <FMLLocalizedDictionary id="SYL-709" userID="SYL" flexoID="709">
+    <Localized id="SYL-729" lang="English" value="Behaviour" key="behaviour" userID="SYL" flexoID="729" />
+    <Localized id="SYL-730" lang="French" value="behaviour" key="behaviour" userID="SYL" flexoID="730" />
+    <Localized id="SYL-731" lang="Dutch" value="behaviour" key="behaviour" userID="SYL" flexoID="731" />
+  </FMLLocalizedDictionary>
   <FlexoConcept id="FLX-31" name="CityGR" userID="FLX" flexoID="31">
-    <Inspector id="FLX-3" renderer="instance.city.name" inspectorTitle="CityGR" userID="FLX" flexoID="3" />
+    <Inspector id="SYL-692" inspectorTitle="CityGR" userID="SYL" flexoID="692" />
     <EMFObjectIndividualRole id="FLX-5" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/City" cloningStrategy="Clone" cardinality="ZeroOne" name="city" userID="FLX" flexoID="5" />
-    <ShapeRole id="FLX-29" exampleLabel="A vey long label for test purpose" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="29">
-      <ShapeGraphicalRepresentation id="0" relativeTextY="0.5500000007450581" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="2.0" relativeTextX="0.499999999254942" dimensionConstraints="FREELY_RESIZABLE" width="450.0" height="200.0" identifier="object_0" lineWrap="true" horizontalTextAlignment="LEFT" layer="1" isMultilineAllowed="true">
-        <SelectedColorBackgroundStyle id="1" color="192,192,192" transparencyLevel="0.5" />
-        <ForegroundStyle id="2" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="3" color="192,192,192" transparencyLevel="0.5" />
-        <ShadowStyle id="4" />
-        <FocusedForegroundStyle id="5" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="6" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <NoneBackgroundStyle id="7" transparencyLevel="0.5" />
-        <RectangleShape id="8" isRounded="true" arcSize="10.0" />
-        <TextStyle id="9" backgroundColor="255,255,255" color="59,45,45" font="SansSerif.bold,1,20" />
-      </ShapeGraphicalRepresentation>
-      <GRSpec id="SYL-689" featureName="label" value="city.name" userID="SYL" flexoID="689" />
+    <ShapeRole id="FLX-29" exampleLabel="A vey long label for test purpose" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_2" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="29">
+      <GRSpec id="SYL-873" featureName="label" value="city.name" userID="SYL" flexoID="873" />
     </ShapeRole>
-    <ShapeRole id="FLX-30" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="30">
-      <ShapeGraphicalRepresentation id="10" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" widthConstraints="50" allowToLeaveBounds="false" adaptBoundsToContents="false" yConstraints="0" heightConstraints="50" xConstraints="0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="50.0" height="50.0" identifier="object_1" layer="1" isReadOnly="true" isSelectable="false" isFocusable="false">
-        <SelectedColorBackgroundStyle id="11" color="192,192,192" transparencyLevel="0.5" />
-        <ForegroundStyle id="12" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="13" color="192,192,192" transparencyLevel="0.5" />
-        <ShadowStyle id="14" drawShadow="false" />
-        <FocusedForegroundStyle id="15" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="16" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <ImageBackgroundStyle id="17" scaleX="0.390625" scaleY="0.390625" fitToShape="true" imageFile="../icons/City.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
-        <CircleShape id="18" />
-        <TextStyle id="19" backgroundColor="255,255,255" color="0,0,0" font="SansSerif,1,11" />
-      </ShapeGraphicalRepresentation>
-    </ShapeRole>
+    <ShapeRole id="FLX-30" previewHeight="50.0" previewY="0.0" previewX="0.0" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_3" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="30" />
     <DropScheme id="FLX-8" target="top" skipConfirmationPanel="false" name="dropAtTopLevel" width="800" label="Drop a New City" height="600" userID="FLX" flexoID="8">
       <BehaviourControlGraph_Sequence id="FLX-556" userID="FLX" flexoID="556">
         <ControlGraph2_Sequence id="FLX-558" ownerContext="controlGraph2" userID="FLX" flexoID="558">
@@ -77,33 +59,10 @@
   <FlexoConcept id="FLX-43" name="HouseGR" userID="FLX" flexoID="43">
     <Inspector id="FLX-36" renderer="(&quot;House: &quot; + instance.house.info.toString)" inspectorTitle="HouseGR" userID="FLX" flexoID="36" />
     <EMFObjectIndividualRole id="FLX-39" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/House" cloningStrategy="Clone" cardinality="ZeroOne" name="house" userID="FLX" flexoID="39" />
-    <ShapeRole id="FLX-41" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="41">
-      <ShapeGraphicalRepresentation id="20" relativeTextY="0.45" locationConstraints="FREELY_MOVABLE" allowToLeaveBounds="false" adaptBoundsToContents="false" x="6.0" y="15.17073170731706" relativeTextX="0.7" adjustMinimalWidthToLabelWidth="false" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalHeightToLabelHeight="false" width="222.7860696517413" height="102.46913580246914" identifier="object_0" lineWrap="true" absoluteTextY="65.0" absoluteTextX="120.0" layer="1" isMultilineAllowed="true">
-        <SelectedColorBackgroundStyle id="21" color="192,192,192" transparencyLevel="0.5" />
-        <ForegroundStyle id="22" color="0,0,153" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="23" color="192,192,192" transparencyLevel="0.5" />
-        <ShadowStyle id="24" />
-        <FocusedForegroundStyle id="25" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="26" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <ColorBackgroundStyle id="27" color="247,252,183" transparencyLevel="0.5" />
-        <RectangleShape id="28" isRounded="true" />
-        <TextStyle id="29" backgroundColor="255,255,255" color="0,0,0" font="SansSerif,1,11" />
-      </ShapeGraphicalRepresentation>
-      <GRSpec id="SYL-690" featureName="label" value="house.info" userID="SYL" flexoID="690" />
+    <ShapeRole id="FLX-41" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_4" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="41">
+      <GRSpec id="SYL-874" featureName="label" value="house.info" userID="SYL" flexoID="874" />
     </ShapeRole>
-    <ShapeRole id="FLX-42" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="42">
-      <ShapeGraphicalRepresentation id="30" relativeTextY="0.5" locationConstraints="UNMOVABLE" isFloatingLabel="false" widthConstraints="50" allowToLeaveBounds="false" adaptBoundsToContents="false" yConstraints="0" heightConstraints="50" xConstraints="0" relativeTextX="0.5" dimensionConstraints="UNRESIZABLE" width="50.0" height="50.0" identifier="object_0_0" lineWrap="true" layer="2" isReadOnly="true" isSelectable="false" isFocusable="false">
-        <SelectedColorBackgroundStyle id="31" color="192,192,192" transparencyLevel="0.5" />
-        <ForegroundStyle id="32" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="33" color="192,192,192" transparencyLevel="0.5" />
-        <ShadowStyle id="34" drawShadow="false" />
-        <FocusedForegroundStyle id="35" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="36" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <ImageBackgroundStyle id="37" imageFile="../icons/Mansion.png" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
-        <RectangleShape id="38" isRounded="true" />
-        <TextStyle id="39" backgroundColor="255,255,255" color="0,0,0" font="SansSerif,1,11" />
-      </ShapeGraphicalRepresentation>
-    </ShapeRole>
+    <ShapeRole id="FLX-42" previewHeight="50.0" previewY="0.0" previewX="0.0" exampleLabel="" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_5" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="42" />
     <DropScheme id="FLX-14" target="http://www.openflexo.org/cityviews/City1_View#CityGR" skipConfirmationPanel="false" name="dropHouseInCity" width="800" label="dropHouseInCity" height="600" description="" userID="FLX" flexoID="14">
       <ShapeRole idref="FLX-29" />
       <BehaviourControlGraph_Sequence id="FLX-561" userID="FLX" flexoID="561">
@@ -153,19 +112,8 @@
   <FlexoConcept id="FLX-53" name="ResidentGR" userID="FLX" flexoID="53">
     <Inspector id="FLX-48" renderer="(&quot;Someone: &quot; + instance.resident.name)" inspectorTitle="ResidentGR" userID="FLX" flexoID="48" />
     <EMFObjectIndividualRole id="FLX-50" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/Resident" cloningStrategy="Clone" cardinality="ZeroOne" name="resident" userID="FLX" flexoID="50" />
-    <ShapeRole id="FLX-52" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="52">
-      <ShapeGraphicalRepresentation id="40" relativeTextY="1.0" locationConstraints="FREELY_MOVABLE" allowToLeaveBounds="false" adaptBoundsToContents="false" x="160.0" y="40.0" relativeTextX="0.4999999997764826" dimensionConstraints="CONSTRAINED_DIMENSIONS" width="80.0" height="50.0" identifier="object_0" lineWrap="true" absoluteTextY="91.0" absoluteTextX="59.0" layer="1" isMultilineAllowed="true" verticalTextAlignment="BOTTOM">
-        <SelectedColorBackgroundStyle id="41" color="192,192,192" transparencyLevel="0.5" />
-        <ForegroundStyle id="42" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
-        <FocusedColorBackgroundStyle id="43" color="192,192,192" transparencyLevel="0.5" />
-        <ShadowStyle id="44" drawShadow="false" />
-        <FocusedForegroundStyle id="45" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="46" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <ImageBackgroundStyle id="47" scaleX="2.2222222222222223" scaleY="1.0638297872340425" fitToShape="true" imageFile="../icons/Actor.gif" imageBackgroundColor="255,255,255" imageBackgroundType="OPAQUE" transparencyLevel="0.5" />
-        <CircleShape idref="18" />
-        <TextStyle id="48" backgroundColor="255,255,255" color="0,0,0" font="SansSerif,1,11" />
-      </ShapeGraphicalRepresentation>
-      <GRSpec id="SYL-691" featureName="label" value="resident.name" userID="SYL" flexoID="691" />
+    <ShapeRole id="FLX-52" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_6" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="52">
+      <GRSpec id="SYL-875" featureName="label" value="resident.name" userID="SYL" flexoID="875" />
     </ShapeRole>
     <DropScheme id="FLX-23" target="http://www.openflexo.org/cityviews/City1_View#CityGR" skipConfirmationPanel="false" name="dropResident" width="800" label="dropResident" height="600" userID="FLX" flexoID="23">
       <ShapeRole idref="FLX-29" />
@@ -202,15 +150,7 @@
   </FlexoConcept>
   <FlexoConcept id="FLX-63" name="HouseOwnerLinkGR" userID="FLX" flexoID="63">
     <Inspector id="FLX-57" renderer="(&quot;owner is &quot; + instance.owner.resident.name)" inspectorTitle="HouseOwnerLinkGR" userID="FLX" flexoID="57" />
-    <ConnectorRole id="FLX-60" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="link" userID="FLX" flexoID="60">
-      <ConnectorGraphicalRepresentation id="49" identifier="object_2" layer="64" isMultilineAllowed="true">
-        <ArcConnector id="50" cpPosition="0.5,0.4" cp1RelativeToStartObject="0.9999455434085489,0.49262072998659157" areBoundsAdjustable="false" cp2RelativeToEndObject="5.526923040660714E-5,0.49256587760937415" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
-        <ForegroundStyle id="51" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <FocusedForegroundStyle id="52" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <SelectedForegroundStyle id="53" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
-        <TextStyle id="54" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
-      </ConnectorGraphicalRepresentation>
-    </ConnectorRole>
+    <ConnectorRole id="FLX-60" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_7" cloningStrategy="Clone" cardinality="ZeroOne" name="link" userID="FLX" flexoID="60" />
     <FlexoConceptInstanceRole id="FLX-61" flexoConceptTypeURI="http://www.openflexo.org/cityviews/City1_View.fml#HouseGR" cloningStrategy="Reference" cardinality="ZeroOne" name="house" userID="FLX" flexoID="61" />
     <FlexoConceptInstanceRole id="FLX-62" flexoConceptTypeURI="http://www.openflexo.org/cityviews/City1_View.fml#ResidentGR" cloningStrategy="Reference" cardinality="ZeroOne" name="owner" userID="FLX" flexoID="62" />
     <LinkScheme id="FLX-64" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/cityviews/City1_View#HouseGR" toTarget="http://www.openflexo.org/cityviews/City1_View#ResidentGR" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="link" width="800" label="link" height="600" userID="FLX" flexoID="64">
@@ -266,9 +206,9 @@
       <BehaviourControlGraph_DeleteAction id="FLX-79" object="link" userID="FLX" flexoID="79" />
     </DeletionScheme>
   </FlexoConcept>
-  <UseModelSlotDeclaration id="55" modelSlotClass="org.openflexo.technologyadapter.emf.EMFModelSlot" userID="FLX" flexoID="-1" />
-  <UseModelSlotDeclaration id="56" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
-  <Inspector id="FLX-6" inspectorTitle="City1_View" userID="FLX" flexoID="6" />
+  <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.emf.EMFModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <Inspector id="SYL-693" inspectorTitle="City1_View" userID="SYL" flexoID="693" />
   <EMFModelSlot id="FLX-6" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city1" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="city1model" userID="FLX" flexoID="6" />
   <TypedDiagramModelSlot id="FLX-28" metaModelURI="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="28">
     <FMLDiagramPaletteElementBinding id="FLX-1" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New City" userID="FLX" flexoID="1">
@@ -282,42 +222,25 @@
     </FMLDiagramPaletteElementBinding>
   </TypedDiagramModelSlot>
   <SynchronizationScheme id="FLX-152" skipConfirmationPanel="false" name="synchronization" width="800" label="synchronization" height="600" userID="FLX" flexoID="152">
-    <BehaviourControlGraph_IterationAction id="FLX-13" iteratorName="emfCity" userID="FLX" flexoID="13">
-      <Iteration_SelectEMFObjectIndividual id="FLX-157" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City" receiver="city1model" ownerContext="iterationControlGraph" userID="FLX" flexoID="157" />
-      <ControlGraph_Sequence id="FLX-7" ownerContext="controlGraph" userID="FLX" flexoID="7">
-        <ControlGraph2_Sequence id="FLX-9" ownerContext="controlGraph2" userID="FLX" flexoID="9">
-          <ControlGraph2_IterationAction id="FLX-417" iteratorName="item" ownerContext="controlGraph2" userID="FLX" flexoID="417">
-            <Iteration_ExpressionAction id="FLX-12" expression="emfCity.residents" ownerContext="iterationControlGraph" userID="FLX" flexoID="12" />
-            <ControlGraph_MatchFlexoConceptInstance id="FLX-418" creationSchemeURI="http://www.openflexo.org/cityviews/City1_View.fml#ResidentGR.createFromEMF" receiver="this" ownerContext="controlGraph" description="" userID="FLX" flexoID="418">
-              <MatchingCriteria id="FLX-412" patternRoleName="resident" value="item" userID="FLX" flexoID="412" />
-              <MatchingCriteria id="FLX-413" patternRoleName="shape" userID="FLX" flexoID="413" />
-              <CreateFlexoConceptInstanceParameter id="FLX-465" paramName="indiv" value="item" userID="FLX" flexoID="465" />
-              <CreateFlexoConceptInstanceParameter id="FLX-466" paramName="cityFCI" value="myCityFCI" userID="FLX" flexoID="466" />
-            </ControlGraph_MatchFlexoConceptInstance>
-          </ControlGraph2_IterationAction>
-          <ControlGraph1_IterationAction id="FLX-183" iteratorName="anHouse" ownerContext="controlGraph1" description="" userID="FLX" flexoID="183">
-            <Iteration_ExpressionAction id="FLX-11" expression="emfCity.houses" ownerContext="iterationControlGraph" userID="FLX" flexoID="11" />
-            <ControlGraph_ConditionalAction id="FLX-10" condition="(myCityFCI != null)" ownerContext="controlGraph" userID="FLX" flexoID="10">
-              <ThenControlGraph_MatchFlexoConceptInstance id="FLX-184" creationSchemeURI="http://www.openflexo.org/cityviews/City1_View.fml#HouseGR.createFromEMF" receiver="this" ownerContext="thenControlGraph" description="" userID="FLX" flexoID="184">
-                <MatchingCriteria id="FLX-185" patternRoleName="house" value="anHouse" userID="FLX" flexoID="185" />
-                <MatchingCriteria id="FLX-186" patternRoleName="shape" userID="FLX" flexoID="186" />
-                <MatchingCriteria id="FLX-187" patternRoleName="icon" userID="FLX" flexoID="187" />
-                <CreateFlexoConceptInstanceParameter id="FLX-198" paramName="indiv" value="anHouse" userID="FLX" flexoID="198" />
-                <CreateFlexoConceptInstanceParameter id="FLX-199" paramName="inCity" value="myCityFCI" userID="FLX" flexoID="199" />
-              </ThenControlGraph_MatchFlexoConceptInstance>
-            </ControlGraph_ConditionalAction>
-          </ControlGraph1_IterationAction>
-        </ControlGraph2_Sequence>
-        <ControlGraph1_DeclarationAction id="FLX-8" variable="myCityFCI" ownerContext="controlGraph1" userID="FLX" flexoID="8">
-          <AssignableAction_MatchFlexoConceptInstance id="FLX-161" creationSchemeURI="http://www.openflexo.org/cityviews/City1_View.fml#CityGR.createFromEMF" receiver="this" variableName="myCityFCI" assignation="myCityFCI" userID="FLX" flexoID="161">
-            <MatchingCriteria id="FLX-158" patternRoleName="city" value="emfCity" userID="FLX" flexoID="158" />
-            <MatchingCriteria id="FLX-159" patternRoleName="shape" userID="FLX" flexoID="159" />
-            <MatchingCriteria id="FLX-160" patternRoleName="icon" userID="FLX" flexoID="160" />
-            <CreateFlexoConceptInstanceParameter id="FLX-166" paramName="indiv" value="emfCity" userID="FLX" flexoID="166" />
+    <BehaviourControlGraph_IterationAction id="SYL-817" iteratorName="emfCity" userID="SYL" flexoID="817">
+      <Iteration_SelectEMFObjectIndividual id="SYL-820" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City" receiver="city1model" ownerContext="iterationControlGraph" userID="SYL" flexoID="820" />
+      <ControlGraph_Sequence id="SYL-839" ownerContext="controlGraph" userID="SYL" flexoID="839">
+        <ControlGraph2_DeclarationAction id="SYL-833" variable="myCityFCI" ownerContext="controlGraph2" userID="SYL" flexoID="833">
+          <AssignableAction_MatchFlexoConceptInstance id="SYL-830" creationSchemeURI="http://www.openflexo.org/cityviews/City1_View.fml#CityGR.createFromEMF" matchingSet="matchingSet" receiver="this" userID="SYL" flexoID="830">
+            <MatchingCriteria id="SYL-832" patternRoleName="city" value="emfCity" userID="SYL" flexoID="832" />
+            <MatchingCriteria id="SYL-834" patternRoleName="shape" userID="SYL" flexoID="834" />
+            <MatchingCriteria id="SYL-835" patternRoleName="icon" userID="SYL" flexoID="835" />
+            <MatchingCriteria id="SYL-836" patternRoleName="city1model" userID="SYL" flexoID="836" />
+            <MatchingCriteria id="SYL-837" patternRoleName="typedDiagramModelSlot" userID="SYL" flexoID="837" />
+            <CreateFlexoConceptInstanceParameter id="SYL-831" paramName="indiv" value="emfCity" userID="SYL" flexoID="831" />
           </AssignableAction_MatchFlexoConceptInstance>
+        </ControlGraph2_DeclarationAction>
+        <ControlGraph1_DeclarationAction id="SYL-828" variable="matchingSet" ownerContext="controlGraph1" userID="SYL" flexoID="828">
+          <AssignableAction_InitiateMatching id="SYL-827" container="this" flexoConceptTypeURI="http://www.openflexo.org/cityviews/City1_View.fml#CityGR" userID="SYL" flexoID="827" />
         </ControlGraph1_DeclarationAction>
       </ControlGraph_Sequence>
     </BehaviourControlGraph_IterationAction>
   </SynchronizationScheme>
   <DeletionScheme id="FLX-232" skipConfirmationPanel="false" name="delete" width="800" label="delete" height="600" userID="FLX" flexoID="232" />
+  <ActionScheme id="SYL-728" name="test" width="800" label="test" height="600" userID="SYL" flexoID="728" />
 </VirtualModel>
