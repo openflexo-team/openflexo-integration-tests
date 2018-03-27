@@ -8,7 +8,7 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
 @VirtualModel(uri="http://www.openflexo.org/cityviews/City2_View.fml")
 public class City2_View {
 
-  ModelSlot city2model type=EMFModelSlot$EMFModelSlotImpl_$$_jvst367_96 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city2" required=true readOnly=false;
+  ModelSlot city2model type=EMFModelSlot$EMFModelSlotImpl_$$_jvstbac_a1 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city2" required=true readOnly=false;
   @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification",cardinality=ZeroOne,readOnly=false)  
   public DiagramType<City2_View> typedDiagramModelSlot;
 
@@ -29,26 +29,25 @@ public class City2_View {
   public class CityGR {  
   
     FlexoRole city as Individual conformTo City from city2model ;  
-    FlexoRole shape as ShapeSpecification from City2_View;  
-    FlexoRole icon as ShapeSpecification from City2_View;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = city.name;      
+    }  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape icon {    
+    }  
   
     @DropScheme    
     CityGR:dropCityAtTopLevel(String cityName) {    
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = city.name;      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();      
       city = city2model.AddEMFObjectIndividual();    
     }    
   
     @CreationScheme    
     CityGR:createFromEMF(IFlexoOntologyIndividual indiv) {    
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = city.name;      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();      
       city = parameters.indiv;    
     }    
   
@@ -62,24 +61,26 @@ public class City2_View {
   public class MansionGR {  
   
     FlexoRole mansion as Individual conformTo Mansion from city2model ;  
-    FlexoRole shape as ShapeSpecification from City2_View;  
-    FlexoRole icon as ShapeSpecification from City2_View;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = ("Mansion N°" + mansion.number.toString);      
+    }  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape icon {    
+    }  
   
     @DropScheme    
     MansionGR:dropMansionInCity(Integer MansionNumber) {    
       mansion = city2model.AddEMFObjectIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = ("Mansion N°" + mansion.number.toString);      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };    
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();    
     }    
   
     @DeletionScheme    
     Void deletion() {    
-      delete mansion      
-      delete shape      
-      delete icon    
+      mansion.delete();      
+      shape.delete();      
+      icon.delete();    
     }    
   
   }  
@@ -101,24 +102,26 @@ public class City2_View {
   public class AppartmentGR {  
   
     FlexoRole appartment as Individual conformTo Appartment from city2model ;  
-    FlexoRole shape as ShapeSpecification from City2_View;  
-    FlexoRole icon as ShapeSpecification from City2_View;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = appartment.label;      
+    }  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape icon {    
+    }  
   
     @DropScheme    
     AppartmentGR:dropAppartmentGRInCity(String name) {    
       appartment = city2model.AddEMFObjectIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = appartment.label;      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };    
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();    
     }    
   
     @DeletionScheme    
     Void deletion() {    
-      delete appartment      
-      delete shape      
-      delete icon    
+      appartment.delete();      
+      shape.delete();      
+      icon.delete();    
     }    
   
   }  

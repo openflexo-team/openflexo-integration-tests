@@ -44,10 +44,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
+import org.openflexo.foundation.FlexoException;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.action.AddRepositoryFolder;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -56,9 +58,11 @@ import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.rm.FMLRTVirtualModelInstanceResource;
 import org.openflexo.foundation.resource.RepositoryFolder;
+import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.foundation.technologyadapter.ModelSlot;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.emf.EMFModelSlot;
+import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.technologyadapter.emf.rm.EMFModelResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
@@ -77,37 +81,73 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	private static FlexoEditor editor;
 	private static FlexoProject<File> project;
 	private static FlexoProject<File> reloadedProject;
+	private static EMFModelResource modelResource1;
 
 	/**
 	 * Instantiate test resource center
 	 */
 	@Test
 	@TestOrder(1)
-	public void test0InstantiateResourceCenter() {
+	public void testInstantiateResourceCenter() {
 
 		log("test0InstantiateResourceCenter()");
 
-		instanciateTestServiceManager();
+		instanciateTestServiceManager(EMFTechnologyAdapter.class);
 	}
 
 	/**
-	 * Test creating a view from Scratch.
+	 * Test creating a project
 	 */
 	@Test
 	@TestOrder(2)
-	public void test1EMFCityViewsViewCreation() {
+	public void testCreateProject() {
 
-		log("test1EMFCityViewsViewCreation()");
+		log("testLoadViewPoint()");
 
 		// CreateProject
 		editor = createStandaloneProject("TestCreateView");
 		project = (FlexoProject<File>) editor.getProject();
 		assertNotNull(project.getVirtualModelInstanceRepository());
 
+	}
+
+	/**
+	 * Test creating a view from Scratch.
+	 */
+	@Test
+	@TestOrder(3)
+	public void testLoadViewPoint() {
+
+		log("testLoadViewPoint()");
+
 		// Load CityMapping ViewPoint
 		cityViewsViewPoint = loadViewPoint("http://www.openflexo.org/cityviews");
 		assertNotNull(cityViewsViewPoint);
 		System.out.println("Found view point in " + ((VirtualModelResource) cityViewsViewPoint.getResource()).getIODelegate().toString());
+
+		assertObjectIsValid(cityViewsViewPoint);
+
+		cityViewsViewPoint.loadContainedVirtualModelsWhenUnloaded();
+		assertEquals(2, cityViewsViewPoint.getVirtualModels().size());
+		VirtualModel cityView1 = cityViewsViewPoint.getVirtualModels().get(0);
+		assertObjectIsValid(cityView1);
+		VirtualModel cityView2 = cityViewsViewPoint.getVirtualModels().get(1);
+		assertObjectIsValid(cityView2);
+
+		modelResource1 = (EMFModelResource) project.getServiceManager().getResourceManager()
+				.getModelWithURI("http://openflexo.org/integration-tests/EMF/Model/city1/my.city1");
+		assertNotNull(modelResource1);
+
+	}
+
+	/**
+	 * Test creating a view from Scratch.
+	 */
+	@Test
+	@TestOrder(4)
+	public void testEMFCityViewsViewCreation() {
+
+		log("testEMFCityViewsViewCreation()");
 
 		// Create View Folder
 		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType
@@ -155,9 +195,10 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 				((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Test
-	@TestOrder(3)
-	public void test3CreateVirtualModelInstance() {
+	@TestOrder(5)
+	public void testCreateVirtualModelInstance() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
 
 		log("test3CreateVirtualModelInstance()");
 
@@ -191,10 +232,8 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 
 			if (ms instanceof EMFModelSlot) {
 				// EMFModelSlot emfModelSlot1 = (EMFModelSlot) ms;
-				EMFModelResource modelResource1 = (EMFModelResource) project.getServiceManager().getResourceManager()
-						.getModelWithURI("http://openflexo.org/integration-tests/TestResourceCenter/EMF/Model/city1/my.city1");
 				assertNotNull(modelResource1);
-				newVirtualModelInstance.setFlexoPropertyValue(ms, modelResource1);
+				newVirtualModelInstance.setFlexoPropertyValue(ms, modelResource1.getResourceData(null));
 			}
 		}
 
