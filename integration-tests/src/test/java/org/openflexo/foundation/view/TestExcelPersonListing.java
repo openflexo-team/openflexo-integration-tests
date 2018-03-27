@@ -453,7 +453,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 
 		ExcelWorkbook document = null;
 		try {
-			document = documentResource.getResourceData(null);
+			document = documentResource.getResourceData();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (ResourceLoadingCancelledException e) {
