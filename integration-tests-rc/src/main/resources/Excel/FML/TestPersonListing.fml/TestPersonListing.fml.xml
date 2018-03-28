@@ -14,7 +14,7 @@
         <AssignableAction_ConfigureGINAFIBComponent id="SYL-21" receiver="ui" userID="SYL" flexoID="21" />
       </ControlGraph2_AssignationAction>
       <ControlGraph1_AssignationAction id="SYL-13" assign="personListing" ownerContext="controlGraph1" userID="SYL" flexoID="13">
-        <AssignableAction_CreateSEResource id="SYL-12" creationSchemeURI="http://openflexo.org/integration-tests/Excel/FML/TestPersonListing.fml/PersonListing.fml.create" excelWorkbook="parameters.excelResource.getResourceData(null)" resourceCenter="this.resourceCenter" relativePath="" resourceName="(this.name + &quot;_PersonListing&quot;)" receiver="null" userID="SYL" flexoID="12" />
+        <AssignableAction_CreateSEResource id="SYL-12" creationSchemeURI="http://openflexo.org/integration-tests/Excel/FML/TestPersonListing.fml/PersonListing.fml.create" excelWorkbook="parameters.excelResource.getResourceData()" resourceCenter="this.resourceCenter" relativePath="" resourceName="(this.name + &quot;_PersonListing&quot;)" receiver="null" userID="SYL" flexoID="12" />
       </ControlGraph1_AssignationAction>
     </BehaviourControlGraph_Sequence>
     <GenericBehaviourParameter id="SYL-10" isRequired="true" widget="CUSTOM_WIDGET" name="excelResource" type="org.openflexo.foundation.resource.FlexoResourceType&lt;org.openflexo.technologyadapter.excel.model.ExcelWorkbook&gt;" userID="SYL" flexoID="10" />

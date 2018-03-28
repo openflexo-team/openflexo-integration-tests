@@ -336,10 +336,10 @@
   <CreationScheme id="227" name="create" width="800" label="create" height="600" userID="FLX" flexoID="275">
     <BehaviourControlGraph_Sequence id="228" userID="FLX" flexoID="294">
       <ControlGraph2_AssignationAction id="229" assign="model2" ownerContext="controlGraph2" userID="FLX" flexoID="282">
-        <AssignableAction_ExpressionAction id="230" expression="parameters.city2.getResourceData(null)" userID="FLX" flexoID="281" />
+        <AssignableAction_ExpressionAction id="230" expression="parameters.city2.getResourceData()" userID="FLX" flexoID="281" />
       </ControlGraph2_AssignationAction>
       <ControlGraph1_AssignationAction id="231" assign="model1" ownerContext="controlGraph1" userID="FLX" flexoID="280">
-        <AssignableAction_ExpressionAction id="232" expression="parameters.city1.getResourceData(null)" userID="FLX" flexoID="279" />
+        <AssignableAction_ExpressionAction id="232" expression="parameters.city1.getResourceData()" userID="FLX" flexoID="279" />
       </ControlGraph1_AssignationAction>
     </BehaviourControlGraph_Sequence>
     <GenericBehaviourParameter id="233" isRequired="true" widget="CUSTOM_WIDGET" name="city1" type="org.openflexo.foundation.resource.FlexoResourceType&lt;org.openflexo.technologyadapter.emf.model.EMFModel&gt;" userID="FLX" flexoID="276" />
