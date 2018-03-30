@@ -5,11 +5,11 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
  * 
  * @version 0.1
  */
-@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml")
+@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml")
 public class DiagramSpecification {
 
   ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_95 conformTo="http://www.w3.org/2004/02/skos/core" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
   public DiagramType<DiagramSpecification> typedDiagramModelSlot;
 
   @FlexoConcept  

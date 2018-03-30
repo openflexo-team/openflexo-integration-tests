@@ -107,48 +107,48 @@ public class TestLoadViewPoints extends OpenflexoTestCase {
 	@Test
 	@TestOrder(2)
 	public void test1LoadBasicOntology() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
+		testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 	}
 
 	/*@Test
 	@TestOrder(3)
 	public void test2LoadBDN() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl");
+		testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl");
 	}
 	
 	@Test
 	@TestOrder(4)
 	public void test3LoadOC() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl");
+		testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl");
 	}
 	
 	@Test
 	@TestOrder(5)
 	public void test4LoadOM() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl");
+		testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl");
 	}
 	
 	@Test
 	@TestOrder(6)
 	public void test5LoadOUD() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl");
+		testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl");
 	}
 	
 	@Test
 	@TestOrder(7)
 	public void test6LoadSKOS() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl");
+		testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl");
 	}
 	
 	@Test
 	@TestOrder(8)
 	public void test7LoadUMLPackage() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl");
+		testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl");
 	}
 	
 	@Test
 	@TestOrder(9)
 	public void test8LoadUMLUseCases() {
-		testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl");
+		testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl");
 	}*/
 }

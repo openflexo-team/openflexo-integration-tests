@@ -99,7 +99,7 @@
   </EditionPattern>
   <EditionPattern id="61" name="ConceptToConceptSchemeRelationship">
     <description>Allows to define link between a concept and a concept scheme</description>
-    <LinkScheme id="62" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#ConceptScheme" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="LinkAConceptToAConceptScheme" label="LinkAConceptToAConceptScheme" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <LinkScheme id="62" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" toTarget="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#ConceptScheme" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="LinkAConceptToAConceptScheme" label="LinkAConceptToAConceptScheme" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <CheckBoxParameter id="63" name="makeInverseRelationship" label="make_inverse_relationship" defaultValue="true" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false">
         <description>When set to true, indicates that inverse relationship must be defined</description>
       </CheckBoxParameter>
@@ -152,7 +152,7 @@
   </EditionPattern>
   <EditionPattern id="101" name="ConceptSpecialization">
     <description>Allows to define link between a concept and a other concept with a specialization semantic</description>
-    <LinkScheme id="102" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="SpecializeAConcept" label="SpecializeAConcept" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <LinkScheme id="102" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" toTarget="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="SpecializeAConcept" label="SpecializeAConcept" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <CheckBoxParameter id="103" name="match" label="match" defaultValue="false" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false">
         <description>When set to true, indicates that broadMatch property should be used</description>
       </CheckBoxParameter>
@@ -247,7 +247,7 @@
   </EditionPattern>
   <EditionPattern id="174" name="ConceptGeneralization">
     <description>Allows to define link between a concept and a other concept with a specialization semantic</description>
-    <LinkScheme id="175" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="GeneralizeAConcept" label="GeneralizeAConcept" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <LinkScheme id="175" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" toTarget="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="GeneralizeAConcept" label="GeneralizeAConcept" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <CheckBoxParameter id="176" name="match" label="match" defaultValue="false" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false">
         <description>When set to true, indicates that broadMatch property should be used</description>
       </CheckBoxParameter>
@@ -342,7 +342,7 @@
   </EditionPattern>
   <EditionPattern id="247" name="ConceptRelatedRelationship">
     <description>Allows to define link between a concept and a other concept with a "related-to" semantic</description>
-    <LinkScheme id="248" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="MakeTwoConceptRelatedToEachOther" label="MakeTwoConceptRelatedToEachOther" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <LinkScheme id="248" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" toTarget="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl#Concept" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="MakeTwoConceptRelatedToEachOther" label="MakeTwoConceptRelatedToEachOther" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <CheckBoxParameter id="249" name="match" label="match" defaultValue="false" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false">
         <description>When set to true, indicates that relatedMatch property should be used</description>
       </CheckBoxParameter>
@@ -461,6 +461,6 @@
     <Localized id="345" key="ConceptToConceptSchemeRelationship" lang="en">'Top concept' relationship</Localized>
   </LocalizedDictionary>
   <OWLModelSlot idref="12" />
-  <DiagramModelSlot id="346" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl" />
+  <DiagramModelSlot id="346" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl" />
   <Inspector id="347" inspectorTitle="DiagramSpecification" />
 </DiagramSpecification>

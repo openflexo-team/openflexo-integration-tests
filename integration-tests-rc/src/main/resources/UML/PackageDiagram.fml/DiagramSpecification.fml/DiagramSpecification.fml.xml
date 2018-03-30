@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="41">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="41">
   <FlexoConcept id="1" name="Package" userID="FLX" flexoID="20">
     <Inspector id="2" inspectorTitle="Package" userID="FLX" flexoID="1">
       <GenericInspectorEntry id="3" widget="TEXT_FIELD" data="package.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="52" />
@@ -19,7 +19,7 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="16" featureName="label" value="package.name" userID="FLX" flexoID="80" />
     </ShapeRole>
-    <OWLIndividualRole id="17" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="19" />
+    <OWLIndividualRole id="17" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="19" />
     <DropScheme id="18" target="top" name="drop" width="800" label="drop" height="600" userID="FLX" flexoID="6">
       <BehaviourControlGraph_Sequence id="19" userID="FLX" flexoID="49">
         <ControlGraph2_AssignationAction id="20" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="47">
@@ -27,7 +27,7 @@
         </ControlGraph2_AssignationAction>
         <ControlGraph1_AssignationAction id="22" assign="package" ownerContext="controlGraph1" userID="FLX" flexoID="48">
           <AssignableAction_AddOWLIndividual id="23" individualName="parameters.uri" receiver="owl" assignation="package" userID="FLX" flexoID="21">
-            <DataPropertyAssertion id="24" value="parameters.name" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#name" userID="FLX" flexoID="22" />
+            <DataPropertyAssertion id="24" value="parameters.name" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#name" userID="FLX" flexoID="22" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -40,10 +40,10 @@
       <GenericInspectorEntry id="29" readOnly="true" widget="TEXT_FIELD" data="package.name" name="source" label="source" type="java.lang.String" userID="FLX" flexoID="67" />
       <GenericInspectorEntry id="30" readOnly="true" widget="TEXT_FIELD" data="importedPackage.name" name="imported" label="imported" type="java.lang.String" userID="FLX" flexoID="68" />
     </Inspector>
-    <OWLIndividualRole id="31" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="24" />
-    <OWLIndividualRole id="32" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="importedPackage" userID="FLX" flexoID="25" />
-    <OWLIndividualRole id="33" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#PackageImport" cloningStrategy="Clone" cardinality="ZeroOne" name="packageImport" userID="FLX" flexoID="26" />
-    <ObjectPropertyStatementRole id="34" objectProperty="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#packageImport" cloningStrategy="Clone" cardinality="ZeroOne" name="import" userID="FLX" flexoID="27" />
+    <OWLIndividualRole id="31" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="24" />
+    <OWLIndividualRole id="32" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="importedPackage" userID="FLX" flexoID="25" />
+    <OWLIndividualRole id="33" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#PackageImport" cloningStrategy="Clone" cardinality="ZeroOne" name="packageImport" userID="FLX" flexoID="26" />
+    <ObjectPropertyStatementRole id="34" objectProperty="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#packageImport" cloningStrategy="Clone" cardinality="ZeroOne" name="import" userID="FLX" flexoID="27" />
     <ConnectorRole id="35" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="28">
       <ConnectorGraphicalRepresentation id="36" identifier="object_2" absoluteTextY="-11.0" absoluteTextX="-7.0" layer="64">
         <LineConnectorSpecification id="37" cp1RelativeToStartObject="0.9965753021614381,0.5584206237836987" cp2RelativeToEndObject="0.0017271208775611058,0.5415227399268701" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
@@ -54,7 +54,7 @@
       </ConnectorGraphicalRepresentation>
       <GRSpec id="42" featureName="label" readOnly="true" value="&quot;import&quot;" userID="FLX" flexoID="81" />
     </ConnectorRole>
-    <LinkScheme id="43" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml#Package" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml#Package" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" skipConfirmationPanel="false" name="ImportPackage" width="800" label="ImportPackage" height="600" userID="FLX" flexoID="13">
+    <LinkScheme id="43" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml#Package" toTarget="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml#Package" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" skipConfirmationPanel="false" name="ImportPackage" width="800" label="ImportPackage" height="600" userID="FLX" flexoID="13">
       <BehaviourControlGraph_Sequence id="44" userID="FLX" flexoID="65">
         <ControlGraph2_Sequence id="45" ownerContext="controlGraph2" userID="FLX" flexoID="62">
           <ControlGraph2_Sequence id="46" ownerContext="controlGraph2" userID="FLX" flexoID="59">
@@ -68,7 +68,7 @@
             </ControlGraph2_Sequence>
             <ControlGraph1_AssignationAction id="52" assign="packageImport" ownerContext="controlGraph1" userID="FLX" flexoID="58">
               <AssignableAction_AddOWLIndividual id="53" individualName="parameters.uri" receiver="owl" assignation="packageImport" userID="FLX" flexoID="33">
-                <ObjectPropertyAssertion id="54" object="importedPackage" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#importedPackage" userID="FLX" flexoID="32" />
+                <ObjectPropertyAssertion id="54" object="importedPackage" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#importedPackage" userID="FLX" flexoID="32" />
               </AssignableAction_AddOWLIndividual>
             </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
@@ -86,9 +86,9 @@
   <UseModelSlotDeclaration id="60" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
   <UseModelSlotDeclaration id="61" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="62" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="42" />
-  <OWLModelSlot id="63" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="15" />
-  <TypedDiagramModelSlot id="64" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="16">
-    <FMLDiagramPaletteElementBinding id="65" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#Package" userID="FLX" flexoID="2">
+  <OWLModelSlot id="63" metaModelURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="15" />
+  <TypedDiagramModelSlot id="64" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="16">
+    <FMLDiagramPaletteElementBinding id="65" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#Package" userID="FLX" flexoID="2">
       <DropScheme idref="18" />
     </FMLDiagramPaletteElementBinding>
   </TypedDiagramModelSlot>

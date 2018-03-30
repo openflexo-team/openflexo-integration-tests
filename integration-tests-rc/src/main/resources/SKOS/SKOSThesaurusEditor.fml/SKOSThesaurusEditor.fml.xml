@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl" version="0.1" name="SKOSThesaurusEditor" userID="FLX" description="" flexoID="1">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl" version="0.1" name="SKOSThesaurusEditor" userID="FLX" description="" flexoID="1">
   <Inspector id="1" inspectorTitle="SKOSThesaurusEditor" userID="FLX" flexoID="3" />
 </VirtualModel>

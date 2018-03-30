@@ -3,7 +3,7 @@
   <description>This viewpoint is intented to deal with the organizational structure</description>
   <EditionPattern id="2" name="OrganizationalUnit">
     <description>Allows to define an organization unit inside an other organization unit.</description>
-    <DropScheme id="3" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnit" name="DropOrganizationalUnitInOrganizationalUnit" label="DropOrganizationalUnitInOrganizationalUnit" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="3" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnit" name="DropOrganizationalUnitInOrganizationalUnit" label="DropOrganizationalUnitInOrganizationalUnit" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <ContainedShapePatternRole id="4" patternRole="shape" name="shape" exampleLabel="Organization Unit">
         <ShapeGraphicalRepresentation id="5" x="0.0" y="16.421052631578974" width="535.752" height="111.57894736842103" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="true" allowToLeaveBounds="false" xConstraints="" yConstraints="" widthConstraints="" heightConstraints="" identifier="object_0" layer="1" hasText="true" text="Organization Unit" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="267.0" absoluteTextY="-12.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
           <ForegroundStyle id="6" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -34,14 +34,14 @@
       <URIParameter id="21" base="parameters.missionName" name="missionURI" label="missionURI" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <TextAreaParameter id="22" name="missionDescription" label="missionDescription" defaultValue="&quot;Please describe here the mission of organizational unit&quot;" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
       <AddOWLIndividual id="23" conditional="" assignation="mission" individualName="parameters.missionURI">
-        <DataPropertyAssertion id="24" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="parameters.missionName" conditional="" />
-        <DataPropertyAssertion id="25" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="parameters.missionDescription" conditional="" />
-        <AddressedOWLModelSlot id="26" isRequired="false" isReadOnly="false" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" name="owl" />
+        <DataPropertyAssertion id="24" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="parameters.missionName" conditional="" />
+        <DataPropertyAssertion id="25" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="parameters.missionDescription" conditional="" />
+        <AddressedOWLModelSlot id="26" isRequired="false" isReadOnly="false" metaModelURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" name="owl" />
       </AddOWLIndividual>
       <AddOWLIndividual id="27" conditional="" assignation="organizationUnit" individualName="parameters.organizationUnitURI">
-        <DataPropertyAssertion id="28" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" value="parameters.organizationUnitName" conditional="" />
-        <DataPropertyAssertion id="29" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitDescription" value="parameters.organizationUnitDescription" conditional="" />
-        <ObjectPropertyAssertion id="30" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasParentOrgUnit" object="target.organizationUnit" conditional="" />
+        <DataPropertyAssertion id="28" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" value="parameters.organizationUnitName" conditional="" />
+        <DataPropertyAssertion id="29" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitDescription" value="parameters.organizationUnitDescription" conditional="" />
+        <ObjectPropertyAssertion id="30" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasParentOrgUnit" object="target.organizationUnit" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="31" object="mission" conditional="" assignation="hasOrgUnitMission" subject="organizationUnit" />
@@ -68,13 +68,13 @@
       <URIParameter id="42" base="parameters.missionName" name="missionURI" label="missionURI" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <TextAreaParameter id="43" name="missionDescription" label="missionDescription" defaultValue="&quot;Please describe here the mission of organizational unit&quot;" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
       <AddOWLIndividual id="44" conditional="" assignation="mission" individualName="parameters.missionURI">
-        <DataPropertyAssertion id="45" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="parameters.missionName" conditional="" />
-        <DataPropertyAssertion id="46" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="parameters.missionDescription" conditional="" />
+        <DataPropertyAssertion id="45" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="parameters.missionName" conditional="" />
+        <DataPropertyAssertion id="46" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="parameters.missionDescription" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddOWLIndividual id="47" conditional="" assignation="organizationUnit" individualName="parameters.organizationUnitURI">
-        <DataPropertyAssertion id="48" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" value="parameters.organizationUnitName" conditional="" />
-        <DataPropertyAssertion id="49" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitDescription" value="parameters.organizationUnitDescription" conditional="" />
+        <DataPropertyAssertion id="48" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" value="parameters.organizationUnitName" conditional="" />
+        <DataPropertyAssertion id="49" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitDescription" value="parameters.organizationUnitDescription" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="50" object="mission" conditional="" assignation="hasOrgUnitMission" subject="organizationUnit" />
@@ -93,12 +93,12 @@
     </DropScheme>
     <DropScheme id="55" target="top" name="DrawOrganizationalUnitInOrganizationalUnit" label="DrawOrganizationalUnitInOrganizationalUnit" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
       <description>Draw an existing Organization Unit. These can be done only at top level.</description>
-      <IndividualParameter id="56" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" conceptValue="" name="organizationalUnit" label="Organizational unit" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
+      <IndividualParameter id="56" conceptURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" conceptValue="" name="organizationalUnit" label="Organizational unit" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
       <DeclarePatternRole id="57" object="parameters.organizationalUnit" conditional="" assignation="organizationUnit" />
       <DeclarePatternRole id="58" object="organizationUnit.hasOrgUnitMission" conditional="(organizationUnit.hasOrgUnitMission != null)" assignation="mission" />
       <AddOWLIndividual id="59" conditional="(organizationUnit.hasOrgUnitMission = null)" assignation="mission" individualName="(organizationUnit.uriName + &quot;Mission&quot;)">
-        <DataPropertyAssertion id="60" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="&quot;Mission&quot;" conditional="" />
-        <DataPropertyAssertion id="61" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="&quot;&lt;Describe the mission here&gt;&quot;" conditional="" />
+        <DataPropertyAssertion id="60" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="&quot;Mission&quot;" conditional="" />
+        <DataPropertyAssertion id="61" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="&quot;&lt;Describe the mission here&gt;&quot;" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddShape id="62" container="topLevel" extendParentBoundsToHostThisShape="false" conditional="" assignation="shape" >
@@ -117,12 +117,12 @@
     <NavigationScheme id="66" targetObject="process" conditional="(process != null)" name="OpenRelatedProcess" label="OpenRelatedProcess" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600" />
     <NavigationScheme id="67" targetObject="activity" conditional="(activity != null)" name="OpenRelatedActivity" label="OpenRelatedActivity" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600" />
     <CreationScheme id="68" name="CreateDiagramFromOrganizationUnit" label="CreateDiagramFromOrganizationUnit" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
-      <IndividualParameter id="69" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" conceptValue="" name="organizationalUnit" label="organizationalUnit" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
+      <IndividualParameter id="69" conceptURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" conceptValue="" name="organizationalUnit" label="organizationalUnit" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
       <DeclarePatternRole id="70" object="parameters.organizationalUnit" conditional="" assignation="organizationUnit" />
       <DeclarePatternRole id="71" object="organizationUnit.hasOrgUnitMission" conditional="(organizationUnit.hasOrgUnitMission != null)" assignation="mission" />
       <AddOWLIndividual id="72" conditional="(organizationUnit.hasOrgUnitMission = null)" assignation="mission" individualName="(organizationUnit.uriName + &quot;Mission&quot;)">
-        <DataPropertyAssertion id="73" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="&quot;Mission&quot;" conditional="" />
-        <DataPropertyAssertion id="74" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="&quot;&lt;Describe the mission here&gt;&quot;" conditional="" />
+        <DataPropertyAssertion id="73" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="&quot;Mission&quot;" conditional="" />
+        <DataPropertyAssertion id="74" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="&quot;&lt;Describe the mission here&gt;&quot;" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="75" object="mission" conditional="" assignation="hasOrgUnitMission" subject="organizationUnit" />
@@ -151,12 +151,12 @@
 		<AddressedDiagramModelSlot idref="358" />
 	  </GraphicalAction>
     </CreationScheme>
-    <ContainedOWLIndividualPatternRole id="84" patternRole="organizationUnit" name="organizationUnit" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" />
-    <ContainedObjectPropertyStatementPatternRole id="85" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasSubOrgUnit" patternRole="hasSubOrgUnit" name="hasSubOrgUnit" />
+    <ContainedOWLIndividualPatternRole id="84" patternRole="organizationUnit" name="organizationUnit" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" />
+    <ContainedObjectPropertyStatementPatternRole id="85" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasSubOrgUnit" patternRole="hasSubOrgUnit" name="hasSubOrgUnit" />
     <ContainedShapePatternRole idref="4" >
 		<AddressedDiagramModelSlot idref="358" />
 	</ContainedShapePatternRole>
-    <ContainedOWLIndividualPatternRole id="86" patternRole="mission" name="mission" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnitMission" />
+    <ContainedOWLIndividualPatternRole id="86" patternRole="mission" name="mission" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnitMission" />
     <ContainedShapePatternRole id="87" patternRole="missionContainer" name="missionContainer" exampleLabel="">
       <ShapeGraphicalRepresentation id="88" x="57.0" y="6.038834951456309" width="396.18257261410787" height="80.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="false" xConstraints="" yConstraints="" widthConstraints="" heightConstraints="" identifier="object_0_0" layer="2" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="89" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -209,7 +209,7 @@
     </ContainedShapePatternRole>
     <ContainedFlexoModelObjectPatternRole id="125" flexoModelObjectType="Process" patternRole="process" name="process" />
     <ContainedFlexoModelObjectPatternRole id="126" flexoModelObjectType="Activity" patternRole="activity" name="activity" />
-    <ContainedObjectPropertyStatementPatternRole id="127" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasOrgUnitMission" patternRole="hasOrgUnitMission" name="hasOrgUnitMission" />
+    <ContainedObjectPropertyStatementPatternRole id="127" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasOrgUnitMission" patternRole="hasOrgUnitMission" name="hasOrgUnitMission" />
     <PrimaryConceptOWLIndividualPatternRole idref="84" />
     <PrimaryRepresentationShapePatternRole idref="4" />
     <Inspector id="128" inspectorTitle="Organization Unit">
@@ -225,7 +225,7 @@
   </EditionPattern>
   <EditionPattern id="137" name="OrganizationalUnitObjective">
     <description>Allows to define an objective for an organization unit</description>
-    <DropScheme id="138" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnit" name="DropObjectiveInOrganizationalUnit" label="DropObjectiveInOrganizationalUnit" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="138" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnit" name="DropObjectiveInOrganizationalUnit" label="DropObjectiveInOrganizationalUnit" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="4" />
       <TextFieldParameter id="139" name="objectiveName" label="objective" defaultValue="&quot;Objective&quot;" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false">
         <description>Allow to enter short name for objective</description>
@@ -237,8 +237,8 @@
         <description>Allow to enter a short description for the organization unit objective</description>
       </TextAreaParameter>
       <AddOWLIndividual id="142" conditional="" assignation="objective" individualName="parameters.objectiveURI">
-        <DataPropertyAssertion id="143" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#objectiveName" value="parameters.objectiveName" conditional="" />
-        <DataPropertyAssertion id="144" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#objectiveDescription" value="parameters.objectiveDescription" conditional="" />
+        <DataPropertyAssertion id="143" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#objectiveName" value="parameters.objectiveName" conditional="" />
+        <DataPropertyAssertion id="144" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#objectiveDescription" value="parameters.objectiveDescription" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="145" object="objective" conditional="" assignation="hasObjective" subject="target.organizationUnit" />
@@ -248,8 +248,8 @@
     </DropScheme>
     <NavigationScheme id="147" targetObject="macroProcess" conditional="(macroProcess != null)" name="OpenRelatedMacroProcess" label="OpenRelatedMacroProcess" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600" />
     <NavigationScheme id="148" targetObject="process" conditional="(process != null)" name="OpenRelatedProcess" label="OpenRelatedProcess" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600" />
-    <ContainedOWLIndividualPatternRole id="149" patternRole="objective" name="objective" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Objective" />
-    <ContainedObjectPropertyStatementPatternRole id="150" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasObjective" patternRole="hasObjective" name="hasObjective" />
+    <ContainedOWLIndividualPatternRole id="149" patternRole="objective" name="objective" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Objective" />
+    <ContainedObjectPropertyStatementPatternRole id="150" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasObjective" patternRole="hasObjective" name="hasObjective" />
     <ContainedShapePatternRole id="151" patternRole="shape" name="shape" exampleLabel="label">
       <ShapeGraphicalRepresentation id="152" x="135.0" y="35.0" width="183.4260355029586" height="40.3013698630137" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="false" adjustMinimalHeightToLabelHeight="false" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="false" xConstraints="" yConstraints="" widthConstraints="" heightConstraints="" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="true" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="153" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -280,7 +280,7 @@
   </EditionPattern>
   <EditionPattern id="172" name="OrganizationalUnitPosition">
     <description>Allows to add a position for an organization unit</description>
-    <DropScheme id="173" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnit" name="DropPositionInOrganizationalUnit" label="DropPositionInOrganizationalUnit" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="173" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnit" name="DropPositionInOrganizationalUnit" label="DropPositionInOrganizationalUnit" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="4" />
       <description>Create a position in organizational unit</description>
       <TextFieldParameter id="174" name="positionName" label="position" defaultValue="&quot;Position&quot;" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false">
@@ -293,13 +293,13 @@
       <URIParameter id="177" base="(parameters.positionName + parameters.missionName)" name="missionURI" label="missionURI" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <TextAreaParameter id="178" name="missionDescription" label="missionDescription" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
       <AddOWLIndividual id="179" conditional="" assignation="mission" individualName="parameters.missionURI">
-        <DataPropertyAssertion id="180" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="parameters.missionName" conditional="" />
-        <DataPropertyAssertion id="181" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="parameters.missionDescription" conditional="" />
+        <DataPropertyAssertion id="180" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="parameters.missionName" conditional="" />
+        <DataPropertyAssertion id="181" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="parameters.missionDescription" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddOWLIndividual id="182" conditional="" assignation="position" individualName="parameters.positionURI">
-        <DataPropertyAssertion id="183" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#positionName" value="parameters.positionName" conditional="" />
-        <ObjectPropertyAssertion id="184" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPositionMission" object="mission" conditional="" />
+        <DataPropertyAssertion id="183" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#positionName" value="parameters.positionName" conditional="" />
+        <ObjectPropertyAssertion id="184" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPositionMission" object="mission" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="185" object="position" conditional="" assignation="containsPosition" subject="target.organizationUnit" />
@@ -319,15 +319,15 @@
 		<AddressedDiagramModelSlot idref="358" />
 	  </AddShape>
     </DropScheme>
-    <DropScheme id="191" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnit" name="DrawPositionInOrganizationalUnit" label="DrawPositionInOrganizationalUnit" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="191" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnit" name="DrawPositionInOrganizationalUnit" label="DrawPositionInOrganizationalUnit" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="4" />
       <description>Choose an existing position of organizational unit and represent it</description>
-      <IndividualParameter id="192" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" conceptValue="" name="positionToRepresent" label="positionToRepresent" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
+      <IndividualParameter id="192" conceptURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" conceptValue="" name="positionToRepresent" label="positionToRepresent" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false" />
       <DeclarePatternRole id="193" object="parameters.positionToRepresent" conditional="" assignation="position" />
       <DeclarePatternRole id="194" object="position.hasPositionMission" conditional="(position.hasPositionMission != null)" assignation="mission" />
       <AddOWLIndividual id="195" conditional="(position.hasPositionMission = null)" assignation="mission" individualName="(position.uriName + &quot;Mission&quot;)">
-        <DataPropertyAssertion id="196" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="&quot;Mission&quot;" conditional="" />
-        <DataPropertyAssertion id="197" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="&quot;Please define position mission&quot;" conditional="" />
+        <DataPropertyAssertion id="196" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" value="&quot;Mission&quot;" conditional="" />
+        <DataPropertyAssertion id="197" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" value="&quot;Please define position mission&quot;" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddShape id="198" container="target.shape" extendParentBoundsToHostThisShape="false" conditional="" assignation="shape" >
@@ -346,8 +346,8 @@
 		<AddressedDiagramModelSlot idref="358" />
 	  </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="203" patternRole="position" name="position" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" />
-    <ContainedObjectPropertyStatementPatternRole id="204" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#containsPosition" patternRole="containsPosition" name="containsPosition" />
+    <ContainedOWLIndividualPatternRole id="203" patternRole="position" name="position" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" />
+    <ContainedObjectPropertyStatementPatternRole id="204" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#containsPosition" patternRole="containsPosition" name="containsPosition" />
     <ContainedShapePatternRole id="205" patternRole="shape" name="shape" exampleLabel="">
       <ShapeGraphicalRepresentation id="206" x="30.032913250076547" y="6.062029242357113" width="297.9275908498315" height="100.655737704918" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="" yConstraints="" widthConstraints="" heightConstraints="" identifier="object_0" layer="2" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="207" noStroke="false" color="102,102,102" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -380,7 +380,7 @@
       <ParentShapePatternRole idref="205" />
       <GRSpec id="229" featureName="label" value="mission.missionDescription" readOnly="false" />
     </ContainedShapePatternRole>
-    <ContainedOWLIndividualPatternRole id="230" patternRole="mission" name="mission" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#PositionMission" />
+    <ContainedOWLIndividualPatternRole id="230" patternRole="mission" name="mission" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#PositionMission" />
     <ContainedShapePatternRole id="231" patternRole="icon" name="icon" exampleLabel="">
       <ShapeGraphicalRepresentation id="232" x="10.0" y="28.0" width="34.87804878048781" height="31.086956521739133" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="false" adjustMinimalHeightToLabelHeight="false" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="true" allowToLeaveBounds="true" xConstraints="10" yConstraints="28" widthConstraints="" heightConstraints="" identifier="object_0_1" layer="3" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="123.87804878048783" absoluteTextY="-7.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="233" noStroke="true" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -439,12 +439,12 @@
       <TextField id="271" label="missionURI" name="missionURI" readOnly="false" data="mission.uriName" conditional="" />
       <TextField id="272" label="mission" name="mission" readOnly="false" data="mission.missionName" conditional="" />
       <TextArea id="273" label="mission_description" name="mission_description" readOnly="false" data="mission.missionDescription" conditional="" />
-      <Individual id="274" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" conceptValue="" name="ontologicalPosition" label="position" readOnly="false" data="position" conditional="" />
+      <Individual id="274" conceptURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" conceptValue="" name="ontologicalPosition" label="position" readOnly="false" data="position" conditional="" />
     </Inspector>
   </EditionPattern>
   <EditionPattern id="275" name="PositionTask">
     <description>Allows to define a position task</description>
-    <DropScheme id="276" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnitPosition" name="DropTaskForPosition" label="DropTaskForPosition" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="276" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl#OrganizationalUnitPosition" name="DropTaskForPosition" label="DropTaskForPosition" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="205" />
       <TextFieldParameter id="277" name="taskName" label="task" defaultValue="&quot;Task&quot;" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="false">
         <description>Allow to enter short name for task</description>
@@ -456,8 +456,8 @@
         <description>Allow to enter a short description for the position task</description>
       </TextAreaParameter>
       <AddOWLIndividual id="280" conditional="" assignation="task" individualName="parameters.taskURI">
-        <DataPropertyAssertion id="281" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#taskName" value="parameters.taskName" conditional="" />
-        <DataPropertyAssertion id="282" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#taskDescription" value="parameters.taskDescription" conditional="" />
+        <DataPropertyAssertion id="281" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#taskName" value="parameters.taskName" conditional="" />
+        <DataPropertyAssertion id="282" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#taskDescription" value="parameters.taskDescription" conditional="" />
         <AddressedOWLModelSlot idref="26" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="283" object="task" conditional="" assignation="hasTask" subject="target.position" />
@@ -468,8 +468,8 @@
 		<AddressedDiagramModelSlot idref="358" />
 	  </AddConnector>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="286" patternRole="task" name="task" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Task" />
-    <ContainedObjectPropertyStatementPatternRole id="287" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasTask" patternRole="hasTask" name="hasTask" />
+    <ContainedOWLIndividualPatternRole id="286" patternRole="task" name="task" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Task" />
+    <ContainedObjectPropertyStatementPatternRole id="287" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasTask" patternRole="hasTask" name="hasTask" />
     <ContainedConnectorPatternRole id="288" patternRole="hasTaskConnector" name="hasTaskConnector" exampleLabel="">
       <ConnectorGraphicalRepresentation id="289" hasSelectedForeground="false" hasFocusedForeground="false" startSymbol="NONE" endSymbol="ARROW" middleSymbol="NONE" startSymbolSize="10.0" endSymbolSize="10.0" middleSymbolSize="10.0" relativeMiddleSymbolLocation="0.5" applyForegroundToSymbols="true" identifier="object_2" layer="64" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="3.0" absoluteTextY="7.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="290" noStroke="false" color="153,153,153" lineWidth="1.6000000014901161" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -559,6 +559,6 @@
     <Localized id="357" key="concept_scheme" lang="English">concept_scheme</Localized>
   </LocalizedDictionary>
   <OWLModelSlot idref="26" />
-  <DiagramModelSlot id="358" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl/DiagramSpecification"/>
+  <DiagramModelSlot id="358" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl/DiagramSpecification"/>
   <Inspector id="359" inspectorTitle="DiagramSpecification" />
 </DiagramSpecification>

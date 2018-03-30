@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="117">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="117">
   <FlexoConcept id="1" name="BOTCompany" userID="FLX" flexoID="38">
     <Inspector id="2" inspectorTitle="Company" userID="FLX" flexoID="1">
       <GenericInspectorEntry id="3" widget="TEXT_FIELD" data="company.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="128" />
       <GenericInspectorEntry id="4" widget="TEXT_FIELD" data="company.companyName" name="company_name" label="company_name" type="java.lang.String" userID="FLX" flexoID="129" />
     </Inspector>
-    <OWLIndividualRole id="5" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTCompany" cloningStrategy="Clone" cardinality="ZeroOne" name="company" userID="FLX" flexoID="36" />
+    <OWLIndividualRole id="5" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTCompany" cloningStrategy="Clone" cardinality="ZeroOne" name="company" userID="FLX" flexoID="36" />
     <ShapeRole id="6" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="37">
       <ShapeGraphicalRepresentation id="7" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="123.0" y="9.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="224.79787851510477" height="90.9883344883345" identifier="object_0" absoluteTextY="13.0" absoluteTextX="115.0" layer="1" text="label">
         <SelectedColorGradientBackgroundStyle id="8" color1="255,255,102" color2="255,204,204" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.5" />
@@ -27,7 +27,7 @@
         </ControlGraph2_AssignationAction>
         <ControlGraph1_AssignationAction id="22" assign="company" ownerContext="controlGraph1" userID="FLX" flexoID="124">
           <AssignableAction_AddOWLIndividual id="23" individualName="parameters.companyURI" receiver="basicOrg" assignation="company" userID="FLX" flexoID="39">
-            <DataPropertyAssertion id="24" value="parameters.companyName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#companyName" userID="FLX" flexoID="40" />
+            <DataPropertyAssertion id="24" value="parameters.companyName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#companyName" userID="FLX" flexoID="40" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -41,7 +41,7 @@
       <GenericInspectorEntry id="30" widget="TEXT_FIELD" data="department.name" name="department_name" label="department_name" type="java.lang.String" userID="FLX" flexoID="137" />
       <GenericInspectorEntry id="31" widget="TEXT_FIELD" data="department.isContainedIn.uriName" name="is_contained_in" label="is_contained_in" type="java.lang.String" userID="FLX" flexoID="138" />
     </Inspector>
-    <OWLIndividualRole id="32" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment" cloningStrategy="Clone" cardinality="ZeroOne" name="department" userID="FLX" flexoID="42" />
+    <OWLIndividualRole id="32" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment" cloningStrategy="Clone" cardinality="ZeroOne" name="department" userID="FLX" flexoID="42" />
     <ShapeRole id="33" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="43">
       <ShapeGraphicalRepresentation id="34" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="163.0" y="27.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="176.0" height="58.0" identifier="object_0" absoluteTextY="16.0" absoluteTextX="89.0" layer="1" text="label">
         <SelectedColorGradientBackgroundStyle id="35" color1="0,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
@@ -56,15 +56,15 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="44" featureName="label" value="department.name" userID="FLX" flexoID="181" />
     </ShapeRole>
-    <DropScheme id="45" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTCompany" name="DropBOTDepartmentInBOTCompany" width="800" label="DropBOTDepartmentInBOTCompany" height="600" userID="FLX" flexoID="14">
+    <DropScheme id="45" target="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTCompany" name="DropBOTDepartmentInBOTCompany" width="800" label="DropBOTDepartmentInBOTCompany" height="600" userID="FLX" flexoID="14">
       <BehaviourControlGraph_Sequence id="46" userID="FLX" flexoID="133">
         <ControlGraph2_AssignationAction id="47" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="131">
           <AssignableAction_AddShape id="48" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="48" />
         </ControlGraph2_AssignationAction>
         <ControlGraph1_AssignationAction id="49" assign="department" ownerContext="controlGraph1" userID="FLX" flexoID="132">
           <AssignableAction_AddOWLIndividual id="50" individualName="parameters.departmentURI" receiver="basicOrg" assignation="department" userID="FLX" flexoID="46">
-            <DataPropertyAssertion id="51" value="parameters.departmentName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" userID="FLX" flexoID="47" />
-            <ObjectPropertyAssertion id="52" object="target.company" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" userID="FLX" flexoID="45" />
+            <DataPropertyAssertion id="51" value="parameters.departmentName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" userID="FLX" flexoID="47" />
+            <ObjectPropertyAssertion id="52" object="target.company" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" userID="FLX" flexoID="45" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -78,7 +78,7 @@
       <GenericInspectorEntry id="58" widget="TEXT_FIELD" data="subDepartment.name" name="sub-department name" label="sub-department name" type="java.lang.String" userID="FLX" flexoID="146" />
       <GenericInspectorEntry id="59" readOnly="true" widget="TEXT_FIELD" data="subDepartment.isContainedIn.uriName" name="is_contained_in" label="is_contained_in" type="java.lang.String" userID="FLX" flexoID="147" />
     </Inspector>
-    <OWLIndividualRole id="60" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTSubDepartment" cloningStrategy="Clone" cardinality="ZeroOne" name="subDepartment" userID="FLX" flexoID="49" />
+    <OWLIndividualRole id="60" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTSubDepartment" cloningStrategy="Clone" cardinality="ZeroOne" name="subDepartment" userID="FLX" flexoID="49" />
     <ShapeRole id="61" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="50">
       <ShapeGraphicalRepresentation id="62" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="147.0" y="28.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="176.0" height="58.0" identifier="object_0" absoluteTextY="15.0" absoluteTextX="87.0" layer="1" text="label">
         <SelectedColorGradientBackgroundStyle id="63" color1="255,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
@@ -93,15 +93,15 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="71" featureName="label" value="subDepartment.name" userID="FLX" flexoID="182" />
     </ShapeRole>
-    <DropScheme id="72" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTDepartment" skipConfirmationPanel="false" name="DropBOTSubDepartmentInBOTDepartment" width="800" label="DropBOTSubDepartmentInBOTDepartment" height="600" userID="FLX" flexoID="24">
+    <DropScheme id="72" target="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTDepartment" skipConfirmationPanel="false" name="DropBOTSubDepartmentInBOTDepartment" width="800" label="DropBOTSubDepartmentInBOTDepartment" height="600" userID="FLX" flexoID="24">
       <BehaviourControlGraph_Sequence id="73" userID="FLX" flexoID="142">
         <ControlGraph2_AssignationAction id="74" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="140">
           <AssignableAction_AddShape id="75" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="55" />
         </ControlGraph2_AssignationAction>
         <ControlGraph1_AssignationAction id="76" assign="subDepartment" ownerContext="controlGraph1" userID="FLX" flexoID="141">
           <AssignableAction_AddOWLIndividual id="77" individualName="parameters.subDepartmentURI" receiver="basicOrg" assignation="subDepartment" userID="FLX" flexoID="53">
-            <DataPropertyAssertion id="78" value="parameters.subDepartmentName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" userID="FLX" flexoID="54" />
-            <ObjectPropertyAssertion id="79" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" userID="FLX" flexoID="52" />
+            <DataPropertyAssertion id="78" value="parameters.subDepartmentName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" userID="FLX" flexoID="54" />
+            <ObjectPropertyAssertion id="79" object="target.department" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" userID="FLX" flexoID="52" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -111,9 +111,9 @@
   </FlexoConcept>
   <FlexoConcept id="82" name="Employee" userID="FLX" flexoID="61">
     <Inspector id="83" userID="FLX" flexoID="26" />
-    <OWLIndividualRole id="84" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTManager" cloningStrategy="Clone" cardinality="ZeroOne" name="employeeAsManager" userID="FLX" flexoID="56" />
-    <OWLIndividualRole id="85" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTWorker" cloningStrategy="Clone" cardinality="ZeroOne" name="employeeAsWorker" userID="FLX" flexoID="57" />
-    <OWLIndividualRole id="86" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTPerson" cloningStrategy="Clone" cardinality="ZeroOne" name="person" userID="FLX" flexoID="58" />
+    <OWLIndividualRole id="84" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTManager" cloningStrategy="Clone" cardinality="ZeroOne" name="employeeAsManager" userID="FLX" flexoID="56" />
+    <OWLIndividualRole id="85" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTWorker" cloningStrategy="Clone" cardinality="ZeroOne" name="employeeAsWorker" userID="FLX" flexoID="57" />
+    <OWLIndividualRole id="86" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTPerson" cloningStrategy="Clone" cardinality="ZeroOne" name="person" userID="FLX" flexoID="58" />
     <ShapeRole id="87" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="managerAsShape" userID="FLX" flexoID="59">
       <ShapeGraphicalRepresentation id="88" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="227.0" y="42.03462386947115" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="173.0" height="38.96537613052885" identifier="object_0" absoluteTextY="36.0" absoluteTextX="23.0" layer="1" text="label">
         <SelectedImageBackgroundStyle id="89" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
@@ -142,7 +142,7 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="109" featureName="label" value="employeeAsWorker.roleName" userID="FLX" flexoID="184" />
     </ShapeRole>
-    <DropScheme id="110" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTDepartment" skipConfirmationPanel="false" name="DropEmployeeInOrganization" width="800" label="DropEmployeeInOrganization" height="600" userID="FLX" flexoID="29">
+    <DropScheme id="110" target="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#BOTDepartment" skipConfirmationPanel="false" name="DropEmployeeInOrganization" width="800" label="DropEmployeeInOrganization" height="600" userID="FLX" flexoID="29">
       <BehaviourControlGraph_Sequence id="111" userID="FLX" flexoID="158">
         <ControlGraph2_Sequence id="112" ownerContext="controlGraph2" userID="FLX" flexoID="156">
           <ControlGraph2_Sequence id="113" ownerContext="controlGraph2" userID="FLX" flexoID="154">
@@ -156,27 +156,27 @@
             </ControlGraph2_Sequence>
             <ControlGraph1_AssignationAction id="119" assign="person" ownerContext="controlGraph1" userID="FLX" flexoID="153">
               <AssignableAction_AddOWLIndividual id="120" individualName="parameters.personURI" receiver="basicOrg" assignation="person" conditional="(parameters.assignPerson = true)" userID="FLX" flexoID="73">
-                <DataPropertyAssertion id="121" value="parameters.employeeFirstName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personFirstName" userID="FLX" flexoID="74" />
-                <DataPropertyAssertion id="122" value="parameters.employeeLastName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personName" userID="FLX" flexoID="75" />
-                <ObjectPropertyAssertion id="123" object="employeeAsManager" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" conditional="(parameters.isManager = true)" userID="FLX" flexoID="71" />
-                <ObjectPropertyAssertion id="124" object="employeeAsWorker" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" conditional="(parameters.isManager = false)" userID="FLX" flexoID="72" />
+                <DataPropertyAssertion id="121" value="parameters.employeeFirstName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personFirstName" userID="FLX" flexoID="74" />
+                <DataPropertyAssertion id="122" value="parameters.employeeLastName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personName" userID="FLX" flexoID="75" />
+                <ObjectPropertyAssertion id="123" object="employeeAsManager" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" conditional="(parameters.isManager = true)" userID="FLX" flexoID="71" />
+                <ObjectPropertyAssertion id="124" object="employeeAsWorker" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" conditional="(parameters.isManager = false)" userID="FLX" flexoID="72" />
               </AssignableAction_AddOWLIndividual>
             </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
           <ControlGraph1_AssignationAction id="125" assign="employeeAsWorker" ownerContext="controlGraph1" userID="FLX" flexoID="155">
             <AssignableAction_AddOWLIndividual id="126" individualName="parameters.employeeURI" receiver="basicOrg" assignation="employeeAsWorker" conditional="(parameters.isManager = false)" userID="FLX" flexoID="69">
-              <DataPropertyAssertion id="127" value="parameters.roleName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" userID="FLX" flexoID="70" />
-              <ObjectPropertyAssertion id="128" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" userID="FLX" flexoID="67" />
-              <ObjectPropertyAssertion id="129" object="person" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" conditional="(parameters.assignPerson = true)" userID="FLX" flexoID="68" />
+              <DataPropertyAssertion id="127" value="parameters.roleName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" userID="FLX" flexoID="70" />
+              <ObjectPropertyAssertion id="128" object="target.department" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" userID="FLX" flexoID="67" />
+              <ObjectPropertyAssertion id="129" object="person" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" conditional="(parameters.assignPerson = true)" userID="FLX" flexoID="68" />
             </AssignableAction_AddOWLIndividual>
           </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="130" assign="employeeAsManager" ownerContext="controlGraph1" userID="FLX" flexoID="157">
           <AssignableAction_AddOWLIndividual id="131" individualName="parameters.employeeURI" receiver="basicOrg" assignation="employeeAsManager" conditional="(parameters.isManager = true)" userID="FLX" flexoID="65">
-            <DataPropertyAssertion id="132" value="parameters.roleName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" userID="FLX" flexoID="66" />
-            <ObjectPropertyAssertion id="133" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" userID="FLX" flexoID="62" />
-            <ObjectPropertyAssertion id="134" object="target.department" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isHeadOf" conditional="(parameters.isHeadOfOrganization = true)" userID="FLX" flexoID="63" />
-            <ObjectPropertyAssertion id="135" object="person" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" conditional="(parameters.assignPerson = true)" userID="FLX" flexoID="64" />
+            <DataPropertyAssertion id="132" value="parameters.roleName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" userID="FLX" flexoID="66" />
+            <ObjectPropertyAssertion id="133" object="target.department" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" userID="FLX" flexoID="62" />
+            <ObjectPropertyAssertion id="134" object="target.department" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isHeadOf" conditional="(parameters.isHeadOfOrganization = true)" userID="FLX" flexoID="63" />
+            <ObjectPropertyAssertion id="135" object="person" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" conditional="(parameters.assignPerson = true)" userID="FLX" flexoID="64" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -192,8 +192,8 @@
   </FlexoConcept>
   <FlexoConcept id="144" name="EmployeeHierarchicalRelationship" userID="FLX" flexoID="81">
     <Inspector id="145" userID="FLX" flexoID="31" />
-    <ObjectPropertyStatementRole id="146" objectProperty="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isResponsibleOf" cloningStrategy="Clone" cardinality="ZeroOne" name="isResponsibleOf" userID="FLX" flexoID="78" />
-    <ObjectPropertyStatementRole id="147" objectProperty="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isUnderResponsabilityOf" cloningStrategy="Clone" cardinality="ZeroOne" name="isUnderResponsabilityOf" userID="FLX" flexoID="79" />
+    <ObjectPropertyStatementRole id="146" objectProperty="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isResponsibleOf" cloningStrategy="Clone" cardinality="ZeroOne" name="isResponsibleOf" userID="FLX" flexoID="78" />
+    <ObjectPropertyStatementRole id="147" objectProperty="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isUnderResponsabilityOf" cloningStrategy="Clone" cardinality="ZeroOne" name="isUnderResponsabilityOf" userID="FLX" flexoID="79" />
     <ConnectorRole id="148" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="80">
       <ConnectorGraphicalRepresentation id="149" identifier="object_2" absoluteTextY="-14.0" absoluteTextX="-2.0" layer="64" text="label">
         <LineConnectorSpecification id="150" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
@@ -204,7 +204,7 @@
       </ConnectorGraphicalRepresentation>
       <GRSpec id="155" featureName="label" readOnly="true" value="&quot;is responsible of&quot;" userID="FLX" flexoID="185" />
     </ConnectorRole>
-    <LinkScheme id="156" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#Employee" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#Employee" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" skipConfirmationPanel="false" name="LinkTwoEmployeesByHierarchicalRelationship" width="800" label="LinkTwoEmployeesByHierarchicalRelationship" height="600" userID="FLX" flexoID="34">
+    <LinkScheme id="156" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#Employee" toTarget="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification#Employee" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" skipConfirmationPanel="false" name="LinkTwoEmployeesByHierarchicalRelationship" width="800" label="LinkTwoEmployeesByHierarchicalRelationship" height="600" userID="FLX" flexoID="34">
       <BehaviourControlGraph_Sequence id="157" userID="FLX" flexoID="172">
         <ControlGraph2_Sequence id="158" ownerContext="controlGraph2" userID="FLX" flexoID="170">
           <ControlGraph2_AssignationAction id="159" assign="connector" ownerContext="controlGraph2" userID="FLX" flexoID="168">
@@ -224,21 +224,21 @@
   <UseModelSlotDeclaration id="166" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
   <UseModelSlotDeclaration id="167" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="168" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="118" />
-  <OWLModelSlot id="169" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="basicOrg" userID="FLX" flexoID="85" />
-  <TypedDiagramModelSlot id="170" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="87">
-    <FMLDiagramPaletteElementBinding id="171" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Company" userID="FLX" flexoID="2">
+  <OWLModelSlot id="169" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="basicOrg" userID="FLX" flexoID="85" />
+  <TypedDiagramModelSlot id="170" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="87">
+    <FMLDiagramPaletteElementBinding id="171" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Company" userID="FLX" flexoID="2">
       <DropScheme idref="18" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="172" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Department" userID="FLX" flexoID="5">
+    <FMLDiagramPaletteElementBinding id="172" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Department" userID="FLX" flexoID="5">
       <DropScheme idref="45" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="173" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Sub-department" userID="FLX" flexoID="8">
+    <FMLDiagramPaletteElementBinding id="173" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Sub-department" userID="FLX" flexoID="8">
       <DropScheme idref="72" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="174" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#CEO" userID="FLX" flexoID="11">
+    <FMLDiagramPaletteElementBinding id="174" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#CEO" userID="FLX" flexoID="11">
       <DropScheme idref="110" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="175" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#Marketing executive" userID="FLX" flexoID="20">
+    <FMLDiagramPaletteElementBinding id="175" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#Marketing executive" userID="FLX" flexoID="20">
       <DropScheme idref="110" />
     </FMLDiagramPaletteElementBinding>
   </TypedDiagramModelSlot>

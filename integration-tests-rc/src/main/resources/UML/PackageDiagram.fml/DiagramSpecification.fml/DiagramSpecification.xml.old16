@@ -13,8 +13,8 @@ Package specializes TemplateableElement and PackageableElement specializes Param
       <URIParameter id="5" base="parameters.name" name="uri" label="uri" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <AddOWLIndividual id="6" conditional="" assignation="package" individualName="parameters.uri">
         <description>Individual of type Package is added to ontology</description>
-        <DataPropertyAssertion id="7" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#name" value="parameters.name" conditional="" />
-        <AddressedOWLModelSlot id="8" isRequired="false" isReadOnly="false" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl" name="owl" />
+        <DataPropertyAssertion id="7" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#name" value="parameters.name" conditional="" />
+        <AddressedOWLModelSlot id="8" isRequired="false" isReadOnly="false" metaModelURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl" name="owl" />
       </AddOWLIndividual>
       <AddShape id="9" container="topLevel" extendParentBoundsToHostThisShape="false" conditional="" assignation="shape">
         <description>Add the shape</description>
@@ -37,7 +37,7 @@ Package specializes TemplateableElement and PackageableElement specializes Param
 	  <AddressedDiagramModelSlot idref="73" />
       <GRSpec id="22" featureName="label" value="package.name" readOnly="false" />
     </ContainedShapePatternRole>
-    <ContainedOWLIndividualPatternRole id="23" patternRole="package" name="package" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" />
+    <ContainedOWLIndividualPatternRole id="23" patternRole="package" name="package" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" />
     <PrimaryConceptOWLIndividualPatternRole idref="23" />
     <PrimaryRepresentationShapePatternRole idref="10" />
     <Inspector id="24" inspectorTitle="Package">
@@ -49,21 +49,21 @@ Package specializes TemplateableElement and PackageableElement specializes Param
     <description>Allows to define dependancies between packages
 A package import is a relationship that allows the use of unqualified names to refer to package members from other namespaces.
 One package depends on another if changes in the other could possibly force changes in the first.</description>
-    <LinkScheme id="28" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl#Package" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl#Package" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="ImportPackage" label="ImportPackage" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+    <LinkScheme id="28" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl#Package" toTarget="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl#Package" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="ImportPackage" label="ImportPackage" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
       <URIParameter id="29" base="&quot;PackageImport&quot;" name="uri" label="uri" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <DeclarePatternRole id="30" object="fromTarget.package" conditional="" assignation="package" />
       <DeclarePatternRole id="31" object="toTarget.package" conditional="" assignation="importedPackage" />
       <AddOWLIndividual id="32" conditional="" assignation="packageImport" individualName="parameters.uri">
-        <ObjectPropertyAssertion id="33" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#importedPackage" object="importedPackage" conditional="" />
+        <ObjectPropertyAssertion id="33" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#importedPackage" object="importedPackage" conditional="" />
         <AddressedOWLModelSlot idref="8" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="34" object="packageImport" conditional="" assignation="import" subject="package" />
       <AddConnector id="35" fromShape="fromTarget.shape" toShape="toTarget.shape" conditional="" assignation="connector" />
     </LinkScheme>
-    <ContainedOWLIndividualPatternRole id="36" patternRole="package" name="package" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" />
-    <ContainedOWLIndividualPatternRole id="37" patternRole="importedPackage" name="importedPackage" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" />
-    <ContainedOWLIndividualPatternRole id="38" patternRole="packageImport" name="packageImport" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#PackageImport" />
-    <ContainedObjectPropertyStatementPatternRole id="39" objectProperty="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#packageImport" patternRole="import" name="import" />
+    <ContainedOWLIndividualPatternRole id="36" patternRole="package" name="package" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" />
+    <ContainedOWLIndividualPatternRole id="37" patternRole="importedPackage" name="importedPackage" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" />
+    <ContainedOWLIndividualPatternRole id="38" patternRole="packageImport" name="packageImport" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#PackageImport" />
+    <ContainedObjectPropertyStatementPatternRole id="39" objectProperty="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#packageImport" patternRole="import" name="import" />
     <ContainedConnectorPatternRole id="40" patternRole="connector" name="connector" exampleLabel="label">
       <ConnectorGraphicalRepresentation id="41" hasSelectedForeground="false" hasFocusedForeground="false" startSymbol="NONE" endSymbol="ARROW" middleSymbol="NONE" startSymbolSize="10.0" endSymbolSize="10.0" middleSymbolSize="10.0" relativeMiddleSymbolLocation="0.5" applyForegroundToSymbols="true" identifier="object_2" layer="64" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="-7.0" absoluteTextY="-11.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="42" noStroke="false" color="0,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="BIG_DASHES" useTransparency="false" transparencyLevel="0.5" />
@@ -108,6 +108,6 @@ One package depends on another if changes in the other could possibly force chan
   </EditionPattern>
   <LocalizedDictionary id="72" />
   <OWLModelSlot idref="8" />
-  <DiagramModelSlot id="73" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification" />
+  <DiagramModelSlot id="73" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification" />
   <Inspector id="74" inspectorTitle="DiagramSpecification" />
 </DiagramSpecification>

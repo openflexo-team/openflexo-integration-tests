@@ -5,11 +5,11 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
  * 
  * @version 0.1
  */
-@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification.fml")
+@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification.fml")
 public class DiagramSpecification {
 
-  ModelSlot basicOrg type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_96 conformTo="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" required=true readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  ModelSlot basicOrg type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_96 conformTo="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" required=true readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
   public DiagramType<DiagramSpecification> typedDiagramModelSlot;
 
   @FlexoConcept  

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="4">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="4">
   <FlexoConcept id="1" name="OrganizationalUnit" userID="FLX" flexoID="152">
     <Inspector id="2" inspectorTitle="Organization Unit" userID="FLX" flexoID="151">
       <GenericInspectorEntry id="3" widget="TEXT_FIELD" data="organizationUnit.uri" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="145" />
@@ -9,8 +9,8 @@
       <GenericInspectorEntry id="7" widget="TEXT_FIELD" data="mission.uri" name="mission_uri" label="mission_uri" type="java.lang.String" userID="FLX" flexoID="149" />
       <GenericInspectorEntry id="8" widget="TEXT_AREA" data="mission.missionDescription" name="description_of_mission" label="description_of_mission" type="java.lang.String" userID="FLX" flexoID="150" />
     </Inspector>
-    <OWLIndividualRole id="9" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" cloningStrategy="Clone" cardinality="ZeroOne" name="organizationUnit" userID="FLX" flexoID="9" />
-    <ObjectPropertyStatementRole id="10" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasSubOrgUnit" cloningStrategy="Clone" cardinality="ZeroOne" name="hasSubOrgUnit" userID="FLX" flexoID="10" />
+    <OWLIndividualRole id="9" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" cloningStrategy="Clone" cardinality="ZeroOne" name="organizationUnit" userID="FLX" flexoID="9" />
+    <ObjectPropertyStatementRole id="10" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasSubOrgUnit" cloningStrategy="Clone" cardinality="ZeroOne" name="hasSubOrgUnit" userID="FLX" flexoID="10" />
     <ShapeRole id="11" exampleLabel="Organization Unit" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="12">
       <ShapeGraphicalRepresentation id="12" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" allowToLeaveBounds="false" adaptBoundsToContents="false" y="16.421052631578974" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="535.752" height="111.57894736842103" identifier="object_0" absoluteTextY="-12.0" absoluteTextX="267.0" layer="1" text="Organization Unit">
         <SelectedColorBackgroundStyle id="13" color="221,249,221" transparencyLevel="0.5" />
@@ -25,7 +25,7 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="22" featureName="label" value="organizationUnit.organizationUnitName" userID="FLX" flexoID="359" />
     </ShapeRole>
-    <OWLIndividualRole id="23" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnitMission" cloningStrategy="Clone" cardinality="ZeroOne" name="mission" userID="FLX" flexoID="13" />
+    <OWLIndividualRole id="23" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnitMission" cloningStrategy="Clone" cardinality="ZeroOne" name="mission" userID="FLX" flexoID="13" />
     <ShapeRole id="24" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="missionContainer" userID="FLX" flexoID="14">
       <ParentShapeRole idref="11" />
       <ShapeGraphicalRepresentation id="25" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="69.78471369294604" y="15.789473684210513" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="396.18257261410787" height="80.0" identifier="object_0_0" layer="2">
@@ -70,8 +70,8 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="58" featureName="label" value="mission.missionDescription" userID="FLX" flexoID="361" />
     </ShapeRole>
-    <ObjectPropertyStatementRole id="59" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasOrgUnitMission" cloningStrategy="Clone" cardinality="ZeroOne" name="hasOrgUnitMission" userID="FLX" flexoID="19" />
-    <DropScheme id="60" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnit" name="DropOrganizationalUnitInOrganizationalUnit" width="800" label="DropOrganizationalUnitInOrganizationalUnit" height="600" userID="FLX" flexoID="54">
+    <ObjectPropertyStatementRole id="59" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasOrgUnitMission" cloningStrategy="Clone" cardinality="ZeroOne" name="hasOrgUnitMission" userID="FLX" flexoID="19" />
+    <DropScheme id="60" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnit" name="DropOrganizationalUnitInOrganizationalUnit" width="800" label="DropOrganizationalUnitInOrganizationalUnit" height="600" userID="FLX" flexoID="54">
       <ShapeRole idref="11" />
       <BehaviourControlGraph_Sequence id="61" userID="FLX" flexoID="47">
         <ControlGraph2_Sequence id="62" ownerContext="controlGraph2" userID="FLX" flexoID="42">
@@ -105,16 +105,16 @@
           </ControlGraph2_Sequence>
           <ControlGraph1_AssignationAction id="80" assign="organizationUnit" ownerContext="controlGraph1" userID="FLX" flexoID="41">
             <AssignableAction_AddOWLIndividual id="81" individualName="parameters.organizationUnitURI" receiver="owl" assignation="organizationUnit" userID="FLX" flexoID="40">
-              <DataPropertyAssertion id="82" value="parameters.organizationUnitName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" userID="FLX" flexoID="37" />
-              <DataPropertyAssertion id="83" value="parameters.organizationUnitDescription" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitDescription" userID="FLX" flexoID="38" />
-              <ObjectPropertyAssertion id="84" object="target.organizationUnit" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasParentOrgUnit" userID="FLX" flexoID="39" />
+              <DataPropertyAssertion id="82" value="parameters.organizationUnitName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" userID="FLX" flexoID="37" />
+              <DataPropertyAssertion id="83" value="parameters.organizationUnitDescription" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitDescription" userID="FLX" flexoID="38" />
+              <ObjectPropertyAssertion id="84" object="target.organizationUnit" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasParentOrgUnit" userID="FLX" flexoID="39" />
             </AssignableAction_AddOWLIndividual>
           </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="85" assign="mission" ownerContext="controlGraph1" userID="FLX" flexoID="46">
           <AssignableAction_AddOWLIndividual id="86" individualName="parameters.missionURI" receiver="owl" assignation="mission" userID="FLX" flexoID="45">
-            <DataPropertyAssertion id="87" value="parameters.missionName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="43" />
-            <DataPropertyAssertion id="88" value="parameters.missionDescription" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="44" />
+            <DataPropertyAssertion id="87" value="parameters.missionName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="43" />
+            <DataPropertyAssertion id="88" value="parameters.missionDescription" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="44" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -153,15 +153,15 @@
           </ControlGraph2_Sequence>
           <ControlGraph1_AssignationAction id="112" assign="organizationUnit" ownerContext="controlGraph1" userID="FLX" flexoID="72">
             <AssignableAction_AddOWLIndividual id="113" individualName="parameters.organizationUnitURI" receiver="owl" assignation="organizationUnit" userID="FLX" flexoID="71">
-              <DataPropertyAssertion id="114" value="parameters.organizationUnitName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" userID="FLX" flexoID="69" />
-              <DataPropertyAssertion id="115" value="parameters.organizationUnitDescription" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitDescription" userID="FLX" flexoID="70" />
+              <DataPropertyAssertion id="114" value="parameters.organizationUnitName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" userID="FLX" flexoID="69" />
+              <DataPropertyAssertion id="115" value="parameters.organizationUnitDescription" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitDescription" userID="FLX" flexoID="70" />
             </AssignableAction_AddOWLIndividual>
           </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="116" assign="mission" ownerContext="controlGraph1" userID="FLX" flexoID="77">
           <AssignableAction_AddOWLIndividual id="117" individualName="parameters.missionURI" receiver="owl" assignation="mission" userID="FLX" flexoID="76">
-            <DataPropertyAssertion id="118" value="parameters.missionName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="74" />
-            <DataPropertyAssertion id="119" value="parameters.missionDescription" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="75" />
+            <DataPropertyAssertion id="118" value="parameters.missionName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="74" />
+            <DataPropertyAssertion id="119" value="parameters.missionDescription" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="75" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -196,8 +196,8 @@
             </ControlGraph2_Sequence>
             <ControlGraph1_AssignationAction id="141" assign="mission" ownerContext="controlGraph1" userID="FLX" flexoID="100">
               <AssignableAction_AddOWLIndividual id="142" individualName="(organizationUnit.uriName + &quot;Mission&quot;)" receiver="owl" assignation="mission" conditional="(organizationUnit.hasOrgUnitMission = null)" userID="FLX" flexoID="99">
-                <DataPropertyAssertion id="143" value="&quot;Mission&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="97" />
-                <DataPropertyAssertion id="144" value="&quot;&lt;Describe the mission here&gt;&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="98" />
+                <DataPropertyAssertion id="143" value="&quot;Mission&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="97" />
+                <DataPropertyAssertion id="144" value="&quot;&lt;Describe the mission here&gt;&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="98" />
               </AssignableAction_AddOWLIndividual>
             </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
@@ -254,8 +254,8 @@
             </ControlGraph2_Sequence>
             <ControlGraph1_AssignationAction id="178" assign="mission" ownerContext="controlGraph1" userID="FLX" flexoID="136">
               <AssignableAction_AddOWLIndividual id="179" individualName="(organizationUnit.uriName + &quot;Mission&quot;)" receiver="owl" assignation="mission" conditional="(organizationUnit.hasOrgUnitMission = null)" userID="FLX" flexoID="135">
-                <DataPropertyAssertion id="180" value="&quot;Mission&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="133" />
-                <DataPropertyAssertion id="181" value="&quot;&lt;Describe the mission here&gt;&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="134" />
+                <DataPropertyAssertion id="180" value="&quot;Mission&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="133" />
+                <DataPropertyAssertion id="181" value="&quot;&lt;Describe the mission here&gt;&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="134" />
               </AssignableAction_AddOWLIndividual>
             </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
@@ -276,8 +276,8 @@
       <GenericInspectorEntry id="190" widget="TEXT_FIELD" data="objective.objectiveName" name="name" label="name" type="java.lang.String" userID="FLX" flexoID="174" />
       <GenericInspectorEntry id="191" widget="TEXT_AREA" data="objective.objectiveDescription" name="description" label="description" type="java.lang.String" userID="FLX" flexoID="175" />
     </Inspector>
-    <OWLIndividualRole id="192" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Objective" cloningStrategy="Clone" cardinality="ZeroOne" name="objective" userID="FLX" flexoID="153" />
-    <ObjectPropertyStatementRole id="193" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasObjective" cloningStrategy="Clone" cardinality="ZeroOne" name="hasObjective" userID="FLX" flexoID="154" />
+    <OWLIndividualRole id="192" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Objective" cloningStrategy="Clone" cardinality="ZeroOne" name="objective" userID="FLX" flexoID="153" />
+    <ObjectPropertyStatementRole id="193" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasObjective" cloningStrategy="Clone" cardinality="ZeroOne" name="hasObjective" userID="FLX" flexoID="154" />
     <ShapeRole id="194" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="156">
       <ShapeGraphicalRepresentation id="195" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="135.0" y="35.0" relativeTextX="0.5" adjustMinimalWidthToLabelWidth="false" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalHeightToLabelHeight="false" width="183.4260355029586" height="40.3013698630137" identifier="object_0" layer="1" isMultilineAllowed="true">
         <SelectedColorBackgroundStyle id="196" color="204,0,51" transparencyLevel="0.5" />
@@ -292,7 +292,7 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="205" featureName="label" value="objective.objectiveName" userID="FLX" flexoID="332" />
     </ShapeRole>
-    <DropScheme id="206" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnit" name="DropObjectiveInOrganizationalUnit" width="800" label="DropObjectiveInOrganizationalUnit" height="600" userID="FLX" flexoID="170">
+    <DropScheme id="206" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnit" name="DropObjectiveInOrganizationalUnit" width="800" label="DropObjectiveInOrganizationalUnit" height="600" userID="FLX" flexoID="170">
       <ShapeRole idref="11" />
       <BehaviourControlGraph_Sequence id="207" userID="FLX" flexoID="166">
         <ControlGraph2_Sequence id="208" ownerContext="controlGraph2" userID="FLX" flexoID="161">
@@ -305,8 +305,8 @@
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="213" assign="objective" ownerContext="controlGraph1" userID="FLX" flexoID="165">
           <AssignableAction_AddOWLIndividual id="214" individualName="parameters.objectiveURI" receiver="owl" assignation="objective" userID="FLX" flexoID="164">
-            <DataPropertyAssertion id="215" value="parameters.objectiveName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#objectiveName" userID="FLX" flexoID="162" />
-            <DataPropertyAssertion id="216" value="parameters.objectiveDescription" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#objectiveDescription" userID="FLX" flexoID="163" />
+            <DataPropertyAssertion id="215" value="parameters.objectiveName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#objectiveName" userID="FLX" flexoID="162" />
+            <DataPropertyAssertion id="216" value="parameters.objectiveDescription" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#objectiveDescription" userID="FLX" flexoID="163" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -326,8 +326,8 @@
       <GenericInspectorEntry id="228" widget="TEXT_AREA" data="mission.missionDescription" name="mission_description" label="mission_description" type="java.lang.String" userID="FLX" flexoID="252" />
       <GenericInspectorEntry id="229" widget="CUSTOM_WIDGET" data="position" name="ontologicalPosition" label="ontologicalPosition" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="253" />
     </Inspector>
-    <OWLIndividualRole id="230" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" cloningStrategy="Clone" cardinality="ZeroOne" name="position" userID="FLX" flexoID="178" />
-    <ObjectPropertyStatementRole id="231" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#containsPosition" cloningStrategy="Clone" cardinality="ZeroOne" name="containsPosition" userID="FLX" flexoID="179" />
+    <OWLIndividualRole id="230" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" cloningStrategy="Clone" cardinality="ZeroOne" name="position" userID="FLX" flexoID="178" />
+    <ObjectPropertyStatementRole id="231" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#containsPosition" cloningStrategy="Clone" cardinality="ZeroOne" name="containsPosition" userID="FLX" flexoID="179" />
     <ShapeRole id="232" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="180">
       <ShapeGraphicalRepresentation id="233" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="30.032913250076547" y="6.062029242357113" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="297.9275908498315" height="100.655737704918" identifier="object_0" layer="2">
         <SelectedColorBackgroundStyle id="234" color="247,221,221" transparencyLevel="0.5" />
@@ -356,7 +356,7 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="254" featureName="label" value="mission.missionName" userID="FLX" flexoID="341" />
     </ShapeRole>
-    <OWLIndividualRole id="255" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#PositionMission" cloningStrategy="Clone" cardinality="ZeroOne" name="mission" userID="FLX" flexoID="183" />
+    <OWLIndividualRole id="255" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#PositionMission" cloningStrategy="Clone" cardinality="ZeroOne" name="mission" userID="FLX" flexoID="183" />
     <ShapeRole id="256" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="184">
       <ParentShapeRole idref="232" />
       <ShapeGraphicalRepresentation id="257" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" yConstraints="28" xConstraints="10" x="131.52477103467186" y="34.78439059158943" relativeTextX="0.5" adjustMinimalWidthToLabelWidth="false" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalHeightToLabelHeight="false" width="34.87804878048781" height="31.086956521739133" identifier="object_0_1" absoluteTextY="-7.0" absoluteTextX="123.87804878048783" layer="3">
@@ -401,7 +401,7 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="289" featureName="label" value="mission.missionName" userID="FLX" flexoID="353" />
     </ShapeRole>
-    <DropScheme id="290" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnit" skipConfirmationPanel="false" name="DropPositionInOrganizationalUnit" width="800" label="DropPositionInOrganizationalUnit" height="600" userID="FLX" flexoID="221">
+    <DropScheme id="290" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnit" skipConfirmationPanel="false" name="DropPositionInOrganizationalUnit" width="800" label="DropPositionInOrganizationalUnit" height="600" userID="FLX" flexoID="221">
       <ShapeRole idref="11" />
       <BehaviourControlGraph_Sequence id="291" userID="FLX" flexoID="215">
         <ControlGraph2_Sequence id="292" ownerContext="controlGraph2" userID="FLX" flexoID="210">
@@ -435,15 +435,15 @@
           </ControlGraph2_Sequence>
           <ControlGraph1_AssignationAction id="310" assign="position" ownerContext="controlGraph1" userID="FLX" flexoID="209">
             <AssignableAction_AddOWLIndividual id="311" individualName="parameters.positionURI" receiver="owl" assignation="position" userID="FLX" flexoID="208">
-              <DataPropertyAssertion id="312" value="parameters.positionName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#positionName" userID="FLX" flexoID="206" />
-              <ObjectPropertyAssertion id="313" object="mission" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPositionMission" userID="FLX" flexoID="207" />
+              <DataPropertyAssertion id="312" value="parameters.positionName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#positionName" userID="FLX" flexoID="206" />
+              <ObjectPropertyAssertion id="313" object="mission" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPositionMission" userID="FLX" flexoID="207" />
             </AssignableAction_AddOWLIndividual>
           </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="314" assign="mission" ownerContext="controlGraph1" userID="FLX" flexoID="214">
           <AssignableAction_AddOWLIndividual id="315" individualName="parameters.missionURI" receiver="owl" assignation="mission" userID="FLX" flexoID="213">
-            <DataPropertyAssertion id="316" value="parameters.missionName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="211" />
-            <DataPropertyAssertion id="317" value="parameters.missionDescription" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="212" />
+            <DataPropertyAssertion id="316" value="parameters.missionName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="211" />
+            <DataPropertyAssertion id="317" value="parameters.missionDescription" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="212" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -453,7 +453,7 @@
       <GenericBehaviourParameter id="321" isRequired="true" widget="URI" name="missionURI" type="java.lang.String" userID="FLX" flexoID="219" />
       <GenericBehaviourParameter id="322" widget="TEXT_AREA" name="missionDescription" type="java.lang.String" userID="FLX" flexoID="220" />
     </DropScheme>
-    <DropScheme id="323" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnit" skipConfirmationPanel="false" name="DrawPositionInOrganizationalUnit" width="800" label="DrawPositionInOrganizationalUnit" height="600" userID="FLX" flexoID="247">
+    <DropScheme id="323" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnit" skipConfirmationPanel="false" name="DrawPositionInOrganizationalUnit" width="800" label="DrawPositionInOrganizationalUnit" height="600" userID="FLX" flexoID="247">
       <ShapeRole idref="11" />
       <BehaviourControlGraph_Sequence id="324" userID="FLX" flexoID="245">
         <ControlGraph2_Sequence id="325" ownerContext="controlGraph2" userID="FLX" flexoID="242">
@@ -483,8 +483,8 @@
             </ControlGraph2_Sequence>
             <ControlGraph1_AssignationAction id="341" assign="mission" ownerContext="controlGraph1" userID="FLX" flexoID="239">
               <AssignableAction_AddOWLIndividual id="342" individualName="(position.uriName + &quot;Mission&quot;)" receiver="owl" assignation="mission" conditional="(position.hasPositionMission = null)" userID="FLX" flexoID="238">
-                <DataPropertyAssertion id="343" value="&quot;Mission&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="236" />
-                <DataPropertyAssertion id="344" value="&quot;Please define position mission&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="237" />
+                <DataPropertyAssertion id="343" value="&quot;Mission&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="236" />
+                <DataPropertyAssertion id="344" value="&quot;Please define position mission&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionDescription" userID="FLX" flexoID="237" />
               </AssignableAction_AddOWLIndividual>
             </ControlGraph1_AssignationAction>
           </ControlGraph2_Sequence>
@@ -506,8 +506,8 @@
       <GenericInspectorEntry id="354" widget="TEXT_FIELD" data="task.taskName" name="task" label="task" type="java.lang.String" userID="FLX" flexoID="279" />
       <GenericInspectorEntry id="355" widget="TEXT_AREA" data="task.taskDescription" name="description" label="description" type="java.lang.String" userID="FLX" flexoID="280" />
     </Inspector>
-    <OWLIndividualRole id="356" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Task" cloningStrategy="Clone" cardinality="ZeroOne" name="task" userID="FLX" flexoID="256" />
-    <ObjectPropertyStatementRole id="357" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasTask" cloningStrategy="Clone" cardinality="ZeroOne" name="hasTask" userID="FLX" flexoID="257" />
+    <OWLIndividualRole id="356" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Task" cloningStrategy="Clone" cardinality="ZeroOne" name="task" userID="FLX" flexoID="256" />
+    <ObjectPropertyStatementRole id="357" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasTask" cloningStrategy="Clone" cardinality="ZeroOne" name="hasTask" userID="FLX" flexoID="257" />
     <ConnectorRole id="358" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="hasTaskConnector" userID="FLX" flexoID="258">
       <ConnectorGraphicalRepresentation id="359" identifier="object_2" absoluteTextY="7.0" absoluteTextX="3.0" layer="64">
         <ForegroundStyle id="360" color="153,153,153" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.6000000014901161" />
@@ -517,7 +517,7 @@
       </ConnectorGraphicalRepresentation>
     </ConnectorRole>
     <ShapeRole id="364" exampleLabel="Task" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="259" />
-    <DropScheme id="365" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnitPosition" name="DropTaskForPosition" width="800" label="DropTaskForPosition" height="600" userID="FLX" flexoID="276">
+    <DropScheme id="365" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml#OrganizationalUnitPosition" name="DropTaskForPosition" width="800" label="DropTaskForPosition" height="600" userID="FLX" flexoID="276">
       <ShapeRole idref="232" />
       <BehaviourControlGraph_Sequence id="366" userID="FLX" flexoID="272">
         <ControlGraph2_Sequence id="367" ownerContext="controlGraph2" userID="FLX" flexoID="267">
@@ -535,8 +535,8 @@
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="375" assign="task" ownerContext="controlGraph1" userID="FLX" flexoID="271">
           <AssignableAction_AddOWLIndividual id="376" individualName="parameters.taskURI" receiver="owl" assignation="task" userID="FLX" flexoID="270">
-            <DataPropertyAssertion id="377" value="parameters.taskName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#taskName" userID="FLX" flexoID="268" />
-            <DataPropertyAssertion id="378" value="parameters.taskDescription" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#taskDescription" userID="FLX" flexoID="269" />
+            <DataPropertyAssertion id="377" value="parameters.taskName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#taskName" userID="FLX" flexoID="268" />
+            <DataPropertyAssertion id="378" value="parameters.taskDescription" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#taskDescription" userID="FLX" flexoID="269" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -548,6 +548,6 @@
   <UseModelSlotDeclaration id="382" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
   <UseModelSlotDeclaration id="383" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="384" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="5" />
-  <OWLModelSlot id="385" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="283" />
-  <TypedDiagramModelSlot id="386" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="284" />
+  <OWLModelSlot id="385" metaModelURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="283" />
+  <TypedDiagramModelSlot id="386" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="284" />
 </VirtualModel>

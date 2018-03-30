@@ -3,6 +3,6 @@
  * 
  * @version 0.1
  */
-@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl")
+@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl")
 public class OrganizationalUnitDefinition {
 }

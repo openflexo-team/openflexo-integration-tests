@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="1">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="1">
   <FlexoConcept id="1" name="ITEnablers" userID="FLX" flexoID="22">
     <Inspector id="2" inspectorTitle="ITEnablers" userID="FLX" flexoID="21">
       <GenericInspectorEntry id="3" readOnly="true" widget="TEXT_FIELD" data="itEnablers.uriName" name="group" label="group" type="java.lang.String" userID="FLX" flexoID="20" />
     </Inspector>
-    <OWLIndividualRole id="4" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#ITEnablers" cloningStrategy="Clone" cardinality="ZeroOne" name="itEnablers" userID="FLX" flexoID="6" />
+    <OWLIndividualRole id="4" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#ITEnablers" cloningStrategy="Clone" cardinality="ZeroOne" name="itEnablers" userID="FLX" flexoID="6" />
     <ShapeRole id="5" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="7">
       <ShapeGraphicalRepresentation id="6" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" widthConstraints="150" adaptBoundsToContents="false" yConstraints="4" heightConstraints="600" xConstraints="-1" x="-1.0" y="4.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="150.0" height="600.0" identifier="object_0" layer="1">
         <SelectedColorBackgroundStyle id="7" color="153,153,153" useTransparency="true" transparencyLevel="0.7" />
@@ -54,7 +54,7 @@
     <Inspector id="39" inspectorTitle="EnablingChanges" userID="FLX" flexoID="38">
       <GenericInspectorEntry id="40" widget="TEXT_FIELD" data="enablingChanges.uriName" name="group" label="group" type="java.lang.String" userID="FLX" flexoID="37" />
     </Inspector>
-    <OWLIndividualRole id="41" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#EnablingChanges" cloningStrategy="Clone" cardinality="ZeroOne" name="enablingChanges" userID="FLX" flexoID="23" />
+    <OWLIndividualRole id="41" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#EnablingChanges" cloningStrategy="Clone" cardinality="ZeroOne" name="enablingChanges" userID="FLX" flexoID="23" />
     <ShapeRole id="42" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="24">
       <ShapeGraphicalRepresentation id="43" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" widthConstraints="150" adaptBoundsToContents="false" yConstraints="4" heightConstraints="600" xConstraints="167" x="167.0" y="4.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="150.0" height="600.0" identifier="object_0" layer="1">
         <SelectedColorBackgroundStyle id="44" color="153,153,153" useTransparency="true" transparencyLevel="0.5" />
@@ -104,7 +104,7 @@
     <Inspector id="74" inspectorTitle="BusinessChanges" userID="FLX" flexoID="55">
       <GenericInspectorEntry id="75" widget="TEXT_FIELD" data="businessChanges.uriName" name="group" label="group" type="java.lang.String" userID="FLX" flexoID="54" />
     </Inspector>
-    <OWLIndividualRole id="76" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#BusinessChanges" cloningStrategy="Clone" cardinality="ZeroOne" name="businessChanges" userID="FLX" flexoID="40" />
+    <OWLIndividualRole id="76" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#BusinessChanges" cloningStrategy="Clone" cardinality="ZeroOne" name="businessChanges" userID="FLX" flexoID="40" />
     <ShapeRole id="77" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="41">
       <ShapeGraphicalRepresentation id="78" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" widthConstraints="280" adaptBoundsToContents="false" yConstraints="4" heightConstraints="600" xConstraints="335" x="335.0" y="4.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="280.0" height="600.0" identifier="object_0" layer="1">
         <SelectedColorBackgroundStyle id="79" color="153,153,153" useTransparency="true" transparencyLevel="0.3" />
@@ -154,7 +154,7 @@
     <Inspector id="111" inspectorTitle="Benefits" userID="FLX" flexoID="72">
       <GenericInspectorEntry id="112" widget="TEXT_FIELD" data="benefits.uriName" name="group" label="group" type="java.lang.String" userID="FLX" flexoID="71" />
     </Inspector>
-    <OWLIndividualRole id="113" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#Benefits" cloningStrategy="Clone" cardinality="ZeroOne" name="benefits" userID="FLX" flexoID="57" />
+    <OWLIndividualRole id="113" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#Benefits" cloningStrategy="Clone" cardinality="ZeroOne" name="benefits" userID="FLX" flexoID="57" />
     <ShapeRole id="114" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="58">
       <ShapeGraphicalRepresentation id="115" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" widthConstraints="150" adaptBoundsToContents="false" yConstraints="4" heightConstraints="600" xConstraints="628" x="628.0" y="4.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="150.0" height="600.0" identifier="object_0" layer="1">
         <SelectedColorBackgroundStyle id="116" color="153,153,153" useTransparency="true" transparencyLevel="0.15" />
@@ -204,7 +204,7 @@
     <Inspector id="146" inspectorTitle="InvestmentObjectives" userID="FLX" flexoID="89">
       <GenericInspectorEntry id="147" widget="TEXT_FIELD" data="investmentObjectives.uriName" name="group" label="group" type="java.lang.String" userID="FLX" flexoID="88" />
     </Inspector>
-    <OWLIndividualRole id="148" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#InvestmentObjectives" cloningStrategy="Clone" cardinality="ZeroOne" name="investmentObjectives" userID="FLX" flexoID="74" />
+    <OWLIndividualRole id="148" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#InvestmentObjectives" cloningStrategy="Clone" cardinality="ZeroOne" name="investmentObjectives" userID="FLX" flexoID="74" />
     <ShapeRole id="149" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="75">
       <ShapeGraphicalRepresentation id="150" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" widthConstraints="150" adaptBoundsToContents="false" yConstraints="3" heightConstraints="600" xConstraints="791" x="791.0" y="3.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="150.0" height="600.0" identifier="object_0" layer="1">
         <SelectedColorBackgroundStyle id="151" color="204,204,204" useTransparency="true" transparencyLevel="0.1" />
@@ -255,7 +255,7 @@
       <GenericInspectorEntry id="183" widget="TEXT_FIELD" data="bdnItem.uri" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="155" />
       <GenericInspectorEntry id="184" widget="TEXT_FIELD" data="bdnItem.uriName" name="name" label="name" type="java.lang.String" userID="FLX" flexoID="156" />
     </Inspector>
-    <OWLIndividualRole id="185" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#BDNItem" cloningStrategy="Clone" cardinality="ZeroOne" name="bdnItem" userID="FLX" flexoID="91" />
+    <OWLIndividualRole id="185" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#BDNItem" cloningStrategy="Clone" cardinality="ZeroOne" name="bdnItem" userID="FLX" flexoID="91" />
     <ShapeRole id="186" exampleLabel="Item" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="93">
       <ShapeGraphicalRepresentation id="187" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" x="81.0" y="15.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="111.0" height="62.0" identifier="object_0" lineWrap="true" layer="2" isMultilineAllowed="true">
         <SelectedColorBackgroundStyle id="188" color="254,247,217" transparencyLevel="0.5" />
@@ -270,8 +270,8 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="197" featureName="label" value="bdnItem.uriName" userID="FLX" flexoID="238" />
     </ShapeRole>
-    <ObjectPropertyStatementRole id="198" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#containsItem" cloningStrategy="Clone" cardinality="ZeroOne" name="containsItem" userID="FLX" flexoID="94" />
-    <DropScheme id="199" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#ITEnablers" name="dropBDNItemInITEnablers" width="800" label="dropBDNItemInITEnablers" height="600" userID="FLX" flexoID="106">
+    <ObjectPropertyStatementRole id="198" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#containsItem" cloningStrategy="Clone" cardinality="ZeroOne" name="containsItem" userID="FLX" flexoID="94" />
+    <DropScheme id="199" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#ITEnablers" name="dropBDNItemInITEnablers" width="800" label="dropBDNItemInITEnablers" height="600" userID="FLX" flexoID="106">
       <ShapeRole idref="5" />
       <BehaviourControlGraph_Sequence id="200" userID="FLX" flexoID="104">
         <ControlGraph2_Sequence id="201" ownerContext="controlGraph2" userID="FLX" flexoID="99">
@@ -284,14 +284,14 @@
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="206" assign="bdnItem" ownerContext="controlGraph1" userID="FLX" flexoID="103">
           <AssignableAction_AddOWLIndividual id="207" individualName="parameters.uri" receiver="owl" assignation="bdnItem" userID="FLX" flexoID="102">
-            <DataPropertyAssertion id="208" value="&quot;Item&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="100" />
-            <ObjectPropertyAssertion id="209" object="target.itEnablers" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="101" />
+            <DataPropertyAssertion id="208" value="&quot;Item&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="100" />
+            <ObjectPropertyAssertion id="209" object="target.itEnablers" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="101" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
       <GenericBehaviourParameter id="210" isRequired="true" widget="URI" name="uri" type="java.lang.String" userID="FLX" flexoID="105" />
     </DropScheme>
-    <DropScheme id="211" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#EnablingChanges" name="dropBDNItemInEnablingChanges" width="800" label="dropBDNItemInEnablingChanges" height="600" userID="FLX" flexoID="118">
+    <DropScheme id="211" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#EnablingChanges" name="dropBDNItemInEnablingChanges" width="800" label="dropBDNItemInEnablingChanges" height="600" userID="FLX" flexoID="118">
       <ShapeRole idref="42" />
       <BehaviourControlGraph_Sequence id="212" userID="FLX" flexoID="116">
         <ControlGraph2_Sequence id="213" ownerContext="controlGraph2" userID="FLX" flexoID="111">
@@ -304,14 +304,14 @@
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="218" assign="bdnItem" ownerContext="controlGraph1" userID="FLX" flexoID="115">
           <AssignableAction_AddOWLIndividual id="219" individualName="parameters.uri" receiver="owl" assignation="bdnItem" userID="FLX" flexoID="114">
-            <DataPropertyAssertion id="220" value="&quot;Item&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="112" />
-            <ObjectPropertyAssertion id="221" object="target.enablingChanges" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="113" />
+            <DataPropertyAssertion id="220" value="&quot;Item&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="112" />
+            <ObjectPropertyAssertion id="221" object="target.enablingChanges" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="113" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
       <GenericBehaviourParameter id="222" isRequired="true" widget="URI" name="uri" type="java.lang.String" userID="FLX" flexoID="117" />
     </DropScheme>
-    <DropScheme id="223" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#BusinessChanges" name="dropBDNItemInBusinessChanges" width="800" label="dropBDNItemInBusinessChanges" height="600" userID="FLX" flexoID="130">
+    <DropScheme id="223" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#BusinessChanges" name="dropBDNItemInBusinessChanges" width="800" label="dropBDNItemInBusinessChanges" height="600" userID="FLX" flexoID="130">
       <ShapeRole idref="77" />
       <BehaviourControlGraph_Sequence id="224" userID="FLX" flexoID="128">
         <ControlGraph2_Sequence id="225" ownerContext="controlGraph2" userID="FLX" flexoID="123">
@@ -324,14 +324,14 @@
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="230" assign="bdnItem" ownerContext="controlGraph1" userID="FLX" flexoID="127">
           <AssignableAction_AddOWLIndividual id="231" individualName="parameters.uri" receiver="owl" assignation="bdnItem" userID="FLX" flexoID="126">
-            <DataPropertyAssertion id="232" value="&quot;Item&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="124" />
-            <ObjectPropertyAssertion id="233" object="target.businessChanges" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="125" />
+            <DataPropertyAssertion id="232" value="&quot;Item&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="124" />
+            <ObjectPropertyAssertion id="233" object="target.businessChanges" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="125" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
       <GenericBehaviourParameter id="234" isRequired="true" widget="URI" name="uri" type="java.lang.String" userID="FLX" flexoID="129" />
     </DropScheme>
-    <DropScheme id="235" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#Benefits" name="dropBDNItemInBenefits" width="800" label="dropBDNItemInBenefits" height="600" userID="FLX" flexoID="142">
+    <DropScheme id="235" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#Benefits" name="dropBDNItemInBenefits" width="800" label="dropBDNItemInBenefits" height="600" userID="FLX" flexoID="142">
       <ShapeRole idref="114" />
       <BehaviourControlGraph_Sequence id="236" userID="FLX" flexoID="140">
         <ControlGraph2_Sequence id="237" ownerContext="controlGraph2" userID="FLX" flexoID="135">
@@ -344,14 +344,14 @@
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="242" assign="bdnItem" ownerContext="controlGraph1" userID="FLX" flexoID="139">
           <AssignableAction_AddOWLIndividual id="243" individualName="parameters.uri" receiver="owl" assignation="bdnItem" userID="FLX" flexoID="138">
-            <DataPropertyAssertion id="244" value="&quot;Item&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="136" />
-            <ObjectPropertyAssertion id="245" object="target.benefits" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="137" />
+            <DataPropertyAssertion id="244" value="&quot;Item&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="136" />
+            <ObjectPropertyAssertion id="245" object="target.benefits" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="137" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
       <GenericBehaviourParameter id="246" isRequired="true" widget="URI" name="uri" type="java.lang.String" userID="FLX" flexoID="141" />
     </DropScheme>
-    <DropScheme id="247" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#InvestmentObjectives" name="dropBDNItemInInvestmentObjectives" width="800" label="dropBDNItemInInvestmentObjectives" height="600" userID="FLX" flexoID="154">
+    <DropScheme id="247" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#InvestmentObjectives" name="dropBDNItemInInvestmentObjectives" width="800" label="dropBDNItemInInvestmentObjectives" height="600" userID="FLX" flexoID="154">
       <ShapeRole idref="149" />
       <BehaviourControlGraph_Sequence id="248" userID="FLX" flexoID="152">
         <ControlGraph2_Sequence id="249" ownerContext="controlGraph2" userID="FLX" flexoID="147">
@@ -364,8 +364,8 @@
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="254" assign="bdnItem" ownerContext="controlGraph1" userID="FLX" flexoID="151">
           <AssignableAction_AddOWLIndividual id="255" individualName="parameters.uri" receiver="owl" assignation="bdnItem" userID="FLX" flexoID="150">
-            <DataPropertyAssertion id="256" value="&quot;Item&quot;" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="148" />
-            <ObjectPropertyAssertion id="257" object="target.investmentObjectives" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="149" />
+            <DataPropertyAssertion id="256" value="&quot;Item&quot;" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" userID="FLX" flexoID="148" />
+            <ObjectPropertyAssertion id="257" object="target.investmentObjectives" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" userID="FLX" flexoID="149" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -377,7 +377,7 @@
       <GenericInspectorEntry id="261" readOnly="true" widget="TEXT_FIELD" data="dependsOfStatement.subject.uriName" name="item1" label="item1" type="java.lang.String" userID="FLX" flexoID="168" />
       <GenericInspectorEntry id="262" readOnly="true" widget="TEXT_FIELD" data="dependsOfStatement.displayableRepresentation" name="item2" label="item2" type="java.lang.String" userID="FLX" flexoID="169" />
     </Inspector>
-    <ObjectPropertyStatementRole id="263" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#dependsOf" cloningStrategy="Clone" cardinality="ZeroOne" name="dependsOfStatement" userID="FLX" flexoID="160" />
+    <ObjectPropertyStatementRole id="263" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#dependsOf" cloningStrategy="Clone" cardinality="ZeroOne" name="dependsOfStatement" userID="FLX" flexoID="160" />
     <ConnectorRole id="264" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="161">
       <ConnectorGraphicalRepresentation id="265" identifier="object_2" layer="64">
         <LineConnectorSpecification id="266" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
@@ -387,7 +387,7 @@
         <TextStyle id="270" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ConnectorGraphicalRepresentation>
     </ConnectorRole>
-    <LinkScheme id="271" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#BDNItem" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#BDNItem" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="linkBDNItemToBDNItem" width="800" label="linkBDNItemToBDNItem" height="600" userID="FLX" flexoID="167">
+    <LinkScheme id="271" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#BDNItem" toTarget="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml#BDNItem" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="linkBDNItemToBDNItem" width="800" label="linkBDNItemToBDNItem" height="600" userID="FLX" flexoID="167">
       <BehaviourControlGraph_Sequence id="272" userID="FLX" flexoID="166">
         <ControlGraph2_AssignationAction id="273" assign="connector" ownerContext="controlGraph2" userID="FLX" flexoID="163">
           <AssignableAction_AddConnector id="274" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="connector" userID="FLX" flexoID="162" />
@@ -401,6 +401,6 @@
   <UseModelSlotDeclaration id="277" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
   <UseModelSlotDeclaration id="278" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="279" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="2" />
-  <OWLModelSlot id="280" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="172" />
-  <TypedDiagramModelSlot id="281" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="173" />
+  <OWLModelSlot id="280" metaModelURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="172" />
+  <TypedDiagramModelSlot id="281" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="173" />
 </VirtualModel>

@@ -12,17 +12,17 @@
       </TextFieldParameter>
       <URIParameter id="5" base="parameters.companyName" name="companyURI" label="uri" usePaletteLabelAsDefaultValue="false" isRequired="true">
         <description>Allow to enter (unique) individual name used in Ontology</description>
-        <AddressedOWLModelSlot id="6" isRequired="true" isReadOnly="false" name="basicOrg" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" />
+        <AddressedOWLModelSlot id="6" isRequired="true" isReadOnly="false" name="basicOrg" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" />
       </URIParameter>
       <AddOWLIndividual id="7" assignation="company" individualName="parameters.companyURI">
         <AddressedOWLModelSlot idref="6" />
-        <DataPropertyAssertion id="8" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#companyName" value="parameters.companyName" />
+        <DataPropertyAssertion id="8" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#companyName" value="parameters.companyName" />
       </AddOWLIndividual>
       <AddShape id="9" container="topLevel" extendParentBoundsToHostThisShape="false" assignation="shape">
         <AddressedDiagramModelSlot idref="10" />
       </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="11" name="company" patternRole="company" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTCompany">
+    <ContainedOWLIndividualPatternRole id="11" name="company" patternRole="company" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTCompany">
       <AddressedOWLModelSlot idref="6" />
     </ContainedOWLIndividualPatternRole>
     <ContainedShapePatternRole id="12" patternRole="shape" name="shape" exampleLabel="label">
@@ -38,7 +38,7 @@
         <ShadowStyle id="22" drawShadow="true" shadowDarkness="150" shadowDepth="2" shadowBlur="4" />
         <TextStyle id="23" font="SansSerif,0,11" color="102,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" />
       </ShapeGraphicalRepresentation>
-      <AddressedDiagramModelSlot id="10" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification" />
+      <AddressedDiagramModelSlot id="10" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification" />
       <GRSpec id="24" featureName="label" value="company.companyName" readOnly="false" />
     </ContainedShapePatternRole>
     <PrimaryConceptOWLIndividualPatternRole idref="11" />
@@ -53,7 +53,7 @@
 A BOTDepartment is top container for BOTCompany
 Related dropping scheme automatically perform creation and recording of a new individual of
 BOTDepartment type, with a Shape connected to it.</description>
-    <DropScheme id="29" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTCompany" name="DropBOTDepartmentInBOTCompany" label="DropBOTDepartmentInBOTCompany" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="29" target="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTCompany" name="DropBOTDepartmentInBOTCompany" label="DropBOTDepartmentInBOTCompany" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
       <description>Creates new BOTDepartment inside a BOTCompany</description>
       <TextFieldParameter id="30" name="departmentName" label="department_name" defaultValue="&quot;My Department&quot;" usePaletteLabelAsDefaultValue="false" isRequired="false">
         <description>Allow to enter department name while dropping concept</description>
@@ -64,8 +64,8 @@ BOTDepartment type, with a Shape connected to it.</description>
       </URIParameter>
       <AddOWLIndividual id="32" assignation="department" individualName="parameters.departmentURI">
         <AddressedOWLModelSlot idref="6" />
-        <DataPropertyAssertion id="33" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" value="parameters.departmentName" />
-        <ObjectPropertyAssertion id="34" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" object="target.company" />
+        <DataPropertyAssertion id="33" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" value="parameters.departmentName" />
+        <ObjectPropertyAssertion id="34" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" object="target.company" />
       </AddOWLIndividual>
       <AddShape id="35" container="target.shape" extendParentBoundsToHostThisShape="false" assignation="shape">
         <AddressedDiagramModelSlot idref="10" />
@@ -77,7 +77,7 @@ BOTDepartment type, with a Shape connected to it.</description>
     <ActionScheme id="37" conditional="(detailedShema != null)" name="ShowDetails" label="ShowDetails" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <description>Switch to shema where details of this BOTDepartment are defined</description>
     </ActionScheme>
-    <ContainedOWLIndividualPatternRole id="38" name="department" patternRole="department" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment">
+    <ContainedOWLIndividualPatternRole id="38" name="department" patternRole="department" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment">
       <AddressedOWLModelSlot idref="6" />
     </ContainedOWLIndividualPatternRole>
     <ContainedShapePatternRole id="39" patternRole="shape" name="shape" exampleLabel="label">
@@ -109,7 +109,7 @@ BOTDepartment type, with a Shape connected to it.</description>
 A BOTSubDepartment is contained in a BOTDepartment
 Related dropping scheme automatically perform creation and recording of a new individual of
 BOTSubDepartment type, with a Shape connected to it.</description>
-    <DropScheme id="57" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment" name="DropBOTSubDepartmentInBOTDepartment" label="DropBOTSubDepartmentInBOTDepartment" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="57" target="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment" name="DropBOTSubDepartmentInBOTDepartment" label="DropBOTSubDepartmentInBOTDepartment" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
       <TextFieldParameter id="58" name="subDepartmentName" label="sub_department_name" defaultValue="&quot;My sub-department&quot;" usePaletteLabelAsDefaultValue="false" isRequired="false">
         <description>Allow to enter sub-department name while dropping concept</description>
       </TextFieldParameter>
@@ -119,14 +119,14 @@ BOTSubDepartment type, with a Shape connected to it.</description>
       </URIParameter>
       <AddOWLIndividual id="60" assignation="subDepartment" individualName="parameters.subDepartmentURI">
         <AddressedOWLModelSlot idref="6" />
-        <DataPropertyAssertion id="61" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" value="parameters.subDepartmentName" />
-        <ObjectPropertyAssertion id="62" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" object="target.department" />
+        <DataPropertyAssertion id="61" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#name" value="parameters.subDepartmentName" />
+        <ObjectPropertyAssertion id="62" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isContainedIn" object="target.department" />
       </AddOWLIndividual>
       <AddShape id="63" container="target.shape" extendParentBoundsToHostThisShape="false" assignation="shape">
         <AddressedDiagramModelSlot idref="10" />
       </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="64" name="subDepartment" patternRole="subDepartment" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTSubDepartment">
+    <ContainedOWLIndividualPatternRole id="64" name="subDepartment" patternRole="subDepartment" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTSubDepartment">
       <AddressedOWLModelSlot idref="6" />
     </ContainedOWLIndividualPatternRole>
     <ContainedShapePatternRole id="65" patternRole="shape" name="shape" exampleLabel="label">
@@ -155,7 +155,7 @@ BOTSubDepartment type, with a Shape connected to it.</description>
   </EditionPattern>
   <EditionPattern id="81" name="Employee">
     <description>Allows to define concept of employee in a context of basic organization tree</description>
-    <DropScheme id="82" target="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment" name="DropEmployeeInOrganization" label="DropEmployeeInOrganization" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="82" target="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTDepartment" name="DropEmployeeInOrganization" label="DropEmployeeInOrganization" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
       <TextFieldParameter id="83" name="roleName" label="role_name" usePaletteLabelAsDefaultValue="true" isRequired="false">
         <description>Allow to enter role name while dropping concept</description>
       </TextFieldParameter>
@@ -184,23 +184,23 @@ BOTSubDepartment type, with a Shape connected to it.</description>
       </URIParameter>
       <AddOWLIndividual id="91" conditional="(parameters.isManager = true)" assignation="employeeAsManager" individualName="parameters.employeeURI">
         <AddressedOWLModelSlot idref="6" />
-        <DataPropertyAssertion id="92" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" value="parameters.roleName" />
-        <ObjectPropertyAssertion id="93" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" object="target.department" />
-        <ObjectPropertyAssertion id="94" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isHeadOf" object="target.department" conditional="(parameters.isHeadOfOrganization = true)" />
-        <ObjectPropertyAssertion id="95" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" object="person" conditional="(parameters.assignPerson = true)" />
+        <DataPropertyAssertion id="92" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" value="parameters.roleName" />
+        <ObjectPropertyAssertion id="93" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" object="target.department" />
+        <ObjectPropertyAssertion id="94" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isHeadOf" object="target.department" conditional="(parameters.isHeadOfOrganization = true)" />
+        <ObjectPropertyAssertion id="95" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" object="person" conditional="(parameters.assignPerson = true)" />
       </AddOWLIndividual>
       <AddOWLIndividual id="96" conditional="(parameters.isManager = false)" assignation="employeeAsWorker" individualName="parameters.employeeURI">
         <AddressedOWLModelSlot idref="6" />
-        <DataPropertyAssertion id="97" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" value="parameters.roleName" />
-        <ObjectPropertyAssertion id="98" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" object="target.department" />
-        <ObjectPropertyAssertion id="99" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" object="person" conditional="(parameters.assignPerson = true)" />
+        <DataPropertyAssertion id="97" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#roleName" value="parameters.roleName" />
+        <ObjectPropertyAssertion id="98" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksIn" object="target.department" />
+        <ObjectPropertyAssertion id="99" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#jobPerformedBy" object="person" conditional="(parameters.assignPerson = true)" />
       </AddOWLIndividual>
       <AddOWLIndividual id="100" conditional="(parameters.assignPerson = true)" assignation="person" individualName="parameters.personURI">
         <AddressedOWLModelSlot idref="6" />
-        <DataPropertyAssertion id="101" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personFirstName" value="parameters.employeeFirstName" />
-        <DataPropertyAssertion id="102" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personName" value="parameters.employeeLastName" />
-        <ObjectPropertyAssertion id="103" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" object="employeeAsManager" conditional="(parameters.isManager = true)" />
-        <ObjectPropertyAssertion id="104" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" object="employeeAsWorker" conditional="(parameters.isManager = false)" />
+        <DataPropertyAssertion id="101" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personFirstName" value="parameters.employeeFirstName" />
+        <DataPropertyAssertion id="102" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#personName" value="parameters.employeeLastName" />
+        <ObjectPropertyAssertion id="103" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" object="employeeAsManager" conditional="(parameters.isManager = true)" />
+        <ObjectPropertyAssertion id="104" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#worksAs" object="employeeAsWorker" conditional="(parameters.isManager = false)" />
       </AddOWLIndividual>
       <AddShape id="105" container="target.shape" extendParentBoundsToHostThisShape="false" conditional="(parameters.isManager = true)" assignation="managerAsShape">
         <AddressedDiagramModelSlot idref="10" />
@@ -209,13 +209,13 @@ BOTSubDepartment type, with a Shape connected to it.</description>
         <AddressedDiagramModelSlot idref="10" />
       </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="107" name="employeeAsManager" patternRole="employeeAsManager" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTManager">
+    <ContainedOWLIndividualPatternRole id="107" name="employeeAsManager" patternRole="employeeAsManager" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTManager">
       <AddressedOWLModelSlot idref="6" />
     </ContainedOWLIndividualPatternRole>
-    <ContainedOWLIndividualPatternRole id="108" name="employeeAsWorker" patternRole="employeeAsWorker" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTWorker">
+    <ContainedOWLIndividualPatternRole id="108" name="employeeAsWorker" patternRole="employeeAsWorker" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTWorker">
       <AddressedOWLModelSlot idref="6" />
     </ContainedOWLIndividualPatternRole>
-    <ContainedOWLIndividualPatternRole id="109" name="person" patternRole="person" ontologicType="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTPerson">
+    <ContainedOWLIndividualPatternRole id="109" name="person" patternRole="person" ontologicType="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#BOTPerson">
       <AddressedOWLModelSlot idref="6" />
     </ContainedOWLIndividualPatternRole>
     <ContainedShapePatternRole id="110" patternRole="managerAsShape" name="managerAsShape" exampleLabel="label">
@@ -259,7 +259,7 @@ BOTSubDepartment type, with a Shape connected to it.</description>
   </EditionPattern>
   <EditionPattern id="139" name="EmployeeHierarchicalRelationship">
     <description>Allows to define hierarchical relationship between two employees</description>
-    <LinkScheme id="140" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#Employee" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#Employee" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="LinkTwoEmployeesByHierarchicalRelationship" label="LinkTwoEmployeesByHierarchicalRelationship" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
+    <LinkScheme id="140" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#Employee" toTarget="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl#Employee" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="LinkTwoEmployeesByHierarchicalRelationship" label="LinkTwoEmployeesByHierarchicalRelationship" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600">
       <CheckBoxParameter id="141" name="makeInverseRelationship" label="make_inverse_relationship" usePaletteLabelAsDefaultValue="false" isRequired="false">
         <description>When set to true, indicates that inverse relationship must be defined</description>
       </CheckBoxParameter>
@@ -269,10 +269,10 @@ BOTSubDepartment type, with a Shape connected to it.</description>
         <AddressedDiagramModelSlot idref="10" />
       </AddConnector>
     </LinkScheme>
-    <ContainedObjectPropertyStatementPatternRole id="145" objectProperty="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isResponsibleOf" name="isResponsibleOf" patternRole="isResponsibleOf">
+    <ContainedObjectPropertyStatementPatternRole id="145" objectProperty="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isResponsibleOf" name="isResponsibleOf" patternRole="isResponsibleOf">
       <AddressedOWLModelSlot idref="6" />
     </ContainedObjectPropertyStatementPatternRole>
-    <ContainedObjectPropertyStatementPatternRole id="146" objectProperty="http://www.agilebirds.com/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isUnderResponsabilityOf" name="isUnderResponsabilityOf" patternRole="isUnderResponsabilityOf">
+    <ContainedObjectPropertyStatementPatternRole id="146" objectProperty="http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl#isUnderResponsabilityOf" name="isUnderResponsabilityOf" patternRole="isUnderResponsabilityOf">
       <AddressedOWLModelSlot idref="6" />
     </ContainedObjectPropertyStatementPatternRole>
     <ContainedConnectorPatternRole id="147" patternRole="connector" name="connector" exampleLabel="label">
