@@ -235,7 +235,6 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 			newVirtualModelInstance.setFlexoPropertyValue(emfModelSlot1, modelResource1.getResourceData());
 			newVirtualModelInstance.setFlexoPropertyValue(emfModelSlot2, modelResource2.getResourceData());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
