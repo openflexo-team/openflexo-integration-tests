@@ -1,0 +1,23 @@
+use org.openflexo.technologyadapter.excel.SemanticsExcelModelSlot;
+use org.openflexo.technologyadapter.gina.FIBComponentModelSlot;
+
+/**
+ * 
+ * @author sylvain
+ * @version 0.1
+ */
+@VirtualModel(uri="http://openflexo.org/integration-tests/Excel/FML/TestPersonListingVM.fml")
+public class TestPersonListing {
+
+  @SemanticsExcelModelSlot(cardinality=ZeroOne,readOnly=false)  
+  public SEVirtualModelInstanceType<PersonListing> personListing;
+  @FIBComponentModelSlot(cardinality=ZeroOne,readOnly=false)  
+  public GINAFIBComponent ui;
+
+  @CreationScheme  
+  TestPersonListing:create(ExcelWorkbookResource excelResource) {  
+    personListing = null.CreateSEResource();    
+    ui = ui.ConfigureGINAFIBComponent();  
+  }  
+
+}

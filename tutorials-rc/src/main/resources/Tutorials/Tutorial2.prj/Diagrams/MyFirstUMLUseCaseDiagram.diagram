@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram id="0" diagramSpecificationURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/DiagramSpecification/MyFreeModel" userID="FLX" uri="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFirstUMLUseCaseDiagram.diagram" flexoID="1" name="MyFirstUMLUseCaseDiagram.diagram">
+  <DrawingGraphicalRepresentation id="1" backgroundColor="255,255,255" dimensionConstraints="FREELY_RESIZABLE" rectangleSelectingSelectionColor="0,0,255" selectionColor="0,0,255" focusColor="255,0,0" drawWorkingArea="false" identifier="1e7ea051">
+    <TextStyle id="2" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+  </DrawingGraphicalRepresentation>
+  <Shape id="3" flexoID="2" userID="FLX">
+    <ShapeGraphicalRepresentation id="4" relativeTextX="0.5" height="45.0" width="99.830220713073" allowToLeaveBounds="false" relativeTextY="0.5" identifier="63a595be" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="108.0" x="239.0">
+      <FocusedForegroundStyle id="5" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedColorBackgroundStyle id="6" color="254,247,217" transparencyLevel="0.5" />
+      <TextStyle id="7" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="8" dashStyle="PLAIN_STROKE" color="0,0,0" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="9" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="10" color="254,247,217" transparencyLevel="0.5" />
+      <OvalShape id="11" />
+      <ShadowStyle id="12" shadowDepth="3" shadowDarkness="200" />
+      <ColorBackgroundStyle id="13" color="254,247,217" transparencyLevel="0.5" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="14" flexoID="3" userID="FLX">
+    <ShapeGraphicalRepresentation id="15" relativeTextX="0.5" height="45.0" width="60.0" allowToLeaveBounds="false" relativeTextY="0.5" identifier="4749be63" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" layer="1" absoluteTextX="32.0" absoluteTextY="-5.0" y="55.0" x="100.0">
+      <FocusedForegroundStyle id="16" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedImageBackgroundStyle id="17" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <TextStyle id="18" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="19" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="20" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="21" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <RectangleShape id="22" />
+      <ShadowStyle id="23" shadowDepth="3" drawShadow="false" shadowDarkness="200" />
+      <ImageBackgroundStyle id="24" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../Images/Actor.gif" imageBackgroundType="TRANSPARENT" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="25" flexoID="4" userID="FLX">
+    <ShapeGraphicalRepresentation id="26" relativeTextX="0.5" height="45.0" width="60.0" allowToLeaveBounds="false" relativeTextY="0.5" identifier="3615b04c" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" layer="1" absoluteTextX="32.0" absoluteTextY="-5.0" y="201.0" x="85.0">
+      <FocusedForegroundStyle id="27" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedImageBackgroundStyle id="28" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <TextStyle id="29" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="30" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="31" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="32" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <RectangleShape id="33" />
+      <ShadowStyle id="34" shadowDepth="3" drawShadow="false" shadowDarkness="200" />
+      <ImageBackgroundStyle id="35" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../Images/Actor.gif" imageBackgroundType="TRANSPARENT" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="36" flexoID="7" userID="FLX">
+    <ShapeGraphicalRepresentation id="37" relativeTextX="0.5" height="45.0" width="99.830220713073" allowToLeaveBounds="false" relativeTextY="0.5" identifier="4713aedb" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="298.0" x="264.0">
+      <FocusedForegroundStyle id="38" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedColorBackgroundStyle id="39" color="254,247,217" transparencyLevel="0.5" />
+      <TextStyle id="40" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="41" dashStyle="PLAIN_STROKE" color="0,0,0" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="42" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="43" color="254,247,217" transparencyLevel="0.5" />
+      <OvalShape id="44" />
+      <ShadowStyle id="45" shadowDepth="3" shadowDarkness="200" />
+      <ColorBackgroundStyle id="46" color="254,247,217" transparencyLevel="0.5" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="47" flexoID="8" userID="FLX">
+    <ShapeGraphicalRepresentation id="48" relativeTextX="0.5" height="45.0" width="60.0" allowToLeaveBounds="false" relativeTextY="0.5" identifier="768674f7" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" layer="1" absoluteTextX="32.0" absoluteTextY="-5.0" y="167.0" x="437.0">
+      <FocusedForegroundStyle id="49" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedImageBackgroundStyle id="50" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <TextStyle id="51" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="52" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="53" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="54" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <RectangleShape id="55" />
+      <ShadowStyle id="56" shadowDepth="3" drawShadow="false" shadowDarkness="200" />
+      <ImageBackgroundStyle id="57" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../Images/Actor.gif" imageBackgroundType="TRANSPARENT" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Connector id="58" flexoID="5" name="" userID="FLX">
+    <EndShape idref="3" />
+    <ConnectorGraphicalRepresentation id="59" layer="64" identifier="6bdaee00">
+      <SelectedForegroundStyle id="60" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedForegroundStyle id="61" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <LineConnectorSpecification id="62" middleSymbol="NONE" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" endSymbol="NONE" />
+      <TextStyle id="63" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="64" dashStyle="PLAIN_STROKE" color="0,0,0" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+    </ConnectorGraphicalRepresentation>
+    <StartShape idref="14" />
+  </Connector>
+  <Connector id="65" flexoID="6" name="" userID="FLX">
+    <EndShape idref="3" />
+    <ConnectorGraphicalRepresentation id="66" layer="64" identifier="4cf6316f">
+      <SelectedForegroundStyle id="67" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedForegroundStyle id="68" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <LineConnectorSpecification id="69" middleSymbol="NONE" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" endSymbol="NONE" />
+      <TextStyle id="70" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="71" dashStyle="PLAIN_STROKE" color="0,0,0" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+    </ConnectorGraphicalRepresentation>
+    <StartShape idref="25" />
+  </Connector>
+  <Connector id="72" flexoID="9" name="" userID="FLX">
+    <EndShape idref="36" />
+    <ConnectorGraphicalRepresentation id="73" layer="64" identifier="3e0d6c47">
+      <SelectedForegroundStyle id="74" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedForegroundStyle id="75" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <LineConnectorSpecification id="76" middleSymbol="NONE" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" endSymbol="NONE" />
+      <TextStyle id="77" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="78" dashStyle="PLAIN_STROKE" color="0,0,0" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+    </ConnectorGraphicalRepresentation>
+    <StartShape idref="25" />
+  </Connector>
+  <Connector id="79" flexoID="10" name="" userID="FLX">
+    <EndShape idref="36" />
+    <ConnectorGraphicalRepresentation id="80" layer="64" identifier="43bdb9f3">
+      <SelectedForegroundStyle id="81" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedForegroundStyle id="82" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <LineConnectorSpecification id="83" middleSymbol="NONE" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" endSymbol="NONE" />
+      <TextStyle id="84" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="85" dashStyle="PLAIN_STROKE" color="0,0,0" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+    </ConnectorGraphicalRepresentation>
+    <StartShape idref="47" />
+  </Connector>
+  <Connector id="86" flexoID="11" name="" userID="FLX">
+    <EndShape idref="3" />
+    <ConnectorGraphicalRepresentation id="87" layer="64" identifier="2adc4c93">
+      <SelectedForegroundStyle id="88" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedForegroundStyle id="89" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <LineConnectorSpecification id="90" middleSymbol="NONE" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" endSymbol="NONE" />
+      <TextStyle id="91" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="92" dashStyle="PLAIN_STROKE" color="0,0,0" lineWidth="0.2" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+    </ConnectorGraphicalRepresentation>
+    <StartShape idref="47" />
+  </Connector>
+</Diagram>

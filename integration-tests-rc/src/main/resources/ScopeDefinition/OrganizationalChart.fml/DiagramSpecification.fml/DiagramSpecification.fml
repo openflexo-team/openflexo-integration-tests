@@ -1,0 +1,65 @@
+use org.openflexo.technologyadapter.owl.OWLModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml")
+public class DiagramSpecification {
+
+  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_94 conformTo="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" required=false readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+
+  @FlexoConcept  
+  public class Actor {  
+  
+    FlexoRole actor as Individual conformTo Actor from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole icon as ShapeSpecification from DiagramSpecification;  
+    FlexoRole nameLabel as ShapeSpecification from DiagramSpecification;  
+    FlexoRole positionLabel as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    Actor:dropActorAtTopLevel(String firstName, String lastName, String uri, IFlexoOntologyIndividual position) {    
+      actor = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      positionLabel = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = actor.hasPosition.uriName;      
+      };      
+      nameLabel = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = ((actor.firstName + " ") + actor.lastName);      
+      };      
+      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+    @NavigationScheme    
+    void OpenOwnedProcess() {    
+      
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class CollaboratorLink {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:hasCollaborator hasCollaboratorStatement;  
+    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:hasManager hasManagerStatement;  
+  
+    @LinkScheme    
+    CollaboratorLink:linkActorToActor() {    
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };      
+      hasCollaboratorStatement = fromTarget.actor.hasCollaborator = toTarget.actor;;      
+      hasManagerStatement = toTarget.actor.hasManager = fromTarget.actor;;    
+    }    
+  
+  }  
+
+}

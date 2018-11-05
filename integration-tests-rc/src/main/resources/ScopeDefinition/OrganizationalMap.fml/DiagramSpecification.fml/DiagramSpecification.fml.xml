@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="84">
+  <FlexoConcept id="1" name="OrganizationalUnit" userID="FLX" flexoID="20">
+    <Inspector id="2" inspectorTitle="OrganizationalUnit" userID="FLX" flexoID="6">
+      <GenericInspectorEntry id="3" widget="TEXT_FIELD" data="organizationalUnit.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="1" />
+      <GenericInspectorEntry id="4" widget="TEXT_FIELD" data="organizationalUnit.organizationUnitName" name="name" label="name" type="java.lang.String" userID="FLX" flexoID="2" />
+      <GenericInspectorEntry id="5" widget="TEXT_AREA" data="organizationalUnit.organizationUnitDescription" name="description" label="description" type="java.lang.String" userID="FLX" flexoID="3" />
+      <GenericInspectorEntry id="6" widget="CUSTOM_WIDGET" data="organizationalUnit" name="individual" label="individual" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="4" />
+      <GenericInspectorEntry id="7" widget="CUSTOM_WIDGET" data="organizationalUnit" name="organizationUnit" label="organizationUnit" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="5" />
+    </Inspector>
+    <OWLIndividualRole id="8" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#OrganizationalUnit" cloningStrategy="Clone" cardinality="ZeroOne" name="organizationalUnit" userID="FLX" flexoID="8" />
+    <ShapeRole id="9" exampleLabel="Organizational Unit" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="10">
+      <ShapeGraphicalRepresentation id="10" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="64.0" y="14.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="191.8407960199005" height="50.98901098901098" identifier="object_0" layer="1" text="Organizational Unit">
+        <SelectedColorGradientBackgroundStyle id="11" color1="219,237,255" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <ForegroundStyle id="12" color="1,96,176" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.2999999985098838" />
+        <FocusedColorGradientBackgroundStyle id="13" color1="219,237,255" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <ShadowStyle id="14" />
+        <FocusedForegroundStyle id="15" color="1,96,176" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.2999999985098838" />
+        <SelectedForegroundStyle id="16" color="1,96,176" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.2999999985098838" />
+        <ColorGradientBackgroundStyle id="17" color1="219,237,255" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape id="18" />
+        <TextStyle id="19" backgroundColor="255,255,255" color="0,102,153" font="Lucida Sans Demibold,1,12" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="20" featureName="label" value="organizationalUnit.organizationUnitName" userID="FLX" flexoID="98" />
+      <Action id="21" actionMask="DoubleClick" userID="FLX" flexoID="89" />
+    </ShapeRole>
+    <DiagramRole id="22" cloningStrategy="Reference" cardinality="ZeroOne" name="flexoBehaviourInstance" userID="FLX" flexoID="11" />
+    <DropScheme id="23" target="top" name="dropOrganizationalUnitAtTopLevel" width="800" label="dropOrganizationalUnitAtTopLevel" height="600" userID="FLX" flexoID="18">
+      <BehaviourControlGraph_Sequence id="24" userID="FLX" flexoID="17">
+        <ControlGraph2_AssignationAction id="25" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="13">
+          <AssignableAction_AddShape id="26" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="12" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="27" assign="organizationalUnit" ownerContext="controlGraph1" userID="FLX" flexoID="16">
+          <AssignableAction_AddOWLIndividual id="28" individualName="parameters.organizationName" receiver="owl" assignation="organizationalUnit" userID="FLX" flexoID="15">
+            <DataPropertyAssertion id="29" value="parameters.organizationName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#organizationUnitName" userID="FLX" flexoID="14" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="30" widget="CUSTOM_WIDGET" name="organizationName" type="java.lang.String" userID="FLX" flexoID="97" />
+    </DropScheme>
+    <NavigationScheme id="31" targetObject="flexoBehaviourInstance" skipConfirmationPanel="false" name="openDetails" width="800" label="openDetails" height="600" userID="FLX" flexoID="19" />
+  </FlexoConcept>
+  <FlexoConcept id="32" name="SubOrganizationUnitLink" userID="FLX" flexoID="36">
+    <Inspector id="33" inspectorTitle="SubOrganizationUnitLink" userID="FLX" flexoID="23">
+      <GenericInspectorEntry id="34" readOnly="true" widget="TEXT_FIELD" data="hasSubOrgUnitStatement.subject.uriName" name="parentOU" label="parentOU" type="java.lang.String" userID="FLX" flexoID="21" />
+      <GenericInspectorEntry id="35" readOnly="true" widget="TEXT_FIELD" data="hasSubOrgUnitStatement.object.uriName" name="childOU" label="childOU" type="java.lang.String" userID="FLX" flexoID="22" />
+    </Inspector>
+    <ObjectPropertyStatementRole id="36" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasSubOrgUnit" cloningStrategy="Clone" cardinality="ZeroOne" name="hasSubOrgUnitStatement" userID="FLX" flexoID="24" />
+    <ConnectorRole id="37" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="25">
+      <ConnectorGraphicalRepresentation id="38" identifier="object_2" layer="64">
+        <ForegroundStyle id="39" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.7000000014901162" />
+        <FocusedForegroundStyle id="40" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.7000000014901162" />
+        <SelectedForegroundStyle id="41" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.7000000014901162" />
+        <TextStyle id="42" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+      </ConnectorGraphicalRepresentation>
+    </ConnectorRole>
+    <ObjectPropertyStatementRole id="43" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasParentOrgUnit" cloningStrategy="Clone" cardinality="ZeroOne" name="hasParentOrgUnitStatement" userID="FLX" flexoID="26" />
+    <LinkScheme id="44" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification.fml#OrganizationalUnit" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification.fml#OrganizationalUnit" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="linkOrganizationalUnitToOrganizationalUnit" width="800" label="linkOrganizationalUnitToOrganizationalUnit" height="600" userID="FLX" flexoID="35">
+      <BehaviourControlGraph_Sequence id="45" userID="FLX" flexoID="34">
+        <ControlGraph2_Sequence id="46" ownerContext="controlGraph2" userID="FLX" flexoID="31">
+          <ControlGraph2_AssignationAction id="47" assign="hasParentOrgUnitStatement" ownerContext="controlGraph2" userID="FLX" flexoID="28">
+            <AssignableAction_AddObjectPropertyStatement id="48" object="fromTarget.organizationalUnit" subject="toTarget.organizationalUnit" receiver="owl" assignation="hasParentOrgUnitStatement" userID="FLX" flexoID="27" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="49" assign="hasSubOrgUnitStatement" ownerContext="controlGraph1" userID="FLX" flexoID="30">
+            <AssignableAction_AddObjectPropertyStatement id="50" object="toTarget.organizationalUnit" subject="fromTarget.organizationalUnit" receiver="owl" assignation="hasSubOrgUnitStatement" userID="FLX" flexoID="29" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="51" assign="connector" ownerContext="controlGraph1" userID="FLX" flexoID="33">
+          <AssignableAction_AddConnector id="52" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="connector" userID="FLX" flexoID="32" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+    </LinkScheme>
+  </FlexoConcept>
+  <FlexoConcept id="53" name="Position" userID="FLX" flexoID="66">
+    <Inspector id="54" inspectorTitle="Position" userID="FLX" flexoID="42">
+      <GenericInspectorEntry id="55" widget="TEXT_FIELD" data="position.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="37" />
+      <GenericInspectorEntry id="56" widget="TEXT_FIELD" data="position.positionName" name="name" label="name" type="java.lang.String" userID="FLX" flexoID="38" />
+      <GenericInspectorEntry id="57" widget="CUSTOM_WIDGET" data="position" name="position" label="position" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="39" />
+      <GenericInspectorEntry id="58" widget="TEXT_FIELD" data="mission.missionName" name="mission" label="mission" type="java.lang.String" userID="FLX" flexoID="40" />
+      <GenericInspectorEntry id="59" widget="TEXT_AREA" data="mission.missionDescription" name="mission_description" label="mission_description" type="java.lang.String" userID="FLX" flexoID="41" />
+    </Inspector>
+    <OWLIndividualRole id="60" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" cloningStrategy="Clone" cardinality="ZeroOne" name="position" userID="FLX" flexoID="43" />
+    <ShapeRole id="61" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="44">
+      <ShapeGraphicalRepresentation id="62" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="93.0" y="12.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="163.86001029336077" height="41.99009781427361" identifier="object_0" layer="1">
+        <SelectedColorGradientBackgroundStyle id="63" color1="251,231,190" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <ForegroundStyle id="64" color="140,59,59" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="2.000000001490116" />
+        <FocusedColorGradientBackgroundStyle id="65" color1="251,231,190" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <ShadowStyle id="66" />
+        <FocusedForegroundStyle id="67" color="140,59,59" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="2.000000001490116" />
+        <SelectedForegroundStyle id="68" color="140,59,59" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="2.000000001490116" />
+        <ColorGradientBackgroundStyle id="69" color1="251,231,190" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
+        <RectangleShape idref="18" />
+        <TextStyle id="70" backgroundColor="255,255,255" color="102,0,0" font="Lucida Sans,0,11" />
+      </ShapeGraphicalRepresentation>
+    </ShapeRole>
+    <ShapeRole id="71" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="45">
+      <ParentShapeRole idref="61" />
+      <ShapeGraphicalRepresentation id="72" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" yConstraints="((parent.height - this.height) / 2)" xConstraints="5" x="66.93000514668039" y="5.995048907136805" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="30.0" height="30.0" identifier="object_0_0" layer="2" isSelectable="false" isFocusable="false">
+        <SelectedImageBackgroundStyle id="73" scaleX="0.25" scaleY="0.25" fitToShape="true" imageFile="People.gif" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <ForegroundStyle id="74" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedImageBackgroundStyle id="75" scaleX="0.25" scaleY="0.25" fitToShape="true" imageFile="People.gif" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <ShadowStyle id="76" drawShadow="false" />
+        <FocusedForegroundStyle id="77" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="78" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <ImageBackgroundStyle id="79" scaleX="0.25" scaleY="0.25" fitToShape="true" imageFile="People.gif" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+        <RectangleShape idref="18" />
+        <TextStyle id="80" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+      </ShapeGraphicalRepresentation>
+    </ShapeRole>
+    <ShapeRole id="81" exampleLabel="Position" cloningStrategy="Clone" cardinality="ZeroOne" name="label" userID="FLX" flexoID="46">
+      <ParentShapeRole idref="61" />
+      <ShapeGraphicalRepresentation id="82" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" widthConstraints="(parent.width - 45)" adaptBoundsToContents="false" yConstraints="((parent.height - this.height) / 2)" xConstraints="40" x="22.5" y="7.368675280763178" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="118.86001029336077" height="27.252747252747255" identifier="object_0_1" layer="2">
+        <SelectedNoneBackgroundStyle id="83" transparencyLevel="0.5" />
+        <ForegroundStyle id="84" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <FocusedNoneBackgroundStyle id="85" transparencyLevel="0.5" />
+        <ShadowStyle id="86" drawShadow="false" />
+        <FocusedForegroundStyle id="87" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="88" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+        <NoneBackgroundStyle id="89" transparencyLevel="0.5" />
+        <RectangleShape idref="18" />
+        <TextStyle id="90" backgroundColor="255,255,255" color="102,0,0" font="Lucida Sans,0,11" />
+      </ShapeGraphicalRepresentation>
+      <GRSpec id="91" featureName="label" value="position.positionName" userID="FLX" flexoID="99" />
+    </ShapeRole>
+    <OWLIndividualRole id="92" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#PositionMission" cloningStrategy="Clone" cardinality="ZeroOne" name="mission" userID="FLX" flexoID="47" />
+    <DropScheme id="93" target="top" name="dropPositionAtTopLevel" width="800" label="dropPositionAtTopLevel" height="600" userID="FLX" flexoID="65">
+      <BehaviourControlGraph_Sequence id="94" userID="FLX" flexoID="64">
+        <ControlGraph2_Sequence id="95" ownerContext="controlGraph2" userID="FLX" flexoID="60">
+          <ControlGraph2_Sequence id="96" ownerContext="controlGraph2" userID="FLX" flexoID="55">
+            <ControlGraph2_Sequence id="97" ownerContext="controlGraph2" userID="FLX" flexoID="52">
+              <ControlGraph2_AssignationAction id="98" assign="icon" ownerContext="controlGraph2" userID="FLX" flexoID="49">
+                <AssignableAction_AddShape id="99" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="48" />
+              </ControlGraph2_AssignationAction>
+              <ControlGraph1_AssignationAction id="100" assign="label" ownerContext="controlGraph1" userID="FLX" flexoID="51">
+                <AssignableAction_AddShape id="101" container="topLevel" receiver="typedDiagramModelSlot" assignation="label" userID="FLX" flexoID="50" />
+              </ControlGraph1_AssignationAction>
+            </ControlGraph2_Sequence>
+            <ControlGraph1_AssignationAction id="102" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="54">
+              <AssignableAction_AddShape id="103" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="53" />
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="104" assign="position" ownerContext="controlGraph1" userID="FLX" flexoID="59">
+            <AssignableAction_AddOWLIndividual id="105" individualName="parameters.position" receiver="owl" assignation="position" userID="FLX" flexoID="58">
+              <DataPropertyAssertion id="106" value="parameters.position" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#positionName" userID="FLX" flexoID="56" />
+              <ObjectPropertyAssertion id="107" object="mission" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPositionMission" userID="FLX" flexoID="57" />
+            </AssignableAction_AddOWLIndividual>
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="108" assign="mission" ownerContext="controlGraph1" userID="FLX" flexoID="63">
+          <AssignableAction_AddOWLIndividual id="109" individualName="parameters.mission" receiver="owl" assignation="mission" userID="FLX" flexoID="62">
+            <DataPropertyAssertion id="110" value="parameters.mission" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#missionName" userID="FLX" flexoID="61" />
+          </AssignableAction_AddOWLIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="111" widget="TEXT_FIELD" name="mission" type="java.lang.String" userID="FLX" flexoID="106" />
+      <GenericBehaviourParameter id="112" widget="TEXT_FIELD" name="position" type="java.lang.String" userID="FLX" flexoID="107" />
+    </DropScheme>
+  </FlexoConcept>
+  <FlexoConcept id="113" name="ContainsPositionLink" userID="FLX" flexoID="82">
+    <Inspector id="114" inspectorTitle="ContainsPositionLink" userID="FLX" flexoID="69">
+      <GenericInspectorEntry id="115" readOnly="true" widget="TEXT_FIELD" data="containsPositionStatement.subject.uriName" name="Organization Unit" label="Organization Unit" type="java.lang.String" userID="FLX" flexoID="67" />
+      <GenericInspectorEntry id="116" readOnly="true" widget="TEXT_FIELD" data="containsPositionStatement.object.uriName" name="Position" label="Position" type="java.lang.String" userID="FLX" flexoID="68" />
+    </Inspector>
+    <ObjectPropertyStatementRole id="117" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#containsPosition" cloningStrategy="Clone" cardinality="ZeroOne" name="containsPositionStatement" userID="FLX" flexoID="70" />
+    <ConnectorRole id="118" exampleLabel="label" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="71">
+      <ConnectorGraphicalRepresentation id="119" identifier="object_2" layer="64">
+        <ForegroundStyle id="120" color="153,153,153" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.800000001490116" />
+        <FocusedForegroundStyle id="121" color="153,153,153" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.800000001490116" />
+        <SelectedForegroundStyle id="122" color="153,153,153" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.800000001490116" />
+        <TextStyle id="123" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+      </ConnectorGraphicalRepresentation>
+    </ConnectorRole>
+    <ObjectPropertyStatementRole id="124" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#isInvolvedInOrganizationUnit" cloningStrategy="Clone" cardinality="ZeroOne" name="isInvolvedInOrganizationUnitStatement" userID="FLX" flexoID="72" />
+    <LinkScheme id="125" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification.fml#OrganizationalUnit" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification.fml#Position" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="linkOrganizationalUnitToPosition" width="800" label="linkOrganizationalUnitToPosition" height="600" userID="FLX" flexoID="81">
+      <BehaviourControlGraph_Sequence id="126" userID="FLX" flexoID="80">
+        <ControlGraph2_Sequence id="127" ownerContext="controlGraph2" userID="FLX" flexoID="77">
+          <ControlGraph2_AssignationAction id="128" assign="isInvolvedInOrganizationUnitStatement" ownerContext="controlGraph2" userID="FLX" flexoID="74">
+            <AssignableAction_AddObjectPropertyStatement id="129" object="fromTarget.organizationalUnit" subject="toTarget.position" receiver="owl" assignation="isInvolvedInOrganizationUnitStatement" userID="FLX" flexoID="73" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="130" assign="containsPositionStatement" ownerContext="controlGraph1" userID="FLX" flexoID="76">
+            <AssignableAction_AddObjectPropertyStatement id="131" object="toTarget.position" subject="fromTarget.organizationalUnit" receiver="owl" assignation="containsPositionStatement" userID="FLX" flexoID="75" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="132" assign="connector" ownerContext="controlGraph1" userID="FLX" flexoID="79">
+          <AssignableAction_AddConnector id="133" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="connector" userID="FLX" flexoID="78" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+    </LinkScheme>
+  </FlexoConcept>
+  <UseModelSlotDeclaration id="134" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="135" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <Inspector id="136" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="83" />
+  <OWLModelSlot id="137" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="7" />
+  <TypedDiagramModelSlot id="138" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="9" />
+</VirtualModel>

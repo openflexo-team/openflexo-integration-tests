@@ -1,0 +1,8 @@
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl")
+public class BenefitDependancyNetwork {
+}

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="FLX-609" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="1.0" uri="http://www.openflexo.org/cityviews/City1_View.fml" version="0.1" name="City1_View" userID="FLX" flexoID="609">
+  <FMLLocalizedDictionary id="SYL-709" userID="SYL" flexoID="709">
+    <Localized id="SYL-729" lang="English" value="Behaviour" key="behaviour" userID="SYL" flexoID="729" />
+    <Localized id="SYL-730" lang="French" value="behaviour" key="behaviour" userID="SYL" flexoID="730" />
+    <Localized id="SYL-731" lang="Dutch" value="behaviour" key="behaviour" userID="SYL" flexoID="731" />
+  </FMLLocalizedDictionary>
+  <FlexoConcept id="FLX-31" name="CityGR" userID="FLX" flexoID="31">
+    <Inspector id="SYL-692" inspectorTitle="CityGR" userID="SYL" flexoID="692" />
+    <EMFObjectIndividualRole id="FLX-5" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/City" cloningStrategy="Clone" cardinality="ZeroOne" name="city" userID="FLX" flexoID="5" />
+    <ShapeRole id="FLX-29" exampleLabel="A vey long label for test purpose" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_2" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="29">
+      <GRSpec id="SYL-873" featureName="label" value="city.name" userID="SYL" flexoID="873" />
+    </ShapeRole>
+    <ShapeRole id="FLX-30" previewHeight="50.0" previewY="0.0" previewX="0.0" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_3" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="30" />
+    <DropScheme id="FLX-8" target="top" skipConfirmationPanel="false" name="dropAtTopLevel" width="800" label="Drop a New City" height="600" userID="FLX" flexoID="8">
+      <BehaviourControlGraph_Sequence id="FLX-556" userID="FLX" flexoID="556">
+        <ControlGraph2_Sequence id="FLX-558" ownerContext="controlGraph2" userID="FLX" flexoID="558">
+          <ControlGraph2_AssignationAction id="FLX-560" assign="city" ownerContext="controlGraph2" userID="FLX" flexoID="560">
+            <AssignableAction_AddEMFObjectIndividual id="FLX-12" individualName="&quot;ANewCity&quot;" receiver="city1model" assignation="city" userID="FLX" flexoID="12">
+              <DataPropertyAssertion id="FLX-13" value="parameters.Name" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City/name" userID="FLX" flexoID="13" />
+            </AssignableAction_AddEMFObjectIndividual>
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="FLX-559" assign="icon" ownerContext="controlGraph1" userID="FLX" flexoID="559">
+            <AssignableAction_AddShape id="FLX-11" container="shape" receiver="typedDiagramModelSlot" assignation="icon" description="" userID="FLX" flexoID="11" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="FLX-557" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="557">
+          <AssignableAction_AddShape id="FLX-10" container="topLevel" receiver="typedDiagramModelSlot" assignation="shape" description="" userID="FLX" flexoID="10" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="FLX-661" widget="TEXT_FIELD" name="Name" type="java.lang.String" userID="FLX" flexoID="661" />
+    </DropScheme>
+    <DeletionScheme id="FLX-32" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="32">
+      <BehaviourControlGraph_Sequence id="FLX-569" userID="FLX" flexoID="569">
+        <ControlGraph2_Sequence id="FLX-570" ownerContext="controlGraph2" userID="FLX" flexoID="570">
+          <ControlGraph2_DeleteAction id="FLX-35" object="shape" ownerContext="controlGraph2" userID="FLX" flexoID="35" />
+          <ControlGraph1_DeleteAction id="FLX-34" object="icon" ownerContext="controlGraph1" userID="FLX" flexoID="34" />
+        </ControlGraph2_Sequence>
+        <ControlGraph1_DeleteAction id="FLX-33" object="city" ownerContext="controlGraph1" userID="FLX" flexoID="33" />
+      </BehaviourControlGraph_Sequence>
+    </DeletionScheme>
+    <CreationScheme id="FLX-162" skipConfirmationPanel="false" name="createFromEMF" width="800" label="createFromEMF" height="600" userID="FLX" flexoID="162">
+      <BehaviourControlGraph_Sequence id="FLX-571" userID="FLX" flexoID="571">
+        <ControlGraph2_Sequence id="FLX-573" ownerContext="controlGraph2" userID="FLX" flexoID="573">
+          <ControlGraph2_AssignationAction id="FLX-575" assign="city" ownerContext="controlGraph2" userID="FLX" flexoID="575">
+            <AssignableAction_ExpressionAction id="FLX-576" expression="parameters.indiv" userID="FLX" flexoID="576" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="FLX-574" assign="icon" ownerContext="controlGraph1" userID="FLX" flexoID="574">
+            <AssignableAction_AddShape id="FLX-167" container="shape" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="167" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="FLX-572" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="572">
+          <AssignableAction_AddShape id="FLX-165" container="typedDiagramModelSlot" receiver="typedDiagramModelSlot" assignation="shape" description="" userID="FLX" flexoID="165" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="FLX-662" isRequired="true" widget="CUSTOM_WIDGET" name="indiv" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="662" />
+    </CreationScheme>
+  </FlexoConcept>
+  <FlexoConcept id="FLX-43" name="HouseGR" userID="FLX" flexoID="43">
+    <Inspector id="FLX-36" renderer="(&quot;House: &quot; + instance.house.info.toString)" inspectorTitle="HouseGR" userID="FLX" flexoID="36" />
+    <EMFObjectIndividualRole id="FLX-39" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/House" cloningStrategy="Clone" cardinality="ZeroOne" name="house" userID="FLX" flexoID="39" />
+    <ShapeRole id="FLX-41" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_4" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="41">
+      <GRSpec id="SYL-874" featureName="label" value="house.info" userID="SYL" flexoID="874" />
+    </ShapeRole>
+    <ShapeRole id="FLX-42" previewHeight="50.0" previewY="0.0" previewX="0.0" exampleLabel="" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_5" cloningStrategy="Clone" cardinality="ZeroOne" name="icon" userID="FLX" flexoID="42" />
+    <DropScheme id="FLX-14" target="http://www.openflexo.org/cityviews/City1_View#CityGR" skipConfirmationPanel="false" name="dropHouseInCity" width="800" label="dropHouseInCity" height="600" description="" userID="FLX" flexoID="14">
+      <ShapeRole idref="FLX-29" />
+      <BehaviourControlGraph_Sequence id="FLX-561" userID="FLX" flexoID="561">
+        <ControlGraph2_Sequence id="FLX-563" ownerContext="controlGraph2" userID="FLX" flexoID="563">
+          <ControlGraph2_AssignationAction id="FLX-565" assign="icon" ownerContext="controlGraph2" userID="FLX" flexoID="565">
+            <AssignableAction_AddShape id="FLX-260" container="shape" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="260" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="FLX-564" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="564">
+            <AssignableAction_AddShape id="FLX-21" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="21" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="FLX-562" assign="house" ownerContext="controlGraph1" userID="FLX" flexoID="562">
+          <AssignableAction_AddEMFObjectIndividual id="FLX-19" container="target.city.houses" individualName="&quot;A New House&quot;" receiver="city1model" assignation="house" userID="FLX" flexoID="19">
+            <DataPropertyAssertion id="FLX-20" value="parameters.Information" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city1/House/info" userID="FLX" flexoID="20" />
+          </AssignableAction_AddEMFObjectIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="FLX-665" widget="TEXT_AREA" name="Information" type="java.lang.String" userID="FLX" flexoID="665" />
+    </DropScheme>
+    <DeletionScheme id="FLX-44" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="44">
+      <BehaviourControlGraph_Sequence id="FLX-577" userID="FLX" flexoID="577">
+        <ControlGraph2_Sequence id="FLX-578" ownerContext="controlGraph2" userID="FLX" flexoID="578">
+          <ControlGraph2_DeleteAction id="FLX-47" object="shape" ownerContext="controlGraph2" userID="FLX" flexoID="47" />
+          <ControlGraph1_DeleteAction id="FLX-46" object="icon" ownerContext="controlGraph1" userID="FLX" flexoID="46" />
+        </ControlGraph2_Sequence>
+        <ControlGraph1_DeleteAction id="FLX-45" object="house" ownerContext="controlGraph1" userID="FLX" flexoID="45" />
+      </BehaviourControlGraph_Sequence>
+    </DeletionScheme>
+    <CreationScheme id="FLX-191" skipConfirmationPanel="false" name="createFromEMF" width="800" label="createFromEMF" height="600" description="" userID="FLX" flexoID="191">
+      <BehaviourControlGraph_Sequence id="FLX-579" userID="FLX" flexoID="579">
+        <ControlGraph2_Sequence id="FLX-582" ownerContext="controlGraph2" userID="FLX" flexoID="582">
+          <ControlGraph2_AssignationAction id="FLX-584" assign="icon" ownerContext="controlGraph2" userID="FLX" flexoID="584">
+            <AssignableAction_AddShape id="FLX-271" container="shape" receiver="typedDiagramModelSlot" assignation="icon" userID="FLX" flexoID="271" />
+          </ControlGraph2_AssignationAction>
+          <ControlGraph1_AssignationAction id="FLX-583" assign="shape" ownerContext="controlGraph1" userID="FLX" flexoID="583">
+            <AssignableAction_AddShape id="FLX-196" container="parameters.inCity.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="196" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="FLX-580" assign="house" ownerContext="controlGraph1" userID="FLX" flexoID="580">
+          <AssignableAction_ExpressionAction id="FLX-581" expression="parameters.indiv" userID="FLX" flexoID="581" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="FLX-666" widget="CUSTOM_WIDGET" name="indiv" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="666" />
+      <GenericBehaviourParameter id="FLX-667" widget="CUSTOM_WIDGET" name="inCity" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/cityviews/City1_View.fml#CityGR&gt;" userID="FLX" flexoID="667" />
+    </CreationScheme>
+  </FlexoConcept>
+  <FlexoConcept id="FLX-53" name="ResidentGR" userID="FLX" flexoID="53">
+    <Inspector id="FLX-48" renderer="(&quot;Someone: &quot; + instance.resident.name)" inspectorTitle="ResidentGR" userID="FLX" flexoID="48" />
+    <EMFObjectIndividualRole id="FLX-50" ontologicType="http://www.thalesgroup.com/openflexo/emf/model/city1/Resident" cloningStrategy="Clone" cardinality="ZeroOne" name="resident" userID="FLX" flexoID="50" />
+    <ShapeRole id="FLX-52" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_6" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="52">
+      <GRSpec id="SYL-875" featureName="label" value="resident.name" userID="SYL" flexoID="875" />
+    </ShapeRole>
+    <DropScheme id="FLX-23" target="http://www.openflexo.org/cityviews/City1_View#CityGR" skipConfirmationPanel="false" name="dropResident" width="800" label="dropResident" height="600" userID="FLX" flexoID="23">
+      <ShapeRole idref="FLX-29" />
+      <BehaviourControlGraph_Sequence id="FLX-566" userID="FLX" flexoID="566">
+        <ControlGraph2_AssignationAction id="FLX-568" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="568">
+          <AssignableAction_AddShape id="FLX-27" container="target.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="27" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="FLX-567" assign="resident" ownerContext="controlGraph1" userID="FLX" flexoID="567">
+          <AssignableAction_AddEMFObjectIndividual id="FLX-25" container="target.city.residents" individualName="&quot;Resident&quot;" receiver="city1model" assignation="resident" userID="FLX" flexoID="25">
+            <DataPropertyAssertion id="FLX-26" value="parameters.Name" dataPropertyURI="http://www.thalesgroup.com/openflexo/emf/model/city1/Resident/name" userID="FLX" flexoID="26" />
+          </AssignableAction_AddEMFObjectIndividual>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="FLX-671" widget="TEXT_FIELD" name="Name" type="java.lang.String" userID="FLX" flexoID="671" />
+    </DropScheme>
+    <DeletionScheme id="FLX-54" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="54">
+      <BehaviourControlGraph_Sequence id="FLX-585" userID="FLX" flexoID="585">
+        <ControlGraph2_DeleteAction id="FLX-56" object="shape" ownerContext="controlGraph2" userID="FLX" flexoID="56" />
+        <ControlGraph1_DeleteAction id="FLX-55" object="resident" ownerContext="controlGraph1" userID="FLX" flexoID="55" />
+      </BehaviourControlGraph_Sequence>
+    </DeletionScheme>
+    <CreationScheme id="FLX-456" skipConfirmationPanel="false" name="createFromEMF" width="800" label="createFromEMF" height="600" description="" userID="FLX" flexoID="456">
+      <BehaviourControlGraph_Sequence id="FLX-586" userID="FLX" flexoID="586">
+        <ControlGraph2_AssignationAction id="FLX-589" assign="shape" ownerContext="controlGraph2" userID="FLX" flexoID="589">
+          <AssignableAction_AddShape id="FLX-464" container="parameters.cityFCI.shape" receiver="typedDiagramModelSlot" assignation="shape" userID="FLX" flexoID="464" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="FLX-587" assign="resident" ownerContext="controlGraph1" userID="FLX" flexoID="587">
+          <AssignableAction_ExpressionAction id="FLX-588" expression="parameters.indiv" userID="FLX" flexoID="588" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="FLX-672" widget="CUSTOM_WIDGET" name="indiv" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="672" />
+      <GenericBehaviourParameter id="FLX-673" widget="CUSTOM_WIDGET" name="cityFCI" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/cityviews/City1_View.fml#CityGR&gt;" userID="FLX" flexoID="673" />
+    </CreationScheme>
+  </FlexoConcept>
+  <FlexoConcept id="FLX-63" name="HouseOwnerLinkGR" userID="FLX" flexoID="63">
+    <Inspector id="FLX-57" renderer="(&quot;owner is &quot; + instance.owner.resident.name)" inspectorTitle="HouseOwnerLinkGR" userID="FLX" flexoID="57" />
+    <ConnectorRole id="FLX-60" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram#SYL_7" cloningStrategy="Clone" cardinality="ZeroOne" name="link" userID="FLX" flexoID="60" />
+    <FlexoConceptInstanceRole id="FLX-61" flexoConceptTypeURI="http://www.openflexo.org/cityviews/City1_View.fml#HouseGR" cloningStrategy="Reference" cardinality="ZeroOne" name="house" userID="FLX" flexoID="61" />
+    <FlexoConceptInstanceRole id="FLX-62" flexoConceptTypeURI="http://www.openflexo.org/cityviews/City1_View.fml#ResidentGR" cloningStrategy="Reference" cardinality="ZeroOne" name="owner" userID="FLX" flexoID="62" />
+    <LinkScheme id="FLX-64" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/cityviews/City1_View#HouseGR" toTarget="http://www.openflexo.org/cityviews/City1_View#ResidentGR" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="link" width="800" label="link" height="600" userID="FLX" flexoID="64">
+      <BehaviourControlGraph_Sequence id="FLX-590" userID="FLX" flexoID="590">
+        <ControlGraph2_Sequence id="FLX-599" ownerContext="controlGraph2" userID="FLX" flexoID="599">
+          <ControlGraph2_Sequence id="FLX-604" ownerContext="controlGraph2" userID="FLX" flexoID="604">
+            <ControlGraph2_AssignationAction id="FLX-607" assign="owner" ownerContext="controlGraph2" userID="FLX" flexoID="607">
+              <AssignableAction_ExpressionAction id="FLX-608" expression="toTarget" userID="FLX" flexoID="608" />
+            </ControlGraph2_AssignationAction>
+            <ControlGraph1_AssignationAction id="FLX-605" assign="house" ownerContext="controlGraph1" userID="FLX" flexoID="605">
+              <AssignableAction_ExpressionAction id="FLX-606" expression="fromTarget" userID="FLX" flexoID="606" />
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_ConditionalAction id="FLX-73" condition="(fromTarget.house.owner = null)" ownerContext="controlGraph1" userID="FLX" flexoID="73">
+            <ThenControlGraph_Sequence id="FLX-600" ownerContext="thenControlGraph" userID="FLX" flexoID="600">
+              <ControlGraph2_AssignationAction id="FLX-603" assign="link" ownerContext="controlGraph2" userID="FLX" flexoID="603">
+                <AssignableAction_AddConnector id="FLX-75" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="link" userID="FLX" flexoID="75" />
+              </ControlGraph2_AssignationAction>
+              <ControlGraph1_AssignationAction id="FLX-601" assign="fromTarget.house.owner" ownerContext="controlGraph1" userID="FLX" flexoID="601">
+                <AssignableAction_ExpressionAction id="FLX-602" expression="toTarget.resident" userID="FLX" flexoID="602" />
+              </ControlGraph1_AssignationAction>
+            </ThenControlGraph_Sequence>
+          </ControlGraph1_ConditionalAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_ConditionalAction id="FLX-65" condition="(fromTarget.house.owner != null)" ownerContext="controlGraph1" userID="FLX" flexoID="65">
+          <ThenControlGraph_Sequence id="FLX-591" ownerContext="thenControlGraph" userID="FLX" flexoID="591">
+            <ControlGraph2_ConditionalAction id="FLX-69" condition="(fromTarget.house.owner != toTarget.resident)" ownerContext="controlGraph2" userID="FLX" flexoID="69">
+              <ThenControlGraph_Sequence id="FLX-594" ownerContext="thenControlGraph" userID="FLX" flexoID="594">
+                <ControlGraph2_Sequence id="FLX-597" ownerContext="controlGraph2" userID="FLX" flexoID="597">
+                  <ControlGraph2_GraphicalAction id="FLX-72" subject="link" value="&quot;Louche&quot;" feature="label" receiver="typedDiagramModelSlot" ownerContext="controlGraph2" userID="FLX" flexoID="72" />
+                  <ControlGraph1_AssignationAction id="FLX-598" assign="link" ownerContext="controlGraph1" userID="FLX" flexoID="598">
+                    <AssignableAction_AddConnector id="FLX-71" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="link" userID="FLX" flexoID="71" />
+                  </ControlGraph1_AssignationAction>
+                </ControlGraph2_Sequence>
+                <ControlGraph1_AssignationAction id="FLX-595" assign="fromTarget.house.owner" ownerContext="controlGraph1" userID="FLX" flexoID="595">
+                  <AssignableAction_ExpressionAction id="FLX-596" expression="toTarget.resident" userID="FLX" flexoID="596" />
+                </ControlGraph1_AssignationAction>
+              </ThenControlGraph_Sequence>
+            </ControlGraph2_ConditionalAction>
+            <ControlGraph1_ConditionalAction id="FLX-66" condition="(fromTarget.house.owner = toTarget.resident)" ownerContext="controlGraph1" userID="FLX" flexoID="66">
+              <ThenControlGraph_Sequence id="FLX-592" ownerContext="thenControlGraph" userID="FLX" flexoID="592">
+                <ControlGraph2_GraphicalAction id="FLX-68" subject="link" value="&quot;Existe Déjà?&quot;" feature="label" receiver="typedDiagramModelSlot" ownerContext="controlGraph2" userID="FLX" flexoID="68" />
+                <ControlGraph1_AssignationAction id="FLX-593" assign="link" ownerContext="controlGraph1" userID="FLX" flexoID="593">
+                  <AssignableAction_AddConnector id="FLX-67" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="typedDiagramModelSlot" assignation="link" userID="FLX" flexoID="67" />
+                </ControlGraph1_AssignationAction>
+              </ThenControlGraph_Sequence>
+            </ControlGraph1_ConditionalAction>
+          </ThenControlGraph_Sequence>
+        </ControlGraph1_ConditionalAction>
+      </BehaviourControlGraph_Sequence>
+    </LinkScheme>
+    <DeletionScheme id="FLX-78" skipConfirmationPanel="false" name="deletion" width="800" label="deletion" height="600" userID="FLX" flexoID="78">
+      <BehaviourControlGraph_DeleteAction id="FLX-79" object="link" userID="FLX" flexoID="79" />
+    </DeletionScheme>
+  </FlexoConcept>
+  <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.emf.EMFModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
+  <Inspector id="SYL-693" inspectorTitle="City1_View" userID="SYL" flexoID="693" />
+  <EMFModelSlot id="FLX-6" metaModelURI="http://www.thalesgroup.com/openflexo/emf/model/city1" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="city1model" userID="FLX" flexoID="6" />
+  <TypedDiagramModelSlot id="FLX-28" metaModelURI="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="28">
+    <FMLDiagramPaletteElementBinding id="FLX-1" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New City" userID="FLX" flexoID="1">
+      <DropScheme idref="FLX-8" />
+    </FMLDiagramPaletteElementBinding>
+    <FMLDiagramPaletteElementBinding id="FLX-2" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New House (in City)" userID="FLX" flexoID="2">
+      <DropScheme idref="FLX-14" />
+    </FMLDiagramPaletteElementBinding>
+    <FMLDiagramPaletteElementBinding id="FLX-3" paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New Resident (in City)" userID="FLX" flexoID="3">
+      <DropScheme idref="FLX-23" />
+    </FMLDiagramPaletteElementBinding>
+  </TypedDiagramModelSlot>
+  <SynchronizationScheme id="FLX-152" skipConfirmationPanel="false" name="synchronization" width="800" label="synchronization" height="600" userID="FLX" flexoID="152">
+    <BehaviourControlGraph_IterationAction id="SYL-817" iteratorName="emfCity" userID="SYL" flexoID="817">
+      <Iteration_SelectEMFObjectIndividual id="SYL-820" ontologyClassURI="http://www.thalesgroup.com/openflexo/emf/model/city1/City" receiver="city1model" ownerContext="iterationControlGraph" userID="SYL" flexoID="820" />
+      <ControlGraph_Sequence id="SYL-839" ownerContext="controlGraph" userID="SYL" flexoID="839">
+        <ControlGraph2_DeclarationAction id="SYL-833" variable="myCityFCI" ownerContext="controlGraph2" userID="SYL" flexoID="833">
+          <AssignableAction_MatchFlexoConceptInstance id="SYL-830" creationSchemeURI="http://www.openflexo.org/cityviews/City1_View.fml#CityGR.createFromEMF" matchingSet="matchingSet" receiver="this" userID="SYL" flexoID="830">
+            <MatchingCriteria id="SYL-832" patternRoleName="city" value="emfCity" userID="SYL" flexoID="832" />
+            <MatchingCriteria id="SYL-834" patternRoleName="shape" userID="SYL" flexoID="834" />
+            <MatchingCriteria id="SYL-835" patternRoleName="icon" userID="SYL" flexoID="835" />
+            <MatchingCriteria id="SYL-836" patternRoleName="city1model" userID="SYL" flexoID="836" />
+            <MatchingCriteria id="SYL-837" patternRoleName="typedDiagramModelSlot" userID="SYL" flexoID="837" />
+            <CreateFlexoConceptInstanceParameter id="SYL-831" paramName="indiv" value="emfCity" userID="SYL" flexoID="831" />
+          </AssignableAction_MatchFlexoConceptInstance>
+        </ControlGraph2_DeclarationAction>
+        <ControlGraph1_DeclarationAction id="SYL-828" variable="matchingSet" ownerContext="controlGraph1" userID="SYL" flexoID="828">
+          <AssignableAction_InitiateMatching id="SYL-827" container="this" flexoConceptTypeURI="http://www.openflexo.org/cityviews/City1_View.fml#CityGR" userID="SYL" flexoID="827" />
+        </ControlGraph1_DeclarationAction>
+      </ControlGraph_Sequence>
+    </BehaviourControlGraph_IterationAction>
+  </SynchronizationScheme>
+  <DeletionScheme id="FLX-232" skipConfirmationPanel="false" name="delete" width="800" label="delete" height="600" userID="FLX" flexoID="232" />
+  <ActionScheme id="SYL-728" name="test" width="800" label="test" height="600" userID="SYL" flexoID="728" />
+</VirtualModel>

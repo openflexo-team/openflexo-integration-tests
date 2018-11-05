@@ -1,0 +1,99 @@
+use org.openflexo.technologyadapter.owl.OWLModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification.fml")
+public class DiagramSpecification {
+
+  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_9a conformTo="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" required=false readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+
+  @FlexoConcept  
+  public class OrganizationalUnit {  
+  
+    FlexoRole organizationalUnit as Individual conformTo OrganizationalUnit from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole flexoBehaviourInstance as Diagram conform to null;  
+  
+    @DropScheme    
+    OrganizationalUnit:dropOrganizationalUnitAtTopLevel(String organizationName) {    
+      organizationalUnit = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = organizationalUnit.organizationUnitName;      
+      };    
+    }    
+  
+    @NavigationScheme    
+    void openDetails() {    
+      
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class SubOrganizationUnitLink {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:hasSubOrgUnit hasSubOrgUnitStatement;  
+    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:hasParentOrgUnit hasParentOrgUnitStatement;  
+  
+    @LinkScheme    
+    SubOrganizationUnitLink:linkOrganizationalUnitToOrganizationalUnit() {    
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_96 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };      
+      hasSubOrgUnitStatement = fromTarget.organizationalUnit.hasSubOrgUnit = toTarget.organizationalUnit;;      
+      hasParentOrgUnitStatement = toTarget.organizationalUnit.hasParentOrgUnit = fromTarget.organizationalUnit;;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Position {  
+  
+    FlexoRole position as Individual conformTo Position from owl ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole icon as ShapeSpecification from DiagramSpecification;  
+    FlexoRole label as ShapeSpecification from DiagramSpecification;  
+    FlexoRole mission as Individual conformTo PositionMission from owl ;  
+  
+    @DropScheme    
+    Position:dropPositionAtTopLevel(String mission, String position) {    
+      mission = owl.AddOWLIndividual();      
+      position = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = position.positionName;      
+      };      
+      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ContainsPositionLink {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:containsPosition containsPositionStatement;  
+    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:isInvolvedInOrganizationUnit isInvolvedInOrganizationUnitStatement;  
+  
+    @LinkScheme    
+    ContainsPositionLink:linkOrganizationalUnitToPosition() {    
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_96 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };      
+      containsPositionStatement = fromTarget.organizationalUnit.containsPosition = toTarget.position;;      
+      isInvolvedInOrganizationUnitStatement = toTarget.position.isInvolvedInOrganizationUnit = fromTarget.organizationalUnit;;    
+    }    
+  
+  }  
+
+}

@@ -1,0 +1,8 @@
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.thalesgroup.com/openflexo/emf/CityMapping")
+public class CityMapping {
+}

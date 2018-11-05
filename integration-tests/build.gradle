@@ -1,0 +1,21 @@
+dependencies {
+
+    testCompile testUtils()
+    testCompile flexoUi()
+    testCompile flexoUiTest()
+    testCompile flexoFoundationTest()
+    testCompile owlConnector()
+    testCompile flexoDiagram()
+    testCompile emfConnector()
+    testCompile excelConnector()
+    testCompile xmlConnector()
+    testCompile powerpointConnector()
+
+    testCompile openflexo("openflexo-modeller")
+    testCompile openflexo("freemodellingeditor")
+    testCompile openflexo("enterprise-architecture-module")
+    
+    testRuntime project(':integration-tests-rc')
+    testRuntime openflexo("owlconnector-test-rc")
+}
+

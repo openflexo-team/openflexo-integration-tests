@@ -1,0 +1,120 @@
+use org.openflexo.technologyadapter.owl.OWLModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification.fml")
+public class DiagramSpecification {
+
+  ModelSlot basicOrg type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_96 conformTo="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" required=true readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+
+  @FlexoConcept  
+  public class BOTCompany {  
+  
+    FlexoRole company as Individual conformTo BOTCompany from basicOrg ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    BOTCompany:DropBOTCompanyAtTopLevel(String companyName, String companyURI) {    
+      company = basicOrg.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = company.companyName;      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class BOTDepartment {  
+  
+    FlexoRole department as Individual conformTo BOTDepartment from basicOrg ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    BOTDepartment:DropBOTDepartmentInBOTCompany(String departmentName, String departmentURI) {    
+      department = basicOrg.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = department.name;      
+      };    
+    }    
+  
+  }  
+
+  /**  
+   * <html>  
+    <head>  
+  
+    </head>  
+    <body>  
+      <p style="margin-top: 0">  
+          
+      </p>  
+    </body>  
+  </html>  
+   *   
+   */  
+  @FlexoConcept  
+  public class BOTSubDepartment {  
+  
+    FlexoRole subDepartment as Individual conformTo BOTSubDepartment from basicOrg ;  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    BOTSubDepartment:DropBOTSubDepartmentInBOTDepartment(String subDepartmentName, String subDepartmentURI) {    
+      subDepartment = basicOrg.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = subDepartment.name;      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Employee {  
+  
+    FlexoRole employeeAsManager as Individual conformTo BOTManager from basicOrg ;  
+    FlexoRole employeeAsWorker as Individual conformTo BOTWorker from basicOrg ;  
+    FlexoRole person as Individual conformTo BOTPerson from basicOrg ;  
+    FlexoRole managerAsShape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole workerAsShape as ShapeSpecification from DiagramSpecification;  
+  
+    @DropScheme    
+    Employee:DropEmployeeInOrganization(String roleName, String employeeURI, Boolean isManager, Boolean isHeadOfOrganization, Boolean assignPerson, String employeeFirstName, String employeeLastName, String personURI) {    
+      employeeAsManager = basicOrg.AddOWLIndividual();      
+      employeeAsWorker = basicOrg.AddOWLIndividual();      
+      person = basicOrg.AddOWLIndividual();      
+      managerAsShape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = employeeAsManager.roleName;      
+      };      
+      workerAsShape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = employeeAsWorker.roleName;      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class EmployeeHierarchicalRelationship {  
+  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:isResponsibleOf isResponsibleOf;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:isUnderResponsabilityOf isUnderResponsabilityOf;  
+    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
+  
+    @LinkScheme    
+    EmployeeHierarchicalRelationship:LinkTwoEmployeesByHierarchicalRelationship(Boolean makeInverseRelationship) {    
+      isResponsibleOf = fromTarget.employeeAsManager.isResponsibleOf = toTarget.employeeAsWorker;;      
+      isUnderResponsabilityOf = toTarget.employeeAsWorker.isUnderResponsabilityOf = fromTarget.employeeAsManager;;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_93 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "is responsible of";      
+      };    
+    }    
+  
+  }  
+
+}

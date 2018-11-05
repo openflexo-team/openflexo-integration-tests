@@ -1,0 +1,115 @@
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+use org.openflexo.technologyadapter.excel.BasicExcelModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://ExcelViewpoint/IdentityDiagram.fml")
+public class IdentityDiagram {
+
+  @TypedDiagramModelSlot(metamodel="http://ExcelViewpoint/IdentityDiagram/IdentityDiagram.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<IdentityDiagram> typedDiagramModelSlot;
+  @BasicExcelModelSlot(cardinality=ZeroOne,readOnly=false)  
+  public ExcelWorkbook excelMS;
+
+  @DeletionScheme  
+  void deletion() {  
+  
+  }  
+
+  @SynchronizationScheme  
+  Void synchronizationScheme() {  
+    for (row : excelMS.XLS::SelectExcelRow where=(selected.rowIndex != 0)) {    
+      FML@RT::MatchFlexoConceptInstance as Person match=(row=row) using Person:creation(row,row.getExcelCell(2),row.getExcelCell(3),row.getExcelCell(4),row.getExcelCell(1),row.getExcelCell(0))    
+    }  
+  }  
+
+
+  @FlexoConcept  
+  public class Person {  
+  
+    FlexoRole shape as ShapeSpecification from IdentityDiagram;  
+    FlexoRole shape2 as ShapeSpecification from IdentityDiagram;  
+    FlexoRole shape3 as ShapeSpecification from IdentityDiagram;  
+    FlexoRole shape4 as ShapeSpecification from IdentityDiagram;  
+    FlexoRole shape5 as ShapeSpecification from IdentityDiagram;  
+    FlexoRole shape6 as ShapeSpecification from IdentityDiagram;  
+    @ExcelRowRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelRow row;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell activity;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell name;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell city;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell age;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell sex;  
+  
+    @DropScheme    
+    Person:dropPersonAtTopLevel(String name, String city, Integer age, String activity, String sex) {    
+      row = excelMS.AddExcelRow();      
+      name = excelMS.AddExcelCell();      
+      city = excelMS.AddExcelCell();      
+      age = excelMS.AddExcelCell();      
+      activity = excelMS.AddExcelCell();      
+      sex = excelMS.AddExcelCell();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape2 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape3 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = age.cellValueAsString;      
+      };      
+      shape4 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = name.cellValueAsString;      
+      };      
+      shape5 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = city.cellValueAsString;      
+      };      
+      shape6 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = activity.cellValueAsString;      
+      };    
+    }    
+  
+    @CreationScheme    
+    Person:creation(Object row, Object activity, Object age, Object city, Object name, Object sex) {    
+      row = parameters.row;      
+      activity = parameters.activity;      
+      age = parameters.age;      
+      name = parameters.name;      
+      city = parameters.city;      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape4 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = name.cellValueAsString;      
+      };      
+      shape3 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = age.cellValueAsString;      
+      };      
+      shape2 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape5 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = city.cellValueAsString;      
+      };      
+      shape6 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = activity.cellValueAsString;      
+      };      
+      sex = parameters.sex;    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete shape2      
+      delete shape3      
+      delete shape4      
+      delete shape5      
+      delete shape6      
+      delete shape    
+    }    
+  
+  }  
+
+}

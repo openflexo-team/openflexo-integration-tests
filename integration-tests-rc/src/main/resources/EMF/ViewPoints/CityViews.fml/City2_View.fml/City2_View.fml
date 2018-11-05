@@ -1,0 +1,129 @@
+use org.openflexo.technologyadapter.emf.EMFModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.openflexo.org/cityviews/City2_View.fml")
+public class City2_View {
+
+  ModelSlot city2model type=EMFModelSlot$EMFModelSlotImpl_$$_jvstbac_a1 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city2" required=true readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<City2_View> typedDiagramModelSlot;
+
+  @SynchronizationScheme  
+  Void synchronization() {  
+    for (item : SelectEMFObjectIndividual from city2model as City) {    
+      FML@RT::MatchFlexoConceptInstance as CityGR match=(city=item) using CityGR:createFromEMF(item)    
+    }  
+  }  
+
+  @DeletionScheme  
+  void delete() {  
+  
+  }  
+
+
+  @FlexoConcept  
+  public class CityGR {  
+  
+    FlexoRole city as Individual conformTo City from city2model ;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = city.name;      
+    }  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape icon {    
+    }  
+  
+    @DropScheme    
+    CityGR:dropCityAtTopLevel(String cityName) {    
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();      
+      city = city2model.AddEMFObjectIndividual();    
+    }    
+  
+    @CreationScheme    
+    CityGR:createFromEMF(IFlexoOntologyIndividual indiv) {    
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();      
+      city = parameters.indiv;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class HouseGR {  
+  }  
+
+  @FlexoConcept  
+  public class MansionGR {  
+  
+    FlexoRole mansion as Individual conformTo Mansion from city2model ;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = ("Mansion N°" + mansion.number.toString);      
+    }  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape icon {    
+    }  
+  
+    @DropScheme    
+    MansionGR:dropMansionInCity(Integer MansionNumber) {    
+      mansion = city2model.AddEMFObjectIndividual();      
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      mansion.delete();      
+      shape.delete();      
+      icon.delete();    
+    }    
+  
+  }  
+
+  /**  
+   * <html>  
+    <head>  
+  
+    </head>  
+    <body>  
+      <p style="margin-top: 0">  
+          
+      </p>  
+    </body>  
+  </html>  
+   *   
+   */  
+  @FlexoConcept  
+  public class AppartmentGR {  
+  
+    FlexoRole appartment as Individual conformTo Appartment from city2model ;  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape shape {    
+        label = appartment.label;      
+    }  
+    @ShapeRole(cardinality=ZeroOne,readOnly=false)    
+    public DiagramShape icon {    
+    }  
+  
+    @DropScheme    
+    AppartmentGR:dropAppartmentGRInCity(String name) {    
+      appartment = city2model.AddEMFObjectIndividual();      
+      shape = typedDiagramModelSlot.AddShape();      
+      icon = typedDiagramModelSlot.AddShape();    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      appartment.delete();      
+      shape.delete();      
+      icon.delete();    
+    }    
+  
+  }  
+
+}

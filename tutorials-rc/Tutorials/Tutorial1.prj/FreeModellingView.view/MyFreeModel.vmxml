@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModelInstance id="0" flexoConceptURI="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/FreeModellingViewPoint.viewpoint/MyFreeModel" userID="FLX" modelVersion="1.0" version="0.1" title="MyFreeModel" flexoID="1" virtualModelURI="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/FreeModellingViewPoint.viewpoint/MyFreeModel">
+  <FlexoConceptInstance id="1" flexoID="6" description="An other description" flexoConceptURI="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/FreeModellingViewPoint.viewpoint/MyFreeModel#None" userID="FLX">
+    <ModelObjectActorReference id="2" flexoID="7" userID="FLX" roleName="shape" objectReference="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/DIAGRAM/MyFreeModel.diagram#FLX_3" />
+    <PrimitiveActorReference id="3" flexoID="8" userID="FLX" roleName="name" valueAsString="item2" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="4" flexoID="14" flexoConceptURI="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/FreeModellingViewPoint.viewpoint/MyFreeModel#None" userID="FLX">
+    <ModelObjectActorReference id="5" flexoID="17" userID="FLX" roleName="shape" objectReference="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/DIAGRAM/MyFreeModel.diagram#FLX_11" />
+    <PrimitiveActorReference id="6" flexoID="18" userID="FLX" roleName="name" valueAsString="unnamed" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="7" flexoID="15" flexoConceptURI="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/FreeModellingViewPoint.viewpoint/MyFreeModel#None" userID="FLX">
+    <ModelObjectActorReference id="8" flexoID="19" userID="FLX" roleName="shape" objectReference="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/DIAGRAM/MyFreeModel.diagram#FLX_12" />
+    <PrimitiveActorReference id="9" flexoID="20" userID="FLX" roleName="name" valueAsString="unnamed2" />
+  </FlexoConceptInstance>
+  <TypeAwareModelSlotInstance id="10" modelURI="http://www.openflexo.org/projects/2016/10/Tutorial1_1476689800734/DIAGRAM/MyFreeModel.diagram" flexoID="2" modelSlotName="diagram" userID="FLX" />
+</VirtualModelInstance>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="0" userID="FLX" modelVersion="1.0" version="0.1" flexoID="4" name="DataModel">
+  <FlexoConcept id="1" userID="FLX" flexoID="48" name="Client">
+    <Inspector id="2" flexoID="47" userID="FLX" inspectorTitle="Client" />
+    <JDBCLineRole id="3" userID="FLX" cloningStrategy="Reference" flexoID="55" description="Client in a SQL database" name="sql" cardinality="One" />
+    <PrimitiveRole id="4" userID="FLX" cloningStrategy="Clone" flexoID="116" description="Client id" primitiveType="Integer" name="id" cardinality="One" />
+    <CreationScheme id="5" userID="FLX" width="800" label="create" height="600" flexoID="50" name="create">
+      <BehaviourControlGraph_Sequence id="6" flexoID="133" userID="FLX">
+        <ControlGraph1_AssignationAction id="7" userID="FLX" flexoID="128" ownerContext="controlGraph1" assign="sql">
+          <AssignableAction_ExpressionAction id="8" expression="parameters.sql" flexoID="127" userID="FLX" />
+        </ControlGraph1_AssignationAction>
+        <ControlGraph2_AssignationAction id="9" userID="FLX" flexoID="132" ownerContext="controlGraph2" assign="id">
+          <AssignableAction_ExpressionAction id="10" expression="sql.getValue(&quot;id&quot;).getIntValue()" flexoID="131" userID="FLX" />
+        </ControlGraph2_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="11" userID="FLX" type="org.openflexo.technologyadapter.jdbc.model.JDBCLine" flexoID="130" container="view" name="sql" widget="CUSTOM_WIDGET" />
+    </CreationScheme>
+    <DeletionScheme id="12" userID="FLX" width="800" label="deletion" height="600" flexoID="52" name="deletion">
+      <BehaviourControlGraph_EmptyControlGraph id="13" flexoID="51" userID="FLX" />
+    </DeletionScheme>
+  </FlexoConcept>
+  <FlexoConcept id="14" userID="FLX" flexoID="57" name="Salesman">
+    <Inspector id="15" flexoID="58" userID="FLX" inspectorTitle="Salesman" />
+    <JDBCLineRole id="16" userID="FLX" cloningStrategy="Reference" flexoID="78" description="Salesman in SQL database" name="sql" cardinality="ZeroOne" />
+    <PrimitiveRole id="17" userID="FLX" cloningStrategy="Clone" flexoID="79" description="Salesman last name" primitiveType="Integer" name="id" cardinality="One" />
+    <ExpressionProperty id="18" expression="sql.getValue(&quot;lastname&quot;).value" flexoID="179" description="Salesman name" name="lastname" userID="FLX" />
+    <ExpressionProperty id="19" expression="sql.getValue(&quot;firstname&quot;).value" flexoID="184" description="Salesman firstname" name="firstname" userID="FLX" />
+    <ExpressionProperty id="20" expression="connection.schema.getTable(&quot;CLIENT&quot;).select((&quot;salesman = &quot; + id))" flexoID="185" description="List of clients for the salesman" name="clients" userID="FLX" />
+    <CreationScheme id="21" userID="FLX" width="800" label="create" height="600" flexoID="61" name="create">
+      <BehaviourControlGraph_Sequence id="22" flexoID="168" userID="FLX">
+        <ControlGraph1_AssignationAction id="23" userID="FLX" flexoID="165" ownerContext="controlGraph1" assign="sql">
+          <AssignableAction_ExpressionAction id="24" expression="parameters.sql" flexoID="164" userID="FLX" />
+        </ControlGraph1_AssignationAction>
+        <ControlGraph2_AssignationAction id="25" userID="FLX" flexoID="167" ownerContext="controlGraph2" assign="id">
+          <AssignableAction_ExpressionAction id="26" expression="sql.getValue(&quot;id&quot;).getIntValue()" flexoID="166" userID="FLX" />
+        </ControlGraph2_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="27" userID="FLX" type="org.openflexo.technologyadapter.jdbc.model.JDBCLine" flexoID="163" name="sql" widget="CUSTOM_WIDGET" />
+    </CreationScheme>
+    <DeletionScheme id="28" userID="FLX" width="800" label="deletion" height="600" flexoID="62" name="deletion">
+      <BehaviourControlGraph_EmptyControlGraph id="29" flexoID="64" userID="FLX" />
+    </DeletionScheme>
+  </FlexoConcept>
+  <Inspector id="30" flexoID="1" userID="FLX" inspectorTitle="DataModel" />
+  <ExpressionProperty id="31" expression="visitSheets" flexoID="189" name="visitSheets" userID="FLX" />
+  <FlexoConceptInstanceRole id="32" userID="FLX" virtualModelInstance="virtualModelInstance" cloningStrategy="Reference" flexoID="200" description="Salesmen synchronized" name="salesmen" flexoConceptTypeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Salesman" cardinality="ZeroMany" />
+  <FlexoConceptInstanceRole id="33" userID="FLX" virtualModelInstance="virtualModelInstance" cloningStrategy="Reference" flexoID="201" description="clients" name="clients" flexoConceptTypeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Client" cardinality="ZeroMany" />
+  <ModelSlot_JDBCModelSlot id="34" userID="FLX" cloningStrategy="Reference" flexoID="80" isRequired="true" description="Database source for model" container="view" name="connection" cardinality="ZeroOne">
+    <JDBCModelSlot idref="34" />
+  </ModelSlot_JDBCModelSlot>
+  <CreationScheme id="35" userID="FLX" width="800" label="create" height="600" flexoID="81" description="Create new data model" name="create">
+    <BehaviourControlGraph_AssignationAction id="36" userID="FLX" flexoID="85" assign="connection">
+      <AssignableAction_ExpressionAction id="37" expression="parameters.connection" flexoID="84" userID="FLX" />
+    </BehaviourControlGraph_AssignationAction>
+    <GenericBehaviourParameter id="38" userID="FLX" type="org.openflexo.foundation.resource.FlexoResourceType&lt;org.openflexo.technologyadapter.jdbc.model.JDBCConnection&gt;" flexoID="83" container="view" name="connection" widget="CUSTOM_WIDGET" />
+  </CreationScheme>
+  <SynchronizationScheme id="39" userID="FLX" width="800" label="synchronizationScheme" height="600" flexoID="89" description="Synchronize data fr" name="synchronizationScheme">
+    <BehaviourControlGraph_Sequence id="40" flexoID="159" userID="FLX">
+      <ControlGraph1_IterationAction id="41" iteratorName="line" userID="FLX" flexoID="97" ownerContext="controlGraph1">
+        <ControlGraph_AddToListAction id="42" userID="FLX" list="clients" flexoID="215" ownerContext="controlGraph">
+          <AssignableAction_MatchFlexoConceptInstance id="43" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="211" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Client.create">
+            <MatchingCriteria id="44" flexoID="213" userID="FLX" patternRoleName="sql" />
+            <MatchingCriteria id="45" flexoID="214" userID="FLX" value="line.getValue(&quot;id&quot;).getIntValue()" patternRoleName="id" />
+            <CreateFlexoConceptInstanceParameter id="46" flexoID="212" userID="FLX" value="line" paramName="sql" />
+          </AssignableAction_MatchFlexoConceptInstance>
+        </ControlGraph_AddToListAction>
+        <Iteration_SelectJDBCLine id="47" userID="FLX" table="connection.schema.getTable(&quot;CLIENT&quot;)" flexoID="100" ownerContext="iterationControlGraph">
+          <JDBCModelSlot idref="34" />
+        </Iteration_SelectJDBCLine>
+      </ControlGraph1_IterationAction>
+      <ControlGraph2_IterationAction id="48" iteratorName="line" userID="FLX" flexoID="150" ownerContext="controlGraph2">
+        <ControlGraph_AddToListAction id="49" userID="FLX" list="salesmen" flexoID="223" ownerContext="controlGraph">
+          <AssignableAction_MatchFlexoConceptInstance id="50" userID="FLX" virtualModelInstance="virtualModelInstance" flexoID="217" creationSchemeURI="http://www.openflexo.org/2016/ExcelSquaredSQL/DataModel#Salesman.create">
+            <MatchingCriteria id="51" flexoID="219" userID="FLX" patternRoleName="sql" />
+            <MatchingCriteria id="52" flexoID="220" userID="FLX" value="line.getValue(&quot;id&quot;).getIntValue()" patternRoleName="id" />
+            <MatchingCriteria id="53" flexoID="221" userID="FLX" patternRoleName="lastname" />
+            <MatchingCriteria id="54" flexoID="222" userID="FLX" patternRoleName="firstname" />
+            <MatchingCriteria id="55" flexoID="224" userID="FLX" patternRoleName="clients" />
+            <CreateFlexoConceptInstanceParameter id="56" flexoID="218" userID="FLX" value="line" paramName="sql" />
+          </AssignableAction_MatchFlexoConceptInstance>
+        </ControlGraph_AddToListAction>
+        <Iteration_SelectJDBCLine id="57" userID="FLX" table="connection.schema.getTable(&quot;SALESMAN&quot;)" flexoID="153" ownerContext="iterationControlGraph">
+          <JDBCModelSlot idref="34" />
+        </Iteration_SelectJDBCLine>
+      </ControlGraph2_IterationAction>
+    </BehaviourControlGraph_Sequence>
+  </SynchronizationScheme>
+  <DeletionScheme id="58" userID="FLX" width="800" label="deletion" height="600" flexoID="192" name="deletion">
+    <BehaviourControlGraph_EmptyControlGraph id="59" flexoID="191" userID="FLX" />
+  </DeletionScheme>
+</VirtualModel>

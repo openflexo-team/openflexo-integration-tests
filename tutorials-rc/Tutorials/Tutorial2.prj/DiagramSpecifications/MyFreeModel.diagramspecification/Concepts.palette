@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DiagramPalette id="0" name="Concepts">
+  <DiagramPaletteElement id="1" name="UseCase">
+    <ShapeGraphicalRepresentation id="2" relativeTextX="0.5" height="30.0" text="UseCase" width="40.0" allowToLeaveBounds="false" relativeTextY="0.5" identifier="71fbb9dc" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="10.0" x="10.0">
+      <FocusedForegroundStyle id="3" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedColorBackgroundStyle id="4" color="254,247,217" transparencyLevel="0.5" />
+      <TextStyle id="5" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="6" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="7" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="8" color="254,247,217" transparencyLevel="0.5" />
+      <OvalShape id="9" />
+      <ShadowStyle id="10" />
+      <ColorBackgroundStyle id="11" color="254,247,217" transparencyLevel="0.5" />
+    </ShapeGraphicalRepresentation>
+  </DiagramPaletteElement>
+  <DiagramPaletteElement id="12" name="Actor">
+    <ShapeGraphicalRepresentation id="13" relativeTextX="0.5" height="30.0" text="Actor" width="40.0" allowToLeaveBounds="false" relativeTextY="0.5" identifier="1db50b7f" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" layer="1" absoluteTextX="32.0" absoluteTextY="-5.0" y="10.0" x="60.0">
+      <FocusedForegroundStyle id="14" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedImageBackgroundStyle id="15" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <TextStyle id="16" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="17" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="18" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="19" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <RectangleShape id="20" />
+      <ShadowStyle id="21" drawShadow="false" />
+      <ImageBackgroundStyle id="22" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../Images/Actor.gif" imageBackgroundType="TRANSPARENT" />
+    </ShapeGraphicalRepresentation>
+  </DiagramPaletteElement>
+</DiagramPalette>

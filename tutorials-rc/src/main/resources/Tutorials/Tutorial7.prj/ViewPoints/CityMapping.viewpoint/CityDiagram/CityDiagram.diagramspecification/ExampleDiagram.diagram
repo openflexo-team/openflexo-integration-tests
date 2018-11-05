@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram id="0" diagramSpecificationURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram/CityDiagram.diagramspecification" userID="FLX" uri="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram/CityDiagram.diagramspecification/ExampleDiagram.diagram" flexoID="1" name="ExampleDiagram.diagram">
+  <DrawingGraphicalRepresentation id="1" backgroundColor="255,255,255" dimensionConstraints="FREELY_RESIZABLE" rectangleSelectingSelectionColor="0,0,255" selectionColor="0,0,255" focusColor="255,0,0" drawWorkingArea="false" identifier="root">
+    <TextStyle id="2" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+  </DrawingGraphicalRepresentation>
+  <Shape id="3" flexoID="2" userID="FLX" name="">
+    <ShapeGraphicalRepresentation id="4" relativeTextX="0.5" height="326.9230769230769" width="443.16831683168317" relativeTextY="0.5" identifier="object_0" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="85.0" x="43.0">
+      <FocusedForegroundStyle id="5" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedColorBackgroundStyle id="6" color="254,247,217" transparencyLevel="0.5" />
+      <TextStyle id="7" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="8" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="9" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="10" color="254,247,217" transparencyLevel="0.5" />
+      <RectangleShape id="11" isRounded="true" />
+      <ShadowStyle id="12" drawShadow="false" />
+      <ColorBackgroundStyle id="13" color="254,247,217" transparencyLevel="0.5" />
+    </ShapeGraphicalRepresentation>
+    <Shape id="14" flexoID="6" userID="FLX" name="Ma Ville">
+      <ShapeGraphicalRepresentation id="15" relativeTextX="0.5" widthConstraints="parent.width" height="20.0" text="My city" width="443.16831683168317" relativeTextY="0.5" identifier="object_0_3" yConstraints="1" locationConstraints="UNMOVABLE" adaptBoundsToContents="false" dimensionConstraints="UNRESIZABLE" isFloatingLabel="false" layer="2" heightConstraints="20" xConstraints="1" y="1.0" x="1.0">
+        <FocusedForegroundStyle id="16" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedColorBackgroundStyle id="17" color="254,247,217" transparencyLevel="0.5" />
+        <TextStyle id="18" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans Demibold,1,14" />
+        <ForegroundStyle id="19" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="20" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="21" color="254,247,217" transparencyLevel="0.5" />
+        <RectangleShape id="22" />
+        <ShadowStyle id="23" drawShadow="false" />
+        <NoneBackgroundStyle id="24" transparencyLevel="0.5" />
+      </ShapeGraphicalRepresentation>
+    </Shape>
+    <Shape id="25" flexoID="8" userID="FLX" name="Mansion">
+      <ShapeGraphicalRepresentation id="26" relativeTextX="0.5" height="64.83516483516485" text="Mansion" width="69.9009900990099" relativeTextY="0.5" identifier="496652d5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" absoluteTextX="54.0" layer="2" absoluteTextY="11.0" y="133.0" x="78.0">
+        <FocusedForegroundStyle id="27" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedColorBackgroundStyle id="28" color="254,247,217" transparencyLevel="0.5" />
+        <TextStyle id="29" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+        <ForegroundStyle id="30" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="31" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="32" color="254,247,217" transparencyLevel="0.5" />
+        <RectangleShape id="33" />
+        <ShadowStyle id="34" drawShadow="false" />
+        <ImageBackgroundStyle id="35" scaleX="1.4562706270627064" scaleY="1.350732600732601" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../Mansion.png" imageBackgroundType="TRANSPARENT" />
+      </ShapeGraphicalRepresentation>
+    </Shape>
+    <Shape id="36" flexoID="9" userID="FLX" name="Appartment">
+      <ShapeGraphicalRepresentation id="37" relativeTextX="0.5" height="69.7802197802198" text="Appartment" width="70.8910891089109" relativeTextY="0.5" identifier="21039bc4" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" absoluteTextX="53.0" layer="2" absoluteTextY="16.0" y="129.0" x="264.0">
+        <FocusedForegroundStyle id="38" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedColorBackgroundStyle id="39" color="254,247,217" transparencyLevel="0.5" />
+        <TextStyle id="40" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+        <ForegroundStyle id="41" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <SelectedForegroundStyle id="42" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+        <FocusedColorBackgroundStyle id="43" color="254,247,217" transparencyLevel="0.5" />
+        <RectangleShape id="44" />
+        <ShadowStyle id="45" drawShadow="false" />
+        <ImageBackgroundStyle id="46" scaleX="1.0906321401370909" scaleY="1.0735418427726122" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../Apartment.png" imageBackgroundType="TRANSPARENT" />
+      </ShapeGraphicalRepresentation>
+    </Shape>
+  </Shape>
+  <Shape id="47" flexoID="7" userID="FLX" name="">
+    <ShapeGraphicalRepresentation id="48" relativeTextX="0.5" height="80.0" text="City" width="80.0" relativeTextY="0.5" identifier="1913a0cb" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="CONSTRAINED_DIMENSIONS" absoluteTextX="57.0" layer="2" absoluteTextY="11.0" y="83.0" x="24.0">
+      <FocusedForegroundStyle id="49" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedColorBackgroundStyle id="50" color="254,247,217" transparencyLevel="0.5" />
+      <TextStyle id="51" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="52" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="53" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="54" color="254,247,217" transparencyLevel="0.5" />
+      <CircleShape id="55" />
+      <ShadowStyle id="56" />
+      <ImageBackgroundStyle id="57" scaleX="0.625" scaleY="0.625" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../City.png" imageBackgroundType="OPAQUE" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+</Diagram>

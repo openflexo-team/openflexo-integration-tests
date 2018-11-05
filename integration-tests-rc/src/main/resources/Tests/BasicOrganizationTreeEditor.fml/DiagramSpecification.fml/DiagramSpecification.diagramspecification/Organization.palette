@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DiagramPalette id="1" index="0" name="Organization" userID="FLX">
+  <description userID="FLX">Edit organization cells</description>
+  <DiagramPaletteElement id="2" name="Company" flexoConcept="BOTCompany" userID="FLX">
+    <Parameter id="3" name="companyName" value="enter company name here" userID="FLX" />
+    <Parameter id="4" name="companyURI" value="&lt; Computed URI &gt;" userID="FLX" />
+    <ShapeGraphicalRepresentation id="5" x="10.0" y="4.0" width="224.79787851510477" height="90.9883344883345" isVisible="true" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" layer="1" isFloatingLabel="true" text="Company" isMultilineAllowed="false" isReadOnly="false" isSelectable="true" isFocusable="true" relativeTextX="0.5" relativeTextY="0.5" absoluteTextX="51.359133513039524" absoluteTextY="12.720426635001509" textAlignment="CENTER" userID="FLX">
+      <ForegroundStyle id="6" noStroke="false" color="102,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
+      <ColorGradientBackgroundStyle id="7" color1="255,255,102" color2="255,204,204" direction="SOUTH_EAST_NORTH_WEST" useTransparency="true" transparencyLevel="0.5" userID="FLX" />
+      <ShapeBorder id="8" top="5" bottom="5" left="5" right="5" userID="FLX" />
+      <ShadowStyle id="9" drawShadow="true" shadowDarkness="150" shadowDepth="2" shadowBlur="4" userID="FLX" />
+      <RectangleShape id="10" isRounded="true" arcSize="15.0" userID="FLX" />
+      <TextStyle id="11" font="SansSerif,0,11" color="102,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
+    </ShapeGraphicalRepresentation>
+  </DiagramPaletteElement>
+  <DiagramPaletteElement id="12" name="Sub-department" flexoConcept="BOTSubDepartment" userID="FLX">
+    <Parameter id="13" name="subDepartmentName" value="enter sub-department name here" userID="FLX" />
+    <Parameter id="14" name="subDepartmentURI" value="&lt; Computed URI &gt;" userID="FLX" />
+    <ShapeGraphicalRepresentation id="15" x="35.0" y="201.0" width="176.0" height="58.98550724637681" isVisible="true" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" layer="1" isFloatingLabel="true" text="Sub-department" isMultilineAllowed="false" isReadOnly="false" isSelectable="true" isFocusable="true" relativeTextX="0.5" relativeTextY="0.5" absoluteTextX="59.99999999999999" absoluteTextY="13.220889555222389" textAlignment="CENTER" userID="FLX">
+      <ForegroundStyle id="16" noStroke="false" color="102,0,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
+      <ColorGradientBackgroundStyle id="17" color1="255,153,153" color2="255,255,255" direction="SOUTH_EAST_NORTH_WEST" useTransparency="true" transparencyLevel="0.2" userID="FLX" />
+      <ShapeBorder id="18" top="5" bottom="5" left="5" right="5" userID="FLX" />
+      <ShadowStyle id="19" drawShadow="true" shadowDarkness="150" shadowDepth="2" shadowBlur="4" userID="FLX" />
+      <RectangleShape id="20" isRounded="true" arcSize="15.0" userID="FLX" />
+      <TextStyle id="21" font="SansSerif,0,11" color="102,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
+    </ShapeGraphicalRepresentation>
+  </DiagramPaletteElement>
+  <DiagramPaletteElement id="22" name="Department" flexoConcept="BOTDepartment" userID="FLX">
+    <Parameter id="23" name="departmentName" value="enter department name here" userID="FLX" />
+    <Parameter id="24" name="departmentURI" value="&lt; Computed URI &gt;" userID="FLX" />
+    <Parameter id="25" name="newShemaName" value="" userID="FLX" />
+    <ShapeGraphicalRepresentation id="26" x="35.0" y="123.0" width="176.0" height="58.0" isVisible="true" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" layer="1" isFloatingLabel="true" text="Department" isMultilineAllowed="false" isReadOnly="false" isSelectable="true" isFocusable="true" relativeTextX="0.5" relativeTextY="0.5" absoluteTextX="46.0" absoluteTextY="13.0" textAlignment="CENTER" userID="FLX">
+      <ForegroundStyle id="27" noStroke="false" color="0,102,102" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" userID="FLX" />
+      <ColorGradientBackgroundStyle id="28" color1="0,153,153" color2="255,255,255" direction="SOUTH_EAST_NORTH_WEST" useTransparency="true" transparencyLevel="0.2" userID="FLX" />
+      <ShapeBorder id="29" top="5" bottom="5" left="5" right="5" userID="FLX" />
+      <ShadowStyle id="30" drawShadow="true" shadowDarkness="150" shadowDepth="2" shadowBlur="4" userID="FLX" />
+      <RectangleShape id="31" isRounded="true" arcSize="15.0" userID="FLX" />
+      <TextStyle id="32" font="SansSerif,0,11" color="0,51,51" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
+    </ShapeGraphicalRepresentation>
+  </DiagramPaletteElement>
+  <DrawingGraphicalRepresentation id="33" width="260.0" height="300.0" drawWorkingArea="true" selectionColor="0,0,255" focusColor="255,0,0" backgroundColor="255,255,255" isMultilineAllowed="false" isReadOnly="false" isSelectable="true" isFocusable="true" relativeTextX="0.5" relativeTextY="0.5" absoluteTextX="0.0" absoluteTextY="0.0" textAlignment="CENTER" userID="FLX">
+    <TextStyle id="34" font="SansSerif,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
+  </DrawingGraphicalRepresentation>
+</DiagramPalette>

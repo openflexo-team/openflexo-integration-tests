@@ -1,0 +1,192 @@
+use org.openflexo.technologyadapter.emf.EMFModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml")
+public class Mapping {
+
+  ModelSlot model1 type=EMFModelSlot$EMFModelSlotImpl_$$_jvste0e_86 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city1" required=true readOnly=false;
+  ModelSlot model2 type=EMFModelSlot$EMFModelSlotImpl_$$_jvste0e_86 conformTo="http://www.thalesgroup.com/openflexo/emf/model/city2" required=true readOnly=false;
+
+  @SynchronizationScheme  
+  Void synchronization() {  
+    for (city1 : SelectEMFObjectIndividual from model1 as City) {    
+      List<IndividualOfClass(City)> matchingCitiesInModel2 = SelectEMFObjectIndividual from model2 as City where=(selected.name.toUpperCase = city1.name.toUpperCase);      
+      if (matchingCitiesInModel2.size = 0) {      
+        FML@RT::MatchFlexoConceptInstance as City match=(cityInModel1=city1,cityInModel2=null) using City:createFromEMF(city1,null)      
+      }      
+      if (matchingCitiesInModel2.size = 1) {      
+        FML@RT::MatchFlexoConceptInstance as City match=(cityInModel1=city1,cityInModel2=matchingCitiesInModel2.get(0)) using City:createFromEMF(city1,matchingCitiesInModel2.get(0))      
+      }      
+      List<FlexoConceptInstanceType<City>> tempList = this.SelectFlexoConceptInstance(type=City,where=where=(selected.cityInModel1 = city1));      
+      FlexoConceptInstanceType<City> currentCity = tempList.get(0);      
+      for (house1 : city1.houses) {      
+        if (house1.type.name = "Appartment") {        
+          List<IndividualOfClass(Appartment)> matchingAppartmentsInModel2 = SelectEMFObjectIndividual from model2 as Appartment where=(selected.label = house1.info);          
+          if (matchingAppartmentsInModel2.size = 0) {          
+            FML@RT::MatchFlexoConceptInstance as Appartment match=(houseInModel1=house1,appartmentInModel2=null,city=currentCity) using Appartment:creation(house1,null,currentCity)          
+          }          
+          if (matchingAppartmentsInModel2.size = 1) {          
+            FML@RT::MatchFlexoConceptInstance as Appartment match=(houseInModel1=house1,appartmentInModel2=matchingAppartmentsInModel2.get(0),city=currentCity) using Appartment:creation(house1,matchingAppartmentsInModel2.get(0),currentCity)          
+          }        
+        }        
+        if (house1.type.name = "Mansion") {        
+          List<IndividualOfClass(Mansion)> matchingMansionsInModel2 = SelectEMFObjectIndividual from model2 as Mansion where=(selected.number.toString = house1.info);          
+          if (matchingMansionsInModel2.size = 0) {          
+            FML@RT::MatchFlexoConceptInstance as Mansion match=(houseInModel1=house1,mansionInModel2=null,city=currentCity) using Mansion:creation(house1,null,currentCity)          
+          }          
+          if (matchingMansionsInModel2.size = 1) {          
+            FML@RT::MatchFlexoConceptInstance as Mansion match=(houseInModel1=house1,mansionInModel2=matchingMansionsInModel2.get(0),city=currentCity) using Mansion:creation(house1,matchingMansionsInModel2.get(0),currentCity)          
+          }        
+        }      
+      }    
+    }    
+    for (residentInModel1 : SelectEMFObjectIndividual from model1 as Resident) {    
+      List<IndividualOfClass(House)> matchingHousesWithSameResident = SelectEMFObjectIndividual from model2 as House where=(selected.owner.toUpperCase = residentInModel1.name.toUpperCase);      
+      if (matchingHousesWithSameResident.size = 0) {      
+        FML@RT::MatchFlexoConceptInstance as Resident match=(residentInModel1=residentInModel1,houseInModel2=null) using Resident:creation(residentInModel1,null)      
+      }      
+      if (matchingHousesWithSameResident.size >= 1) {      
+        FML@RT::MatchFlexoConceptInstance as Resident match=(residentInModel1=residentInModel1,houseInModel2=matchingHousesWithSameResident.get(0)) using Resident:creation(residentInModel1,matchingHousesWithSameResident.get(0))      
+      }    
+    }    
+    for (city2 : SelectEMFObjectIndividual from model2 as City) {    
+      List<IndividualOfClass(City)> matchingCitiesInModel1 = SelectEMFObjectIndividual from model1 as City where=(selected.name = city2.name);      
+      if (matchingCitiesInModel1.size = 0) {      
+        FML@RT::MatchFlexoConceptInstance as City match=(cityInModel1=null,cityInModel2=city2) using City:createFromEMF(null,city2)      
+      }    
+    }  
+  }  
+
+  @ActionScheme  
+  Void synchronizeModel2FromModel1() {  
+    List<FlexoConceptInstanceType<City>> nonExistantCitiesInModel2 = this.SelectFlexoConceptInstance(type=City,where=where=(selected.cityInModel2 = null));    
+    for (nonExistantCity : nonExistantCitiesInModel2) {    
+      nonExistantCity.generateModel2FromModel1()    
+    }  
+  }  
+
+  @ActionScheme  
+  Void synchronizeModel1FromModel2() {  
+    List<FlexoConceptInstanceType<City>> nonExistingCitiesInModel1 = this.SelectFlexoConceptInstance(type=City,where=where=(selected.cityInModel1 = null));    
+    for (nonExistingCity : nonExistingCitiesInModel1) {    
+      nonExistingCity.generateModel1FromModel2()    
+    }  
+  }  
+
+  @CreationScheme  
+  Mapping:create(EMFModelResource city1, EMFModelResource city2) {  
+    model1 = parameters.city1.getResourceData(null);    
+    model2 = parameters.city2.getResourceData(null);  
+  }  
+
+
+  @FlexoConcept  
+  public class City {  
+  
+    FlexoRole cityInModel1 as Individual conformTo City from model1 ;  
+    FlexoRole cityInModel2 as Individual conformTo City from model2 ;  
+  
+    @CreationScheme    
+    City:createFromEMF(IFlexoOntologyIndividual cityInModel1, IFlexoOntologyIndividual cityInModel2) {    
+      cityInModel1 = parameters.cityInModel1;      
+      cityInModel2 = parameters.cityInModel2;    
+    }    
+  
+    @ActionScheme    
+    Void generateModel2FromModel1() {    
+      cityInModel2 = model2.AddEMFObjectIndividual();    
+    }    
+  
+    @ActionScheme    
+    Void generateModel1FromModel2() {    
+      cityInModel1 = model1.AddEMFObjectIndividual();    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete cityInModel1      
+      delete cityInModel2    
+    }    
+  
+    @CreationScheme    
+    City:createANewOne(String cityName) {    
+      cityInModel1 = model1.AddEMFObjectIndividual();      
+      cityInModel2 = model2.AddEMFObjectIndividual();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class House {  
+  }  
+
+  @FlexoConcept  
+  public class Appartment extends House  {  
+  
+    FlexoRole houseInModel1 as Individual conformTo House from model1 ;  
+    FlexoRole appartmentInModel2 as Individual conformTo Appartment from model2 ;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<City> city;  
+  
+    @CreationScheme    
+    Appartment:creation(IFlexoOntologyIndividual houseInModel1, IFlexoOntologyIndividual appartmentInModel2, FlexoConceptInstanceType<NotFound:null> cityParameter) {    
+      houseInModel1 = parameters.houseInModel1;      
+      appartmentInModel2 = parameters.appartmentInModel2;      
+      city = parameters.cityParameter;    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete houseInModel1      
+      delete appartmentInModel2    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Mansion extends House  {  
+  
+    FlexoRole houseInModel1 as Individual conformTo House from model1 ;  
+    FlexoRole mansionInModel2 as Individual conformTo Mansion from model2 ;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<City> city;  
+  
+    @CreationScheme    
+    Mansion:creation(IFlexoOntologyIndividual houseInModel1, IFlexoOntologyIndividual mansionInModel2, FlexoConceptInstanceType<NotFound:null> cityParameter) {    
+      houseInModel1 = parameters.houseInModel1;      
+      mansionInModel2 = parameters.mansionInModel2;      
+      city = parameters.cityParameter;    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete houseInModel1      
+      delete mansionInModel2    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Resident {  
+  
+    FlexoRole residentInModel1 as Individual conformTo Resident from model1 ;  
+    FlexoRole houseInModel2 as Individual conformTo House from model2 ;  
+  
+    @CreationScheme    
+    Resident:creation(IFlexoOntologyIndividual residentInModel1, IFlexoOntologyIndividual houseInModel2) {    
+      residentInModel1 = parameters.residentInModel1;      
+      houseInModel2 = parameters.houseInModel2;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Mayor {  
+  
+    FlexoRole mayor as Individual conformTo Mayor from model1 ;  
+  }  
+
+}

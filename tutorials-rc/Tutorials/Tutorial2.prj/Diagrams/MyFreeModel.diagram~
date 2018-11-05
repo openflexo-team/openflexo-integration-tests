@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram id="0" diagramSpecificationURI="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/DiagramSpecification/MyFreeModel" userID="FLX" uri="http://www.openflexo.org/projects/2016/11/Tutorial2_1479207539365/MyFreeModel.diagram" flexoID="1" name="MyFreeModel.diagram">
+  <DrawingGraphicalRepresentation id="1" backgroundColor="255,255,255" dimensionConstraints="FREELY_RESIZABLE" rectangleSelectingSelectionColor="0,0,255" selectionColor="0,0,255" focusColor="255,0,0" drawWorkingArea="false" identifier="7c2b13ad">
+    <TextStyle id="2" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+  </DrawingGraphicalRepresentation>
+  <Shape id="3" flexoID="2" userID="FLX">
+    <ShapeGraphicalRepresentation id="4" relativeTextX="0.5" height="45.0" width="60.0" allowToLeaveBounds="false" relativeTextY="0.5" identifier="1db50b7f" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" layer="1" absoluteTextX="32.0" absoluteTextY="-5.0" y="127.0" x="56.0">
+      <FocusedForegroundStyle id="5" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedImageBackgroundStyle id="6" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <TextStyle id="7" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="8" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="9" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="10" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <RectangleShape id="11" />
+      <ShadowStyle id="12" drawShadow="false" />
+      <ImageBackgroundStyle id="13" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../Images/Actor.gif" imageBackgroundType="TRANSPARENT" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="14" flexoID="3" userID="FLX">
+    <ShapeGraphicalRepresentation id="15" relativeTextX="0.5" height="45.0" width="99.830220713073" allowToLeaveBounds="false" relativeTextY="0.5" identifier="71fbb9dc" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="35.0" x="241.0">
+      <FocusedForegroundStyle id="16" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedColorBackgroundStyle id="17" color="254,247,217" transparencyLevel="0.5" />
+      <TextStyle id="18" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="19" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="20" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="21" color="254,247,217" transparencyLevel="0.5" />
+      <OvalShape id="22" />
+      <ShadowStyle id="23" />
+      <ColorBackgroundStyle id="24" color="254,247,217" transparencyLevel="0.5" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="25" flexoID="4" userID="FLX">
+    <ShapeGraphicalRepresentation id="26" relativeTextX="0.5" height="45.0" width="112.10526315789474" allowToLeaveBounds="false" relativeTextY="0.5" identifier="6fd1826a" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="136.0" x="241.0">
+      <FocusedForegroundStyle id="27" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedColorBackgroundStyle id="28" color="254,247,217" transparencyLevel="0.5" />
+      <TextStyle id="29" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="30" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="31" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="32" color="254,247,217" transparencyLevel="0.5" />
+      <OvalShape id="33" />
+      <ShadowStyle id="34" />
+      <ColorBackgroundStyle id="35" color="254,247,217" transparencyLevel="0.5" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="36" flexoID="5" userID="FLX">
+    <ShapeGraphicalRepresentation id="37" relativeTextX="0.5" height="45.0" width="105.78947368421052" allowToLeaveBounds="false" relativeTextY="0.5" identifier="20dc68d6" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" isFloatingLabel="false" layer="1" y="255.0" x="246.0">
+      <FocusedForegroundStyle id="38" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedColorBackgroundStyle id="39" color="254,247,217" transparencyLevel="0.5" />
+      <TextStyle id="40" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="41" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="42" dashStyle="PLAIN_STROKE" color="0,0,0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="43" color="254,247,217" transparencyLevel="0.5" />
+      <OvalShape id="44" />
+      <ShadowStyle id="45" />
+      <ColorBackgroundStyle id="46" color="254,247,217" transparencyLevel="0.5" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="47" flexoID="6" userID="FLX">
+    <ShapeGraphicalRepresentation id="48" relativeTextX="0.5" height="45.0" width="60.0" allowToLeaveBounds="false" relativeTextY="0.5" identifier="21467fa1" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" dimensionConstraints="FREELY_RESIZABLE" layer="1" absoluteTextX="32.0" absoluteTextY="-5.0" y="137.0" x="496.0">
+      <FocusedForegroundStyle id="49" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedImageBackgroundStyle id="50" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <TextStyle id="51" color="0,0,0" backgroundColor="255,255,255" font="Lucida Sans,0,11" />
+      <ForegroundStyle id="52" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="53" dashStyle="PLAIN_STROKE" color="0,0,0" noStroke="true" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="54" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../../../../../../../../openflexo-modules/freemodellingeditor/target/classes/Icons/Diagram.png" imageBackgroundType="TRANSPARENT" />
+      <RectangleShape id="55" />
+      <ShadowStyle id="56" drawShadow="false" />
+      <ImageBackgroundStyle id="57" imageBackgroundColor="255,255,255" transparencyLevel="0.5" fitToShape="true" imageFile="../Images/Actor.gif" imageBackgroundType="TRANSPARENT" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+</Diagram>

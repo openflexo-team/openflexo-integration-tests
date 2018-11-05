@@ -1,0 +1,54 @@
+use org.openflexo.technologyadapter.owl.OWLModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml")
+public class DiagramSpecification {
+
+  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_96 conformTo="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl" required=false readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+
+  @FlexoConcept  
+  public class Package {  
+  
+    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
+    FlexoRole package as Individual conformTo Package from owl ;  
+  
+    @DropScheme    
+    Package:drop(String name, String uri) {    
+      package = owl.AddOWLIndividual();      
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = package.name;      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ImportPackage {  
+  
+    FlexoRole package as Individual conformTo Package from owl ;  
+    FlexoRole importedPackage as Individual conformTo Package from owl ;  
+    FlexoRole packageImport as Individual conformTo PackageImport from owl ;  
+    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
+    public Statement:packageImport import;  
+    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
+  
+    @LinkScheme    
+    ImportPackage:ImportPackage(String uri) {    
+      package = fromTarget;      
+      importedPackage = toTarget;      
+      packageImport = owl.AddOWLIndividual();      
+      import = package.packageImport = packageImport;;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_91 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+        label = "import";      
+      };    
+    }    
+  
+  }  
+
+}

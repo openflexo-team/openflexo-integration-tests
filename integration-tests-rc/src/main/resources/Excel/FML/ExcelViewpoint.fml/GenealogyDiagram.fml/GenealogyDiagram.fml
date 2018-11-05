@@ -1,0 +1,322 @@
+use org.openflexo.technologyadapter.excel.BasicExcelModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://ExcelViewpoint/GenealogyDiagram.fml")
+public class GenealogyDiagram {
+
+  @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)  
+  public FlexoConceptInstanceType<Genealogic> Gen;
+  @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)  
+  public FlexoConceptInstanceType<Human> sourceEPtemp;
+  @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)  
+  public FlexoConceptInstanceType<Human> targetEPtemp;
+  @BasicExcelModelSlot(cardinality=ZeroOne,readOnly=false)  
+  public ExcelWorkbook listingMS;
+  @BasicExcelModelSlot(cardinality=ZeroOne,readOnly=false)  
+  public ExcelWorkbook genealogyMS;
+  @TypedDiagramModelSlot(metamodel="http://ExcelViewpoint/GenealogyDiagram/GenealogyDiagram.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  public DiagramType<GenealogyDiagram> typedDiagramModelSlot;
+
+  @SynchronizationScheme  
+  Void synchronization() {  
+    Gen = FML@RT::MatchFlexoConceptInstance as Genealogic match=(genSheet=flexoBehaviourInstance.genealogyMS.excelSheets.get(0),listSheet=flexoBehaviourInstance.listingMS.excelSheets.get(0)) using Genealogic:creation(flexoBehaviourInstance.listingMS.excelSheets.get(0),flexoBehaviourInstance.genealogyMS.excelSheets.get(0));    
+    for (listRow : listingMS.XLS::SelectExcelRow where=(selected.row.physicalNumberOfCells > 2)) {    
+      for (genRow : genealogyMS.XLS::SelectExcelRow where=(selected.row.physicalNumberOfCells > 2)) {      
+        for (listCell : listRow.excelCells) {        
+          for (genCell : genRow.excelCells) {          
+            if (((listCell.cellValue.toString = genCell.cellValue.toString) & (listCell.columnIndex = 1)) & (genCell.columnIndex = 0)) {            
+              if (listCell.previousCell.cellValue = "MR") {              
+                FML@RT::MatchFlexoConceptInstance as Man match=(nameInGen=genCell,age=listCell.nextCell.nextCell,nameInListing=listCell) using Man:creation(genCell,listCell,listCell.nextCell.nextCell)              
+              }              
+              if (listCell.previousCell.cellValue = "MS") {              
+                FML@RT::MatchFlexoConceptInstance as Woman match=(nameInListing=listCell,nameInGen=genCell,age=listCell.nextCell.nextCell) using Woman:creation(genCell,listCell,listCell.nextCell.nextCell)              
+              }            
+            }          
+          }        
+        }      
+      }    
+    }    
+    List<FlexoConceptInstanceType<Human>> existingHuman = this.SelectFlexoConceptInstance(type=Human);    
+    List<ExcelRow> genRows = genealogyMS.XLS::SelectExcelRow();    
+    ExcelRow firstRow = genRows.get(0);    
+    for (row : genRows) {    
+      for (cell : row.excelCells) {      
+        if (cell.columnIndex > 0) {        
+          for (humans : existingHuman) {          
+            if (humans.nameInGen.cellValue = row.getCellAt(0).cellValue) {            
+              sourceEPtemp = humans;            
+            }            
+            if (humans.nameInGen.cellValue = firstRow.getCellAt(cell.columnIndex).cellValue) {            
+              targetEPtemp = humans;            
+            }          
+          }          
+          if ((cell.cellValue = "Brother") | (cell.cellValue = "Sister")) {          
+            FML@RT::MatchFlexoConceptInstance as BrotherRelationship match=(cell=cell,source=sourceEPtemp,target=targetEPtemp) using BrotherRelationship:creation(sourceEPtemp,targetEPtemp,cell)          
+          }          
+          if ((cell.cellValue = "Wife") | (cell.cellValue = "Husband")) {          
+            FML@RT::MatchFlexoConceptInstance as MarriageRelationship match=(cell=cell,source=sourceEPtemp,target=targetEPtemp) using MarriageRelationship:creation(sourceEPtemp,targetEPtemp,cell)          
+          }          
+          if ((cell.cellValue = "Father") | (cell.cellValue = "Mother")) {          
+            FML@RT::MatchFlexoConceptInstance as ParentRelationship match=(cell=cell,source=sourceEPtemp,target=targetEPtemp) using ParentRelationship:creation(sourceEPtemp,targetEPtemp,cell)          
+          }        
+        }      
+      }    
+    }  
+  }  
+
+
+  @FlexoConcept  
+  public class Human {  
+  
+    FlexoRole shape as ShapeSpecification from GenealogyDiagram;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell nameInGen;  
+  }  
+
+  @FlexoConcept  
+  public class Man extends Human  {  
+  
+    FlexoRole shape as ShapeSpecification from GenealogyDiagram;  
+    FlexoRole shape2 as ShapeSpecification from GenealogyDiagram;  
+    FlexoRole shape3 as ShapeSpecification from GenealogyDiagram;  
+    FlexoRole shape4 as ShapeSpecification from GenealogyDiagram;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell nameInGen;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell age;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell nameInListing;  
+  
+    @DropScheme    
+    Man:dropManAtTopLevel(Integer rowIndex, String name, Integer age, FlexoConceptInstanceType<NotFound:null> sheet) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape2 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape3 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = age.cellValueAsString;      
+      };      
+      shape4 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = nameInGen.cellValueAsString;      
+      };      
+      nameInListing = listingMS.AddExcelCell();      
+      nameInGen = genealogyMS.AddExcelCell();      
+      age = listingMS.AddExcelCell();    
+    }    
+  
+    @CreationScheme    
+    Man:creation(Object nameInGen, Object nameInListing, Object age) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape2 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape3 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = age.cellValueAsString;      
+      };      
+      shape4 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = nameInGen.cellValueAsString;      
+      };      
+      nameInGen = parameters.nameInGen;      
+      nameInListing = parameters.nameInListing;      
+      age = parameters.age;    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete shape2      
+      delete shape3      
+      delete shape4      
+      delete shape    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Woman extends Human  {  
+  
+    FlexoRole shape as ShapeSpecification from GenealogyDiagram;  
+    FlexoRole shape2 as ShapeSpecification from GenealogyDiagram;  
+    FlexoRole shape3 as ShapeSpecification from GenealogyDiagram;  
+    FlexoRole shape4 as ShapeSpecification from GenealogyDiagram;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell nameInListing;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell nameInGen;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell age;  
+  
+    @DropScheme    
+    Woman:dropWomamAtTopLevel(String name, Integer rowInde, Integer age) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape2 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape3 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = age.cellValueAsString;      
+      };      
+      shape4 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = nameInGen.cellValueAsString;      
+      };      
+      nameInListing = listingMS.AddExcelCell();      
+      nameInGen = genealogyMS.AddExcelCell();      
+      age = listingMS.AddExcelCell();    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete shape2      
+      delete shape3      
+      delete shape4      
+      delete shape    
+    }    
+  
+    @CreationScheme    
+    Woman:creation(Object nameInGen, Object nameInList, Object age) {    
+      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape2 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+      };      
+      shape3 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = age.cellValueAsString;      
+      };      
+      shape4 = typedDiagramModelSlot.DIAGRAM::AddShape {      
+        label = nameInGen.cellValueAsString;      
+      };      
+      nameInListing = parameters.nameInList;      
+      nameInGen = parameters.nameInGen;      
+      age = parameters.age;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class BrotherRelationship {  
+  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell cell;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<Human> source;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<Human> target;  
+    FlexoRole connector as ConnectorSpecification from GenealogyDiagram;  
+  
+    @LinkScheme    
+    BrotherRelationship:linkManToMan() {    
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_c7 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };      
+      source = toTarget;      
+      target = fromTarget;      
+      cell = genealogyMS.AddExcelCell();    
+    }    
+  
+    @CreationScheme    
+    BrotherRelationship:creation(FlexoConceptInstanceType<NotFound:null> source, FlexoConceptInstanceType<NotFound:null> target, Object cell) {    
+      source = parameters.source;      
+      target = parameters.target;      
+      cell = parameters;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_c7 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete connector    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class MarriageRelationship {  
+  
+    FlexoRole connector as ConnectorSpecification from GenealogyDiagram;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell cell;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<Human> source;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<Human> target;  
+  
+    @LinkScheme    
+    MarriageRelationship:linkManToWoman() {    
+      source = fromTarget;      
+      target = toTarget;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_c7 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };      
+      cell = genealogyMS.AddExcelCell();    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete connector    
+    }    
+  
+    @CreationScheme    
+    MarriageRelationship:creation(FlexoConceptInstanceType<NotFound:null> source, FlexoConceptInstanceType<NotFound:null> target, Object cell) {    
+      source = parameters.source;      
+      target = parameters.target;      
+      cell = parameters.cell;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_c7 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ParentRelationship {  
+  
+    FlexoRole connector as ConnectorSpecification from GenealogyDiagram;  
+    @ExcelCellRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelCell cell;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<Human> source;  
+    @FlexoConceptInstanceRole(cardinality=ZeroOne,readOnly=false)    
+    public FlexoConceptInstanceType<Human> target;  
+  
+    @LinkScheme    
+    ParentRelationship:linkManToMan() {    
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_c7 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };    
+    }    
+  
+    @DeletionScheme    
+    Void deletion() {    
+      delete connector    
+    }    
+  
+    @CreationScheme    
+    ParentRelationship:creation(FlexoConceptInstanceType<NotFound:null> source, FlexoConceptInstanceType<NotFound:null> target, Object cell) {    
+      source = parameters.source;      
+      target = parameters.target;      
+      cell = parameters.cell;      
+      connector = AddConnector$AddConnectorImpl_$$_jvste0e_c7 conformTo ConnectorSpecification from typedDiagramModelSlot {      
+      };    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Genealogic {  
+  
+    @ExcelSheetRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelSheet genSheet;  
+    @ExcelSheetRole(cardinality=ZeroOne,readOnly=false)    
+    public ExcelSheet listSheet;  
+  
+    @CreationScheme    
+    Genealogic:creation(Object list, Object gen) {    
+      genSheet = parameters.gen;      
+      listSheet = parameters.list;    
+    }    
+  
+    @DeletionScheme    
+    void deletion() {    
+      
+    }    
+  
+  }  
+
+}
