@@ -380,7 +380,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 		}
 
 		System.out.println("Now remove a Person");
-		DeletionScheme deletionScheme = seVMI.getVirtualModel().getDeletionSchemes().get(0);
+		DeletionScheme deletionScheme = ninaDupont.getFlexoConcept().getDeletionSchemes().get(0);
 		DeletionSchemeAction deletePerson = new DeletionSchemeAction(deletionScheme, ninaDupont, null, editor);
 		deletePerson.doAction();
 
