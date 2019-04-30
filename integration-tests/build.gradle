@@ -5,7 +5,7 @@ dependencies {
     testCompile flexoUiTest()
     testCompile flexoFoundationTest()
     testCompile owlConnector()
-    testCompile flexoDiagram()
+    testCompile diagramConnector()
     testCompile emfConnector()
     testCompile excelConnector()
     testCompile xmlConnector()
