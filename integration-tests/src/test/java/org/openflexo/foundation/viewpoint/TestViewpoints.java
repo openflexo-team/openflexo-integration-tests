@@ -47,7 +47,7 @@ import java.util.logging.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
@@ -74,12 +74,12 @@ public class TestViewpoints extends OpenflexoTestCase {
 
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		VirtualModelResource vpRes = (VirtualModelResource) serviceManager.getResourceManager().getResource(viewPointURI);
+		CompilationUnitResource vpRes = (CompilationUnitResource) serviceManager.getResourceManager().getResource(viewPointURI);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getVirtualModel();
+		VirtualModel vp = vpRes.getCompilationUnit();
 		assertTrue(vpRes.isLoaded());
 
 		return vp;
@@ -93,7 +93,7 @@ public class TestViewpoints extends OpenflexoTestCase {
 		VirtualModel basicOntologyEditor = testLoadViewPoint(
 				"http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 		assertNotNull(basicOntologyEditor);
-		System.out.println("Read resource " + ((VirtualModelResource) basicOntologyEditor.getResource()).getIODelegate().toString());
+		System.out.println("Read resource " + ((CompilationUnitResource) basicOntologyEditor.getResource()).getIODelegate().toString());
 
 		assertVirtualModelIsValid(basicOntologyEditor);
 

@@ -47,7 +47,7 @@ import java.util.logging.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.foundation.resource.FlexoResource;
 import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.test.OrderedRunner;
@@ -76,21 +76,21 @@ public class TestLoadViewPoints extends OpenflexoTestCase {
 
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		VirtualModelResource vpRes = (VirtualModelResource) serviceManager.getResourceManager().getResource(viewPointURI);
+		CompilationUnitResource vpRes = (CompilationUnitResource) serviceManager.getResourceManager().getResource(viewPointURI);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getVirtualModel();
+		VirtualModel vp = vpRes.getCompilationUnit();
 		assertNotNull(vp);
 		assertTrue(vpRes.isLoaded());
 
 		System.out.println("Found " + vp);
 
 		for (FlexoResource<?> r : vpRes.getContents()) {
-			assertTrue(r instanceof VirtualModelResource);
-			VirtualModelResource vmRes = (VirtualModelResource) r;
-			VirtualModel vm = vmRes.getVirtualModel();
+			assertTrue(r instanceof CompilationUnitResource);
+			CompilationUnitResource vmRes = (CompilationUnitResource) r;
+			VirtualModel vm = vmRes.getCompilationUnit();
 			assertNotNull(vm);
 			assertTrue(vmRes.isLoaded());
 

@@ -63,7 +63,7 @@ import org.openflexo.foundation.fml.editionaction.AssignationAction;
 import org.openflexo.foundation.fml.editionaction.DeclarationAction;
 import org.openflexo.foundation.fml.editionaction.ExpressionAction;
 import org.openflexo.foundation.fml.editionaction.FetchRequestCondition;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.editionaction.MatchFlexoConceptInstance;
 import org.openflexo.foundation.fml.rt.editionaction.MatchingCriteria;
@@ -112,12 +112,12 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		String viewPointURI = "http://www.thalesgroup.com/openflexo/emf/CityMapping";
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		VirtualModelResource vpRes = (VirtualModelResource) serviceManager.getResourceManager().getResource(viewPointURI);
+		CompilationUnitResource vpRes = (CompilationUnitResource) serviceManager.getResourceManager().getResource(viewPointURI);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getVirtualModel();
+		VirtualModel vp = vpRes.getCompilationUnit();
 		assertTrue(vpRes.isLoaded());
 		cityMappingVP = vp;
 

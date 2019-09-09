@@ -53,7 +53,7 @@ import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.action.AddRepositoryFolder;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.VirtualModel;
-import org.openflexo.foundation.fml.rm.VirtualModelResource;
+import org.openflexo.foundation.fml.rm.CompilationUnitResource;
 import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import org.openflexo.foundation.fml.rt.action.CreateBasicVirtualModelInstance;
@@ -105,12 +105,12 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 
 		log("Testing ViewPoint loading: " + viewPointURI);
 
-		VirtualModelResource vpRes = (VirtualModelResource) serviceManager.getResourceManager().getResource(viewPointURI);
+		CompilationUnitResource vpRes = (CompilationUnitResource) serviceManager.getResourceManager().getResource(viewPointURI);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getVirtualModel();
+		VirtualModel vp = vpRes.getCompilationUnit();
 		assertTrue(vpRes.isLoaded());
 
 		return vp;
@@ -122,7 +122,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 	public void test2LoadBasicOntologyEditorViewPoint() {
 		basicOntologyEditor = loadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 		assertNotNull(basicOntologyEditor);
-		System.out.println("Found view point in " + ((VirtualModelResource) basicOntologyEditor.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + ((CompilationUnitResource) basicOntologyEditor.getResource()).getIODelegate().toString());
 	}
 
 	@Test
