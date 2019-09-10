@@ -47,6 +47,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoException;
@@ -66,6 +67,7 @@ import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.technologyadapter.emf.rm.EMFModelResource;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 
 /**
  * Test instanciation of CityViews View to test EMF and Diagram, in File-System context
@@ -88,6 +90,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	 */
 	@Test
 	@TestOrder(1)
+	@Category(UITest.class)
 	public void testInstantiateResourceCenter() {
 
 		log("test0InstantiateResourceCenter()");
@@ -100,6 +103,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	 */
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testCreateProject() {
 
 		log("testLoadViewPoint()");
@@ -116,6 +120,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	 */
 	@Test
 	@TestOrder(3)
+	@Category(UITest.class)
 	public void testLoadViewPoint() {
 
 		log("testLoadViewPoint()");
@@ -145,6 +150,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	 */
 	@Test
 	@TestOrder(4)
+	@Category(UITest.class)
 	public void testEMFCityViewsViewCreation() {
 
 		log("testEMFCityViewsViewCreation()");
@@ -198,6 +204,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	@SuppressWarnings("rawtypes")
 	@Test
 	@TestOrder(5)
+	@Category(UITest.class)
 	public void testCreateVirtualModelInstance() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
 
 		log("test3CreateVirtualModelInstance()");
