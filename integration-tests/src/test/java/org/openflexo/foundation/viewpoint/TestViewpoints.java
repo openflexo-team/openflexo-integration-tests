@@ -79,7 +79,7 @@ public class TestViewpoints extends OpenflexoTestCase {
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getCompilationUnit();
+		VirtualModel vp = vpRes.getCompilationUnit().getVirtualModel();
 		assertTrue(vpRes.isLoaded());
 
 		return vp;
@@ -90,10 +90,9 @@ public class TestViewpoints extends OpenflexoTestCase {
 	@TestOrder(2)
 	public void test1BasicOntologyEditor() {
 		log("test1BasicOntologyEditor()");
-		VirtualModel basicOntologyEditor = testLoadViewPoint(
-				"http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
+		VirtualModel basicOntologyEditor = testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 		assertNotNull(basicOntologyEditor);
-		System.out.println("Read resource " + ((CompilationUnitResource) basicOntologyEditor.getResource()).getIODelegate().toString());
+		System.out.println("Read resource " + basicOntologyEditor.getResource().getIODelegate().toString());
 
 		assertVirtualModelIsValid(basicOntologyEditor);
 
@@ -119,8 +118,7 @@ public class TestViewpoints extends OpenflexoTestCase {
 	@TestOrder(5)
 	public void test4OrganizationalMap() {
 		log("test4OrganizationalMap()");
-		assertVirtualModelIsValid(
-				testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl"));
+		assertVirtualModelIsValid(testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl"));
 	}
 
 	@Test

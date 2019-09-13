@@ -107,7 +107,7 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getCompilationUnit();
+		VirtualModel vp = vpRes.getCompilationUnit().getVirtualModel();
 		assertTrue(vpRes.isLoaded());
 		cityMappingVP = vp;
 
@@ -117,7 +117,7 @@ public class TestCityMappingViewBigModels extends OpenflexoProjectAtRunTimeTestC
 	@TestOrder(4)
 	public void test2LoadCityMappingViewPoint() {
 		assertNotNull(cityMappingVP);
-		System.out.println("Found view point in " + ((CompilationUnitResource) cityMappingVP.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + cityMappingVP.getResource().getIODelegate().toString());
 
 		VirtualModel cityMappingVM = cityMappingVP.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMappingVM);

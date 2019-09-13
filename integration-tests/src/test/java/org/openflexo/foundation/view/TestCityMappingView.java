@@ -51,6 +51,7 @@ import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.action.AddRepositoryFolder;
+import org.openflexo.foundation.fml.FMLCompilationUnit;
 import org.openflexo.foundation.fml.FMLTechnologyAdapter;
 import org.openflexo.foundation.fml.FlexoConcept;
 import org.openflexo.foundation.fml.SynchronizationScheme;
@@ -110,12 +111,12 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		log("Testing ViewPoint loading: " + viewPointURI);
 
 		CompilationUnitResource vpRes = (CompilationUnitResource) serviceManager.getResourceManager().getResource(viewPointURI,
-				VirtualModel.class);
+				FMLCompilationUnit.class);
 
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getCompilationUnit();
+		VirtualModel vp = vpRes.getCompilationUnit().getVirtualModel();
 		assertTrue(vpRes.isLoaded());
 		cityMappingVP = vp;
 
@@ -125,7 +126,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 	@TestOrder(4)
 	public void test2LoadCityMappingViewPoint() {
 		assertNotNull(cityMappingVP);
-		System.out.println("Found view point in " + ((CompilationUnitResource) cityMappingVP.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + cityMappingVP.getResource().getIODelegate().toString());
 
 		VirtualModel cityMappingVM = cityMappingVP.getVirtualModelNamed("Mapping");
 		assertNotNull(cityMappingVM);

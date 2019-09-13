@@ -104,7 +104,7 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		// Load CityMapping ViewPoint
 		VirtualModel cityMappingViewPoint = loadViewPoint("http://www.thalesgroup.com/openflexo/emf/CityMapping");
 		assertNotNull(cityMappingViewPoint);
-		System.out.println("Found view point in " + ((CompilationUnitResource) cityMappingViewPoint.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + cityMappingViewPoint.getResource().getIODelegate().toString());
 
 		// Create View Folder
 		AddRepositoryFolder addRepositoryFolder = AddRepositoryFolder.actionType
@@ -251,7 +251,7 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		CompilationUnitResource viewPointResource = (CompilationUnitResource) serviceManager.getResourceManager().getResource(viewPointURI);
 		assertNotNull(viewPointResource);
 		assertFalse(viewPointResource.isLoaded());
-		VirtualModel viewPoint = viewPointResource.getCompilationUnit();
+		VirtualModel viewPoint = viewPointResource.getCompilationUnit().getVirtualModel();
 		assertTrue(viewPointResource.isLoaded());
 		return viewPoint;
 	}

@@ -117,7 +117,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getCompilationUnit();
+		VirtualModel vp = vpRes.getCompilationUnit().getVirtualModel();
 		assertTrue(vpRes.isLoaded());
 		cityMappingVP = vp;
 

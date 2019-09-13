@@ -123,11 +123,11 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		// Load CityMapping ViewPoint
 		cityViewsViewPoint = loadViewPoint("http://www.openflexo.org/cityviews");
 		assertNotNull(cityViewsViewPoint);
-		System.out.println("Found view point in " + ((CompilationUnitResource) cityViewsViewPoint.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + cityViewsViewPoint.getResource().getIODelegate().toString());
 
 		assertObjectIsValid(cityViewsViewPoint);
 
-		cityViewsViewPoint.loadContainedVirtualModelsWhenUnloaded();
+		cityViewsViewPoint.getCompilationUnit().loadContainedVirtualModelsWhenUnloaded();
 		assertEquals(2, cityViewsViewPoint.getVirtualModels().size());
 		VirtualModel cityView1 = cityViewsViewPoint.getVirtualModels().get(0);
 		assertObjectIsValid(cityView1);
@@ -244,7 +244,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 		CompilationUnitResource viewPointResource = (CompilationUnitResource) serviceManager.getResourceManager().getResource(viewPointURI);
 		assertNotNull(viewPointResource);
 		assertFalse(viewPointResource.isLoaded());
-		VirtualModel viewPoint = viewPointResource.getCompilationUnit();
+		VirtualModel viewPoint = viewPointResource.getCompilationUnit().getVirtualModel();
 		assertTrue(viewPointResource.isLoaded());
 		return viewPoint;
 	}

@@ -110,7 +110,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getCompilationUnit();
+		VirtualModel vp = vpRes.getCompilationUnit().getVirtualModel();
 		assertTrue(vpRes.isLoaded());
 
 		return vp;
@@ -122,7 +122,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 	public void test2LoadBasicOntologyEditorViewPoint() {
 		basicOntologyEditor = loadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 		assertNotNull(basicOntologyEditor);
-		System.out.println("Found view point in " + ((CompilationUnitResource) basicOntologyEditor.getResource()).getIODelegate().toString());
+		System.out.println("Found view point in " + basicOntologyEditor.getResource().getIODelegate().toString());
 	}
 
 	@Test

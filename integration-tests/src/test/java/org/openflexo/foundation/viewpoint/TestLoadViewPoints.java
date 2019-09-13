@@ -81,7 +81,7 @@ public class TestLoadViewPoints extends OpenflexoTestCase {
 		assertNotNull(vpRes);
 		assertFalse(vpRes.isLoaded());
 
-		VirtualModel vp = vpRes.getCompilationUnit();
+		VirtualModel vp = vpRes.getCompilationUnit().getVirtualModel();
 		assertNotNull(vp);
 		assertTrue(vpRes.isLoaded());
 
@@ -90,7 +90,7 @@ public class TestLoadViewPoints extends OpenflexoTestCase {
 		for (FlexoResource<?> r : vpRes.getContents()) {
 			assertTrue(r instanceof CompilationUnitResource);
 			CompilationUnitResource vmRes = (CompilationUnitResource) r;
-			VirtualModel vm = vmRes.getCompilationUnit();
+			VirtualModel vm = vmRes.getCompilationUnit().getVirtualModel();
 			assertNotNull(vm);
 			assertTrue(vmRes.isLoaded());
 
