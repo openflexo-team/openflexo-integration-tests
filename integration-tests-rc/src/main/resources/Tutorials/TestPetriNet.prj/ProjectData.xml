@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexoProject id="0" creationUserId="SYL" uri="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj" creationDate="dd/MM/yy HH:mm,21/11/19 10:37" userID="SYL" flexoID="1">
+  <FreeModellingProjectNature id="1" userID="SYL" flexoID="2">
+    <FMESampleData id="2" virtualModelInstanceURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt" userID="SYL" flexoID="4" />
+    <FMEConceptualModel id="3" virtualModelURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml" userID="SYL" flexoID="3" />
+    <FMEDiagramFreeModel id="4" virtualModelURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml" userID="SYL" flexoID="5">
+      <FMEDiagramFreeModelInstance id="5" virtualModelInstanceURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.fml.rt" userID="SYL" flexoID="6" />
+      <FMEDiagramFreeModelInstance id="6" virtualModelInstanceURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example2.fml.rt" userID="SYL" flexoID="7" />
+      <FMEDiagramFreeModelInstance id="7" virtualModelInstanceURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example3.fml.rt" userID="SYL" flexoID="8" />
+      <FMEDiagramFreeModelInstance id="8" virtualModelInstanceURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example4.fml.rt" userID="SYL" flexoID="9" />
+      <FMEDiagramFreeModelInstance id="9" virtualModelInstanceURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example5.fml.rt" userID="SYL" flexoID="10" />
+      <FMEDiagramFreeModelInstance id="10" virtualModelInstanceURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example6.fml.rt" userID="SYL" flexoID="11" />
+      <FMESampleData idref="2" />
+      <FMEConceptualModel idref="3" />
+    </FMEDiagramFreeModel>
+  </FreeModellingProjectNature>
+</FlexoProject>

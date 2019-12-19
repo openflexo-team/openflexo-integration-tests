@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FMLRTVirtualModelInstance id="0" virtualModelURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml" modelVersion="1.0" title="Example" version="0.1" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml" userID="SYL" flexoID="1">
+  <FlexoConceptInstance id="1" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml#PlaceGR" userID="SYL" flexoID="7">
+    <PrimitiveActorReference id="2" valueAsString="place" roleName="name" userID="SYL" flexoID="4" />
+    <ModelObjectActorReference id="3" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram#SYL_2" roleName="shape" userID="SYL" flexoID="5" />
+    <ModelObjectActorReference id="4" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt#SYL_2" roleName="fmeConcept" userID="SYL" flexoID="6" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="5" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml#TransitionGR" userID="SYL" flexoID="11">
+    <PrimitiveActorReference id="6" valueAsString="transition" roleName="name" userID="SYL" flexoID="8" />
+    <ModelObjectActorReference id="7" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram#SYL_3" roleName="shape" userID="SYL" flexoID="9" />
+    <ModelObjectActorReference id="8" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt#SYL_3" roleName="fmeConcept" userID="SYL" flexoID="10" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="9" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml#PlaceGR" userID="SYL" flexoID="14">
+    <ModelObjectActorReference id="10" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt#SYL_4" roleName="fmeConcept" userID="SYL" flexoID="12" />
+    <ModelObjectActorReference id="11" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram#SYL_4" roleName="shape" userID="SYL" flexoID="13" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="12" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml#PlaceGR" userID="SYL" flexoID="17">
+    <ModelObjectActorReference id="13" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt#SYL_5" roleName="fmeConcept" userID="SYL" flexoID="15" />
+    <ModelObjectActorReference id="14" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram#SYL_5" roleName="shape" userID="SYL" flexoID="16" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="15" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml#PlaceGR" userID="SYL" flexoID="20">
+    <ModelObjectActorReference id="16" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt#SYL_6" roleName="fmeConcept" userID="SYL" flexoID="18" />
+    <ModelObjectActorReference id="17" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram#SYL_6" roleName="shape" userID="SYL" flexoID="19" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="18" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml#PlaceTransitionEdgeGR" userID="SYL" flexoID="23">
+    <ModelObjectActorReference id="19" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram#SYL_7" roleName="connector" userID="SYL" flexoID="21" />
+    <ModelObjectActorReference id="20" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt#SYL_7" roleName="fmeConcept" userID="SYL" flexoID="22" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="21" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml#TransitionPlaceEdgeGR" userID="SYL" flexoID="26">
+    <ModelObjectActorReference id="22" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram#SYL_8" roleName="connector" userID="SYL" flexoID="24" />
+    <ModelObjectActorReference id="23" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt#SYL_8" roleName="fmeConcept" userID="SYL" flexoID="25" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="24" flexoConceptURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/FreeModel.fml#PlaceTransitionEdgeGR" userID="SYL" flexoID="29">
+    <ModelObjectActorReference id="25" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt#SYL_9" roleName="fmeConcept" userID="SYL" flexoID="27" />
+    <ModelObjectActorReference id="26" objectReference="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram#SYL_9" roleName="connector" userID="SYL" flexoID="28" />
+  </FlexoConceptInstance>
+  <VirtualModelModelSlotInstance id="27" virtualModelInstanceURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/SampleData.fml.rt" modelSlotName="sampleData" roleName="sampleData" userID="SYL" flexoID="2" />
+  <TypeAwareModelSlotInstance id="28" modelURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/Example.diagram" modelSlotName="diagram" roleName="diagram" userID="SYL" flexoID="3" />
+</FMLRTVirtualModelInstance>
