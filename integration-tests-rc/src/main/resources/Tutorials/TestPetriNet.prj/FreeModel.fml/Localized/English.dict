@@ -1,0 +1,12 @@
+Create\ Place-Edge\ transition=Create Place-Edge transition
+Create\ Place-Transition\ edge=Create Place-Transition edge
+Relationship=Relationship
+Type=Type
+destinationConcept=DestinationConcept
+execute=Execute
+isActivable=IsActivable
+link=Link
+sourceConcept=SourceConcept
+step=Step
+tokenNb=TokenNb
+weight=Weight
