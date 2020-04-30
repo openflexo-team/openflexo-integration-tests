@@ -251,7 +251,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		assertNotNull(mansionEP);
 		assertNotNull(residentEP);
 
-		System.out.println("FML=" + newVirtualModelInstance.getVirtualModel().getSynchronizationScheme().getFMLRepresentation());
+		System.out.println("FML=" + newVirtualModelInstance.getVirtualModel().getSynchronizationScheme().getFMLPrettyPrint());
 
 		System.out.println("FCI: " + newVirtualModelInstance.getFlexoConceptInstances(cityEP));
 

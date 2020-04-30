@@ -95,7 +95,7 @@ public class TestLoadViewPoints extends OpenflexoTestCase {
 			assertTrue(vmRes.isLoaded());
 
 			System.out.println("Loaded VirtualModel " + vm.getName());
-			System.out.println(vm.getFMLRepresentation());
+			System.out.println(vm.getFMLPrettyPrint());
 
 			assertVirtualModelIsValid(vm);
 		}

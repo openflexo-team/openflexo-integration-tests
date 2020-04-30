@@ -135,7 +135,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		syncScheme = cityMapping.getSynchronizationScheme();
 		assertNotNull(syncScheme);
 
-		System.out.println("FML=" + syncScheme.getFMLRepresentation());
+		System.out.println("FML=" + syncScheme.getFMLPrettyPrint());
 
 		assertEquals(5, syncScheme.getBindingModel().getBindingVariablesCount());
 		assertNotNull(syncScheme.getBindingModel().bindingVariableNamed("model1"));
@@ -154,7 +154,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		IterationAction iterationAction = (IterationAction) (((Sequence) syncScheme.getFlexoBehaviour().getControlGraph())
 				.getControlGraph1());
 
-		// System.out.println("IterationAction: " + iterationAction.getFMLRepresentation());
+		// System.out.println("IterationAction: " + iterationAction.getFMLPrettyPrint());
 
 		assertEquals(5, iterationAction.getBindingModel().getBindingVariablesCount());
 		assertEquals(6, iterationAction.getInferedBindingModel().getBindingVariablesCount());
@@ -168,13 +168,13 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		// assertSame(fetchRequest1, fetchRequest2);
 
-		System.out.println("FML=" + syncScheme.getFlexoBehaviour().getFMLRepresentation());
+		System.out.println("FML=" + syncScheme.getFlexoBehaviour().getFMLPrettyPrint());
 
-		// System.out.println("fetchRequest1=" + fetchRequest1.getFMLRepresentation());
+		// System.out.println("fetchRequest1=" + fetchRequest1.getFMLPrettyPrint());
 
 		assertEquals(5, fetchRequest1.getBindingModel().getBindingVariablesCount());
 
-		// System.out.println("fetchRequest2=" + fetchRequest2.getFMLRepresentation());
+		// System.out.println("fetchRequest2=" + fetchRequest2.getFMLPrettyPrint());
 
 		DeclarationAction<?> declaration = (DeclarationAction<?>) ((Sequence) iterationAction.getControlGraph()).getControlGraph1();
 		SelectEMFObjectIndividual fetchRequest2 = (SelectEMFObjectIndividual) declaration.getAssignableAction();
@@ -195,13 +195,13 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	@TestOrder(4)
 	public void checkMatchFlexoConceptInstance() {
 
-		System.out.println("FML=" + syncScheme.getFlexoBehaviour().getFMLRepresentation());
+		System.out.println("FML=" + syncScheme.getFlexoBehaviour().getFMLPrettyPrint());
 
 		assertTrue(syncScheme.getFlexoBehaviour().getControlGraph() instanceof Sequence);
 		IterationAction iterationAction = (IterationAction) (((Sequence) syncScheme.getFlexoBehaviour().getControlGraph())
 				.getControlGraph1());
 
-		// System.out.println("IterationAction: " + iterationAction.getFMLRepresentation());
+		// System.out.println("IterationAction: " + iterationAction.getFMLPrettyPrint());
 
 		assertEquals(5, iterationAction.getBindingModel().getBindingVariablesCount());
 		assertEquals(6, iterationAction.getInferedBindingModel().getBindingVariablesCount());
@@ -276,7 +276,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		ActionScheme actionScheme = (ActionScheme) cityMapping.getFlexoBehaviour("synchronizeModel1FromModel2");
 		assertNotNull(actionScheme);
 
-		System.out.println("FML=" + actionScheme.getFMLRepresentation());
+		System.out.println("FML=" + actionScheme.getFMLPrettyPrint());
 
 		assertTrue(actionScheme.getControlGraph() instanceof Sequence);
 
@@ -299,7 +299,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		ActionScheme actionScheme = (ActionScheme) cityMapping.getFlexoBehaviour("synchronizeModel2FromModel1");
 		assertNotNull(actionScheme);
 
-		System.out.println("FML=" + actionScheme.getFMLRepresentation());
+		System.out.println("FML=" + actionScheme.getFMLPrettyPrint());
 
 		assertTrue(actionScheme.getControlGraph() instanceof Sequence);
 
@@ -324,7 +324,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		CreationScheme creationScheme = (CreationScheme) city.getFlexoBehaviour("createANewOne");
 
-		System.out.println("FML=" + creationScheme.getFMLRepresentation());
+		System.out.println("FML=" + creationScheme.getFMLPrettyPrint());
 
 		assertTrue(creationScheme.getControlGraph() instanceof Sequence);
 
@@ -342,7 +342,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	@Test
 	@TestOrder(10)
 	public void checkViewPointValidity() {
-		System.out.println("cityMappingVP FML=" + cityMappingVP.getFMLRepresentation());
+		System.out.println("cityMappingVP FML=" + cityMappingVP.getFMLPrettyPrint());
 		assertVirtualModelIsValid(cityMappingVP);
 	}
 
