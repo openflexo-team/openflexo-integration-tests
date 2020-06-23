@@ -91,7 +91,7 @@ public class TestViewpoints extends OpenflexoTestCase {
 	public void test1BasicOntologyEditor() {
 		log("test1BasicOntologyEditor()");
 		VirtualModel basicOntologyEditor = testLoadViewPoint(
-				"http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
+				"http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml");
 		assertNotNull(basicOntologyEditor);
 		System.out.println("Read resource " + ((VirtualModelResource) basicOntologyEditor.getResource()).getIODelegate().toString());
 
@@ -104,7 +104,7 @@ public class TestViewpoints extends OpenflexoTestCase {
 	public void test2BDN() {
 		log("test2BDN()");
 		assertVirtualModelIsValid(
-				testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl"));
+				testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl"));
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public class TestViewpoints extends OpenflexoTestCase {
 	public void test3OrganizationalChart() {
 		log("test3OrganizationalChart()");
 		assertVirtualModelIsValid(
-				testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl"));
+				testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl"));
 	}
 
 	@Test
@@ -120,7 +120,7 @@ public class TestViewpoints extends OpenflexoTestCase {
 	public void test4OrganizationalMap() {
 		log("test4OrganizationalMap()");
 		assertVirtualModelIsValid(
-				testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl"));
+				testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl"));
 	}
 
 	@Test
@@ -128,34 +128,34 @@ public class TestViewpoints extends OpenflexoTestCase {
 	public void test5OrganizationalUnitDefinition() {
 		log("test5OrganizationalUnitDefinition()");
 		assertVirtualModelIsValid(
-				testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl"));
+				testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl"));
 	}
 
 	@Test
 	@TestOrder(7)
 	public void test6SKOS() {
 		log("test6SKOS()");
-		assertVirtualModelIsValid(testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl"));
+		assertVirtualModelIsValid(testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl"));
 	}
 
 	@Test
 	@TestOrder(8)
 	public void test7BasicOrganizationTreeEditor() {
 		log("test7BasicOrganizationTreeEditor()");
-		assertVirtualModelIsValid(testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor"));
+		assertVirtualModelIsValid(testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor"));
 	}
 
 	@Test
 	@TestOrder(9)
 	public void test8UMLPackageDiagram() {
 		log("test8UMLPackageDiagram()");
-		assertVirtualModelIsValid(testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl"));
+		assertVirtualModelIsValid(testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl"));
 	}
 
 	@Test
 	@TestOrder(10)
 	public void test9UMLUCDiagram() {
 		log("test9UMLUCDiagram()");
-		assertVirtualModelIsValid(testLoadViewPoint("http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl"));
+		assertVirtualModelIsValid(testLoadViewPoint("http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl"));
 	}
 }

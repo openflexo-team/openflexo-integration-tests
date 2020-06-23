@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="FLX-200" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="200">
+<VirtualModel id="FLX-200" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="200">
   <FMLLocalizedDictionary id="SYL-271" userID="SYL" flexoID="271" />
   <FlexoConcept id="FLX-26" name="Concept" userID="FLX" flexoID="26">
     <Inspector id="FLX-1" renderer="instance.individual.uriName" inspectorTitle="Concept" userID="FLX" flexoID="1" />
-    <ShapeRole id="FLX-24" exampleLabel="label" metamodelElementReference="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram#SYL_21" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="24">
+    <ShapeRole id="FLX-24" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram#SYL_21" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="24">
       <GRSpec id="SYL-302" featureName="label" value="individual.name" userID="SYL" flexoID="302" />
     </ShapeRole>
     <OWLIndividualRole id="FLX-25" ontologicType="http://www.w3.org/2002/07/owl#Thing" cloningStrategy="Clone" cardinality="ZeroOne" name="individual" userID="FLX" flexoID="25" />
@@ -21,11 +21,11 @@
   </FlexoConcept>
   <FlexoConcept id="FLX-31" name="IsARelationship" userID="FLX" flexoID="31">
     <Inspector id="FLX-7" inspectorTitle="&quot;Is A&quot; relationship" userID="FLX" flexoID="7" />
-    <ConnectorRole id="FLX-29" exampleLabel="label" metamodelElementReference="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram#SYL_22" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="29">
+    <ConnectorRole id="FLX-29" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram#SYL_22" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="29">
       <GRSpec id="SYL-308" featureName="label" readOnly="true" value="&quot;is a&quot;" userID="SYL" flexoID="308" />
     </ConnectorRole>
-    <ObjectPropertyStatementRole id="FLX-30" objectProperty="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl#semanticRelation" cloningStrategy="Clone" cardinality="ZeroOne" name="isA" userID="FLX" flexoID="30" />
-    <LinkScheme id="FLX-12" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml#Concept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="LinkTwoConceptByIsARelationShip" width="800" label="LinkTwoConceptByIsARelationShip" height="600" userID="FLX" flexoID="12">
+    <ObjectPropertyStatementRole id="FLX-30" objectProperty="http://www.openflexo.org/openflexo/ViewPoints/BasicOntology.owl#semanticRelation" cloningStrategy="Clone" cardinality="ZeroOne" name="isA" userID="FLX" flexoID="30" />
+    <LinkScheme id="FLX-12" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml#Concept" toTarget="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml#Concept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="LinkTwoConceptByIsARelationShip" width="800" label="LinkTwoConceptByIsARelationShip" height="600" userID="FLX" flexoID="12">
       <BehaviourControlGraph_Sequence id="FLX-191" userID="FLX" flexoID="191">
         <ControlGraph2_AssignationAction id="FLX-189" assign="isA" ownerContext="controlGraph2" userID="FLX" flexoID="189">
           <AssignableAction_AddObjectPropertyStatement id="FLX-110" object="toTarget.individual" subject="fromTarget.individual" receiver="basicOntologyi" assignation="isA" userID="FLX" flexoID="110" />
@@ -38,11 +38,11 @@
   </FlexoConcept>
   <FlexoConcept id="FLX-34" name="HasRelationship" userID="FLX" flexoID="34">
     <Inspector id="FLX-13" inspectorTitle="&quot;Has&quot; relationship" userID="FLX" flexoID="13" />
-    <ConnectorRole id="FLX-33" exampleLabel="label" metamodelElementReference="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram#SYL_23" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="33">
+    <ConnectorRole id="FLX-33" exampleLabel="label" metamodelElementReference="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram#SYL_23" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="33">
       <GRSpec id="SYL-309" featureName="label" readOnly="true" value="&quot;has&quot;" userID="SYL" flexoID="309" />
     </ConnectorRole>
-    <ObjectPropertyStatementRole id="FLX-98" objectProperty="http://www.agilebirds.com/openflexo/ViewPoints/BasicOntology.owl#has" cloningStrategy="Clone" cardinality="ZeroOne" name="has" description="" userID="FLX" flexoID="98" />
-    <LinkScheme id="FLX-22" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml#Concept" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml#Concept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="LinkTwoConceptByHasRelationShip" width="800" label="LinkTwoConceptByHasRelationShip" height="600" description="" userID="FLX" flexoID="22">
+    <ObjectPropertyStatementRole id="FLX-98" objectProperty="http://www.openflexo.org/openflexo/ViewPoints/BasicOntology.owl#has" cloningStrategy="Clone" cardinality="ZeroOne" name="has" description="" userID="FLX" flexoID="98" />
+    <LinkScheme id="FLX-22" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml#Concept" toTarget="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml#Concept" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="LinkTwoConceptByHasRelationShip" width="800" label="LinkTwoConceptByHasRelationShip" height="600" description="" userID="FLX" flexoID="22">
       <BehaviourControlGraph_Sequence id="FLX-198" userID="FLX" flexoID="198">
         <ControlGraph2_AssignationAction id="FLX-196" assign="has" ownerContext="controlGraph2" userID="FLX" flexoID="196">
           <AssignableAction_AddObjectPropertyStatement id="FLX-122" object="toTarget.individual" subject="fromTarget.individual" receiver="basicOntologyi" assignation="has" userID="FLX" flexoID="122" />
@@ -57,8 +57,8 @@
   <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="FLX-199" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="199" />
   <OWLModelSlot id="FLX-39" metaModelURI="http://www.w3.org/2002/07/owl" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="basicOntologyi" userID="FLX" flexoID="39" />
-  <TypedDiagramModelSlot id="FLX-38" templateDiagramReference="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram#FLX_1" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="38">
-    <FMLDiagramPaletteElementBinding id="FLX-2" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/BasicOntology.palette#Concept" userID="FLX" flexoID="2">
+  <TypedDiagramModelSlot id="FLX-38" templateDiagramReference="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram#FLX_1" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="38">
+    <FMLDiagramPaletteElementBinding id="FLX-2" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/BasicOntology.palette#Concept" userID="FLX" flexoID="2">
       <DropScheme idref="FLX-5" />
     </FMLDiagramPaletteElementBinding>
   </TypedDiagramModelSlot>

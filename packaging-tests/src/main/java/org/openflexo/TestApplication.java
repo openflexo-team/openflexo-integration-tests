@@ -38,40 +38,34 @@
 
 package org.openflexo;
 
-import javax.swing.*;        
-
 import java.awt.GridLayout;
 
-public class TestApplication {
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-	    private static void createTestApplicationGUI() {
-		
+public class TestApplication {
+	private static void createTestApplicationGUI() {
+
 		JFrame frame = new JFrame("Openflexo Packaging Test App");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(300,300);
+		frame.setSize(300, 300);
 
-  		JPanel panel = new JPanel();
-        	panel.setBorder(BorderFactory.createEmptyBorder(50, 10, 10, 10));
-        	panel.setLayout(new GridLayout(5, 4, 5, 5));
-	
+		JPanel panel = new JPanel();
+		panel.setBorder(BorderFactory.createEmptyBorder(50, 10, 10, 10));
+		panel.setLayout(new GridLayout(5, 4, 5, 5));
+
 		frame.getContentPane().add(panel);
 
 		JLabel label = new JLabel("Hi,  I'm Openflexo Licence IV Test App.");
 		panel.add(label);
-	
 
 		frame.pack();
 		frame.setVisible(true);
-	    }
-
-	public static void main(String[] args) {
-	
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createTestApplicationGUI();
-            }
-        });
-		
 	}
 
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(() -> createTestApplicationGUI());
+	}
 }

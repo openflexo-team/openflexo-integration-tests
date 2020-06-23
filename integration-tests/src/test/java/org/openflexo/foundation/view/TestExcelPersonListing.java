@@ -380,7 +380,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 		}
 
 		System.out.println("Now remove a Person");
-		DeletionScheme deletionScheme = seVMI.getVirtualModel().getDeletionSchemes().get(0);
+		DeletionScheme deletionScheme = ninaDupont.getFlexoConcept().getDeletionSchemes().get(0);
 		DeletionSchemeAction deletePerson = new DeletionSchemeAction(deletionScheme, ninaDupont, null, editor);
 		deletePerson.doAction();
 
@@ -453,7 +453,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 
 		ExcelWorkbook document = null;
 		try {
-			document = documentResource.getResourceData(null);
+			document = documentResource.getResourceData();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (ResourceLoadingCancelledException e) {

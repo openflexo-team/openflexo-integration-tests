@@ -3,6 +3,6 @@
  * 
  * @version 0.1
  */
-@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl")
+@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl")
 public class OrganizationalChart {
 }

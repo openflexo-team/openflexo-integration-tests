@@ -3,6 +3,6 @@
  * 
  * @version 0.1
  */
-@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/UML/PackageDiagram.owl")
+@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl")
 public class PackageDiagram {
 }

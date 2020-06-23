@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Diagram id="0" diagramSpecificationURI="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification" uri="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram" name="Animals.diagram" userID="FLX" flexoID="1">
+<Diagram id="0" diagramSpecificationURI="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification" uri="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/Animals.diagram" name="Animals.diagram" userID="FLX" flexoID="1">
   <Connector id="1" name="is a" userID="FLX" flexoID="2">
     <StartShape idref="2" />
     <EndShape idref="13" />

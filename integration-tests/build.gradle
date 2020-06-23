@@ -5,7 +5,7 @@ dependencies {
     testCompile flexoUiTest()
     testCompile flexoFoundationTest()
     testCompile owlConnector()
-    testCompile flexoDiagram()
+    testCompile diagramConnector()
     testCompile emfConnector()
     testCompile excelConnector()
     testCompile xmlConnector()
@@ -16,6 +16,6 @@ dependencies {
     testCompile openflexo("enterprise-architecture-module")
     
     testRuntime project(':integration-tests-rc')
-    testRuntime openflexo("owlconnector-test-rc")
+    testRuntime owlConnectorRc()
 }
 

@@ -6,14 +6,14 @@
       <TextFieldParameter id="4" name="firstName" label="First name" usePaletteLabelAsDefaultValue="false" isRequired="false" />
       <TextFieldParameter id="5" name="lastName" label="Last name" usePaletteLabelAsDefaultValue="false" isRequired="false" />
       <URIParameter id="6" base="(parameters.firstName + parameters.lastName)" name="uri" label="uri" usePaletteLabelAsDefaultValue="false" isRequired="true">
-        <AddressedOWLModelSlot id="7" isRequired="false" isReadOnly="false" name="owl" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" />
+        <AddressedOWLModelSlot id="7" isRequired="false" isReadOnly="false" name="owl" metaModelURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" />
       </URIParameter>
-      <IndividualParameter id="8" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" name="position" label="position" usePaletteLabelAsDefaultValue="false" isRequired="false" />
+      <IndividualParameter id="8" conceptURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" name="position" label="position" usePaletteLabelAsDefaultValue="false" isRequired="false" />
       <AddOWLIndividual id="9" assignation="actor" individualName="parameters.uri">
         <AddressedOWLModelSlot idref="7" />
-        <DataPropertyAssertion id="10" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#firstName" value="parameters.firstName" />
-        <DataPropertyAssertion id="11" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#lastName" value="parameters.lastName" />
-        <ObjectPropertyAssertion id="12" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPosition" object="parameters.position" />
+        <DataPropertyAssertion id="10" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#firstName" value="parameters.firstName" />
+        <DataPropertyAssertion id="11" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#lastName" value="parameters.lastName" />
+        <ObjectPropertyAssertion id="12" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPosition" object="parameters.position" />
       </AddOWLIndividual>
       <AddShape id="13" container="topLevel" extendParentBoundsToHostThisShape="false" assignation="shape">
         <AddressedDiagramModelSlot idref="14" />
@@ -29,7 +29,7 @@
       </AddShape>
     </DropScheme>
     <NavigationScheme id="18" targetObject="ownedProcess" conditional="(ownedProcess != null)" name="OpenOwnedProcess" label="OpenOwnedProcess" skipConfirmationPanel="false" definePopupDefaultSize="false" width="800" height="600" />
-    <ContainedOWLIndividualPatternRole id="19" name="actor" patternRole="actor" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Actor">
+    <ContainedOWLIndividualPatternRole id="19" name="actor" patternRole="actor" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Actor">
       <AddressedOWLModelSlot idref="7" />
     </ContainedOWLIndividualPatternRole>
     <ContainedShapePatternRole id="20" patternRole="shape" name="shape" exampleLabel="">
@@ -45,7 +45,7 @@
         <ShadowStyle id="30" drawShadow="true" shadowDarkness="150" shadowDepth="2" shadowBlur="4" />
         <TextStyle id="31" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" />
       </ShapeGraphicalRepresentation>
-      <AddressedDiagramModelSlot id="14" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification" />
+      <AddressedDiagramModelSlot id="14" isRequired="true" isReadOnly="false" name="this" virtualModelURI="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification" />
     </ContainedShapePatternRole>
     <ContainedShapePatternRole id="32" patternRole="icon" name="icon" exampleLabel="">
       <ShapeGraphicalRepresentation id="33" className="org.openflexo.vpm.view.widget.EditionPatternPreviewShapeGR" x="112.9725117248567" y="5.300804828973838" width="48.0" height="48.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="UNMOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="((parent.width - this.width) - 10)" yConstraints="((parent.height - this.height) / 2)" identifier="object_0_0" layer="2" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="false" isFocusable="false" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
@@ -104,20 +104,20 @@
       <TextField id="71" name="firstName" label="First name" readOnly="false" data="actor.firstName" />
       <TextField id="72" name="lastName" label="Last name" readOnly="false" data="actor.lastName" />
       <TextField id="73" name="uri" label="uri" readOnly="false" data="actor.uriName" />
-      <Individual id="74" conceptURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" name="position" label="position" readOnly="false" data="actor.hasPosition" />
+      <Individual id="74" conceptURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Position" name="position" label="position" readOnly="false" data="actor.hasPosition" />
       <TextField id="75" name="organizationUnit" label="organization_unit" readOnly="true" data="actor.hasPosition.isInvolvedInOrganizationUnit.uriName" />
       <FlexoObject id="76" flexoObjectType="Process" name="ownedProcess" label="ownedProcess" readOnly="false" data="ownedProcess" />
     </Inspector>
   </EditionPattern>
   <EditionPattern id="77" name="CollaboratorLink">
-    <LinkScheme id="78" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl#Actor" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl#Actor" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="linkActorToActor" label="linkActorToActor" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <LinkScheme id="78" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl#Actor" toTarget="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl#Actor" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="linkActorToActor" label="linkActorToActor" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <AddConnector id="79" fromShape="fromTarget.shape" toShape="toTarget.shape" assignation="connector">
         <AddressedDiagramModelSlot idref="14" />
       </AddConnector>
       <AddObjectPropertyStatement id="80" object="toTarget.actor" assignation="hasCollaboratorStatement" subject="fromTarget.actor" />
       <AddObjectPropertyStatement id="81" object="fromTarget.actor" assignation="hasManagerStatement" subject="toTarget.actor" />
     </LinkScheme>
-    <ContainedObjectPropertyStatementPatternRole id="82" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasCollaborator" name="hasCollaboratorStatement" patternRole="hasCollaboratorStatement">
+    <ContainedObjectPropertyStatementPatternRole id="82" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasCollaborator" name="hasCollaboratorStatement" patternRole="hasCollaboratorStatement">
       <AddressedOWLModelSlot idref="7" />
     </ContainedObjectPropertyStatementPatternRole>
     <ContainedConnectorPatternRole id="83" patternRole="connector" name="connector" exampleLabel="">
@@ -154,7 +154,7 @@
       </ArtifactToShapeGraphicalRepresentation>
       <AddressedDiagramModelSlot idref="14" />
     </ContainedConnectorPatternRole>
-    <ContainedObjectPropertyStatementPatternRole id="111" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasManager" name="hasManagerStatement" patternRole="hasManagerStatement">
+    <ContainedObjectPropertyStatementPatternRole id="111" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasManager" name="hasManagerStatement" patternRole="hasManagerStatement">
       <AddressedOWLModelSlot idref="7" />
     </ContainedObjectPropertyStatementPatternRole>
     <PrimaryConceptObjectPropertyStatementPatternRole idref="82" />

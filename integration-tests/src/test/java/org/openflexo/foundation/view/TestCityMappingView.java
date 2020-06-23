@@ -232,10 +232,9 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		assertNotNull(modelResource2);
 
 		try {
-			newVirtualModelInstance.setFlexoPropertyValue(emfModelSlot1, modelResource1.getResourceData(null));
-			newVirtualModelInstance.setFlexoPropertyValue(emfModelSlot2, modelResource2.getResourceData(null));
+			newVirtualModelInstance.setFlexoPropertyValue(emfModelSlot1, modelResource1.getResourceData());
+			newVirtualModelInstance.setFlexoPropertyValue(emfModelSlot2, modelResource2.getResourceData());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -261,7 +260,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 
 		newVirtualModelInstance.synchronize(editor);
 
-		newVirtualModelInstance.getResource().save(null);
+		newVirtualModelInstance.getResource().save();
 
 		System.out.println("Les FCI2: " + newVirtualModelInstance.getFlexoConceptInstances(cityEP));
 

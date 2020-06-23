@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="128">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="128">
   <FlexoConcept id="1" name="Actor" userID="FLX" flexoID="26">
     <Inspector id="2" inspectorTitle="Actor" userID="FLX" flexoID="1">
       <GenericInspectorEntry id="3" widget="TEXT_FIELD" data="actor.uriName" name="uri" label="uri" type="java.lang.String" userID="FLX" flexoID="152" />
@@ -19,9 +19,9 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="16" featureName="label" value="actor.name" userID="FLX" flexoID="214" />
     </ShapeRole>
-    <OWLIndividualRole id="17" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="23" />
-    <OWLIndividualRole id="18" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Actor" cloningStrategy="Clone" cardinality="ZeroOne" name="actor" userID="FLX" flexoID="24" />
-    <ObjectPropertyStatementRole id="19" objectProperty="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#packagedElement" cloningStrategy="Clone" cardinality="ZeroOne" name="packagedElement" userID="FLX" flexoID="25" />
+    <OWLIndividualRole id="17" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="23" />
+    <OWLIndividualRole id="18" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Actor" cloningStrategy="Clone" cardinality="ZeroOne" name="actor" userID="FLX" flexoID="24" />
+    <ObjectPropertyStatementRole id="19" objectProperty="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#packagedElement" cloningStrategy="Clone" cardinality="ZeroOne" name="packagedElement" userID="FLX" flexoID="25" />
     <DropScheme id="20" target="top" name="DropNewActor" width="800" label="DropNewActor" height="600" userID="FLX" flexoID="6">
       <BehaviourControlGraph_Sequence id="21" userID="FLX" flexoID="141">
         <ControlGraph2_Sequence id="22" ownerContext="controlGraph2" userID="FLX" flexoID="138">
@@ -35,7 +35,7 @@
           </ControlGraph2_Sequence>
           <ControlGraph1_AssignationAction id="28" assign="actor" ownerContext="controlGraph1" userID="FLX" flexoID="137">
             <AssignableAction_AddOWLIndividual id="29" individualName="parameters.uri" receiver="owl" assignation="actor" userID="FLX" flexoID="28">
-              <DataPropertyAssertion id="30" value="parameters.name" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#name" userID="FLX" flexoID="29" />
+              <DataPropertyAssertion id="30" value="parameters.name" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#name" userID="FLX" flexoID="29" />
             </AssignableAction_AddOWLIndividual>
           </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
@@ -83,9 +83,9 @@
       </ShapeGraphicalRepresentation>
       <GRSpec id="61" featureName="label" value="useCase.name" userID="FLX" flexoID="215" />
     </ShapeRole>
-    <OWLIndividualRole id="62" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="33" />
-    <OWLIndividualRole id="63" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#UseCase" cloningStrategy="Clone" cardinality="ZeroOne" name="useCase" userID="FLX" flexoID="34" />
-    <ObjectPropertyStatementRole id="64" objectProperty="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#packagedElement" cloningStrategy="Clone" cardinality="ZeroOne" name="packagedElement" userID="FLX" flexoID="35" />
+    <OWLIndividualRole id="62" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="33" />
+    <OWLIndividualRole id="63" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#UseCase" cloningStrategy="Clone" cardinality="ZeroOne" name="useCase" userID="FLX" flexoID="34" />
+    <ObjectPropertyStatementRole id="64" objectProperty="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#packagedElement" cloningStrategy="Clone" cardinality="ZeroOne" name="packagedElement" userID="FLX" flexoID="35" />
     <DropScheme id="65" target="top" name="DropNewUseCase" width="800" label="DropNewUseCase" height="600" userID="FLX" flexoID="13">
       <BehaviourControlGraph_Sequence id="66" userID="FLX" flexoID="162">
         <ControlGraph2_Sequence id="67" ownerContext="controlGraph2" userID="FLX" flexoID="159">
@@ -99,7 +99,7 @@
           </ControlGraph2_Sequence>
           <ControlGraph1_AssignationAction id="73" assign="useCase" ownerContext="controlGraph1" userID="FLX" flexoID="158">
             <AssignableAction_AddOWLIndividual id="74" individualName="parameters.uri" receiver="owl" assignation="useCase" description="" userID="FLX" flexoID="38">
-              <DataPropertyAssertion id="75" value="parameters.name" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#name" userID="FLX" flexoID="121" />
+              <DataPropertyAssertion id="75" value="parameters.name" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#name" userID="FLX" flexoID="121" />
             </AssignableAction_AddOWLIndividual>
           </ControlGraph1_AssignationAction>
         </ControlGraph2_Sequence>
@@ -137,16 +137,16 @@
         <TextStyle id="98" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ConnectorGraphicalRepresentation>
     </ConnectorRole>
-    <OWLIndividualRole id="99" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Actor" cloningStrategy="Clone" cardinality="ZeroOne" name="actor" userID="FLX" flexoID="43" />
-    <OWLIndividualRole id="100" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#UseCase" cloningStrategy="Clone" cardinality="ZeroOne" name="useCase" userID="FLX" flexoID="44" />
-    <OWLIndividualRole id="101" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Association" cloningStrategy="Clone" cardinality="ZeroOne" name="association" userID="FLX" flexoID="45" />
-    <OWLIndividualRole id="102" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="46" />
-    <ObjectPropertyStatementRole id="103" objectProperty="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#packagedElement" cloningStrategy="Clone" cardinality="ZeroOne" name="packagedElement" userID="FLX" flexoID="47" />
-    <OWLIndividualRole id="104" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Property" cloningStrategy="Clone" cardinality="ZeroOne" name="actorProperty" userID="FLX" flexoID="48" />
-    <OWLIndividualRole id="105" ontologicType="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#Property" cloningStrategy="Clone" cardinality="ZeroOne" name="useCaseProperty" userID="FLX" flexoID="49" />
-    <ObjectPropertyStatementRole id="106" objectProperty="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#ownedEnd" cloningStrategy="Clone" cardinality="ZeroOne" name="ownedEndForActor" userID="FLX" flexoID="50" />
-    <ObjectPropertyStatementRole id="107" objectProperty="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#ownedEnd" cloningStrategy="Clone" cardinality="ZeroOne" name="ownedEndForUseCase" userID="FLX" flexoID="51" />
-    <LinkScheme id="108" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl#Actor" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl#UseCase" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="associateActorToUseCase" width="800" label="associateActorToUseCase" height="600" userID="FLX" flexoID="20">
+    <OWLIndividualRole id="99" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Actor" cloningStrategy="Clone" cardinality="ZeroOne" name="actor" userID="FLX" flexoID="43" />
+    <OWLIndividualRole id="100" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#UseCase" cloningStrategy="Clone" cardinality="ZeroOne" name="useCase" userID="FLX" flexoID="44" />
+    <OWLIndividualRole id="101" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Association" cloningStrategy="Clone" cardinality="ZeroOne" name="association" userID="FLX" flexoID="45" />
+    <OWLIndividualRole id="102" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Package" cloningStrategy="Clone" cardinality="ZeroOne" name="package" userID="FLX" flexoID="46" />
+    <ObjectPropertyStatementRole id="103" objectProperty="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#packagedElement" cloningStrategy="Clone" cardinality="ZeroOne" name="packagedElement" userID="FLX" flexoID="47" />
+    <OWLIndividualRole id="104" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Property" cloningStrategy="Clone" cardinality="ZeroOne" name="actorProperty" userID="FLX" flexoID="48" />
+    <OWLIndividualRole id="105" ontologicType="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#Property" cloningStrategy="Clone" cardinality="ZeroOne" name="useCaseProperty" userID="FLX" flexoID="49" />
+    <ObjectPropertyStatementRole id="106" objectProperty="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#ownedEnd" cloningStrategy="Clone" cardinality="ZeroOne" name="ownedEndForActor" userID="FLX" flexoID="50" />
+    <ObjectPropertyStatementRole id="107" objectProperty="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#ownedEnd" cloningStrategy="Clone" cardinality="ZeroOne" name="ownedEndForUseCase" userID="FLX" flexoID="51" />
+    <LinkScheme id="108" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl#Actor" toTarget="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl#UseCase" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="associateActorToUseCase" width="800" label="associateActorToUseCase" height="600" userID="FLX" flexoID="20">
       <BehaviourControlGraph_Sequence id="109" userID="FLX" flexoID="193">
         <ControlGraph2_Sequence id="110" ownerContext="controlGraph2" userID="FLX" flexoID="190">
           <ControlGraph2_Sequence id="111" ownerContext="controlGraph2" userID="FLX" flexoID="187">
@@ -169,15 +169,15 @@
                     </ControlGraph2_Sequence>
                     <ControlGraph1_AssignationAction id="124" assign="useCaseProperty" ownerContext="controlGraph1" userID="FLX" flexoID="177">
                       <AssignableAction_AddOWLIndividual id="125" individualName="parameters.useCasePropertyURI" receiver="owl" assignation="useCaseProperty" userID="FLX" flexoID="63">
-                        <ObjectPropertyAssertion id="126" object="association" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#association" userID="FLX" flexoID="61" />
-                        <ObjectPropertyAssertion id="127" object="useCase" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#type" userID="FLX" flexoID="62" />
+                        <ObjectPropertyAssertion id="126" object="association" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#association" userID="FLX" flexoID="61" />
+                        <ObjectPropertyAssertion id="127" object="useCase" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#type" userID="FLX" flexoID="62" />
                       </AssignableAction_AddOWLIndividual>
                     </ControlGraph1_AssignationAction>
                   </ControlGraph2_Sequence>
                   <ControlGraph1_AssignationAction id="128" assign="actorProperty" ownerContext="controlGraph1" userID="FLX" flexoID="179">
                     <AssignableAction_AddOWLIndividual id="129" individualName="parameters.actorPropertyURI" receiver="owl" assignation="actorProperty" userID="FLX" flexoID="60">
-                      <ObjectPropertyAssertion id="130" object="association" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#association" userID="FLX" flexoID="58" />
-                      <ObjectPropertyAssertion id="131" object="actor" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl#type" userID="FLX" flexoID="59" />
+                      <ObjectPropertyAssertion id="130" object="association" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#association" userID="FLX" flexoID="58" />
+                      <ObjectPropertyAssertion id="131" object="actor" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl#type" userID="FLX" flexoID="59" />
                     </AssignableAction_AddOWLIndividual>
                   </ControlGraph1_AssignationAction>
                 </ControlGraph2_Sequence>
@@ -210,12 +210,12 @@
   <UseModelSlotDeclaration id="146" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
   <UseModelSlotDeclaration id="147" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="148" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="129" />
-  <OWLModelSlot id="149" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/UML/UML2.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="67" />
-  <TypedDiagramModelSlot id="150" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="68">
-    <FMLDiagramPaletteElementBinding id="151" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#Actor" userID="FLX" flexoID="2">
+  <OWLModelSlot id="149" metaModelURI="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="67" />
+  <TypedDiagramModelSlot id="150" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="68">
+    <FMLDiagramPaletteElementBinding id="151" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#Actor" userID="FLX" flexoID="2">
       <DropScheme idref="20" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="152" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#UseCase" userID="FLX" flexoID="6">
+    <FMLDiagramPaletteElementBinding id="152" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#UseCase" userID="FLX" flexoID="6">
       <DropScheme idref="65" />
     </FMLDiagramPaletteElementBinding>
   </TypedDiagramModelSlot>

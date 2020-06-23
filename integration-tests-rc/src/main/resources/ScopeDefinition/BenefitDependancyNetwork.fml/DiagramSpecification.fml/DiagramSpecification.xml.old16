@@ -4,7 +4,7 @@
     <DropScheme id="3" target="top" name="dropITEnablersAtTopLevel" label="dropITEnablersAtTopLevel" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <URIParameter id="4" base="&quot;ITEnablers&quot;" name="uri" label="uri" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <AddOWLIndividual id="5" conditional="" assignation="itEnablers" individualName="parameters.uri">
-        <AddressedOWLModelSlot id="6" isRequired="false" isReadOnly="false" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl" name="owl" />
+        <AddressedOWLModelSlot id="6" isRequired="false" isReadOnly="false" metaModelURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl" name="owl" />
       </AddOWLIndividual>
       <AddShape id="7" container="topLevel" extendParentBoundsToHostThisShape="false" conditional="" assignation="shape">
 	   <AddressedDiagramModelSlot idref="264" />
@@ -13,7 +13,7 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="9" patternRole="itEnablers" name="itEnablers" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#ITEnablers" />
+    <ContainedOWLIndividualPatternRole id="9" patternRole="itEnablers" name="itEnablers" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#ITEnablers" />
     <ContainedShapePatternRole id="10" patternRole="shape" name="shape" exampleLabel="">
       <ShapeGraphicalRepresentation id="11" x="-1.0" y="4.0" width="150.0" height="600.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="-1" yConstraints="4" widthConstraints="150" heightConstraints="600" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="12" noStroke="false" color="102,102,102" lineWidth="0.3999999985098839" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -65,7 +65,7 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="43" patternRole="enablingChanges" name="enablingChanges" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#EnablingChanges" />
+    <ContainedOWLIndividualPatternRole id="43" patternRole="enablingChanges" name="enablingChanges" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#EnablingChanges" />
     <ContainedShapePatternRole id="44" patternRole="shape" name="shape" exampleLabel="">
       <ShapeGraphicalRepresentation id="45" x="167.0" y="4.0" width="150.0" height="600.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="167" yConstraints="4" widthConstraints="150" heightConstraints="600" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="46" noStroke="false" color="102,102,102" lineWidth="0.3999999985098839" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -117,7 +117,7 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="75" patternRole="businessChanges" name="businessChanges" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#BusinessChanges" />
+    <ContainedOWLIndividualPatternRole id="75" patternRole="businessChanges" name="businessChanges" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#BusinessChanges" />
     <ContainedShapePatternRole id="76" patternRole="shape" name="shape" exampleLabel="">
       <ShapeGraphicalRepresentation id="77" x="335.0" y="4.0" width="280.0" height="600.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="335" yConstraints="4" widthConstraints="280" heightConstraints="600" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="78" noStroke="false" color="102,102,102" lineWidth="0.3999999985098839" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -169,7 +169,7 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="109" patternRole="benefits" name="benefits" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#Benefits" />
+    <ContainedOWLIndividualPatternRole id="109" patternRole="benefits" name="benefits" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#Benefits" />
     <ContainedShapePatternRole id="110" patternRole="shape" name="shape" exampleLabel="">
       <ShapeGraphicalRepresentation id="111" x="628.0" y="4.0" width="150.0" height="600.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="628" yConstraints="4" widthConstraints="150" heightConstraints="600" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="112" noStroke="false" color="102,102,102" lineWidth="0.3999999985098839" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -221,7 +221,7 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="141" patternRole="investmentObjectives" name="investmentObjectives" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#InvestmentObjectives" />
+    <ContainedOWLIndividualPatternRole id="141" patternRole="investmentObjectives" name="investmentObjectives" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#InvestmentObjectives" />
     <ContainedShapePatternRole id="142" patternRole="shape" name="shape" exampleLabel="">
       <ShapeGraphicalRepresentation id="143" x="791.0" y="3.0" width="150.0" height="600.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="false" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="true" xConstraints="791" yConstraints="3" widthConstraints="150" heightConstraints="600" identifier="object_0" layer="1" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="144" noStroke="false" color="102,102,102" lineWidth="0.3999999985098839" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -261,12 +261,12 @@
     </Inspector>
   </EditionPattern>
   <EditionPattern id="168" name="BDNItem">
-    <DropScheme id="169" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#ITEnablers" name="dropBDNItemInITEnablers" label="dropBDNItemInITEnablers" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="169" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#ITEnablers" name="dropBDNItemInITEnablers" label="dropBDNItemInITEnablers" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="10" />
       <URIParameter id="170" base="&quot;BDNItem&quot;" name="uri" label="uri" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <AddOWLIndividual id="171" conditional="" assignation="bdnItem" individualName="parameters.uri">
-        <DataPropertyAssertion id="172" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
-        <ObjectPropertyAssertion id="173" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.itEnablers" conditional="" />
+        <DataPropertyAssertion id="172" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
+        <ObjectPropertyAssertion id="173" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.itEnablers" conditional="" />
         <AddressedOWLModelSlot idref="6" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="174" object="bdnItem" conditional="" assignation="containsItem" subject="target.itEnablers" />
@@ -274,12 +274,12 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <DropScheme id="176" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#EnablingChanges" name="dropBDNItemInEnablingChanges" label="dropBDNItemInEnablingChanges" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="176" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#EnablingChanges" name="dropBDNItemInEnablingChanges" label="dropBDNItemInEnablingChanges" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="44" />
       <URIParameter id="177" base="&quot;BDNItem&quot;" name="uri" label="uri" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <AddOWLIndividual id="178" conditional="" assignation="bdnItem" individualName="parameters.uri">
-        <DataPropertyAssertion id="179" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
-        <ObjectPropertyAssertion id="180" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.enablingChanges" conditional="" />
+        <DataPropertyAssertion id="179" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
+        <ObjectPropertyAssertion id="180" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.enablingChanges" conditional="" />
         <AddressedOWLModelSlot idref="6" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="181" object="bdnItem" conditional="" assignation="containsItem" subject="target.enablingChanges" />
@@ -287,12 +287,12 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <DropScheme id="183" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#BusinessChanges" name="dropBDNItemInBusinessChanges" label="dropBDNItemInBusinessChanges" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="183" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#BusinessChanges" name="dropBDNItemInBusinessChanges" label="dropBDNItemInBusinessChanges" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="76" />
       <URIParameter id="184" base="&quot;BDNItem&quot;" name="uri" label="uri" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <AddOWLIndividual id="185" conditional="" assignation="bdnItem" individualName="parameters.uri">
-        <DataPropertyAssertion id="186" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
-        <ObjectPropertyAssertion id="187" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.businessChanges" conditional="" />
+        <DataPropertyAssertion id="186" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
+        <ObjectPropertyAssertion id="187" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.businessChanges" conditional="" />
         <AddressedOWLModelSlot idref="6" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="188" object="bdnItem" conditional="" assignation="containsItem" subject="target.businessChanges" />
@@ -300,12 +300,12 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <DropScheme id="190" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#Benefits" name="dropBDNItemInBenefits" label="dropBDNItemInBenefits" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="190" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#Benefits" name="dropBDNItemInBenefits" label="dropBDNItemInBenefits" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="110" />
       <URIParameter id="191" base="&quot;BDNItem&quot;" name="uri" label="uri" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <AddOWLIndividual id="192" conditional="" assignation="bdnItem" individualName="parameters.uri">
-        <DataPropertyAssertion id="193" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
-        <ObjectPropertyAssertion id="194" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.benefits" conditional="" />
+        <DataPropertyAssertion id="193" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
+        <ObjectPropertyAssertion id="194" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.benefits" conditional="" />
         <AddressedOWLModelSlot idref="6" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="195" object="bdnItem" conditional="" assignation="containsItem" subject="target.benefits" />
@@ -313,12 +313,12 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <DropScheme id="197" target="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#InvestmentObjectives" name="dropBDNItemInInvestmentObjectives" label="dropBDNItemInInvestmentObjectives" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <DropScheme id="197" target="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#InvestmentObjectives" name="dropBDNItemInInvestmentObjectives" label="dropBDNItemInInvestmentObjectives" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <ContextShapePatternRole idref="142" />
       <URIParameter id="198" base="&quot;BDNItem&quot;" name="uri" label="uri" defaultValue="" usePaletteLabelAsDefaultValue="false" conditional="" isRequired="true" />
       <AddOWLIndividual id="199" conditional="" assignation="bdnItem" individualName="parameters.uri">
-        <DataPropertyAssertion id="200" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
-        <ObjectPropertyAssertion id="201" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.investmentObjectives" conditional="" />
+        <DataPropertyAssertion id="200" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#itemName" value="&quot;Item&quot;" conditional="" />
+        <ObjectPropertyAssertion id="201" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#isContainedInGroup" object="target.investmentObjectives" conditional="" />
         <AddressedOWLModelSlot idref="6" />
       </AddOWLIndividual>
       <AddObjectPropertyStatement id="202" object="bdnItem" conditional="" assignation="containsItem" subject="target.investmentObjectives" />
@@ -326,7 +326,7 @@
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddShape>
     </DropScheme>
-    <ContainedOWLIndividualPatternRole id="204" patternRole="bdnItem" name="bdnItem" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#BDNItem" />
+    <ContainedOWLIndividualPatternRole id="204" patternRole="bdnItem" name="bdnItem" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#BDNItem" />
     <ContainedShapePatternRole id="205" patternRole="shape" name="shape" exampleLabel="Item">
       <ShapeGraphicalRepresentation id="206" x="81.0" y="15.0" width="111.0" height="62.0" minimalWidth="0.0" minimalHeight="0.0" maximalWidth="Infinity" maximalHeight="Infinity" relativeTextX="0.5" relativeTextY="0.5" lineWrap="true" locationConstraints="FREELY_MOVABLE" dimensionConstraints="FREELY_RESIZABLE" adjustMinimalWidthToLabelWidth="true" adjustMinimalHeightToLabelHeight="true" adjustMaximalWidthToLabelWidth="false" adjustMaximalHeightToLabelHeight="false" hasSelectedForeground="false" hasSelectedBackground="false" hasFocusedForeground="false" hasFocusedBackground="false" isFloatingLabel="false" allowToLeaveBounds="false" xConstraints="" yConstraints="" widthConstraints="" heightConstraints="" identifier="object_0" layer="2" hasText="true" isMultilineAllowed="true" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="207" noStroke="false" color="204,153,0" lineWidth="1.0" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -343,7 +343,7 @@
 	  <AddressedDiagramModelSlot idref="264" />
       <GRSpec id="217" featureName="label" value="bdnItem.itemName" readOnly="false" />
     </ContainedShapePatternRole>
-    <ContainedObjectPropertyStatementPatternRole id="218" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#containsItem" patternRole="containsItem" name="containsItem" />
+    <ContainedObjectPropertyStatementPatternRole id="218" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#containsItem" patternRole="containsItem" name="containsItem" />
     <ContainedFlexoModelObjectPatternRole id="219" flexoModelObjectType="Process" patternRole="process" name="process" />
     <ContainedFlexoModelObjectPatternRole id="220" flexoModelObjectType="Activity" patternRole="activity" name="activity" />
     <PrimaryConceptOWLIndividualPatternRole idref="204" />
@@ -357,13 +357,13 @@
     </Inspector>
   </EditionPattern>
   <EditionPattern id="227" name="ItemDependancy">
-    <LinkScheme id="228" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#BDNItem" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#BDNItem" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="linkBDNItemToBDNItem" label="linkBDNItemToBDNItem" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
+    <LinkScheme id="228" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#BDNItem" toTarget="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl#BDNItem" isAvailableWithFloatingPalette="true" northDirectionSupported="true" eastDirectionSupported="true" southDirectionSupported="true" westDirectionSupported="true" name="linkBDNItemToBDNItem" label="linkBDNItemToBDNItem" skipConfirmationPanel="true" definePopupDefaultSize="false" width="800" height="600">
       <AddObjectPropertyStatement id="229" object="fromTarget.bdnItem" conditional="" assignation="dependsOfStatement" subject="toTarget.bdnItem" />
       <AddConnector id="230" fromShape="fromTarget.shape" toShape="toTarget.shape" conditional="" assignation="connector" >
 		<AddressedDiagramModelSlot idref="264" />
 	  </AddConnector>
     </LinkScheme>
-    <ContainedObjectPropertyStatementPatternRole id="231" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#dependsOf" patternRole="dependsOfStatement" name="dependsOfStatement" />
+    <ContainedObjectPropertyStatementPatternRole id="231" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl#dependsOf" patternRole="dependsOfStatement" name="dependsOfStatement" />
     <ContainedConnectorPatternRole id="232" patternRole="connector" name="connector" exampleLabel="">
       <ConnectorGraphicalRepresentation id="233" hasSelectedForeground="false" hasFocusedForeground="false" startSymbol="NONE" endSymbol="ARROW" middleSymbol="NONE" startSymbolSize="10.0" endSymbolSize="10.0" middleSymbolSize="10.0" relativeMiddleSymbolLocation="0.5" applyForegroundToSymbols="true" identifier="object_2" layer="64" hasText="true" isMultilineAllowed="false" continuousTextEditing="true" absoluteTextX="0.0" absoluteTextY="0.0" paragraphAlignment="CENTER" horizontalTextAlignment="CENTER" verticalTextAlignment="MIDDLE" isSelectable="true" isFocusable="true" drawControlPointsWhenFocused="true" drawControlPointsWhenSelected="true" isReadOnly="false" isLabelEditable="true" isVisible="true">
         <ForegroundStyle id="234" noStroke="false" color="102,102,102" lineWidth="2.200000001490116" joinStyle="JOIN_MITER" capStyle="CAP_SQUARE" dashStyle="PLAIN_STROKE" useTransparency="false" transparencyLevel="0.5" />
@@ -407,6 +407,6 @@
   </EditionPattern>
   <LocalizedDictionary id="263" />
   <OWLModelSlot idref="6" />
-  <DiagramModelSlot id="264" isRequired="false" name="this" virtualModelURI="http://www.agilebirds.com/openflexo/ViewPoints/Basic/BasicOntology.owl/DiagramSpecification" isReadOnly="false" />
+  <DiagramModelSlot id="264" isRequired="false" name="this" virtualModelURI="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntology.owl/DiagramSpecification" isReadOnly="false" />
   <Inspector id="265" inspectorTitle="DiagramSpecification" />
 </DiagramSpecification>

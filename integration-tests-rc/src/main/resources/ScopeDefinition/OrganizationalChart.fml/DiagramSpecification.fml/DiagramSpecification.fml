@@ -5,11 +5,11 @@ use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
  * 
  * @version 0.1
  */
-@VirtualModel(uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml")
+@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml")
 public class DiagramSpecification {
 
-  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_94 conformTo="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
+  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_94 conformTo="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" required=false readOnly=false;
+  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
   public DiagramType<DiagramSpecification> typedDiagramModelSlot;
 
   @FlexoConcept  

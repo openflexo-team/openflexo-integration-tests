@@ -45,6 +45,7 @@ import static org.junit.Assert.fail;
 import java.util.logging.Logger;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.eamodule.EAModule;
 import org.openflexo.eamodule.EnterpriseArchitectureModule;
@@ -62,6 +63,7 @@ import org.openflexo.om.OpenflexoModeller;
 import org.openflexo.prefs.PreferencesService;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
+import org.openflexo.test.UITest;
 import org.openflexo.view.controller.TechnologyAdapterControllerService;
 
 @RunWith(OrderedRunner.class)
@@ -76,6 +78,7 @@ public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {
 	 */
 	@Test
 	@TestOrder(1)
+	@Category(UITest.class)
 	public void testUseTestApplicationContext() {
 		log("testUseTestApplicationContext()");
 		instanciateTestServiceManager();
@@ -99,6 +102,7 @@ public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {
 	 */
 	@Test
 	@TestOrder(2)
+	@Category(UITest.class)
 	public void testOMModuleLoading() {
 		log("testOMModuleLoading()");
 
@@ -121,6 +125,7 @@ public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {
 	 */
 	@Test
 	@TestOrder(5)
+	@Category(UITest.class)
 	public void testFMEModuleLoading() {
 		log("testFMEModuleLoading()");
 
@@ -143,6 +148,7 @@ public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {
 	 */
 	@Test
 	@TestOrder(6)
+	@Category(UITest.class)
 	public void testEAModuleLoading() {
 		log("testEAModuleLoading()");
 

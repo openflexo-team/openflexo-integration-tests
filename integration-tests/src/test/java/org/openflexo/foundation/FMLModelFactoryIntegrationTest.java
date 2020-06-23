@@ -55,10 +55,10 @@ import org.openflexo.foundation.technologyadapter.TechnologyAdapter;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
 import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.logging.FlexoLogger;
-import org.openflexo.model.ModelContext;
-import org.openflexo.model.ModelEntity;
-import org.openflexo.model.exceptions.MissingImplementationException;
-import org.openflexo.model.exceptions.ModelDefinitionException;
+import org.openflexo.pamela.ModelContext;
+import org.openflexo.pamela.ModelEntity;
+import org.openflexo.pamela.exceptions.MissingImplementationException;
+import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.technologyadapter.emf.EMFTechnologyAdapter;
 import org.openflexo.technologyadapter.excel.ExcelTechnologyAdapter;
@@ -104,7 +104,7 @@ public class FMLModelFactoryIntegrationTest extends OpenflexoTestCase {
 		assertNotNull(taService.getTechnologyAdapter(XMLTechnologyAdapter.class));
 	}
 
-	private static void testVirtualModelModelFactoryWithTechnologyAdapter(TechnologyAdapter ta) {
+	private static void testVirtualModelModelFactoryWithTechnologyAdapter(TechnologyAdapter<?> ta) {
 		assertNotNull(ta);
 		try {
 			System.out.println("Instanciating FMLModelFactory");

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl" version="0.1" name="OrganizationalChart" userID="FLX" flexoID="3">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl" version="0.1" name="OrganizationalChart" userID="FLX" flexoID="3">
   <Inspector id="1" inspectorTitle="OrganizationalChart" userID="FLX" flexoID="2" />
 </VirtualModel>

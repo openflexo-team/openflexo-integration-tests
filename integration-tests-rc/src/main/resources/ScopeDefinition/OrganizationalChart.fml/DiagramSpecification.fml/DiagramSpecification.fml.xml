@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="0" modelVersion="1.0" uri="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="1">
+<VirtualModel id="0" modelVersion="1.0" uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml" version="0.1" name="DiagramSpecification" userID="FLX" flexoID="1">
   <FlexoConcept id="1" name="Actor" userID="FLX" flexoID="42">
     <Inspector id="2" inspectorTitle="Actor" userID="FLX" flexoID="41">
       <GenericInspectorEntry id="3" widget="TEXT_FIELD" data="actor.firstName" name="firstName" label="firstName" type="java.lang.String" userID="FLX" flexoID="36" />
@@ -8,7 +8,7 @@
       <GenericInspectorEntry id="6" widget="CUSTOM_WIDGET" data="actor" name="position" label="position" type="org.openflexo.foundation.ontology.IFlexoOntologyIndividual" userID="FLX" flexoID="39" />
       <GenericInspectorEntry id="7" readOnly="true" widget="TEXT_FIELD" data="actor.isInvolvedInOrganizationUnit.uriName" name="organizationUnit" label="organizationUnit" type="java.lang.String" userID="FLX" flexoID="40" />
     </Inspector>
-    <OWLIndividualRole id="8" ontologicType="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Actor" cloningStrategy="Clone" cardinality="ZeroOne" name="actor" userID="FLX" flexoID="6" />
+    <OWLIndividualRole id="8" ontologicType="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#Actor" cloningStrategy="Clone" cardinality="ZeroOne" name="actor" userID="FLX" flexoID="6" />
     <ShapeRole id="9" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="FLX" flexoID="7">
       <ShapeGraphicalRepresentation id="10" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="10.0" y="10.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="170.9725117248567" height="58.60160965794768" identifier="object_0" layer="1">
         <SelectedColorGradientBackgroundStyle id="11" color1="255,153,153" color2="255,255,255" direction="NORTH_SOUTH" transparencyLevel="0.5" />
@@ -88,9 +88,9 @@
         </ControlGraph2_Sequence>
         <ControlGraph1_AssignationAction id="67" assign="actor" ownerContext="controlGraph1" userID="FLX" flexoID="28">
           <AssignableAction_AddOWLIndividual id="68" individualName="parameters.uri" receiver="owl" assignation="actor" userID="FLX" flexoID="27">
-            <DataPropertyAssertion id="69" value="parameters.firstName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#firstName" userID="FLX" flexoID="24" />
-            <DataPropertyAssertion id="70" value="parameters.lastName" dataPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#lastName" userID="FLX" flexoID="25" />
-            <ObjectPropertyAssertion id="71" object="parameters.position" objectPropertyURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPosition" userID="FLX" flexoID="26" />
+            <DataPropertyAssertion id="69" value="parameters.firstName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#firstName" userID="FLX" flexoID="24" />
+            <DataPropertyAssertion id="70" value="parameters.lastName" dataPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#lastName" userID="FLX" flexoID="25" />
+            <ObjectPropertyAssertion id="71" object="parameters.position" objectPropertyURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasPosition" userID="FLX" flexoID="26" />
           </AssignableAction_AddOWLIndividual>
         </ControlGraph1_AssignationAction>
       </BehaviourControlGraph_Sequence>
@@ -105,7 +105,7 @@
     <Inspector id="78" inspectorTitle="CollaboratorLink" userID="FLX" flexoID="56">
       <GenericInspectorEntry id="79" readOnly="true" widget="TEXT_FIELD" data="hasCollaboratorStatement.displayableRepresentation.toString" name="statement" label="statement" type="java.lang.String" userID="FLX" flexoID="55" />
     </Inspector>
-    <ObjectPropertyStatementRole id="80" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasCollaborator" cloningStrategy="Clone" cardinality="ZeroOne" name="hasCollaboratorStatement" userID="FLX" flexoID="43" />
+    <ObjectPropertyStatementRole id="80" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasCollaborator" cloningStrategy="Clone" cardinality="ZeroOne" name="hasCollaboratorStatement" userID="FLX" flexoID="43" />
     <ConnectorRole id="81" exampleLabel="" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="FLX" flexoID="44">
       <ConnectorGraphicalRepresentation id="82" identifier="object_2" layer="64">
         <ForegroundStyle id="83" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="1.6000000014901161" />
@@ -114,8 +114,8 @@
         <TextStyle id="86" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
       </ConnectorGraphicalRepresentation>
     </ConnectorRole>
-    <ObjectPropertyStatementRole id="87" objectProperty="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasManager" cloningStrategy="Clone" cardinality="ZeroOne" name="hasManagerStatement" userID="FLX" flexoID="45" />
-    <LinkScheme id="88" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml#Actor" toTarget="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml#Actor" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="linkActorToActor" width="800" label="linkActorToActor" height="600" userID="FLX" flexoID="54">
+    <ObjectPropertyStatementRole id="87" objectProperty="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl#hasManager" cloningStrategy="Clone" cardinality="ZeroOne" name="hasManagerStatement" userID="FLX" flexoID="45" />
+    <LinkScheme id="88" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml#Actor" toTarget="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml#Actor" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" name="linkActorToActor" width="800" label="linkActorToActor" height="600" userID="FLX" flexoID="54">
       <BehaviourControlGraph_Sequence id="89" userID="FLX" flexoID="53">
         <ControlGraph2_Sequence id="90" ownerContext="controlGraph2" userID="FLX" flexoID="50">
           <ControlGraph2_AssignationAction id="91" assign="hasManagerStatement" ownerContext="controlGraph2" userID="FLX" flexoID="47">
@@ -134,36 +134,36 @@
   <UseModelSlotDeclaration id="97" modelSlotClass="org.openflexo.technologyadapter.owl.OWLModelSlot" userID="FLX" flexoID="-1" />
   <UseModelSlotDeclaration id="98" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="99" inspectorTitle="DiagramSpecification" userID="FLX" flexoID="2" />
-  <OWLModelSlot id="100" metaModelURI="http://www.agilebirds.com/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="58" />
-  <TypedDiagramModelSlot id="101" metaModelURI="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="69">
-    <FMLDiagramPaletteElementBinding id="102" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="59">
+  <OWLModelSlot id="100" metaModelURI="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" cloningStrategy="Reference" cardinality="ZeroOne" name="owl" userID="FLX" flexoID="58" />
+  <TypedDiagramModelSlot id="101" metaModelURI="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="typedDiagramModelSlot" userID="FLX" flexoID="69">
+    <FMLDiagramPaletteElementBinding id="102" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="59">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="103" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="60">
+    <FMLDiagramPaletteElementBinding id="103" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="60">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="104" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="61">
+    <FMLDiagramPaletteElementBinding id="104" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="61">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="105" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="62">
+    <FMLDiagramPaletteElementBinding id="105" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="62">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="106" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="63">
+    <FMLDiagramPaletteElementBinding id="106" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="63">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="107" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="64">
+    <FMLDiagramPaletteElementBinding id="107" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="64">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="108" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="65">
+    <FMLDiagramPaletteElementBinding id="108" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="65">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="109" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="66">
+    <FMLDiagramPaletteElementBinding id="109" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="66">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="110" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="67">
+    <FMLDiagramPaletteElementBinding id="110" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="67">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
-    <FMLDiagramPaletteElementBinding id="111" paletteElementId="http://www.agilebirds.com/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="68">
+    <FMLDiagramPaletteElementBinding id="111" paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor" userID="FLX" flexoID="68">
       <DropScheme idref="54" />
     </FMLDiagramPaletteElementBinding>
   </TypedDiagramModelSlot>

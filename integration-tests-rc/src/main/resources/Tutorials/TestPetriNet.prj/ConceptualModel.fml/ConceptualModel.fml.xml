@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="SYL-5" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml" version="0.1" name="ConceptualModel" description="Conceptual model for TestPetriNet" userID="SYL" flexoID="5">
+  <FlexoConcept id="SYL-6" name="Place" userID="SYL" flexoID="6">
+    <Inspector id="SYL-7" renderer="instance.name" inspectorTitle="Place" userID="SYL" flexoID="7">
+      <InspectorEntry id="SYL-8" widget="TEXT_FIELD" data="name" name="name" label="name" type="java.lang.String" userID="SYL" flexoID="8" />
+      <InspectorEntry id="SYL-9" widget="TEXT_AREA" data="description" name="description" label="description" type="java.lang.String" userID="SYL" flexoID="9" />
+    </Inspector>
+    <PrimitiveRole id="SYL-10" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="name" userID="SYL" flexoID="10" />
+    <PrimitiveRole id="SYL-11" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="description" userID="SYL" flexoID="11" />
+    <PrimitiveRole id="SYL-12" primitiveType="Integer" cloningStrategy="Clone" cardinality="ZeroOne" name="tokenNb" userID="SYL" flexoID="12" />
+    <CreationScheme id="SYL-13" label="create" name="create" width="800" height="600" userID="SYL" flexoID="13">
+      <BehaviourControlGraph_Sequence id="SYL-108" userID="SYL" flexoID="108">
+        <ControlGraph2_AssignationAction id="SYL-107" assign="tokenNb" ownerContext="controlGraph2" userID="SYL" flexoID="107">
+          <AssignableAction_ExpressionAction id="SYL-106" expression="0" userID="SYL" flexoID="106" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="SYL-14" assign="name" ownerContext="controlGraph1" userID="SYL" flexoID="14">
+          <AssignableAction_ExpressionAction id="SYL-15" expression="parameters.conceptName" userID="SYL" flexoID="15" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="SYL-16" widget="TEXT_FIELD" name="conceptName" type="java.lang.String" userID="SYL" flexoID="16" />
+    </CreationScheme>
+    <DeletionScheme id="SYL-17" label="delete" name="delete" width="800" height="600" userID="SYL" flexoID="17">
+      <BehaviourControlGraph_EmptyControlGraph id="SYL-18" userID="SYL" flexoID="18" />
+    </DeletionScheme>
+    <ActionScheme id="SYL-149" visibility="Public" label="refresh" name="refresh" width="800" height="600" userID="SYL" flexoID="149">
+      <BehaviourControlGraph_NotifyPropertyChangedAction id="SYL-151" propertyName="tokenNb" object="this" userID="SYL" flexoID="151" />
+    </ActionScheme>
+  </FlexoConcept>
+  <FlexoConcept id="SYL-19" name="Transition" userID="SYL" flexoID="19">
+    <Inspector id="SYL-20" renderer="instance.name" inspectorTitle="Transition" userID="SYL" flexoID="20">
+      <InspectorEntry id="SYL-21" widget="TEXT_FIELD" data="name" name="name" label="name" type="java.lang.String" userID="SYL" flexoID="21" />
+      <InspectorEntry id="SYL-22" widget="TEXT_AREA" data="description" name="description" label="description" type="java.lang.String" userID="SYL" flexoID="22" />
+    </Inspector>
+    <PrimitiveRole id="SYL-23" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="name" userID="SYL" flexoID="23" />
+    <PrimitiveRole id="SYL-24" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="description" userID="SYL" flexoID="24" />
+    <FlexoConceptInstanceRole id="SYL-114" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#PlaceToTransitionEdge" cloningStrategy="Reference" cardinality="ZeroMany" name="incomings" userID="SYL" flexoID="114" />
+    <FlexoConceptInstanceRole id="SYL-115" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#TransitionToPlaceEdge" cloningStrategy="Reference" cardinality="ZeroMany" name="outgoings" userID="SYL" flexoID="115" />
+    <CreationScheme id="SYL-25" label="create" name="create" width="800" height="600" userID="SYL" flexoID="25">
+      <BehaviourControlGraph_AssignationAction id="SYL-26" assign="name" userID="SYL" flexoID="26">
+        <AssignableAction_ExpressionAction id="SYL-27" expression="parameters.conceptName" userID="SYL" flexoID="27" />
+      </BehaviourControlGraph_AssignationAction>
+      <GenericBehaviourParameter id="SYL-28" widget="TEXT_FIELD" name="conceptName" type="java.lang.String" userID="SYL" flexoID="28" />
+    </CreationScheme>
+    <DeletionScheme id="SYL-29" label="delete" name="delete" width="800" height="600" userID="SYL" flexoID="29">
+      <BehaviourControlGraph_EmptyControlGraph id="SYL-30" userID="SYL" flexoID="30" />
+    </DeletionScheme>
+    <ActionScheme id="SYL-109" visibility="Public" label="step" name="step" width="800" height="600" userID="SYL" flexoID="109">
+      <BehaviourControlGraph_ConditionalAction id="SYL-133" condition="this.isFireable()" userID="SYL" flexoID="133">
+        <ThenControlGraph_Sequence id="SYL-156" ownerContext="thenControlGraph" userID="SYL" flexoID="156">
+          <ControlGraph2_IterationAction id="SYL-153" iteratorName="incoming" ownerContext="controlGraph2" userID="SYL" flexoID="153">
+            <Iteration_ExpressionAction id="SYL-154" expression="incomings" ownerContext="iterationControlGraph" userID="SYL" flexoID="154" />
+            <ControlGraph_ExpressionAction id="SYL-155" expression="incoming.activate()" ownerContext="controlGraph" userID="SYL" flexoID="155" />
+          </ControlGraph2_IterationAction>
+          <ControlGraph1_IterationAction id="SYL-135" iteratorName="outgoing" ownerContext="controlGraph1" userID="SYL" flexoID="135">
+            <Iteration_ExpressionAction id="SYL-136" expression="outgoings" ownerContext="iterationControlGraph" userID="SYL" flexoID="136" />
+            <ControlGraph_ExpressionAction id="SYL-137" expression="outgoing.activate()" ownerContext="controlGraph" userID="SYL" flexoID="137" />
+          </ControlGraph1_IterationAction>
+        </ThenControlGraph_Sequence>
+      </BehaviourControlGraph_ConditionalAction>
+    </ActionScheme>
+    <ActionScheme id="SYL-110" label="isFireable" name="isFireable" width="800" height="600" userID="SYL" flexoID="110">
+      <BehaviourControlGraph_Sequence id="SYL-147" userID="SYL" flexoID="147">
+        <ControlGraph2_ReturnStatement id="SYL-146" ownerContext="controlGraph2" userID="SYL" flexoID="146">
+          <AssignableAction_ExpressionAction id="SYL-145" expression="true" userID="SYL" flexoID="145" />
+        </ControlGraph2_ReturnStatement>
+        <ControlGraph1_IterationAction id="SYL-139" iteratorName="incoming" ownerContext="controlGraph1" userID="SYL" flexoID="139">
+          <Iteration_ExpressionAction id="SYL-140" expression="incomings" ownerContext="iterationControlGraph" userID="SYL" flexoID="140" />
+          <ControlGraph_ConditionalAction id="SYL-142" condition="(!(incoming.isActivable()))" ownerContext="controlGraph" userID="SYL" flexoID="142">
+            <ThenControlGraph_ReturnStatement id="SYL-144" ownerContext="thenControlGraph" userID="SYL" flexoID="144">
+              <AssignableAction_ExpressionAction id="SYL-143" expression="false" userID="SYL" flexoID="143" />
+            </ThenControlGraph_ReturnStatement>
+          </ControlGraph_ConditionalAction>
+        </ControlGraph1_IterationAction>
+      </BehaviourControlGraph_Sequence>
+    </ActionScheme>
+  </FlexoConcept>
+  <FlexoConcept id="SYL-31" parentFlexoConceptsList="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Edge" name="PlaceToTransitionEdge" userID="SYL" flexoID="31">
+    <Inspector id="SYL-32" renderer="(((&quot;PlaceTransitionEdge &quot; + sourceConcept.name) + &quot; - &quot;) + destinationConcept.name)" inspectorTitle="PlaceTransitionEdge" userID="SYL" flexoID="32">
+      <InspectorEntry id="SYL-33" widget="CUSTOM_WIDGET" data="sourceConcept" name="sourceConcept" label="sourceConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Place&gt;" userID="SYL" flexoID="33" />
+      <InspectorEntry id="SYL-34" widget="CUSTOM_WIDGET" data="destinationConcept" name="destinationConcept" label="destinationConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Transition&gt;" userID="SYL" flexoID="34" />
+      <InspectorEntry id="SYL-148" widget="CHECKBOX" readOnly="true" data="this.isActivable()" name="isActivable" label="isActivable" type="java.lang.Boolean" userID="SYL" flexoID="148" />
+    </Inspector>
+    <FlexoConceptInstanceRole id="SYL-35" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Place" cloningStrategy="Reference" cardinality="ZeroOne" name="sourceConcept" userID="SYL" flexoID="35" />
+    <FlexoConceptInstanceRole id="SYL-36" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Transition" cloningStrategy="Reference" cardinality="ZeroOne" name="destinationConcept" userID="SYL" flexoID="36" />
+    <CreationScheme id="SYL-37" label="create" name="create" width="800" height="600" userID="SYL" flexoID="37">
+      <BehaviourControlGraph_Sequence id="SYL-38" userID="SYL" flexoID="38">
+        <ControlGraph2_Sequence id="SYL-104" ownerContext="controlGraph2" userID="SYL" flexoID="104">
+          <ControlGraph2_Sequence id="SYL-127" ownerContext="controlGraph2" userID="SYL" flexoID="127">
+            <ControlGraph2_AddToListAction id="SYL-118" list="destinationConcept.incomings" ownerContext="controlGraph2" userID="SYL" flexoID="118">
+              <AssignableAction_ExpressionAction id="SYL-117" expression="this" userID="SYL" flexoID="117" />
+            </ControlGraph2_AddToListAction>
+            <ControlGraph1_AssignationAction id="SYL-101" assign="weight" ownerContext="controlGraph1" userID="SYL" flexoID="101">
+              <AssignableAction_ExpressionAction id="SYL-100" expression="1" userID="SYL" flexoID="100" />
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="SYL-39" assign="destinationConcept" ownerContext="controlGraph1" userID="SYL" flexoID="39">
+            <AssignableAction_ExpressionAction id="SYL-40" expression="parameters.destinationConcept" userID="SYL" flexoID="40" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="SYL-41" assign="sourceConcept" ownerContext="controlGraph1" userID="SYL" flexoID="41">
+          <AssignableAction_ExpressionAction id="SYL-42" expression="parameters.sourceConcept" userID="SYL" flexoID="42" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="SYL-43" widget="CUSTOM_WIDGET" name="sourceConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Place&gt;" userID="SYL" flexoID="43" />
+      <GenericBehaviourParameter id="SYL-44" widget="CUSTOM_WIDGET" name="destinationConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Transition&gt;" userID="SYL" flexoID="44" />
+    </CreationScheme>
+    <DeletionScheme id="SYL-45" label="delete" name="delete" width="800" height="600" userID="SYL" flexoID="45">
+      <BehaviourControlGraph_EmptyControlGraph id="SYL-46" userID="SYL" flexoID="46" />
+    </DeletionScheme>
+    <ActionScheme id="SYL-121" label="isActivable" name="isActivable" width="800" height="600" userID="SYL" flexoID="121">
+      <BehaviourControlGraph_ReturnStatement id="SYL-123" userID="SYL" flexoID="123">
+        <AssignableAction_ExpressionAction id="SYL-122" expression="(sourceConcept.tokenNb &gt;= weight)" userID="SYL" flexoID="122" />
+      </BehaviourControlGraph_ReturnStatement>
+    </ActionScheme>
+    <ActionScheme id="SYL-124" label="activate" name="activate" width="800" height="600" userID="SYL" flexoID="124">
+      <BehaviourControlGraph_AssignationAction id="SYL-126" assign="sourceConcept.tokenNb" userID="SYL" flexoID="126">
+        <AssignableAction_ExpressionAction id="SYL-125" expression="(sourceConcept.tokenNb - weight)" userID="SYL" flexoID="125" />
+      </BehaviourControlGraph_AssignationAction>
+    </ActionScheme>
+  </FlexoConcept>
+  <FlexoConcept id="SYL-47" parentFlexoConceptsList="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Edge" name="TransitionToPlaceEdge" userID="SYL" flexoID="47">
+    <Inspector id="SYL-48" renderer="(((&quot;TransitionPlaceEdge &quot; + sourceConcept.name) + &quot; - &quot;) + destinationConcept.name)" inspectorTitle="TransitionPlaceEdge" userID="SYL" flexoID="48">
+      <InspectorEntry id="SYL-49" widget="CUSTOM_WIDGET" data="sourceConcept" name="sourceConcept" label="sourceConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Transition&gt;" userID="SYL" flexoID="49" />
+      <InspectorEntry id="SYL-50" widget="CUSTOM_WIDGET" data="destinationConcept" name="destinationConcept" label="destinationConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Place&gt;" userID="SYL" flexoID="50" />
+    </Inspector>
+    <FlexoConceptInstanceRole id="SYL-51" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Transition" cloningStrategy="Reference" cardinality="ZeroOne" name="sourceConcept" userID="SYL" flexoID="51" />
+    <FlexoConceptInstanceRole id="SYL-52" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Place" cloningStrategy="Reference" cardinality="ZeroOne" name="destinationConcept" userID="SYL" flexoID="52" />
+    <CreationScheme id="SYL-53" label="create" name="create" width="800" height="600" userID="SYL" flexoID="53">
+      <BehaviourControlGraph_Sequence id="SYL-54" userID="SYL" flexoID="54">
+        <ControlGraph2_Sequence id="SYL-105" ownerContext="controlGraph2" userID="SYL" flexoID="105">
+          <ControlGraph2_Sequence id="SYL-128" ownerContext="controlGraph2" userID="SYL" flexoID="128">
+            <ControlGraph2_AddToListAction id="SYL-120" list="sourceConcept.outgoings" ownerContext="controlGraph2" userID="SYL" flexoID="120">
+              <AssignableAction_ExpressionAction id="SYL-119" expression="this" userID="SYL" flexoID="119" />
+            </ControlGraph2_AddToListAction>
+            <ControlGraph1_AssignationAction id="SYL-103" assign="weight" ownerContext="controlGraph1" userID="SYL" flexoID="103">
+              <AssignableAction_ExpressionAction id="SYL-102" expression="1" userID="SYL" flexoID="102" />
+            </ControlGraph1_AssignationAction>
+          </ControlGraph2_Sequence>
+          <ControlGraph1_AssignationAction id="SYL-55" assign="destinationConcept" ownerContext="controlGraph1" userID="SYL" flexoID="55">
+            <AssignableAction_ExpressionAction id="SYL-56" expression="parameters.destinationConcept" userID="SYL" flexoID="56" />
+          </ControlGraph1_AssignationAction>
+        </ControlGraph2_Sequence>
+        <ControlGraph1_AssignationAction id="SYL-57" assign="sourceConcept" ownerContext="controlGraph1" userID="SYL" flexoID="57">
+          <AssignableAction_ExpressionAction id="SYL-58" expression="parameters.sourceConcept" userID="SYL" flexoID="58" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="SYL-59" widget="CUSTOM_WIDGET" name="sourceConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Transition&gt;" userID="SYL" flexoID="59" />
+      <GenericBehaviourParameter id="SYL-60" widget="CUSTOM_WIDGET" name="destinationConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Place&gt;" userID="SYL" flexoID="60" />
+    </CreationScheme>
+    <DeletionScheme id="SYL-61" label="delete" name="delete" width="800" height="600" userID="SYL" flexoID="61">
+      <BehaviourControlGraph_EmptyControlGraph id="SYL-62" userID="SYL" flexoID="62" />
+    </DeletionScheme>
+    <ActionScheme id="SYL-129" label="activate" name="activate" width="800" height="600" userID="SYL" flexoID="129">
+      <BehaviourControlGraph_AssignationAction id="SYL-131" assign="destinationConcept.tokenNb" userID="SYL" flexoID="131">
+        <AssignableAction_ExpressionAction id="SYL-130" expression="(destinationConcept.tokenNb + weight)" userID="SYL" flexoID="130" />
+      </BehaviourControlGraph_AssignationAction>
+    </ActionScheme>
+  </FlexoConcept>
+  <FlexoConcept id="SYL-63" isAbstract="true" name="Edge" userID="SYL" flexoID="63">
+    <Inspector id="SYL-64" inspectorTitle="Edge" userID="SYL" flexoID="64">
+      <InspectorEntry id="SYL-71" widget="INTEGER" data="this.weight" name="weight" label="weight" type="java.lang.Integer" userID="SYL" flexoID="71" />
+    </Inspector>
+    <PrimitiveRole id="SYL-70" primitiveType="Integer" cloningStrategy="Clone" cardinality="One" name="weight" userID="SYL" flexoID="70" />
+    <CreationScheme id="SYL-68" label="create" name="create" width="800" height="600" userID="SYL" flexoID="68">
+      <BehaviourControlGraph_AssignationAction id="SYL-99" assign="weight" userID="SYL" flexoID="99">
+        <AssignableAction_ExpressionAction id="SYL-98" expression="1" userID="SYL" flexoID="98" />
+      </BehaviourControlGraph_AssignationAction>
+    </CreationScheme>
+    <DeletionScheme id="SYL-69" label="delete" name="delete" width="800" height="600" userID="SYL" flexoID="69">
+      <BehaviourControlGraph_EmptyControlGraph id="SYL-79" userID="SYL" flexoID="79" />
+    </DeletionScheme>
+  </FlexoConcept>
+  <Inspector id="SYL-1" inspectorTitle="ConceptualModel" userID="SYL" flexoID="1" />
+  <ActionScheme id="SYL-175" label="execute" name="execute" width="800" height="600" userID="SYL" flexoID="175">
+    <BehaviourControlGraph_IterationAction id="SYL-177" iteratorName="transition" userID="SYL" flexoID="177">
+      <Iteration_SelectFlexoConceptInstance id="SYL-179" container="this" flexoConceptTypeURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml#Transition" receiver="this" ownerContext="iterationControlGraph" userID="SYL" flexoID="179" />
+      <ControlGraph_ConditionalAction id="SYL-181" condition="transition.isFireable()" ownerContext="controlGraph" userID="SYL" flexoID="181">
+        <ThenControlGraph_ExpressionAction id="SYL-182" expression="transition.step()" ownerContext="thenControlGraph" userID="SYL" flexoID="182" />
+      </ControlGraph_ConditionalAction>
+    </BehaviourControlGraph_IterationAction>
+  </ActionScheme>
+</VirtualModel>
