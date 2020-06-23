@@ -1,0 +1,161 @@
+
+/**
+ * Conceptual model for TestPetriNet
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml")
+public class ConceptualModel {
+
+  @ActionScheme  
+  Void execute() {  
+    for (transition : this.SelectFlexoConceptInstance(type=Transition)) {    
+      if transition.isFireable() {      
+        transition.step()      
+      }    
+    }  
+  }  
+
+
+  @FlexoConcept  
+  public class Place {  
+  
+    public String name;  
+    public String description;  
+    public int tokenNb;  
+  
+    @CreationScheme    
+    Place:create(String conceptName) {    
+      name = parameters.conceptName;      
+      tokenNb = 0;    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+    @ActionScheme    
+    public Void refresh() {    
+      this.firePropertyChange tokenNb    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Transition {  
+  
+    public String name;  
+    public String description;  
+    public List incomings;  
+    public List outgoings;  
+  
+    @CreationScheme    
+    Transition:create(String conceptName) {    
+      name = parameters.conceptName;    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+    @ActionScheme    
+    public Void step() {    
+      if this.isFireable() {      
+        for (outgoing : outgoings) {        
+          outgoing.activate()        
+        }        
+        for (incoming : incomings) {        
+          incoming.activate()        
+        }      
+      }    
+    }    
+  
+    @ActionScheme    
+    Boolean isFireable() {    
+      for (incoming : incomings) {      
+        if (!(incoming.isActivable())) {        
+          return false;        
+        }      
+      }      
+      return true;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class PlaceToTransitionEdge extends Edge  {  
+  
+    public Place sourceConcept;  
+    public Transition destinationConcept;  
+  
+    @CreationScheme    
+    PlaceToTransitionEdge:create(Place sourceConcept, Transition destinationConcept) {    
+      sourceConcept = parameters.sourceConcept;      
+      destinationConcept = parameters.destinationConcept;      
+      weight = 1;      
+      destinationConcept.incomings.add(this)    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+    @ActionScheme    
+    Boolean isActivable() {    
+      return (sourceConcept.tokenNb >= weight);    
+    }    
+  
+    @ActionScheme    
+    Void activate() {    
+      sourceConcept.tokenNb = (sourceConcept.tokenNb - weight);    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class TransitionToPlaceEdge extends Edge  {  
+  
+    public Transition sourceConcept;  
+    public Place destinationConcept;  
+  
+    @CreationScheme    
+    TransitionToPlaceEdge:create(Transition sourceConcept, Place destinationConcept) {    
+      sourceConcept = parameters.sourceConcept;      
+      destinationConcept = parameters.destinationConcept;      
+      weight = 1;      
+      sourceConcept.outgoings.add(this)    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+    @ActionScheme    
+    Void activate() {    
+      destinationConcept.tokenNb = (destinationConcept.tokenNb + weight);    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class Edge {  
+  
+    public int weight;  
+  
+    @CreationScheme    
+    Edge:create() {    
+      weight = 1;    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      
+    }    
+  
+  }  
+
+}
