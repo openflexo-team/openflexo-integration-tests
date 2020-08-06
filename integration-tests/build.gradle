@@ -1,21 +1,20 @@
 dependencies {
+    testImplementation testUtils()
+    testImplementation flexoUi()
+    testImplementation flexoUiTest()
+    testImplementation flexoFoundationTest()
+    testImplementation owlConnector()
+    testImplementation diagramConnector()
+    testImplementation emfConnector()
+    testImplementation excelConnector()
+    testImplementation xmlConnector()
+    testImplementation powerpointConnector()
 
-    testCompile testUtils()
-    testCompile flexoUi()
-    testCompile flexoUiTest()
-    testCompile flexoFoundationTest()
-    testCompile owlConnector()
-    testCompile diagramConnector()
-    testCompile emfConnector()
-    testCompile excelConnector()
-    testCompile xmlConnector()
-    testCompile powerpointConnector()
+    testImplementation openflexo("openflexo-modeller")
+    testImplementation openflexo("freemodellingeditor")
+    testImplementation openflexo("enterprise-architecture-module")
 
-    testCompile openflexo("openflexo-modeller")
-    testCompile openflexo("freemodellingeditor")
-    testCompile openflexo("enterprise-architecture-module")
-    
-    testRuntime project(':integration-tests-rc')
-    testRuntime owlConnectorRc()
+    testRuntimeOnly project(':integration-tests-rc')
+    testRuntimeOnly owlConnectorRc()
 }
 
