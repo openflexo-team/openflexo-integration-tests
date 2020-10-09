@@ -1,0 +1,22 @@
+dependencies {
+   implementation group: 'junit', name: 'junit', version: '4.13'
+   api group: 'org.swinglabs.swingx', name: 'swingx-core', version: '1.6.5-1'
+   api group: 'org.openflexo', name: 'flexo-foundation', version: '2.1.0-SNAPSHOT'
+   api group: 'org.openflexo', name: 'flexo-foundation-rm', version: '2.1.0-SNAPSHOT'
+ 
+    implementation testUtils()
+    implementation flexoUi()
+    implementation flexoUiTest()
+    implementation flexoFoundationTest()
+    implementation fmlTechnologyAdapterUi();
+    implementation fmlRtTechnologyAdapterUi();
+    implementation owlConnector()
+    implementation owlConnectorUi()
+    implementation diagramConnector()
+    implementation diagramConnectorUi()
+    //implementation emfConnector()
+    //implementation excelConnector()
+    //implementation xmlConnector()
+    //implementation powerpointConnector()
+}
+
