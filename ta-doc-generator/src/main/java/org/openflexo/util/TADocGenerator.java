@@ -70,14 +70,18 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 	private static final Logger logger = FlexoLogger.getLogger(TADocGenerator.class.getPackage().getName());
 
 	private Class<? extends TechnologyAdapter<?>> taClass;
-	private String fullPath;
-	private String globalPath;
-	private String relativePath;
+	// private String fullPath;
+	// private String globalPath;
+	// private String relativePath;
 	private ApplicationContext applicationContext;
 	private TechnologyAdapterService technologyAdapterService;
 	private TechnologyAdapterControllerService taControllerService;
 	private TA technologyAdapter;
 	private TechnologyAdapterController<TA> technologyAdapterController;
+
+	private String repositoryName;
+	private String modelProjectName;
+	private String mvnArtefactName;
 
 	private File root;
 	private File globalTADir;
@@ -95,11 +99,18 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 	private StringBuffer globalMenu;
 	private StringBuffer localMenu;
 
-	public TADocGenerator(Class<TA> taClass, String fullPath, ApplicationContext applicationContext) {
+	private static final String START_MARKER = "<!-- BEGIN GENERATED -->";
+	private static final String END_MARKER = "<!-- END GENERATED -->";
+
+	public TADocGenerator(Class<TA> taClass, String repositoryName, String modelProjectName, String mvnArtefactName,
+			ApplicationContext applicationContext) {
 		this.taClass = taClass;
-		this.fullPath = fullPath;
+		this.repositoryName = repositoryName;
+		this.modelProjectName = modelProjectName;
+		this.mvnArtefactName = mvnArtefactName;
+		/*this.fullPath = fullPath;
 		this.globalPath = fullPath.substring(0, fullPath.indexOf("/"));
-		this.relativePath = fullPath.substring(fullPath.indexOf("/") + 1);
+		this.relativePath = fullPath.substring(fullPath.indexOf("/") + 1);*/
 		this.applicationContext = applicationContext;
 		technologyAdapterService = applicationContext.getService(TechnologyAdapterService.class);
 		technologyAdapter = technologyAdapterService.getTechnologyAdapter(taClass);
@@ -123,10 +134,14 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 		String currentDir = System.getProperty("user.dir");
 		File current = new File(currentDir);
 		File root = current.getParentFile().getParentFile();
-		globalTADir = new File(root, globalPath);
+		globalTADir = new File(root, repositoryName);
 		globalTASiteDir = new File(globalTADir, "src/site");
 		globalTADir = new File(globalTASiteDir, "markdown");
-		taDir = new File(root, fullPath);
+		taDir = new File(root, repositoryName + "/" + modelProjectName);
+		if (!taDir.exists()) {
+			System.out.println("Ca existe pas: " + taDir.getAbsolutePath());
+			System.exit(-1);
+		}
 		taSiteDir = new File(taDir, "src/site");
 		mdDir = new File(taSiteDir, "markdown");
 		imageDir = new File(taSiteDir, "resources/images");
@@ -141,6 +156,87 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 		}
 
 		makeGlobalMenu();
+		makeLocalMenu();
+	}
+
+	public <O extends FMLObject> AbstractGenerator<O> getGenerator(Class<O> objectClass) {
+		return generators.get(objectClass);
+	}
+
+	public void generate() {
+		System.out.println("Generate doc for " + technologyAdapter);
+		for (Class<? extends FMLObject> objectClass : generators.keySet()) {
+			AbstractGenerator<?> generator = generators.get(objectClass);
+			generator.generate();
+		}
+
+		generateGlobalMenu();
+		generateLocalMenu();
+	}
+
+	private void prepareDocGenerationForModelSlot(Class<? extends ModelSlot<?>> modelSlotClass) {
+		System.out.println("ModelSlot class : " + modelSlotClass);
+		ModelSlotGenerator<?> generator = new ModelSlotGenerator<>(modelSlotClass, this);
+		generators.put(modelSlotClass, generator);
+		for (Class<? extends FlexoRole<?>> roleClass : technologyAdapterService.getAvailableFlexoRoleTypes(modelSlotClass)) {
+			prepareDocGenerationForRole(roleClass);
+		}
+		for (Class<? extends FlexoBehaviour> behaviourClass : technologyAdapterService.getAvailableFlexoBehaviourTypes(modelSlotClass)) {
+			prepareDocGenerationForBehaviour(behaviourClass);
+		}
+		for (Class<? extends EditionAction> editionActionClass : technologyAdapterService.getAvailableEditionActionTypes(modelSlotClass)) {
+			prepareDocGenerationForEditionAction(editionActionClass);
+		}
+		for (Class<? extends FetchRequest<?, ?, ?>> fetchRequestClass : technologyAdapterService
+				.getAvailableFetchRequestActionTypes(modelSlotClass)) {
+			prepareDocGenerationForEditionAction(fetchRequestClass);
+		}
+	}
+
+	private void prepareDocGenerationForRole(Class<? extends FlexoRole<?>> roleClass) {
+		System.out.println("  > Role: " + roleClass);
+		FlexoRoleGenerator<?> generator = new FlexoRoleGenerator<>(roleClass, this);
+		generators.put(roleClass, generator);
+	}
+
+	private void prepareDocGenerationForBehaviour(Class<? extends FlexoBehaviour> behaviourClass) {
+		System.out.println("  > Behaviour: " + behaviourClass);
+		FlexoBehaviourGenerator<?> generator = new FlexoBehaviourGenerator<>(behaviourClass, this);
+		generators.put(behaviourClass, generator);
+	}
+
+	private void prepareDocGenerationForEditionAction(Class<? extends EditionAction> editionActionClass) {
+		System.out.println("  > EditionAction: " + editionActionClass);
+		EditionActionGenerator<?> generator = new EditionActionGenerator<>(editionActionClass, this);
+		generators.put(editionActionClass, generator);
+
+	}
+
+	private void prepareDocGenerationForFetchRequest(Class<? extends FetchRequest<?, ?, ?>> fetchRequestClass) {
+		System.out.println("  > FetchRequest: " + fetchRequestClass);
+		FetchRequestGenerator<?> generator = new FetchRequestGenerator<>(fetchRequestClass, this);
+		generators.put(fetchRequestClass, generator);
+
+	}
+
+	public TechnologyAdapterController<TA> getTechnologyAdapterController() {
+		return technologyAdapterController;
+	}
+
+	public String getRelativePath() {
+		return mvnArtefactName;
+	}
+
+	public File getMDDir() {
+		return mdDir;
+	}
+
+	public File getImageDir() {
+		return imageDir;
+	}
+
+	public FMLModelFactory getFMLModelFactory() {
+		return fmlModelFactory;
 	}
 
 	private String makeGlobalMenu() {
@@ -217,12 +313,92 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 		return globalMenu.toString();
 	}
 
-	private static final String START_MARKER = "<!-- BEGIN GENERATED -->";
-	private static final String END_MARKER = "<!-- END GENERATED -->";
-
 	private void generateGlobalMenu() {
 		File globalMenuFile = new File(globalTASiteDir, "site.xml");
 		generateMenu(globalMenu.toString(), globalMenuFile);
+
+	}
+
+	private String makeLocalMenu() {
+		localMenu = new StringBuffer();
+
+		localMenu.append("<menu name=\"FML / Usage\">" + StringUtils.LINE_SEPARATOR);
+		for (Class<? extends ModelSlot<?>> modelSlotClass : technologyAdapter.getAvailableModelSlotTypes()) {
+			AbstractGenerator<? extends ModelSlot<?>> generator = getGenerator(modelSlotClass);
+			localMenu.append("    <item name=\"" + modelSlotClass.getSimpleName() + "\" href=\"" + generator.getLocalReference() + "\"/>"
+					+ StringUtils.LINE_SEPARATOR);
+		}
+		localMenu.append("</menu>" + StringUtils.LINE_SEPARATOR);
+		localMenu.append(StringUtils.LINE_SEPARATOR);
+
+		for (Class<? extends ModelSlot<?>> modelSlotClass : technologyAdapter.getAvailableModelSlotTypes()) {
+			AbstractGenerator<? extends ModelSlot<?>> generator = getGenerator(modelSlotClass);
+			localMenu.append("<menu name=\"" + modelSlotClass.getSimpleName() + "\">" + StringUtils.LINE_SEPARATOR);
+
+			// Roles
+			if (technologyAdapterService.getAvailableFlexoRoleTypes(modelSlotClass).size() > 0) {
+				localMenu.append(
+						"    <item name=\"Roles\" href=\"" + generator.getGlobalRolesReference() + "\">" + StringUtils.LINE_SEPARATOR);
+				for (Class<? extends FlexoRole<?>> roleClass : technologyAdapterService.getAvailableFlexoRoleTypes(modelSlotClass)) {
+					AbstractGenerator<? extends FlexoRole<?>> roleGenerator = getGenerator(roleClass);
+					localMenu.append("        <item name=\"" + roleClass.getSimpleName() + "\" href=\"" + roleGenerator.getLocalReference()
+							+ "\"/>" + StringUtils.LINE_SEPARATOR);
+				}
+				localMenu.append("    </item>" + StringUtils.LINE_SEPARATOR);
+			}
+
+			// Behaviours
+			if (technologyAdapterService.getAvailableFlexoBehaviourTypes(modelSlotClass).size() > 0) {
+				localMenu.append("    <item name=\"Behaviours\" href=\"" + generator.getGlobalBehavioursReference() + "\">"
+						+ StringUtils.LINE_SEPARATOR);
+				for (Class<? extends FlexoBehaviour> behaviourClass : technologyAdapterService
+						.getAvailableFlexoBehaviourTypes(modelSlotClass)) {
+					AbstractGenerator<? extends FlexoBehaviour> behaviourGenerator = getGenerator(behaviourClass);
+					localMenu.append("        <item name=\"" + behaviourClass.getSimpleName() + "\" href=\""
+							+ behaviourGenerator.getLocalReference() + "\"/>" + StringUtils.LINE_SEPARATOR);
+				}
+				localMenu.append("    </item>" + StringUtils.LINE_SEPARATOR);
+			}
+
+			// EditionAction
+			if (technologyAdapterService.getAvailableEditionActionTypes(modelSlotClass).size() > 0) {
+				localMenu.append("    <item name=\"Edition actions\" href=\"" + generator.getGlobalEditionActionsReference() + "\">"
+						+ StringUtils.LINE_SEPARATOR);
+				for (Class<? extends EditionAction> eaClass : technologyAdapterService.getAvailableEditionActionTypes(modelSlotClass)) {
+					AbstractGenerator<? extends EditionAction> eaGenerator = getGenerator(eaClass);
+					localMenu.append("        <item name=\"" + eaClass.getSimpleName() + "\" href=\"" + eaGenerator.getLocalReference()
+							+ "\"/>" + StringUtils.LINE_SEPARATOR);
+				}
+				localMenu.append("    </item>" + StringUtils.LINE_SEPARATOR);
+			}
+
+			// FetchRequests
+			if (technologyAdapterService.getAvailableFetchRequestActionTypes(modelSlotClass).size() > 0) {
+				localMenu.append("    <item name=\"Fetch requests\" href=\"" + generator.getGlobalFetchRequestsReference() + "\">"
+						+ StringUtils.LINE_SEPARATOR);
+				for (Class<? extends FetchRequest<?, ?, ?>> eaClass : technologyAdapterService
+						.getAvailableFetchRequestActionTypes(modelSlotClass)) {
+					AbstractGenerator<? extends FetchRequest<?, ?, ?>> eaGenerator = getGenerator(eaClass);
+					localMenu.append("        <item name=\"" + eaClass.getSimpleName() + "\" href=\"" + eaGenerator.getLocalReference()
+							+ "\"/>" + StringUtils.LINE_SEPARATOR);
+				}
+				localMenu.append("    </item>" + StringUtils.LINE_SEPARATOR);
+			}
+
+			localMenu.append("</menu>" + StringUtils.LINE_SEPARATOR);
+			localMenu.append(StringUtils.LINE_SEPARATOR);
+		}
+
+		System.out.println(localMenu.toString());
+		return localMenu.toString();
+	}
+
+	private void generateLocalMenu() {
+		File localMenuFile = new File(taSiteDir, "site.xml");
+		generateMenu(localMenu.toString(), localMenuFile);
+
+		System.out.println("On genere aussi " + localMenuFile);
+		System.out.println("avec " + localMenu.toString());
 
 	}
 
@@ -236,7 +412,7 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 				StringBuffer generatedMenu = new StringBuffer();
 				generatedMenu.append(currentContents.substring(0, firstIndex));
 				generatedMenu.append(START_MARKER + StringUtils.LINE_SEPARATOR);
-				generatedMenu.append(globalMenu.toString());
+				generatedMenu.append(menuContents);
 				generatedMenu.append(END_MARKER + StringUtils.LINE_SEPARATOR);
 				generatedMenu.append(currentContents.substring(endIndex + END_MARKER.length() + 1));
 				FileUtils.saveToFile(file, generatedMenu.toString());
@@ -246,85 +422,6 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 			e.printStackTrace();
 		}
 
-	}
-
-	public <O extends FMLObject> AbstractGenerator<O> getGenerator(Class<O> objectClass) {
-		return generators.get(objectClass);
-	}
-
-	public void generate() {
-		System.out.println("Generate doc for " + technologyAdapter);
-		for (Class<? extends FMLObject> objectClass : generators.keySet()) {
-			AbstractGenerator<?> generator = generators.get(objectClass);
-			generator.generate();
-		}
-
-		generateGlobalMenu();
-	}
-
-	private void prepareDocGenerationForModelSlot(Class<? extends ModelSlot<?>> modelSlotClass) {
-		System.out.println("ModelSlot class : " + modelSlotClass);
-		ModelSlotGenerator<?> generator = new ModelSlotGenerator<>(modelSlotClass, this);
-		generators.put(modelSlotClass, generator);
-		for (Class<? extends FlexoRole<?>> roleClass : technologyAdapterService.getAvailableFlexoRoleTypes(modelSlotClass)) {
-			prepareDocGenerationForRole(roleClass);
-		}
-		for (Class<? extends FlexoBehaviour> behaviourClass : technologyAdapterService.getAvailableFlexoBehaviourTypes(modelSlotClass)) {
-			prepareDocGenerationForBehaviour(behaviourClass);
-		}
-		for (Class<? extends EditionAction> editionActionClass : technologyAdapterService.getAvailableEditionActionTypes(modelSlotClass)) {
-			prepareDocGenerationForEditionAction(editionActionClass);
-		}
-		for (Class<? extends FetchRequest<?, ?, ?>> fetchRequestClass : technologyAdapterService
-				.getAvailableFetchRequestActionTypes(modelSlotClass)) {
-			prepareDocGenerationForEditionAction(fetchRequestClass);
-		}
-	}
-
-	private void prepareDocGenerationForRole(Class<? extends FlexoRole<?>> roleClass) {
-		System.out.println("  > Role: " + roleClass);
-		FlexoRoleGenerator<?> generator = new FlexoRoleGenerator<>(roleClass, this);
-		generators.put(roleClass, generator);
-	}
-
-	private void prepareDocGenerationForBehaviour(Class<? extends FlexoBehaviour> behaviourClass) {
-		System.out.println("  > Behaviour: " + behaviourClass);
-		FlexoBehaviourGenerator<?> generator = new FlexoBehaviourGenerator<>(behaviourClass, this);
-		generators.put(behaviourClass, generator);
-	}
-
-	private void prepareDocGenerationForEditionAction(Class<? extends EditionAction> editionActionClass) {
-		System.out.println("  > EditionAction: " + editionActionClass);
-		EditionActionGenerator<?> generator = new EditionActionGenerator<>(editionActionClass, this);
-		generators.put(editionActionClass, generator);
-
-	}
-
-	private void prepareDocGenerationForFetchRequest(Class<? extends FetchRequest<?, ?, ?>> fetchRequestClass) {
-		System.out.println("  > FetchRequest: " + fetchRequestClass);
-		FetchRequestGenerator<?> generator = new FetchRequestGenerator<>(fetchRequestClass, this);
-		generators.put(fetchRequestClass, generator);
-
-	}
-
-	public TechnologyAdapterController<TA> getTechnologyAdapterController() {
-		return technologyAdapterController;
-	}
-
-	public String getRelativePath() {
-		return relativePath;
-	}
-
-	public File getMDDir() {
-		return mdDir;
-	}
-
-	public File getImageDir() {
-		return imageDir;
-	}
-
-	public FMLModelFactory getFMLModelFactory() {
-		return fmlModelFactory;
 	}
 
 }

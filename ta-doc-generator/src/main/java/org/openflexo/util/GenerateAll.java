@@ -44,7 +44,6 @@ import org.openflexo.foundation.fml.rt.FMLRTTechnologyAdapter;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapter;
 import org.openflexo.gina.test.OpenflexoTestCaseWithGUI;
 import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
-import org.openflexo.technologyadapter.owl.OWLTechnologyAdapter;
 
 /**
  * Generate documentation for all TA
@@ -55,16 +54,17 @@ public class GenerateAll extends OpenflexoTestCaseWithGUI {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = instanciateTestServiceManager(FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class,
 				DiagramTechnologyAdapter.class);
-		generateDocForTechnologyAdapter(FMLTechnologyAdapter.class, "openflexo-core/flexo-foundation", applicationContext);
-		generateDocForTechnologyAdapter(FMLRTTechnologyAdapter.class, "openflexo-core/flexo-foundation", applicationContext);
-		generateDocForTechnologyAdapter(DiagramTechnologyAdapter.class, "openflexo-diagram/diagram-ta", applicationContext);
-		generateDocForTechnologyAdapter(OWLTechnologyAdapter.class, "openflexo-owl/owl-ta", applicationContext);
+		// generateDocForTechnologyAdapter(FMLTechnologyAdapter.class, "openflexo-core/flexo-foundation", applicationContext);
+		// generateDocForTechnologyAdapter(FMLRTTechnologyAdapter.class, "openflexo-core/flexo-foundation", applicationContext);
+		generateDocForTechnologyAdapter(DiagramTechnologyAdapter.class, "openflexo-diagram", "diagram-ta", "flexodiagram",
+				applicationContext);
+		// generateDocForTechnologyAdapter(OWLTechnologyAdapter.class, "openflexo-owl/owl-ta", applicationContext);
 		System.exit(0);
 	}
 
-	private static <TA extends TechnologyAdapter<TA>> void generateDocForTechnologyAdapter(Class<TA> taClass, String relativePath,
-			ApplicationContext applicationContext) {
-		TADocGenerator<?> generator = new TADocGenerator<>(taClass, relativePath, applicationContext);
+	private static <TA extends TechnologyAdapter<TA>> void generateDocForTechnologyAdapter(Class<TA> taClass, String repositoryName,
+			String modelProjectName, String mvnArtefactName, ApplicationContext applicationContext) {
+		TADocGenerator<?> generator = new TADocGenerator<>(taClass, repositoryName, modelProjectName, mvnArtefactName, applicationContext);
 		generator.generate();
 	}
 

@@ -111,6 +111,26 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_fetch_requests.html";
 	}
 
+	protected String getLocalReference() {
+		return "./" + objectClass.getSimpleName() + ".html";
+	}
+
+	protected String getLocalRolesReference() {
+		return "./" + objectClass.getSimpleName() + "_roles.html";
+	}
+
+	protected String getLocalBehavioursReference() {
+		return "./" + objectClass.getSimpleName() + "_behaviours.html";
+	}
+
+	protected String getLocalEditionActionsReference() {
+		return "./" + objectClass.getSimpleName() + "_edition_actions.html";
+	}
+
+	protected String getLocalFetchRequestsReference() {
+		return "./" + objectClass.getSimpleName() + "_fetch_requests.html";
+	}
+
 	protected abstract Image getIcon();
 
 	protected String getSmallIconAsHTML() {
