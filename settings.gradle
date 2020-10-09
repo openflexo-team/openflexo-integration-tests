@@ -2,4 +2,5 @@ include 'integration-tests-rc'
 include 'integration-tests'
 include 'tutorials-rc'
 include 'packaging-tests'
+include 'ta-doc-generator'
 
