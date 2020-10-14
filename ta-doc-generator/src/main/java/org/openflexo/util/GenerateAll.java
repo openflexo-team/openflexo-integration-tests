@@ -54,8 +54,10 @@ public class GenerateAll extends OpenflexoTestCaseWithGUI {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = instanciateTestServiceManager(FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class,
 				DiagramTechnologyAdapter.class);
-		// generateDocForTechnologyAdapter(FMLTechnologyAdapter.class, "openflexo-core/flexo-foundation", applicationContext);
-		// generateDocForTechnologyAdapter(FMLRTTechnologyAdapter.class, "openflexo-core/flexo-foundation", applicationContext);
+		generateDocForTechnologyAdapter(FMLTechnologyAdapter.class, "openflexo-core", "flexo-foundation", "flexo-foundation",
+				applicationContext);
+		generateDocForTechnologyAdapter(FMLRTTechnologyAdapter.class, "openflexo-core", "flexo-foundation", "flexo-foundation",
+				applicationContext);
 		generateDocForTechnologyAdapter(DiagramTechnologyAdapter.class, "openflexo-diagram", "diagram-ta", "flexodiagram",
 				applicationContext);
 		// generateDocForTechnologyAdapter(OWLTechnologyAdapter.class, "openflexo-owl/owl-ta", applicationContext);

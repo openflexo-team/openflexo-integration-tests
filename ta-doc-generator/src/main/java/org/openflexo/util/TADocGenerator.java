@@ -219,6 +219,14 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 
 	}
 
+	public TA getTechnologyAdapter() {
+		return technologyAdapter;
+	}
+
+	public TechnologyAdapterService getTechnologyAdapterService() {
+		return technologyAdapterService;
+	}
+
 	public TechnologyAdapterController<TA> getTechnologyAdapterController() {
 		return technologyAdapterController;
 	}
@@ -233,6 +241,10 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 
 	public File getImageDir() {
 		return imageDir;
+	}
+
+	public String getMVNArtefactName() {
+		return mvnArtefactName;
 	}
 
 	public FMLModelFactory getFMLModelFactory() {

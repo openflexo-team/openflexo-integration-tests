@@ -45,14 +45,24 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 import org.openflexo.foundation.fml.FMLModelContext;
 import org.openflexo.foundation.fml.FMLModelContext.FMLEntity;
+import org.openflexo.foundation.fml.FMLModelContext.FMLProperty;
 import org.openflexo.foundation.fml.FMLModelFactory;
 import org.openflexo.foundation.fml.FMLObject;
+import org.openflexo.foundation.fml.annotations.SeeAlso;
+import org.openflexo.foundation.fml.annotations.UsageExample;
+import org.openflexo.foundation.technologyadapter.TechnologyAdapter;
+import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
 import org.openflexo.logging.FlexoLogger;
 import org.openflexo.toolbox.FileUtils;
 import org.openflexo.toolbox.StringUtils;
@@ -131,6 +141,15 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		return "./" + objectClass.getSimpleName() + "_fetch_requests.html";
 	}
 
+	protected String getJavadocReference() {
+		return "[" + getObjectClass().getName() + "](./apidocs/" + getJavadocPath(getObjectClass()) + ".html)" + StringUtils.LINE_SEPARATOR;
+	}
+
+	private String getJavadocPath(Class<?> clazz) {
+		String className = clazz.getName();
+		return className.replace(".", "/");
+	}
+
 	protected abstract Image getIcon();
 
 	protected String getSmallIconAsHTML() {
@@ -199,6 +218,10 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		return objectClass;
 	}
 
+	public <R extends FMLObject> AbstractGenerator<R> getReference(Class<R> objectClass) {
+		return taDocGenerator.getGenerator(objectClass);
+	}
+
 	public String toMD(String text) {
 		String returned = text;
 		if (returned.startsWith("<html>")) {
@@ -207,7 +230,60 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		if (returned.endsWith("</html>")) {
 			returned = returned.substring(0, returned.length() - 7);
 		}
+		returned = returned.replace("<br>", StringUtils.LINE_SEPARATOR + StringUtils.LINE_SEPARATOR);
 		return returned;
+	}
+
+	public String toCode(String text) {
+		StringBuffer sb = new StringBuffer();
+		int indent = 0;
+		StringBuffer current = null;
+		for (int i = 0; i < text.length(); i++) {
+			if (text.charAt(i) == '(' && indent == 0) {
+				sb.append(text.charAt(i));
+				// propertyList = new ArrayList<>();
+				current = new StringBuffer();
+				indent++;
+			}
+			else if (text.charAt(i) == ')' && indent == 1) {
+				if (current.length() > 60) {
+					boolean isFirst = true;
+					StringTokenizer st = new StringTokenizer(current.toString(), ",");
+					while (st.hasMoreElements()) {
+						String next = st.nextToken();
+						sb.append((isFirst ? "" : ",") + StringUtils.LINE_SEPARATOR + "        ");
+						isFirst = false;
+						sb.append(next);
+					}
+				}
+				else {
+					sb.append(current);
+				}
+				sb.append(text.charAt(i));
+				indent--;
+			}
+			/*else if (text.charAt(i) == ',') {
+				if (indent == 1) {
+					propertyList.add(current.toString());
+					current.append(text.charAt(i));
+				}
+				else {
+					sb.append(text.charAt(i));
+				}
+			}*/
+			/*else if (indent == 0) {
+				sb.append(text.charAt(i));
+			}*/
+			else if (indent == 1) {
+				current.append(text.charAt(i));
+			}
+			else {
+				sb.append(text.charAt(i));
+				// System.err.println("Unexpected indent>1");
+			}
+		}
+		return sb.toString();
+
 	}
 
 	protected FMLEntity<?> getFMLEntity() {
@@ -232,34 +308,67 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		return "No documentation yet";
 	}
 
-	/*@Override
-	public final boolean hasFMLProperties(FMLModelFactory modelFactory) {
-		if (getFMLEntity(modelFactory) != null) {
-			return getFMLEntity(modelFactory).getProperties().size() > 0;
+	public final String getFMLShortDescription() {
+		if (getFMLEntity() != null) {
+			String returned = getFMLEntity().getFmlAnnotation().description();
+			if (StringUtils.isEmpty(returned)) {
+				return "No documentation yet";
+			}
+			if (returned.contains("<br>")) {
+				returned = returned.substring(0, returned.indexOf("<br>"));
+			}
+			return toMD(returned);
+		}
+		return "No documentation yet";
+	}
+
+	public List<UsageExample> getFMLExamples() {
+		if (getFMLEntity() != null) {
+			return Arrays.asList(getFMLEntity().getFmlAnnotation().examples());
+		}
+		return Collections.emptyList();
+	}
+
+	public List<SeeAlso> getReferences() {
+		if (getFMLEntity() != null) {
+			return Arrays.asList(getFMLEntity().getFmlAnnotation().references());
+		}
+		return Collections.emptyList();
+	}
+
+	public final boolean hasFMLProperties() {
+		if (getFMLEntity() != null) {
+			return getFMLEntity().getProperties().size() > 0;
 		}
 		return false;
 	}
-	
-	@Override
-	public Set<FMLProperty> getFMLProperties(FMLModelFactory modelFactory) {
-		if (getFMLEntity(modelFactory) != null) {
-			return (Set) getFMLEntity(modelFactory).getProperties();
+
+	public Set<FMLProperty> getFMLProperties() {
+		if (getFMLEntity() != null) {
+			return (Set) getFMLEntity().getProperties();
 		}
 		return null;
 	}
-	
-	@Override
-	public FMLProperty getFMLProperty(String propertyName, FMLModelFactory modelFactory) {
-		Set<FMLProperty> fmlProperties = getFMLProperties(modelFactory);
+
+	public FMLProperty getFMLProperty(String propertyName) {
+		Set<FMLProperty> fmlProperties = getFMLProperties();
 		if (fmlProperties != null) {
-			for (FMLProperty fmlProperty : getFMLProperties(modelFactory)) {
+			for (FMLProperty fmlProperty : getFMLProperties()) {
 				if (fmlProperty.getName().equals(propertyName)) {
 					return fmlProperty;
 				}
 			}
 		}
 		return null;
-	}*/
+	}
+
+	public TechnologyAdapter<?> getTechnologyAdapter() {
+		return taDocGenerator.getTechnologyAdapter();
+	}
+
+	public TechnologyAdapterService getTechnologyAdapterService() {
+		return taDocGenerator.getTechnologyAdapterService();
+	}
 
 	public TechnologyAdapterController<?> getTechnologyAdapterController() {
 		return taDocGenerator.getTechnologyAdapterController();
@@ -267,6 +376,14 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 
 	public FMLModelFactory getFMLModelFactory() {
 		return taDocGenerator.getFMLModelFactory();
+	}
+
+	public File getGeneratedFile() {
+		return generatedFile;
+	}
+
+	public String getMVNArtefactName() {
+		return taDocGenerator.getMVNArtefactName();
 	}
 
 }
