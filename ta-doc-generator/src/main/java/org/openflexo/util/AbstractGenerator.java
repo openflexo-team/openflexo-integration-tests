@@ -48,7 +48,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
@@ -343,15 +342,15 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		return false;
 	}
 
-	public Set<FMLProperty> getFMLProperties() {
+	public List<FMLProperty> getFMLProperties() {
 		if (getFMLEntity() != null) {
-			return (Set) getFMLEntity().getProperties();
+			return (List) getFMLEntity().getProperties();
 		}
 		return null;
 	}
 
 	public FMLProperty getFMLProperty(String propertyName) {
-		Set<FMLProperty> fmlProperties = getFMLProperties();
+		List<FMLProperty> fmlProperties = getFMLProperties();
 		if (fmlProperties != null) {
 			for (FMLProperty fmlProperty : getFMLProperties()) {
 				if (fmlProperty.getName().equals(propertyName)) {
@@ -384,6 +383,10 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 
 	public String getMVNArtefactName() {
 		return taDocGenerator.getMVNArtefactName();
+	}
+
+	public File getMDDir() {
+		return taDocGenerator.getMDDir();
 	}
 
 }
