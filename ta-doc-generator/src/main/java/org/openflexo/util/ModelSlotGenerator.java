@@ -49,7 +49,6 @@ import java.util.logging.Logger;
 import org.openflexo.connie.DataBinding;
 import org.openflexo.connie.type.TypeUtils;
 import org.openflexo.foundation.fml.FMLModelContext.FMLProperty;
-import org.openflexo.foundation.fml.FMLObject;
 import org.openflexo.foundation.fml.FlexoBehaviour;
 import org.openflexo.foundation.fml.FlexoRole;
 import org.openflexo.foundation.fml.annotations.SeeAlso;
@@ -103,6 +102,7 @@ public class ModelSlotGenerator<MS extends ModelSlot<?>> extends AbstractGenerat
 		sb.append(getFMLDescription() + StringUtils.LINE_SEPARATOR);
 		sb.append(StringUtils.LINE_SEPARATOR);
 
+		sb.append(StringUtils.LINE_SEPARATOR);
 		sb.append("---" + StringUtils.LINE_SEPARATOR);
 		sb.append(StringUtils.LINE_SEPARATOR);
 
@@ -284,15 +284,6 @@ public class ModelSlotGenerator<MS extends ModelSlot<?>> extends AbstractGenerat
 
 		render(sb);
 
-	}
-
-	protected String getHTMLReference(Class<? extends FMLObject> objectReference) {
-		StringBuffer sb = new StringBuffer();
-		AbstractGenerator<? extends FMLObject> generatorReference = getReference(objectReference);
-		sb.append(" - " + generatorReference.getSmallIconAsHTML());
-		sb.append(" [`" + generatorReference.getFMLKeyword() + "`](" + generatorReference.getObjectClass().getSimpleName() + ".html) : "
-				+ generatorReference.getFMLShortDescription());
-		return sb.toString();
 	}
 
 	private String getUsage(boolean fullQualified) {

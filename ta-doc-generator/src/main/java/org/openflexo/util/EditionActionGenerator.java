@@ -89,6 +89,7 @@ public class EditionActionGenerator<EA extends EditionAction> extends AbstractGe
 		sb.append(getFMLDescription() + StringUtils.LINE_SEPARATOR);
 		sb.append(StringUtils.LINE_SEPARATOR);
 
+		sb.append(StringUtils.LINE_SEPARATOR);
 		sb.append("---" + StringUtils.LINE_SEPARATOR);
 		sb.append(StringUtils.LINE_SEPARATOR);
 

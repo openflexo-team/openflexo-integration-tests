@@ -39,11 +39,18 @@
 package org.openflexo.util;
 
 import java.awt.Image;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
+import org.openflexo.connie.DataBinding;
+import org.openflexo.connie.type.TypeUtils;
+import org.openflexo.foundation.fml.FMLModelContext.FMLProperty;
 import org.openflexo.foundation.fml.FlexoRole;
+import org.openflexo.foundation.fml.annotations.SeeAlso;
+import org.openflexo.foundation.fml.annotations.UsageExample;
 import org.openflexo.logging.FlexoLogger;
 import org.openflexo.toolbox.StringUtils;
 
@@ -55,8 +62,11 @@ public class FlexoRoleGenerator<R extends FlexoRole<?>> extends AbstractGenerato
 
 	private static final Logger logger = FlexoLogger.getLogger(FlexoRoleGenerator.class.getPackage().getName());
 
+	private R role;
+
 	public FlexoRoleGenerator(Class<R> objectClass, TADocGenerator<?> taDocGenerator) {
 		super(objectClass, taDocGenerator);
+		role = getFMLModelFactory().newInstance(getObjectClass());
 		generateIconFiles();
 	}
 
@@ -92,7 +102,177 @@ public class FlexoRoleGenerator<R extends FlexoRole<?>> extends AbstractGenerato
 		sb.append(getFMLDescription());
 		sb.append(StringUtils.LINE_SEPARATOR);
 
+		sb.append(StringUtils.LINE_SEPARATOR);
+		sb.append("---" + StringUtils.LINE_SEPARATOR);
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		sb.append("## Usage" + StringUtils.LINE_SEPARATOR);
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		sb.append("```java" + StringUtils.LINE_SEPARATOR);
+		sb.append(toCode(getUsage(false)) + StringUtils.LINE_SEPARATOR);
+		sb.append("```" + StringUtils.LINE_SEPARATOR);
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		sb.append("or" + StringUtils.LINE_SEPARATOR);
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		sb.append("```java" + StringUtils.LINE_SEPARATOR);
+		sb.append(toCode(getUsage(true)) + StringUtils.LINE_SEPARATOR);
+		sb.append("```" + StringUtils.LINE_SEPARATOR);
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		sb.append("where" + StringUtils.LINE_SEPARATOR);
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		sb.append("- `visibility` is default (unspecified), 'public', 'protected' or 'private'" + StringUtils.LINE_SEPARATOR);
+		sb.append("- `cardinality` is \\[0,1\\] (unspecified), \\[0,\\*\\] or \\[1,\\*\\]" + StringUtils.LINE_SEPARATOR);
+		sb.append("- \\<identifier\\> is the name of declared model slot variable" + StringUtils.LINE_SEPARATOR);
+
+		for (FMLProperty fmlProperty : getFMLProperties()) {
+			if (fmlProperty.isRequired()) {
+				Type propertyType = fmlProperty.getModelProperty().getGetterMethod().getGenericReturnType();
+				if (propertyType instanceof ParameterizedType
+						&& ((ParameterizedType) propertyType).getRawType().equals(DataBinding.class)) {
+					Type argType = ((ParameterizedType) propertyType).getActualTypeArguments()[0];
+					sb.append("- \\<" + fmlProperty.getPathNameInUsage() + "\\>");
+					sb.append(" addresses a `" + TypeUtils.simpleRepresentation(argType) + "`" + StringUtils.LINE_SEPARATOR);
+				}
+				else {
+					sb.append("- \\<" + fmlProperty.getPathNameInUsage() + "\\>");
+					sb.append(" addresses a `" + TypeUtils.simpleRepresentation(propertyType) + "`" + StringUtils.LINE_SEPARATOR);
+				}
+			}
+		}
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		if (getFMLProperties().size() > 0) {
+
+			sb.append("---" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+
+			sb.append("## Configuration" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+
+			sb.append("| Property        | Type                    | &nbsp;Required&nbsp;  |" + StringUtils.LINE_SEPARATOR);
+			sb.append("| --------------- |-------------------------| :------:|" + StringUtils.LINE_SEPARATOR);
+
+			for (FMLProperty fmlProperty : getFMLProperties()) {
+				String propertyName = fmlProperty.getLabel();
+				String propertyType;
+				Type pType = fmlProperty.getModelProperty().getGetterMethod().getGenericReturnType();
+				if (pType instanceof ParameterizedType && ((ParameterizedType) pType).getRawType().equals(DataBinding.class)) {
+					Type argType = ((ParameterizedType) pType).getActualTypeArguments()[0];
+					propertyType = TypeUtils.simpleRepresentation(argType);
+				}
+				else {
+					propertyType = TypeUtils.simpleRepresentation(pType);
+				}
+				sb.append("| `" + propertyName + "` &nbsp; | `" + propertyType + "` &nbsp; | " + (fmlProperty.isRequired() ? "yes" : "no")
+						+ " |" + StringUtils.LINE_SEPARATOR);
+			}
+			sb.append(StringUtils.LINE_SEPARATOR);
+
+			sb.append("---" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+
+			for (FMLProperty fmlProperty : getFMLProperties()) {
+				String propertyName = fmlProperty.getLabel();
+				sb.append("- `" + propertyName + "` : " + toMD(fmlProperty.getDescription()) + StringUtils.LINE_SEPARATOR);
+			}
+
+			sb.append(StringUtils.LINE_SEPARATOR);
+			sb.append("---" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+		}
+
+		if (getFMLExamples().size() > 0) {
+			sb.append("## Examples" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+
+			for (UsageExample usageExample : getFMLExamples()) {
+
+				sb.append("```java" + StringUtils.LINE_SEPARATOR);
+				sb.append(toCode(usageExample.example()) + StringUtils.LINE_SEPARATOR);
+				sb.append("```" + StringUtils.LINE_SEPARATOR);
+				sb.append(StringUtils.LINE_SEPARATOR);
+				sb.append(toMD(usageExample.description()) + StringUtils.LINE_SEPARATOR);
+				sb.append(StringUtils.LINE_SEPARATOR);
+
+			}
+
+			sb.append(StringUtils.LINE_SEPARATOR);
+			sb.append("---" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+		}
+
+		sb.append("## Javadoc" + StringUtils.LINE_SEPARATOR);
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		sb.append(getJavadocReference());
+		sb.append(StringUtils.LINE_SEPARATOR);
+
+		if (getReferences().size() > 0) {
+			sb.append("---" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+			sb.append("## See also" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+
+			for (SeeAlso reference : getReferences()) {
+
+				// AbstractGenerator<? extends FMLObject> generatorReference = getReference(reference.value());
+				// sb.append(" - " + generatorReference.getSmallIconAsHTML());
+				// sb.append(" [`" + generatorReference.getFMLKeyword() + "`](" + generatorReference.getObjectClass().getSimpleName()
+				// + ".html) : " + generatorReference.getFMLShortDescription());
+				sb.append(getHTMLReference(reference.value()) + StringUtils.LINE_SEPARATOR);
+
+			}
+			sb.append(StringUtils.LINE_SEPARATOR);
+		}
+
 		render(sb);
+
+		render(sb);
+	}
+
+	private String getUsage(boolean fullQualified) {
+		StringBuffer returned = new StringBuffer();
+
+		int optionalProperties = 0;
+		int requiredProperties = 0;
+		for (FMLProperty fmlProperty : getFMLProperties()) {
+			if (fmlProperty.isRequired()) {
+				requiredProperties++;
+			}
+			else {
+				optionalProperties++;
+			}
+		}
+
+		returned.append("[visibility] [cardinality]" + " ");
+		returned.append(TypeUtils.simpleRepresentation(TypeUtils.getRawType(role.getType())) + " ");
+		returned.append("<identifier>" + (requiredProperties > 0 ? StringUtils.LINE_SEPARATOR : " "));
+		returned.append("with ");
+
+		if (fullQualified) {
+			returned.append(getTechnologyAdapter().getIdentifier() + "::");
+		}
+		returned.append(getFMLKeyword() + "(");
+		boolean isFirst = true;
+		for (FMLProperty fmlProperty : getFMLProperties()) {
+			if (fmlProperty.isRequired()) {
+				if (!isFirst) {
+					returned.append(",");
+				}
+				returned.append(fmlProperty.getLabel() + "=<" + fmlProperty.getPathNameInUsage() + ">");
+				isFirst = false;
+			}
+		}
+		if (optionalProperties > 0) {
+			returned.append("[" + (isFirst ? "" : ",") + "options]");
+		}
+		returned.append(");");
+		return returned.toString();
 	}
 
 	// @formatter:off	

@@ -149,6 +149,15 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		return className.replace(".", "/");
 	}
 
+	protected String getHTMLReference(Class<? extends FMLObject> objectReference) {
+		StringBuffer sb = new StringBuffer();
+		AbstractGenerator<? extends FMLObject> generatorReference = getReference(objectReference);
+		sb.append(" - " + generatorReference.getSmallIconAsHTML());
+		sb.append(" [`" + generatorReference.getFMLKeyword() + "`](" + generatorReference.getObjectClass().getSimpleName() + ".html) : "
+				+ generatorReference.getFMLShortDescription());
+		return sb.toString();
+	}
+
 	protected abstract Image getIcon();
 
 	protected String getSmallIconAsHTML() {
