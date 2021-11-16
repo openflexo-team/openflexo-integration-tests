@@ -166,7 +166,8 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 	 */
 	@Test
 	@TestOrder(5)
-	public void testInstantiate() throws TypeMismatchException, NullReferenceException, InvocationTargetException, InvalidBindingException {
+	public void testInstantiate()
+			throws TypeMismatchException, NullReferenceException, ReflectiveOperationException, InvalidBindingException {
 		CreateBasicVirtualModelInstance action = CreateBasicVirtualModelInstance.actionType
 				.makeNewAction(project.getVirtualModelInstanceRepository().getRootFolder(), null, editor);
 		action.setNewVirtualModelInstanceName("MyView");
@@ -237,7 +238,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 	@Test
 	@TestOrder(7)
 	public void testInsertNewPerson()
-			throws TypeMismatchException, NullReferenceException, InvocationTargetException, InvalidBindingException {
+			throws TypeMismatchException, NullReferenceException, ReflectiveOperationException, InvalidBindingException {
 
 		ExcelSheet sheet = personListingWB.getExcelSheetAtPosition(0);
 
@@ -357,7 +358,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 	@Test
 	@TestOrder(8)
 	public void testRemovePerson()
-			throws TypeMismatchException, NullReferenceException, InvocationTargetException, InvalidBindingException {
+			throws TypeMismatchException, NullReferenceException, ReflectiveOperationException, InvalidBindingException {
 
 		ExcelSheet sheet = personListingWB.getExcelSheetAtPosition(0);
 
