@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FMLRTVirtualModelInstance id="0" virtualModelURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml" modelVersion="1.0" title="XSure" version="0.1" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml" userID="SYL" flexoID="1">
+  <FlexoConceptInstance id="1" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#ProcessType" userID="SYL" flexoID="2">
+    <PrimitiveActorReference id="2" valueAsString="Claim Handling" roleName="name" userID="SYL" flexoID="6" />
+    <PrimitiveActorReference id="3" valueAsString="dd/MM/yy HH:mm,18/02/21 10:47" roleName="lastUpdated" userID="SYL" flexoID="33" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="4" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" userID="SYL" flexoID="3">
+    <PrimitiveActorReference id="5" valueAsString="Receive claim" roleName="name" userID="SYL" flexoID="7" />
+    <PrimitiveActorReference id="6" valueAsString="dd/MM/yy HH:mm,18/02/21 10:47" roleName="lastUpdated" userID="SYL" flexoID="34" />
+    <PrimitiveActorReference id="7" valueAsString="false" roleName="isCritical" userID="SYL" flexoID="55" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="8" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" userID="SYL" flexoID="4">
+    <PrimitiveActorReference id="9" valueAsString="Asses claim" roleName="name" userID="SYL" flexoID="8" />
+    <ModelObjectActorReference id="10" objectReference="http://www.openflexo.org/MULTIProcessChallenge/XSure.fml.rt#SYL_19" roleName="allowedActors" userID="SYL" flexoID="25" />
+    <ModelObjectActorReference id="11" objectReference="http://www.openflexo.org/MULTIProcessChallenge/XSure.fml.rt#SYL_20" roleName="allowedActors" userID="SYL" flexoID="26" />
+    <ModelObjectActorReference id="12" objectReference="http://www.openflexo.org/MULTIProcessChallenge/XSure.fml.rt#SYL_27" roleName="usedArtifactTypes" userID="SYL" flexoID="31" />
+    <ModelObjectActorReference id="13" objectReference="http://www.openflexo.org/MULTIProcessChallenge/XSure.fml.rt#SYL_28" roleName="producedArtifactTypes" userID="SYL" flexoID="32" />
+    <PrimitiveActorReference id="14" valueAsString="dd/MM/yy HH:mm,18/02/21 10:47" roleName="lastUpdated" userID="SYL" flexoID="35" />
+    <PrimitiveActorReference id="15" valueAsString="false" roleName="isCritical" userID="SYL" flexoID="56" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="16" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" userID="SYL" flexoID="5">
+    <PrimitiveActorReference id="17" valueAsString="Pay premium" roleName="name" userID="SYL" flexoID="9" />
+    <PrimitiveActorReference id="18" valueAsString="dd/MM/yy HH:mm,18/02/21 10:47" roleName="lastUpdated" userID="SYL" flexoID="36" />
+    <PrimitiveActorReference id="19" valueAsString="false" roleName="isCritical" userID="SYL" flexoID="57" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="20" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Actor" userID="SYL" flexoID="10">
+    <PrimitiveActorReference id="21" valueAsString="Ben Boss" roleName="name" userID="SYL" flexoID="11" />
+    <PrimitiveActorReference id="22" valueAsString="dd/MM/yy HH:mm,18/02/21 10:47" roleName="lastUpdated" userID="SYL" flexoID="37" />
+    <PrimitiveActorReference id="23" valueAsString="false" roleName="isSenior" userID="SYL" flexoID="59" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="24" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#ActorType" userID="SYL" flexoID="13">
+    <PrimitiveActorReference id="25" valueAsString="Claim handling manager" roleName="name" userID="SYL" flexoID="16" />
+    <PrimitiveActorReference id="26" valueAsString="dd/MM/yy HH:mm,18/02/21 10:48" roleName="lastUpdated" userID="SYL" flexoID="38" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="27" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#ActorType" userID="SYL" flexoID="14">
+    <PrimitiveActorReference id="28" valueAsString="Financial officer" roleName="name" userID="SYL" flexoID="17" />
+    <PrimitiveActorReference id="29" valueAsString="dd/MM/yy HH:mm,18/02/21 10:48" roleName="lastUpdated" userID="SYL" flexoID="39" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="30" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" userID="SYL" flexoID="15">
+    <PrimitiveActorReference id="31" valueAsString="Authorize payment" roleName="name" userID="SYL" flexoID="18" />
+    <ModelObjectActorReference id="32" objectReference="http://www.openflexo.org/MULTIProcessChallenge/XSure.fml.rt#SYL_13" roleName="allowedActorTypes" userID="SYL" flexoID="21" />
+    <ModelObjectActorReference id="33" objectReference="http://www.openflexo.org/MULTIProcessChallenge/XSure.fml.rt#SYL_14" roleName="allowedActorTypes" userID="SYL" flexoID="22" />
+    <PrimitiveActorReference id="34" valueAsString="dd/MM/yy HH:mm,18/02/21 10:48" roleName="lastUpdated" userID="SYL" flexoID="40" />
+    <PrimitiveActorReference id="35" valueAsString="false" roleName="isCritical" userID="SYL" flexoID="58" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="36" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Actor" userID="SYL" flexoID="19">
+    <PrimitiveActorReference id="37" valueAsString="John Smith" roleName="name" userID="SYL" flexoID="23" />
+    <PrimitiveActorReference id="38" valueAsString="dd/MM/yy HH:mm,18/02/21 10:48" roleName="lastUpdated" userID="SYL" flexoID="41" />
+    <PrimitiveActorReference id="39" valueAsString="false" roleName="isSenior" userID="SYL" flexoID="60" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="40" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Actor" userID="SYL" flexoID="20">
+    <PrimitiveActorReference id="41" valueAsString="Paul Alter" roleName="name" userID="SYL" flexoID="24" />
+    <PrimitiveActorReference id="42" valueAsString="dd/MM/yy HH:mm,18/02/21 10:48" roleName="lastUpdated" userID="SYL" flexoID="42" />
+    <PrimitiveActorReference id="43" valueAsString="false" roleName="isSenior" userID="SYL" flexoID="61" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="44" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#ArtifactType" userID="SYL" flexoID="27">
+    <PrimitiveActorReference id="45" valueAsString="Claim" roleName="name" userID="SYL" flexoID="29" />
+    <PrimitiveActorReference id="46" valueAsString="dd/MM/yy HH:mm,18/02/21 10:48" roleName="lastUpdated" userID="SYL" flexoID="43" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="47" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#ArtifactType" userID="SYL" flexoID="28">
+    <PrimitiveActorReference id="48" valueAsString="Claim payment decision" roleName="name" userID="SYL" flexoID="30" />
+    <PrimitiveActorReference id="49" valueAsString="dd/MM/yy HH:mm,18/02/21 10:48" roleName="lastUpdated" userID="SYL" flexoID="44" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="50" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#ActorType" userID="SYL" flexoID="45">
+    <PrimitiveActorReference id="51" valueAsString="Senior Manager" roleName="name" userID="SYL" flexoID="47" />
+    <PrimitiveActorReference id="52" valueAsString="dd/MM/yy HH:mm,18/02/21 11:00" roleName="lastUpdated" userID="SYL" flexoID="48" />
+    <ModelObjectActorReference id="53" objectReference="http://www.openflexo.org/MULTIProcessChallenge/XSure.fml.rt#SYL_51" roleName="parentActorTypes" userID="SYL" flexoID="54" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="54" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#ActorType" userID="SYL" flexoID="46">
+    <PrimitiveActorReference id="55" valueAsString="Project Leader" roleName="name" userID="SYL" flexoID="49" />
+    <PrimitiveActorReference id="56" valueAsString="dd/MM/yy HH:mm,18/02/21 11:00" roleName="lastUpdated" userID="SYL" flexoID="50" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="57" flexoConceptURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#ActorType" userID="SYL" flexoID="51">
+    <PrimitiveActorReference id="58" valueAsString="Manager" roleName="name" userID="SYL" flexoID="52" />
+    <PrimitiveActorReference id="59" valueAsString="dd/MM/yy HH:mm,18/02/21 11:39" roleName="lastUpdated" userID="SYL" flexoID="53" />
+  </FlexoConceptInstance>
+</FMLRTVirtualModelInstance>

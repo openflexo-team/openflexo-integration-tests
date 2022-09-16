@@ -1,0 +1,355 @@
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+use org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.openflexo.org/MULTIProcessChallenge/MULTIProcessChallenge.prj/ProcessEditor/ProcessEditor.fml")
+public class ProcessEditor {
+
+  public Diagram diagram;
+  public MetaModel model;
+  public Process process;
+  public ProcessTypeEditor processTypeEditor;
+
+  @CreationScheme  
+  ProcessEditor:init(MetaModel model, ProcessType processType, String processName, ProcessTypeEditor processTypeEditor) {  
+    diagram = CreateDiagram();    
+    model = parameters.model;    
+    processTypeEditor = parameters.processTypeEditor;    
+    ProcessGR newProcessGR = ProcessGR.instantiateProcess(parameters.processType,parameters.processName);    
+    process = newProcessGR.process;    
+    log ("Les tasks= " + newProcessGR.process.tasks)    
+    for (task : process.tasks) {    
+      log ("Task=" + task)      
+      if (task.type.concept.name = "Begin") {      
+        BeginGR.representTask(task)        
+        log "New begin"      
+      } else {      
+        if (task.type.concept.name = "End") {        
+          EndGR.representTask(task)          
+          log "New end"        
+        } else {        
+          TaskGR.representTask(task)          
+          log "New task"        
+        }      
+      }    
+    }    
+    for (gateway : process.type.gateways) {    
+      if ((gateway.concept.name = "AndSplit") | (gateway.concept.name = "AndJoin")) {      
+        GatewayGR.representGateway(gateway,process)      
+      }    
+    }    
+    for (sequencing : process.type.sequencingList) {    
+      log ("On cherche a representer la sequence " + sequencing)      
+      SequencingGR.representSequencing(sequencing,process)    
+    }    
+    for (andSplit : process.type.andSplitList) {    
+      AndSplitConnectorsGR.representAndSplit(andSplit,process)    
+    }    
+    for (actor : model.actorList) {    
+      ActorGR.representActor(actor)    
+    }    
+    for (andJoin : process.type.andJoinList) {    
+      AndJoinConnectorsGR.representAndSplit(andJoin,process)    
+    }    
+    for (task : process.tasks) {    
+      for (actor : task.performingActors) {      
+        ActorAssignationGR.representAssignation(actor,task)      
+      }    
+    }  
+  }  
+
+  @DeletionScheme  
+  Void delete() {  
+  
+  }  
+
+  @ActionScheme  
+  ProcessGR getProcessGR(Process process) {  
+    return this.SelectUniqueFlexoConceptInstance(type=ProcessGR,where=where=(selected.process = parameters.process));  
+  }  
+
+  @ActionScheme  
+  BeginGR getTaskGR(Task task) {  
+    if (parameters.task.type.concept.name = "Begin") {    
+      return this.getBeginGR(parameters.task);    
+    }    
+    if (parameters.task.type.concept.name = "End") {    
+      return this.getEndGR(parameters.task);    
+    }    
+    return this.SelectUniqueFlexoConceptInstance(type=TaskGR,where=where=(selected.task = parameters.task));  
+  }  
+
+  @ActionScheme  
+  BeginGR getBeginGR(Task task) {  
+    return this.SelectUniqueFlexoConceptInstance(type=BeginGR,where=where=(selected.task = parameters.task));  
+  }  
+
+  @ActionScheme  
+  EndGR getEndGR(Task task) {  
+    return this.SelectUniqueFlexoConceptInstance(type=EndGR,where=where=(selected.task = parameters.task));  
+  }  
+
+  @ActionScheme  
+  GatewayGR getGatewayGR(Gateway gateway) {  
+    return this.SelectUniqueFlexoConceptInstance(type=GatewayGR,where=where=(selected.gateway = parameters.gateway));    
+    return null;  
+  }  
+
+  @ActionScheme  
+  ActorGR getActorGR(Actor actor) {  
+    return this.SelectUniqueFlexoConceptInstance(type=ActorGR,where=where=(selected.actor = parameters.actor));  
+  }  
+
+
+  @FlexoConcept  
+  public class ProcessGR {  
+  
+    public DiagramShape shape;  
+    public DiagramShape header;  
+    public Process process;  
+  
+    @CreationScheme    
+    ProcessGR:instantiateProcess(ProcessType processType, String processName) {    
+      process = Process.create(parameters.processName,parameters.processType);      
+      shape = diagram.AddShape();      
+      header = diagram.AddShape();      
+      ProcessTypeGR processTypeGR = processTypeEditor.getProcessTypeGR(parameters.processType);      
+      shape.x=processTypeGR.shape.graphicalRepresentation.x      
+      shape.y=processTypeGR.shape.graphicalRepresentation.y      
+      shape.width=processTypeGR.shape.graphicalRepresentation.width      
+      shape.height=processTypeGR.shape.graphicalRepresentation.height    
+    }    
+  
+    @ActionScheme    
+    public Void start() {    
+      process.startProcess()    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class BeginGR {  
+  
+    public DiagramShape shape;  
+    public Task task;  
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;      
+      task.delete();    
+    }    
+  
+    @CreationScheme    
+    BeginGR:representTask(Task task) {    
+      task = parameters.task;      
+      shape = diagram.AddShape();      
+      BeginGR beginTypeGR = processTypeEditor.getBeginGR(parameters.task.type);      
+      shape.x=beginTypeGR.shape.graphicalRepresentation.x      
+      shape.y=beginTypeGR.shape.graphicalRepresentation.y      
+      shape.width=beginTypeGR.shape.graphicalRepresentation.width      
+      shape.height=beginTypeGR.shape.graphicalRepresentation.height    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class TaskGR {  
+  
+    public DiagramShape shape;  
+    public Task task;  
+    public DiagramShape title;  
+    public DiagramShape performingActors;  
+    public DiagramShape status;  
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;      
+      task.delete();    
+    }    
+  
+    @CreationScheme    
+    TaskGR:representTask(Task task) {    
+      task = parameters.task;      
+      shape = diagram.AddShape();      
+      title = diagram.AddShape();      
+      performingActors = diagram.AddShape();      
+      status = diagram.AddShape();      
+      BeginGR taskTypeGR = processTypeEditor.getTaskTypeGR(parameters.task.type);      
+      log ((("pour " + task) + " taskTypeGR=") + taskTypeGR)      
+      shape.x=taskTypeGR.shape.graphicalRepresentation.x      
+      shape.y=taskTypeGR.shape.graphicalRepresentation.y      
+      shape.width=taskTypeGR.shape.graphicalRepresentation.width      
+      shape.height=(taskTypeGR.shape.graphicalRepresentation.height + 20)    
+    }    
+  
+    @ActionScheme    
+    public Void completeTask() {    
+      task.finishTask()    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class EndGR {  
+  
+    public DiagramShape shape;  
+    public Task task;  
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;      
+      task.delete();    
+    }    
+  
+    @CreationScheme    
+    EndGR:representTask(Task task) {    
+      task = parameters.task;      
+      shape = diagram.AddShape();      
+      EndGR endTypeGR = processTypeEditor.getEndGR(parameters.task.type);      
+      shape.x=endTypeGR.shape.graphicalRepresentation.x      
+      shape.y=endTypeGR.shape.graphicalRepresentation.y      
+      shape.width=endTypeGR.shape.graphicalRepresentation.width      
+      shape.height=endTypeGR.shape.graphicalRepresentation.height    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class GatewayGR {  
+  
+    public DiagramShape shape;  
+    public Gateway gateway;  
+  
+    @DeletionScheme    
+    Void delete() {    
+      delete shape;    
+    }    
+  
+    @CreationScheme    
+    GatewayGR:representGateway(Gateway gateway, Process process) {    
+      gateway = parameters.gateway;      
+      shape = diagram.AddShape();      
+      ShapeBasedGR gatewayGR = processTypeEditor.getGatewayGR(parameters.gateway);      
+      shape.x=gatewayGR.shape.graphicalRepresentation.x      
+      shape.y=gatewayGR.shape.graphicalRepresentation.y      
+      shape.width=shape.graphicalRepresentation.width      
+      shape.height=gatewayGR.shape.graphicalRepresentation.height    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class SequencingGR {  
+  
+    public DiagramConnector connector;  
+    public Sequencing sequencing;  
+  
+    @CreationScheme    
+    SequencingGR:representSequencing(Sequencing sequencing, Process process) {    
+      sequencing = parameters.sequencing;      
+      Task startTask = process.type.getTask(sequencing.in,process);      
+      Task endTask = process.type.getTask(sequencing.out,process);      
+      BeginGR startTaskGR = container.getTaskGR(startTask);      
+      BeginGR endTaskGR = container.getTaskGR(endTask);      
+      log ("Start=" + startTaskGR)      
+      log ("End=" + endTaskGR)      
+      connector = diagram.AddConnector();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class AndSplitConnectorsGR {  
+  
+    public DiagramConnector inConnector;  
+    public AndSplit andSplit;  
+    public DiagramConnector outConnector;  
+  
+    @CreationScheme    
+    AndSplitConnectorsGR:representAndSplit(AndSplit andSplit, Process process) {    
+      andSplit = parameters.andSplit;      
+      Task startTask = process.type.getTask(andSplit.in,process);      
+      BeginGR startTaskGR = container.getTaskGR(startTask);      
+      GatewayGR gatewayGR = container.getGatewayGR(parameters.andSplit);      
+      inConnector = diagram.AddConnector();      
+      for (taskType : andSplit.out) {      
+        Task endTask = process.type.getTask(taskType,process);        
+        BeginGR endTaskGR = container.getTaskGR(endTask);        
+        outConnector = diagram.AddConnector();      
+      }    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class AndJoinConnectorsGR {  
+  
+    public DiagramConnector inConnector;  
+    public AndJoin andJoin;  
+    public DiagramConnector outConnector;  
+  
+    @CreationScheme    
+    AndJoinConnectorsGR:representAndSplit(AndJoin andJoin, Process process) {    
+      andJoin = parameters.andJoin;      
+      Task endTask = process.type.getTask(andJoin.out,process);      
+      BeginGR endTaskGR = container.getTaskGR(endTask);      
+      GatewayGR gatewayGR = container.getGatewayGR(parameters.andJoin);      
+      outConnector = diagram.AddConnector();      
+      for (taskType : andJoin.in) {      
+        Task startTask = process.type.getTask(taskType,process);        
+        BeginGR startTaskGR = container.getTaskGR(startTask);        
+        inConnector = diagram.AddConnector();      
+      }    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ActorGR {  
+  
+    public DiagramShape shape;  
+    public Actor actor;  
+  
+    @DropScheme    
+    ActorGR:dropActorGRAtTopLevel(String name) {    
+      shape = diagram.AddShape();      
+      actor = Actor.create(parameters.name);    
+    }    
+  
+    @CreationScheme    
+    ActorGR:representActor(Actor actor) {    
+      actor = parameters.actor;      
+      shape = diagram.AddShape();      
+      ActorGR actorInProcessTypeGR = processTypeEditor.getActorGR(parameters.actor);      
+      shape.x=actorInProcessTypeGR.shape.graphicalRepresentation.x      
+      shape.y=actorInProcessTypeGR.shape.graphicalRepresentation.y      
+      shape.width=actorInProcessTypeGR.shape.graphicalRepresentation.width      
+      shape.height=actorInProcessTypeGR.shape.graphicalRepresentation.height    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ActorAssignationGR {  
+  
+    public DiagramConnector connector;  
+  
+    @LinkScheme    
+    ActorAssignationGR:linkActorGRToTaskGR() {    
+      connector = diagram.AddConnector();      
+      toTarget.task.addToPerformingActor(fromTarget.actor)    
+    }    
+  
+    @CreationScheme    
+    ActorAssignationGR:representAssignation(Actor actor, Task task) {    
+      ActorGR actorGR = container.getActorGR(parameters.actor);      
+      BeginGR taskGR = container.getTaskGR(parameters.task);      
+      connector = diagram.AddConnector();    
+    }    
+  
+  }  
+
+}

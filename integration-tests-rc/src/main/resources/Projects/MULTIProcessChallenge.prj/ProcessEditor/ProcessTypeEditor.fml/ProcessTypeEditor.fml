@@ -1,0 +1,528 @@
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+use org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.openflexo.org/MULTIProcessChallenge/ProcessTypeEditor.fml")
+public class ProcessTypeEditor {
+
+  public MetaModel model;
+  public Diagram diagram;
+
+  @CreationScheme  
+  ProcessTypeEditor:init(MetaModel model, String diagramName) {  
+    diagram = CreateDiagram();    
+    model = parameters.model;  
+  }  
+
+  @ActionScheme  
+  ProcessTypeGR getProcessTypeGR(ProcessType processType) {  
+    return this.SelectUniqueFlexoConceptInstance(type=ProcessTypeGR,where=where=(selected.processType = parameters.processType));  
+  }  
+
+  @ActionScheme  
+  BeginGR getTaskTypeGR(TaskType taskType) {  
+    if (parameters.taskType.concept.name = "Begin") {    
+      return this.getBeginGR(parameters.taskType);    
+    }    
+    if (parameters.taskType.concept.name = "End") {    
+      return this.getEndGR(parameters.taskType);    
+    }    
+    return this.SelectUniqueFlexoConceptInstance(type=TaskTypeGR,where=where=(selected.taskType = parameters.taskType));  
+  }  
+
+  @ActionScheme  
+  BeginGR getBeginGR(TaskType taskType) {  
+    return this.SelectUniqueFlexoConceptInstance(type=BeginGR,where=where=(selected.begin = parameters.taskType));  
+  }  
+
+  @ActionScheme  
+  EndGR getEndGR(TaskType taskType) {  
+    return this.SelectUniqueFlexoConceptInstance(type=EndGR,where=where=(selected.end = parameters.taskType));  
+  }  
+
+  @ActionScheme  
+  ShapeBasedGR getGatewayGR(Gateway gateway) {  
+    if (parameters.gateway.concept.name = "AndSplit") {    
+      return this.SelectUniqueFlexoConceptInstance(type=AndSplitGR,where=where=(selected.andSplit = parameters.gateway));    
+    } else {    
+      if (parameters.gateway.concept.name = "AndJoin") {      
+        return this.SelectUniqueFlexoConceptInstance(type=AndJoinGR,where=where=(selected.andJoin = parameters.gateway));      
+      }    
+    }    
+    return null;  
+  }  
+
+  @ActionScheme  
+  ActorGR getActorGR(Actor actor) {  
+    return this.SelectUniqueFlexoConceptInstance(type=ActorGR,where=where=(selected.actor = parameters.actor));  
+  }  
+
+
+  @FlexoConcept  
+  public class BeginGR {  
+  
+    public DiagramShape shape;  
+    public Begin begin;  
+  
+    @DropScheme    
+    BeginGR:dropBeginNodeAtTopLevel() {    
+      shape = diagram.AddShape();      
+      begin = Begin.create();      
+      target.processType.taskTypes.add(begin)      
+      target.processType.setInitialTaskType(begin)    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;      
+      begin.delete();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class StartSequencingGR {  
+  
+    public DiagramConnector connector;  
+    public Sequencing sequencing;  
+  
+    @LinkScheme    
+    StartSequencingGR:linkBeginGRToTaskTypeGR() {    
+      connector = diagram.AddConnector();      
+      sequencing = Sequencing.create();      
+      fromTarget.begin.container.addToGateways(sequencing)      
+      sequencing.in = fromTarget.begin;      
+      sequencing.out = toTarget.taskType;    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      sequencing.delete();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class EndGR {  
+  
+    public DiagramShape shape;  
+    public DiagramShape inside;  
+    public End end;  
+  
+    @DropScheme    
+    EndGR:dropEndGRAtTopLevel() {    
+      shape = diagram.AddShape();      
+      inside = diagram.AddShape();      
+      end = End.create();      
+      target.processType.addToTaskTypes(end)      
+      target.processType.addToFinalTaskTypes(end)    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;      
+      delete inside;      
+      end.delete();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class SequencingGR {  
+  
+    public DiagramConnector connector;  
+    public Sequencing sequencing;  
+  
+    @LinkScheme    
+    SequencingGR:linkTaskTypeGRToTaskTypeGR() {    
+      connector = diagram.AddConnector();      
+      sequencing = Sequencing.create();      
+      fromTarget.taskType.container.addToGateways(sequencing)      
+      sequencing.in = fromTarget.taskType;      
+      sequencing.out = toTarget.taskType;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class EndSequencingGR {  
+  
+    public DiagramConnector connector;  
+    public Sequencing sequencing;  
+  
+    @LinkScheme    
+    EndSequencingGR:linkTaskTypeGRtoEndGR() {    
+      connector = diagram.AddConnector();      
+      sequencing = Sequencing.create();      
+      fromTarget.taskType.container.addToGateways(sequencing)      
+      sequencing.in = fromTarget.taskType;      
+      sequencing.out = toTarget.end;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class AndSplitGR extends ShapeBasedGR  {  
+  
+    public DiagramShape shape;  
+    public AndSplit andSplit;  
+  
+    @DropScheme    
+    AndSplitGR:dropAndSplitGRAtTopLevel() {    
+      shape = diagram.AddShape();      
+      andSplit = AndSplit.create();      
+      target.processType.addToGateways(andSplit)    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      delete shape;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class InAndSplitGR {  
+  
+    public DiagramConnector connector;  
+    public TaskType taskType;  
+    public AndSplit andSplit;  
+  
+    @LinkScheme    
+    InAndSplitGR:linkTaskTypeGRToAndSplitGR() {    
+      connector = diagram.AddConnector();      
+      taskType = fromTarget.taskType;      
+      andSplit = toTarget.andSplit;      
+      andSplit.in = taskType;    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      andSplit.in = null;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class OutAndSplitGR {  
+  
+    public DiagramConnector connector;  
+    public AndSplit andSplit;  
+    public TaskType taskType;  
+  
+    @LinkScheme    
+    OutAndSplitGR:linkAndSplitGRToTaskTypeGR() {    
+      connector = diagram.AddConnector();      
+      andSplit = fromTarget.andSplit;      
+      taskType = toTarget.taskType;      
+      andSplit.out.add(taskType)    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      andSplit.out.remove(taskType)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class AndJoinGR extends ShapeBasedGR  {  
+  
+    public DiagramShape shape;  
+    public AndJoin andJoin;  
+  
+    @DropScheme    
+    AndJoinGR:dropAndJoinGRAtTopLevel() {    
+      shape = diagram.AddShape();      
+      andJoin = AndJoin.create();      
+      target.processType.addToGateways(andJoin)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class OutAndJoinGR {  
+  
+    public DiagramConnector connector;  
+    public AndJoin andJoin;  
+    public TaskType taskType;  
+  
+    @LinkScheme    
+    OutAndJoinGR:linkAndJoinGRToTaskTypeGR() {    
+      connector = diagram.AddConnector();      
+      andJoin = fromTarget.andJoin;      
+      taskType = toTarget.taskType;      
+      andJoin.out = taskType;    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      andJoin.out = null;    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class InAndJoinGR {  
+  
+    public DiagramConnector connector;  
+    public TaskType taskType;  
+    public AndJoin andJoin;  
+  
+    @LinkScheme    
+    InAndJoinGR:linkTaskTypeGRToAndJoinGR() {    
+      connector = diagram.AddConnector();      
+      taskType = fromTarget.taskType;      
+      andJoin = toTarget.andJoin;      
+      andJoin.in.add(taskType)    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      andJoin.in.remove(taskType)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ArtifactTypeGR {  
+  
+    public DiagramShape shape;  
+    public ArtifactType artifactType;  
+  
+    @DropScheme    
+    ArtifactTypeGR:dropArtifactTypeGRAtTopLevel(String name, ? extends ArtifactType artefactType) {    
+      shape = diagram.AddShape();      
+      artifactType = ArtifactType.create(parameters.name);      
+      artifactType.name = parameters.name;    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;      
+      artifactType.delete();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class UsedArtefactType {  
+  
+    public DiagramConnector connector;  
+    public TaskType taskType;  
+    public ArtifactType artefactType;  
+  
+    @LinkScheme    
+    UsedArtefactType:linkArtifactTypeGRToTaskTypeGR() {    
+      connector = diagram.AddConnector();      
+      taskType = toTarget.taskType;      
+      artefactType = fromTarget.artifactType;      
+      taskType.usedArtifactTypes.add(artefactType)    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      taskType.usedArtifactTypes.remove(artefactType)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ProducedArtefactType {  
+  
+    public DiagramConnector connector;  
+    public TaskType taskType;  
+    public ArtifactType artefactType;  
+  
+    @LinkScheme    
+    ProducedArtefactType:linkTaskTypeGRToArtifactTypeGR() {    
+      connector = diagram.AddConnector();      
+      taskType = fromTarget.taskType;      
+      artefactType = toTarget.artifactType;      
+      taskType.producedArtifactTypes.add(artefactType)    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      taskType.producedArtifactTypes.remove(artefactType)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ActorTypeGR {  
+  
+    public DiagramShape shape;  
+    public ActorType actorType;  
+  
+    @DropScheme    
+    ActorTypeGR:dropActorTypeGRAtTopLevel(String name, ? extends ActorType actorType) {    
+      shape = diagram.AddShape();      
+      actorType = ActorType.create(parameters.name);      
+      actorType.name = parameters.name;    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;      
+      actorType.delete();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ActorGR {  
+  
+    public DiagramShape shape;  
+    public Actor actor;  
+  
+    @DropScheme    
+    ActorGR:dropActorGRAtTopLevel(String name) {    
+      shape = diagram.AddShape();      
+      actor = Actor.create(parameters.name);    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class HasActorTypeGR {  
+  
+    public DiagramConnector connector;  
+    public Actor actor;  
+    public ActorType actorType;  
+  
+    @LinkScheme    
+    HasActorTypeGR:linkActorGRToActorTypeGR() {    
+      connector = diagram.AddConnector();      
+      actor = fromTarget.actor;      
+      actorType = toTarget.actorType;      
+      actor.addActorType(actorType)    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      actor.removeActorType(actorType)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ParentActorTypeGR {  
+  
+    public DiagramConnector connector;  
+  
+    @LinkScheme    
+    ParentActorTypeGR:linkActorTypeGRToActorTypeGR() {    
+      connector = diagram.AddConnector();      
+      fromTarget.actorType.addParentActorType(toTarget.actorType)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class AllowedActorTypeGR {  
+  
+    public DiagramConnector connector;  
+    public TaskType taskType;  
+    public ActorType actorType;  
+  
+    @LinkScheme    
+    AllowedActorTypeGR:linkActorTypeGRToTaskTypeGR() {    
+      taskType = toTarget.taskType;      
+      actorType = fromTarget.actorType;      
+      if taskType.addAllowedActorType(actorType) {      
+        connector = diagram.AddConnector();      
+      } else {      
+        log "Invalid ActorType"      
+      }    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete connector;      
+      taskType.allowedActorTypes.remove(actorType)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class AllowedActorGR {  
+  
+    public DiagramConnector connector;  
+  
+    @LinkScheme    
+    AllowedActorGR:linkActorGRToTaskTypeGR() {    
+      connector = diagram.AddConnector();      
+      toTarget.taskType.addAllowedActor(fromTarget.actor)    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class TaskTypeGR {  
+  
+    public DiagramShape shape;  
+    public TaskType taskType;  
+  
+    @DropScheme    
+    TaskTypeGR:dropTaskTypeGRAtTopLevel(String name, ? extends TaskType taskType) {    
+      shape = diagram.AddShape();      
+      taskType = TaskType.create(parameters.name);      
+      taskType.name = parameters.name;      
+      target.processType.addToTaskTypes(taskType)    
+    }    
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;      
+      taskType.delete();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ProcessTypeGR {  
+  
+    public DiagramShape shape;  
+    public DiagramShape header;  
+    public ProcessType processType;  
+  
+    @DropScheme    
+    ProcessTypeGR:dropProcessTypeGRAtTopLevel(String name) {    
+      shape = diagram.AddShape();      
+      header = diagram.AddShape();      
+      processType = ProcessType.create(parameters.name);    
+    }    
+  
+    @DeletionScheme    
+    Void delete() {    
+      delete shape;      
+      delete header;    
+    }    
+  
+    @ActionScheme    
+    public Void newProcess(String processName) {    
+      ProcessEditor newProcessEditor = ProcessEditor.init(model,processType,parameters.processName,container);    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class ShapeBasedGR {  
+  
+      
+    abstract DiagramShape shape;  
+  }  
+
+}
