@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram id="0" diagramSpecificationURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification" uri="file:/Users/mac/Repositories/PetriNet.prj/Diagram/Example3.diagram" name="Example3.diagram" userID="MAC" flexoID="1">
+  <DrawingGraphicalRepresentation id="1" drawWorkingArea="false" backgroundColor="255,255,255" focusColor="255,0,0" selectionColor="0,0,255" rectangleSelectingSelectionColor="0,0,255" dimensionConstraints="FREELY_RESIZABLE" identifier="45a1da48">
+    <TextStyle id="2" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+  </DrawingGraphicalRepresentation>
+</Diagram>

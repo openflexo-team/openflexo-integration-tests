@@ -1,0 +1,137 @@
+use org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
+
+/**
+ * 
+ * @version 0.1
+ */
+@VirtualModel(uri="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml")
+public class FreeModel {
+
+  public ConceptualModel sampleData;
+  public Diagram diagram;
+
+  @CreationScheme  
+  FreeModel:create(ConceptualModel sampleData, DiagramType<FreeModel> diagram) {  
+    sampleData = parameters.sampleData;    
+    diagram = parameters.diagram;  
+  }  
+
+  @DeletionScheme  
+  Void delete() {  
+  
+  }  
+
+
+  @FlexoConcept  
+  public class NoneGR {  
+  
+    public String name;  
+    public DiagramShape shape;  
+  
+    @DeletionScheme    
+    public Void delete() {    
+      delete shape;    
+    }    
+  
+    @DropScheme    
+    NoneGR:drop(String conceptName) {    
+      name = parameters.conceptName;      
+      shape = diagram.AddShape();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class PlaceGR {  
+  
+    public Place fmeConcept;  
+    public DiagramShape shape;  
+  
+    @DeletionScheme    
+    public Void delete() {    
+      fmeConcept.delete();      
+      delete shape;    
+    }    
+  
+    @DropScheme    
+    PlaceGR:drop(String conceptName) {    
+      fmeConcept = Place.create(parameters.conceptName);      
+      shape = diagram.AddShape();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class TransitionGR {  
+  
+    public Transition fmeConcept;  
+    public DiagramShape shape;  
+  
+    @DeletionScheme    
+    public Void delete() {    
+      fmeConcept.delete();      
+      delete shape;    
+    }    
+  
+    @DropScheme    
+    TransitionGR:drop(String conceptName) {    
+      fmeConcept = Transition.create(parameters.conceptName);      
+      shape = diagram.AddShape();    
+    }    
+  
+    @ActionScheme    
+    public Void step() {    
+      if fmeConcept.isFireable() {      
+        fmeConcept.step()      
+      }    
+    }    
+  
+    @ActionScheme    
+    public Void test() {    
+      fmeConcept.null()    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class PlaceToTransitionEdgeGR {  
+  
+    public PlaceToTransitionEdge fmeConcept;  
+    public DiagramConnector connector;  
+  
+    @DeletionScheme    
+    public Void delete() {    
+      fmeConcept.delete();      
+      delete connector;    
+    }    
+  
+    @LinkScheme    
+    PlaceToTransitionEdgeGR:link() {    
+      fmeConcept = PlaceToTransitionEdge.create(fromTarget.fmeConcept,toTarget.fmeConcept);      
+      connector = diagram.AddConnector();    
+    }    
+  
+  }  
+
+  @FlexoConcept  
+  public class TransitionToPlaceEdgeGR {  
+  
+    public TransitionToPlaceEdge fmeConcept;  
+    public DiagramConnector connector;  
+  
+    @DeletionScheme    
+    public Void delete() {    
+      fmeConcept.delete();      
+      delete connector;    
+    }    
+  
+    @LinkScheme    
+    TransitionToPlaceEdgeGR:link() {    
+      fmeConcept = TransitionToPlaceEdge.create(fromTarget.fmeConcept,toTarget.fmeConcept);      
+      connector = diagram.AddConnector();    
+    }    
+  
+  }  
+
+}

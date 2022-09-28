@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VirtualModel id="MAC-1" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml" version="0.1" visibility="Public" name="FreeModel" userID="MAC" flexoID="1">
+  <FlexoConcept id="MAC-57" visibility="Public" name="NoneGR" userID="MAC" flexoID="57">
+    <Inspector id="MAC-46" renderer="instance.name" inspectorTitle="NoneGR" userID="MAC" flexoID="46">
+      <InspectorEntry id="MAC-44" widget="TEXT_FIELD" readOnly="true" data="&quot;Unclassified&quot;" name="Type" label="Type" type="java.lang.String" userID="MAC" flexoID="44" />
+      <InspectorEntry id="MAC-45" widget="TEXT_FIELD" data="name" name="name" label="name" type="java.lang.String" userID="MAC" flexoID="45" />
+    </Inspector>
+    <PrimitiveRole id="MAC-33" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="name" userID="MAC" flexoID="33" />
+    <ShapeRole id="MAC-34" metamodelElementReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Default.diagram#MAC_2" container="diagram" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="MAC" flexoID="34">
+      <GRSpec id="MAC-240" featureName="label" value="name" userID="MAC" flexoID="240" />
+    </ShapeRole>
+    <DeletionScheme id="MAC-36" visibility="Public" label="delete" name="delete" width="800" height="600" userID="MAC" flexoID="36">
+      <BehaviourControlGraph_DeleteAction id="MAC-35" object="shape" userID="MAC" flexoID="35" />
+    </DeletionScheme>
+    <DropScheme id="MAC-43" target="top" skipConfirmationPanel="false" label="drop" name="drop" width="800" height="600" userID="MAC" flexoID="43">
+      <BehaviourControlGraph_Sequence id="MAC-41" userID="MAC" flexoID="41">
+        <ControlGraph2_AssignationAction id="MAC-38" assign="shape" ownerContext="controlGraph2" userID="MAC" flexoID="38">
+          <AssignableAction_AddShape id="MAC-37" container="diagram" receiver="diagram" userID="MAC" flexoID="37" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="MAC-40" assign="name" ownerContext="controlGraph1" userID="MAC" flexoID="40">
+          <AssignableAction_ExpressionAction id="MAC-39" expression="parameters.conceptName" userID="MAC" flexoID="39" />
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="MAC-42" widget="TEXT_FIELD" defaultValue="&quot;conceptName&quot;" name="conceptName" type="java.lang.String" userID="MAC" flexoID="42" />
+    </DropScheme>
+  </FlexoConcept>
+  <FlexoConcept id="MAC-14" visibility="Public" name="PlaceGR" userID="MAC" flexoID="14">
+    <Inspector id="MAC-18" renderer="instance.fmeConcept.name" inspectorTitle="PlaceGR" userID="MAC" flexoID="18">
+      <InspectorEntry id="MAC-15" widget="TEXT_FIELD" readOnly="true" data="fmeConcept.concept.name" name="Type" label="Type" type="java.lang.String" userID="MAC" flexoID="15" />
+      <InspectorEntry id="MAC-16" widget="TEXT_FIELD" data="fmeConcept.name" name="name" label="name" type="java.lang.String" userID="MAC" flexoID="16" />
+      <InspectorEntry id="MAC-32" widget="INTEGER" data="fmeConcept.nbToken" name="nbToken" label="nbToken" type="int" userID="MAC" flexoID="32" />
+      <InspectorEntry id="MAC-59" widget="INTEGER" data="fmeConcept.nbToken" name="nbToken" label="nbToken" type="int" userID="MAC" flexoID="59" />
+      <InspectorEntry id="MAC-17" widget="TEXT_AREA" data="fmeConcept.description" name="description" label="description" type="java.lang.String" userID="MAC" flexoID="17" />
+    </Inspector>
+    <FlexoConceptInstanceRole id="MAC-19" virtualModelInstance="sampleData" flexoConceptTypeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Place" cloningStrategy="Reference" cardinality="ZeroOne" name="fmeConcept" userID="MAC" flexoID="19" />
+    <ShapeRole id="MAC-20" previewY="26.14" previewX="27.14" exampleLabel="" metamodelElementReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Default.diagram#MAC_3" container="diagram" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="MAC" flexoID="20">
+      <GRSpec id="MAC-241" featureName="label" readOnly="true" value="((fmeConcept.name + &quot; / &quot;) + fmeConcept.nbToken)" userID="MAC" flexoID="241" />
+    </ShapeRole>
+    <DeletionScheme id="MAC-24" visibility="Public" label="delete" name="delete" width="800" height="600" userID="MAC" flexoID="24">
+      <BehaviourControlGraph_Sequence id="MAC-23" userID="MAC" flexoID="23">
+        <ControlGraph2_DeleteAction id="MAC-21" object="shape" ownerContext="controlGraph2" userID="MAC" flexoID="21" />
+        <ControlGraph1_DeleteFlexoConceptInstance id="MAC-22" deletionSchemeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Place.delete()" object="fmeConcept" ownerContext="controlGraph1" userID="MAC" flexoID="22" />
+      </BehaviourControlGraph_Sequence>
+    </DeletionScheme>
+    <DropScheme id="MAC-13" target="top" skipConfirmationPanel="false" label="drop" name="drop" width="800" height="600" userID="MAC" flexoID="13">
+      <BehaviourControlGraph_Sequence id="MAC-30" userID="MAC" flexoID="30">
+        <ControlGraph2_AssignationAction id="MAC-26" assign="shape" ownerContext="controlGraph2" userID="MAC" flexoID="26">
+          <AssignableAction_AddShape id="MAC-25" container="diagram" receiver="diagram" userID="MAC" flexoID="25" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="MAC-29" assign="fmeConcept" ownerContext="controlGraph1" userID="MAC" flexoID="29">
+          <AssignableAction_AddFlexoConceptInstance id="MAC-28" container="sampleData" creationSchemeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Place.create(conceptName)" flexoConceptTypeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Place" receiver="sampleData" userID="MAC" flexoID="28">
+            <AddFlexoConceptInstanceParameter id="MAC-27" paramName="conceptName" value="parameters.conceptName" userID="MAC" flexoID="27" />
+          </AssignableAction_AddFlexoConceptInstance>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="MAC-31" widget="TEXT_FIELD" defaultValue="&quot;Place&quot;" name="conceptName" type="java.lang.String" userID="MAC" flexoID="31" />
+    </DropScheme>
+  </FlexoConcept>
+  <FlexoConcept id="MAC-61" visibility="Public" name="TransitionGR" userID="MAC" flexoID="61">
+    <Inspector id="MAC-62" renderer="instance.fmeConcept.name" inspectorTitle="TransitionGR" userID="MAC" flexoID="62">
+      <InspectorEntry id="MAC-63" widget="TEXT_FIELD" readOnly="true" data="fmeConcept.concept.name" name="Type" label="Type" type="java.lang.String" userID="MAC" flexoID="63" />
+      <InspectorEntry id="MAC-64" widget="TEXT_FIELD" data="fmeConcept.name" name="name" label="name" type="java.lang.String" userID="MAC" flexoID="64" />
+      <InspectorEntry id="MAC-65" widget="TEXT_AREA" data="fmeConcept.description" name="description" label="description" type="java.lang.String" userID="MAC" flexoID="65" />
+    </Inspector>
+    <FlexoConceptInstanceRole id="MAC-66" virtualModelInstance="sampleData" flexoConceptTypeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Transition" cloningStrategy="Reference" cardinality="ZeroOne" name="fmeConcept" userID="MAC" flexoID="66" />
+    <ShapeRole id="MAC-67" metamodelElementReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Default.diagram#MAC_4" container="diagram" cloningStrategy="Clone" cardinality="ZeroOne" name="shape" userID="MAC" flexoID="67">
+      <GRSpec id="MAC-242" featureName="label" value="fmeConcept.name" userID="MAC" flexoID="242" />
+    </ShapeRole>
+    <DeletionScheme id="MAC-69" visibility="Public" label="delete" name="delete" width="800" height="600" userID="MAC" flexoID="69">
+      <BehaviourControlGraph_Sequence id="MAC-70" userID="MAC" flexoID="70">
+        <ControlGraph2_DeleteAction id="MAC-71" object="shape" ownerContext="controlGraph2" userID="MAC" flexoID="71" />
+        <ControlGraph1_DeleteFlexoConceptInstance id="MAC-72" deletionSchemeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Transition.delete()" object="fmeConcept" ownerContext="controlGraph1" userID="MAC" flexoID="72" />
+      </BehaviourControlGraph_Sequence>
+    </DeletionScheme>
+    <DropScheme id="MAC-56" target="top" skipConfirmationPanel="false" label="drop" name="drop" width="800" height="600" userID="MAC" flexoID="56">
+      <BehaviourControlGraph_Sequence id="MAC-73" userID="MAC" flexoID="73">
+        <ControlGraph2_AssignationAction id="MAC-74" assign="shape" ownerContext="controlGraph2" userID="MAC" flexoID="74">
+          <AssignableAction_AddShape id="MAC-75" container="diagram" receiver="diagram" userID="MAC" flexoID="75" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="MAC-76" assign="fmeConcept" ownerContext="controlGraph1" userID="MAC" flexoID="76">
+          <AssignableAction_AddFlexoConceptInstance id="MAC-77" container="sampleData" creationSchemeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Transition.create(conceptName)" flexoConceptTypeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Transition" receiver="sampleData" userID="MAC" flexoID="77">
+            <AddFlexoConceptInstanceParameter id="MAC-78" paramName="conceptName" value="parameters.conceptName" userID="MAC" flexoID="78" />
+          </AssignableAction_AddFlexoConceptInstance>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+      <GenericBehaviourParameter id="MAC-79" widget="TEXT_FIELD" defaultValue="&quot;Transition&quot;" name="conceptName" type="java.lang.String" userID="MAC" flexoID="79" />
+    </DropScheme>
+    <ActionScheme id="MAC-135" visibility="Public" label="step" name="step" width="800" height="600" userID="MAC" flexoID="135">
+      <BehaviourControlGraph_ConditionalAction id="MAC-138" condition="fmeConcept.isFireable()" userID="MAC" flexoID="138">
+        <ThenControlGraph_ExpressionAction id="MAC-143" expression="fmeConcept.step()" ownerContext="thenControlGraph" userID="MAC" flexoID="143" />
+      </BehaviourControlGraph_ConditionalAction>
+    </ActionScheme>
+    <ActionScheme id="MAC-235" visibility="Public" label="test" name="test" width="800" height="600" userID="MAC" flexoID="235">
+      <BehaviourControlGraph_ExpressionAction id="MAC-239" expression="fmeConcept.null()" userID="MAC" flexoID="239" />
+    </ActionScheme>
+  </FlexoConcept>
+  <FlexoConcept id="MAC-80" visibility="Public" name="PlaceToTransitionEdgeGR" userID="MAC" flexoID="80">
+    <Inspector id="MAC-81" renderer="instance.fmeConcept.render" inspectorTitle="PlaceToTransitionEdgeGR" userID="MAC" flexoID="81">
+      <InspectorEntry id="MAC-82" widget="TEXT_FIELD" readOnly="true" data="fmeConcept.render" name="Relationship" label="Relationship" type="java.lang.String" userID="MAC" flexoID="82" />
+      <InspectorEntry id="MAC-83" widget="CUSTOM_WIDGET" data="fmeConcept.sourceConcept" name="sourceConcept" label="sourceConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Place&gt;" userID="MAC" flexoID="83" />
+      <InspectorEntry id="MAC-84" widget="CUSTOM_WIDGET" data="fmeConcept.destinationConcept" name="destinationConcept" label="destinationConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Transition&gt;" userID="MAC" flexoID="84" />
+    </Inspector>
+    <FlexoConceptInstanceRole id="MAC-85" virtualModelInstance="sampleData" flexoConceptTypeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#PlaceToTransitionEdge" cloningStrategy="Reference" cardinality="ZeroOne" name="fmeConcept" userID="MAC" flexoID="85" />
+    <ConnectorRole id="MAC-86" metamodelElementReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Default.diagram#MAC_5" container="diagram" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="MAC" flexoID="86">
+      <GRSpec id="MAC-243" featureName="label" readOnly="true" value="fmeConcept.render" userID="MAC" flexoID="243" />
+    </ConnectorRole>
+    <DeletionScheme id="MAC-88" visibility="Public" label="delete" name="delete" width="800" height="600" userID="MAC" flexoID="88">
+      <BehaviourControlGraph_Sequence id="MAC-89" userID="MAC" flexoID="89">
+        <ControlGraph2_DeleteAction id="MAC-90" object="connector" ownerContext="controlGraph2" userID="MAC" flexoID="90" />
+        <ControlGraph1_DeleteFlexoConceptInstance id="MAC-91" deletionSchemeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#PlaceToTransitionEdge.delete()" object="fmeConcept" ownerContext="controlGraph1" userID="MAC" flexoID="91" />
+      </BehaviourControlGraph_Sequence>
+    </DeletionScheme>
+    <LinkScheme id="MAC-92" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml#PlaceGR" toTarget="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml#TransitionGR" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" label="link" name="link" width="800" height="600" userID="MAC" flexoID="92">
+      <BehaviourControlGraph_Sequence id="MAC-93" userID="MAC" flexoID="93">
+        <ControlGraph2_AssignationAction id="MAC-94" assign="connector" ownerContext="controlGraph2" userID="MAC" flexoID="94">
+          <AssignableAction_AddConnector id="MAC-95" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="diagram" userID="MAC" flexoID="95" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="MAC-96" assign="fmeConcept" ownerContext="controlGraph1" userID="MAC" flexoID="96">
+          <AssignableAction_AddFlexoConceptInstance id="MAC-97" creationSchemeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#PlaceToTransitionEdge.create(sourceConcept,destinationConcept)" flexoConceptTypeURI="file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#PlaceToTransitionEdge" receiver="sampleData" userID="MAC" flexoID="97">
+            <AddFlexoConceptInstanceParameter id="MAC-98" paramName="sourceConcept" value="fromTarget.fmeConcept" userID="MAC" flexoID="98" />
+            <AddFlexoConceptInstanceParameter id="MAC-99" paramName="destinationConcept" value="toTarget.fmeConcept" userID="MAC" flexoID="99" />
+          </AssignableAction_AddFlexoConceptInstance>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+    </LinkScheme>
+  </FlexoConcept>
+  <FlexoConcept id="MAC-100" visibility="Public" name="TransitionToPlaceEdgeGR" userID="MAC" flexoID="100">
+    <Inspector id="MAC-101" renderer="instance.fmeConcept.render" inspectorTitle="TransitionToPlaceEdgeGR" userID="MAC" flexoID="101">
+      <InspectorEntry id="MAC-102" widget="TEXT_FIELD" readOnly="true" data="fmeConcept.render" name="Relationship" label="Relationship" type="java.lang.String" userID="MAC" flexoID="102" />
+      <InspectorEntry id="MAC-103" widget="CUSTOM_WIDGET" data="fmeConcept.sourceConcept" name="sourceConcept" label="sourceConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;file:/Users/mac/Repositories/PetriNet.prj/ConceptualModel.fml#Transition&gt;" userID="MAC" flexoID="103" />
+      <InspectorEntry id="MAC-104" widget="CUSTOM_WIDGET" data="fmeConcept.destinationConcept" name="destinationConcept" label="destinationConcept" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place&gt;" userID="MAC" flexoID="104" />
+    </Inspector>
+    <FlexoConceptInstanceRole id="MAC-105" virtualModelInstance="sampleData" flexoConceptTypeURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" cloningStrategy="Reference" cardinality="ZeroOne" name="fmeConcept" userID="MAC" flexoID="105" />
+    <ConnectorRole id="MAC-106" metamodelElementReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Default.diagram#MAC_6" container="diagram" cloningStrategy="Clone" cardinality="ZeroOne" name="connector" userID="MAC" flexoID="106">
+      <GRSpec id="MAC-244" featureName="label" readOnly="true" value="fmeConcept.render" userID="MAC" flexoID="244" />
+    </ConnectorRole>
+    <DeletionScheme id="MAC-108" visibility="Public" label="delete" name="delete" width="800" height="600" userID="MAC" flexoID="108">
+      <BehaviourControlGraph_Sequence id="MAC-109" userID="MAC" flexoID="109">
+        <ControlGraph2_DeleteAction id="MAC-110" object="connector" ownerContext="controlGraph2" userID="MAC" flexoID="110" />
+        <ControlGraph1_DeleteFlexoConceptInstance id="MAC-111" deletionSchemeURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge.delete()" object="fmeConcept" ownerContext="controlGraph1" userID="MAC" flexoID="111" />
+      </BehaviourControlGraph_Sequence>
+    </DeletionScheme>
+    <LinkScheme id="MAC-112" northDirectionSupported="true" eastDirectionSupported="true" fromTarget="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml#TransitionGR" toTarget="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml#PlaceGR" westDirectionSupported="true" isAvailableWithFloatingPalette="true" southDirectionSupported="true" label="link" name="link" width="800" height="600" userID="MAC" flexoID="112">
+      <BehaviourControlGraph_Sequence id="MAC-113" userID="MAC" flexoID="113">
+        <ControlGraph2_AssignationAction id="MAC-114" assign="connector" ownerContext="controlGraph2" userID="MAC" flexoID="114">
+          <AssignableAction_AddConnector id="MAC-115" fromShape="fromTarget.shape" toShape="toTarget.shape" receiver="diagram" userID="MAC" flexoID="115" />
+        </ControlGraph2_AssignationAction>
+        <ControlGraph1_AssignationAction id="MAC-116" assign="fmeConcept" ownerContext="controlGraph1" userID="MAC" flexoID="116">
+          <AssignableAction_AddFlexoConceptInstance id="MAC-117" creationSchemeURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge.create(sourceConcept,destinationConcept)" flexoConceptTypeURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" receiver="sampleData" userID="MAC" flexoID="117">
+            <AddFlexoConceptInstanceParameter id="MAC-118" paramName="sourceConcept" value="fromTarget.fmeConcept" userID="MAC" flexoID="118" />
+            <AddFlexoConceptInstanceParameter id="MAC-119" paramName="destinationConcept" value="toTarget.fmeConcept" userID="MAC" flexoID="119" />
+          </AssignableAction_AddFlexoConceptInstance>
+        </ControlGraph1_AssignationAction>
+      </BehaviourControlGraph_Sequence>
+    </LinkScheme>
+  </FlexoConcept>
+  <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot" userID="MAC" flexoID="-1" />
+  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="MAC" flexoID="-1" />
+  <Inspector id="MAC-2" inspectorTitle="FreeModel" userID="MAC" flexoID="2" />
+  <FMLRTVirtualModelInstanceModelSlot id="MAC-3" virtualModelURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="sampleData" userID="MAC" flexoID="3" />
+  <TypedDiagramModelSlot id="MAC-4" templateDiagramReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Default.diagram#MAC_1" metaModelURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="diagram" userID="MAC" flexoID="4">
+    <FMLDiagramPaletteElementBinding id="MAC-120" paletteElementId="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Concepts.palette#Place" userID="MAC" flexoID="120">
+      <DropScheme idref="MAC-13" />
+    </FMLDiagramPaletteElementBinding>
+    <FMLDiagramPaletteElementBinding id="MAC-121" paletteElementId="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Concepts.palette#Transition" userID="MAC" flexoID="121">
+      <DropScheme idref="MAC-56" />
+    </FMLDiagramPaletteElementBinding>
+  </TypedDiagramModelSlot>
+  <CreationScheme id="MAC-5" label="create" name="create" width="800" height="600" userID="MAC" flexoID="5">
+    <BehaviourControlGraph_Sequence id="MAC-6" userID="MAC" flexoID="6">
+      <ControlGraph2_AssignationAction id="MAC-7" assign="diagram" ownerContext="controlGraph2" userID="MAC" flexoID="7">
+        <AssignableAction_ExpressionAction id="MAC-8" expression="parameters.diagram" userID="MAC" flexoID="8" />
+      </ControlGraph2_AssignationAction>
+      <ControlGraph1_AssignationAction id="MAC-9" assign="sampleData" ownerContext="controlGraph1" userID="MAC" flexoID="9">
+        <AssignableAction_ExpressionAction id="MAC-10" expression="parameters.sampleData" userID="MAC" flexoID="10" />
+      </ControlGraph1_AssignationAction>
+    </BehaviourControlGraph_Sequence>
+    <GenericBehaviourParameter id="MAC-11" widget="CUSTOM_WIDGET" name="sampleData" type="org.openflexo.foundation.fml.VirtualModelInstanceType&lt;http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml&gt;" userID="MAC" flexoID="11" />
+    <GenericBehaviourParameter id="MAC-12" widget="CUSTOM_WIDGET" name="diagram" type="org.openflexo.technologyadapter.diagram.model.DiagramType&lt;http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification&gt;" userID="MAC" flexoID="12" />
+  </CreationScheme>
+  <DeletionScheme id="MAC-245" label="delete" name="delete" width="800" height="600" userID="MAC" flexoID="245">
+    <BehaviourControlGraph_EmptyControlGraph id="MAC-246" userID="MAC" flexoID="246" />
+  </DeletionScheme>
+</VirtualModel>

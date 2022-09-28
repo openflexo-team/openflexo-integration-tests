@@ -1,0 +1,8 @@
+Relationship=Relationship
+Type=Type
+destinationConcept=DestinationConcept
+link=Link
+nbToken=NbToken
+sourceConcept=SourceConcept
+step=Step
+test=Test

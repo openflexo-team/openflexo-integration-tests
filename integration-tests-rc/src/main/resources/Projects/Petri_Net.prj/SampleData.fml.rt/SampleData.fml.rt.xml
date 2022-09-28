@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FMLRTVirtualModelInstance id="0" virtualModelURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml" modelVersion="1.0" title="SampleData" version="0.1" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml" userID="MAC" flexoID="1">
+  <FlexoConceptInstance id="1" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="2">
+    <PrimitiveActorReference id="2" valueAsString="Place" roleName="name" userID="MAC" flexoID="3" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="3" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Transition" userID="MAC" flexoID="4">
+    <PrimitiveActorReference id="4" valueAsString="Transition" roleName="name" userID="MAC" flexoID="10" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="5" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="5">
+    <PrimitiveActorReference id="6" valueAsString="place" roleName="name" userID="MAC" flexoID="11" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="7" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#PlaceToTransitionEdge" userID="MAC" flexoID="8">
+    <ModelObjectActorReference id="8" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_2" roleName="sourceConcept" userID="MAC" flexoID="12" />
+    <ModelObjectActorReference id="9" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_4" roleName="destinationConcept" userID="MAC" flexoID="13" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="10" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" userID="MAC" flexoID="9">
+    <ModelObjectActorReference id="11" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_4" roleName="sourceConcept" userID="MAC" flexoID="14" />
+    <ModelObjectActorReference id="12" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_5" roleName="destinationConcept" userID="MAC" flexoID="15" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="13" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="16">
+    <PrimitiveActorReference id="14" valueAsString="place2" roleName="name" userID="MAC" flexoID="25" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="15" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="17">
+    <PrimitiveActorReference id="16" valueAsString="place3" roleName="name" userID="MAC" flexoID="26" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="17" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="18">
+    <PrimitiveActorReference id="18" valueAsString="place4" roleName="name" userID="MAC" flexoID="27" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="19" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Transition" userID="MAC" flexoID="19">
+    <PrimitiveActorReference id="20" valueAsString="transition" roleName="name" userID="MAC" flexoID="28" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="21" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Transition" userID="MAC" flexoID="20">
+    <PrimitiveActorReference id="22" valueAsString="transition2" roleName="name" userID="MAC" flexoID="29" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="23" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#PlaceToTransitionEdge" userID="MAC" flexoID="21">
+    <ModelObjectActorReference id="24" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_16" roleName="sourceConcept" userID="MAC" flexoID="30" />
+    <ModelObjectActorReference id="25" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_19" roleName="destinationConcept" userID="MAC" flexoID="31" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="26" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" userID="MAC" flexoID="22">
+    <ModelObjectActorReference id="27" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_19" roleName="sourceConcept" userID="MAC" flexoID="32" />
+    <ModelObjectActorReference id="28" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_17" roleName="destinationConcept" userID="MAC" flexoID="33" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="29" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#PlaceToTransitionEdge" userID="MAC" flexoID="23">
+    <ModelObjectActorReference id="30" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_17" roleName="sourceConcept" userID="MAC" flexoID="34" />
+    <ModelObjectActorReference id="31" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_20" roleName="destinationConcept" userID="MAC" flexoID="35" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="32" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" userID="MAC" flexoID="24">
+    <ModelObjectActorReference id="33" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_20" roleName="sourceConcept" userID="MAC" flexoID="36" />
+    <ModelObjectActorReference id="34" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_18" roleName="destinationConcept" userID="MAC" flexoID="37" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="35" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="38">
+    <PrimitiveActorReference id="36" valueAsString="place5" roleName="name" userID="MAC" flexoID="53" />
+    <PrimitiveActorReference id="37" valueAsString="0" roleName="nbToken" userID="MAC" flexoID="54" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="38" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="39">
+    <PrimitiveActorReference id="39" valueAsString="p1" roleName="name" userID="MAC" flexoID="55" />
+    <PrimitiveActorReference id="40" valueAsString="48" roleName="nbToken" userID="MAC" flexoID="89" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="41" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="40">
+    <PrimitiveActorReference id="42" valueAsString="p2" roleName="name" userID="MAC" flexoID="57" />
+    <PrimitiveActorReference id="43" valueAsString="0" roleName="nbToken" userID="MAC" flexoID="90" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="44" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="41">
+    <PrimitiveActorReference id="45" valueAsString="p3" roleName="name" userID="MAC" flexoID="59" />
+    <PrimitiveActorReference id="46" valueAsString="0" roleName="nbToken" userID="MAC" flexoID="91" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="47" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="42">
+    <PrimitiveActorReference id="48" valueAsString="p4" roleName="name" userID="MAC" flexoID="61" />
+    <PrimitiveActorReference id="49" valueAsString="0" roleName="nbToken" userID="MAC" flexoID="92" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="50" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Place" userID="MAC" flexoID="43">
+    <PrimitiveActorReference id="51" valueAsString="p5" roleName="name" userID="MAC" flexoID="63" />
+    <PrimitiveActorReference id="52" valueAsString="15" roleName="nbToken" userID="MAC" flexoID="64" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="53" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Transition" userID="MAC" flexoID="44">
+    <PrimitiveActorReference id="54" valueAsString="t2" roleName="name" userID="MAC" flexoID="65" />
+    <ModelObjectActorReference id="55" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_49" roleName="incomings" userID="MAC" flexoID="66" />
+    <ModelObjectActorReference id="56" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_50" roleName="incomings" userID="MAC" flexoID="67" />
+    <ModelObjectActorReference id="57" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_51" roleName="incomings" userID="MAC" flexoID="68" />
+    <ModelObjectActorReference id="58" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_52" roleName="outcomings" userID="MAC" flexoID="69" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="59" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#Transition" userID="MAC" flexoID="45">
+    <PrimitiveActorReference id="60" valueAsString="t1" roleName="name" userID="MAC" flexoID="70" />
+    <ModelObjectActorReference id="61" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_46" roleName="incomings" userID="MAC" flexoID="71" />
+    <ModelObjectActorReference id="62" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_47" roleName="outcomings" userID="MAC" flexoID="72" />
+    <ModelObjectActorReference id="63" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_48" roleName="outcomings" userID="MAC" flexoID="73" />
+    <PrimitiveActorReference id="64" valueAsString="" roleName="description" userID="MAC" flexoID="74" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="65" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#PlaceToTransitionEdge" userID="MAC" flexoID="46">
+    <ModelObjectActorReference id="66" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_39" roleName="sourceConcept" userID="MAC" flexoID="75" />
+    <ModelObjectActorReference id="67" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_45" roleName="destinationConcept" userID="MAC" flexoID="76" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="68" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" userID="MAC" flexoID="47">
+    <ModelObjectActorReference id="69" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_45" roleName="sourceConcept" userID="MAC" flexoID="77" />
+    <ModelObjectActorReference id="70" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_40" roleName="destinationConcept" userID="MAC" flexoID="78" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="71" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" userID="MAC" flexoID="48">
+    <ModelObjectActorReference id="72" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_45" roleName="sourceConcept" userID="MAC" flexoID="79" />
+    <ModelObjectActorReference id="73" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_41" roleName="destinationConcept" userID="MAC" flexoID="80" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="74" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#PlaceToTransitionEdge" userID="MAC" flexoID="49">
+    <ModelObjectActorReference id="75" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_40" roleName="sourceConcept" userID="MAC" flexoID="81" />
+    <ModelObjectActorReference id="76" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_44" roleName="destinationConcept" userID="MAC" flexoID="82" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="77" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#PlaceToTransitionEdge" userID="MAC" flexoID="50">
+    <ModelObjectActorReference id="78" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_41" roleName="sourceConcept" userID="MAC" flexoID="83" />
+    <ModelObjectActorReference id="79" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_44" roleName="destinationConcept" userID="MAC" flexoID="84" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="80" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#PlaceToTransitionEdge" userID="MAC" flexoID="51">
+    <ModelObjectActorReference id="81" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_42" roleName="sourceConcept" userID="MAC" flexoID="85" />
+    <ModelObjectActorReference id="82" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_44" roleName="destinationConcept" userID="MAC" flexoID="86" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="83" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" userID="MAC" flexoID="52">
+    <ModelObjectActorReference id="84" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_44" roleName="sourceConcept" userID="MAC" flexoID="87" />
+    <ModelObjectActorReference id="85" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_43" roleName="destinationConcept" userID="MAC" flexoID="88" />
+  </FlexoConceptInstance>
+</FMLRTVirtualModelInstance>

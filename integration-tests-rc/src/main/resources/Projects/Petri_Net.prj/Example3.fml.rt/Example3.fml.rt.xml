@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FMLRTVirtualModelInstance id="0" virtualModelURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml" modelVersion="1.0" title="Example3" version="0.1" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml" userID="MAC" flexoID="1">
+  <FlexoConceptInstance id="1" flexoConceptURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/FreeModel.fml#PlaceGR" userID="MAC" flexoID="6">
+    <ModelObjectActorReference id="2" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt#MAC_38" roleName="fmeConcept" userID="MAC" flexoID="4" />
+    <ModelObjectActorReference id="3" objectReference="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/Diagram/Example3.diagram#MAC_2" roleName="shape" userID="MAC" flexoID="5" />
+  </FlexoConceptInstance>
+  <VirtualModelModelSlotInstance id="4" virtualModelInstanceURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/SampleData.fml.rt" modelSlotName="sampleData" roleName="sampleData" userID="MAC" flexoID="2" />
+  <TypeAwareModelSlotInstance id="5" modelURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/Diagram/Example3.diagram" modelSlotName="diagram" roleName="diagram" userID="MAC" flexoID="3" />
+</FMLRTVirtualModelInstance>
