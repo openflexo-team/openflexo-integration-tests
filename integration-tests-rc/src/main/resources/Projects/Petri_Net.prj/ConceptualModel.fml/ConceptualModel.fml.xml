@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<VirtualModel id="MAC-1" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" uri="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml" version="0.1" visibility="Public" name="ConceptualModel" description="Conceptual model for PetriNet" userID="MAC" flexoID="1">
+<VirtualModel id="MAC-1" virtualModelClass="org.openflexo.foundation.fml.VirtualModel" modelVersion="2.0" version="0.1" uri="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml" visibility="Public" name="ConceptualModel" description="Conceptual model for PetriNet" userID="MAC" flexoID="1">
   <FlexoConcept id="MAC-3" visibility="Public" name="Place" userID="MAC" flexoID="3">
     <Inspector id="MAC-6" renderer="instance.name" inspectorTitle="Place" userID="MAC" flexoID="6">
       <InspectorEntry id="MAC-4" widget="TEXT_FIELD" data="name" name="name" label="name" type="java.lang.String" userID="MAC" flexoID="4" />
@@ -31,7 +31,7 @@
     <PrimitiveRole id="MAC-27" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="name" userID="MAC" flexoID="27" />
     <PrimitiveRole id="MAC-28" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="description" userID="MAC" flexoID="28" />
     <FlexoConceptInstanceRole id="MAC-121" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#PlaceToTransitionEdge" cloningStrategy="Reference" cardinality="ZeroMany" name="incomings" userID="MAC" flexoID="121" />
-    <FlexoConceptInstanceRole id="MAC-122" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" cloningStrategy="Reference" cardinality="ZeroMany" name="outcomings" userID="MAC" flexoID="122" />
+    <FlexoConceptInstanceRole id="MAC-122" virtualModelInstance="container" flexoConceptTypeURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml#TransitionToPlaceEdge" cloningStrategy="Reference" cardinality="ZeroMany" name="outgoings" userID="MAC" flexoID="122" />
     <CreationScheme id="MAC-29" label="create" name="create" width="800" height="600" userID="MAC" flexoID="29">
       <BehaviourControlGraph_AssignationAction id="MAC-30" assign="name" userID="MAC" flexoID="30">
         <AssignableAction_ExpressionAction id="MAC-31" expression="parameters.conceptName" userID="MAC" flexoID="31" />
@@ -49,7 +49,7 @@
             <ControlGraph_ExpressionAction id="MAC-177" expression="incoming.activate()" ownerContext="controlGraph" userID="MAC" flexoID="177" />
           </ControlGraph2_IterationAction>
           <ControlGraph1_IterationAction id="MAC-168" iteratorName="outgoing" ownerContext="controlGraph1" userID="MAC" flexoID="168">
-            <Iteration_ExpressionAction id="MAC-169" expression="outcomings" ownerContext="iterationControlGraph" userID="MAC" flexoID="169" />
+            <Iteration_ExpressionAction id="MAC-169" expression="outgoings" ownerContext="iterationControlGraph" userID="MAC" flexoID="169" />
             <ControlGraph_ExpressionAction id="MAC-172" expression="outgoing.activate()" ownerContext="controlGraph" userID="MAC" flexoID="172" />
           </ControlGraph1_IterationAction>
         </ThenControlGraph_Sequence>

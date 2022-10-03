@@ -33,7 +33,7 @@ public class ConceptualModel {
     public String name;  
     public String description;  
     public List incomings;  
-    public List outcomings;  
+    public List outgoings;  
   
     @CreationScheme    
     Transition:create(String conceptName) {    
@@ -48,7 +48,7 @@ public class ConceptualModel {
     @ActionScheme    
     public Void step() {    
       if this.isFireable() {      
-        for (outgoing : outcomings) {        
+        for (outgoing : outgoings) {        
           outgoing.activate()        
         }        
         for (incoming : incomings) {        
