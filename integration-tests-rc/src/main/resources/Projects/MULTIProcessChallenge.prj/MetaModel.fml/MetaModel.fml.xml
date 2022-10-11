@@ -192,7 +192,7 @@
     </EmbeddedFlexoConcept>
     <EmbeddedFlexoConcept id="SYL-26" visibility="Public" parentFlexoConceptsList="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Gateway" name="Sequencing" author="sylvain" userID="SYL" flexoID="26">
       <Inspector id="SYL-27" inspectorTitle="Sequencing" userID="SYL" flexoID="27" />
-      <FlexoConceptInstanceRole id="SYL-33" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="in" userID="SYL" flexoID="33" />
+      <FlexoConceptInstanceRole id="SYL-33" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="_in" userID="SYL" flexoID="33" />
       <FlexoConceptInstanceRole id="SYL-34" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="out" userID="SYL" flexoID="34" />
       <CreationScheme id="SYL-31" label="create" width="800" name="create" height="600" userID="SYL" flexoID="31">
         <BehaviourControlGraph_ExpressionAction id="SYL-970" expression="super.create(&quot;Sequence&quot;)" userID="SYL" flexoID="970" />
@@ -213,7 +213,7 @@
             </ThenControlGraph_Sequence>
           </ControlGraph2_ConditionalAction>
           <ControlGraph1_DeclarationAction id="SYL-3240" variable="inTask" ownerContext="controlGraph1" userID="SYL" flexoID="3240">
-            <AssignableAction_ExpressionAction id="SYL-3239" expression="parameters.process.getTask(in)" userID="SYL" flexoID="3239" />
+            <AssignableAction_ExpressionAction id="SYL-3239" expression="parameters.process.getTask(_in)" userID="SYL" flexoID="3239" />
           </ControlGraph1_DeclarationAction>
         </BehaviourControlGraph_Sequence>
         <GenericBehaviourParameter id="SYL-3251" isRequired="true" widget="CUSTOM_WIDGET" name="process" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Process&gt;" userID="SYL" flexoID="3251" />
@@ -221,7 +221,7 @@
     </EmbeddedFlexoConcept>
     <EmbeddedFlexoConcept id="SYL-35" visibility="Public" parentFlexoConceptsList="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Gateway" name="AndSplit" author="sylvain" userID="SYL" flexoID="35">
       <Inspector id="SYL-36" inspectorTitle="AndSplit" userID="SYL" flexoID="36" />
-      <FlexoConceptInstanceRole id="SYL-42" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="in" userID="SYL" flexoID="42" />
+      <FlexoConceptInstanceRole id="SYL-42" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="_in" userID="SYL" flexoID="42" />
       <FlexoConceptInstanceRole id="SYL-82" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="OneMany" name="out" userID="SYL" flexoID="82" />
       <CreationScheme id="SYL-40" label="create" width="800" name="create" height="600" userID="SYL" flexoID="40">
         <BehaviourControlGraph_ExpressionAction id="SYL-972" expression="super.create(&quot;AndSplit&quot;)" userID="SYL" flexoID="972" />
@@ -245,7 +245,7 @@
             </ThenControlGraph_IterationAction>
           </ControlGraph2_ConditionalAction>
           <ControlGraph1_DeclarationAction id="SYL-3259" variable="inTask" ownerContext="controlGraph1" userID="SYL" flexoID="3259">
-            <AssignableAction_ExpressionAction id="SYL-3258" expression="parameters.process.getTask(in)" userID="SYL" flexoID="3258" />
+            <AssignableAction_ExpressionAction id="SYL-3258" expression="parameters.process.getTask(_in)" userID="SYL" flexoID="3258" />
           </ControlGraph1_DeclarationAction>
         </BehaviourControlGraph_Sequence>
         <GenericBehaviourParameter id="SYL-3261" isRequired="true" widget="CUSTOM_WIDGET" name="process" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Process&gt;" userID="SYL" flexoID="3261" />
@@ -253,7 +253,7 @@
     </EmbeddedFlexoConcept>
     <EmbeddedFlexoConcept id="SYL-43" visibility="Public" parentFlexoConceptsList="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Gateway" name="OrSplit" author="sylvain" userID="SYL" flexoID="43">
       <Inspector id="SYL-44" inspectorTitle="OrSplit" userID="SYL" flexoID="44" />
-      <FlexoConceptInstanceRole id="SYL-50" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="in" userID="SYL" flexoID="50" />
+      <FlexoConceptInstanceRole id="SYL-50" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="_in" userID="SYL" flexoID="50" />
       <FlexoConceptInstanceRole id="SYL-83" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="OneMany" name="out" userID="SYL" flexoID="83" />
       <CreationScheme id="SYL-48" label="create" width="800" name="create" height="600" userID="SYL" flexoID="48">
         <BehaviourControlGraph_ExpressionAction id="SYL-973" expression="super.create(&quot;OrSplit&quot;)" userID="SYL" flexoID="973" />
@@ -277,7 +277,7 @@
             </ThenControlGraph_IterationAction>
           </ControlGraph2_ConditionalAction>
           <ControlGraph1_DeclarationAction id="SYL-3283" variable="inTask" ownerContext="controlGraph1" userID="SYL" flexoID="3283">
-            <AssignableAction_ExpressionAction id="SYL-3282" expression="parameters.process.getTask(in)" userID="SYL" flexoID="3282" />
+            <AssignableAction_ExpressionAction id="SYL-3282" expression="parameters.process.getTask(_in)" userID="SYL" flexoID="3282" />
           </ControlGraph1_DeclarationAction>
         </BehaviourControlGraph_Sequence>
         <GenericBehaviourParameter id="SYL-3285" isRequired="true" widget="CUSTOM_WIDGET" name="process" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Process&gt;" userID="SYL" flexoID="3285" />
@@ -286,7 +286,7 @@
     <EmbeddedFlexoConcept id="SYL-51" visibility="Public" parentFlexoConceptsList="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Gateway" name="AndJoin" author="sylvain" userID="SYL" flexoID="51">
       <Inspector id="SYL-52" inspectorTitle="AndJoin" userID="SYL" flexoID="52" />
       <FlexoConceptInstanceRole id="SYL-58" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="out" userID="SYL" flexoID="58" />
-      <FlexoConceptInstanceRole id="SYL-84" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="OneMany" name="in" userID="SYL" flexoID="84" />
+      <FlexoConceptInstanceRole id="SYL-84" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="OneMany" name="_in" userID="SYL" flexoID="84" />
       <CreationScheme id="SYL-56" label="create" width="800" name="create" height="600" userID="SYL" flexoID="56">
         <BehaviourControlGraph_ExpressionAction id="SYL-974" expression="super.create(&quot;AndJoin&quot;)" userID="SYL" flexoID="974" />
       </CreationScheme>
@@ -312,7 +312,7 @@
             <AssignableAction_ExpressionAction id="SYL-3315" expression="true" userID="SYL" flexoID="3315" />
           </ControlGraph2_ReturnStatement>
           <ControlGraph1_IterationAction id="SYL-3305" iteratorName="taskType" ownerContext="controlGraph1" userID="SYL" flexoID="3305">
-            <Iteration_ExpressionAction id="SYL-3306" expression="in" ownerContext="iterationControlGraph" userID="SYL" flexoID="3306" />
+            <Iteration_ExpressionAction id="SYL-3306" expression="_in" ownerContext="iterationControlGraph" userID="SYL" flexoID="3306" />
             <ControlGraph_Sequence id="SYL-3318" ownerContext="controlGraph" userID="SYL" flexoID="3318">
               <ControlGraph2_ConditionalAction id="SYL-3312" condition="(!(inTask.completed))" ownerContext="controlGraph2" userID="SYL" flexoID="3312">
                 <ThenControlGraph_ReturnStatement id="SYL-3314" ownerContext="thenControlGraph" userID="SYL" flexoID="3314">
@@ -331,7 +331,7 @@
     <EmbeddedFlexoConcept id="SYL-59" visibility="Public" parentFlexoConceptsList="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#Gateway" name="OrJoin" author="sylvain" userID="SYL" flexoID="59">
       <Inspector id="SYL-60" inspectorTitle="OrJoin" userID="SYL" flexoID="60" />
       <FlexoConceptInstanceRole id="SYL-66" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="ZeroOne" name="out" userID="SYL" flexoID="66" />
-      <FlexoConceptInstanceRole id="SYL-85" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="OneMany" name="in" userID="SYL" flexoID="85" />
+      <FlexoConceptInstanceRole id="SYL-85" virtualModelInstance="container.container" flexoConceptTypeURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml#TaskType" cloningStrategy="Reference" cardinality="OneMany" name="_in" userID="SYL" flexoID="85" />
       <CreationScheme id="SYL-64" label="create" width="800" name="create" height="600" userID="SYL" flexoID="64">
         <BehaviourControlGraph_ExpressionAction id="SYL-975" expression="super.create(&quot;OrJoin&quot;)" userID="SYL" flexoID="975" />
       </CreationScheme>
@@ -344,7 +344,7 @@
             <AssignableAction_ExpressionAction id="SYL-3326" expression="false" userID="SYL" flexoID="3326" />
           </ControlGraph2_ReturnStatement>
           <ControlGraph1_IterationAction id="SYL-3335" iteratorName="taskType" ownerContext="controlGraph1" userID="SYL" flexoID="3335">
-            <Iteration_ExpressionAction id="SYL-3328" expression="in" ownerContext="iterationControlGraph" userID="SYL" flexoID="3328" />
+            <Iteration_ExpressionAction id="SYL-3328" expression="_in" ownerContext="iterationControlGraph" userID="SYL" flexoID="3328" />
             <ControlGraph_Sequence id="SYL-3334" ownerContext="controlGraph" userID="SYL" flexoID="3334">
               <ControlGraph2_ConditionalAction id="SYL-3331" condition="inTask.completed" ownerContext="controlGraph2" userID="SYL" flexoID="3331">
                 <ThenControlGraph_ReturnStatement id="SYL-3330" ownerContext="thenControlGraph" userID="SYL" flexoID="3330">
@@ -379,7 +379,7 @@
         <BehaviourControlGraph_ExpressionAction id="SYL-905" expression="super.create(&quot;Begin&quot;)" userID="SYL" flexoID="905" />
       </CreationScheme>
       <DeletionScheme id="SYL-755" label="delete" width="800" name="delete" height="600" userID="SYL" flexoID="755">
-        <BehaviourControlGraph_ConditionalAction id="SYL-1703" condition="(((container != null) &amp; container.initialTaskType) = this)" userID="SYL" flexoID="1703">
+        <BehaviourControlGraph_ConditionalAction id="SYL-1703" condition="((container != null) &amp; (container.initialTaskType = this))" userID="SYL" flexoID="1703">
           <ThenControlGraph_AssignationAction id="SYL-1708" assign="container.initialTaskType" ownerContext="thenControlGraph" userID="SYL" flexoID="1708">
             <AssignableAction_ExpressionAction id="SYL-1707" expression="null" userID="SYL" flexoID="1707" />
           </ThenControlGraph_AssignationAction>
