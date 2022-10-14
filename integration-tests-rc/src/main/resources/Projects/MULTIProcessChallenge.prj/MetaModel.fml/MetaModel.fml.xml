@@ -553,7 +553,7 @@
   <FlexoConcept id="SYL-114" visibility="Public" isAbstract="true" name="ModelingElement" author="sylvain" userID="SYL" flexoID="114">
     <Inspector id="SYL-115" renderer="name" inspectorTitle="ModelingElement" userID="SYL" flexoID="115">
       <InspectorEntry id="SYL-1559" widget="TEXT_FIELD" data="this.name" name="name" label="name" type="java.lang.String" userID="SYL" flexoID="1559" />
-      <InspectorEntry id="SYL-1625" widget="TEXT_FIELD" readOnly="true" data="this.concept.name" name="type" label="type" type="java.lang.String" userID="SYL" flexoID="1625" />
+      <InspectorEntry id="SYL-1625" widget="TEXT_FIELD" readOnly="true" data="this.conceptType.name" name="type" label="type" type="java.lang.String" userID="SYL" flexoID="1625" />
       <InspectorEntry id="SYL-1560" widget="TEXT_FIELD" readOnly="true" data="lastUpdated.toString" name="last_updated" label="last_updated" type="java.lang.String" userID="SYL" flexoID="1560" />
     </Inspector>
     <PrimitiveRole id="SYL-122" primitiveType="String" cloningStrategy="Clone" cardinality="ZeroOne" name="name" userID="SYL" flexoID="122" />
