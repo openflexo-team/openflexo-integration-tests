@@ -1,6 +1,8 @@
 dependencies {
     testImplementation testUtils()
     testImplementation flexoUi()
+    testImplementation fmlTechnologyAdapterUi()
+    testImplementation fmlRtTechnologyAdapterUi()
     testImplementation flexoUiTest()
     testImplementation flexoFoundationTest()
     testImplementation owlConnector()
