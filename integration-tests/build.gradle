@@ -12,9 +12,9 @@ dependencies {
     testImplementation xmlConnector()
     testImplementation powerpointConnector()
 
-    testImplementation openflexo("openflexo-modeller")
-    testImplementation openflexo("freemodellingeditor")
-    testImplementation openflexo("enterprise-architecture-module")
+    testImplementation openflexo("om-module")
+    testImplementation openflexo("fme-module")
+    testImplementation openflexo("ea-module")
 
     testRuntimeOnly project(':integration-tests-rc')
     testRuntimeOnly owlConnectorRc()
