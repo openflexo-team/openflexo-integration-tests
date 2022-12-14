@@ -55,7 +55,7 @@ import org.openflexo.foundation.technologyadapter.TechnologyAdapter;
 import org.openflexo.foundation.technologyadapter.TechnologyAdapterService;
 import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.logging.FlexoLogger;
-import org.openflexo.pamela.ModelContext;
+import org.openflexo.pamela.PamelaMetaModel;
 import org.openflexo.pamela.exceptions.MissingImplementationException;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.pamela.model.ModelEntity;
@@ -111,8 +111,8 @@ public class FMLModelFactoryIntegrationTest extends OpenflexoTestCase {
 			TechnologyAdapterService taService = DefaultTechnologyAdapterService.getNewInstance(null);
 			taService.addToTechnologyAdapters(ta);
 			FMLModelFactory factory = new FMLModelFactory(null, serviceManager, taService);
-			ModelContext modelContext = factory.getModelContext();
-			for (Iterator<ModelEntity> it = modelContext.getEntities(); it.hasNext();) {
+			PamelaMetaModel pamelaMetaModel = factory.getModelContext();
+			for (Iterator<ModelEntity> it = pamelaMetaModel.getEntities(); it.hasNext();) {
 				ModelEntity e = it.next();
 				System.out.println("> Found " + e.getImplementedInterface());
 			}
@@ -224,8 +224,8 @@ public class FMLModelFactoryIntegrationTest extends OpenflexoTestCase {
 		try {
 			System.out.println("Instanciating ViewPointModelFactory");
 			FMLModelFactory factory = new FMLModelFactory(null, serviceManager);
-			ModelContext modelContext = factory.getModelContext();
-			for (Iterator<ModelEntity> it = modelContext.getEntities(); it.hasNext();) {
+			PamelaMetaModel pamelaMetaModel = factory.getModelContext();
+			for (Iterator<ModelEntity> it = pamelaMetaModel.getEntities(); it.hasNext();) {
 				ModelEntity e = it.next();
 				System.out.println("> Found " + e.getImplementedInterface());
 			}
