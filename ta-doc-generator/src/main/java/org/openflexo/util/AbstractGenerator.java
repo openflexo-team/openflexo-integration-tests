@@ -9,7 +9,7 @@
  * Openflexo is dual-licensed under the European Union Public License (EUPL, either 
  * version 1.1 of the License, or any later version ), which is available at 
  * https://joinup.ec.europa.eu/software/page/eupl/licence-eupl
- * and the GNU General Public License (GPL, either version 3 of the License, or any 
+ * and the GNU General Public License (GPL, either version 3 of the License, or any
  * later version), which is available at http://www.gnu.org/licenses/gpl.html .
  * 
  * You can redistribute it and/or modify under the terms of either of these licenses
@@ -101,47 +101,47 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 	}
 
 	protected String getGlobalReference() {
-		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + ".html";
+		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + ".md";
 	}
 
 	protected String getGlobalRolesReference() {
-		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_roles.html";
+		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_roles.md";
 	}
 
 	protected String getGlobalBehavioursReference() {
-		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_behaviours.html";
+		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_behaviours.md";
 	}
 
 	protected String getGlobalEditionActionsReference() {
-		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_edition_actions.html";
+		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_edition_actions.md";
 	}
 
 	protected String getGlobalFetchRequestsReference() {
-		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_fetch_requests.html";
+		return taDocGenerator.getRelativePath() + "/" + objectClass.getSimpleName() + "_fetch_requests.md";
 	}
 
 	protected String getLocalReference() {
-		return "./" + objectClass.getSimpleName() + ".html";
+		return "./" + objectClass.getSimpleName() + ".md";
 	}
 
 	protected String getLocalRolesReference() {
-		return "./" + objectClass.getSimpleName() + "_roles.html";
+		return "./" + objectClass.getSimpleName() + "_roles.md";
 	}
 
 	protected String getLocalBehavioursReference() {
-		return "./" + objectClass.getSimpleName() + "_behaviours.html";
+		return "./" + objectClass.getSimpleName() + "_behaviours.md";
 	}
 
 	protected String getLocalEditionActionsReference() {
-		return "./" + objectClass.getSimpleName() + "_edition_actions.html";
+		return "./" + objectClass.getSimpleName() + "_edition_actions.md";
 	}
 
 	protected String getLocalFetchRequestsReference() {
-		return "./" + objectClass.getSimpleName() + "_fetch_requests.html";
+		return "./" + objectClass.getSimpleName() + "_fetch_requests.md";
 	}
 
 	protected String getJavadocReference() {
-		return "[" + getObjectClass().getName() + "](./apidocs/" + getJavadocPath(getObjectClass()) + ".html)" + StringUtils.LINE_SEPARATOR;
+		return "[" + getObjectClass().getName() + "](./apidocs/" + getJavadocPath(getObjectClass()) + ".md)" + StringUtils.LINE_SEPARATOR;
 	}
 
 	private String getJavadocPath(Class<?> clazz) {
@@ -153,7 +153,7 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		StringBuffer sb = new StringBuffer();
 		AbstractGenerator<? extends FMLObject> generatorReference = getReference(objectReference);
 		sb.append(" - " + generatorReference.getSmallIconAsHTML());
-		sb.append(" [`" + generatorReference.getFMLKeyword() + "`](" + generatorReference.getObjectClass().getSimpleName() + ".html) : "
+		sb.append(" [`" + generatorReference.getFMLKeyword() + "`](" + generatorReference.getObjectClass().getSimpleName() + ".md) : "
 				+ generatorReference.getFMLShortDescription());
 		return sb.toString();
 	}
@@ -164,14 +164,14 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		if (smallIconFile == null) {
 			return "";
 		}
-		return "<img src=\"" + "./images/" + smallIconFile.getName() + "\" alt=\"" + getObjectClass().getSimpleName() + "\"/>";
+		return "<img src=\"" + "../resources/images/" + smallIconFile.getName() + "\" alt=\"" + getObjectClass().getSimpleName() + "\"/>";
 	}
 
 	protected String getBigIconAsHTML() {
 		if (bigIconFile == null) {
 			return "";
 		}
-		return "<img src=\"" + "./images/" + bigIconFile.getName() + "\" alt=\"" + getObjectClass().getSimpleName() + "\"/>";
+		return "<img src=\"" + "../resources/images/" + bigIconFile.getName() + "\" alt=\"" + getObjectClass().getSimpleName() + "\"/>";
 	}
 
 	protected void generateIconFiles() {

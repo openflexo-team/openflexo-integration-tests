@@ -179,10 +179,10 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 			generator.generate();
 		}
 
-		if (!(technologyAdapter instanceof FMLTechnologyAdapter)) {
-			generateGlobalMenu();
-			generateLocalMenu();
-		}
+//		if (!(technologyAdapter instanceof FMLTechnologyAdapter)) {
+//			generateGlobalMenu();
+//			generateLocalMenu();
+//		}
 	}
 
 	private void prepareDocGenerationForModelSlot(Class<? extends ModelSlot<?>> modelSlotClass) {
@@ -364,12 +364,12 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 		return globalMenu.toString();
 	}
 
-	private void generateGlobalMenu() {
-		File globalMenuFile = new File(globalTASiteDir, "site.xml");
-		generateMenu(globalMenu.toString(), globalMenuFile);
-		System.out.println("Generated " + globalMenuFile);
-
-	}
+//	private void generateGlobalMenu() {
+//		File globalMenuFile = new File(globalTASiteDir, "site.xml");
+//		generateMenu(globalMenu.toString(), globalMenuFile);
+//		System.out.println("Generated " + globalMenuFile);
+//
+//	}
 
 	private void makeLocalModelSlotMenu(Class<? extends ModelSlot<?>> modelSlotClass) {
 		AbstractGenerator<? extends ModelSlot<?>> generator = getGenerator(modelSlotClass);
@@ -465,12 +465,12 @@ public class TADocGenerator<TA extends TechnologyAdapter<TA>> {
 		return localMenu.toString();
 	}
 
-	private void generateLocalMenu() {
-		File localMenuFile = new File(taSiteDir, "site.xml");
-		generateMenu(localMenu.toString(), localMenuFile);
-		System.out.println("Generated " + localMenuFile);
-
-	}
+//	private void generateLocalMenu() {
+//		File localMenuFile = new File(taSiteDir, "site.xml");
+//		generateMenu(localMenu.toString(), localMenuFile);
+//		System.out.println("Generated " + localMenuFile);
+//
+//	}
 
 	private void generateMenu(String menuContents, File file) {
 		try {
