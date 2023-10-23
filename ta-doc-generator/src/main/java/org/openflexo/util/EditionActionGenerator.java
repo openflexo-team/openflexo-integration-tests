@@ -204,23 +204,23 @@ public class EditionActionGenerator<EA extends EditionAction> extends AbstractGe
 		sb.append(getJavadocReference());
 		sb.append(StringUtils.LINE_SEPARATOR);
 
-//		if (getReferences().size() > 0) {
-//			sb.append("---" + StringUtils.LINE_SEPARATOR);
-//			sb.append(StringUtils.LINE_SEPARATOR);
-//			sb.append("## See also" + StringUtils.LINE_SEPARATOR);
-//			sb.append(StringUtils.LINE_SEPARATOR);
-//
-//			for (SeeAlso reference : getReferences()) {
-//
-//				AbstractGenerator<? extends FMLObject> generatorReference = getReference(reference.value());
-//				sb.append(" - " + generatorReference.getSmallIconAsHTML());
-//				sb.append(" [`" + generatorReference.getFMLKeyword() + "`](" + generatorReference.getObjectClass().getSimpleName()
-//						+ ".html) : " + generatorReference.getFMLShortDescription());
-//				sb.append(StringUtils.LINE_SEPARATOR);
-//
-//			}
-//			sb.append(StringUtils.LINE_SEPARATOR);
-//		}
+		if (getReferences().size() > 0) {
+			sb.append("---" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+			sb.append("## See also" + StringUtils.LINE_SEPARATOR);
+			sb.append(StringUtils.LINE_SEPARATOR);
+
+			for (SeeAlso reference : getReferences()) {
+
+				AbstractGenerator<? extends FMLObject> generatorReference = getReference(reference.value());
+				sb.append(" - " + generatorReference.getSmallIconAsHTML());
+				sb.append(" [`" + generatorReference.getFMLKeyword() + "`](" + generatorReference.getObjectClass().getSimpleName()
+						+ ".md) : " + generatorReference.getFMLShortDescription());
+				sb.append(StringUtils.LINE_SEPARATOR);
+
+			}
+			sb.append(StringUtils.LINE_SEPARATOR);
+		}
 
 		render(sb);
 	}

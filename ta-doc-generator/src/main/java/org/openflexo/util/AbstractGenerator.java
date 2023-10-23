@@ -152,8 +152,8 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 	protected String getHTMLReference(Class<? extends FMLObject> objectReference) {
 		StringBuffer sb = new StringBuffer();
 		AbstractGenerator<? extends FMLObject> generatorReference = getReference(objectReference);
-		sb.append(" - " + generatorReference.getSmallIconAsHTML());
-		sb.append(" [`" + generatorReference.getFMLKeyword() + "`](" + generatorReference.getObjectClass().getSimpleName() + ".md) : "
+		sb.append(" - \u200E" + generatorReference.getSmallIconAsHTML());
+		sb.append(" [" + generatorReference.getFMLKeyword() + "](" + generatorReference.getObjectClass().getSimpleName() + ".md) : "
 				+ generatorReference.getFMLShortDescription());
 		return sb.toString();
 	}
@@ -164,14 +164,14 @@ public abstract class AbstractGenerator<O extends FMLObject> {
 		if (smallIconFile == null) {
 			return "";
 		}
-		return "<img src=\"" + "../resources/images/" + smallIconFile.getName() + "\" alt=\"" + getObjectClass().getSimpleName() + "\"/>";
+		return "<img src=\"" + "/openflexo-diagram/images/" + smallIconFile.getName() + "\" alt=\"" + getObjectClass().getSimpleName() + "\"/>";
 	}
 
 	protected String getBigIconAsHTML() {
 		if (bigIconFile == null) {
 			return "";
 		}
-		return "<img src=\"" + "../resources/images/" + bigIconFile.getName() + "\" alt=\"" + getObjectClass().getSimpleName() + "\"/>";
+		return "<img src=\"" + "/openflexo-diagram/images/" + bigIconFile.getName() + "\" alt=\"" + getObjectClass().getSimpleName() + "\"/>";
 	}
 
 	protected void generateIconFiles() {
