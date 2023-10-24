@@ -81,7 +81,7 @@ public class FetchRequestGenerator<FR extends FetchRequest<?, ?, ?>> extends Abs
 		// sb.append("<h1><tt>" + getObjectClass().getSimpleName() + "</tt>" + getBigIconAsHTML() + "</h1>");
 		// sb.append(StringUtils.LINE_SEPARATOR);
 
-		sb.append(getFMLDescription());
+		sb.append(getBigIconAsHTML() + " " + getFMLDescription());
 		sb.append(StringUtils.LINE_SEPARATOR);
 
 		render(sb);
