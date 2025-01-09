@@ -174,7 +174,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.xml.fml.XMLTypeRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.technologyadapter.xml.metamodel.XMLMetaModel.class) != null);
+				.getModelEntity(org.openflexo.technologyadapter.xml.metamodel.XSDMetaModel.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.FMLDiagramPaletteElementBindingParameter.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -222,7 +222,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.FMLObject.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.technologyadapter.xml.metamodel.XMLObject.class) != null);
+				.getModelEntity(org.openflexo.technologyadapter.xml.XMLObject.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.PropertyRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
