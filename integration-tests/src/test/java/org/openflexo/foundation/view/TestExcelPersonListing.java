@@ -70,13 +70,13 @@ import org.openflexo.foundation.resource.FlexoResourceCenter;
 import org.openflexo.foundation.resource.ResourceLoadingCancelledException;
 import org.openflexo.foundation.test.OpenflexoProjectAtRunTimeTestCase;
 import org.openflexo.technologyadapter.excel.ExcelTechnologyAdapter;
+import org.openflexo.technologyadapter.excel.fml.reflect.rt.XLSFlexoConceptInstance;
+import org.openflexo.technologyadapter.excel.fml.reflect.rt.XLSVirtualModelInstance;
 import org.openflexo.technologyadapter.excel.model.ExcelCell;
 import org.openflexo.technologyadapter.excel.model.ExcelRow;
 import org.openflexo.technologyadapter.excel.model.ExcelSheet;
 import org.openflexo.technologyadapter.excel.model.ExcelWorkbook;
 import org.openflexo.technologyadapter.excel.rm.ExcelWorkbookResource;
-import org.openflexo.technologyadapter.excel.semantics.model.SEFlexoConceptInstance;
-import org.openflexo.technologyadapter.excel.semantics.model.SEVirtualModelInstance;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
@@ -93,18 +93,18 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 	private static FlexoEditor editor;
 	private static FlexoProject<File> project;
 	private static FMLRTVirtualModelInstance rootVMI;
-	private static SEVirtualModelInstance seVMI;
+	private static XLSVirtualModelInstance seVMI;
 
 	private static ExcelWorkbookResource personListingResource;
 	private static ExcelWorkbook personListingWB;
 
-	private static SEFlexoConceptInstance jeanDupont;
-	private static SEFlexoConceptInstance bernadetteDupont;
-	private static SEFlexoConceptInstance julesDupont;
-	private static SEFlexoConceptInstance ninaDupont;
-	private static SEFlexoConceptInstance gerardMenvusat;
-	private static SEFlexoConceptInstance alainTerrieur;
-	private static SEFlexoConceptInstance newPerson;
+	private static XLSFlexoConceptInstance jeanDupont;
+	private static XLSFlexoConceptInstance bernadetteDupont;
+	private static XLSFlexoConceptInstance julesDupont;
+	private static XLSFlexoConceptInstance ninaDupont;
+	private static XLSFlexoConceptInstance gerardMenvusat;
+	private static XLSFlexoConceptInstance alainTerrieur;
+	private static XLSFlexoConceptInstance newPerson;
 
 	@Test
 	@TestOrder(1)
@@ -186,12 +186,12 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 		assertNotNull(seVMI);
 
 		assertEquals(6, seVMI.getFlexoConceptInstances().size());
-		jeanDupont = (SEFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(0);
-		bernadetteDupont = (SEFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(1);
-		julesDupont = (SEFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(2);
-		ninaDupont = (SEFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(3);
-		gerardMenvusat = (SEFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(4);
-		alainTerrieur = (SEFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(5);
+		jeanDupont = (XLSFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(0);
+		bernadetteDupont = (XLSFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(1);
+		julesDupont = (XLSFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(2);
+		ninaDupont = (XLSFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(3);
+		gerardMenvusat = (XLSFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(4);
+		alainTerrieur = (XLSFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(5);
 
 		assertEquals("MR", jeanDupont.execute("sexe"));
 		assertEquals("Jean Dupont", jeanDupont.execute("name"));
@@ -229,7 +229,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 		assertEquals(55, (long) alainTerrieur.execute("age"));
 		assertEquals("MULHOUSE", alainTerrieur.execute("city"));
 
-		List<SEFlexoConceptInstance> allPersons = seVMI.execute("persons");
+		List<XLSFlexoConceptInstance> allPersons = seVMI.execute("persons");
 		assertEquals(6, allPersons.size());
 		assertSameList(allPersons, jeanDupont, bernadetteDupont, julesDupont, ninaDupont, gerardMenvusat, alainTerrieur);
 
@@ -286,7 +286,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 		}
 
 		assertEquals(7, seVMI.getFlexoConceptInstances().size());
-		newPerson = (SEFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(seVMI.getFlexoConceptInstances().size() - 1);
+		newPerson = (XLSFlexoConceptInstance) seVMI.getFlexoConceptInstances().get(seVMI.getFlexoConceptInstances().size() - 1);
 
 		assertEquals("", newPerson.execute("sexe"));
 		assertEquals("<enter name>", newPerson.execute("name"));
@@ -342,7 +342,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 		assertEquals(55, (long) alainTerrieur.execute("age"));
 		assertEquals("MULHOUSE", alainTerrieur.execute("city"));
 
-		List<SEFlexoConceptInstance> allPersons = seVMI.execute("persons");
+		List<XLSFlexoConceptInstance> allPersons = seVMI.execute("persons");
 		assertEquals(7, allPersons.size());
 
 		assertSame(jeanDupont, allPersons.get(0));
@@ -407,7 +407,7 @@ public class TestExcelPersonListing extends OpenflexoProjectAtRunTimeTestCase {
 
 		assertEquals(6, seVMI.getFlexoConceptInstances().size());
 
-		List<SEFlexoConceptInstance> allPersons = seVMI.execute("persons");
+		List<XLSFlexoConceptInstance> allPersons = seVMI.execute("persons");
 		assertEquals(6, allPersons.size());
 
 		assertSame(jeanDupont, allPersons.get(0));

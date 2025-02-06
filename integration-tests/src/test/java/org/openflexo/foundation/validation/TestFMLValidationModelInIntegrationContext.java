@@ -198,7 +198,7 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.IndividualRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.rt.FMLRTModelSlot.class) != null);
+				.getModelEntity(org.openflexo.foundation.fml.rt.AbstractFMLRTModelSlot.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.diagram.fml.GraphicalElementRole.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()

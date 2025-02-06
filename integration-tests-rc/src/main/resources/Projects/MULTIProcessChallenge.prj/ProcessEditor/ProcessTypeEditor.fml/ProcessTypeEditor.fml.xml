@@ -676,7 +676,7 @@
     <AbstractProperty id="SYL-4475" type="org.openflexo.technologyadapter.diagram.model.DiagramShape" name="shape" userID="SYL" flexoID="4475" />
   </FlexoConcept>
   <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="SYL" flexoID="-1" />
-  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot" userID="SYL" flexoID="-1" />
+  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTModelSlot" userID="SYL" flexoID="-1" />
   <Inspector id="SYL-2" inspectorTitle="ProcessTypeEditor" delegateConceptInstance="processType" userID="SYL" flexoID="2" />
   <FMLRTVirtualModelInstanceModelSlot id="SYL-10" virtualModelURI="http://www.openflexo.org/MULTIProcessChallenge/MetaModel.fml" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="model" userID="SYL" flexoID="10" />
   <TypedDiagramModelSlot id="SYL-4994" templateDiagramReference="http://www.openflexo.org/MULTIProcessChallenge/ProcessType/ExampleDiagram.diagram#SYL_1" metaModelURI="http://www.openflexo.org/MULTIProcessChallenge/ProcessType" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="diagram" userID="SYL" flexoID="4994">

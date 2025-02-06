@@ -465,7 +465,7 @@
     </CreationScheme>
   </FlexoConcept>
   <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="SYL" flexoID="-1" />
-  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot" userID="SYL" flexoID="-1" />
+  <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTModelSlot" userID="SYL" flexoID="-1" />
   <Inspector id="SYL-2" inspectorTitle="ProcessEditor" delegateConceptInstance="process" userID="SYL" flexoID="2" />
   <TypedDiagramModelSlot id="SYL-3" metaModelURI="http://www.openflexo.org/MULTIProcessChallenge/ProcessEditor/Process" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="diagram" userID="SYL" flexoID="3">
     <FMLDiagramPaletteElementBinding id="SYL-51" userID="SYL" flexoID="51">

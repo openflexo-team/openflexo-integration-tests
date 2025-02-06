@@ -154,7 +154,7 @@
       </BehaviourControlGraph_Sequence>
     </LinkScheme>
   </FlexoConcept>
-  <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot" userID="MAC" flexoID="-1" />
+  <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTModelSlot" userID="MAC" flexoID="-1" />
   <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="MAC" flexoID="-1" />
   <Inspector id="MAC-2" inspectorTitle="FreeModel" userID="MAC" flexoID="2" />
   <FMLRTVirtualModelInstanceModelSlot id="MAC-3" virtualModelURI="http://www.openflexo.org/projects/2022/4/PetriNet_1651132004541.prj/ConceptualModel.fml" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="sampleData" userID="MAC" flexoID="3" />

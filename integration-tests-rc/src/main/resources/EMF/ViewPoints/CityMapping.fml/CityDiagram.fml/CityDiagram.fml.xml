@@ -194,7 +194,7 @@
       </BehaviourControlGraph_Sequence>
     </DeletionScheme>
   </FlexoConcept>
-  <UseModelSlotDeclaration id="138" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot" userID="FLX" flexoID="-1" />
+  <UseModelSlotDeclaration id="138" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTModelSlot" userID="FLX" flexoID="-1" />
   <UseModelSlotDeclaration id="139" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="FLX" flexoID="-1" />
   <Inspector id="140" inspectorTitle="CityDiagram" userID="FLX" flexoID="22" />
   <FlexoConceptInstanceRole id="141" flexoConceptTypeURI="http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml#City" cloningStrategy="Reference" cardinality="ZeroOne" name="city" userID="FLX" flexoID="64" />

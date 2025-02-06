@@ -153,7 +153,7 @@
       </BehaviourControlGraph_Sequence>
     </LinkScheme>
   </FlexoConcept>
-  <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstanceModelSlot" userID="SYL" flexoID="-1" />
+  <UseModelSlotDeclaration id="0" modelSlotClass="org.openflexo.foundation.fml.rt.FMLRTModelSlot" userID="SYL" flexoID="-1" />
   <UseModelSlotDeclaration id="1" modelSlotClass="org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot" userID="SYL" flexoID="-1" />
   <Inspector id="SYL-1" inspectorTitle="FreeModel" userID="SYL" flexoID="1" />
   <FMLRTVirtualModelInstanceModelSlot id="SYL-6" virtualModelURI="http://www.openflexo.org/projects/2019/11/TestPetriNet_1574329032401.prj/ConceptualModel.fml" isRequired="true" cloningStrategy="Reference" cardinality="ZeroOne" name="sampleData" userID="SYL" flexoID="6" />
