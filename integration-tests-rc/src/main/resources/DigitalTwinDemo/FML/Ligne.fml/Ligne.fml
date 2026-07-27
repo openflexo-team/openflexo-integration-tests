@@ -3,13 +3,12 @@
  *
  * Federates the CAEX/AutomationML topology (ligne.xml, typed against ligne.xsd) with the
  * maintenance workbook (exploitation.xlsx), and derives a maintenance-priority hierarchy that
- * no artifact holds alone. Criticity is never stored, always derived.
+ * no artifact holds alone. Criticity is never stored in an artifact, always derived.
  *
- *   - Federation: FlexoConcept Equipement (XML InternalElement joined, on code, to its Parc row).
- *   - Topology (XML): estCritique, estGoulot.
- *   - Transverse (XML seuils + Excel measurements): tauxSeuil, enDerive, criticiteEffective.
- *   - Priority: prioritized / actionable lists.
- *   - Live manipulations (in memory, never saved): addReleve + write-back, addBypassL7.
+ * Performance: all heavy derivations (graph reachability, thresholds) are computed ONCE by
+ * recompute() into a runtime snapshot (VM fields + per-Equipement fields), refreshed after the
+ * initial synchronize and after each live manipulation. Public accessors are then O(1) reads.
+ * The snapshot is runtime state, never written to the XML/Excel artifacts.
  */
 
 use org.openflexo.technologyadapter.xml.XMLModelSlot as XML;
@@ -41,10 +40,54 @@ public model Ligne {
 	XMLModel ligneXml with XMLModelSlot(metaModel=CAEX);
 	ExcelWorkbook exploitation with BasicExcelModelSlot();
 
+	// Snapshot at the VirtualModel level (topology endpoints + bottleneck), filled by recompute().
+	String cachedEntry;
+	String cachedExit;
+	String cachedGoulot;
+
 	create(Resource<XMLModel> xmlResource, Resource<ExcelWorkbook> xlsxResource) {
 		connect ligneXml using parameters.xmlResource;
 		connect exploitation using parameters.xlsxResource;
 		this.synchronizeEquipements();
+		this.recompute();
+	}
+
+	// =========================================================================
+	// recompute() - the single expensive pass. Run after synchronize and after
+	// each live manipulation. Everything below reads the resulting snapshot.
+	// =========================================================================
+	public recompute() {
+		// 1. join codes (EQ-DEP-01 -> DEP01)
+		for (Equipement eq : select Equipement from this) {
+			eq.code = this.deriveCode(eq.xmlId);
+		}
+		// 2. per-equipment measurements: XML seuils + latest Excel vibration + drift
+		for (Equipement eq : select Equipement from this) {
+			eq.cadenceNominale = this.parseDoubleFML(eq.attributeValue("CadenceNominale"));
+			eq.seuilVibration = this.parseDoubleFML(eq.attributeValue("SeuilVibration"));
+			eq.lastVib = this.computeLastVibration(eq.code);
+			eq.taux = this.computeTaux(eq.lastVib, eq.seuilVibration);
+			eq.derive = this.computeEnDerive(eq);
+		}
+		// 3. topology endpoints (constant for a given graph, computed once)
+		cachedEntry = this.computeEntryCode();
+		cachedExit = this.computeExitCode();
+		// 4. estCritique - one graph reachability per equipment
+		for (Equipement eq : select Equipement from this) {
+			eq.critical = this.computeEstCritique(eq.code);
+		}
+		// 5. bottleneck = min nominal cadence among the criticals
+		cachedGoulot = this.computeGoulotCode();
+		// 6. effective criticity
+		for (Equipement eq : select Equipement from this) {
+			eq.criticite = this.computeCriticite(eq);
+		}
+	}
+
+	public Double computeTaux(Double last, Double seuil) {
+		if (parameters.last == null) { return null; }
+		if (parameters.seuil == null) { return null; }
+		return parameters.last / parameters.seuil;
 	}
 
 	// --- XML side ---
@@ -57,18 +100,19 @@ public model Ligne {
 		return exploitation.getExcelSheetByName("Parc");
 	}
 
-	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes.
-	// Kept in a single, explicit, revisable place (specification-demo.md, section 2).
+	public ExcelSheet getRelevesSheet() {
+		return exploitation.getExcelSheetByName("Relevés");
+	}
+
+	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes (spec section 2).
+	// NB: Connie does not resolve chained String calls (a.replace(..).replace(..) returns null),
+	// hence the intermediate variable; behaviour parameters are read via "parameters.".
 	public String deriveCode(String xmlId) {
-		// NB: Connie does not resolve chained String method calls (a.replace(..).replace(..)
-		// returns null); go through an intermediate variable. Behaviour parameters are read
-		// through the "parameters." namespace.
 		String withoutPrefix = parameters.xmlId.replace("EQ-", "");
 		return withoutPrefix.replace("-", "");
 	}
 
-	// Find the Parc row (Excel) whose Code column matches the given equipment code,
-	// or null when the equipment is not inventoried (e.g. ETI04B). Header is shifted:
+	// Parc row (Excel) matching a code, or null when not inventoried (e.g. ETI04B). Header shifted:
 	// title on rows 1-2, headers on row 4, data from 0-based row 4.
 	public ExcelRow findParcRow(String code) {
 		for (ExcelRow r : this.getParcSheet().getExcelRows()) {
@@ -95,30 +139,6 @@ public model Ligne {
 		return null;
 	}
 
-	// Value accessors evaluated in VirtualModel context (so derivations relying on String
-	// operations are computed here, not by the fmlscript interpreter). Used by the tests.
-	public String getCodeByXmlId(String xmlId) {
-		return this.deriveCode(parameters.xmlId);
-	}
-
-	public String getLabelXmlByCode(String code) {
-		Equipement eq = this.getEquipementByCode(parameters.code);
-		if (eq == null) { return null; }
-		return eq.labelXml;
-	}
-
-	public String getDesignationParcByCode(String code) {
-		Equipement eq = this.getEquipementByCode(parameters.code);
-		if (eq == null) { return null; }
-		return eq.designationParc;
-	}
-
-	public Boolean isInventorieByCode(String code) {
-		Equipement eq = this.getEquipementByCode(parameters.code);
-		if (eq == null) { return false; }
-		return eq.estInventorie;
-	}
-
 	public synchronizeEquipements() {
 		MatchingSet<Equipement> ms = begin match Equipement from this;
 		for (InternalElement e : select InternalElement from ligneXml) {
@@ -128,10 +148,9 @@ public model Ligne {
 	}
 
 	// =========================================================================
-	// Topology (XML only) - derivations J3: estCritique, estGoulot.
-	// A link "EQ-A:OUT" -> "EQ-B:IN" is an oriented edge A -> B. Interfaces are
-	// shared (EQ-CONV-03:OUT feeds L3 and L4), so navigation goes through the
-	// InternalLink list, never assuming one interface per link.
+	// Topology computation (XML only). A link "EQ-A:OUT" -> "EQ-B:IN" is an edge
+	// A -> B. Interfaces are shared, so navigation goes through the InternalLink
+	// list. Called only from recompute().
 	// =========================================================================
 
 	// Equipment code owning an interface id, e.g. "EQ-CONV-03:OUT" -> "CONV03".
@@ -149,7 +168,6 @@ public model Ligne {
 		return this.equipCodeOfInterface("" + parameters.link.getPropertyValue("RefPartnerSideB"));
 	}
 
-	// Direct successors of an equipment code in the material-flow graph.
 	public List<String> successorsOf(String code) {
 		List<String> result = new ArrayList();
 		for (InternalLink link : select InternalLink from ligneXml) {
@@ -160,8 +178,7 @@ public model Ligne {
 		return result;
 	}
 
-	// Entry = the only equipment with no incoming edge; exit = no outgoing edge.
-	public String getEntryCode() {
+	public String computeEntryCode() {
 		for (Equipement eq : select Equipement from this) {
 			Boolean hasIncoming = false;
 			for (InternalLink link : select InternalLink from ligneXml) {
@@ -172,7 +189,7 @@ public model Ligne {
 		return null;
 	}
 
-	public String getExitCode() {
+	public String computeExitCode() {
 		for (Equipement eq : select Equipement from this) {
 			Boolean hasOutgoing = false;
 			for (InternalLink link : select InternalLink from ligneXml) {
@@ -191,16 +208,14 @@ public model Ligne {
 		return false;
 	}
 
-	// Codes reachable from the entry when a given node is removed from the graph.
-	// Level-by-level BFS (Connie does not support indexed List.get(i) with a variable index,
-	// so we iterate levels with for-each rather than a worklist cursor).
+	// Codes reachable from the (cached) entry when a node is removed. Level-by-level BFS
+	// (Connie has no indexed List.get(i) with a variable index).
 	public List<String> reachableFromEntryAvoiding(String avoid) {
 		List<String> visited = new ArrayList();
 		List<String> current = new ArrayList();
-		String entry = this.getEntryCode();
-		if (entry != parameters.avoid) {
-			visited.add(entry);
-			current.add(entry);
+		if (cachedEntry != parameters.avoid) {
+			visited.add(cachedEntry);
+			current.add(cachedEntry);
 		}
 		while (current.size > 0) {
 			List<String> next = new ArrayList();
@@ -219,28 +234,23 @@ public model Ligne {
 		return visited;
 	}
 
-	// Critical iff no entry->exit path avoids it: removing it makes the exit unreachable.
-	public Boolean estCritique(String code) {
+	// Critical iff removing it makes the (cached) exit unreachable from the (cached) entry.
+	public Boolean computeEstCritique(String code) {
 		List<String> reachable = this.reachableFromEntryAvoiding(parameters.code);
-		return !this.listContains(reachable, this.getExitCode());
+		return !this.listContains(reachable, cachedExit);
 	}
 
-	// Bottleneck = the critical equipment with the smallest nominal cadence.
-	public String getGoulotCode() {
+	public String computeGoulotCode() {
 		String goulot = null;
 		Double minCadence = null;
 		for (Equipement eq : select Equipement from this) {
-			if (this.estCritique(eq.code)) {
-				Double c = eq.cadenceNominale;
-				// NB: Connie does NOT short-circuit || / && (both operands are always evaluated),
-				// so the null-guard must be a nested if, not "minCadence == null || c < minCadence"
-				// (the latter would evaluate c < null even when minCadence is null).
+			if (eq.critical) {
 				if (minCadence == null) {
-					minCadence = c;
+					minCadence = eq.cadenceNominale;
 					goulot = eq.code;
 				} else {
-					if (c < minCadence) {
-						minCadence = c;
+					if (eq.cadenceNominale < minCadence) {
+						minCadence = eq.cadenceNominale;
 						goulot = eq.code;
 					}
 				}
@@ -249,23 +259,14 @@ public model Ligne {
 		return goulot;
 	}
 
-	public Boolean estGoulot(String code) {
-		return this.getGoulotCode() == parameters.code;
-	}
-
 	// =========================================================================
-	// Transverse derivations J4 (XML seuils + Excel measurements).
-	// Vibration measurements live in the Releves sheet, already in chronological
-	// order (header on row 0, data from row 1). Columns: 0 Date, 1 Code, 2 Grandeur,
-	// 3 Valeur, 4 Unite, 5 Operateur.
+	// Transverse computation (XML seuils + Excel vibrations). Vibration readings
+	// live in the Releves sheet, in chronological order (data from row 1).
+	// Columns: 0 Date, 1 Code, 2 Grandeur, 3 Valeur, 4 Unite, 5 Operateur.
+	// Called only from recompute().
 	// =========================================================================
 
-	public ExcelSheet getRelevesSheet() {
-		return exploitation.getExcelSheetByName("Relevés");
-	}
-
-	// Latest vibration value for an equipment code (rows are in date order).
-	public Double lastVibration(String code) {
+	public Double computeLastVibration(String code) {
 		Double last = null;
 		for (ExcelRow r : this.getRelevesSheet().getExcelRows()) {
 			if (r.rowIndex >= 1) {
@@ -281,9 +282,8 @@ public model Ligne {
 		return last;
 	}
 
-	// Positive trend over the last 4 vibration readings (net increase across the window).
-	// Rolling 4-scalar buffer avoids indexed List access.
-	public Boolean vibrationTrendPositive(String code) {
+	// Positive trend over the last 4 vibration readings (rolling 4-scalar buffer, no indexed access).
+	public Boolean computeVibrationTrendPositive(String code) {
 		Double v1 = null;
 		Double v2 = null;
 		Double v3 = null;
@@ -306,33 +306,67 @@ public model Ligne {
 		return v4 > v1;
 	}
 
-	// tauxSeuil = last vibration (Excel) / SeuilVibration (XML). Uses both artifacts.
+	// enDerive = positive vibration trend AND tauxSeuil >= 0.8.
+	public Boolean computeEnDerive(Equipement eq) {
+		if (parameters.eq.taux == null) { return false; }
+		if (parameters.eq.taux < 0.8) { return false; }
+		return this.computeVibrationTrendPositive(parameters.eq.code);
+	}
+
+	// criticiteEffective = estCritique AND enDerive, aggravated when the bottleneck.
+	// Levels: NORMALE / A_SURVEILLER (derive but not critical) / CRITIQUE / CRITIQUE_GOULOT.
+	public String computeCriticite(Equipement eq) {
+		if (!parameters.eq.derive) { return "NORMALE"; }
+		if (!parameters.eq.critical) { return "A_SURVEILLER"; }
+		if (cachedGoulot == parameters.eq.code) { return "CRITIQUE_GOULOT"; }
+		return "CRITIQUE";
+	}
+
+	// =========================================================================
+	// Public accessors - O(1) reads of the snapshot.
+	// =========================================================================
+	public String getEntryCode() { return cachedEntry; }
+	public String getExitCode() { return cachedExit; }
+	public String getGoulotCode() { return cachedGoulot; }
+
+	public Boolean estCritique(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return false; }
+		return eq.critical;
+	}
+
+	public Boolean estGoulot(String code) {
+		return cachedGoulot == parameters.code;
+	}
+
+	public Double getCadenceByCode(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return null; }
+		return eq.cadenceNominale;
+	}
+
+	public Double lastVibration(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return null; }
+		return eq.lastVib;
+	}
+
 	public Double tauxSeuil(String code) {
 		Equipement eq = this.getEquipementByCode(parameters.code);
 		if (eq == null) { return null; }
-		Double last = this.lastVibration(parameters.code);
-		if (last == null) { return null; }
-		return last / eq.seuilVibration;
+		return eq.taux;
 	}
 
-	// enDerive = positive vibration trend AND tauxSeuil >= 0.8. Uses both artifacts.
 	public Boolean enDerive(String code) {
-		Double taux = this.tauxSeuil(parameters.code);
-		if (taux == null) { return false; }
-		if (taux < 0.8) { return false; }
-		return this.vibrationTrendPositive(parameters.code);
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return false; }
+		return eq.derive;
 	}
 
-	// criticiteEffective = estCritique AND enDerive, aggravated when estGoulot.
-	// Levels: NORMALE / A_SURVEILLER (derive but not critical) / CRITIQUE / CRITIQUE_GOULOT.
-	// Derived only, never stored in an artifact.
 	public String criticiteEffective(String code) {
-		Boolean critique = this.estCritique(parameters.code);
-		Boolean derive = this.enDerive(parameters.code);
-		if (!derive) { return "NORMALE"; }
-		if (!critique) { return "A_SURVEILLER"; }
-		if (this.estGoulot(parameters.code)) { return "CRITIQUE_GOULOT"; }
-		return "CRITIQUE";
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return "NORMALE"; }
+		return eq.criticite;
 	}
 
 	// Threshold status from tauxSeuil: DEPASSEMENT (>=1), SURVEILLANCE (>=0.8), NORMAL else.
@@ -344,52 +378,32 @@ public model Ligne {
 		return "NORMAL";
 	}
 
-	// =========================================================================
-	// Live manipulations J6 (applied in memory, never saved to the artifacts).
-	// =========================================================================
-
-	// Manipulation 2 - append a vibration reading to the Releves sheet.
-	public addReleve(String code, String valeur, String date, String operateur) {
-		ExcelSheet rel = this.getRelevesSheet();
-		int newRow = rel.getExcelRows().size;
-		rel.setCellValue(newRow, 0, parameters.date);
-		rel.setCellValue(newRow, 1, parameters.code);
-		rel.setCellValue(newRow, 2, "Vibration");
-		rel.setCellValue(newRow, 3, parameters.valeur);
-		rel.setCellValue(newRow, 4, "mm/s");
-		rel.setCellValue(newRow, 5, parameters.operateur);
+	public String getCodeByXmlId(String xmlId) {
+		return this.deriveCode(parameters.xmlId);
 	}
 
-	// Manipulation 2 - write-back the derived effective criticity into Parc column H (index 7),
-	// left free for this purpose. This is a projection sink, NOT the source of truth.
-	public writeBackCriticiteToParc(String code) {
-		ExcelRow row = this.findParcRow(parameters.code);
-		if (row == null) { return; }
-		String level = this.criticiteEffective(parameters.code);
-		this.getParcSheet().setCellValue(row.rowIndex, 7, level);
+	public String getLabelXmlByCode(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return null; }
+		return eq.labelXml;
 	}
 
-	public String readParcCriticite(String code) {
-		ExcelRow row = this.findParcRow(parameters.code);
-		if (row == null) { return null; }
-		return "" + this.getParcSheet().getCellAt(row.rowIndex, 7).getCellValueAsString();
+	public String getDesignationParcByCode(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return null; }
+		return eq.designationParc;
 	}
 
-	// Manipulation 3 - add the L7 bypass (EQ-REM-02:OUT -> EQ-ETI-04A:IN) to the topology.
-	public addBypassL7() {
-		XMLComplexType linkType = ligneXml.metaModel.getComplexTypeFromURI("http://www.dke.de/CAEX#InternalLinkType");
-		XMLIndividual l7 = ligneXml.addNewIndividual(linkType);
-		l7.setPropertyValue("Name", "L7");
-		l7.setPropertyValue("RefPartnerSideA", "EQ-REM-02:OUT");
-		l7.setPropertyValue("RefPartnerSideB", "EQ-ETI-04A:IN");
+	public Boolean isInventorieByCode(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return false; }
+		return eq.estInventorie;
 	}
 
 	// =========================================================================
-	// Priority hierarchy J5. The prioritized list is what no artifact holds alone:
-	// CONV03 on top, ETI04A NOT among the actionable priorities despite the highest
-	// raw vibration (6.5), because topology makes it non-critical.
+	// Priority hierarchy - reads cached criticite / taux (spec sections 4-5).
+	// CONV03 on top; ETI04A NOT actionable despite the highest raw vibration.
 	// =========================================================================
-
 	public int priorityRank(String code) {
 		String c = this.criticiteEffective(parameters.code);
 		if (c == "CRITIQUE_GOULOT") { return 3; }
@@ -404,7 +418,6 @@ public model Ligne {
 		return t;
 	}
 
-	// a ranks strictly higher than b (by criticity level, then by tauxSeuil).
 	public Boolean isHigherPriority(String a, String b) {
 		int ra = this.priorityRank(parameters.a);
 		int rb = this.priorityRank(parameters.b);
@@ -413,12 +426,10 @@ public model Ligne {
 		return this.tauxOrZero(parameters.a) > this.tauxOrZero(parameters.b);
 	}
 
-	// Actionable = at CRITIQUE level or above (a line-stop risk to schedule now).
 	public Boolean isActionablePriority(String code) {
 		return this.priorityRank(parameters.code) >= 2;
 	}
 
-	// All equipment codes, most-critical first (selection sort; no indexed List access).
 	public List<String> getPrioritizedCodes() {
 		List<String> ordered = new ArrayList();
 		int n = this.getEquipements().size;
@@ -457,7 +468,6 @@ public model Ligne {
 		return best;
 	}
 
-	// The actionable priority set only (CRITIQUE and above), most-critical first.
 	public List<String> getActionablePriorities() {
 		List<String> result = new ArrayList();
 		for (String code : this.getPrioritizedCodes()) {
@@ -468,23 +478,59 @@ public model Ligne {
 		return result;
 	}
 
-	// Connie itself has no implicit String->number coercion (arithmetic on a String throws), but
-	// fully-qualified Java static calls work in FML expressions, so we delegate to java.lang.
+	// Connie has no implicit String->number coercion (arithmetic on a String throws), but
+	// fully-qualified Java static calls work in FML expressions.
 	public Double parseDoubleFML(String s) {
 		if (parameters.s == null) { return null; }
 		return java.lang.Double.parseDouble(parameters.s);
 	}
 
-	public Double getCadenceByCode(String code) {
-		Equipement eq = this.getEquipementByCode(parameters.code);
-		if (eq == null) { return null; }
-		return eq.cadenceNominale;
+	// =========================================================================
+	// Live manipulations J6 (applied in memory, then recompute; never saved).
+	// =========================================================================
+
+	// Manipulation 2 - append a vibration reading, then refresh the snapshot.
+	public addReleve(String code, String valeur, String date, String operateur) {
+		ExcelSheet rel = this.getRelevesSheet();
+		int newRow = rel.getExcelRows().size;
+		rel.setCellValue(newRow, 0, parameters.date);
+		rel.setCellValue(newRow, 1, parameters.code);
+		rel.setCellValue(newRow, 2, "Vibration");
+		rel.setCellValue(newRow, 3, parameters.valeur);
+		rel.setCellValue(newRow, 4, "mm/s");
+		rel.setCellValue(newRow, 5, parameters.operateur);
+		this.recompute();
+	}
+
+	// Manipulation 2 - write-back the derived effective criticity into Parc column H (index 7).
+	// Projection sink, NOT the source of truth.
+	public writeBackCriticiteToParc(String code) {
+		ExcelRow row = this.findParcRow(parameters.code);
+		if (row == null) { return; }
+		String level = this.criticiteEffective(parameters.code);
+		this.getParcSheet().setCellValue(row.rowIndex, 7, level);
+	}
+
+	public String readParcCriticite(String code) {
+		ExcelRow row = this.findParcRow(parameters.code);
+		if (row == null) { return null; }
+		return "" + this.getParcSheet().getCellAt(row.rowIndex, 7).getCellValueAsString();
+	}
+
+	// Manipulation 3 - add the L7 bypass (EQ-REM-02:OUT -> EQ-ETI-04A:IN), then refresh.
+	public addBypassL7() {
+		XMLComplexType linkType = ligneXml.metaModel.getComplexTypeFromURI("http://www.dke.de/CAEX#InternalLinkType");
+		XMLIndividual l7 = ligneXml.addNewIndividual(linkType);
+		l7.setPropertyValue("Name", "L7");
+		l7.setPropertyValue("RefPartnerSideA", "EQ-REM-02:OUT");
+		l7.setPropertyValue("RefPartnerSideB", "EQ-ETI-04A:IN");
+		this.recompute();
 	}
 
 	/**
 	 * Federative concept: one InternalElement (XML) joined, on code, to its Parc row (Excel).
-	 * parcRow is null when the equipment is absent from the inventory (planted inconsistency
-	 * EQ-ETI-04B). Nothing here is stored back into the artifacts.
+	 * The snapshot fields (code, cadenceNominale, ..., criticite) are filled by Ligne.recompute().
+	 * parcRow is null when the equipment is absent from the inventory (planted EQ-ETI-04B).
 	 */
 	public concept Equipement {
 
@@ -496,15 +542,10 @@ public model Ligne {
 
 		String xmlId values "" + xmlElement.getPropertyValue("ID");
 
-		// Join key EQ-CONV-03 -> CONV03 (rule owned by the enclosing VirtualModel).
-		String code values this.container.deriveCode(this.xmlId);
-
 		// XML label (topology owner) vs Excel designation (maintenance owner) deliberately differ.
 		String labelXml values "" + xmlElement.getPropertyValue("Name");
 
-		// --- CAEX property promotion (spec section 7, option A) ---
-		// CAEX stores properties as generic <Attribute Name Value/>. The verbose lookup is
-		// written ONCE here; downstream derivations read the typed properties below.
+		// CAEX generic <Attribute Name Value/> lookup, written once (spec section 7, option A).
 		String attributeValue(String attrName) {
 			for (XMLIndividual child : xmlElement.children) {
 				String tn = "" + child.type.name;
@@ -518,24 +559,29 @@ public model Ligne {
 			return null;
 		}
 
+		// CAEX properties promoted to typed FML (the two hot ones are cached below; these two are
+		// cheap and computed on demand).
 		String type values this.attributeValue("Type");
-
-		Double cadenceNominale values this.container.parseDoubleFML(this.attributeValue("CadenceNominale"));
-
-		Double seuilVibration values this.container.parseDoubleFML(this.attributeValue("SeuilVibration"));
-
 		Double seuilTemperature values this.container.parseDoubleFML(this.attributeValue("SeuilTemperaturePalier"));
 
-		// Matching Parc row (Excel), derived (never stored) ; null when not inventoried (ETI04B).
+		// Excel projection (not in any hot loop), derived on access.
 		ExcelRow parcRow values this.container.findParcRow(this.code);
-
 		Boolean estInventorie values this.parcRow != null;
-
 		String designationParc {
 			String get() {
 				if (this.parcRow == null) { return null; }
 				return this.parcRow.getExcelCellAt(1).getCellValueAsString();
 			}
 		};
+
+		// --- Snapshot fields, filled by Ligne.recompute() (runtime state, never in an artifact) ---
+		String code;
+		Double cadenceNominale;
+		Double seuilVibration;
+		Double lastVib;
+		Double taux;
+		Boolean critical;
+		Boolean derive;
+		String criticite;
 	}
 }
