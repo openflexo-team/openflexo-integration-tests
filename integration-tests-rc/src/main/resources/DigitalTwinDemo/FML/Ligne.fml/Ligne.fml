@@ -131,12 +131,7 @@ public model Ligne {
 	}
 
 	public Equipement getEquipementByCode(String code) {
-		for (Equipement eq : select Equipement from this) {
-			if (eq.code == parameters.code) {
-				return eq;
-			}
-		}
-		return null;
+		return select unique Equipement from this where (selected.code == parameters.code);
 	}
 
 	public synchronizeEquipements() {
