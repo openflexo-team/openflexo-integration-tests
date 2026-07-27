@@ -1,0 +1,40 @@
+// J2 - Federative concept Equipement, join on code (EQ-DEP-01 <-> DEP01).
+// Expected business values (specification-demo.md sections 2 and 4):
+//   - 6 InternalElement -> 6 Equipement instances
+//   - 5 matched to a Parc row; EQ-ETI-04B absent from inventory (planted, not repaired)
+//   - labels differ across sides (XML "ConvoyeurTransfert" vs Excel designation)
+// Derived business values are asserted through VirtualModel accessors (VM-context evaluation).
+
+vm = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml"];
+assert vm != null;
+xmlRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/ligne.xml"];
+xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/exploitation.xlsx"];
+service ResourceCenterService add_temp_rc;
+ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+assert ligne != null;
+
+// One Equipement per InternalElement
+assert ligne.getEquipements().size == 6;
+
+// Join rule EQ-CONV-03 -> CONV03
+assert ligne.getCodeByXmlId("EQ-CONV-03") == "CONV03";
+assert ligne.getCodeByXmlId("EQ-ETI-04A") == "ETI04A";
+
+// CONV03 : matched on code; labels differ across the two artifacts
+assert ligne.getEquipementByCode("CONV03") != null;
+assert ligne.getLabelXmlByCode("CONV03") == "ConvoyeurTransfert";
+assert ligne.getDesignationParcByCode("CONV03") == "Convoyeur transfert étiqueteuses";
+assert ligne.isInventorieByCode("CONV03") == true;
+log "CONV03 xml='" + ligne.getLabelXmlByCode("CONV03") + "' parc='" + ligne.getDesignationParcByCode("CONV03") + "'";
+
+// DEP01 : matched
+assert ligne.getEquipementByCode("DEP01") != null;
+assert ligne.isInventorieByCode("DEP01") == true;
+
+// ETI04B : present in XML topology, absent from Parc (planted inconsistency, not repaired)
+assert ligne.getEquipementByCode("ETI04B") != null;
+assert ligne.isInventorieByCode("ETI04B") == false;
+assert ligne.getDesignationParcByCode("ETI04B") == null;
+log "ETI04B inventorie = " + ligne.isInventorieByCode("ETI04B");
+
+log "Test PASSED: J2 - federation on code, 5 matched, ETI04B unmatched as planted";

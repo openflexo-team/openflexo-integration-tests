@@ -1,0 +1,541 @@
+/**
+ * DigitalTwinDemo - VirtualModel "Ligne".
+ *
+ * Federates the CAEX/AutomationML topology (ligne.xml, typed against ligne.xsd) with the
+ * maintenance workbook (exploitation.xlsx), and derives a maintenance-priority hierarchy that
+ * no artifact holds alone. Criticity is never stored, always derived.
+ *
+ *   - Federation: FlexoConcept Equipement (XML InternalElement joined, on code, to its Parc row).
+ *   - Topology (XML): estCritique, estGoulot.
+ *   - Transverse (XML seuils + Excel measurements): tauxSeuil, enDerive, criticiteEffective.
+ *   - Priority: prioritized / actionable lists.
+ *   - Live manipulations (in memory, never saved): addReleve + write-back, addBypassL7.
+ */
+
+use org.openflexo.technologyadapter.xml.XMLModelSlot as XML;
+use org.openflexo.technologyadapter.excel.BasicExcelModelSlot as XLS;
+
+import org.openflexo.technologyadapter.xml.model.typed.XMLModel;
+import org.openflexo.technologyadapter.xml.model.typed.XMLIndividual;
+import org.openflexo.technologyadapter.xml.metamodel.XSDMetaModel;
+import org.openflexo.technologyadapter.xml.metamodel.XMLComplexType;
+import org.openflexo.technologyadapter.excel.model.ExcelWorkbook;
+import org.openflexo.technologyadapter.excel.model.ExcelSheet;
+import org.openflexo.technologyadapter.excel.model.ExcelRow;
+import org.openflexo.technologyadapter.excel.model.ExcelCell;
+import java.util.List;
+import java.util.ArrayList;
+
+import XSDMetaModel CAEX from ["http://www.dke.de/CAEX"];
+import XMLComplexType INTERNAL_ELEMENT from [CAEX:"InternalElementType"];
+import XMLComplexType ATTRIBUTE from [CAEX:"AttributeType"];
+import XMLComplexType INTERNAL_LINK from [CAEX:"InternalLinkType"];
+
+typedef XMLIndividualType(xsdType=INTERNAL_ELEMENT) as InternalElement;
+typedef XMLIndividualType(xsdType=ATTRIBUTE) as CaexAttribute;
+typedef XMLIndividualType(xsdType=INTERNAL_LINK) as InternalLink;
+
+@URI("http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml")
+public model Ligne {
+
+	XMLModel ligneXml with XMLModelSlot(metaModel=CAEX);
+	ExcelWorkbook exploitation with BasicExcelModelSlot();
+
+	create(Resource<XMLModel> xmlResource, Resource<ExcelWorkbook> xlsxResource) {
+		connect ligneXml using parameters.xmlResource;
+		connect exploitation using parameters.xlsxResource;
+		this.synchronizeEquipements();
+	}
+
+	// --- XML side ---
+	public List<InternalElement> getInternalElements() {
+		return select InternalElement from ligneXml;
+	}
+
+	// --- Excel side ---
+	public ExcelSheet getParcSheet() {
+		return exploitation.getExcelSheetByName("Parc");
+	}
+
+	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes.
+	// Kept in a single, explicit, revisable place (specification-demo.md, section 2).
+	public String deriveCode(String xmlId) {
+		// NB: Connie does not resolve chained String method calls (a.replace(..).replace(..)
+		// returns null); go through an intermediate variable. Behaviour parameters are read
+		// through the "parameters." namespace.
+		String withoutPrefix = parameters.xmlId.replace("EQ-", "");
+		return withoutPrefix.replace("-", "");
+	}
+
+	// Find the Parc row (Excel) whose Code column matches the given equipment code,
+	// or null when the equipment is not inventoried (e.g. ETI04B). Header is shifted:
+	// title on rows 1-2, headers on row 4, data from 0-based row 4.
+	public ExcelRow findParcRow(String code) {
+		for (ExcelRow r : this.getParcSheet().getExcelRows()) {
+			if (r.rowIndex >= 4) {
+				if (r.getExcelCellAt(0).getCellValueAsString() == parameters.code) {
+					return r;
+				}
+			}
+		}
+		return null;
+	}
+
+	// --- Federation ---
+	public List<Equipement> getEquipements() {
+		return select Equipement from this;
+	}
+
+	public Equipement getEquipementByCode(String code) {
+		for (Equipement eq : select Equipement from this) {
+			if (eq.code == parameters.code) {
+				return eq;
+			}
+		}
+		return null;
+	}
+
+	// Value accessors evaluated in VirtualModel context (so derivations relying on String
+	// operations are computed here, not by the fmlscript interpreter). Used by the tests.
+	public String getCodeByXmlId(String xmlId) {
+		return this.deriveCode(parameters.xmlId);
+	}
+
+	public String getLabelXmlByCode(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return null; }
+		return eq.labelXml;
+	}
+
+	public String getDesignationParcByCode(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return null; }
+		return eq.designationParc;
+	}
+
+	public Boolean isInventorieByCode(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return false; }
+		return eq.estInventorie;
+	}
+
+	public synchronizeEquipements() {
+		MatchingSet<Equipement> ms = begin match Equipement from this;
+		for (InternalElement e : select InternalElement from ligneXml) {
+			match Equipement in ms from this where (xmlElement=e) unmatched: new Equipement(e);
+		}
+		end match Equipement in ms unmatched: delete();
+	}
+
+	// =========================================================================
+	// Topology (XML only) - derivations J3: estCritique, estGoulot.
+	// A link "EQ-A:OUT" -> "EQ-B:IN" is an oriented edge A -> B. Interfaces are
+	// shared (EQ-CONV-03:OUT feeds L3 and L4), so navigation goes through the
+	// InternalLink list, never assuming one interface per link.
+	// =========================================================================
+
+	// Equipment code owning an interface id, e.g. "EQ-CONV-03:OUT" -> "CONV03".
+	public String equipCodeOfInterface(String iface) {
+		int idx = parameters.iface.indexOf(":");
+		String xmlId = parameters.iface.substring(0, idx);
+		return this.deriveCode(xmlId);
+	}
+
+	public String linkSource(InternalLink link) {
+		return this.equipCodeOfInterface("" + parameters.link.getPropertyValue("RefPartnerSideA"));
+	}
+
+	public String linkTarget(InternalLink link) {
+		return this.equipCodeOfInterface("" + parameters.link.getPropertyValue("RefPartnerSideB"));
+	}
+
+	// Direct successors of an equipment code in the material-flow graph.
+	public List<String> successorsOf(String code) {
+		List<String> result = new ArrayList();
+		for (InternalLink link : select InternalLink from ligneXml) {
+			if (this.linkSource(link) == parameters.code) {
+				result.add(this.linkTarget(link));
+			}
+		}
+		return result;
+	}
+
+	// Entry = the only equipment with no incoming edge; exit = no outgoing edge.
+	public String getEntryCode() {
+		for (Equipement eq : select Equipement from this) {
+			Boolean hasIncoming = false;
+			for (InternalLink link : select InternalLink from ligneXml) {
+				if (this.linkTarget(link) == eq.code) { hasIncoming = true; }
+			}
+			if (!hasIncoming) { return eq.code; }
+		}
+		return null;
+	}
+
+	public String getExitCode() {
+		for (Equipement eq : select Equipement from this) {
+			Boolean hasOutgoing = false;
+			for (InternalLink link : select InternalLink from ligneXml) {
+				if (this.linkSource(link) == eq.code) { hasOutgoing = true; }
+			}
+			if (!hasOutgoing) { return eq.code; }
+		}
+		return null;
+	}
+
+	// Explicit membership test (Connie's List.contains is unreliable here).
+	public Boolean listContains(List<String> list, String value) {
+		for (String s : parameters.list) {
+			if (s == parameters.value) { return true; }
+		}
+		return false;
+	}
+
+	// Codes reachable from the entry when a given node is removed from the graph.
+	// Level-by-level BFS (Connie does not support indexed List.get(i) with a variable index,
+	// so we iterate levels with for-each rather than a worklist cursor).
+	public List<String> reachableFromEntryAvoiding(String avoid) {
+		List<String> visited = new ArrayList();
+		List<String> current = new ArrayList();
+		String entry = this.getEntryCode();
+		if (entry != parameters.avoid) {
+			visited.add(entry);
+			current.add(entry);
+		}
+		while (current.size > 0) {
+			List<String> next = new ArrayList();
+			for (String cur : current) {
+				for (String succ : this.successorsOf(cur)) {
+					if (succ != parameters.avoid) {
+						if (!this.listContains(visited, succ)) {
+							visited.add(succ);
+							next.add(succ);
+						}
+					}
+				}
+			}
+			current = next;
+		}
+		return visited;
+	}
+
+	// Critical iff no entry->exit path avoids it: removing it makes the exit unreachable.
+	public Boolean estCritique(String code) {
+		List<String> reachable = this.reachableFromEntryAvoiding(parameters.code);
+		return !this.listContains(reachable, this.getExitCode());
+	}
+
+	// Bottleneck = the critical equipment with the smallest nominal cadence.
+	public String getGoulotCode() {
+		String goulot = null;
+		Double minCadence = null;
+		for (Equipement eq : select Equipement from this) {
+			if (this.estCritique(eq.code)) {
+				Double c = eq.cadenceNominale;
+				// NB: Connie does NOT short-circuit || / && (both operands are always evaluated),
+				// so the null-guard must be a nested if, not "minCadence == null || c < minCadence"
+				// (the latter would evaluate c < null even when minCadence is null).
+				if (minCadence == null) {
+					minCadence = c;
+					goulot = eq.code;
+				} else {
+					if (c < minCadence) {
+						minCadence = c;
+						goulot = eq.code;
+					}
+				}
+			}
+		}
+		return goulot;
+	}
+
+	public Boolean estGoulot(String code) {
+		return this.getGoulotCode() == parameters.code;
+	}
+
+	// =========================================================================
+	// Transverse derivations J4 (XML seuils + Excel measurements).
+	// Vibration measurements live in the Releves sheet, already in chronological
+	// order (header on row 0, data from row 1). Columns: 0 Date, 1 Code, 2 Grandeur,
+	// 3 Valeur, 4 Unite, 5 Operateur.
+	// =========================================================================
+
+	public ExcelSheet getRelevesSheet() {
+		return exploitation.getExcelSheetByName("Relevés");
+	}
+
+	// Latest vibration value for an equipment code (rows are in date order).
+	public Double lastVibration(String code) {
+		Double last = null;
+		for (ExcelRow r : this.getRelevesSheet().getExcelRows()) {
+			if (r.rowIndex >= 1) {
+				String c = "" + r.getExcelCellAt(1).getCellValueAsString();
+				String g = "" + r.getExcelCellAt(2).getCellValueAsString();
+				if (c == parameters.code) {
+					if (g == "Vibration") {
+						last = this.parseDoubleFML("" + r.getExcelCellAt(3).getCellValueAsString());
+					}
+				}
+			}
+		}
+		return last;
+	}
+
+	// Positive trend over the last 4 vibration readings (net increase across the window).
+	// Rolling 4-scalar buffer avoids indexed List access.
+	public Boolean vibrationTrendPositive(String code) {
+		Double v1 = null;
+		Double v2 = null;
+		Double v3 = null;
+		Double v4 = null;
+		for (ExcelRow r : this.getRelevesSheet().getExcelRows()) {
+			if (r.rowIndex >= 1) {
+				String c = "" + r.getExcelCellAt(1).getCellValueAsString();
+				String g = "" + r.getExcelCellAt(2).getCellValueAsString();
+				if (c == parameters.code) {
+					if (g == "Vibration") {
+						v1 = v2;
+						v2 = v3;
+						v3 = v4;
+						v4 = this.parseDoubleFML("" + r.getExcelCellAt(3).getCellValueAsString());
+					}
+				}
+			}
+		}
+		if (v1 == null) { return false; }
+		return v4 > v1;
+	}
+
+	// tauxSeuil = last vibration (Excel) / SeuilVibration (XML). Uses both artifacts.
+	public Double tauxSeuil(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return null; }
+		Double last = this.lastVibration(parameters.code);
+		if (last == null) { return null; }
+		return last / eq.seuilVibration;
+	}
+
+	// enDerive = positive vibration trend AND tauxSeuil >= 0.8. Uses both artifacts.
+	public Boolean enDerive(String code) {
+		Double taux = this.tauxSeuil(parameters.code);
+		if (taux == null) { return false; }
+		if (taux < 0.8) { return false; }
+		return this.vibrationTrendPositive(parameters.code);
+	}
+
+	// criticiteEffective = estCritique AND enDerive, aggravated when estGoulot.
+	// Levels: NORMALE / A_SURVEILLER (derive but not critical) / CRITIQUE / CRITIQUE_GOULOT.
+	// Derived only, never stored in an artifact.
+	public String criticiteEffective(String code) {
+		Boolean critique = this.estCritique(parameters.code);
+		Boolean derive = this.enDerive(parameters.code);
+		if (!derive) { return "NORMALE"; }
+		if (!critique) { return "A_SURVEILLER"; }
+		if (this.estGoulot(parameters.code)) { return "CRITIQUE_GOULOT"; }
+		return "CRITIQUE";
+	}
+
+	// Threshold status from tauxSeuil: DEPASSEMENT (>=1), SURVEILLANCE (>=0.8), NORMAL else.
+	public String seuilStatus(String code) {
+		Double taux = this.tauxSeuil(parameters.code);
+		if (taux == null) { return "INCONNU"; }
+		if (taux >= 1.0) { return "DEPASSEMENT"; }
+		if (taux >= 0.8) { return "SURVEILLANCE"; }
+		return "NORMAL";
+	}
+
+	// =========================================================================
+	// Live manipulations J6 (applied in memory, never saved to the artifacts).
+	// =========================================================================
+
+	// Manipulation 2 - append a vibration reading to the Releves sheet.
+	public addReleve(String code, String valeur, String date, String operateur) {
+		ExcelSheet rel = this.getRelevesSheet();
+		int newRow = rel.getExcelRows().size;
+		rel.setCellValue(newRow, 0, parameters.date);
+		rel.setCellValue(newRow, 1, parameters.code);
+		rel.setCellValue(newRow, 2, "Vibration");
+		rel.setCellValue(newRow, 3, parameters.valeur);
+		rel.setCellValue(newRow, 4, "mm/s");
+		rel.setCellValue(newRow, 5, parameters.operateur);
+	}
+
+	// Manipulation 2 - write-back the derived effective criticity into Parc column H (index 7),
+	// left free for this purpose. This is a projection sink, NOT the source of truth.
+	public writeBackCriticiteToParc(String code) {
+		ExcelRow row = this.findParcRow(parameters.code);
+		if (row == null) { return; }
+		String level = this.criticiteEffective(parameters.code);
+		this.getParcSheet().setCellValue(row.rowIndex, 7, level);
+	}
+
+	public String readParcCriticite(String code) {
+		ExcelRow row = this.findParcRow(parameters.code);
+		if (row == null) { return null; }
+		return "" + this.getParcSheet().getCellAt(row.rowIndex, 7).getCellValueAsString();
+	}
+
+	// Manipulation 3 - add the L7 bypass (EQ-REM-02:OUT -> EQ-ETI-04A:IN) to the topology.
+	public addBypassL7() {
+		XMLComplexType linkType = ligneXml.metaModel.getComplexTypeFromURI("http://www.dke.de/CAEX#InternalLinkType");
+		XMLIndividual l7 = ligneXml.addNewIndividual(linkType);
+		l7.setPropertyValue("Name", "L7");
+		l7.setPropertyValue("RefPartnerSideA", "EQ-REM-02:OUT");
+		l7.setPropertyValue("RefPartnerSideB", "EQ-ETI-04A:IN");
+	}
+
+	// =========================================================================
+	// Priority hierarchy J5. The prioritized list is what no artifact holds alone:
+	// CONV03 on top, ETI04A NOT among the actionable priorities despite the highest
+	// raw vibration (6.5), because topology makes it non-critical.
+	// =========================================================================
+
+	public int priorityRank(String code) {
+		String c = this.criticiteEffective(parameters.code);
+		if (c == "CRITIQUE_GOULOT") { return 3; }
+		if (c == "CRITIQUE") { return 2; }
+		if (c == "A_SURVEILLER") { return 1; }
+		return 0;
+	}
+
+	public Double tauxOrZero(String code) {
+		Double t = this.tauxSeuil(parameters.code);
+		if (t == null) { return 0.0; }
+		return t;
+	}
+
+	// a ranks strictly higher than b (by criticity level, then by tauxSeuil).
+	public Boolean isHigherPriority(String a, String b) {
+		int ra = this.priorityRank(parameters.a);
+		int rb = this.priorityRank(parameters.b);
+		if (ra > rb) { return true; }
+		if (ra < rb) { return false; }
+		return this.tauxOrZero(parameters.a) > this.tauxOrZero(parameters.b);
+	}
+
+	// Actionable = at CRITIQUE level or above (a line-stop risk to schedule now).
+	public Boolean isActionablePriority(String code) {
+		return this.priorityRank(parameters.code) >= 2;
+	}
+
+	// All equipment codes, most-critical first (selection sort; no indexed List access).
+	public List<String> getPrioritizedCodes() {
+		List<String> ordered = new ArrayList();
+		int n = this.getEquipements().size;
+		while (ordered.size < n) {
+			String best = null;
+			for (Equipement eq : select Equipement from this) {
+				if (!this.listContains(ordered, eq.code)) {
+					if (best == null) {
+						best = eq.code;
+					} else {
+						if (this.isHigherPriority(eq.code, best)) {
+							best = eq.code;
+						}
+					}
+				}
+			}
+			if (best == null) {
+				return ordered;
+			}
+			ordered.add(best);
+		}
+		return ordered;
+	}
+
+	public String getTopPriorityCode() {
+		String best = null;
+		for (Equipement eq : select Equipement from this) {
+			if (best == null) {
+				best = eq.code;
+			} else {
+				if (this.isHigherPriority(eq.code, best)) {
+					best = eq.code;
+				}
+			}
+		}
+		return best;
+	}
+
+	// The actionable priority set only (CRITIQUE and above), most-critical first.
+	public List<String> getActionablePriorities() {
+		List<String> result = new ArrayList();
+		for (String code : this.getPrioritizedCodes()) {
+			if (this.isActionablePriority(code)) {
+				result.add(code);
+			}
+		}
+		return result;
+	}
+
+	// Connie itself has no implicit String->number coercion (arithmetic on a String throws), but
+	// fully-qualified Java static calls work in FML expressions, so we delegate to java.lang.
+	public Double parseDoubleFML(String s) {
+		if (parameters.s == null) { return null; }
+		return java.lang.Double.parseDouble(parameters.s);
+	}
+
+	public Double getCadenceByCode(String code) {
+		Equipement eq = this.getEquipementByCode(parameters.code);
+		if (eq == null) { return null; }
+		return eq.cadenceNominale;
+	}
+
+	/**
+	 * Federative concept: one InternalElement (XML) joined, on code, to its Parc row (Excel).
+	 * parcRow is null when the equipment is absent from the inventory (planted inconsistency
+	 * EQ-ETI-04B). Nothing here is stored back into the artifacts.
+	 */
+	public concept Equipement {
+
+		InternalElement xmlElement with XMLIndividualRole(container=ligneXml, xsdType=INTERNAL_ELEMENT);
+
+		create(required InternalElement e) {
+			xmlElement = parameters.e;
+		}
+
+		String xmlId values "" + xmlElement.getPropertyValue("ID");
+
+		// Join key EQ-CONV-03 -> CONV03 (rule owned by the enclosing VirtualModel).
+		String code values this.container.deriveCode(this.xmlId);
+
+		// XML label (topology owner) vs Excel designation (maintenance owner) deliberately differ.
+		String labelXml values "" + xmlElement.getPropertyValue("Name");
+
+		// --- CAEX property promotion (spec section 7, option A) ---
+		// CAEX stores properties as generic <Attribute Name Value/>. The verbose lookup is
+		// written ONCE here; downstream derivations read the typed properties below.
+		String attributeValue(String attrName) {
+			for (XMLIndividual child : xmlElement.children) {
+				String tn = "" + child.type.name;
+				if (tn == "AttributeType") {
+					String n = "" + child.getPropertyValue("Name");
+					if (n == parameters.attrName) {
+						return "" + child.getPropertyValue("Value");
+					}
+				}
+			}
+			return null;
+		}
+
+		String type values this.attributeValue("Type");
+
+		Double cadenceNominale values this.container.parseDoubleFML(this.attributeValue("CadenceNominale"));
+
+		Double seuilVibration values this.container.parseDoubleFML(this.attributeValue("SeuilVibration"));
+
+		Double seuilTemperature values this.container.parseDoubleFML(this.attributeValue("SeuilTemperaturePalier"));
+
+		// Matching Parc row (Excel), derived (never stored) ; null when not inventoried (ETI04B).
+		ExcelRow parcRow values this.container.findParcRow(this.code);
+
+		Boolean estInventorie values this.parcRow != null;
+
+		String designationParc {
+			String get() {
+				if (this.parcRow == null) { return null; }
+				return this.parcRow.getExcelCellAt(1).getCellValueAsString();
+			}
+		};
+	}
+}

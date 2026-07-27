@@ -1,0 +1,30 @@
+// J6 / Manipulation 1 - the transverse question (specification-demo.md sections 4 and 5).
+// "Which equipment should maintenance address first?" The three possible readings disagree,
+// and that disagreement is the whole point of federating the two artifacts.
+
+vm = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml"];
+xmlRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/ligne.xml"];
+xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/exploitation.xlsx"];
+service ResourceCenterService add_temp_rc;
+ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+
+// Reading 1 - Excel alone, raw vibration: ETI04A is by far the most vibrating -> WRONG answer.
+log "raw vibration ETI04A=" + ligne.lastVibration("ETI04A") + " CONV03=" + ligne.lastVibration("CONV03");
+assert ligne.lastVibration("ETI04A") > ligne.lastVibration("CONV03");
+
+// Reading 2 - Excel + XML thresholds: both at ~93% -> a tie, no decision possible.
+log "tauxSeuil CONV03=" + ligne.tauxSeuil("CONV03") + " ETI04A=" + ligne.tauxSeuil("ETI04A");
+assert ligne.tauxSeuil("CONV03") > 0.92;
+assert ligne.tauxSeuil("CONV03") < 0.94;
+assert ligne.tauxSeuil("ETI04A") > 0.92;
+assert ligne.tauxSeuil("ETI04A") < 0.94;
+
+// Reading 3 - Excel + thresholds + topology: ETI04A is doubled by ETI04B, CONV03 is the
+// bottleneck nothing bypasses -> CONV03, unambiguously.
+log "prioritized=" + ligne.getPrioritizedCodes() + " actionable=" + ligne.getActionablePriorities();
+assert ligne.getTopPriorityCode() == "CONV03";
+assert ligne.getActionablePriorities().size == 1;
+assert ligne.getActionablePriorities().get(0) == "CONV03";
+assert ligne.isActionablePriority("ETI04A") == false;
+
+log "Test PASSED: J6 Manip1 - federation resolves the tie: CONV03, not ETI04A";

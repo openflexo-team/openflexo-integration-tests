@@ -1,0 +1,34 @@
+// J6 / Manipulation 2 - liveness and write-back (specification-demo.md section 5).
+// Add a vibration reading 4.9 mm/s on CONV03: 4.9 > 4.5, so CONV03 goes from
+// "sous surveillance" to "dépassement de seuil". Then the twin writes the effective
+// criticity back into Parc column H. Everything in memory; artifacts stay untouched.
+
+vm = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml"];
+xmlRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/ligne.xml"];
+xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/exploitation.xlsx"];
+service ResourceCenterService add_temp_rc;
+ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+
+// --- Before ---
+log "BEFORE tauxSeuil CONV03=" + ligne.tauxSeuil("CONV03") + " status=" + ligne.seuilStatus("CONV03");
+assert ligne.lastVibration("CONV03") == 4.2;
+assert ligne.tauxSeuil("CONV03") < 1.0;
+assert ligne.seuilStatus("CONV03") == "SURVEILLANCE";
+
+// --- Manipulation: append 24/07/2026 | CONV03 | Vibration | 4.9 | mm/s | MPR ---
+ligne.addReleve("CONV03", "4.9", "24/07/2026", "MPR");
+
+// --- After ---
+log "AFTER  tauxSeuil CONV03=" + ligne.tauxSeuil("CONV03") + " status=" + ligne.seuilStatus("CONV03");
+assert ligne.lastVibration("CONV03") == 4.9;
+assert ligne.tauxSeuil("CONV03") > 1.0;
+assert ligne.seuilStatus("CONV03") == "DEPASSEMENT";
+// still the top-priority critical bottleneck
+assert ligne.criticiteEffective("CONV03") == "CRITIQUE_GOULOT";
+
+// --- Write-back into Parc!H (projection sink, not the source of truth) ---
+ligne.writeBackCriticiteToParc("CONV03");
+log "Parc!H CONV03 = " + ligne.readParcCriticite("CONV03");
+assert ligne.readParcCriticite("CONV03") == "CRITIQUE_GOULOT";
+
+log "Test PASSED: J6 Manip2 - alert rises to DEPASSEMENT, criticity written back to Parc!H";

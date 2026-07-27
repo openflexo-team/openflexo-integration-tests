@@ -1,0 +1,51 @@
+// J4 - Transverse derivations: tauxSeuil, enDerive, criticiteEffective (XML seuils + Excel).
+// Expected business values (specification-demo.md sections 3 and 4):
+//   tauxSeuil CONV03 = 4.2/4.5 = 0.933 ; ETI04A = 6.5/7.0 = 0.929  -> both ~93% (deliberate tie)
+//   tauxSeuil DEP01 = 4.1/6.0 = 0.68 ; REM02 = 0.52 ; ENC05 = 0.60 (< 0.8)
+//   enDerive TRUE for CONV03 and ETI04A, FALSE for DEP01/REM02/ENC05
+//   criticiteEffective: CONV03 = CRITIQUE_GOULOT ; ETI04A = A_SURVEILLER (derive but not critical)
+
+vm = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml"];
+xmlRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/ligne.xml"];
+xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/exploitation.xlsx"];
+service ResourceCenterService add_temp_rc;
+ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+
+log "lastVibration CONV03=" + ligne.lastVibration("CONV03") + " ETI04A=" + ligne.lastVibration("ETI04A");
+log "tauxSeuil CONV03=" + ligne.tauxSeuil("CONV03") + " ETI04A=" + ligne.tauxSeuil("ETI04A")
+	+ " DEP01=" + ligne.tauxSeuil("DEP01");
+log "criticiteEffective CONV03=" + ligne.criticiteEffective("CONV03")
+	+ " ETI04A=" + ligne.criticiteEffective("ETI04A");
+
+// last vibration values
+assert ligne.lastVibration("CONV03") == 4.2;
+assert ligne.lastVibration("ETI04A") == 6.5;
+
+// tauxSeuil: the deliberate ~93% tie (CONV03 0.933, ETI04A 0.929)
+assert ligne.tauxSeuil("CONV03") > 0.93;
+assert ligne.tauxSeuil("CONV03") < 0.94;
+assert ligne.tauxSeuil("ETI04A") > 0.92;
+assert ligne.tauxSeuil("ETI04A") < 0.93;
+// CONV03 marginally above ETI04A
+assert ligne.tauxSeuil("CONV03") > ligne.tauxSeuil("ETI04A");
+
+// background equipments well below the 0.8 alert band
+assert ligne.tauxSeuil("DEP01") < 0.7;
+assert ligne.tauxSeuil("REM02") < 0.6;
+assert ligne.tauxSeuil("ENC05") < 0.7;
+
+// enDerive
+assert ligne.enDerive("CONV03") == true;
+assert ligne.enDerive("ETI04A") == true;
+assert ligne.enDerive("DEP01") == false;
+assert ligne.enDerive("REM02") == false;
+assert ligne.enDerive("ENC05") == false;
+
+// criticiteEffective : topology is what separates the bottleneck from the lure
+assert ligne.criticiteEffective("CONV03") == "CRITIQUE_GOULOT";
+assert ligne.criticiteEffective("ETI04A") == "A_SURVEILLER";
+assert ligne.criticiteEffective("DEP01") == "NORMALE";
+assert ligne.criticiteEffective("REM02") == "NORMALE";
+assert ligne.criticiteEffective("ENC05") == "NORMALE";
+
+log "Test PASSED: J4 - tauxSeuil tie ~93%, enDerive, criticiteEffective (CONV03 aggravated, ETI04A only watched)";

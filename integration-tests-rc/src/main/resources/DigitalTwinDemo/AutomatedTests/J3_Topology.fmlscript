@@ -1,0 +1,39 @@
+// J3 - Topological derivations (XML only): estCritique, estGoulot.
+// Expected business values (specification-demo.md section 4):
+//   entry = DEP01, exit = ENC05
+//   estCritique TRUE for DEP01, REM02, CONV03, ENC05
+//   estCritique FALSE for ETI04A and ETI04B (parallel branch: each bypassable by the other)
+//   estGoulot: CONV03 (minimal nominal cadence 950 among the critical equipments)
+
+vm = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml"];
+xmlRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/ligne.xml"];
+xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/exploitation.xlsx"];
+service ResourceCenterService add_temp_rc;
+ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+
+log "entry=" + ligne.getEntryCode() + " exit=" + ligne.getExitCode();
+
+assert ligne.getEntryCode() == "DEP01";
+assert ligne.getExitCode() == "ENC05";
+
+// estCritique - derived from topology, never declared
+assert ligne.estCritique("DEP01") == true;
+assert ligne.estCritique("REM02") == true;
+assert ligne.estCritique("CONV03") == true;
+assert ligne.estCritique("ETI04A") == false;
+assert ligne.estCritique("ETI04B") == false;
+assert ligne.estCritique("ENC05") == true;
+
+// estGoulot - minimal nominal cadence among the critical equipments = CONV03 (950)
+log "cadences DEP01=" + ligne.getCadenceByCode("DEP01")
+	+ " REM02=" + ligne.getCadenceByCode("REM02")
+	+ " CONV03=" + ligne.getCadenceByCode("CONV03")
+	+ " ENC05=" + ligne.getCadenceByCode("ENC05");
+log "goulot=" + ligne.getGoulotCode();
+assert ligne.getCadenceByCode("CONV03") == 950.0;
+assert ligne.getGoulotCode() == "CONV03";
+assert ligne.estGoulot("CONV03") == true;
+assert ligne.estGoulot("DEP01") == false;
+assert ligne.estGoulot("ETI04A") == false;
+
+log "Test PASSED: J3 - estCritique + estGoulot (CONV03 critical bottleneck, cadence 950)";
