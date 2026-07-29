@@ -535,6 +535,12 @@ public model Ligne {
 			xmlElement = parameters.e;
 		}
 
+		// Deletion scheme so that 'end match Equipement ... unmatched: delete()' in
+		// synchronizeEquipements() resolves to a real behaviour (stale equipements are removed from the
+		// federation snapshot; the XML/Excel artifacts are never touched).
+		delete() {
+		}
+
 		String xmlId values "" + xmlElement.getPropertyValue("ID");
 
 		// XML label (topology owner) vs Excel designation (maintenance owner) deliberately differ.
