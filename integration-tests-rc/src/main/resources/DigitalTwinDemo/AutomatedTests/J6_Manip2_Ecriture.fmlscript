@@ -15,8 +15,10 @@ assert ligne.lastVibration("CONV03") == 4.2;
 assert ligne.tauxSeuil("CONV03") < 1.0;
 assert ligne.seuilStatus("CONV03") == "SURVEILLANCE";
 
-// --- Manipulation: append 24/07/2026 | CONV03 | Vibration | 4.9 | mm/s | MPR ---
-ligne.addReleve("CONV03", "4.9", "24/07/2026", "MPR");
+// --- Manipulation: append a new Releve  CONV03 | Vibration | 4.9 | mm/s | MPR ---
+// The reflected model slot creates the row explicitly and the new reading enters the
+// "releves" role of CONV03 (no re-reflection needed).
+ligne.addReleve("CONV03", 4.9, "MPR");
 
 // --- After ---
 log "AFTER  tauxSeuil CONV03=" + ligne.tauxSeuil("CONV03") + " status=" + ligne.seuilStatus("CONV03");

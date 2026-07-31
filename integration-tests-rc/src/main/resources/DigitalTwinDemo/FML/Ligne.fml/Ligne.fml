@@ -5,6 +5,11 @@
  * maintenance workbook (exploitation.xlsx), and derives a maintenance-priority hierarchy that
  * no artifact holds alone. Criticity is never stored in an artifact, always derived.
  *
+ * The Excel side is accessed through a FMLExcelModelSlot: the workbook is reflected against the
+ * annotated "Exploitation" VirtualModel (Releve / FicheParc), so this model speaks of business
+ * objects and typed cells rather than of raw rows and column indices. Equipement carries a
+ * multiple-cardinality role "releves" onto its readings in the workbook.
+ *
  * Performance: all heavy derivations (graph reachability, thresholds) are computed ONCE by
  * recompute() into a runtime snapshot (VM fields + per-Equipement fields), refreshed after the
  * initial synchronize and after each live manipulation. Public accessors are then O(1) reads.
@@ -12,18 +17,19 @@
  */
 
 use org.openflexo.technologyadapter.xml.XMLModelSlot as XML;
-use org.openflexo.technologyadapter.excel.BasicExcelModelSlot as XLS;
+use org.openflexo.technologyadapter.excel.FMLExcelModelSlot as XLS;
 
 import org.openflexo.technologyadapter.xml.model.typed.XMLModel;
 import org.openflexo.technologyadapter.xml.model.typed.XMLIndividual;
 import org.openflexo.technologyadapter.xml.metamodel.XSDMetaModel;
 import org.openflexo.technologyadapter.xml.metamodel.XMLComplexType;
 import org.openflexo.technologyadapter.excel.model.ExcelWorkbook;
-import org.openflexo.technologyadapter.excel.model.ExcelSheet;
-import org.openflexo.technologyadapter.excel.model.ExcelRow;
-import org.openflexo.technologyadapter.excel.model.ExcelCell;
+import org.openflexo.technologyadapter.excel.fml.reflect.rt.XLSVirtualModelInstance;
 import java.util.List;
 import java.util.ArrayList;
+
+// The annotated VirtualModel that types the maintenance workbook (Releve / FicheParc).
+import ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Exploitation.fml"];
 
 import XSDMetaModel CAEX from ["http://www.dke.de/CAEX"];
 import XMLComplexType INTERNAL_ELEMENT from [CAEX:"InternalElementType"];
@@ -38,7 +44,9 @@ typedef XMLIndividualType(xsdType=INTERNAL_LINK) as InternalLink;
 public model Ligne {
 
 	XMLModel ligneXml with XMLModelSlot(metaModel=CAEX);
-	ExcelWorkbook exploitation with BasicExcelModelSlot();
+	// Reflected against the "Exploitation" contract VM: exploitation.flexoConceptInstances are
+	// typed Releve / FicheParc instances, each backed by a workbook row.
+	Exploitation exploitation with FMLExcelModelSlot();
 
 	// Snapshot at the VirtualModel level (topology endpoints + bottleneck), filled by recompute().
 	String cachedEntry;
@@ -65,7 +73,7 @@ public model Ligne {
 		for (Equipement eq : select Equipement from this) {
 			eq.cadenceNominale = this.parseDoubleFML(eq.attributeValue("CadenceNominale"));
 			eq.seuilVibration = this.parseDoubleFML(eq.attributeValue("SeuilVibration"));
-			eq.lastVib = this.computeLastVibration(eq.code);
+			eq.lastVib = this.computeLastVibration(eq);
 			eq.taux = this.computeTaux(eq.lastVib, eq.seuilVibration);
 			eq.derive = this.computeEnDerive(eq);
 		}
@@ -95,13 +103,9 @@ public model Ligne {
 		return select InternalElement from ligneXml;
 	}
 
-	// --- Excel side ---
-	public ExcelSheet getParcSheet() {
-		return exploitation.getExcelSheetByName("Parc");
-	}
-
-	public ExcelSheet getRelevesSheet() {
-		return exploitation.getExcelSheetByName("Relevés");
+	// --- Excel side (typed through the Exploitation reflected VMI) ---
+	public FicheParc getFicheParc(String code) {
+		return select unique FicheParc from (exploitation) where (selected.code == parameters.code);
 	}
 
 	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes (spec section 2).
@@ -110,19 +114,6 @@ public model Ligne {
 	public String deriveCode(String xmlId) {
 		String withoutPrefix = parameters.xmlId.replace("EQ-", "");
 		return withoutPrefix.replace("-", "");
-	}
-
-	// Parc row (Excel) matching a code, or null when not inventoried (e.g. ETI04B). Header shifted:
-	// title on rows 1-2, headers on row 4, data from 0-based row 4.
-	public ExcelRow findParcRow(String code) {
-		for (ExcelRow r : this.getParcSheet().getExcelRows()) {
-			if (r.rowIndex >= 4) {
-				if (r.getExcelCellAt(0).getCellValueAsString() == parameters.code) {
-					return r;
-				}
-			}
-		}
-		return null;
 	}
 
 	// --- Federation ---
@@ -256,45 +247,32 @@ public model Ligne {
 
 	// =========================================================================
 	// Transverse computation (XML seuils + Excel vibrations). Vibration readings
-	// live in the Releves sheet, in chronological order (data from row 1).
-	// Columns: 0 Date, 1 Code, 2 Grandeur, 3 Valeur, 4 Unite, 5 Operateur.
-	// Called only from recompute().
+	// are the "Vibration" Releve instances of each Equipement, in chronological
+	// order (workbook row order). Called only from recompute().
 	// =========================================================================
 
-	public Double computeLastVibration(String code) {
+	public Double computeLastVibration(Equipement eq) {
 		Double last = null;
-		for (ExcelRow r : this.getRelevesSheet().getExcelRows()) {
-			if (r.rowIndex >= 1) {
-				String c = "" + r.getExcelCellAt(1).getCellValueAsString();
-				String g = "" + r.getExcelCellAt(2).getCellValueAsString();
-				if (c == parameters.code) {
-					if (g == "Vibration") {
-						last = this.parseDoubleFML("" + r.getExcelCellAt(3).getCellValueAsString());
-					}
-				}
+		for (Releve r : parameters.eq.releves) {
+			if (r.grandeur == "Vibration") {
+				last = r.valeur;
 			}
 		}
 		return last;
 	}
 
 	// Positive trend over the last 4 vibration readings (rolling 4-scalar buffer, no indexed access).
-	public Boolean computeVibrationTrendPositive(String code) {
+	public Boolean computeVibrationTrendPositive(Equipement eq) {
 		Double v1 = null;
 		Double v2 = null;
 		Double v3 = null;
 		Double v4 = null;
-		for (ExcelRow r : this.getRelevesSheet().getExcelRows()) {
-			if (r.rowIndex >= 1) {
-				String c = "" + r.getExcelCellAt(1).getCellValueAsString();
-				String g = "" + r.getExcelCellAt(2).getCellValueAsString();
-				if (c == parameters.code) {
-					if (g == "Vibration") {
-						v1 = v2;
-						v2 = v3;
-						v3 = v4;
-						v4 = this.parseDoubleFML("" + r.getExcelCellAt(3).getCellValueAsString());
-					}
-				}
+		for (Releve r : parameters.eq.releves) {
+			if (r.grandeur == "Vibration") {
+				v1 = v2;
+				v2 = v3;
+				v3 = v4;
+				v4 = r.valeur;
 			}
 		}
 		if (v1 == null) { return false; }
@@ -305,7 +283,7 @@ public model Ligne {
 	public Boolean computeEnDerive(Equipement eq) {
 		if (parameters.eq.taux == null) { return false; }
 		if (parameters.eq.taux < 0.8) { return false; }
-		return this.computeVibrationTrendPositive(parameters.eq.code);
+		return this.computeVibrationTrendPositive(parameters.eq);
 	}
 
 	// criticiteEffective = estCritique AND enDerive, aggravated when the bottleneck.
@@ -484,32 +462,35 @@ public model Ligne {
 	// Live manipulations J6 (applied in memory, then recompute; never saved).
 	// =========================================================================
 
-	// Manipulation 2 - append a vibration reading, then refresh the snapshot.
-	public addReleve(String code, String valeur, String date, String operateur) {
-		ExcelSheet rel = this.getRelevesSheet();
-		int newRow = rel.getExcelRows().size;
-		rel.setCellValue(newRow, 0, parameters.date);
-		rel.setCellValue(newRow, 1, parameters.code);
-		rel.setCellValue(newRow, 2, "Vibration");
-		rel.setCellValue(newRow, 3, parameters.valeur);
-		rel.setCellValue(newRow, 4, "mm/s");
-		rel.setCellValue(newRow, 5, parameters.operateur);
+	// Manipulation 2 - append a vibration reading as a new Releve, then refresh the snapshot.
+	// The reflected model slot handles the row creation explicitly (createReflectedInstance):
+	// a new row is appended to the "Relevés" sheet, and setting the typed properties writes the
+	// cells. The new Releve is then visible to the "releves" role of the matching Equipement.
+	public addReleve(String code, Double valeur, String operateur) {
+		// Cast to the reflected VMI first (in its own statement): a cast used directly as a method
+		// receiver loses the receiver in the binding analyzer, so bind it to a local variable.
+		XLSVirtualModelInstance xls = (XLSVirtualModelInstance) exploitation;
+		Releve r = (Releve) xls.createReflectedInstance("Releve");
+		r.code = parameters.code;
+		r.grandeur = "Vibration";
+		r.valeur = parameters.valeur;
+		r.unite = "mm/s";
+		r.operateur = parameters.operateur;
 		this.recompute();
 	}
 
-	// Manipulation 2 - write-back the derived effective criticity into Parc column H (index 7).
+	// Manipulation 2 - write-back the derived effective criticity into the FicheParc (Parc column H).
 	// Projection sink, NOT the source of truth.
 	public writeBackCriticiteToParc(String code) {
-		ExcelRow row = this.findParcRow(parameters.code);
-		if (row == null) { return; }
-		String level = this.criticiteEffective(parameters.code);
-		this.getParcSheet().setCellValue(row.rowIndex, 7, level);
+		FicheParc fiche = this.getFicheParc(parameters.code);
+		if (fiche == null) { return; }
+		fiche.criticite = this.criticiteEffective(parameters.code);
 	}
 
 	public String readParcCriticite(String code) {
-		ExcelRow row = this.findParcRow(parameters.code);
-		if (row == null) { return null; }
-		return "" + this.getParcSheet().getCellAt(row.rowIndex, 7).getCellValueAsString();
+		FicheParc fiche = this.getFicheParc(parameters.code);
+		if (fiche == null) { return null; }
+		return fiche.criticite;
 	}
 
 	// Manipulation 3 - add the L7 bypass (EQ-REM-02:OUT -> EQ-ETI-04A:IN), then refresh.
@@ -523,9 +504,10 @@ public model Ligne {
 	}
 
 	/**
-	 * Federative concept: one InternalElement (XML) joined, on code, to its Parc row (Excel).
-	 * The snapshot fields (code, cadenceNominale, ..., criticite) are filled by Ligne.recompute().
-	 * parcRow is null when the equipment is absent from the inventory (planted EQ-ETI-04B).
+	 * Federative concept: one InternalElement (XML) joined, on code, to its FicheParc (Excel) and to
+	 * its readings (the "releves" role). The snapshot fields (code, cadenceNominale, ..., criticite)
+	 * are filled by Ligne.recompute(). fiche is null when the equipment is absent from the inventory
+	 * (planted EQ-ETI-04B).
 	 */
 	public concept Equipement {
 
@@ -565,13 +547,23 @@ public model Ligne {
 		String type values this.attributeValue("Type");
 		Double seuilTemperature values this.container.parseDoubleFML(this.attributeValue("SeuilTemperaturePalier"));
 
+		// --- Excel roles (typed through the Exploitation reflected VMI) ---
+		// Multiple-cardinality role: all readings of this equipment, in workbook (chronological) order.
+		// A fetch request (select) is an fml-action, not a plain expression, so it lives in a get()
+		// body (which accepts 'return select ...') rather than in a 'values' clause.
+		List<Releve> releves {
+			List<Releve> get() {
+				return select Releve from (this.container.exploitation) where (selected.code == this.code);
+			}
+		};
+
 		// Excel projection (not in any hot loop), derived on access.
-		ExcelRow parcRow values this.container.findParcRow(this.code);
-		Boolean estInventorie values this.parcRow != null;
+		FicheParc fiche values this.container.getFicheParc(this.code);
+		Boolean estInventorie values this.fiche != null;
 		String designationParc {
 			String get() {
-				if (this.parcRow == null) { return null; }
-				return this.parcRow.getExcelCellAt(1).getCellValueAsString();
+				if (this.fiche == null) { return null; }
+				return this.fiche.designation;
 			}
 		};
 

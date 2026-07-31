@@ -37,4 +37,15 @@ assert ligne.isInventorieByCode("ETI04B") == false;
 assert ligne.getDesignationParcByCode("ETI04B") == null;
 log "ETI04B inventorie = " + ligne.isInventorieByCode("ETI04B");
 
+// --- Typed multiple-cardinality role "releves" (FMLExcelModelSlot) ---
+// Each Equipement carries its readings from the "Relevés" sheet, joined on code.
+conv = ligne.getEquipementByCode("CONV03");
+log "CONV03 releves count = " + conv.releves.size;
+assert conv.releves.size > 0;
+// The role is filtered on code: every reading of CONV03 carries its own code.
+assert conv.releves.get(0).code == "CONV03";
+// The readings are typed: a Vibration reading exposes its numeric value through the model slot.
+assert conv.releves.get(0).grandeur == "Vibration";
+assert conv.releves.get(0).valeur > 0.0;
+
 log "Test PASSED: J2 - federation on code, 5 matched, ETI04B unmatched as planted";

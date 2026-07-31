@@ -1,7 +1,7 @@
 // J1 - The two model slots mount their resources; read one value from each side.
 // Expected business values (specification-demo.md):
 //   - XML: 6 InternalElement (equipements) in the topology
-//   - Excel: Parc sheet, code CONV03 present (header shifted: data from 0-based row 4)
+//   - Excel: FicheParc CONV03 reflected through the FMLExcelModelSlot (typed, not raw cells)
 
 vm = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml"];
 assert vm != null;
@@ -20,10 +20,10 @@ elems = ligne.getInternalElements();
 log "InternalElements = " + elems;
 assert elems.size == 6;
 
-// --- Excel side ---
-parc = ligne.getParcSheet();
-assert parc != null;
-log "Parc CONV03 designation = " + parc.getCellAt(6,1).getCellValueAsString();
-assert parc.getCellAt(6,0).getCellValueAsString() == "CONV03";
+// --- Excel side (typed FicheParc reflected through the FMLExcelModelSlot) ---
+conv = ligne.getFicheParc("CONV03");
+assert conv != null;
+assert conv.code == "CONV03";
+log "Parc CONV03 designation = " + conv.designation;
 
 log "Test PASSED: J1 - both model slots mounted, one value read from each side";
