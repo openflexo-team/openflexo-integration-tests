@@ -16,11 +16,11 @@ assert ligne != null;
 // One Equipement per InternalElement of the topology
 assert ligne.getEquipements().size == 6;
 
-conv = ligne.getEquipementByCode("CONV03");
+conv = ligne.getEquipementParCode("CONV03");
 assert conv != null;
 
 // The join rule EQ-CONV-03 <-> CONV03, declared once and reviewable
-assert ligne.deriveCode("EQ-CONV-03") == "CONV03";
+assert ligne.codeDepuisXmlId("EQ-CONV-03") == "CONV03";
 assert conv.xmlId == "EQ-CONV-03";
 assert conv.code == "CONV03";
 
@@ -52,10 +52,10 @@ assert conv.releves.get(0).valeur > 0.0;
 assert conv.interventions.size == 1;
 assert conv.derniereIntervention.type == "Préventive";
 // the discreet corroboration: ETI04A was serviced twice, CONV03 only once
-assert ligne.getEquipementByCode("ETI04A").interventions.size == 2;
+assert ligne.getEquipementParCode("ETI04A").interventions.size == 2;
 
 // --- The planted inconsistency, not repaired: in the XML, absent from the Parc ---
-eti04b = ligne.getEquipementByCode("ETI04B");
+eti04b = ligne.getEquipementParCode("ETI04B");
 assert eti04b != null;
 assert eti04b.estInventorie == false;
 assert eti04b.fiche == null;

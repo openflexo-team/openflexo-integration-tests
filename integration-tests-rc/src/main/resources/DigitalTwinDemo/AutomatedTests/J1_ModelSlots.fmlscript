@@ -26,4 +26,11 @@ assert conv != null;
 assert conv.code == "CONV03";
 log "Parc CONV03 designation = " + conv.designation;
 
-log "Test PASSED: J1 - both model slots mounted, one value read from each side";
+// The third reflected concept: the "Interventions" sheet is typed too.
+itvs = ligne.getInterventions();
+assert itvs.size == 6;
+assert itvs.get(0).code == "CONV03";
+assert itvs.get(0).type == "Préventive";
+log "Interventions = " + itvs.size + ", first on " + itvs.get(0).code;
+
+log "Test PASSED: J1 - both model slots mounted, all three reflected concepts readable";

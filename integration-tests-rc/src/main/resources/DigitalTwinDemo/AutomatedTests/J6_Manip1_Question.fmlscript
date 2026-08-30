@@ -8,8 +8,8 @@ xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/explo
 service ResourceCenterService add_temp_rc;
 ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
 
-conv = ligne.getEquipementByCode("CONV03");
-eti = ligne.getEquipementByCode("ETI04A");
+conv = ligne.getEquipementParCode("CONV03");
+eti = ligne.getEquipementParCode("ETI04A");
 
 // Reading 1 - the workbook alone, raw vibration: ETI04A is by far the most vibrating -> WRONG.
 log "raw vibration ETI04A=" + eti.derniereVibration + " CONV03=" + conv.derniereVibration;

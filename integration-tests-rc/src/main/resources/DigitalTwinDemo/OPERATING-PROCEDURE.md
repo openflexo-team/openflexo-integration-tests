@@ -26,8 +26,9 @@ Everything above them — `cadenceNominale`, `seuilVibration`, `tauxSeuil`, `enD
 `get()` property. **Nothing is stored: no criticity is ever written into an artifact.** After a live
 manipulation, `synchronize()` re-attaches the structure and every derived value follows on its own.
 
-Join rule `EQ-CONV-03` ⟷ `CONV03` isolated in `deriveCode(...)` (drop `EQ-` prefix and dashes), and
-reused by `Liaison` to resolve interface ids such as `EQ-CONV-03:OUT`.
+Join rule `EQ-CONV-03` ⟷ `CONV03` isolated in `codeDepuisXmlId(...)` (drop `EQ-` prefix and dashes),
+and reused by `Liaison`, through `codeDepuisInterface(...)`, to resolve interface ids such as
+`EQ-CONV-03:OUT`.
 
 > Note on the artifacts: to let the typed XML model slot bind, `ligne.xsd` was given
 > `targetNamespace="http://www.dke.de/CAEX"` and `ligne.xml` the matching default namespace with
@@ -110,7 +111,7 @@ appends the same reading in memory).
 **Script equivalent** — both manipulations are carried by the equipment they concern:
 
 ```
-conv = ligne.getEquipementByCode("CONV03");
+conv = ligne.getEquipementParCode("CONV03");
 conv.ajouterReleveVibration(4.9, "MPR");
 conv.ecrireCriticiteDansFiche();
 ```

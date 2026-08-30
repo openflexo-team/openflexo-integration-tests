@@ -9,7 +9,7 @@ xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/explo
 service ResourceCenterService add_temp_rc;
 ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
 
-conv = ligne.getEquipementByCode("CONV03");
+conv = ligne.getEquipementParCode("CONV03");
 
 // --- Before ---
 log "BEFORE tauxSeuil=" + conv.tauxSeuil + " statut=" + conv.statutSeuil + " releves=" + conv.releves.size;

@@ -16,11 +16,11 @@ assert ligne.getLiaisons().size == 6;
 
 // The ends of a Liaison are Equipement instances, not parsed strings. NB: a 'select' returns the
 // instances in no particular order, so navigate the graph rather than index into the list.
-dep = ligne.getEquipementByCode("DEP01");
+dep = ligne.getEquipementParCode("DEP01");
 assert dep.successeurs.size == 1;
 assert dep.successeurs.get(0).code == "REM02";
 
-conv = ligne.getEquipementByCode("CONV03");
+conv = ligne.getEquipementParCode("CONV03");
 // CONV03 feeds BOTH labellers: this is the fork that makes ETI04A dispensable.
 assert conv.successeurs.size == 2;
 assert conv.predecesseurs.size == 1;
@@ -35,22 +35,22 @@ assert conv.estEntree == false;
 
 // estCritique - derived from the topology, never declared anywhere
 assert dep.estCritique == true;
-assert ligne.getEquipementByCode("REM02").estCritique == true;
+assert ligne.getEquipementParCode("REM02").estCritique == true;
 assert conv.estCritique == true;
-assert ligne.getEquipementByCode("ETI04A").estCritique == false;
-assert ligne.getEquipementByCode("ETI04B").estCritique == false;
-assert ligne.getEquipementByCode("ENC05").estCritique == true;
+assert ligne.getEquipementParCode("ETI04A").estCritique == false;
+assert ligne.getEquipementParCode("ETI04B").estCritique == false;
+assert ligne.getEquipementParCode("ENC05").estCritique == true;
 
 // estGoulot - minimal nominal cadence among the critical equipments = CONV03 (950)
 log "cadences DEP01=" + dep.cadenceNominale
-	+ " REM02=" + ligne.getEquipementByCode("REM02").cadenceNominale
+	+ " REM02=" + ligne.getEquipementParCode("REM02").cadenceNominale
 	+ " CONV03=" + conv.cadenceNominale
-	+ " ENC05=" + ligne.getEquipementByCode("ENC05").cadenceNominale;
+	+ " ENC05=" + ligne.getEquipementParCode("ENC05").cadenceNominale;
 log "goulot=" + ligne.getGoulot().code;
 assert conv.cadenceNominale == 950.0;
 assert ligne.getGoulot().code == "CONV03";
 assert conv.estGoulot == true;
 assert dep.estGoulot == false;
-assert ligne.getEquipementByCode("ETI04A").estGoulot == false;
+assert ligne.getEquipementParCode("ETI04A").estGoulot == false;
 
 log "Test PASSED: J3 - Liaison graph, estCritique + estGoulot (CONV03 critical bottleneck, 950)";

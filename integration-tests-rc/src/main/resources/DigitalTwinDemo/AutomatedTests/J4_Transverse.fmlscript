@@ -11,11 +11,11 @@ xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/explo
 service ResourceCenterService add_temp_rc;
 ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
 
-conv = ligne.getEquipementByCode("CONV03");
-eti = ligne.getEquipementByCode("ETI04A");
-dep = ligne.getEquipementByCode("DEP01");
-rem = ligne.getEquipementByCode("REM02");
-enc = ligne.getEquipementByCode("ENC05");
+conv = ligne.getEquipementParCode("CONV03");
+eti = ligne.getEquipementParCode("ETI04A");
+dep = ligne.getEquipementParCode("DEP01");
+rem = ligne.getEquipementParCode("REM02");
+enc = ligne.getEquipementParCode("ENC05");
 
 log "derniereVibration CONV03=" + conv.derniereVibration + " ETI04A=" + eti.derniereVibration;
 log "tauxSeuil CONV03=" + conv.tauxSeuil + " ETI04A=" + eti.tauxSeuil + " DEP01=" + dep.tauxSeuil;
@@ -39,6 +39,20 @@ assert conv.tauxSeuil > eti.tauxSeuil;
 assert dep.tauxSeuil < 0.7;
 assert rem.tauxSeuil < 0.6;
 assert enc.tauxSeuil < 0.7;
+
+// A SECOND indicator, on another physical quantity, corroborates CONV03 without taking part in
+// the verdict: the bearing also runs at 95% of its temperature threshold.
+log "temperature CONV03=" + conv.derniereTemperature + "/" + conv.seuilTemperature
+	+ " -> " + conv.tauxTemperature;
+assert conv.temperatures.size == 7;
+assert conv.derniereTemperature == 57.0;
+assert conv.seuilTemperature == 60.0;
+assert conv.tauxTemperature > 0.94;
+assert conv.tauxTemperature < 0.96;
+// ETI04A is simply not monitored on temperature: the model tolerates the missing data
+assert eti.temperatures.size == 0;
+assert eti.derniereTemperature == null;
+assert eti.tauxTemperature == null;
 
 // enDerive = rising over the last 4 readings AND already at 80% of the threshold
 assert conv.tendanceCroissante == true;

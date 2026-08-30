@@ -37,6 +37,7 @@ import org.openflexo.technologyadapter.xml.metamodel.XSDMetaModel;
 import org.openflexo.technologyadapter.xml.metamodel.XMLComplexType;
 import org.openflexo.technologyadapter.excel.model.ExcelWorkbook;
 import org.openflexo.technologyadapter.excel.fml.reflect.rt.XLSVirtualModelInstance;
+import java.lang.Double;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -69,7 +70,8 @@ public model Ligne {
 	// =========================================================================
 	// Structural synchronization - instantiates the concepts and attaches them to the artifact
 	// elements. Re-runnable: 'match' reuses the existing instances instead of duplicating them,
-	// and each multiple role is re-assigned as a whole (adding one by one would pile up).
+	// and each multiple role is refilled with a membership-guarded add (match de-duplicates the
+	// instances it matches, never the contents of their roles).
 	// =========================================================================
 	public synchronize() {
 		this.synchronizeEquipements();
@@ -108,11 +110,11 @@ public model Ligne {
 		MatchingSet<Liaison> ms = begin match Liaison from this;
 		for (InternalLink l : select InternalLink from ligneXml) {
 			Liaison li = match Liaison in ms from this where (xmlLink=l) unmatched: new Liaison(l);
-			Equipement src = this.getEquipementByCode(li.codeSource);
+			Equipement src = this.getEquipementParCode(li.codeSource);
 			if (src != null) {
 				li.source = src;
 			}
-			Equipement dst = this.getEquipementByCode(li.codeCible);
+			Equipement dst = this.getEquipementParCode(li.codeCible);
 			if (dst != null) {
 				li.cible = dst;
 			}
@@ -134,9 +136,13 @@ public model Ligne {
 		return select unique FicheParc from (exploitation) where (selected.code == parameters.code);
 	}
 
+	public List<Intervention> getInterventions() {
+		return select Intervention from (exploitation);
+	}
+
 	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes (spec section 2).
 	// Behaviour parameters are read via "parameters.".
-	public String deriveCode(String xmlId) {
+	public String codeDepuisXmlId(String xmlId) {
 		String withoutPrefix = parameters.xmlId.replace("EQ-", "");
 		return withoutPrefix.replace("-", "");
 	}
@@ -146,7 +152,7 @@ public model Ligne {
 		return select Equipement from this;
 	}
 
-	public Equipement getEquipementByCode(String code) {
+	public Equipement getEquipementParCode(String code) {
 		return select unique Equipement from this where (selected.code == parameters.code);
 	}
 
@@ -156,25 +162,19 @@ public model Ligne {
 	// =========================================================================
 
 	// Equipment code owning an interface id, e.g. "EQ-CONV-03:OUT" -> "CONV03".
-	public String equipCodeOfInterface(String iface) {
+	public String codeDepuisInterface(String iface) {
 		int idx = parameters.iface.indexOf(":");
 		String xmlId = parameters.iface.substring(0, idx);
-		return this.deriveCode(xmlId);
+		return this.codeDepuisXmlId(xmlId);
 	}
 
 	// Entry = the only equipment no link points to; exit = the only one no link leaves.
 	public Equipement getEntree() {
-		for (Equipement eq : select Equipement from this) {
-			if (eq.estEntree) { return eq; }
-		}
-		return null;
+		return select unique Equipement from this where (selected.estEntree);
 	}
 
 	public Equipement getSortie() {
-		for (Equipement eq : select Equipement from this) {
-			if (eq.estSortie) { return eq; }
-		}
-		return null;
+		return select unique Equipement from this where (selected.estSortie);
 	}
 
 	// Which equipments the material can still reach from the entry when one of them is removed.
@@ -224,13 +224,6 @@ public model Ligne {
 		return goulot;
 	}
 
-	// Connie has no implicit String->number coercion (arithmetic on a String throws), but
-	// fully-qualified Java static calls work in FML expressions.
-	public Double parseDoubleFML(String s) {
-		if (parameters.s == null) { return null; }
-		return java.lang.Double.parseDouble(parameters.s);
-	}
-
 	// =========================================================================
 	// Priority hierarchy (spec sections 4-5). CONV03 on top; ETI04A NOT actionable despite
 	// the highest raw vibration - topology is what separates the bottleneck from the lure.
@@ -242,27 +235,18 @@ public model Ligne {
 		return parameters.a.tauxOuZero > parameters.b.tauxOuZero;
 	}
 
-	// The maintenance list, most urgent first.
+	// The maintenance list, most urgent first: each equipment slots in behind everyone already
+	// ranked above it. Six machines - the point is to read the rule, not to sort fast.
 	public List<Equipement> getEquipementsPrioritaires() {
 		List<Equipement> ordonnes = new ArrayList();
-		int n = this.getEquipements().size;
-		while (ordonnes.size < n) {
-			Equipement meilleur = null;
-			for (Equipement eq : select Equipement from this) {
-				if (!ordonnes.contains(eq)) {
-					if (meilleur == null) {
-						meilleur = eq;
-					} else {
-						if (this.plusPrioritaire(eq, meilleur)) {
-							meilleur = eq;
-						}
-					}
+		for (Equipement candidat : select Equipement from this) {
+			int position = 0;
+			for (Equipement place : ordonnes) {
+				if (this.plusPrioritaire(place, candidat)) {
+					position = position + 1;
 				}
 			}
-			if (meilleur == null) {
-				return ordonnes;
-			}
-			ordonnes.add(meilleur);
+			ordonnes.add(position, candidat);
 		}
 		return ordonnes;
 	}
@@ -340,8 +324,8 @@ public model Ligne {
 		String interfaceSource values "" + xmlLink.getPropertyValue("RefPartnerSideA");
 		String interfaceCible values "" + xmlLink.getPropertyValue("RefPartnerSideB");
 		// "EQ-CONV-03:OUT" -> "CONV03" : the same join rule as the equipments.
-		String codeSource values this.container.equipCodeOfInterface(this.interfaceSource);
-		String codeCible values this.container.equipCodeOfInterface(this.interfaceCible);
+		String codeSource values this.container.codeDepuisInterface(this.interfaceSource);
+		String codeCible values this.container.codeDepuisInterface(this.interfaceCible);
 	}
 
 	/**
@@ -367,7 +351,7 @@ public model Ligne {
 
 		// --- Identity, from the XML side ---
 		String xmlId values "" + xmlElement.getPropertyValue("ID");
-		String code values this.container.deriveCode(this.xmlId);
+		String code values this.container.codeDepuisXmlId(this.xmlId);
 
 		// XML label (topology owner) vs Excel designation (maintenance owner) deliberately differ.
 		String labelXml values "" + xmlElement.getPropertyValue("Name");
@@ -388,11 +372,12 @@ public model Ligne {
 		}
 
 		// CAEX attributes promoted to named, typed properties: fidelity to AutomationML on one
-		// side, readable projection on the other.
+		// side, readable projection on the other. Connie has no implicit String->number coercion,
+		// but a Java static call works in an FML expression.
 		String type values this.attributeValue("Type");
-		Double cadenceNominale values this.container.parseDoubleFML(this.attributeValue("CadenceNominale"));
-		Double seuilVibration values this.container.parseDoubleFML(this.attributeValue("SeuilVibration"));
-		Double seuilTemperature values this.container.parseDoubleFML(this.attributeValue("SeuilTemperaturePalier"));
+		Double cadenceNominale values Double.parseDouble(this.attributeValue("CadenceNominale"));
+		Double seuilVibration values Double.parseDouble(this.attributeValue("SeuilVibration"));
+		Double seuilTemperature values Double.parseDouble(this.attributeValue("SeuilTemperaturePalier"));
 
 		// --- Excel projection, through the filled roles ---
 		Boolean estInventorie values this.fiche != null;
@@ -436,6 +421,30 @@ public model Ligne {
 			}
 		};
 
+		// The temperature readings, same shape as the vibrations: the model privileges no physical
+		// quantity, it federates whatever the workbook happens to record.
+		List<Releve> temperatures {
+			List<Releve> get() {
+				List<Releve> result = new ArrayList();
+				for (Releve r : this.releves) {
+					if (r.grandeur == "Température palier") {
+						result.add(r);
+					}
+				}
+				return result;
+			}
+		};
+
+		Double derniereTemperature {
+			Double get() {
+				Double last = null;
+				for (Releve r : this.temperatures) {
+					last = r.valeur;
+				}
+				return last;
+			}
+		};
+
 		// --- Transverse derivations: the XML threshold meets the Excel measurement ---
 		Double tauxSeuil {
 			Double get() {
@@ -452,6 +461,17 @@ public model Ligne {
 				if (this.tauxSeuil >= 1.0) { return "DEPASSEMENT"; }
 				if (this.tauxSeuil >= 0.8) { return "SURVEILLANCE"; }
 				return "NORMAL";
+			}
+		};
+
+		// A second, independent indicator: how hot the bearing runs against its own XML threshold.
+		// It CORROBORATES the vibration reading without entering criticiteEffective - the verdict of
+		// the demo stays built on vibration and topology alone. Null when nobody measures it (ETI04A).
+		Double tauxTemperature {
+			Double get() {
+				if (this.derniereTemperature == null) { return null; }
+				if (this.seuilTemperature == null) { return null; }
+				return this.derniereTemperature / this.seuilTemperature;
 			}
 		};
 
