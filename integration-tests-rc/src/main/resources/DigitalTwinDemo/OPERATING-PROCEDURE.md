@@ -8,30 +8,53 @@ source of truth is `specification-demo.md`; this file is the how-to.
 - **VirtualModel** `FML/Ligne.fml/Ligne.fml` — federates the CAEX topology (`ligne.xml`, typed
   against `ligne.xsd`) with the maintenance workbook (`exploitation.xlsx`) through two model slots:
   - `XMLModelSlot(metaModel=CAEX)` on `ligne.xml`;
-  - `BasicExcelModelSlot()` on `exploitation.xlsx`.
-- One federative FlexoConcept `Equipement` (XML `InternalElement` joined, on code, to its `Parc`
-  row), plus transverse derivations on the `Ligne` model. **Nothing is stored in the artifacts —
-  every criticity value is derived.**
-- Join rule `EQ-CONV-03` ⟷ `CONV03` isolated in `deriveCode(...)` (drop `EQ-` prefix and dashes).
+  - `FMLExcelModelSlot()` on `exploitation.xlsx`, reflected against the **`Exploitation`** contract
+    VirtualModel (`FML/Exploitation.fml`), which types each significant row as a `Releve`,
+    a `FicheParc` or an `Intervention`. The workbook is never navigated as rows and columns.
+
+**The structure is materialized, the values are derived.** Two FlexoConcepts are instantiated and
+attached to the artifact elements they federate:
+
+| Concept | Roles (what it points at) |
+|---|---|
+| `Equipement` | `xmlElement` → its `InternalElement` (XML) · `fiche` → its row in `Parc` (cardinality 1, empty for `ETI04B`) · `releves` → its readings · `interventions` → its maintenance operations |
+| `Liaison` | `xmlLink` → its `InternalLink` (XML) · `source` / `cible` → the two `Equipement` it connects |
+
+`synchronize()` fills those roles with the FML `match` mechanism, so it is idempotent and re-runnable.
+Everything above them — `cadenceNominale`, `seuilVibration`, `tauxSeuil`, `enDerive`, `successeurs`,
+`estCritique`, `estGoulot`, `criticiteEffective`, `rangPriorite` — is an expression (`values`) or a
+`get()` property. **Nothing is stored: no criticity is ever written into an artifact.** After a live
+manipulation, `synchronize()` re-attaches the structure and every derived value follows on its own.
+
+Join rule `EQ-CONV-03` ⟷ `CONV03` isolated in `deriveCode(...)` (drop `EQ-` prefix and dashes), and
+reused by `Liaison` to resolve interface ids such as `EQ-CONV-03:OUT`.
 
 > Note on the artifacts: to let the typed XML model slot bind, `ligne.xsd` was given
 > `targetNamespace="http://www.dke.de/CAEX"` and `ligne.xml` the matching default namespace with
-> `xsi:schemaLocation` (spec section 7). No data was changed. The planted inconsistencies are
-> intact: `EQ-ETI-04B` is absent from `Parc`, and the `CONV3` orphan row in `Relevés` references
-> nothing.
+> `xsi:schemaLocation` (spec section 7 documents the no-namespace variant, which predates this).
+> No data was changed. The planted inconsistencies are intact: `EQ-ETI-04B` is absent from `Parc`,
+> and the `CONV3` orphan row in `Relevés` references nothing.
 
 ## Execution loop
 
-Automated FML-script tests (the milestone gate — validation is on business values, not compilation):
+⚠️ **Prerequisite — a technology-adapter fix is required.** Materialized roles pointing at the
+reflected Excel instances need `XLSObjectActorReference` to be declared on `FMLExcelModelSlot`
+(`openflexo-xlsx`); the same gap was fixed on `FMLXMLModelSlot` (`openflexo-xml`). Until those two
+projects are published, run the tests through a composite build against local sources, otherwise 7
+of the 9 scripts fail:
 
 ```
 cd openflexo-integration-tests
-./gradlew :integration-tests:test --tests '*DigitalTwinAutomatedTests*'
+./gradlew --include-build ../openflexo-xlsx --include-build ../openflexo-xml \
+    :integration-tests:test --tests '*DigitalTwin*'
 ```
+
+(Or run everything from the `openflexo-dev` composite, which includes both.)
 
 ⚠️ `test` runs with `ignoreFailures = true` — read the printed
 `Results: … (N tests, … failures)` line, never the exit code. A green run is
-`Results: SUCCESS (9 tests, 9 successes, 0 failures, …)`.
+`Results: SUCCESS (11 tests, 11 successes, 0 failures, …)` — the 9 FML-scripts plus the two
+`DigitalTwinValidationTest` cases.
 
 Scripts live in `AutomatedTests/`:
 
@@ -58,8 +81,9 @@ Ask: *which equipment should maintenance address first?* The three readings disa
 3. **Excel + thresholds + topology** → `ETI04A` is doubled by `ETI04B`; `CONV03` is the bottleneck
    nothing bypasses → **`CONV03`, unambiguously.**
 
-**Expected result:** prioritized list `[CONV03, ETI04A, DEP01, ENC05, REM02, ETI04B]`; actionable
-priorities `[CONV03]` only; `ETI04A` excluded despite the highest raw vibration.
+**Expected result:** `ligne.getCodesPrioritaires()` puts `CONV03` first; `ligne.getPrioritesActionnables()`
+holds `CONV03` alone; `ETI04A` is excluded (`estPrioriteActionnable == false`) despite the highest raw
+vibration of the whole workbook.
 
 ---
 
@@ -77,14 +101,19 @@ appends the same reading in memory).
 
 **Expected result:**
 
-- `CONV03` last vibration 4.2 → **4.9**; `tauxSeuil` 0.933 → **1.089**.
+- `CONV03` last vibration 4.2 → **4.9** (its `releves` role goes from 14 to 15); `tauxSeuil` 0.933 → **1.089**.
 - Threshold status **`SURVEILLANCE` → `DEPASSEMENT`** (4.9 > 4.5).
-- `criticiteEffective(CONV03)` stays **`CRITIQUE_GOULOT`** (still the critical bottleneck).
+- `conv.criticiteEffective` stays **`CRITIQUE_GOULOT`** (still the critical bottleneck).
 - The twin writes the effective criticity back into **`Parc` column `H`** (left free for this):
   `Parc!H(CONV03) = CRITIQUE_GOULOT`. This column is a **projection sink**, never the source.
 
-**Script equivalent:** `ligne.addReleve("CONV03", "4.9", "24/07/2026", "MPR");` then
-`ligne.writeBackCriticiteToParc("CONV03");`.
+**Script equivalent** — both manipulations are carried by the equipment they concern:
+
+```
+conv = ligne.getEquipementByCode("CONV03");
+conv.ajouterReleveVibration(4.9, "MPR");
+conv.ecrireCriticiteDansFiche();
+```
 
 ---
 
@@ -102,10 +131,11 @@ This bypass creates a path `DEP01 → REM02 → ETI04A → ENC05` that avoids `C
 
 **Expected result:**
 
-- `estCritique(CONV03)` **true → false** (a path now avoids it).
+- one more `Liaison` (6 → 7), and `ETI04A` now has two predecessors;
+- `conv.estCritique` **true → false** (a path now avoids it).
 - Its vibration is unchanged: still `SURVEILLANCE` (0.933 of threshold) and still trending up, so
-  `enDerive(CONV03)` stays **true**.
-- `criticiteEffective(CONV03)` **`CRITIQUE_GOULOT` → `A_SURVEILLER`**, and `CONV03` leaves the
+  `conv.enDerive` stays **true**.
+- `conv.criticiteEffective` **`CRITIQUE_GOULOT` → `A_SURVEILLER`**, and `CONV03` leaves the
   actionable priority set.
 
 **Phrase it precisely:** the alert is **not cleared, it is re-scoped** — from a line-stop risk to an

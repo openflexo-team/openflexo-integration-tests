@@ -1,7 +1,7 @@
 // J6 / Manipulation 2 - liveness and write-back (specification-demo.md section 5).
-// Add a vibration reading 4.9 mm/s on CONV03: 4.9 > 4.5, so CONV03 goes from
-// "sous surveillance" to "dépassement de seuil". Then the twin writes the effective
-// criticity back into Parc column H. Everything in memory; artifacts stay untouched.
+// Add a vibration reading 4.9 mm/s on CONV03: 4.9 > 4.5, so CONV03 goes from "sous surveillance"
+// to "dépassement de seuil". Then the twin projects the effective criticity into Parc column H.
+// Everything in memory; the artifacts stay untouched.
 
 vm = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml"];
 xmlRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/ligne.xml"];
@@ -9,28 +9,32 @@ xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/explo
 service ResourceCenterService add_temp_rc;
 ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
 
+conv = ligne.getEquipementByCode("CONV03");
+
 // --- Before ---
-log "BEFORE tauxSeuil CONV03=" + ligne.tauxSeuil("CONV03") + " status=" + ligne.seuilStatus("CONV03");
-assert ligne.lastVibration("CONV03") == 4.2;
-assert ligne.tauxSeuil("CONV03") < 1.0;
-assert ligne.seuilStatus("CONV03") == "SURVEILLANCE";
+log "BEFORE tauxSeuil=" + conv.tauxSeuil + " statut=" + conv.statutSeuil + " releves=" + conv.releves.size;
+assert conv.derniereVibration == 4.2;
+assert conv.releves.size == 14;
+assert conv.tauxSeuil < 1.0;
+assert conv.statutSeuil == "SURVEILLANCE";
 
-// --- Manipulation: append a new Releve  CONV03 | Vibration | 4.9 | mm/s | MPR ---
-// The reflected model slot creates the row explicitly and the new reading enters the
-// "releves" role of CONV03 (no re-reflection needed).
-ligne.addReleve("CONV03", 4.9, "MPR");
+// --- Manipulation: the equipment records one more vibration reading ---
+// The row is appended to the workbook and the structure re-attached, so the new reading enters
+// this equipment's "releves" role. Nothing else is refreshed by hand.
+conv.ajouterReleveVibration(4.9, "MPR");
 
-// --- After ---
-log "AFTER  tauxSeuil CONV03=" + ligne.tauxSeuil("CONV03") + " status=" + ligne.seuilStatus("CONV03");
-assert ligne.lastVibration("CONV03") == 4.9;
-assert ligne.tauxSeuil("CONV03") > 1.0;
-assert ligne.seuilStatus("CONV03") == "DEPASSEMENT";
-// still the top-priority critical bottleneck
-assert ligne.criticiteEffective("CONV03") == "CRITIQUE_GOULOT";
+// --- After: every derived value followed on its own ---
+log "AFTER  tauxSeuil=" + conv.tauxSeuil + " statut=" + conv.statutSeuil + " releves=" + conv.releves.size;
+assert conv.releves.size == 15;
+assert conv.derniereVibration == 4.9;
+assert conv.tauxSeuil > 1.0;
+assert conv.statutSeuil == "DEPASSEMENT";
+// still the critical bottleneck in drift
+assert conv.criticiteEffective == "CRITIQUE_GOULOT";
 
-// --- Write-back into Parc!H (projection sink, not the source of truth) ---
-ligne.writeBackCriticiteToParc("CONV03");
-log "Parc!H CONV03 = " + ligne.readParcCriticite("CONV03");
-assert ligne.readParcCriticite("CONV03") == "CRITIQUE_GOULOT";
+// --- Write-back into Parc!H : a projection SINK, never a source of truth ---
+conv.ecrireCriticiteDansFiche();
+log "Parc!H CONV03 = " + conv.fiche.criticite;
+assert conv.fiche.criticite == "CRITIQUE_GOULOT";
 
-log "Test PASSED: J6 Manip2 - alert rises to DEPASSEMENT, criticity written back to Parc!H";
+log "Test PASSED: J6 Manip2 - alert rises to DEPASSEMENT, criticity projected into Parc!H";

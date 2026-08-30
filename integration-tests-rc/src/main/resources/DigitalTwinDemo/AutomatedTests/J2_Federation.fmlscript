@@ -1,9 +1,9 @@
-// J2 - Federative concept Equipement, join on code (EQ-DEP-01 <-> DEP01).
+// J2 - The federative concept Equipement: FOUR ROLES pointing at the actual artifact elements.
 // Expected business values (specification-demo.md sections 2 and 4):
 //   - 6 InternalElement -> 6 Equipement instances
-//   - 5 matched to a Parc row; EQ-ETI-04B absent from inventory (planted, not repaired)
-//   - labels differ across sides (XML "ConvoyeurTransfert" vs Excel designation)
-// Derived business values are asserted through VirtualModel accessors (VM-context evaluation).
+//   - 5 of them matched to a Parc row; EQ-ETI-04B absent from inventory (planted, not repaired)
+//   - labels differ across sides (XML "ConvoyeurTransfert" vs Excel designation): joining on a
+//     label would be impossible, which is why the join is on the code.
 
 vm = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/FML/Ligne.fml"];
 assert vm != null;
@@ -13,39 +13,54 @@ service ResourceCenterService add_temp_rc;
 ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
 assert ligne != null;
 
-// One Equipement per InternalElement
+// One Equipement per InternalElement of the topology
 assert ligne.getEquipements().size == 6;
 
-// Join rule EQ-CONV-03 -> CONV03
-assert ligne.getCodeByXmlId("EQ-CONV-03") == "CONV03";
-assert ligne.getCodeByXmlId("EQ-ETI-04A") == "ETI04A";
-
-// CONV03 : matched on code; labels differ across the two artifacts
-assert ligne.getEquipementByCode("CONV03") != null;
-assert ligne.getLabelXmlByCode("CONV03") == "ConvoyeurTransfert";
-assert ligne.getDesignationParcByCode("CONV03") == "Convoyeur transfert étiqueteuses";
-assert ligne.isInventorieByCode("CONV03") == true;
-log "CONV03 xml='" + ligne.getLabelXmlByCode("CONV03") + "' parc='" + ligne.getDesignationParcByCode("CONV03") + "'";
-
-// DEP01 : matched
-assert ligne.getEquipementByCode("DEP01") != null;
-assert ligne.isInventorieByCode("DEP01") == true;
-
-// ETI04B : present in XML topology, absent from Parc (planted inconsistency, not repaired)
-assert ligne.getEquipementByCode("ETI04B") != null;
-assert ligne.isInventorieByCode("ETI04B") == false;
-assert ligne.getDesignationParcByCode("ETI04B") == null;
-log "ETI04B inventorie = " + ligne.isInventorieByCode("ETI04B");
-
-// --- Typed multiple-cardinality role "releves" (FMLExcelModelSlot) ---
-// Each Equipement carries its readings from the "Relevés" sheet, joined on code.
 conv = ligne.getEquipementByCode("CONV03");
-log "CONV03 releves count = " + conv.releves.size;
-assert conv.releves.size > 0;
-// The role is filtered on code: every reading of CONV03 carries its own code.
+assert conv != null;
+
+// The join rule EQ-CONV-03 <-> CONV03, declared once and reviewable
+assert ligne.deriveCode("EQ-CONV-03") == "CONV03";
+assert conv.xmlId == "EQ-CONV-03";
+assert conv.code == "CONV03";
+
+// --- Role 1: the InternalElement of the XML ---
+assert conv.xmlElement != null;
+assert conv.labelXml == "ConvoyeurTransfert";
+// CAEX generic <Attribute Name Value/> promoted to named, typed properties
+assert conv.type == "Convoyeur";
+assert conv.cadenceNominale == 950.0;
+assert conv.seuilVibration == 4.5;
+
+// --- Role 2: its row in the "Parc" sheet (cardinality 1) ---
+assert conv.estInventorie == true;
+assert conv.fiche != null;
+assert conv.fiche.code == "CONV03";
+// The two artifacts name the same machine differently: joining on the label is impossible.
+assert conv.designationParc == "Convoyeur transfert étiqueteuses";
+log "CONV03 xml='" + conv.labelXml + "' parc='" + conv.designationParc + "'";
+
+// --- Role 3: its readings in the "Relevés" sheet (multiple cardinality) ---
+log "CONV03 releves = " + conv.releves.size + " dont vibrations = " + conv.vibrations.size;
+assert conv.releves.size == 14;
+assert conv.vibrations.size == 7;
 assert conv.releves.get(0).code == "CONV03";
-// The readings are typed: a Vibration reading exposes its numeric value through the model slot.
 assert conv.releves.get(0).grandeur == "Vibration";
 assert conv.releves.get(0).valeur > 0.0;
 
-log "Test PASSED: J2 - federation on code, 5 matched, ETI04B unmatched as planted";
+// --- Role 4: its maintenance operations in the "Interventions" sheet ---
+assert conv.interventions.size == 1;
+assert conv.derniereIntervention.type == "Préventive";
+// the discreet corroboration: ETI04A was serviced twice, CONV03 only once
+assert ligne.getEquipementByCode("ETI04A").interventions.size == 2;
+
+// --- The planted inconsistency, not repaired: in the XML, absent from the Parc ---
+eti04b = ligne.getEquipementByCode("ETI04B");
+assert eti04b != null;
+assert eti04b.estInventorie == false;
+assert eti04b.fiche == null;
+assert eti04b.designationParc == null;
+assert eti04b.releves.size == 0;
+log "ETI04B inventorie = " + eti04b.estInventorie;
+
+log "Test PASSED: J2 - four roles filled, 5 matched, ETI04B unmatched as planted";

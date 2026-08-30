@@ -172,7 +172,11 @@ que des types anonymes en ligne, pour que la dérivation de concepts depuis le s
 des noms exploitables.
 
 **Pas d'espace de noms.** `xsi:noNamespaceSchemaLocation` suffit et évite les préfixes dans
-toutes les expressions de navigation. Le vrai CAEX en déclare un — si votre chaîne d'outils
+toutes les expressions de navigation. *(Mise à jour : ce choix a dû être abandonné. Le model slot
+XML typé reconnaît le métamodèle par l'espace de noms de l'élément racine, pas par
+`xsi:noNamespaceSchemaLocation` ; sans espace de noms le fichier se charge en document non typé et
+le slot ne se lie pas. Le XSD porte donc `targetNamespace="http://www.dke.de/CAEX"` et le XML le
+`xmlns` correspondant avec `xsi:schemaLocation`. Aucune donnée n'a changé.)* Le vrai CAEX en déclare un — si votre chaîne d'outils
 le préfère, il suffit d'ajouter `targetNamespace` au schéma et de basculer sur
 `xsi:schemaLocation`.
 

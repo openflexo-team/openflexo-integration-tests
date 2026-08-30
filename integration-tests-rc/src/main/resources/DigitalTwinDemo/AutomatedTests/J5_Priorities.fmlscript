@@ -10,19 +10,25 @@ xlsxRes = load -r ["http://openflexo.org/integration-tests/DigitalTwinDemo/explo
 service ResourceCenterService add_temp_rc;
 ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
 
-log "prioritized = " + ligne.getPrioritizedCodes();
-log "actionable  = " + ligne.getActionablePriorities();
+conv = ligne.getEquipementByCode("CONV03");
+eti = ligne.getEquipementByCode("ETI04A");
+
+log "prioritized = " + ligne.getCodesPrioritaires();
+log "actionable  = " + ligne.getPrioritesActionnables().size + " equipement(s)";
 
 // The naive reading (raw vibration) would put ETI04A first...
-assert ligne.lastVibration("ETI04A") > ligne.lastVibration("CONV03");
+assert eti.derniereVibration > conv.derniereVibration;
 
 // ...but the federated model puts CONV03 on top.
-assert ligne.getTopPriorityCode() == "CONV03";
+assert ligne.getPrioriteMax().code == "CONV03";
+assert ligne.getCodesPrioritaires().get(0) == "CONV03";
 
 // Actionable priorities = { CONV03 } only. ETI04A is deliberately excluded.
-assert ligne.getActionablePriorities().size == 1;
-assert ligne.getActionablePriorities().get(0) == "CONV03";
-assert ligne.isActionablePriority("CONV03") == true;
-assert ligne.isActionablePriority("ETI04A") == false;
+assert ligne.getPrioritesActionnables().size == 1;
+assert ligne.getPrioritesActionnables().get(0).code == "CONV03";
+assert conv.estPrioriteActionnable == true;
+assert conv.rangPriorite == 3;
+assert eti.estPrioriteActionnable == false;
+assert eti.rangPriorite == 1;
 
 log "Test PASSED: J5 - CONV03 top priority, ETI04A excluded despite higher raw vibration";
