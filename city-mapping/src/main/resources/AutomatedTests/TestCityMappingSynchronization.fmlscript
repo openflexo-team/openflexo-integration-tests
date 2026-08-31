@@ -87,9 +87,26 @@ assert patrick != null;
 assert patrick.houseInModel2 == null;
 assert mapping.residentsUnknownInModel2().size == 1;
 
-// NB: re-running synchronization() here would NOT be idempotent - the City instances are reused
-// as 'match' intends, but the Appartment / Mansion / Resident ones are created a second time
-// (3 houses -> 6, 3 residents -> 9 on a third run). That asymmetry is a defect of its own, out of
-// the scope of these tests, which reproduce what the JUnit tests cover: one synchronization.
+// --- Re-running the synchronization must not duplicate anything ---
+// This is the regression witness for the explicit per-concept matching sets of synchronization().
+// Drop them and this block turns red at once: the City instances would still be reused, but the
+// Appartment / Mansion / Resident ones would be created afresh on every run (3 houses -> 6 -> 9),
+// because a standalone 'match' shares one implicit matching set typed by the first match executed.
+mapping.synchronization();
+assert mapping.allCities().size == 5;
+assert mapping.allHouses().size == 3;
+assert mapping.allAppartments().size == 2;
+assert mapping.allMansions().size == 1;
+assert mapping.allResidents().size == 3;
+mapping.synchronization();
+assert mapping.allCities().size == 5;
+assert mapping.allHouses().size == 3;
+assert mapping.allResidents().size == 3;
+
+// The federation is not merely the same size, it is the same instances, still correctly joined.
+assert mapping.cityOfModel1Named("Lampaul-Plouarzel") == lampaul;
+assert mapping.appartmentOfModel1WithInfo("42B").appartmentInModel2 != null;
+assert mapping.appartmentOfModel1WithInfo("12A").appartmentInModel2 == null;
+assert mapping.residentOfModel1Named("Patrick Martin").houseInModel2 == null;
 
 log "Test PASSED: CityMappingSynchronization - 5 cities, 3 houses, 3 residents federated";

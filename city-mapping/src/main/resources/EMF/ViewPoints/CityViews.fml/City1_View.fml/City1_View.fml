@@ -7,7 +7,14 @@
  *     in the FML grammar; they are written here as plain assignments on the created individual;
  *   - the legacy synchronization scheme opened a matching set INSIDE the loop (once per iteration),
  *     never closed it, and bound the result to an unused variable. It is written here as the
- *     standalone match, which keeps the same semantics - create if absent, never prune;
+ *     standalone match. NB: "standalone" does NOT mean "never prune" - a match with no explicit
+ *     matching set falls back on the behaviour's implicit one, which IS finalized at the end of
+ *     the behaviour and DELETES every instance it did not match (FlexoBehaviourAction.
+ *     finalizeDefaultMatchingSet). Here that is the wanted semantics: a CityGR whose EMF city is
+ *     gone should go with it. It stays correct only because this behaviour matches ONE concept -
+ *     the implicit set is created once per execution and typed by the first match, so a second
+ *     concept would never match and would be duplicated on every run (see Mapping.fml, which
+ *     matches four concepts and therefore opens one explicit matching set per concept);
  *   - empty @Description("") annotations were dropped.
  */
 

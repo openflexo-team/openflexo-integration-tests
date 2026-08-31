@@ -57,6 +57,7 @@ import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.binding.EditionActionBindingModel;
 import org.openflexo.foundation.fml.binding.FlexoBehaviourBindingModel;
 import org.openflexo.foundation.fml.controlgraph.ConditionalAction;
+import org.openflexo.foundation.fml.controlgraph.FMLControlGraph;
 import org.openflexo.foundation.fml.controlgraph.IterationAction;
 import org.openflexo.foundation.fml.controlgraph.Sequence;
 import org.openflexo.foundation.fml.editionaction.AssignationAction;
@@ -153,13 +154,16 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 	public void checkFetchRequestIteration() {
 
 		assertTrue(syncScheme.getFlexoBehaviour().getControlGraph() instanceof Sequence);
-		IterationAction iterationAction = (IterationAction) (((Sequence) syncScheme.getFlexoBehaviour().getControlGraph())
-				.getControlGraph1());
+		IterationAction iterationAction = firstIterationAction(syncScheme.getFlexoBehaviour().getControlGraph());
+		assertNotNull(iterationAction);
 
 		// System.out.println("IterationAction: " + iterationAction.getFMLPrettyPrint());
 
-		assertEquals(5, iterationAction.getBindingModel().getBindingVariablesCount());
-		assertEquals(6, iterationAction.getInferedBindingModel().getBindingVariablesCount());
+		// +4 on every count below, compared to the plain behaviour binding model: synchronization()
+		// opens one explicit matching set per concept (cityMatching, appartmentMatching,
+		// mansionMatching, residentMatching), and those four locals are in scope from here on.
+		assertEquals(9, iterationAction.getBindingModel().getBindingVariablesCount());
+		assertEquals(10, iterationAction.getInferedBindingModel().getBindingVariablesCount());
 
 		SelectEMFObjectIndividual fetchRequest1 = (SelectEMFObjectIndividual) iterationAction.getIterationAction();
 		assertNotNull(fetchRequest1);
@@ -174,19 +178,19 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 
 		// System.out.println("fetchRequest1=" + fetchRequest1.getFMLPrettyPrint());
 
-		assertEquals(5, fetchRequest1.getBindingModel().getBindingVariablesCount());
+		assertEquals(9, fetchRequest1.getBindingModel().getBindingVariablesCount());
 
 		// System.out.println("fetchRequest2=" + fetchRequest2.getFMLPrettyPrint());
 
 		DeclarationAction<?> declaration = (DeclarationAction<?>) ((Sequence) iterationAction.getControlGraph()).getControlGraph1();
 		SelectEMFObjectIndividual fetchRequest2 = (SelectEMFObjectIndividual) declaration.getAssignableAction();
 
-		assertEquals(6, fetchRequest2.getBindingModel().getBindingVariablesCount());
+		assertEquals(10, fetchRequest2.getBindingModel().getBindingVariablesCount());
 		assertNotNull(fetchRequest2.getBindingModel().bindingVariableNamed("city1"));
 
 		for (FetchRequestCondition c : fetchRequest2.getConditions()) {
 			System.out.println("condition: " + c.getCondition() + " bm=" + c.getBindingModel());
-			assertEquals(7, c.getBindingModel().getBindingVariablesCount());
+			assertEquals(11, c.getBindingModel().getBindingVariablesCount());
 			assertNotNull(c.getBindingModel().bindingVariableNamed(FetchRequestCondition.SELECTED));
 			assertTrue(c.getCondition().isValid());
 		}
@@ -200,13 +204,16 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		System.out.println("FML=" + syncScheme.getFlexoBehaviour().getFMLPrettyPrint());
 
 		assertTrue(syncScheme.getFlexoBehaviour().getControlGraph() instanceof Sequence);
-		IterationAction iterationAction = (IterationAction) (((Sequence) syncScheme.getFlexoBehaviour().getControlGraph())
-				.getControlGraph1());
+		IterationAction iterationAction = firstIterationAction(syncScheme.getFlexoBehaviour().getControlGraph());
+		assertNotNull(iterationAction);
 
 		// System.out.println("IterationAction: " + iterationAction.getFMLPrettyPrint());
 
-		assertEquals(5, iterationAction.getBindingModel().getBindingVariablesCount());
-		assertEquals(6, iterationAction.getInferedBindingModel().getBindingVariablesCount());
+		// +4 on every count below, compared to the plain behaviour binding model: synchronization()
+		// opens one explicit matching set per concept (cityMatching, appartmentMatching,
+		// mansionMatching, residentMatching), and those four locals are in scope from here on.
+		assertEquals(9, iterationAction.getBindingModel().getBindingVariablesCount());
+		assertEquals(10, iterationAction.getInferedBindingModel().getBindingVariablesCount());
 
 		/*for (int i = 0; i < iterationAction.getInferedBindingModel().getBindingVariablesCount(); i++) {
 			System.out.println("1 / Variable at " + i + " = " + iterationAction.getInferedBindingModel().getBindingVariableAt(i));
@@ -226,7 +233,7 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 			/*for (int i = 0; i < criteria.getBindingModel().getBindingVariablesCount(); i++) {
 				System.out.println("2 / Variable at " + i + " = " + criteria.getBindingModel().getBindingVariableAt(i));
 			}*/
-			assertEquals(7, criteria.getBindingModel().getBindingVariablesCount());
+			assertEquals(11, criteria.getBindingModel().getBindingVariablesCount());
 			assertNotNull(criteria.getBindingModel().bindingVariableNamed("matchingCitiesInModel2"));
 			assertTrue(criteria.getValue().isValid());
 		}
@@ -348,4 +355,26 @@ public class TestCityMappingBindingModel extends OpenflexoProjectAtRunTimeTestCa
 		assertVirtualModelIsValid(cityMappingVP);
 	}
 
+
+	/**
+	 * Walks down the right-nested Sequence of a control graph and returns its first
+	 * {@link IterationAction}.
+	 *
+	 * synchronization() no longer starts with its iteration: it opens one explicit matching set per
+	 * concept first (see Mapping.fml), so the iteration is not getControlGraph1() any more. Walking
+	 * down rather than indexing keeps this test about the iteration itself.
+	 */
+	private static IterationAction firstIterationAction(FMLControlGraph cg) {
+		while (cg instanceof Sequence) {
+			Sequence seq = (Sequence) cg;
+			if (seq.getControlGraph1() instanceof IterationAction) {
+				return (IterationAction) seq.getControlGraph1();
+			}
+			cg = seq.getControlGraph2();
+		}
+		if (cg instanceof IterationAction) {
+			return (IterationAction) cg;
+		}
+		return null;
+	}
 }

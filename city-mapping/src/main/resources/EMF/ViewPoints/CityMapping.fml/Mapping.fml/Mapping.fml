@@ -59,15 +59,32 @@ public model Mapping {
 	// Walks both models and federates what belongs together: cities matched on name, houses on
 	// their info/label, residents on the owner name. Whatever exists on one side only is federated
 	// with a null counterpart, which is precisely what generateModelXFromModelY() later fills in.
+	//
+	// Re-runnable: 'match' reuses the instances of the previous run instead of duplicating them.
+	// That requires ONE EXPLICIT MATCHING SET PER CONCEPT, opened here and threaded through every
+	// match below - do not go back to the standalone form. A standalone 'match' falls back on the
+	// behaviour's implicit default matching set, and that set is created ONCE per behaviour
+	// execution, typed by the FIRST match executed (see FlexoBehaviourAction.
+	// initiateDefaultMatchingSet): every later match of another concept would then search a set
+	// holding only City instances, never find anything, and create a duplicate on every run.
+	//
+	// The sets are closed at the end, so the federation follows the models in BOTH directions:
+	// what appeared is federated, what disappeared stops being federated. See the end-match block
+	// down there for what the 'unmatched: delete()' clause actually deletes - and what it does not.
 	synchronization() {
+		MatchingSet<City> cityMatching = begin match City from this;
+		MatchingSet<Appartment> appartmentMatching = begin match Appartment from this;
+		MatchingSet<Mansion> mansionMatching = begin match Mansion from this;
+		MatchingSet<Resident> residentMatching = begin match Resident from this;
+
 		for (City1City city1 : select City1City from model1) {
 			List<City2City> matchingCitiesInModel2 = select City2City from model2 where (selected.name.toUpperCase == city1.name.toUpperCase);
 			if (matchingCitiesInModel2.size == 0) {
-				match City from this where (cityInModel1=city1, cityInModel2=null)
+				match City in cityMatching from this where (cityInModel1=city1, cityInModel2=null)
 					unmatched: new City::createFromEMF(city1, null);
 			}
 			if (matchingCitiesInModel2.size == 1) {
-				match City from this where (cityInModel1=city1, cityInModel2=matchingCitiesInModel2.get(0))
+				match City in cityMatching from this where (cityInModel1=city1, cityInModel2=matchingCitiesInModel2.get(0))
 					unmatched: new City::createFromEMF(city1, matchingCitiesInModel2.get(0));
 			}
 			List<City> tempList = select City from this where (selected.cityInModel1 == city1);
@@ -76,22 +93,22 @@ public model Mapping {
 				if (house1.type.name == "Appartment") {
 					List<City2Appartment> matchingAppartmentsInModel2 = select City2Appartment from model2 where (selected.label == house1.info);
 					if (matchingAppartmentsInModel2.size == 0) {
-						match Appartment from this where (houseInModel1=house1, appartmentInModel2=null, city=currentCity)
+						match Appartment in appartmentMatching from this where (houseInModel1=house1, appartmentInModel2=null, city=currentCity)
 							unmatched: new Appartment::creation(house1, null, currentCity);
 					}
 					if (matchingAppartmentsInModel2.size == 1) {
-						match Appartment from this where (houseInModel1=house1, appartmentInModel2=matchingAppartmentsInModel2.get(0), city=currentCity)
+						match Appartment in appartmentMatching from this where (houseInModel1=house1, appartmentInModel2=matchingAppartmentsInModel2.get(0), city=currentCity)
 							unmatched: new Appartment::creation(house1, matchingAppartmentsInModel2.get(0), currentCity);
 					}
 				}
 				if (house1.type.name == "Mansion") {
 					List<City2Mansion> matchingMansionsInModel2 = select City2Mansion from model2 where (selected.number.toString == house1.info);
 					if (matchingMansionsInModel2.size == 0) {
-						match Mansion from this where (houseInModel1=house1, mansionInModel2=null, city=currentCity)
+						match Mansion in mansionMatching from this where (houseInModel1=house1, mansionInModel2=null, city=currentCity)
 							unmatched: new Mansion::creation(house1, null, currentCity);
 					}
 					if (matchingMansionsInModel2.size == 1) {
-						match Mansion from this where (houseInModel1=house1, mansionInModel2=matchingMansionsInModel2.get(0), city=currentCity)
+						match Mansion in mansionMatching from this where (houseInModel1=house1, mansionInModel2=matchingMansionsInModel2.get(0), city=currentCity)
 							unmatched: new Mansion::creation(house1, matchingMansionsInModel2.get(0), currentCity);
 					}
 				}
@@ -100,11 +117,11 @@ public model Mapping {
 		for (City1Resident residentInModel1 : select City1Resident from model1) {
 			List<City2House> matchingHousesWithSameResident = select City2House from model2 where (selected.owner.toUpperCase == residentInModel1.name.toUpperCase);
 			if (matchingHousesWithSameResident.size == 0) {
-				match Resident from this where (residentInModel1=residentInModel1, houseInModel2=null)
+				match Resident in residentMatching from this where (residentInModel1=residentInModel1, houseInModel2=null)
 					unmatched: new Resident::creation(residentInModel1, null);
 			}
 			if (matchingHousesWithSameResident.size >= 1) {
-				match Resident from this where (residentInModel1=residentInModel1, houseInModel2=matchingHousesWithSameResident.get(0))
+				match Resident in residentMatching from this where (residentInModel1=residentInModel1, houseInModel2=matchingHousesWithSameResident.get(0))
 					unmatched: new Resident::creation(residentInModel1, matchingHousesWithSameResident.get(0));
 			}
 		}
@@ -112,10 +129,26 @@ public model Mapping {
 		for (City2City city2 : select City2City from model2) {
 			List<City1City> matchingCitiesInModel1 = select City1City from model1 where (selected.name == city2.name);
 			if (matchingCitiesInModel1.size == 0) {
-				match City from this where (cityInModel1=null, cityInModel2=city2)
+				match City in cityMatching from this where (cityInModel1=null, cityInModel2=city2)
 					unmatched: new City::createFromEMF(null, city2);
 			}
 		}
+
+		// Closing the sets: an instance that existed before this run and that nothing matched is no
+		// longer backed by the models, so it stops being federated. City is closed last because it
+		// is matched by BOTH the first and the third loop.
+		//
+		// 'unmatched: delete()' does not delete the instance directly: it runs the concept's
+		// DEFAULT deletion scheme (FinalizeMatching.execute), i.e. its first declared one. Each
+		// concept below declares exactly one, anonymous and empty, so unfederating is all that
+		// happens here and neither EMF model is ever written to. Naming a scheme explicitly
+		// ("unmatched: someScheme();") would say it instead of relying on that default, but the
+		// parser accepts that form and then IGNORES it (see EndMatchActionNode), so delete() is
+		// the only clause that actually runs.
+		end match Appartment in appartmentMatching unmatched: delete();
+		end match Mansion in mansionMatching unmatched: delete();
+		end match Resident in residentMatching unmatched: delete();
+		end match City in cityMatching unmatched: delete();
 	}
 
 	void synchronizeModel2FromModel1() {
@@ -141,10 +174,13 @@ public model Mapping {
 	// what those scripts replace.
 	// =========================================================================
 
-	public void touchOnlyParis() {
-		City1City paris = select unique City1City from model1 where (selected.name == "Paris");
-		match City from this where (cityInModel1=paris)
-			unmatched: new City::createFromEMF(paris, null);
+	// Reading the city1 side directly: what synchronization() must NEVER have modified.
+	public List<City1City> city1Cities() {
+		return select City1City from model1;
+	}
+
+	public List<City2City> city2Cities() {
+		return select City2City from model2;
 	}
 
 	public List<City> allCities() {
@@ -241,9 +277,14 @@ public model Mapping {
 			cityInModel1 = EMF::AddEMFObject(ontologyClass=CITY1_CITY) in model1;
 		}
 
-		delete::deletion() {
-			delete cityInModel1;
-			delete cityInModel2;
+		// The only deletion scheme, and anonymous, so it IS the concept default - which is what
+		// 'unmatched: delete()' runs at the end of synchronization(). Releasing each role says
+		// what unfederating means: this instance stops pointing at those individuals. It does NOT
+		// delete them - the two EMF artifacts are the source of truth, this VirtualModel is only
+		// their projection.
+		delete() {
+			cityInModel1 = null;
+			cityInModel2 = null;
 		}
 	}
 
@@ -262,9 +303,15 @@ public model Mapping {
 			city = parameters.cityParameter;
 		}
 
-		delete::deletion() {
-			delete houseInModel1;
-			delete appartmentInModel2;
+		// The only deletion scheme, and anonymous, so it IS the concept default - which is what
+		// 'unmatched: delete()' runs at the end of synchronization(). Releasing each role says
+		// what unfederating means: this instance stops pointing at those individuals. It does NOT
+		// delete them - the two EMF artifacts are the source of truth, this VirtualModel is only
+		// their projection.
+		delete() {
+			houseInModel1 = null;
+			appartmentInModel2 = null;
+			city = null;
 		}
 	}
 
@@ -280,9 +327,15 @@ public model Mapping {
 			city = parameters.cityParameter;
 		}
 
-		delete::deletion() {
-			delete houseInModel1;
-			delete mansionInModel2;
+		// The only deletion scheme, and anonymous, so it IS the concept default - which is what
+		// 'unmatched: delete()' runs at the end of synchronization(). Releasing each role says
+		// what unfederating means: this instance stops pointing at those individuals. It does NOT
+		// delete them - the two EMF artifacts are the source of truth, this VirtualModel is only
+		// their projection.
+		delete() {
+			houseInModel1 = null;
+			mansionInModel2 = null;
+			city = null;
 		}
 	}
 
@@ -294,6 +347,16 @@ public model Mapping {
 		create::creation(City1Resident residentInModel1, City2House houseInModel2) {
 			residentInModel1 = parameters.residentInModel1;
 			houseInModel2 = parameters.houseInModel2;
+		}
+
+		// The only deletion scheme, and anonymous, so it IS the concept default - which is what
+		// 'unmatched: delete()' runs at the end of synchronization(). Releasing each role says
+		// what unfederating means: this instance stops pointing at those individuals. It does NOT
+		// delete them - the two EMF artifacts are the source of truth, this VirtualModel is only
+		// their projection.
+		delete() {
+			residentInModel1 = null;
+			houseInModel2 = null;
 		}
 	}
 
