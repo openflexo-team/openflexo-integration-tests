@@ -138,13 +138,15 @@ public model Mapping {
 		// longer backed by the models, so it stops being federated. City is closed last because it
 		// is matched by BOTH the first and the third loop.
 		//
-		// 'unmatched: delete()' does not delete the instance directly: it runs the concept's
-		// DEFAULT deletion scheme (FinalizeMatching.execute), i.e. its first declared one. Each
-		// concept below declares exactly one, anonymous and empty, so unfederating is all that
-		// happens here and neither EMF model is ever written to. Naming a scheme explicitly
-		// ("unmatched: someScheme();") would say it instead of relying on that default, but the
-		// parser accepts that form and then IGNORES it (see EndMatchActionNode), so delete() is
-		// the only clause that actually runs.
+		// 'unmatched: delete()' does not delete the instance directly: FinalizeMatching runs a
+		// deletion scheme of the concept on it. Which one is picked is not something this file
+		// should depend on, so each concept below declares exactly ONE - anonymous, releasing its
+		// roles and nothing else. Unfederating is therefore all that happens here, and neither EMF
+		// model is ever written to; TestCityMappingUnfederation.fmlscript asserts precisely that,
+		// and fails both if this clause turns destructive and if it stops running at all.
+		// Naming the scheme ("unmatched: someScheme();") would remove the question altogether, but
+		// the parser accepts that form and then IGNORES it (see EndMatchActionNode), leaving the
+		// end match a silent no-op - delete() is the only clause that actually runs.
 		end match Appartment in appartmentMatching unmatched: delete();
 		end match Mansion in mansionMatching unmatched: delete();
 		end match Resident in residentMatching unmatched: delete();
@@ -277,11 +279,15 @@ public model Mapping {
 			cityInModel1 = EMF::AddEMFObject(ontologyClass=CITY1_CITY) in model1;
 		}
 
-		// The only deletion scheme, and anonymous, so it IS the concept default - which is what
-		// 'unmatched: delete()' runs at the end of synchronization(). Releasing each role says
-		// what unfederating means: this instance stops pointing at those individuals. It does NOT
-		// delete them - the two EMF artifacts are the source of truth, this VirtualModel is only
-		// their projection.
+		// THE only deletion scheme of this concept, and anonymous. Deliberately so: the
+		// 'unmatched: delete()' clause closing synchronization() has to resolve to a deletion
+		// scheme, and with exactly one declared there is nothing to arbitrate - no reliance on
+		// which one counts as "the default". Keep it that way: adding a second deletion scheme
+		// here would make what synchronization() does depend on a resolution rule this concept
+		// has no say in.
+		// Releasing each role says what unfederating means: this instance stops pointing at those
+		// individuals. It does NOT delete them - the two EMF artifacts are the source of truth,
+		// this VirtualModel is only their projection.
 		delete() {
 			cityInModel1 = null;
 			cityInModel2 = null;
@@ -303,11 +309,15 @@ public model Mapping {
 			city = parameters.cityParameter;
 		}
 
-		// The only deletion scheme, and anonymous, so it IS the concept default - which is what
-		// 'unmatched: delete()' runs at the end of synchronization(). Releasing each role says
-		// what unfederating means: this instance stops pointing at those individuals. It does NOT
-		// delete them - the two EMF artifacts are the source of truth, this VirtualModel is only
-		// their projection.
+		// THE only deletion scheme of this concept, and anonymous. Deliberately so: the
+		// 'unmatched: delete()' clause closing synchronization() has to resolve to a deletion
+		// scheme, and with exactly one declared there is nothing to arbitrate - no reliance on
+		// which one counts as "the default". Keep it that way: adding a second deletion scheme
+		// here would make what synchronization() does depend on a resolution rule this concept
+		// has no say in.
+		// Releasing each role says what unfederating means: this instance stops pointing at those
+		// individuals. It does NOT delete them - the two EMF artifacts are the source of truth,
+		// this VirtualModel is only their projection.
 		delete() {
 			houseInModel1 = null;
 			appartmentInModel2 = null;
@@ -327,11 +337,15 @@ public model Mapping {
 			city = parameters.cityParameter;
 		}
 
-		// The only deletion scheme, and anonymous, so it IS the concept default - which is what
-		// 'unmatched: delete()' runs at the end of synchronization(). Releasing each role says
-		// what unfederating means: this instance stops pointing at those individuals. It does NOT
-		// delete them - the two EMF artifacts are the source of truth, this VirtualModel is only
-		// their projection.
+		// THE only deletion scheme of this concept, and anonymous. Deliberately so: the
+		// 'unmatched: delete()' clause closing synchronization() has to resolve to a deletion
+		// scheme, and with exactly one declared there is nothing to arbitrate - no reliance on
+		// which one counts as "the default". Keep it that way: adding a second deletion scheme
+		// here would make what synchronization() does depend on a resolution rule this concept
+		// has no say in.
+		// Releasing each role says what unfederating means: this instance stops pointing at those
+		// individuals. It does NOT delete them - the two EMF artifacts are the source of truth,
+		// this VirtualModel is only their projection.
 		delete() {
 			houseInModel1 = null;
 			mansionInModel2 = null;
@@ -349,11 +363,15 @@ public model Mapping {
 			houseInModel2 = parameters.houseInModel2;
 		}
 
-		// The only deletion scheme, and anonymous, so it IS the concept default - which is what
-		// 'unmatched: delete()' runs at the end of synchronization(). Releasing each role says
-		// what unfederating means: this instance stops pointing at those individuals. It does NOT
-		// delete them - the two EMF artifacts are the source of truth, this VirtualModel is only
-		// their projection.
+		// THE only deletion scheme of this concept, and anonymous. Deliberately so: the
+		// 'unmatched: delete()' clause closing synchronization() has to resolve to a deletion
+		// scheme, and with exactly one declared there is nothing to arbitrate - no reliance on
+		// which one counts as "the default". Keep it that way: adding a second deletion scheme
+		// here would make what synchronization() does depend on a resolution rule this concept
+		// has no say in.
+		// Releasing each role says what unfederating means: this instance stops pointing at those
+		// individuals. It does NOT delete them - the two EMF artifacts are the source of truth,
+		// this VirtualModel is only their projection.
 		delete() {
 			residentInModel1 = null;
 			houseInModel2 = null;
