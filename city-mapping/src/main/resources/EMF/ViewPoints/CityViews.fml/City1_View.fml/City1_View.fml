@@ -1,0 +1,193 @@
+/**
+ * City1_View - a diagram view over the "city1" EMF model.
+ *
+ * Migrated from the deprecated .fml.xml serialization to textual FML. What could not be carried
+ * over literally, and why:
+ *   - the legacy <DataPropertyAssertion> children of AddEMFObjectIndividual have no representation
+ *     in the FML grammar; they are written here as plain assignments on the created individual;
+ *   - the legacy synchronization scheme opened a matching set INSIDE the loop (once per iteration),
+ *     never closed it, and bound the result to an unused variable. It is written here as the
+ *     standalone match, which keeps the same semantics - create if absent, never prune;
+ *   - empty @Description("") annotations were dropped.
+ */
+
+use org.openflexo.technologyadapter.emf.EMFModelSlot as EMF;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import org.openflexo.technologyadapter.emf.model.EMFModel;
+import org.openflexo.technologyadapter.emf.model.EMFObjectIndividual;
+import org.openflexo.technologyadapter.emf.metamodel.EMFMetaModel;
+import org.openflexo.technologyadapter.emf.metamodel.EMFClassClass;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+import java.lang.String;
+
+import EMFMetaModel CITY1 from ["http://www.thalesgroup.com/openflexo/emf/model/city1"];
+import EMFClassClass CITY1_CITY from [CITY1:"City"];
+import EMFClassClass CITY1_HOUSE from [CITY1:"House"];
+import EMFClassClass CITY1_RESIDENT from [CITY1:"Resident"];
+
+import DiagramSpecification CITY1_VIEW from ["http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification"];
+import Diagram DEFAULT_EXAMPLE_DIAGRAM from ["http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/DefaultExampleDiagram.diagram"];
+import DiagramShape CITY_SHAPE from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-2"];
+import DiagramShape CITY_ICON from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-3"];
+import DiagramShape HOUSE_SHAPE from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-4"];
+import DiagramShape HOUSE_ICON from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-5"];
+import DiagramShape RESIDENT_SHAPE from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-6"];
+import DiagramConnector OWNER_CONNECTOR from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-7"];
+
+typedef EMFObjectIndividualType(eClass=CITY1_CITY) as City1City;
+typedef EMFObjectIndividualType(eClass=CITY1_HOUSE) as City1House;
+typedef EMFObjectIndividualType(eClass=CITY1_RESIDENT) as City1Resident;
+
+@URI("http://www.openflexo.org/cityviews/City1_View.fml")
+@Version("0.1")
+public model City1_View {
+
+	EMFModel city1model with EMFModelSlot(metaModel=CITY1, isRequired=true);
+	Diagram typedDiagramModelSlot with TypedDiagram(
+		diagramSpecification=CITY1_VIEW,
+		isRequired=true,
+		paletteElementBindings={
+			PaletteElementBinding:(
+				call=new CityGR::dropAtTopLevel(null),
+				paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New City"),
+			PaletteElementBinding:(
+				call=new HouseGR::dropHouseInCity(null),
+				paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New House (in City)"),
+			PaletteElementBinding:(
+				call=new ResidentGR::dropResident(null),
+				paletteElementId="http://www.openflexo.org/cityviews/City1_View/City1_View.diagramspecification/CityOne View.palette#New Resident (in City)")
+		});
+
+	// One CityGR per City individual of the model: created if missing, reused otherwise.
+	synchronization() {
+		for (City1City emfCity : select City1City from city1model) {
+			match CityGR from this where (city=emfCity) unmatched: new CityGR::createFromEMF(emfCity);
+		}
+	}
+
+	delete::defaultDeletionScheme() {
+	}
+
+	test() {
+	}
+
+	public concept CityGR {
+
+		City1City city with EMFObjectRole(container=city1model, type=CITY1_CITY);
+		DiagramShape shape with ShapeRole(metamodelElement=CITY_SHAPE, exampleLabel="A vey long label for test purpose", label=city.name);
+		DiagramShape icon with ShapeRole(metamodelElement=CITY_ICON, exampleLabel="label");
+
+		@UI(
+			@TextField(value="name")
+		)
+		CityGR dropAtTopLevel(String name) with DropScheme(skipConfirmationPanel=false, targetType=City1_View) {
+			shape = DIAGRAM::AddShape(container=topLevel) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
+			city = EMF::AddEMFObject(individualName="ANewCity", ontologyClass=CITY1_CITY) in city1model;
+			city.name = parameters.name;
+		}
+
+		create::createFromEMF(required City1City indiv) {
+			shape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
+			city = parameters.indiv;
+		}
+
+		delete::deletion() {
+			delete city;
+			delete icon;
+			delete shape;
+		}
+	}
+
+	@Renderer("House: " + instance.house.info.toString)
+	public concept HouseGR {
+
+		City1House house with EMFObjectRole(container=city1model, type=CITY1_HOUSE);
+		DiagramShape shape with ShapeRole(metamodelElement=HOUSE_SHAPE, exampleLabel="label", label=house.info);
+		DiagramShape icon with ShapeRole(metamodelElement=HOUSE_ICON, exampleLabel="");
+
+		@UI(
+			@TextArea(value="information")
+		)
+		HouseGR dropHouseInCity(String information) with DropScheme(skipConfirmationPanel=false, targetType=CityGR) {
+			house = EMF::AddEMFObject(container=target.city.houses, individualName="A New House", ontologyClass=CITY1_HOUSE) in city1model;
+			house.info = parameters.information;
+			shape = DIAGRAM::AddShape(container=target.shape) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
+		}
+
+		create::createFromEMF(City1House indiv, CityGR inCity) {
+			house = parameters.indiv;
+			shape = DIAGRAM::AddShape(container=parameters.inCity.shape) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
+		}
+
+		delete::deletion() {
+			delete house;
+			delete icon;
+			delete shape;
+		}
+	}
+
+	@Renderer("Someone: " + instance.resident.name)
+	public concept ResidentGR {
+
+		City1Resident resident with EMFObjectRole(container=city1model, type=CITY1_RESIDENT);
+		DiagramShape shape with ShapeRole(metamodelElement=RESIDENT_SHAPE, exampleLabel="label", label=resident.name);
+
+		@UI(
+			@TextField(value="name")
+		)
+		ResidentGR dropResident(String name) with DropScheme(skipConfirmationPanel=false, targetType=CityGR) {
+			resident = EMF::AddEMFObject(container=target.city.residents, individualName="Resident", ontologyClass=CITY1_RESIDENT) in city1model;
+			resident.name = parameters.name;
+			shape = DIAGRAM::AddShape(container=target.shape) in typedDiagramModelSlot;
+		}
+
+		create::createFromEMF(City1Resident indiv, CityGR cityFCI) {
+			resident = parameters.indiv;
+			shape = DIAGRAM::AddShape(container=parameters.cityFCI.shape) in typedDiagramModelSlot;
+		}
+
+		delete::deletion() {
+			delete resident;
+			delete shape;
+		}
+	}
+
+	public concept HouseOwnerLinkGR {
+
+		DiagramConnector link with ConnectorRole(metamodelElement=OWNER_CONNECTOR, exampleLabel="label");
+		HouseGR house;
+		ResidentGR owner;
+
+		HouseOwnerLinkGR link() with LinkScheme(fromType=HouseGR, toType=ResidentGR) {
+			if (fromTarget.house.owner != null) {
+				if (fromTarget.house.owner == toTarget.resident) {
+					link = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in typedDiagramModelSlot;
+					DIAGRAM::GraphicalAction(subject=link, graphicalFeatureName="label", value="Existe Déjà?") in typedDiagramModelSlot;
+				}
+				if (fromTarget.house.owner != toTarget.resident) {
+					fromTarget.house.owner = toTarget.resident;
+					link = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in typedDiagramModelSlot;
+					DIAGRAM::GraphicalAction(subject=link, graphicalFeatureName="label", value="Louche") in typedDiagramModelSlot;
+				}
+			}
+			if (fromTarget.house.owner == null) {
+				fromTarget.house.owner = toTarget.resident;
+				link = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in typedDiagramModelSlot;
+			}
+			house = fromTarget;
+			owner = toTarget;
+		}
+
+		delete::deletion() {
+			delete link;
+		}
+	}
+}

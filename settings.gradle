@@ -1,3 +1,6 @@
+include 'city-mapping'
+include 'digital-twin-demo'
+
 include 'integration-tests-rc'
 include 'integration-tests'
 include 'tutorials-rc'

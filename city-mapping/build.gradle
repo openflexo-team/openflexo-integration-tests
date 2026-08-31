@@ -1,0 +1,17 @@
+// CityMapping - federating two heterogeneous EMF city metamodels through a mapping viewpoint,
+// projected on diagrams.
+//
+// Self-contained use-case project: it carries BOTH its resource center (src/main/resources,
+// declared by META-INF/resourceCenters with base URI http://openflexo.org/city-mapping) AND the
+// tests that exercise it (src/test/java). No separate -rc project.
+//
+// The CityMapping / CityViews viewpoints keep their own URIs (http://www.thalesgroup.com/...),
+// independent of the resource center: only the EMF models are addressed through the RC base URI.
+
+dependencies {
+    testImplementation testUtils()
+    testImplementation flexoFoundation()
+    testImplementation flexoFoundationTest()
+    testImplementation emfConnector()
+    testImplementation diagramConnector()
+}

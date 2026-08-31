@@ -1,0 +1,4 @@
+@URI("http://www.openflexo.org/cityviews")
+@Version("0.1")
+model CityViews {
+}

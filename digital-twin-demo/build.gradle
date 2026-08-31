@@ -1,0 +1,18 @@
+// DigitalTwinDemo - model federation applied to a digital twin of a packaging line.
+//
+// Self-contained use-case project: it carries BOTH its resource center (src/main/resources,
+// declared by META-INF/resourceCenters with base URI http://openflexo.org/digital-twin-demo)
+// AND the tests that exercise it (src/test/java). No separate -rc project.
+//
+// The demo federates ligne.xml (XML/XSD) with exploitation.xlsx (Excel), so only those two
+// technology adapters are needed - plus fml-cli, since the milestone tests are FML-scripts.
+
+dependencies {
+    testImplementation testUtils()
+    testImplementation flexoFoundation()
+    testImplementation flexoFoundationTest()
+    testImplementation fmlCli()
+    testImplementation fmlCliTest()
+    testImplementation excelConnector()
+    testImplementation xmlConnector()
+}

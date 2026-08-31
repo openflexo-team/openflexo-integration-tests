@@ -1,0 +1,131 @@
+/**
+ * City2_View - a diagram view over the "city2" EMF model.
+ *
+ * Migrated from the deprecated .fml.xml serialization to textual FML. Two things could not be
+ * carried over literally, because they have no representation in the FML grammar:
+ *   - the legacy <DataPropertyAssertion> children of AddEMFObjectIndividual are now written as
+ *     plain assignments on the created individual, which says the same thing and reads better;
+ *   - the legacy empty HTML @Description on AppartmentGR carried no text and was dropped.
+ */
+
+use org.openflexo.technologyadapter.emf.EMFModelSlot as EMF;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import org.openflexo.technologyadapter.emf.model.EMFModel;
+import org.openflexo.technologyadapter.emf.model.EMFObjectIndividual;
+import org.openflexo.technologyadapter.emf.metamodel.EMFMetaModel;
+import org.openflexo.technologyadapter.emf.metamodel.EMFClassClass;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+import java.lang.String;
+
+import EMFMetaModel CITY2 from ["http://www.thalesgroup.com/openflexo/emf/model/city2"];
+import EMFClassClass CITY2_CITY from [CITY2:"City"];
+import EMFClassClass CITY2_MANSION from [CITY2:"Mansion"];
+import EMFClassClass CITY2_APPARTMENT from [CITY2:"Appartment"];
+
+import DiagramSpecification CITY2_VIEW from ["http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification"];
+import Diagram DEFAULT_EXAMPLE_DIAGRAM from ["http://www.openflexo.org/cityviews/City2_View/City2_View.diagramspecification/DefaultExampleDiagram.diagram"];
+import DiagramShape CITY_SHAPE from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-2"];
+import DiagramShape CITY_ICON from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-3"];
+import DiagramShape MANSION_SHAPE from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-4"];
+import DiagramShape MANSION_ICON from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-5"];
+import DiagramShape APPARTMENT_SHAPE from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-6"];
+import DiagramShape APPARTMENT_ICON from [DEFAULT_EXAMPLE_DIAGRAM:"SYL-7"];
+
+typedef EMFObjectIndividualType(eClass=CITY2_CITY) as City2City;
+typedef EMFObjectIndividualType(eClass=CITY2_MANSION) as City2Mansion;
+typedef EMFObjectIndividualType(eClass=CITY2_APPARTMENT) as City2Appartment;
+
+@URI("http://www.openflexo.org/cityviews/City2_View.fml")
+@Version("0.1")
+public model City2_View {
+
+	EMFModel city2model with EMFModelSlot(metaModel=CITY2, isRequired=true);
+	Diagram typedDiagramModelSlot with TypedDiagram(diagramSpecification=CITY2_VIEW, isRequired=true);
+
+	// One CityGR per City individual of the model: created if missing, reused otherwise.
+	synchronization() {
+		for (City2City item : select City2City from city2model) {
+			match CityGR from this where (city=item) unmatched: new CityGR::createFromEMF(item);
+		}
+	}
+
+	delete::delete() {
+	}
+
+	public concept CityGR {
+
+		City2City city with EMFObjectRole(container=city2model, type=CITY2_CITY);
+		DiagramShape shape with ShapeRole(metamodelElement=CITY_SHAPE, exampleLabel="label", label=city.name);
+		DiagramShape icon with ShapeRole(metamodelElement=CITY_ICON, containerElement=shape, exampleLabel="");
+
+		@UI(
+			@TextField(value="cityName")
+		)
+		CityGR dropCityAtTopLevel(String cityName) with DropScheme(skipConfirmationPanel=false, targetType=City2_View) {
+			shape = DIAGRAM::AddShape(container=topLevel) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
+			city = EMF::AddEMFObject(individualName="A New City", ontologyClass=CITY2_CITY) in city2model;
+			city.name = parameters.cityName;
+		}
+
+		create::createFromEMF(City2City indiv) {
+			shape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
+			city = parameters.indiv;
+		}
+	}
+
+	public abstract concept HouseGR {
+	}
+
+	public concept MansionGR {
+
+		City2Mansion mansion with EMFObjectRole(container=city2model, type=CITY2_MANSION);
+		DiagramShape shape with ShapeRole(metamodelElement=MANSION_SHAPE, exampleLabel="A very long label", label=("Mansion N°" + mansion.number.toString));
+		DiagramShape icon with ShapeRole(metamodelElement=MANSION_ICON, exampleLabel="");
+
+		@UI(
+			@IntegerWidget(value="mansionNumber")
+		)
+		MansionGR dropMansionInCity(required int mansionNumber=0) with DropScheme(skipConfirmationPanel=false, targetType=CityGR) {
+			mansion = EMF::AddEMFObject(container=target.city.houses, ontologyClass=CITY2_MANSION) in city2model;
+			mansion.number = parameters.mansionNumber;
+			shape = DIAGRAM::AddShape(container=target.shape) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
+		}
+
+		delete::deletion() {
+			delete mansion;
+			delete shape;
+			delete icon;
+		}
+	}
+
+	public concept AppartmentGR {
+
+		City2Appartment appartment with EMFObjectRole(container=city2model, type=CITY2_APPARTMENT);
+		DiagramShape shape with ShapeRole(metamodelElement=APPARTMENT_SHAPE, exampleLabel="label", label=appartment.label);
+		DiagramShape icon with ShapeRole(metamodelElement=APPARTMENT_ICON, exampleLabel="");
+
+		@UI(
+			@TextField(value="name")
+		)
+		AppartmentGR dropAppartmentGRInCity(required String name="An Appartment") with DropScheme(skipConfirmationPanel=false, targetType=CityGR) {
+			// legacy read "individualName=parameters.uri", but no such parameter exists: it silently
+			// resolved to null. The only sensible reading is the name the user typed.
+			appartment = EMF::AddEMFObject(container=target.city.houses, individualName=parameters.name, ontologyClass=CITY2_APPARTMENT) in city2model;
+			appartment.label = parameters.name;
+			shape = DIAGRAM::AddShape(container=target.shape) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
+		}
+
+		delete::deletion() {
+			delete appartment;
+			delete shape;
+			delete icon;
+		}
+	}
+}

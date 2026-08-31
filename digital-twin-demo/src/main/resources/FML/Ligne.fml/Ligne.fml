@@ -1,0 +1,592 @@
+/**
+ * DigitalTwinDemo - VirtualModel "Ligne".
+ *
+ * Federates the CAEX/AutomationML topology (ligne.xml, typed against ligne.xsd) with the
+ * maintenance workbook (exploitation.xlsx), and derives a maintenance-priority hierarchy that no
+ * artifact holds alone. Three readings of the same line disagree, and that disagreement is the
+ * whole point:
+ *   1. the workbook alone, raw vibration      -> ETI04A (6.5 mm/s)     : the WRONG answer
+ *   2. plus the XML thresholds                -> CONV03 and ETI04A both at ~93% : a tie
+ *   3. plus the topology                      -> ETI04A is doubled by ETI04B, CONV03 is the
+ *                                                bottleneck nothing bypasses : CONV03.
+ *
+ * How the model is built, and why it reads the way it does:
+ *
+ *   STRUCTURE IS MATERIALIZED. Equipement is not a computed view: it is an instantiated concept
+ *   holding four roles that point at the actual artifact elements - the InternalElement of the XML
+ *   (xmlElement), its row in the Parc sheet (fiche), its readings (releves) and its maintenance
+ *   operations (interventions). synchronize() fills them, using the FML match mechanism, so the
+ *   structure can be inspected in projection rather than re-derived at every access.
+ *
+ *   VALUES ARE DERIVED. Everything on top of those roles - thresholds, ratios, drift, criticity -
+ *   is an expression (values) or a get() property. Nothing is a field set from the outside, and
+ *   criticity in particular is NEVER stored in an artifact: it is derived from the topology.
+ *   (The write-back into Parc column H is a projection sink, not a source of truth.)
+ *
+ *   RE-SYNCHRONIZATION, NOT RECOMPUTATION. After a live manipulation, synchronize() is run again:
+ *   it re-attaches the structure (a new reading enters the releves role, a new link becomes a
+ *   Liaison) and every derived value follows on its own. The match makes it idempotent.
+ */
+
+use org.openflexo.technologyadapter.xml.XMLModelSlot as XML;
+use org.openflexo.technologyadapter.excel.FMLExcelModelSlot as XLS;
+
+import org.openflexo.technologyadapter.xml.model.typed.XMLModel;
+import org.openflexo.technologyadapter.xml.model.typed.XMLIndividual;
+import org.openflexo.technologyadapter.xml.metamodel.XSDMetaModel;
+import org.openflexo.technologyadapter.xml.metamodel.XMLComplexType;
+import org.openflexo.technologyadapter.excel.model.ExcelWorkbook;
+import org.openflexo.technologyadapter.excel.fml.reflect.rt.XLSVirtualModelInstance;
+import java.lang.Double;
+import java.util.List;
+import java.util.ArrayList;
+
+// The annotated VirtualModel that types the maintenance workbook (Releve / FicheParc / Intervention).
+import ["http://openflexo.org/digital-twin-demo/FML/Exploitation.fml"];
+
+import XSDMetaModel CAEX from ["http://www.dke.de/CAEX"];
+import XMLComplexType INTERNAL_ELEMENT from [CAEX:"InternalElementType"];
+import XMLComplexType ATTRIBUTE from [CAEX:"AttributeType"];
+import XMLComplexType INTERNAL_LINK from [CAEX:"InternalLinkType"];
+
+typedef XMLIndividualType(xsdType=INTERNAL_ELEMENT) as InternalElement;
+typedef XMLIndividualType(xsdType=ATTRIBUTE) as CaexAttribute;
+typedef XMLIndividualType(xsdType=INTERNAL_LINK) as InternalLink;
+
+@URI("http://openflexo.org/digital-twin-demo/FML/Ligne.fml")
+public model Ligne {
+
+	XMLModel ligneXml with XMLModelSlot(metaModel=CAEX);
+	// Reflected against the "Exploitation" contract VM: exploitation.flexoConceptInstances are
+	// typed Releve / FicheParc / Intervention instances, each backed by a workbook row.
+	Exploitation exploitation with FMLExcelModelSlot();
+
+	create(Resource<XMLModel> xmlResource, Resource<ExcelWorkbook> xlsxResource) {
+		connect ligneXml using parameters.xmlResource;
+		connect exploitation using parameters.xlsxResource;
+		this.synchronize();
+	}
+
+	// =========================================================================
+	// Structural synchronization - instantiates the concepts and attaches them to the artifact
+	// elements. Re-runnable: 'match' reuses the existing instances instead of duplicating them,
+	// and each multiple role is refilled with a membership-guarded add (match de-duplicates the
+	// instances it matches, never the contents of their roles).
+	// =========================================================================
+	public synchronize() {
+		this.synchronizeEquipements();
+		this.synchronizeLiaisons();
+	}
+
+	public synchronizeEquipements() {
+		MatchingSet<Equipement> ms = begin match Equipement from this;
+		for (InternalElement e : select InternalElement from ligneXml) {
+			Equipement eq = match Equipement in ms from this where (xmlElement=e) unmatched: new Equipement(e);
+			// Join on code (EQ-CONV-03 <-> CONV03): this is where the two artifacts meet.
+			// fiche stays empty for EQ-ETI-04B, absent from the inventory (planted, not repaired).
+			FicheParc f = this.getFicheParc(eq.code);
+			if (f != null) {
+				eq.fiche = f;
+			}
+			// A multiple role is filled one element at a time; the membership guard is what makes
+			// re-running this behaviour idempotent (a bare add would pile the readings up again).
+			for (Releve r : select Releve from (exploitation) where (selected.code == eq.code)) {
+				if (!eq.releves.contains(r)) {
+					eq.releves.add(r);
+				}
+			}
+			for (Intervention i : select Intervention from (exploitation) where (selected.code == eq.code)) {
+				if (!eq.interventions.contains(i)) {
+					eq.interventions.add(i);
+				}
+			}
+		}
+		end match Equipement in ms unmatched: delete();
+	}
+
+	// One Liaison per InternalLink, its two ends resolved to the Equipement instances they name.
+	// Run after synchronizeEquipements(), since it links to those instances.
+	public synchronizeLiaisons() {
+		MatchingSet<Liaison> ms = begin match Liaison from this;
+		for (InternalLink l : select InternalLink from ligneXml) {
+			Liaison li = match Liaison in ms from this where (xmlLink=l) unmatched: new Liaison(l);
+			Equipement src = this.getEquipementParCode(li.codeSource);
+			if (src != null) {
+				li.source = src;
+			}
+			Equipement dst = this.getEquipementParCode(li.codeCible);
+			if (dst != null) {
+				li.cible = dst;
+			}
+		}
+		end match Liaison in ms unmatched: delete();
+	}
+
+	public List<Liaison> getLiaisons() {
+		return select Liaison from this;
+	}
+
+	// --- XML side ---
+	public List<InternalElement> getInternalElements() {
+		return select InternalElement from ligneXml;
+	}
+
+	// --- Excel side (typed through the Exploitation reflected VMI) ---
+	public FicheParc getFicheParc(String code) {
+		return select unique FicheParc from (exploitation) where (selected.code == parameters.code);
+	}
+
+	public List<Intervention> getInterventions() {
+		return select Intervention from (exploitation);
+	}
+
+	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes (spec section 2).
+	// Behaviour parameters are read via "parameters.".
+	public String codeDepuisXmlId(String xmlId) {
+		String withoutPrefix = parameters.xmlId.replace("EQ-", "");
+		return withoutPrefix.replace("-", "");
+	}
+
+	// --- Federation ---
+	public List<Equipement> getEquipements() {
+		return select Equipement from this;
+	}
+
+	public Equipement getEquipementParCode(String code) {
+		return select unique Equipement from this where (selected.code == parameters.code);
+	}
+
+	// =========================================================================
+	// Topology (XML only). A link "EQ-A:OUT" -> "EQ-B:IN" is an edge A -> B. Interfaces are
+	// shared (EQ-CONV-03:OUT appears in both L3 and L4), so navigation goes through the links.
+	// =========================================================================
+
+	// Equipment code owning an interface id, e.g. "EQ-CONV-03:OUT" -> "CONV03".
+	public String codeDepuisInterface(String iface) {
+		int idx = parameters.iface.indexOf(":");
+		String xmlId = parameters.iface.substring(0, idx);
+		return this.codeDepuisXmlId(xmlId);
+	}
+
+	// Entry = the only equipment no link points to; exit = the only one no link leaves.
+	public Equipement getEntree() {
+		return select unique Equipement from this where (selected.estEntree);
+	}
+
+	public Equipement getSortie() {
+		return select unique Equipement from this where (selected.estSortie);
+	}
+
+	// Which equipments the material can still reach from the entry when one of them is removed.
+	// Level-by-level walk over the Liaison graph.
+	public List<Equipement> accessiblesDepuisEntreeSans(Equipement evite) {
+		List<Equipement> vus = new ArrayList();
+		List<Equipement> courant = new ArrayList();
+		Equipement entree = this.getEntree();
+		if (entree != parameters.evite) {
+			vus.add(entree);
+			courant.add(entree);
+		}
+		while (courant.size > 0) {
+			List<Equipement> suivants = new ArrayList();
+			for (Equipement e : courant) {
+				for (Equipement s : e.successeurs) {
+					if (s != parameters.evite) {
+						if (!vus.contains(s)) {
+							vus.add(s);
+							suivants.add(s);
+						}
+					}
+				}
+			}
+			courant = suivants;
+		}
+		return vus;
+	}
+
+	// Bottleneck = minimal nominal cadence among the critical equipments.
+	public Equipement getGoulot() {
+		Equipement goulot = null;
+		Double minCadence = null;
+		for (Equipement eq : select Equipement from this) {
+			if (eq.estCritique) {
+				if (minCadence == null) {
+					minCadence = eq.cadenceNominale;
+					goulot = eq;
+				} else {
+					if (eq.cadenceNominale < minCadence) {
+						minCadence = eq.cadenceNominale;
+						goulot = eq;
+					}
+				}
+			}
+		}
+		return goulot;
+	}
+
+	// =========================================================================
+	// Priority hierarchy (spec sections 4-5). CONV03 on top; ETI04A NOT actionable despite
+	// the highest raw vibration - topology is what separates the bottleneck from the lure.
+	// =========================================================================
+	// Is a ranked above b? Rank first, then how close to its own threshold.
+	public Boolean plusPrioritaire(Equipement a, Equipement b) {
+		if (parameters.a.rangPriorite > parameters.b.rangPriorite) { return true; }
+		if (parameters.a.rangPriorite < parameters.b.rangPriorite) { return false; }
+		return parameters.a.tauxOuZero > parameters.b.tauxOuZero;
+	}
+
+	// The maintenance list, most urgent first: each equipment slots in behind everyone already
+	// ranked above it. Six machines - the point is to read the rule, not to sort fast.
+	public List<Equipement> getEquipementsPrioritaires() {
+		List<Equipement> ordonnes = new ArrayList();
+		for (Equipement candidat : select Equipement from this) {
+			int position = 0;
+			for (Equipement place : ordonnes) {
+				if (this.plusPrioritaire(place, candidat)) {
+					position = position + 1;
+				}
+			}
+			ordonnes.add(position, candidat);
+		}
+		return ordonnes;
+	}
+
+	public Equipement getPrioriteMax() {
+		Equipement meilleur = null;
+		for (Equipement eq : select Equipement from this) {
+			if (meilleur == null) {
+				meilleur = eq;
+			} else {
+				if (this.plusPrioritaire(eq, meilleur)) {
+					meilleur = eq;
+				}
+			}
+		}
+		return meilleur;
+	}
+
+	// The equipments maintenance should actually act on. CONV03 only - ETI04A is deliberately out,
+	// despite carrying the highest raw vibration of the whole workbook.
+	public List<Equipement> getPrioritesActionnables() {
+		List<Equipement> result = new ArrayList();
+		for (Equipement eq : this.getEquipementsPrioritaires()) {
+			if (eq.estPrioriteActionnable) {
+				result.add(eq);
+			}
+		}
+		return result;
+	}
+
+	// Display helper for the live demo: the priority list as plain codes.
+	public List<String> getCodesPrioritaires() {
+		List<String> result = new ArrayList();
+		for (Equipement eq : this.getEquipementsPrioritaires()) {
+			result.add(eq.code);
+		}
+		return result;
+	}
+
+	// =========================================================================
+	// Live manipulation 3 (applied in memory, then re-synchronized; never saved).
+	// Manipulations 1 and 2 are carried by Equipement, the object they concern.
+	// =========================================================================
+
+	// Manipulation 3 - add the L7 bypass (EQ-REM-02:OUT -> EQ-ETI-04A:IN), then re-attach.
+	public addBypassL7() {
+		XMLComplexType linkType = ligneXml.metaModel.getComplexTypeFromURI("http://www.dke.de/CAEX#InternalLinkType");
+		XMLIndividual l7 = ligneXml.addNewIndividual(linkType);
+		l7.setPropertyValue("Name", "L7");
+		l7.setPropertyValue("RefPartnerSideA", "EQ-REM-02:OUT");
+		l7.setPropertyValue("RefPartnerSideB", "EQ-ETI-04A:IN");
+		this.synchronize();
+	}
+
+	/**
+	 * A material link of the line, instantiated on an InternalLink of the XML. Its two ends are not
+	 * strings: they are roles pointing at the Equipement instances the link names. Interfaces are
+	 * shared (EQ-CONV-03:OUT carries both L3 and L4), which is why the graph is navigated through
+	 * the links rather than through the interfaces.
+	 */
+	public concept Liaison {
+
+		InternalLink xmlLink with XMLIndividualRole(container=ligneXml, xsdType=INTERNAL_LINK);
+		Equipement source;
+		Equipement cible;
+
+		create(required InternalLink l) {
+			xmlLink = parameters.l;
+		}
+
+		delete() {
+		}
+
+		String nom values "" + xmlLink.getPropertyValue("Name");
+		String interfaceSource values "" + xmlLink.getPropertyValue("RefPartnerSideA");
+		String interfaceCible values "" + xmlLink.getPropertyValue("RefPartnerSideB");
+		// "EQ-CONV-03:OUT" -> "CONV03" : the same join rule as the equipments.
+		String codeSource values this.container.codeDepuisInterface(this.interfaceSource);
+		String codeCible values this.container.codeDepuisInterface(this.interfaceCible);
+	}
+
+	/**
+	 * The federative concept. Four roles point at the actual artifact elements it joins, and every
+	 * business property below is derived from them - none is ever stored.
+	 * fiche is empty when the equipment is absent from the inventory (planted EQ-ETI-04B).
+	 */
+	public concept Equipement {
+
+		// --- Roles: what this equipment IS, in each artifact ---
+		InternalElement xmlElement with XMLIndividualRole(container=ligneXml, xsdType=INTERNAL_ELEMENT);
+		FicheParc fiche;
+		Releve[0,*] releves;
+		Intervention[0,*] interventions;
+
+		create(required InternalElement e) {
+			xmlElement = parameters.e;
+		}
+
+		// Stale equipements are removed from the federation; the artifacts are never touched.
+		delete() {
+		}
+
+		// --- Identity, from the XML side ---
+		String xmlId values "" + xmlElement.getPropertyValue("ID");
+		String code values this.container.codeDepuisXmlId(this.xmlId);
+
+		// XML label (topology owner) vs Excel designation (maintenance owner) deliberately differ.
+		String labelXml values "" + xmlElement.getPropertyValue("Name");
+
+		// In CAEX, properties are generic <Attribute Name="…" Value="…"/> children (spec section 7).
+		// This single generic lookup is written once, and promoted below into named properties.
+		String attributeValue(String attrName) {
+			for (XMLIndividual child : xmlElement.children) {
+				String tn = "" + child.type.name;
+				if (tn == "AttributeType") {
+					String n = "" + child.getPropertyValue("Name");
+					if (n == parameters.attrName) {
+						return "" + child.getPropertyValue("Value");
+					}
+				}
+			}
+			return null;
+		}
+
+		// CAEX attributes promoted to named, typed properties: fidelity to AutomationML on one
+		// side, readable projection on the other. Connie has no implicit String->number coercion,
+		// but a Java static call works in an FML expression.
+		String type values this.attributeValue("Type");
+		Double cadenceNominale values Double.parseDouble(this.attributeValue("CadenceNominale"));
+		Double seuilVibration values Double.parseDouble(this.attributeValue("SeuilVibration"));
+		Double seuilTemperature values Double.parseDouble(this.attributeValue("SeuilTemperaturePalier"));
+
+		// --- Excel projection, through the filled roles ---
+		Boolean estInventorie values this.fiche != null;
+		String designationParc {
+			String get() {
+				if (this.fiche == null) { return null; }
+				return this.fiche.designation;
+			}
+		};
+
+		// The vibration readings only, in workbook (chronological) order.
+		List<Releve> vibrations {
+			List<Releve> get() {
+				List<Releve> result = new ArrayList();
+				for (Releve r : this.releves) {
+					if (r.grandeur == "Vibration") {
+						result.add(r);
+					}
+				}
+				return result;
+			}
+		};
+
+		Double derniereVibration {
+			Double get() {
+				Double last = null;
+				for (Releve r : this.vibrations) {
+					last = r.valeur;
+				}
+				return last;
+			}
+		};
+
+		Intervention derniereIntervention {
+			Intervention get() {
+				Intervention last = null;
+				for (Intervention i : this.interventions) {
+					last = i;
+				}
+				return last;
+			}
+		};
+
+		// The temperature readings, same shape as the vibrations: the model privileges no physical
+		// quantity, it federates whatever the workbook happens to record.
+		List<Releve> temperatures {
+			List<Releve> get() {
+				List<Releve> result = new ArrayList();
+				for (Releve r : this.releves) {
+					if (r.grandeur == "Température palier") {
+						result.add(r);
+					}
+				}
+				return result;
+			}
+		};
+
+		Double derniereTemperature {
+			Double get() {
+				Double last = null;
+				for (Releve r : this.temperatures) {
+					last = r.valeur;
+				}
+				return last;
+			}
+		};
+
+		// --- Transverse derivations: the XML threshold meets the Excel measurement ---
+		Double tauxSeuil {
+			Double get() {
+				if (this.derniereVibration == null) { return null; }
+				if (this.seuilVibration == null) { return null; }
+				return this.derniereVibration / this.seuilVibration;
+			}
+		};
+
+		// DEPASSEMENT (>=1) / SURVEILLANCE (>=0.8) / NORMAL, or INCONNU without a reading.
+		String statutSeuil {
+			String get() {
+				if (this.tauxSeuil == null) { return "INCONNU"; }
+				if (this.tauxSeuil >= 1.0) { return "DEPASSEMENT"; }
+				if (this.tauxSeuil >= 0.8) { return "SURVEILLANCE"; }
+				return "NORMAL";
+			}
+		};
+
+		// A second, independent indicator: how hot the bearing runs against its own XML threshold.
+		// It CORROBORATES the vibration reading without entering criticiteEffective - the verdict of
+		// the demo stays built on vibration and topology alone. Null when nobody measures it (ETI04A).
+		Double tauxTemperature {
+			Double get() {
+				if (this.derniereTemperature == null) { return null; }
+				if (this.seuilTemperature == null) { return null; }
+				return this.derniereTemperature / this.seuilTemperature;
+			}
+		};
+
+		// Rising over the last 4 vibration readings.
+		Boolean tendanceCroissante {
+			Boolean get() {
+				List<Releve> v = this.vibrations;
+				if (v.size < 4) { return false; }
+				Releve dernier = v.get(v.size - 1);
+				Releve reference = v.get(v.size - 4);
+				return dernier.valeur > reference.valeur;
+			}
+		};
+
+		// enDerive = rising vibration trend AND already at 80% of the threshold.
+		Boolean enDerive {
+			Boolean get() {
+				if (this.tauxSeuil == null) { return false; }
+				if (this.tauxSeuil < 0.8) { return false; }
+				return this.tendanceCroissante;
+			}
+		};
+
+		// --- Topology, read off the Liaison graph: never declared, always derived ---
+		List<Equipement> successeurs {
+			List<Equipement> get() {
+				List<Equipement> result = new ArrayList();
+				for (Liaison l : this.container.getLiaisons()) {
+					if (l.source == this) {
+						result.add(l.cible);
+					}
+				}
+				return result;
+			}
+		};
+
+		List<Equipement> predecesseurs {
+			List<Equipement> get() {
+				List<Equipement> result = new ArrayList();
+				for (Liaison l : this.container.getLiaisons()) {
+					if (l.cible == this) {
+						result.add(l.source);
+					}
+				}
+				return result;
+			}
+		};
+
+		Boolean estEntree values this.predecesseurs.size == 0;
+		Boolean estSortie values this.successeurs.size == 0;
+
+		// Critical iff removing it makes the exit unreachable from the entry. THE derived property
+		// of the demo: nothing in either artifact declares it.
+		Boolean estCritique {
+			Boolean get() {
+				List<Equipement> accessibles = this.container.accessiblesDepuisEntreeSans(this);
+				return !accessibles.contains(this.container.getSortie());
+			}
+		};
+
+		Boolean estGoulot values this.container.getGoulot() == this;
+
+		// criticiteEffective = estCritique AND enDerive, aggravated when it is the bottleneck.
+		// This is the property no single artifact can produce.
+		String criticiteEffective {
+			String get() {
+				if (!this.enDerive) { return "NORMALE"; }
+				if (!this.estCritique) { return "A_SURVEILLER"; }
+				if (this.estGoulot) { return "CRITIQUE_GOULOT"; }
+				return "CRITIQUE";
+			}
+		};
+
+		// --- Where this equipment sits in the maintenance queue ---
+		int rangPriorite {
+			int get() {
+				if (this.criticiteEffective == "CRITIQUE_GOULOT") { return 3; }
+				if (this.criticiteEffective == "CRITIQUE") { return 2; }
+				if (this.criticiteEffective == "A_SURVEILLER") { return 1; }
+				return 0;
+			}
+		};
+
+		// Worth acting on = critical AND drifting. "Watch it" is not an intervention.
+		Boolean estPrioriteActionnable values this.rangPriorite >= 2;
+
+		Double tauxOuZero {
+			Double get() {
+				if (this.tauxSeuil == null) { return 0.0; }
+				return this.tauxSeuil;
+			}
+		};
+
+		// --- Live manipulations, carried by the equipment they concern ---
+
+		// Manipulation 2 - append one vibration reading to the workbook, then re-attach the
+		// structure so it enters this equipment's "releves" role. Every derived value follows.
+		ajouterReleveVibration(Double valeur, String operateur) {
+			// Bind the cast to a local first: a cast used directly as a method receiver loses the
+			// receiver in the binding analyzer.
+			XLSVirtualModelInstance xls = (XLSVirtualModelInstance) this.container.exploitation;
+			Releve r = (Releve) xls.createReflectedInstance("Releve");
+			r.code = this.code;
+			r.grandeur = "Vibration";
+			r.valeur = parameters.valeur;
+			r.unite = "mm/s";
+			r.operateur = parameters.operateur;
+			this.container.synchronize();
+		}
+
+		// Manipulation 2 - project the derived criticity into the Parc sheet (column H, left free
+		// for this). A projection SINK: the twin writes it out, it never reads it back as a source.
+		ecrireCriticiteDansFiche() {
+			if (this.fiche == null) { return; }
+			this.fiche.criticite = this.criticiteEffective;
+		}
+	}
+}

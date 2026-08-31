@@ -1,0 +1,45 @@
+// J6 / Manipulation 3 - reconfiguration (specification-demo.md section 5).
+// Add a single InternalLink L7 (EQ-REM-02:OUT -> EQ-ETI-04A:IN). This bypass creates a path
+// DEP01 -> REM02 -> ETI04A -> ENC05 that avoids CONV03. CONV03 ceases to be critical while its
+// vibration stays above threshold: the alert does NOT disappear, it DE-CLASSES (from a line-stop
+// risk to an intervention to schedule at the next planned stop).
+// Applied in memory; ligne.xml is untouched.
+
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/Ligne.fml"];
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/ligne.xml"];
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/exploitation.xlsx"];
+service ResourceCenterService add_temp_rc;
+ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+
+conv = ligne.getEquipementParCode("CONV03");
+eti = ligne.getEquipementParCode("ETI04A");
+
+// --- Before: CONV03 is the critical bottleneck ---
+log "BEFORE CONV03 critique=" + conv.estCritique + " criticite=" + conv.criticiteEffective;
+assert ligne.getLiaisons().size == 6;
+assert eti.predecesseurs.size == 1;
+assert conv.estCritique == true;
+assert conv.criticiteEffective == "CRITIQUE_GOULOT";
+assert ligne.getPrioriteMax().code == "CONV03";
+
+// --- Manipulation: add the L7 bypass ---
+ligne.addBypassL7();
+
+// --- After: one more Liaison, and ETI04A is now fed from two places ---
+assert ligne.getLiaisons().size == 7;
+assert eti.predecesseurs.size == 2;
+
+// CONV03 is no longer critical, but its vibration has not moved
+log "AFTER  CONV03 critique=" + conv.estCritique
+	+ " enDerive=" + conv.enDerive
+	+ " criticite=" + conv.criticiteEffective;
+assert conv.estCritique == false;
+assert conv.derniereVibration == 4.2;
+assert conv.enDerive == true;
+assert conv.statutSeuil == "SURVEILLANCE";
+// the alert de-classes, it does not vanish
+assert conv.criticiteEffective == "A_SURVEILLER";
+// and CONV03 leaves the actionable priority set
+assert conv.estPrioriteActionnable == false;
+
+log "Test PASSED: J6 Manip3 - CONV03 de-classes CRITIQUE_GOULOT -> A_SURVEILLER (re-scoped, not cleared)";

@@ -1,0 +1,36 @@
+// J1 - The two model slots mount their resources; read one value from each side.
+// Expected business values (specification-demo.md):
+//   - XML: 6 InternalElement (equipements) in the topology
+//   - Excel: FicheParc CONV03 reflected through the FMLExcelModelSlot (typed, not raw cells)
+
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/Ligne.fml"];
+assert vm != null;
+
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/ligne.xml"];
+assert xmlRes != null;
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/exploitation.xlsx"];
+assert xlsxRes != null;
+
+service ResourceCenterService add_temp_rc;
+ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+assert ligne != null;
+
+// --- XML side ---
+elems = ligne.getInternalElements();
+log "InternalElements = " + elems;
+assert elems.size == 6;
+
+// --- Excel side (typed FicheParc reflected through the FMLExcelModelSlot) ---
+conv = ligne.getFicheParc("CONV03");
+assert conv != null;
+assert conv.code == "CONV03";
+log "Parc CONV03 designation = " + conv.designation;
+
+// The third reflected concept: the "Interventions" sheet is typed too.
+itvs = ligne.getInterventions();
+assert itvs.size == 6;
+assert itvs.get(0).code == "CONV03";
+assert itvs.get(0).type == "Préventive";
+log "Interventions = " + itvs.size + ", first on " + itvs.get(0).code;
+
+log "Test PASSED: J1 - both model slots mounted, all three reflected concepts readable";
