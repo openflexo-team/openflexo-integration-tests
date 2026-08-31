@@ -1,0 +1,95 @@
+// TestCityMappingSynchronization - the heart of the demo: two heterogeneous EMF city models are
+// federated into one set of concepts, each holding one foot in each model.
+//
+// Expected business values, read from the two artifacts:
+//   my.city1    -> Lampaul-Plouarzel (3 houses, 3 residents), Paris, Bordeaux, Brest
+//   first.city2 -> Lampaul-Plouarzel (1 Mansion #12, 1 Appartment "42B", 1 mayor), Brest, Lannilis
+// so the federation must produce 5 cities: 2 matched on both sides, 2 known only to city1 and
+// 1 known only to city2. This is the FML-script counterpart of test6CreateVirtualModelInstance()
+// in TestCityMappingView.
+
+vm = load -r ["http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml"];
+assert vm != null;
+city1 = load -r ["http://openflexo.org/city-mapping/EMF/Model/city1/my.city1"];
+city2 = load -r ["http://openflexo.org/city-mapping/EMF/Model/city2/first.city2"];
+
+service ResourceCenterService add_temp_rc;
+mapping = new Mapping::defaultCreationScheme(city1.resource, city2.resource) with (name="cityMapping");
+assert mapping != null;
+assert mapping.model1 != null;
+assert mapping.model2 != null;
+
+// Nothing is federated until synchronization() runs: the mapping is a projection, not a copy.
+assert mapping.allCities().size == 0;
+
+mapping.synchronization();
+
+// --- Cardinalities: same numbers the JUnit test asserts, expressed on the model itself ---
+assert mapping.allCities().size == 5;
+assert mapping.allHouses().size == 3;
+assert mapping.allAppartments().size == 2;
+assert mapping.allMansions().size == 1;
+assert mapping.allResidents().size == 3;
+
+// --- Which city is federated with which: matched on the name, case-insensitively ---
+assert mapping.matchedCities().size == 2;
+assert mapping.citiesMissingInModel2().size == 2;
+assert mapping.citiesMissingInModel1().size == 1;
+
+lampaul = mapping.cityOfModel1Named("Lampaul-Plouarzel");
+assert lampaul != null;
+assert lampaul.cityInModel2 != null;
+assert lampaul.cityInModel2.name == "Lampaul-Plouarzel";
+
+brest = mapping.cityOfModel1Named("Brest");
+assert brest != null;
+assert brest.cityInModel2 != null;
+
+// Paris and Bordeaux exist in city1 only; Lannilis in city2 only. Each is federated all the same,
+// with a null counterpart - which is exactly what generateModelXFromModelY() later fills in.
+paris = mapping.cityOfModel1Named("Paris");
+assert paris != null;
+assert paris.cityInModel2 == null;
+lannilis = mapping.cityOfModel2Named("Lannilis");
+assert lannilis != null;
+assert lannilis.cityInModel1 == null;
+
+// --- Houses: city1 identifies them by a free-text "info", city2 by a label or a number ---
+// "42B" is an Appartment on both sides: label (city2) joined with info (city1).
+appartment42B = mapping.appartmentOfModel1WithInfo("42B");
+assert appartment42B != null;
+assert appartment42B.appartmentInModel2 != null;
+assert appartment42B.appartmentInModel2.label == "42B";
+assert appartment42B.city == lampaul;
+
+// "12A" exists in city1 only: federated with an empty city2 side.
+appartment12A = mapping.appartmentOfModel1WithInfo("12A");
+assert appartment12A != null;
+assert appartment12A.appartmentInModel2 == null;
+
+// The Mansion is joined on the number, not on the owner: the two artifacts spell the owner
+// differently ("Christophe Guychard" vs "Christophe GUYCHARD"), so joining on it is impossible.
+mansion12 = mapping.mansionOfModel1WithInfo("12");
+assert mansion12 != null;
+assert mansion12.mansionInModel2 != null;
+assert mansion12.mansionInModel2.owner == "Christophe GUYCHARD";
+assert mansion12.city == lampaul;
+
+// --- Residents: matched on the owner of a city2 house, case-insensitively ---
+sylvain = mapping.residentOfModel1Named("Sylvain Guerin");
+assert sylvain != null;
+assert sylvain.houseInModel2 != null;
+assert sylvain.houseInModel2.owner == "Sylvain GUERIN";
+
+// Patrick Martin owns a house in city1 that city2 does not know: no counterpart.
+patrick = mapping.residentOfModel1Named("Patrick Martin");
+assert patrick != null;
+assert patrick.houseInModel2 == null;
+assert mapping.residentsUnknownInModel2().size == 1;
+
+// NB: re-running synchronization() here would NOT be idempotent - the City instances are reused
+// as 'match' intends, but the Appartment / Mansion / Resident ones are created a second time
+// (3 houses -> 6, 3 residents -> 9 on a third run). That asymmetry is a defect of its own, out of
+// the scope of these tests, which reproduce what the JUnit tests cover: one synchronization.
+
+log "Test PASSED: CityMappingSynchronization - 5 cities, 3 houses, 3 residents federated";

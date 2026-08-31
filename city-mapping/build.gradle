@@ -7,11 +7,19 @@
 //
 // The CityMapping / CityViews viewpoints keep their own URIs (http://www.thalesgroup.com/...),
 // independent of the resource center: only the EMF models are addressed through the RC base URI.
+//
+// Two test surfaces coexist on purpose: the JUnit classes of src/test/java, which reach the
+// federation through the Java action API and are the only ones able to assert on binding models
+// and on the shape of a control graph, and the FML-scripts of src/main/resources/AutomatedTests,
+// which drive the very same Mapping VirtualModel through the FML runtime and assert on business
+// values. The latter is why fml-cli is a test dependency here.
 
 dependencies {
     testImplementation testUtils()
     testImplementation flexoFoundation()
     testImplementation flexoFoundationTest()
+    testImplementation fmlCli()
+    testImplementation fmlCliTest()
     testImplementation emfConnector()
     testImplementation diagramConnector()
 }

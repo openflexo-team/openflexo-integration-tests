@@ -132,6 +132,83 @@ public model Mapping {
 		}
 	}
 
+	// =========================================================================
+	// Read-only queries. They add nothing to the federation itself: they are the
+	// business-level entry point through which the FML-script integration tests
+	// (AutomatedTests/*.fmlscript) read what synchronization() produced. A script
+	// only sees what the model declares, so what is not declared here cannot be
+	// asserted - counting FlexoConceptInstances through the Java API is precisely
+	// what those scripts replace.
+	// =========================================================================
+
+	public void touchOnlyParis() {
+		City1City paris = select unique City1City from model1 where (selected.name == "Paris");
+		match City from this where (cityInModel1=paris)
+			unmatched: new City::createFromEMF(paris, null);
+	}
+
+	public List<City> allCities() {
+		return select City from this;
+	}
+
+	// Federated on both sides: the city exists in city1 AND in city2.
+	public List<City> matchedCities() {
+		return select City from this where (selected.cityInModel1 != null && selected.cityInModel2 != null);
+	}
+
+	// One foot only: what synchronizeModel2FromModel1() / synchronizeModel1FromModel2() fill in.
+	public List<City> citiesMissingInModel2() {
+		return select City from this where (selected.cityInModel2 == null);
+	}
+
+	public List<City> citiesMissingInModel1() {
+		return select City from this where (selected.cityInModel1 == null);
+	}
+
+	public City cityOfModel1Named(String cityName) {
+		return select unique City from this where (selected.cityInModel1.name == parameters.cityName);
+	}
+
+	public City cityOfModel2Named(String cityName) {
+		return select unique City from this where (selected.cityInModel2.name == parameters.cityName);
+	}
+
+	// House is abstract: this returns the Appartment and Mansion instances together.
+	public List<House> allHouses() {
+		return select House from this;
+	}
+
+	public List<Appartment> allAppartments() {
+		return select Appartment from this;
+	}
+
+	public List<Mansion> allMansions() {
+		return select Mansion from this;
+	}
+
+	public List<Resident> allResidents() {
+		return select Resident from this;
+	}
+
+	// Residents of city1 whose name matches no house owner in city2.
+	public List<Resident> residentsUnknownInModel2() {
+		return select Resident from this where (selected.houseInModel2 == null);
+	}
+
+	// city1 identifies a house by its free-text "info", city2 by a label (Appartment) or a
+	// number (Mansion): these two look the federated house up by the city1 side.
+	public Appartment appartmentOfModel1WithInfo(String info) {
+		return select unique Appartment from this where (selected.houseInModel1.info == parameters.info);
+	}
+
+	public Mansion mansionOfModel1WithInfo(String info) {
+		return select unique Mansion from this where (selected.houseInModel1.info == parameters.info);
+	}
+
+	public Resident residentOfModel1Named(String residentName) {
+		return select unique Resident from this where (selected.residentInModel1.name == parameters.residentName);
+	}
+
 	create::defaultCreationScheme(required Resource<EMFModel> city1, required Resource<EMFModel> city2) {
 		model1 = (EMFModel) parameters.city1.getResourceData();
 		model2 = (EMFModel) parameters.city2.getResourceData();

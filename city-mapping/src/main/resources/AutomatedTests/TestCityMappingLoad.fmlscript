@@ -1,0 +1,34 @@
+// TestCityMappingLoad - the CityMapping resources are there and the Mapping VirtualModel loads.
+//
+// Counterpart of the "instantiate resource center / load view point" phases of
+// TestCityMappingView and TestEMFCityMappingView: it proves the same thing (both EMF metamodels
+// are registered, both models are readable, the mapping VirtualModel compiles) without creating
+// a FlexoProject, a repository folder and a view first - none of which the federation needs.
+
+vm = load -r ["http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml"];
+assert vm != null;
+assert vm.name == "Mapping";
+
+// The federative concepts, and the "extends House" that Appartment and Mansion had lost on load
+// when the viewpoint was still serialized as .fml.xml.
+assert vm.getFlexoConcept("City") != null;
+assert vm.getFlexoConcept("House") != null;
+assert vm.getFlexoConcept("Appartment") != null;
+assert vm.getFlexoConcept("Mansion") != null;
+assert vm.getFlexoConcept("Resident") != null;
+assert vm.getFlexoConcept("House").isSuperConceptOf(vm.getFlexoConcept("Appartment"));
+assert vm.getFlexoConcept("House").isSuperConceptOf(vm.getFlexoConcept("Mansion"));
+
+// synchronization is a plain FML behaviour: SynchronizationScheme is a deprecated notion and
+// textual FML has no way to declare one.
+assert vm.getFlexoBehaviour("synchronization") != null;
+assert vm.getFlexoBehaviour("synchronizeModel1FromModel2") != null;
+assert vm.getFlexoBehaviour("synchronizeModel2FromModel1") != null;
+
+// The two heterogeneous EMF models this demo federates.
+city1 = load -r ["http://openflexo.org/city-mapping/EMF/Model/city1/my.city1"];
+assert city1 != null;
+city2 = load -r ["http://openflexo.org/city-mapping/EMF/Model/city2/first.city2"];
+assert city2 != null;
+
+log "Test PASSED: CityMappingLoad - Mapping VirtualModel and both EMF models are loadable";
