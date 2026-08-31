@@ -1,19 +1,19 @@
 /**
- * DigitalTwinDemo - VirtualModel "Exploitation".
+ * DigitalTwinDemo - VirtualModel "MaintenanceRecords".
  *
- * Business-flavoured typing of the maintenance workbook (exploitation.xlsx), consumed through a
+ * Business-flavoured typing of the maintenance workbook (maintenance.xlsx), consumed through a
  * FMLExcelModelSlot. Each significative row of a sheet is reflected as a FlexoConceptInstance, and
  * each @Property binds a typed cell (read AND write). This replaces the raw ExcelWorkbook navigation
- * that a BasicExcelModelSlot would expose: Ligne now speaks of Releve / FicheParc / Intervention,
- * not of rows and columns, and an Equipement can hold them in roles.
+ * that a BasicExcelModelSlot would expose: ProductionLine now speaks of Reading / AssetRecord / Intervention,
+ * not of rows and columns, and an Equipment can hold them in roles.
  *
  * Sheet layouts (see specification-demo.md):
- *   - "Relevés": headers on row 1, data from 0-based row 1.
- *     cols 0 Date | 1 Code | 2 Grandeur | 3 Valeur | 4 Unité | 5 Opérateur
- *   - "Parc": title on rows 1-2, headers on row 4, data from 0-based row 4.
- *     cols 0 Code | 1 Désignation | ... | 7 Criticité (write-back column, empty in the source)
+ *   - "Readings": headers on row 1, data from 0-based row 1.
+ *     cols 0 Date | 1 Equipment code | 2 Quantity | 3 Value | 4 Unit | 5 Operator
+ *   - "Assets": title on rows 1-2, headers on row 4, data from 0-based row 4.
+ *     cols 0 Code | 1 Designation | ... | 7 Criticity (write-back column, empty in the source)
  *   - "Interventions": headers on row 1, data from 0-based row 1.
- *     cols 0 Date | 1 Code | 2 Type | 3 Description | 4 Durée arrêt (min)
+ *     cols 0 Date | 1 Equipment code | 2 Type | 3 Description | 4 Downtime (min)
  */
 
 use org.openflexo.technologyadapter.excel.FMLExcelModelSlot as XLS;
@@ -22,26 +22,26 @@ import org.openflexo.technologyadapter.excel.model.ExcelWorkbook;
 import java.util.Date;
 import java.lang.String;
 
-@URI("http://openflexo.org/digital-twin-demo/FML/Exploitation.fml")
-public model Exploitation {
+@URI("http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml")
+public model MaintenanceRecords {
 
-	// One reflected instance per timestamped reading in the "Relevés" sheet.
-	@DataRange(sheet="Relevés", rows="1,*", cols="0,5")
-	public concept Releve {
+	// One reflected instance per timestamped reading in the "Readings" sheet.
+	@DataRange(sheet="Readings", rows="1,*", cols="0,5")
+	public concept Reading {
 		@Property(col="0")
 		Date date;
 		@Property(col="1")
 		String code;
 		@Property(col="2")
-		String grandeur;
+		String quantity;
 		// Primitive 'double', not the wrapper Double: only Java primitives (and String/Date) map to a
 		// PrimitiveRole, which is what the reflected cell read/write binds to (a wrapper -> JavaRole -> null).
 		@Property(col="3")
-		double valeur;
+		double value;
 		@Property(col="4")
-		String unite;
+		String unit;
 		@Property(col="5")
-		String operateur;
+		String operator;
 	}
 
 	// One reflected instance per maintenance operation in the "Interventions" sheet.
@@ -57,18 +57,18 @@ public model Exploitation {
 		@Property(col="3")
 		String description;
 		@Property(col="4")
-		double dureeArret;
+		double downtime;
 	}
 
-	// One reflected instance per inventoried equipment in the "Parc" sheet.
-	@DataRange(sheet="Parc", rows="4,*", cols="0,7")
-	public concept FicheParc {
+	// One reflected instance per inventoried equipment in the "Assets" sheet.
+	@DataRange(sheet="Assets", rows="4,*", cols="0,7")
+	public concept AssetRecord {
 		@Property(col="0")
 		String code;
 		@Property(col="1")
 		String designation;
 		// Column H, left free in the source: the twin projects the derived effective criticity here.
 		@Property(col="7")
-		String criticite;
+		String criticity;
 	}
 }

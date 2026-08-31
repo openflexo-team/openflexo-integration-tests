@@ -1,36 +1,36 @@
 // J1 - The two model slots mount their resources; read one value from each side.
 // Expected business values (specification-demo.md):
 //   - XML: 6 InternalElement (equipements) in the topology
-//   - Excel: FicheParc CONV03 reflected through the FMLExcelModelSlot (typed, not raw cells)
+//   - Excel: AssetRecord CONV03 reflected through the FMLExcelModelSlot (typed, not raw cells)
 
-vm = load -r ["http://openflexo.org/digital-twin-demo/FML/Ligne.fml"];
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
 assert vm != null;
 
-xmlRes = load -r ["http://openflexo.org/digital-twin-demo/ligne.xml"];
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
 assert xmlRes != null;
-xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/exploitation.xlsx"];
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance.xlsx"];
 assert xlsxRes != null;
 
 service ResourceCenterService add_temp_rc;
-ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
-assert ligne != null;
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="lineL2");
+assert line != null;
 
 // --- XML side ---
-elems = ligne.getInternalElements();
+elems = line.getInternalElements();
 log "InternalElements = " + elems;
 assert elems.size == 6;
 
-// --- Excel side (typed FicheParc reflected through the FMLExcelModelSlot) ---
-conv = ligne.getFicheParc("CONV03");
+// --- Excel side (typed AssetRecord reflected through the FMLExcelModelSlot) ---
+conv = line.getAssetRecord("CONV03");
 assert conv != null;
 assert conv.code == "CONV03";
-log "Parc CONV03 designation = " + conv.designation;
+log "Assets CONV03 designation = " + conv.designation;
 
 // The third reflected concept: the "Interventions" sheet is typed too.
-itvs = ligne.getInterventions();
+itvs = line.getInterventions();
 assert itvs.size == 6;
 assert itvs.get(0).code == "CONV03";
-assert itvs.get(0).type == "Préventive";
+assert itvs.get(0).type == "Preventive";
 log "Interventions = " + itvs.size + ", first on " + itvs.get(0).code;
 
 log "Test PASSED: J1 - both model slots mounted, all three reflected concepts readable";

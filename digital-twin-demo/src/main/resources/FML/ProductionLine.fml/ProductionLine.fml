@@ -1,8 +1,8 @@
 /**
- * DigitalTwinDemo - VirtualModel "Ligne".
+ * DigitalTwinDemo - VirtualModel "ProductionLine".
  *
- * Federates the CAEX/AutomationML topology (ligne.xml, typed against ligne.xsd) with the
- * maintenance workbook (exploitation.xlsx), and derives a maintenance-priority hierarchy that no
+ * Federates the CAEX/AutomationML topology (production-line.xml, typed against production-line.xsd) with the
+ * maintenance workbook (maintenance.xlsx), and derives a maintenance-priority hierarchy that no
  * artifact holds alone. Three readings of the same line disagree, and that disagreement is the
  * whole point:
  *   1. the workbook alone, raw vibration      -> ETI04A (6.5 mm/s)     : the WRONG answer
@@ -12,20 +12,20 @@
  *
  * How the model is built, and why it reads the way it does:
  *
- *   STRUCTURE IS MATERIALIZED. Equipement is not a computed view: it is an instantiated concept
+ *   STRUCTURE IS MATERIALIZED. Equipment is not a computed view: it is an instantiated concept
  *   holding four roles that point at the actual artifact elements - the InternalElement of the XML
- *   (xmlElement), its row in the Parc sheet (fiche), its readings (releves) and its maintenance
- *   operations (interventions). synchronize() fills them, using the FML match mechanism, so the
+ *   (xmlElement), its row in the Assets sheet (assetRecord), its readings (readings) and its maintenance
+ *   maintenance (interventions). synchronize() fills them, using the FML match mechanism, so the
  *   structure can be inspected in projection rather than re-derived at every access.
  *
  *   VALUES ARE DERIVED. Everything on top of those roles - thresholds, ratios, drift, criticity -
  *   is an expression (values) or a get() property. Nothing is a field set from the outside, and
  *   criticity in particular is NEVER stored in an artifact: it is derived from the topology.
- *   (The write-back into Parc column H is a projection sink, not a source of truth.)
+ *   (The write-back into Assets column H is a projection sink, not a source of truth.)
  *
  *   RE-SYNCHRONIZATION, NOT RECOMPUTATION. After a live manipulation, synchronize() is run again:
- *   it re-attaches the structure (a new reading enters the releves role, a new link becomes a
- *   Liaison) and every derived value follows on its own. The match makes it idempotent.
+ *   it re-attaches the structure (a new reading enters the readings role, a new link becomes a
+ *   MaterialLink) and every derived value follows on its own. The match makes it idempotent.
  */
 
 use org.openflexo.technologyadapter.xml.XMLModelSlot as XML;
@@ -41,8 +41,8 @@ import java.lang.Double;
 import java.util.List;
 import java.util.ArrayList;
 
-// The annotated VirtualModel that types the maintenance workbook (Releve / FicheParc / Intervention).
-import ["http://openflexo.org/digital-twin-demo/FML/Exploitation.fml"];
+// The annotated VirtualModel that types the maintenance workbook (Reading / AssetRecord / Intervention).
+import ["http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml"];
 
 import XSDMetaModel CAEX from ["http://www.dke.de/CAEX"];
 import XMLComplexType INTERNAL_ELEMENT from [CAEX:"InternalElementType"];
@@ -53,17 +53,17 @@ typedef XMLIndividualType(xsdType=INTERNAL_ELEMENT) as InternalElement;
 typedef XMLIndividualType(xsdType=ATTRIBUTE) as CaexAttribute;
 typedef XMLIndividualType(xsdType=INTERNAL_LINK) as InternalLink;
 
-@URI("http://openflexo.org/digital-twin-demo/FML/Ligne.fml")
-public model Ligne {
+@URI("http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml")
+public model ProductionLine {
 
 	XMLModel ligneXml with XMLModelSlot(metaModel=CAEX);
-	// Reflected against the "Exploitation" contract VM: exploitation.flexoConceptInstances are
-	// typed Releve / FicheParc / Intervention instances, each backed by a workbook row.
-	Exploitation exploitation with FMLExcelModelSlot();
+	// Reflected against the "MaintenanceRecords" contract VM: maintenance.flexoConceptInstances are
+	// typed Reading / AssetRecord / Intervention instances, each backed by a workbook row.
+	MaintenanceRecords maintenance with FMLExcelModelSlot();
 
 	create(Resource<XMLModel> xmlResource, Resource<ExcelWorkbook> xlsxResource) {
 		connect ligneXml using parameters.xmlResource;
-		connect exploitation using parameters.xlsxResource;
+		connect maintenance using parameters.xlsxResource;
 		this.synchronize();
 	}
 
@@ -74,56 +74,56 @@ public model Ligne {
 	// instances it matches, never the contents of their roles).
 	// =========================================================================
 	public synchronize() {
-		this.synchronizeEquipements();
-		this.synchronizeLiaisons();
+		this.synchronizeEquipments();
+		this.synchronizeMaterialLinks();
 	}
 
-	public synchronizeEquipements() {
-		MatchingSet<Equipement> ms = begin match Equipement from this;
+	public synchronizeEquipments() {
+		MatchingSet<Equipment> ms = begin match Equipment from this;
 		for (InternalElement e : select InternalElement from ligneXml) {
-			Equipement eq = match Equipement in ms from this where (xmlElement=e) unmatched: new Equipement(e);
+			Equipment eq = match Equipment in ms from this where (xmlElement=e) unmatched: new Equipment(e);
 			// Join on code (EQ-CONV-03 <-> CONV03): this is where the two artifacts meet.
-			// fiche stays empty for EQ-ETI-04B, absent from the inventory (planted, not repaired).
-			FicheParc f = this.getFicheParc(eq.code);
+			// assetRecord stays empty for EQ-ETI-04B, absent from the inventory (planted, not repaired).
+			AssetRecord f = this.getAssetRecord(eq.code);
 			if (f != null) {
-				eq.fiche = f;
+				eq.assetRecord = f;
 			}
 			// A multiple role is filled one element at a time; the membership guard is what makes
 			// re-running this behaviour idempotent (a bare add would pile the readings up again).
-			for (Releve r : select Releve from (exploitation) where (selected.code == eq.code)) {
-				if (!eq.releves.contains(r)) {
-					eq.releves.add(r);
+			for (Reading r : select Reading from (maintenance) where (selected.code == eq.code)) {
+				if (!eq.readings.contains(r)) {
+					eq.readings.add(r);
 				}
 			}
-			for (Intervention i : select Intervention from (exploitation) where (selected.code == eq.code)) {
+			for (Intervention i : select Intervention from (maintenance) where (selected.code == eq.code)) {
 				if (!eq.interventions.contains(i)) {
 					eq.interventions.add(i);
 				}
 			}
 		}
-		end match Equipement in ms unmatched: delete();
+		end match Equipment in ms unmatched: delete();
 	}
 
-	// One Liaison per InternalLink, its two ends resolved to the Equipement instances they name.
-	// Run after synchronizeEquipements(), since it links to those instances.
-	public synchronizeLiaisons() {
-		MatchingSet<Liaison> ms = begin match Liaison from this;
+	// One MaterialLink per InternalLink, its two ends resolved to the Equipment instances they name.
+	// Run after synchronizeEquipments(), since it links to those instances.
+	public synchronizeMaterialLinks() {
+		MatchingSet<MaterialLink> ms = begin match MaterialLink from this;
 		for (InternalLink l : select InternalLink from ligneXml) {
-			Liaison li = match Liaison in ms from this where (xmlLink=l) unmatched: new Liaison(l);
-			Equipement src = this.getEquipementParCode(li.codeSource);
+			MaterialLink li = match MaterialLink in ms from this where (xmlLink=l) unmatched: new MaterialLink(l);
+			Equipment src = this.getEquipmentByCode(li.sourceCode);
 			if (src != null) {
 				li.source = src;
 			}
-			Equipement dst = this.getEquipementParCode(li.codeCible);
+			Equipment dst = this.getEquipmentByCode(li.targetCode);
 			if (dst != null) {
-				li.cible = dst;
+				li.target = dst;
 			}
 		}
-		end match Liaison in ms unmatched: delete();
+		end match MaterialLink in ms unmatched: delete();
 	}
 
-	public List<Liaison> getLiaisons() {
-		return select Liaison from this;
+	public List<MaterialLink> getMaterialLinks() {
+		return select MaterialLink from this;
 	}
 
 	// --- XML side ---
@@ -131,29 +131,29 @@ public model Ligne {
 		return select InternalElement from ligneXml;
 	}
 
-	// --- Excel side (typed through the Exploitation reflected VMI) ---
-	public FicheParc getFicheParc(String code) {
-		return select unique FicheParc from (exploitation) where (selected.code == parameters.code);
+	// --- Excel side (typed through the MaintenanceRecords reflected VMI) ---
+	public AssetRecord getAssetRecord(String code) {
+		return select unique AssetRecord from (maintenance) where (selected.code == parameters.code);
 	}
 
 	public List<Intervention> getInterventions() {
-		return select Intervention from (exploitation);
+		return select Intervention from (maintenance);
 	}
 
 	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes (spec section 2).
 	// Behaviour parameters are read via "parameters.".
-	public String codeDepuisXmlId(String xmlId) {
+	public String codeFromXmlId(String xmlId) {
 		String withoutPrefix = parameters.xmlId.replace("EQ-", "");
 		return withoutPrefix.replace("-", "");
 	}
 
 	// --- Federation ---
-	public List<Equipement> getEquipements() {
-		return select Equipement from this;
+	public List<Equipment> getEquipments() {
+		return select Equipment from this;
 	}
 
-	public Equipement getEquipementParCode(String code) {
-		return select unique Equipement from this where (selected.code == parameters.code);
+	public Equipment getEquipmentByCode(String code) {
+		return select unique Equipment from this where (selected.code == parameters.code);
 	}
 
 	// =========================================================================
@@ -162,66 +162,66 @@ public model Ligne {
 	// =========================================================================
 
 	// Equipment code owning an interface id, e.g. "EQ-CONV-03:OUT" -> "CONV03".
-	public String codeDepuisInterface(String iface) {
+	public String codeFromInterface(String iface) {
 		int idx = parameters.iface.indexOf(":");
 		String xmlId = parameters.iface.substring(0, idx);
-		return this.codeDepuisXmlId(xmlId);
+		return this.codeFromXmlId(xmlId);
 	}
 
 	// Entry = the only equipment no link points to; exit = the only one no link leaves.
-	public Equipement getEntree() {
-		return select unique Equipement from this where (selected.estEntree);
+	public Equipment getEntry() {
+		return select unique Equipment from this where (selected.isEntry);
 	}
 
-	public Equipement getSortie() {
-		return select unique Equipement from this where (selected.estSortie);
+	public Equipment getExit() {
+		return select unique Equipment from this where (selected.isExit);
 	}
 
 	// Which equipments the material can still reach from the entry when one of them is removed.
-	// Level-by-level walk over the Liaison graph.
-	public List<Equipement> accessiblesDepuisEntreeSans(Equipement evite) {
-		List<Equipement> vus = new ArrayList();
-		List<Equipement> courant = new ArrayList();
-		Equipement entree = this.getEntree();
-		if (entree != parameters.evite) {
-			vus.add(entree);
-			courant.add(entree);
+	// Level-by-level walk over the MaterialLink graph.
+	public List<Equipment> reachableFromEntryWithout(Equipment avoided) {
+		List<Equipment> seen = new ArrayList();
+		List<Equipment> current = new ArrayList();
+		Equipment entry = this.getEntry();
+		if (entry != parameters.avoided) {
+			seen.add(entry);
+			current.add(entry);
 		}
-		while (courant.size > 0) {
-			List<Equipement> suivants = new ArrayList();
-			for (Equipement e : courant) {
-				for (Equipement s : e.successeurs) {
-					if (s != parameters.evite) {
-						if (!vus.contains(s)) {
-							vus.add(s);
-							suivants.add(s);
+		while (current.size > 0) {
+			List<Equipment> next = new ArrayList();
+			for (Equipment e : current) {
+				for (Equipment s : e.successors) {
+					if (s != parameters.avoided) {
+						if (!seen.contains(s)) {
+							seen.add(s);
+							next.add(s);
 						}
 					}
 				}
 			}
-			courant = suivants;
+			current = next;
 		}
-		return vus;
+		return seen;
 	}
 
 	// Bottleneck = minimal nominal cadence among the critical equipments.
-	public Equipement getGoulot() {
-		Equipement goulot = null;
-		Double minCadence = null;
-		for (Equipement eq : select Equipement from this) {
-			if (eq.estCritique) {
-				if (minCadence == null) {
-					minCadence = eq.cadenceNominale;
-					goulot = eq;
+	public Equipment getBottleneck() {
+		Equipment bottleneck = null;
+		Double minRate = null;
+		for (Equipment eq : select Equipment from this) {
+			if (eq.isCritical) {
+				if (minRate == null) {
+					minRate = eq.nominalRate;
+					bottleneck = eq;
 				} else {
-					if (eq.cadenceNominale < minCadence) {
-						minCadence = eq.cadenceNominale;
-						goulot = eq;
+					if (eq.nominalRate < minRate) {
+						minRate = eq.nominalRate;
+						bottleneck = eq;
 					}
 				}
 			}
 		}
-		return goulot;
+		return bottleneck;
 	}
 
 	// =========================================================================
@@ -229,48 +229,48 @@ public model Ligne {
 	// the highest raw vibration - topology is what separates the bottleneck from the lure.
 	// =========================================================================
 	// Is a ranked above b? Rank first, then how close to its own threshold.
-	public Boolean plusPrioritaire(Equipement a, Equipement b) {
-		if (parameters.a.rangPriorite > parameters.b.rangPriorite) { return true; }
-		if (parameters.a.rangPriorite < parameters.b.rangPriorite) { return false; }
-		return parameters.a.tauxOuZero > parameters.b.tauxOuZero;
+	public Boolean hasHigherPriorityThan(Equipment a, Equipment b) {
+		if (parameters.a.priorityRank > parameters.b.priorityRank) { return true; }
+		if (parameters.a.priorityRank < parameters.b.priorityRank) { return false; }
+		return parameters.a.ratioOrZero > parameters.b.ratioOrZero;
 	}
 
 	// The maintenance list, most urgent first: each equipment slots in behind everyone already
 	// ranked above it. Six machines - the point is to read the rule, not to sort fast.
-	public List<Equipement> getEquipementsPrioritaires() {
-		List<Equipement> ordonnes = new ArrayList();
-		for (Equipement candidat : select Equipement from this) {
+	public List<Equipment> getPrioritizedEquipments() {
+		List<Equipment> ordered = new ArrayList();
+		for (Equipment candidate : select Equipment from this) {
 			int position = 0;
-			for (Equipement place : ordonnes) {
-				if (this.plusPrioritaire(place, candidat)) {
+			for (Equipment ranked : ordered) {
+				if (this.hasHigherPriorityThan(ranked, candidate)) {
 					position = position + 1;
 				}
 			}
-			ordonnes.add(position, candidat);
+			ordered.add(position, candidate);
 		}
-		return ordonnes;
+		return ordered;
 	}
 
-	public Equipement getPrioriteMax() {
-		Equipement meilleur = null;
-		for (Equipement eq : select Equipement from this) {
-			if (meilleur == null) {
-				meilleur = eq;
+	public Equipment getTopPriority() {
+		Equipment best = null;
+		for (Equipment eq : select Equipment from this) {
+			if (best == null) {
+				best = eq;
 			} else {
-				if (this.plusPrioritaire(eq, meilleur)) {
-					meilleur = eq;
+				if (this.hasHigherPriorityThan(eq, best)) {
+					best = eq;
 				}
 			}
 		}
-		return meilleur;
+		return best;
 	}
 
 	// The equipments maintenance should actually act on. CONV03 only - ETI04A is deliberately out,
 	// despite carrying the highest raw vibration of the whole workbook.
-	public List<Equipement> getPrioritesActionnables() {
-		List<Equipement> result = new ArrayList();
-		for (Equipement eq : this.getEquipementsPrioritaires()) {
-			if (eq.estPrioriteActionnable) {
+	public List<Equipment> getActionablePriorities() {
+		List<Equipment> result = new ArrayList();
+		for (Equipment eq : this.getPrioritizedEquipments()) {
+			if (eq.isActionablePriority) {
 				result.add(eq);
 			}
 		}
@@ -278,9 +278,9 @@ public model Ligne {
 	}
 
 	// Display helper for the live demo: the priority list as plain codes.
-	public List<String> getCodesPrioritaires() {
+	public List<String> getPrioritizedCodes() {
 		List<String> result = new ArrayList();
-		for (Equipement eq : this.getEquipementsPrioritaires()) {
+		for (Equipment eq : this.getPrioritizedEquipments()) {
 			result.add(eq.code);
 		}
 		return result;
@@ -288,7 +288,7 @@ public model Ligne {
 
 	// =========================================================================
 	// Live manipulation 3 (applied in memory, then re-synchronized; never saved).
-	// Manipulations 1 and 2 are carried by Equipement, the object they concern.
+	// Manipulations 1 and 2 are carried by Equipment, the object they concern.
 	// =========================================================================
 
 	// Manipulation 3 - add the L7 bypass (EQ-REM-02:OUT -> EQ-ETI-04A:IN), then re-attach.
@@ -303,15 +303,15 @@ public model Ligne {
 
 	/**
 	 * A material link of the line, instantiated on an InternalLink of the XML. Its two ends are not
-	 * strings: they are roles pointing at the Equipement instances the link names. Interfaces are
+	 * strings: they are roles pointing at the Equipment instances the link names. Interfaces are
 	 * shared (EQ-CONV-03:OUT carries both L3 and L4), which is why the graph is navigated through
 	 * the links rather than through the interfaces.
 	 */
-	public concept Liaison {
+	public concept MaterialLink {
 
 		InternalLink xmlLink with XMLIndividualRole(container=ligneXml, xsdType=INTERNAL_LINK);
-		Equipement source;
-		Equipement cible;
+		Equipment source;
+		Equipment target;
 
 		create(required InternalLink l) {
 			xmlLink = parameters.l;
@@ -321,24 +321,24 @@ public model Ligne {
 		}
 
 		String nom values "" + xmlLink.getPropertyValue("Name");
-		String interfaceSource values "" + xmlLink.getPropertyValue("RefPartnerSideA");
-		String interfaceCible values "" + xmlLink.getPropertyValue("RefPartnerSideB");
+		String sourceInterface values "" + xmlLink.getPropertyValue("RefPartnerSideA");
+		String targetInterface values "" + xmlLink.getPropertyValue("RefPartnerSideB");
 		// "EQ-CONV-03:OUT" -> "CONV03" : the same join rule as the equipments.
-		String codeSource values this.container.codeDepuisInterface(this.interfaceSource);
-		String codeCible values this.container.codeDepuisInterface(this.interfaceCible);
+		String sourceCode values this.container.codeFromInterface(this.sourceInterface);
+		String targetCode values this.container.codeFromInterface(this.targetInterface);
 	}
 
 	/**
 	 * The federative concept. Four roles point at the actual artifact elements it joins, and every
 	 * business property below is derived from them - none is ever stored.
-	 * fiche is empty when the equipment is absent from the inventory (planted EQ-ETI-04B).
+	 * assetRecord is empty when the equipment is absent from the inventory (planted EQ-ETI-04B).
 	 */
-	public concept Equipement {
+	public concept Equipment {
 
 		// --- Roles: what this equipment IS, in each artifact ---
 		InternalElement xmlElement with XMLIndividualRole(container=ligneXml, xsdType=INTERNAL_ELEMENT);
-		FicheParc fiche;
-		Releve[0,*] releves;
+		AssetRecord assetRecord;
+		Reading[0,*] readings;
 		Intervention[0,*] interventions;
 
 		create(required InternalElement e) {
@@ -351,10 +351,10 @@ public model Ligne {
 
 		// --- Identity, from the XML side ---
 		String xmlId values "" + xmlElement.getPropertyValue("ID");
-		String code values this.container.codeDepuisXmlId(this.xmlId);
+		String code values this.container.codeFromXmlId(this.xmlId);
 
 		// XML label (topology owner) vs Excel designation (maintenance owner) deliberately differ.
-		String labelXml values "" + xmlElement.getPropertyValue("Name");
+		String xmlLabel values "" + xmlElement.getPropertyValue("Name");
 
 		// In CAEX, properties are generic <Attribute Name="…" Value="…"/> children (spec section 7).
 		// This single generic lookup is written once, and promoted below into named properties.
@@ -375,25 +375,25 @@ public model Ligne {
 		// side, readable projection on the other. Connie has no implicit String->number coercion,
 		// but a Java static call works in an FML expression.
 		String type values this.attributeValue("Type");
-		Double cadenceNominale values Double.parseDouble(this.attributeValue("CadenceNominale"));
-		Double seuilVibration values Double.parseDouble(this.attributeValue("SeuilVibration"));
-		Double seuilTemperature values Double.parseDouble(this.attributeValue("SeuilTemperaturePalier"));
+		Double nominalRate values Double.parseDouble(this.attributeValue("NominalRate"));
+		Double vibrationThreshold values Double.parseDouble(this.attributeValue("VibrationThreshold"));
+		Double bearingTemperatureThreshold values Double.parseDouble(this.attributeValue("BearingTemperatureThreshold"));
 
 		// --- Excel projection, through the filled roles ---
-		Boolean estInventorie values this.fiche != null;
-		String designationParc {
+		Boolean isInInventory values this.assetRecord != null;
+		String assetDesignation {
 			String get() {
-				if (this.fiche == null) { return null; }
-				return this.fiche.designation;
+				if (this.assetRecord == null) { return null; }
+				return this.assetRecord.designation;
 			}
 		};
 
 		// The vibration readings only, in workbook (chronological) order.
-		List<Releve> vibrations {
-			List<Releve> get() {
-				List<Releve> result = new ArrayList();
-				for (Releve r : this.releves) {
-					if (r.grandeur == "Vibration") {
+		List<Reading> vibrations {
+			List<Reading> get() {
+				List<Reading> result = new ArrayList();
+				for (Reading r : this.readings) {
+					if (r.quantity == "Vibration") {
 						result.add(r);
 					}
 				}
@@ -401,17 +401,17 @@ public model Ligne {
 			}
 		};
 
-		Double derniereVibration {
+		Double lastVibration {
 			Double get() {
 				Double last = null;
-				for (Releve r : this.vibrations) {
-					last = r.valeur;
+				for (Reading r : this.vibrations) {
+					last = r.value;
 				}
 				return last;
 			}
 		};
 
-		Intervention derniereIntervention {
+		Intervention lastIntervention {
 			Intervention get() {
 				Intervention last = null;
 				for (Intervention i : this.interventions) {
@@ -423,11 +423,11 @@ public model Ligne {
 
 		// The temperature readings, same shape as the vibrations: the model privileges no physical
 		// quantity, it federates whatever the workbook happens to record.
-		List<Releve> temperatures {
-			List<Releve> get() {
-				List<Releve> result = new ArrayList();
-				for (Releve r : this.releves) {
-					if (r.grandeur == "Température palier") {
+		List<Reading> bearingTemperatures {
+			List<Reading> get() {
+				List<Reading> result = new ArrayList();
+				for (Reading r : this.readings) {
+					if (r.quantity == "Bearing temperature") {
 						result.add(r);
 					}
 				}
@@ -435,84 +435,84 @@ public model Ligne {
 			}
 		};
 
-		Double derniereTemperature {
+		Double lastBearingTemperature {
 			Double get() {
 				Double last = null;
-				for (Releve r : this.temperatures) {
-					last = r.valeur;
+				for (Reading r : this.bearingTemperatures) {
+					last = r.value;
 				}
 				return last;
 			}
 		};
 
 		// --- Transverse derivations: the XML threshold meets the Excel measurement ---
-		Double tauxSeuil {
+		Double thresholdRatio {
 			Double get() {
-				if (this.derniereVibration == null) { return null; }
-				if (this.seuilVibration == null) { return null; }
-				return this.derniereVibration / this.seuilVibration;
+				if (this.lastVibration == null) { return null; }
+				if (this.vibrationThreshold == null) { return null; }
+				return this.lastVibration / this.vibrationThreshold;
 			}
 		};
 
 		// DEPASSEMENT (>=1) / SURVEILLANCE (>=0.8) / NORMAL, or INCONNU without a reading.
-		String statutSeuil {
+		String thresholdStatus {
 			String get() {
-				if (this.tauxSeuil == null) { return "INCONNU"; }
-				if (this.tauxSeuil >= 1.0) { return "DEPASSEMENT"; }
-				if (this.tauxSeuil >= 0.8) { return "SURVEILLANCE"; }
+				if (this.thresholdRatio == null) { return "UNKNOWN"; }
+				if (this.thresholdRatio >= 1.0) { return "EXCEEDED"; }
+				if (this.thresholdRatio >= 0.8) { return "WATCH"; }
 				return "NORMAL";
 			}
 		};
 
 		// A second, independent indicator: how hot the bearing runs against its own XML threshold.
-		// It CORROBORATES the vibration reading without entering criticiteEffective - the verdict of
+		// It CORROBORATES the vibration reading without entering effectiveCriticity - the verdict of
 		// the demo stays built on vibration and topology alone. Null when nobody measures it (ETI04A).
-		Double tauxTemperature {
+		Double temperatureRatio {
 			Double get() {
-				if (this.derniereTemperature == null) { return null; }
-				if (this.seuilTemperature == null) { return null; }
-				return this.derniereTemperature / this.seuilTemperature;
+				if (this.lastBearingTemperature == null) { return null; }
+				if (this.bearingTemperatureThreshold == null) { return null; }
+				return this.lastBearingTemperature / this.bearingTemperatureThreshold;
 			}
 		};
 
 		// Rising over the last 4 vibration readings.
-		Boolean tendanceCroissante {
+		Boolean isRising {
 			Boolean get() {
-				List<Releve> v = this.vibrations;
+				List<Reading> v = this.vibrations;
 				if (v.size < 4) { return false; }
-				Releve dernier = v.get(v.size - 1);
-				Releve reference = v.get(v.size - 4);
-				return dernier.valeur > reference.valeur;
+				Reading dernier = v.get(v.size - 1);
+				Reading reference = v.get(v.size - 4);
+				return dernier.value > reference.value;
 			}
 		};
 
-		// enDerive = rising vibration trend AND already at 80% of the threshold.
-		Boolean enDerive {
+		// isDrifting = rising vibration trend AND already at 80% of the threshold.
+		Boolean isDrifting {
 			Boolean get() {
-				if (this.tauxSeuil == null) { return false; }
-				if (this.tauxSeuil < 0.8) { return false; }
-				return this.tendanceCroissante;
+				if (this.thresholdRatio == null) { return false; }
+				if (this.thresholdRatio < 0.8) { return false; }
+				return this.isRising;
 			}
 		};
 
-		// --- Topology, read off the Liaison graph: never declared, always derived ---
-		List<Equipement> successeurs {
-			List<Equipement> get() {
-				List<Equipement> result = new ArrayList();
-				for (Liaison l : this.container.getLiaisons()) {
+		// --- Topology, read off the MaterialLink graph: never declared, always derived ---
+		List<Equipment> successors {
+			List<Equipment> get() {
+				List<Equipment> result = new ArrayList();
+				for (MaterialLink l : this.container.getMaterialLinks()) {
 					if (l.source == this) {
-						result.add(l.cible);
+						result.add(l.target);
 					}
 				}
 				return result;
 			}
 		};
 
-		List<Equipement> predecesseurs {
-			List<Equipement> get() {
-				List<Equipement> result = new ArrayList();
-				for (Liaison l : this.container.getLiaisons()) {
-					if (l.cible == this) {
+		List<Equipment> predecessors {
+			List<Equipment> get() {
+				List<Equipment> result = new ArrayList();
+				for (MaterialLink l : this.container.getMaterialLinks()) {
+					if (l.target == this) {
 						result.add(l.source);
 					}
 				}
@@ -520,73 +520,73 @@ public model Ligne {
 			}
 		};
 
-		Boolean estEntree values this.predecesseurs.size == 0;
-		Boolean estSortie values this.successeurs.size == 0;
+		Boolean isEntry values this.predecessors.size == 0;
+		Boolean isExit values this.successors.size == 0;
 
 		// Critical iff removing it makes the exit unreachable from the entry. THE derived property
 		// of the demo: nothing in either artifact declares it.
-		Boolean estCritique {
+		Boolean isCritical {
 			Boolean get() {
-				List<Equipement> accessibles = this.container.accessiblesDepuisEntreeSans(this);
-				return !accessibles.contains(this.container.getSortie());
+				List<Equipment> accessibles = this.container.reachableFromEntryWithout(this);
+				return !accessibles.contains(this.container.getExit());
 			}
 		};
 
-		Boolean estGoulot values this.container.getGoulot() == this;
+		Boolean isBottleneck values this.container.getBottleneck() == this;
 
-		// criticiteEffective = estCritique AND enDerive, aggravated when it is the bottleneck.
+		// effectiveCriticity = isCritical AND isDrifting, aggravated when it is the bottleneck.
 		// This is the property no single artifact can produce.
-		String criticiteEffective {
+		String effectiveCriticity {
 			String get() {
-				if (!this.enDerive) { return "NORMALE"; }
-				if (!this.estCritique) { return "A_SURVEILLER"; }
-				if (this.estGoulot) { return "CRITIQUE_GOULOT"; }
-				return "CRITIQUE";
+				if (!this.isDrifting) { return "NORMAL"; }
+				if (!this.isCritical) { return "TO_WATCH"; }
+				if (this.isBottleneck) { return "CRITICAL_BOTTLENECK"; }
+				return "CRITICAL";
 			}
 		};
 
 		// --- Where this equipment sits in the maintenance queue ---
-		int rangPriorite {
+		int priorityRank {
 			int get() {
-				if (this.criticiteEffective == "CRITIQUE_GOULOT") { return 3; }
-				if (this.criticiteEffective == "CRITIQUE") { return 2; }
-				if (this.criticiteEffective == "A_SURVEILLER") { return 1; }
+				if (this.effectiveCriticity == "CRITICAL_BOTTLENECK") { return 3; }
+				if (this.effectiveCriticity == "CRITICAL") { return 2; }
+				if (this.effectiveCriticity == "TO_WATCH") { return 1; }
 				return 0;
 			}
 		};
 
 		// Worth acting on = critical AND drifting. "Watch it" is not an intervention.
-		Boolean estPrioriteActionnable values this.rangPriorite >= 2;
+		Boolean isActionablePriority values this.priorityRank >= 2;
 
-		Double tauxOuZero {
+		Double ratioOrZero {
 			Double get() {
-				if (this.tauxSeuil == null) { return 0.0; }
-				return this.tauxSeuil;
+				if (this.thresholdRatio == null) { return 0.0; }
+				return this.thresholdRatio;
 			}
 		};
 
 		// --- Live manipulations, carried by the equipment they concern ---
 
 		// Manipulation 2 - append one vibration reading to the workbook, then re-attach the
-		// structure so it enters this equipment's "releves" role. Every derived value follows.
-		ajouterReleveVibration(Double valeur, String operateur) {
+		// structure so it enters this equipment's "readings" role. Every derived value follows.
+		addVibrationReading(Double value, String operator) {
 			// Bind the cast to a local first: a cast used directly as a method receiver loses the
 			// receiver in the binding analyzer.
-			XLSVirtualModelInstance xls = (XLSVirtualModelInstance) this.container.exploitation;
-			Releve r = (Releve) xls.createReflectedInstance("Releve");
+			XLSVirtualModelInstance xls = (XLSVirtualModelInstance) this.container.maintenance;
+			Reading r = (Reading) xls.createReflectedInstance("Reading");
 			r.code = this.code;
-			r.grandeur = "Vibration";
-			r.valeur = parameters.valeur;
-			r.unite = "mm/s";
-			r.operateur = parameters.operateur;
+			r.quantity = "Vibration";
+			r.value = parameters.value;
+			r.unit = "mm/s";
+			r.operator = parameters.operator;
 			this.container.synchronize();
 		}
 
-		// Manipulation 2 - project the derived criticity into the Parc sheet (column H, left free
+		// Manipulation 2 - project the derived criticity into the Assets sheet (column H, left free
 		// for this). A projection SINK: the twin writes it out, it never reads it back as a source.
-		ecrireCriticiteDansFiche() {
-			if (this.fiche == null) { return; }
-			this.fiche.criticite = this.criticiteEffective;
+		writeCriticityToAssetRecord() {
+			if (this.assetRecord == null) { return; }
+			this.assetRecord.criticity = this.effectiveCriticity;
 		}
 	}
 }

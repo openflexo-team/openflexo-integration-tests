@@ -3,43 +3,43 @@
 // DEP01 -> REM02 -> ETI04A -> ENC05 that avoids CONV03. CONV03 ceases to be critical while its
 // vibration stays above threshold: the alert does NOT disappear, it DE-CLASSES (from a line-stop
 // risk to an intervention to schedule at the next planned stop).
-// Applied in memory; ligne.xml is untouched.
+// Applied in memory; production-line.xml is untouched.
 
-vm = load -r ["http://openflexo.org/digital-twin-demo/FML/Ligne.fml"];
-xmlRes = load -r ["http://openflexo.org/digital-twin-demo/ligne.xml"];
-xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/exploitation.xlsx"];
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance.xlsx"];
 service ResourceCenterService add_temp_rc;
-ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="lineL2");
 
-conv = ligne.getEquipementParCode("CONV03");
-eti = ligne.getEquipementParCode("ETI04A");
+conv = line.getEquipmentByCode("CONV03");
+eti = line.getEquipmentByCode("ETI04A");
 
 // --- Before: CONV03 is the critical bottleneck ---
-log "BEFORE CONV03 critique=" + conv.estCritique + " criticite=" + conv.criticiteEffective;
-assert ligne.getLiaisons().size == 6;
-assert eti.predecesseurs.size == 1;
-assert conv.estCritique == true;
-assert conv.criticiteEffective == "CRITIQUE_GOULOT";
-assert ligne.getPrioriteMax().code == "CONV03";
+log "BEFORE CONV03 critique=" + conv.isCritical + " criticity=" + conv.effectiveCriticity;
+assert line.getMaterialLinks().size == 6;
+assert eti.predecessors.size == 1;
+assert conv.isCritical == true;
+assert conv.effectiveCriticity == "CRITICAL_BOTTLENECK";
+assert line.getTopPriority().code == "CONV03";
 
 // --- Manipulation: add the L7 bypass ---
-ligne.addBypassL7();
+line.addBypassL7();
 
-// --- After: one more Liaison, and ETI04A is now fed from two places ---
-assert ligne.getLiaisons().size == 7;
-assert eti.predecesseurs.size == 2;
+// --- After: one more MaterialLink, and ETI04A is now fed from two places ---
+assert line.getMaterialLinks().size == 7;
+assert eti.predecessors.size == 2;
 
 // CONV03 is no longer critical, but its vibration has not moved
-log "AFTER  CONV03 critique=" + conv.estCritique
-	+ " enDerive=" + conv.enDerive
-	+ " criticite=" + conv.criticiteEffective;
-assert conv.estCritique == false;
-assert conv.derniereVibration == 4.2;
-assert conv.enDerive == true;
-assert conv.statutSeuil == "SURVEILLANCE";
+log "AFTER  CONV03 critique=" + conv.isCritical
+	+ " isDrifting=" + conv.isDrifting
+	+ " criticity=" + conv.effectiveCriticity;
+assert conv.isCritical == false;
+assert conv.lastVibration == 4.2;
+assert conv.isDrifting == true;
+assert conv.thresholdStatus == "WATCH";
 // the alert de-classes, it does not vanish
-assert conv.criticiteEffective == "A_SURVEILLER";
+assert conv.effectiveCriticity == "TO_WATCH";
 // and CONV03 leaves the actionable priority set
-assert conv.estPrioriteActionnable == false;
+assert conv.isActionablePriority == false;
 
 log "Test PASSED: J6 Manip3 - CONV03 de-classes CRITIQUE_GOULOT -> A_SURVEILLER (re-scoped, not cleared)";

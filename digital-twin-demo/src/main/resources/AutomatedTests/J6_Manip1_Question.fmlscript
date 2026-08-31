@@ -2,37 +2,37 @@
 // "Which equipment should maintenance address first?" The three possible readings disagree,
 // and that disagreement is the whole point of federating the two artifacts.
 
-vm = load -r ["http://openflexo.org/digital-twin-demo/FML/Ligne.fml"];
-xmlRes = load -r ["http://openflexo.org/digital-twin-demo/ligne.xml"];
-xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/exploitation.xlsx"];
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance.xlsx"];
 service ResourceCenterService add_temp_rc;
-ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="lineL2");
 
-conv = ligne.getEquipementParCode("CONV03");
-eti = ligne.getEquipementParCode("ETI04A");
+conv = line.getEquipmentByCode("CONV03");
+eti = line.getEquipmentByCode("ETI04A");
 
 // Reading 1 - the workbook alone, raw vibration: ETI04A is by far the most vibrating -> WRONG.
-log "raw vibration ETI04A=" + eti.derniereVibration + " CONV03=" + conv.derniereVibration;
-assert eti.derniereVibration > conv.derniereVibration;
+log "raw vibration ETI04A=" + eti.lastVibration + " CONV03=" + conv.lastVibration;
+assert eti.lastVibration > conv.lastVibration;
 
 // Reading 2 - plus the XML thresholds: both at ~93% -> a tie, no decision possible.
-log "tauxSeuil CONV03=" + conv.tauxSeuil + " ETI04A=" + eti.tauxSeuil;
-assert conv.tauxSeuil > 0.92;
-assert conv.tauxSeuil < 0.94;
-assert eti.tauxSeuil > 0.92;
-assert eti.tauxSeuil < 0.94;
+log "thresholdRatio CONV03=" + conv.thresholdRatio + " ETI04A=" + eti.thresholdRatio;
+assert conv.thresholdRatio > 0.92;
+assert conv.thresholdRatio < 0.94;
+assert eti.thresholdRatio > 0.92;
+assert eti.thresholdRatio < 0.94;
 
 // Reading 3 - plus the topology: ETI04A is doubled by ETI04B, CONV03 is the bottleneck nothing
 // bypasses -> CONV03, unambiguously.
-log "ETI04A doublee par " + eti.predecesseurs.get(0).successeurs.size + " branches paralleles";
-assert eti.estCritique == false;
-assert conv.estCritique == true;
-assert conv.estGoulot == true;
+log "ETI04A doublee par " + eti.predecessors.get(0).successors.size + " branches paralleles";
+assert eti.isCritical == false;
+assert conv.isCritical == true;
+assert conv.isBottleneck == true;
 
-log "prioritized=" + ligne.getCodesPrioritaires();
-assert ligne.getPrioriteMax().code == "CONV03";
-assert ligne.getPrioritesActionnables().size == 1;
-assert ligne.getPrioritesActionnables().get(0).code == "CONV03";
-assert eti.estPrioriteActionnable == false;
+log "prioritized=" + line.getPrioritizedCodes();
+assert line.getTopPriority().code == "CONV03";
+assert line.getActionablePriorities().size == 1;
+assert line.getActionablePriorities().get(0).code == "CONV03";
+assert eti.isActionablePriority == false;
 
 log "Test PASSED: J6 Manip1 - federation resolves the tie: CONV03, not ETI04A";

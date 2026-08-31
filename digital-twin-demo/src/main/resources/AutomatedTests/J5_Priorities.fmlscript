@@ -4,31 +4,31 @@
 //   - ETI04A is NOT in the actionable priorities, despite the HIGHEST raw vibration (6.5 > 4.2),
 //     because topology makes it non-critical. This is the whole argument of the demo.
 
-vm = load -r ["http://openflexo.org/digital-twin-demo/FML/Ligne.fml"];
-xmlRes = load -r ["http://openflexo.org/digital-twin-demo/ligne.xml"];
-xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/exploitation.xlsx"];
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance.xlsx"];
 service ResourceCenterService add_temp_rc;
-ligne = new Ligne(xmlRes.resource, xlsxRes.resource) with (name="ligneL2");
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="lineL2");
 
-conv = ligne.getEquipementParCode("CONV03");
-eti = ligne.getEquipementParCode("ETI04A");
+conv = line.getEquipmentByCode("CONV03");
+eti = line.getEquipmentByCode("ETI04A");
 
-log "prioritized = " + ligne.getCodesPrioritaires();
-log "actionable  = " + ligne.getPrioritesActionnables().size + " equipement(s)";
+log "prioritized = " + line.getPrioritizedCodes();
+log "actionable  = " + line.getActionablePriorities().size + " equipement(s)";
 
 // The naive reading (raw vibration) would put ETI04A first...
-assert eti.derniereVibration > conv.derniereVibration;
+assert eti.lastVibration > conv.lastVibration;
 
 // ...but the federated model puts CONV03 on top.
-assert ligne.getPrioriteMax().code == "CONV03";
-assert ligne.getCodesPrioritaires().get(0) == "CONV03";
+assert line.getTopPriority().code == "CONV03";
+assert line.getPrioritizedCodes().get(0) == "CONV03";
 
 // Actionable priorities = { CONV03 } only. ETI04A is deliberately excluded.
-assert ligne.getPrioritesActionnables().size == 1;
-assert ligne.getPrioritesActionnables().get(0).code == "CONV03";
-assert conv.estPrioriteActionnable == true;
-assert conv.rangPriorite == 3;
-assert eti.estPrioriteActionnable == false;
-assert eti.rangPriorite == 1;
+assert line.getActionablePriorities().size == 1;
+assert line.getActionablePriorities().get(0).code == "CONV03";
+assert conv.isActionablePriority == true;
+assert conv.priorityRank == 3;
+assert eti.isActionablePriority == false;
+assert eti.priorityRank == 1;
 
 log "Test PASSED: J5 - CONV03 top priority, ETI04A excluded despite higher raw vibration";

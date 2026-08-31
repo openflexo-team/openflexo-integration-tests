@@ -56,7 +56,7 @@ import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
 /**
- * Checks that the DigitalTwinDemo "Ligne" VirtualModel is FML-valid, i.e. that loading it in the
+ * Checks that the DigitalTwinDemo "ProductionLine" VirtualModel is FML-valid, i.e. that loading it in the
  * interactive tool raises no validation error. The J0-J6 {@code .fmlscript} suite proves business
  * values by execution but never runs the {@link ValidationModel} over the compilation unit, so this
  * test closes that gap: it runs the very same {@code FMLValidationModel} the interactive tool uses
@@ -67,7 +67,7 @@ import org.openflexo.test.TestOrder;
 @RunWith(OrderedRunner.class)
 public class DigitalTwinValidationTest extends OpenflexoTestCase {
 
-	static final String VM_URI = "http://openflexo.org/digital-twin-demo/FML/Ligne.fml";
+	static final String VM_URI = "http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml";
 
 	static VirtualModel vm;
 
@@ -77,7 +77,7 @@ public class DigitalTwinValidationTest extends OpenflexoTestCase {
 		instanciateTestServiceManager(XMLTechnologyAdapter.class, ExcelTechnologyAdapter.class);
 		VirtualModelLibrary vpLib = serviceManager.getVirtualModelLibrary();
 		vm = vpLib.getVirtualModel(VM_URI);
-		assertNotNull("Ligne VM not found by URI " + VM_URI, vm);
+		assertNotNull("ProductionLine VM not found by URI " + VM_URI, vm);
 	}
 
 	@Test
@@ -94,7 +94,7 @@ public class DigitalTwinValidationTest extends OpenflexoTestCase {
 					+ "  >> " + describe(issue.getValidable()));
 		}
 
-		assertEquals("Ligne VM must load without FML validation error", 0, report.getErrorsCount());
+		assertEquals("ProductionLine VM must load without FML validation error", 0, report.getErrorsCount());
 	}
 
 	private static String describe(Object o) {
