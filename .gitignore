@@ -1,6 +1,7 @@
 **/out/
 **/target
 **/build
+**/bin
 *.ipr
 *.idea
 *.iws
@@ -15,3 +16,4 @@
 /infer-out/
 **/*~
 .java-version
+**/.metadata
