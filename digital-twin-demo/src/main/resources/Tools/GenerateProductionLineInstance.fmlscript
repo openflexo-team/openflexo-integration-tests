@@ -1,0 +1,24 @@
+// Generator script for the serialized ProductionLine instance committed under INSTANCES/.
+// Run through ProductionLineInstanceGenerator (see src/test/java), which points the command
+// interpreter's working directory at <resource center>/INSTANCES, so that the instance is created
+// INSIDE the demo's resource center and its resource URI is the portable
+// "http://openflexo.org/digital-twin-demo/INSTANCES/lineL2.fml.rt" - not a file: path.
+//
+// This is NOT part of the automated suite: it writes a resource, it does not assert anything.
+
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+assert vm != null;
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
+assert xmlRes != null;
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance.xlsx"];
+assert xlsxRes != null;
+
+// The creation scheme mounts both model slots and runs synchronize(), so the instance is fully
+// attached before it is written out.
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="lineL2");
+assert line != null;
+assert line.getEquipments().size == 6;
+assert line.getMaterialLinks().size == 6;
+
+line.resource.save();
+log "Instance written to " + line.resource;

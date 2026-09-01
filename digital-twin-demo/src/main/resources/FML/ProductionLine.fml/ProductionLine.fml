@@ -223,8 +223,7 @@ public model ProductionLine {
 				}
 			}
 		}
-      log "Bottleneck: " + bottleneck;
-		return bottleneck;
+ 		return bottleneck;
 	}
 
 	// =========================================================================
@@ -265,6 +264,7 @@ public model ProductionLine {
 				}
 			}
 		}
+      log "top priority : " + best;
 		return best;
 	}
 
@@ -571,6 +571,10 @@ public model ProductionLine {
 		};
 
 		// --- Live manipulations, carried by the equipment they concern ---
+
+      public addImpactingVibrationReading() {
+         this.addVibrationReading(4.9,"MPR");
+      }
 
 		// Manipulation 2 - append one vibration reading to the workbook, then re-attach the
 		// structure so it enters this equipment's "readings" role. Every derived value follows.

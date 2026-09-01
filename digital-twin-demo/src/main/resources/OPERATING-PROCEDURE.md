@@ -1,7 +1,8 @@
 # DigitalTwinDemo — operating procedure
 
 Step-by-step guide to run the demo and replay the three live manipulations. The functional
-source of truth is `specification-demo.md`; this file is the how-to.
+source of truth is `specification-demo.md`; this file is the how-to; and `DEMO-SCRIPT.md` is the
+presenter's run sheet — what to do and what to say, step by step.
 
 ## What was built
 
