@@ -27,6 +27,7 @@ public model MaintenanceRecords {
 
 	// One reflected instance per timestamped reading in the "Readings" sheet.
 	@DataRange(sheet="Readings", rows="1,*", cols="0,5")
+	@Renderer("" + code + "(" + this.quantity + "=" + this.value + ")")
 	public concept Reading {
 		@Property(col="0")
 		Date date;
@@ -46,6 +47,7 @@ public model MaintenanceRecords {
 
 	// One reflected instance per maintenance operation in the "Interventions" sheet.
 	@DataRange(sheet="Interventions", rows="1,*", cols="0,4")
+   @Renderer("" + code + "=>" + description)
 	public concept Intervention {
 		@Property(col="0")
 		Date date;
@@ -62,6 +64,7 @@ public model MaintenanceRecords {
 
 	// One reflected instance per inventoried equipment in the "Assets" sheet.
 	@DataRange(sheet="Assets", rows="4,*", cols="0,7")
+   @Renderer("AssetRecord " + code)
 	public concept AssetRecord {
 		@Property(col="0")
 		String code;

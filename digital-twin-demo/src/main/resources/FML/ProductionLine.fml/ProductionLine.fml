@@ -30,6 +30,7 @@
 
 use org.openflexo.technologyadapter.xml.XMLModelSlot as XML;
 use org.openflexo.technologyadapter.excel.FMLExcelModelSlot as XLS;
+use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
 
 import org.openflexo.technologyadapter.xml.model.typed.XMLModel;
 import org.openflexo.technologyadapter.xml.model.typed.XMLIndividual;
@@ -40,6 +41,7 @@ import org.openflexo.technologyadapter.excel.fml.reflect.rt.XLSVirtualModelInsta
 import java.lang.Double;
 import java.util.List;
 import java.util.ArrayList;
+import java.lang.String;
 
 // The annotated VirtualModel that types the maintenance workbook (Reading / AssetRecord / Intervention).
 import ["http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml"];
@@ -90,12 +92,12 @@ public model ProductionLine {
 			}
 			// A multiple role is filled one element at a time; the membership guard is what makes
 			// re-running this behaviour idempotent (a bare add would pile the readings up again).
-			for (Reading r : select Reading from (maintenance) where (selected.code == eq.code)) {
+			for (Reading r : select Reading from maintenance where (selected.code == eq.code)) {
 				if (!eq.readings.contains(r)) {
 					eq.readings.add(r);
 				}
 			}
-			for (Intervention i : select Intervention from (maintenance) where (selected.code == eq.code)) {
+			for (Intervention i : select Intervention from maintenance where (selected.code == eq.code)) {
 				if (!eq.interventions.contains(i)) {
 					eq.interventions.add(i);
 				}
@@ -133,18 +135,18 @@ public model ProductionLine {
 
 	// --- Excel side (typed through the MaintenanceRecords reflected VMI) ---
 	public AssetRecord getAssetRecord(String code) {
-		return select unique AssetRecord from (maintenance) where (selected.code == parameters.code);
+		return select unique AssetRecord from maintenance where (selected.code == parameters.code);
 	}
 
 	public List<Intervention> getInterventions() {
-		return select Intervention from (maintenance);
+		return select Intervention from maintenance;
 	}
 
 	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes (spec section 2).
 	// Behaviour parameters are read via "parameters.".
 	public String codeFromXmlId(String xmlId) {
-		String withoutPrefix = parameters.xmlId.replace("EQ-", "");
-		return withoutPrefix.replace("-", "");
+		String withoutPrefix = parameters.xmlId.replace("EQ-","");
+		return withoutPrefix.replace("-","");
 	}
 
 	// --- Federation ---
@@ -164,7 +166,7 @@ public model ProductionLine {
 	// Equipment code owning an interface id, e.g. "EQ-CONV-03:OUT" -> "CONV03".
 	public String codeFromInterface(String iface) {
 		int idx = parameters.iface.indexOf(":");
-		String xmlId = parameters.iface.substring(0, idx);
+		String xmlId = parameters.iface.substring(0,idx);
 		return this.codeFromXmlId(xmlId);
 	}
 
@@ -221,6 +223,7 @@ public model ProductionLine {
 				}
 			}
 		}
+      log "Bottleneck: " + bottleneck;
 		return bottleneck;
 	}
 
@@ -242,11 +245,11 @@ public model ProductionLine {
 		for (Equipment candidate : select Equipment from this) {
 			int position = 0;
 			for (Equipment ranked : ordered) {
-				if (this.hasHigherPriorityThan(ranked, candidate)) {
+				if (this.hasHigherPriorityThan(ranked,candidate)) {
 					position = position + 1;
 				}
 			}
-			ordered.add(position, candidate);
+			ordered.add(position,candidate);
 		}
 		return ordered;
 	}
@@ -257,7 +260,7 @@ public model ProductionLine {
 			if (best == null) {
 				best = eq;
 			} else {
-				if (this.hasHigherPriorityThan(eq, best)) {
+				if (this.hasHigherPriorityThan(eq,best)) {
 					best = eq;
 				}
 			}
@@ -295,9 +298,9 @@ public model ProductionLine {
 	public addBypassL7() {
 		XMLComplexType linkType = ligneXml.metaModel.getComplexTypeFromURI("http://www.dke.de/CAEX#InternalLinkType");
 		XMLIndividual l7 = ligneXml.addNewIndividual(linkType);
-		l7.setPropertyValue("Name", "L7");
-		l7.setPropertyValue("RefPartnerSideA", "EQ-REM-02:OUT");
-		l7.setPropertyValue("RefPartnerSideB", "EQ-ETI-04A:IN");
+		l7.setPropertyValue("Name","L7");
+		l7.setPropertyValue("RefPartnerSideA","EQ-REM-02:OUT");
+		l7.setPropertyValue("RefPartnerSideB","EQ-ETI-04A:IN");
 		this.synchronize();
 	}
 
@@ -307,11 +310,12 @@ public model ProductionLine {
 	 * shared (EQ-CONV-03:OUT carries both L3 and L4), which is why the graph is navigated through
 	 * the links rather than through the interfaces.
 	 */
-	public concept MaterialLink {
+   @Renderer("MaterialLink " + this.source.code + "-" + this.target.code)
+ 	public concept MaterialLink {
 
 		InternalLink xmlLink with XMLIndividualRole(container=ligneXml, xsdType=INTERNAL_LINK);
-		Equipment source;
-		Equipment target;
+		Equipment source with ConceptInstance();
+		Equipment target with ConceptInstance();
 
 		create(required InternalLink l) {
 			xmlLink = parameters.l;
@@ -333,13 +337,14 @@ public model ProductionLine {
 	 * business property below is derived from them - none is ever stored.
 	 * assetRecord is empty when the equipment is absent from the inventory (planted EQ-ETI-04B).
 	 */
-	public concept Equipment {
+    @Renderer("Equipment " + this.code)
+    public concept Equipment {
 
 		// --- Roles: what this equipment IS, in each artifact ---
 		InternalElement xmlElement with XMLIndividualRole(container=ligneXml, xsdType=INTERNAL_ELEMENT);
-		AssetRecord assetRecord;
-		Reading[0,*] readings;
-		Intervention[0,*] interventions;
+		AssetRecord assetRecord with ConceptInstance();
+		Reading[0,*] readings with ConceptInstance();
+		Intervention[0,*] interventions with ConceptInstance();
 
 		create(required InternalElement e) {
 			xmlElement = parameters.e;
@@ -569,11 +574,11 @@ public model ProductionLine {
 
 		// Manipulation 2 - append one vibration reading to the workbook, then re-attach the
 		// structure so it enters this equipment's "readings" role. Every derived value follows.
-		addVibrationReading(Double value, String operator) {
+		addVibrationReading(double value, String operator) {
 			// Bind the cast to a local first: a cast used directly as a method receiver loses the
 			// receiver in the binding analyzer.
-			XLSVirtualModelInstance xls = (XLSVirtualModelInstance) this.container.maintenance;
-			Reading r = (Reading) xls.createReflectedInstance("Reading");
+			XLSVirtualModelInstance xls = (XLSVirtualModelInstance)this.container.maintenance;
+			Reading r = (Reading)xls.createReflectedInstance("Reading");
 			r.code = this.code;
 			r.quantity = "Vibration";
 			r.value = parameters.value;
