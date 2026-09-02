@@ -18,7 +18,11 @@
  * assigns its one COBOL-capable actor by itself. That last rule is the demo's punchline: the
  * domain metamodel, not the generic one, knows who can write COBOL.
  *
- * Migrated from the legacy MULTIProcessChallenge.prj. See MIGRATION.md for what was pruned.
+ * Migrated from the legacy MULTIProcessChallenge.prj and rewritten in 2.99 FML. Two legacy idioms
+ * did not survive: the stringly-typed tests on `actorType.concept.name` became `instanceof`
+ * (`concept` is now a grammar keyword and no longer parses in a binding path), and the COBOL rule
+ * was dead code - it compared the FlexoConcept name of a language instance, which was always
+ * "ProgrammingLanguage", so the branch never fired. The language now carries its own name.
  */
 
 import ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];

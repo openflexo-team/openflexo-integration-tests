@@ -24,9 +24,17 @@
  * (see the virtualModelInstance=container / container.container qualifiers on the roles); the
  * nesting is a namespacing and ownership statement, not a containment of instances.
  *
- * Migrated from the legacy MULTIProcessChallenge.prj (.fml.xml serialization, 2021). The model
- * layer declares NO model slot: it is pure FML, which is why this module needs no technology
- * adapter. See MIGRATION.md for what was pruned and which bugs were fixed on the way.
+ * Migrated from the legacy MULTIProcessChallenge.prj (.fml.xml serialization, 2021) and rewritten
+ * by hand in 2.99 FML - the textual .fml files shipped next to that XML were 2022 pretty-prints in
+ * a syntax that no longer parses. The model layer declares NO model slot: it is pure FML, which is
+ * why this module needs no technology adapter.
+ *
+ * Pruned on the way: @UI annotations, display-only derived properties, notify actions with an empty
+ * expression, and accessors only the diagram editors used. Fixed on the way: an OrJoin that could
+ * never fire (its guard returned false on the completed branch), artifacts created with a bare
+ * parameter name (which Connie resolves to null, so every one of them was unnamed), an assignment
+ * used as a condition, and two remove* behaviours whose parameter was typed Gateway while used as
+ * a TaskType.
  */
 
 import java.util.Date;
