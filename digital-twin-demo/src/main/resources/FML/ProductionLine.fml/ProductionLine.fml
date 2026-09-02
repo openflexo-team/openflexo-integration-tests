@@ -38,6 +38,7 @@ import org.openflexo.technologyadapter.xml.metamodel.XSDMetaModel;
 import org.openflexo.technologyadapter.xml.metamodel.XMLComplexType;
 import org.openflexo.technologyadapter.excel.model.ExcelWorkbook;
 import org.openflexo.technologyadapter.excel.fml.reflect.rt.XLSVirtualModelInstance;
+import org.openflexo.foundation.fml.rt.FMLRTVirtualModelInstance;
 import java.lang.Double;
 import java.util.List;
 import java.util.ArrayList;
@@ -66,6 +67,32 @@ public model ProductionLine {
 	create(Resource<XMLModel> xmlResource, Resource<ExcelWorkbook> xlsxResource) {
 		connect ligneXml using parameters.xmlResource;
 		connect maintenance using parameters.xlsxResource;
+		this.synchronize();
+	}
+
+	// The workbook was edited OUTSIDE Openflexo (someone typed a new reading in Excel). Re-read it
+	// and re-attach the structure, without restarting: refreshModelSlot() throws away the reflected
+	// view of maintenance.xlsx so it is rebuilt from the file on the next access, and synchronize()
+	// then re-attaches the roles - which is NOT optional, since Equipment.readings still holds the
+	// instances built from the previous read until it runs. Every derived value follows on its own.
+	public refresh() {
+		// Bind the cast to a local first: refreshModelSlot() is a platform method of
+		// FMLRTVirtualModelInstance, not an FML property, so "this" has to be seen as its Java type
+		// for the call to resolve - same trick as the XLSVirtualModelInstance cast in
+		// Equipment.addVibrationReading().
+		FMLRTVirtualModelInstance vmi = (FMLRTVirtualModelInstance) this;
+		vmi.refreshModelSlot("maintenance");
+		// Then drop the structure entirely and let synchronize() rebuild it. It cannot simply be
+		// re-run: refreshing rebuilds the reflected instances as NEW objects, so the membership guard
+		// in synchronizeEquipments() ("if (!eq.readings.contains(r))") recognizes none of the ones the
+		// roles already hold - it would pile the fresh readings ON TOP of the stale ones, doubling
+		// every multiple role. Deleting first is blunt but keeps the result exact.
+		for (Equipment eq : select Equipment from this) {
+			delete eq;
+		}
+		for (MaterialLink l : select MaterialLink from this) {
+			delete l;
+		}
 		this.synchronize();
 	}
 

@@ -1,0 +1,91 @@
+// J7 - a serialized ProductionLine instance comes back whole.
+//
+// Unlike J0-J6, this script instantiates NOTHING: it loads the instance committed under
+// INSTANCES/lineL2.fml.rt and re-checks, on the reloaded instance, the business values J2/J3/J5
+// prove in memory. The point is that federation survives serialization: the roles pointing into
+// BOTH artifacts are restored, so every derived value follows.
+//
+// Regenerate the instance with ProductionLineInstanceGenerator (see src/test/java) after any change
+// to ProductionLine.fml, production-line.xml or maintenance.xlsx that alters what it holds.
+//
+// Three defects had to be fixed to get here, all three worth knowing when writing FML that persists:
+//   D1  a reflected model slot ("maintenance") is a live view over a foreign artifact and is never
+//       serialized - only the reflected resource URI is. It is now rebuilt on demand through
+//       ReflectedFMLRTModelSlot.reflectVirtualModelInstance().
+//   D2  an XMLIndividualRole had no serializable identity: XMLModelSlot.getURIForObject() needs an
+//       XMLURIProcessor, and textual FML has no syntax to declare one. Individuals now fall back on
+//       a POSITIONAL uri ("xmlpath:/0/2" = child 2 of child 0 of the root). Simple, and deliberately
+//       not robust: inserting or removing an element in production-line.xml shifts the path of
+//       everything after it, and this instance must then be regenerated - which is exactly what the
+//       xmlId assertions below would catch.
+//   D3  XLSObjectActorReference now resolves reflected Excel instances by (concept, row number).
+//       Those instances are rebuilt from the workbook, so they are NOT the same objects as before
+//       serialization - only the row they sit on is stable.
+
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+assert vm != null;
+
+// The serialized instance. Its resource URI carries no INSTANCES/ segment: the resource center
+// derives the URI from the resource name, not from the folder it sits in.
+inst = load -r ["http://openflexo.org/digital-twin-demo/lineL2.fml.rt"];
+assert inst != null;
+// Cast required: load returns the resource data, statically typed FMLRTVirtualModelInstance, so
+// without it "line.ligneXml" is rejected as an unresolved path element before the script even runs.
+line = (ProductionLine) inst;
+
+// --- Structure and both model slots ---
+assert line.getEquipments().size == 6;
+assert line.getMaterialLinks().size == 6;
+assert line.ligneXml != null;
+assert line.maintenance != null;
+
+// --- The join still works, so equipments are addressable by code again (this is what collapsed
+// when the XML roles were lost: "code" is derived from xmlElement) ---
+conv = line.getEquipmentByCode("CONV03");
+assert conv != null;
+
+// Role 1 - the InternalElement of the XML. Asserting the DERIVED values, not just non-nullity:
+// they prove the positional URI resolved to the RIGHT element, not merely to some element.
+assert conv.xmlElement != null;
+assert conv.xmlId == "EQ-CONV-03";
+assert conv.code == "CONV03";
+assert conv.xmlLabel == "TransferConveyor";
+assert conv.type == "Conveyor";
+assert conv.nominalRate == 950.0;
+assert conv.vibrationThreshold == 4.5;
+
+// Role 2 - its row in the "Assets" sheet
+assert conv.assetRecord != null;
+assert conv.assetRecord.code == "CONV03";
+assert conv.assetDesignation == "Labeller transfer conveyor";
+
+// Roles 3 and 4 - its readings and its maintenance operations
+assert conv.readings.size == 14;
+assert conv.vibrations.size == 7;
+assert conv.interventions.size == 1;
+assert conv.lastIntervention.type == "Preventive";
+
+// The planted inconsistency survives as an inconsistency: in the XML, absent from the inventory.
+eti04b = line.getEquipmentByCode("ETI04B");
+assert eti04b != null;
+assert eti04b.isInInventory == false;
+assert eti04b.assetRecord == null;
+assert eti04b.readings.size == 0;
+
+// --- Topology: the MaterialLink graph is restored too, ends included ---
+link = line.getMaterialLinks().get(0);
+assert link.xmlLink != null;
+assert link.source != null;
+assert link.target != null;
+assert line.getEntry() != null;
+assert line.getExit() != null;
+
+// --- And the transverse verdict, rebuilt from the reloaded instance alone ---
+assert conv.isCritical == true;
+assert conv.isBottleneck == true;
+assert line.getEquipmentByCode("ETI04A").isCritical == false;
+assert line.getTopPriority().code == "CONV03";
+assert line.getActionablePriorities().size == 1;
+assert line.getActionablePriorities().get(0).code == "CONV03";
+
+log "Test PASSED: J7 - the serialized instance reloads whole, XML and Excel roles included";

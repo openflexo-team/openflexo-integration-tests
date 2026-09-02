@@ -1,0 +1,27 @@
+// Hot-reload scenario, part 1 of 2 - see ExternalWorkbookEditTest (src/test/java).
+// Mounts the demo on a THROWAWAY COPY of the workbook (maintenance-hotreload.xlsx), so the test can
+// edit that file behind Openflexo's back without disturbing the other tests, which read the real one.
+// Part 2 runs on the same command interpreter, and therefore on the same "line" variable.
+
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+assert vm != null;
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
+assert xmlRes != null;
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance-hotreload.xlsx"];
+assert xlsxRes != null;
+
+service ResourceCenterService add_temp_rc;
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="hotReload");
+assert line != null;
+
+// State before the external edit. Counts are captured, NOT hard-coded: what this scenario proves is
+// that refresh() picks up one added row, whatever the workbook held to begin with. (It also holds
+// whatever J6_Manip2 wrote into build/resources during an earlier run - see the test's javadoc.)
+conv = line.getEquipmentByCode("CONV03");
+assert conv != null;
+readingsBefore = conv.readings.size;
+vibrationsBefore = conv.vibrations.size;
+assert readingsBefore > 0;
+assert vibrationsBefore > 0;
+log "before external edit: readings=" + readingsBefore + " vibrations=" + vibrationsBefore
+	+ " lastVibration=" + conv.lastVibration;
