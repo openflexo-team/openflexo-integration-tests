@@ -1,0 +1,982 @@
+/**
+ * MultiProcessChallenge - VirtualModel "MetaModel".
+ *
+ * A process metamodel in the "two-level" style: every notion exists twice, once as a TYPE
+ * (what a process looks like) and once as an INSTANCE (a process actually being run).
+ *
+ *   ProcessType  --newProcess()-->  Process
+ *   TaskType     --newTask()---->   Task
+ *   ActorType    <--types--------   Actor
+ *   ArtifactType <--types--------   Artifact
+ *
+ * The type level is a workflow graph: a ProcessType owns TaskTypes and Gateways (Sequencing,
+ * AndSplit, OrSplit, AndJoin, OrJoin) wired through their _in / out roles, with a single Begin
+ * and one or more End. Instantiating a ProcessType mirrors every TaskType into a Task.
+ *
+ * The instance level is an interpreter. Tasks are startable once an authorized Actor performs
+ * them; finishing a task re-evaluates every gateway of the process (executeGateways), which in
+ * turn starts whichever downstream tasks have become enabled. BeginTask and EndTask are
+ * self-completing, so starting a process propagates through the graph on its own until it
+ * blocks on a task nobody is assigned to - that blocking IS the didactic point of the use case.
+ *
+ * Concepts are NESTED to state ownership: TaskType and the Gateways live inside ProcessType,
+ * Task inside Process. The FlexoConceptInstances themselves are flat in the VirtualModelInstance
+ * (see the virtualModelInstance=container / container.container qualifiers on the roles); the
+ * nesting is a namespacing and ownership statement, not a containment of instances.
+ *
+ * Migrated from the legacy MULTIProcessChallenge.prj (.fml.xml serialization, 2021). The model
+ * layer declares NO model slot: it is pure FML, which is why this module needs no technology
+ * adapter. See MIGRATION.md for what was pruned and which bugs were fixed on the way.
+ */
+
+import java.util.Date;
+import java.util.List;
+
+@Version("1.0")
+@URI("http://openflexo.org/multi-process-challenge/FML/MetaModel.fml")
+public model MetaModel {
+
+	// ---------------------------------------------------------------------------------------
+	// Queries. An .fmlscript can only assert what the model DECLARES, so every question the
+	// tests ask of a MetaModel instance is a behaviour here.
+	// ---------------------------------------------------------------------------------------
+
+	public List<Actor> allActors() {
+		return select Actor from this;
+	}
+
+	public Actor getActor(String name) {
+		return select unique Actor from this where (selected.name == parameters.name);
+	}
+
+	public List<ActorType> allActorTypes() {
+		return select ActorType from this;
+	}
+
+	public ActorType getActorType(String name) {
+		return select unique ActorType from this where (selected.name == parameters.name);
+	}
+
+	public List<ArtifactType> allArtifactTypes() {
+		return select ArtifactType from this;
+	}
+
+	public ArtifactType getArtifactType(String name) {
+		return select unique ArtifactType from this where (selected.name == parameters.name);
+	}
+
+	public List<Artifact> allArtifacts() {
+		return select Artifact from this;
+	}
+
+	public List<ProcessType> allProcessTypes() {
+		return select ProcessType from this;
+	}
+
+	public ProcessType getProcessType(String name) {
+		return select unique ProcessType from this where (selected.name == parameters.name);
+	}
+
+	public List<Process> allProcesses() {
+		return select Process from this;
+	}
+
+	public Process getProcess(String name) {
+		return select unique Process from this where (selected.name == parameters.name);
+	}
+
+	// ---------------------------------------------------------------------------------------
+	// Factories. A .fmlscript cannot instantiate a concept on its own, so every element the
+	// tests need to build is created through one of these. They are also the metamodel's public
+	// API: this is how a tool (or the diagrammatic editors of phase 2) populates a model.
+	// ---------------------------------------------------------------------------------------
+
+	public ActorType newActorType(String name) {
+		return new ActorType(parameters.name);
+	}
+
+	public Actor newActor(String name) {
+		return new Actor(parameters.name);
+	}
+
+	public ArtifactType newArtifactType(String name) {
+		return new ArtifactType(parameters.name);
+	}
+
+	public ProcessType newProcessType(String name) {
+		return new ProcessType(parameters.name);
+	}
+
+	// ---------------------------------------------------------------------------------------
+	// Root of the metamodel
+	// ---------------------------------------------------------------------------------------
+
+	/**
+	 * Everything in this metamodel is a named element that remembers when it last changed.
+	 */
+	@Renderer(name)
+	public abstract concept ModelingElement {
+
+		String name;
+		Date lastUpdated;
+
+		create(String name) {
+			name = parameters.name;
+			this.update();
+		}
+
+		delete() {
+		}
+
+		public void update() {
+			lastUpdated = new Date();
+		}
+	}
+
+	/** Type level: what something looks like, as opposed to something actually being run. */
+	public concept Type extends ModelingElement {
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+	}
+
+	/** Instance level, single-typed: a Process is a ProcessType, a Task is a TaskType. */
+	public abstract concept Instance extends ModelingElement {
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+	}
+
+	/** Instance level, multi-typed: an Actor may hold several ActorTypes, an Artifact several ArtifactTypes. */
+	public abstract concept MultiInstance extends ModelingElement {
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+	}
+
+	// ---------------------------------------------------------------------------------------
+	// Actors
+	// ---------------------------------------------------------------------------------------
+
+	/**
+	 * A role an actor may hold. ActorTypes form a specialization hierarchy of their own
+	 * (parentActorTypes), so "Senior developer" can satisfy a task open to "Developer".
+	 */
+	public concept ActorType extends Type {
+
+		ActorType[0,*] parentActorTypes with ConceptInstance(virtualModelInstance=container);
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+
+		public void addParentActorType(ActorType actorType) {
+			parentActorTypes.add(parameters.actorType);
+		}
+
+		/** True if this type IS the given type, or specializes it transitively. */
+		public boolean isOrSpecializesActorType(ActorType actorType) {
+			if (parameters.actorType == this) {
+				return true;
+			}
+			for (ActorType parentActorType : parentActorTypes) {
+				if (parentActorType.isOrSpecializesActorType(parameters.actorType)) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	/** Somebody who can perform tasks, holding zero or more ActorTypes. */
+	@Renderer(name)
+	public concept Actor extends MultiInstance {
+
+		ActorType[0,*] types with ConceptInstance(virtualModelInstance=container);
+		boolean isSenior;
+
+		create(String name) {
+			super(parameters.name);
+			isSenior = false;
+		}
+
+		delete() {
+		}
+
+		public void addActorType(ActorType actorType) {
+			types.add(parameters.actorType);
+		}
+
+		public void removeActorType(ActorType actorType) {
+			types.remove(parameters.actorType);
+		}
+
+		/** True if this actor holds the given type, or any type specializing it. */
+		public boolean hasActorType(ActorType actorType) {
+			for (ActorType type : types) {
+				if (type.isOrSpecializesActorType(parameters.actorType)) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	// ---------------------------------------------------------------------------------------
+	// Artifacts
+	// ---------------------------------------------------------------------------------------
+
+	/** A kind of thing tasks consume or produce (a specification, a piece of code, a report). */
+	public concept ArtifactType extends Type {
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+
+		public Artifact newArtifact(String name) {
+			Artifact returned = container.new Artifact(parameters.name);
+			returned.types.add(this);
+			return returned;
+		}
+	}
+
+	/** An actual artifact, holding zero or more ArtifactTypes. */
+	@Renderer(name)
+	public concept Artifact extends MultiInstance {
+
+		ArtifactType[0,*] types with ConceptInstance(virtualModelInstance=container);
+
+		create(String name) {
+			// Legacy called super(name) with a BARE parameter name here, which Connie resolves
+			// to null - every migrated Artifact was therefore unnamed. Fixed: parameters.name.
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+
+		public boolean hasArtifactType(ArtifactType artifactType) {
+			for (ArtifactType type : types) {
+				if (type == parameters.artifactType) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	// ---------------------------------------------------------------------------------------
+	// Type level: the workflow graph
+	// ---------------------------------------------------------------------------------------
+
+	/**
+	 * A process definition: a set of TaskTypes wired by Gateways, entered through a single
+	 * Begin and left through one or more End.
+	 */
+	public concept ProcessType extends Type {
+
+		TaskType[0,*] taskTypes with ConceptInstance(virtualModelInstance=container);
+		Gateway[0,*] gateways with ConceptInstance(virtualModelInstance=container);
+		Begin initialTaskType with ConceptInstance(virtualModelInstance=container);
+		End[0,*] finalTaskTypes with ConceptInstance(virtualModelInstance=container);
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+
+		public void addToTaskTypes(TaskType taskType) {
+			taskTypes.add(parameters.taskType);
+		}
+
+		public void removeFromTaskTypes(TaskType taskType) {
+			taskTypes.remove(parameters.taskType);
+		}
+
+		public void setInitialTaskType(Begin beginTaskType) {
+			initialTaskType = parameters.beginTaskType;
+		}
+
+		public void addToFinalTaskTypes(End endTaskType) {
+			finalTaskTypes.add(parameters.endTaskType);
+		}
+
+		public void removeFromFinalTaskTypes(End endTaskType) {
+			finalTaskTypes.remove(parameters.endTaskType);
+		}
+
+		public void addToGateways(Gateway gateway) {
+			gateways.add(parameters.gateway);
+		}
+
+		public void removeFromGateways(Gateway gateway) {
+			gateways.remove(parameters.gateway);
+		}
+
+		public TaskType getTaskType(String name) {
+			for (TaskType taskType : taskTypes) {
+				if (taskType.name == parameters.name) {
+					return taskType;
+				}
+			}
+			return null;
+		}
+
+		/**
+		 * Instantiate this definition: one Task per TaskType, wired to the same graph.
+		 */
+		/**
+		 * container.new, not a bare new: Process is a MODEL-level concept being instantiated from
+		 * a ProcessType instance, so the enclosing context is the wrong container. "container" is
+		 * the VirtualModelInstance, which is where a Process belongs. A bare "new Process(...)"
+		 * here silently yields null.
+		 */
+		public Process newProcess(String name) {
+			return container.new Process(parameters.name, this);
+		}
+
+		// --- Factories for the graph this ProcessType owns -------------------------------
+
+		public TaskType newTaskType(String name) {
+			TaskType returned = new TaskType(parameters.name);
+			taskTypes.add(returned);
+			return returned;
+		}
+
+		/** The single entry point. Registered both as a task type and as THE initial one. */
+		public Begin newBegin() {
+			Begin returned = new Begin();
+			taskTypes.add(returned);
+			initialTaskType = returned;
+			return returned;
+		}
+
+		/** An exit point. Registered both as a task type and as a final one. */
+		public End newEnd() {
+			End returned = new End();
+			taskTypes.add(returned);
+			finalTaskTypes.add(returned);
+			return returned;
+		}
+
+		public Sequencing newSequencing(TaskType inTaskType, TaskType outTaskType) {
+			Sequencing returned = new Sequencing();
+			returned._in = parameters.inTaskType;
+			returned.out = parameters.outTaskType;
+			gateways.add(returned);
+			return returned;
+		}
+
+		public AndSplit newAndSplit(TaskType inTaskType) {
+			AndSplit returned = new AndSplit();
+			returned._in = parameters.inTaskType;
+			gateways.add(returned);
+			return returned;
+		}
+
+		public OrSplit newOrSplit(TaskType inTaskType) {
+			OrSplit returned = new OrSplit();
+			returned._in = parameters.inTaskType;
+			gateways.add(returned);
+			return returned;
+		}
+
+		public AndJoin newAndJoin(TaskType outTaskType) {
+			AndJoin returned = new AndJoin();
+			returned.out = parameters.outTaskType;
+			gateways.add(returned);
+			return returned;
+		}
+
+		public OrJoin newOrJoin(TaskType outTaskType) {
+			OrJoin returned = new OrJoin();
+			returned.out = parameters.outTaskType;
+			gateways.add(returned);
+			return returned;
+		}
+
+		// -----------------------------------------------------------------------------------
+
+		/** A step of the process definition, with who may perform it and what it handles. */
+		public concept TaskType extends Type {
+
+			Actor creator with ConceptInstance(virtualModelInstance=container.container);
+			ActorType[0,*] allowedActorTypes with ConceptInstance(virtualModelInstance=container.container);
+			Actor[0,*] allowedActors with ConceptInstance(virtualModelInstance=container.container);
+			ArtifactType[0,*] usedArtifactTypes with ConceptInstance(virtualModelInstance=container.container);
+			ArtifactType[0,*] producedArtifactTypes with ConceptInstance(virtualModelInstance=container.container);
+			int expectedDuration;
+			boolean isCritical;
+
+			create(String name) {
+				super(parameters.name);
+				isCritical = false;
+			}
+
+			delete() {
+			}
+
+			public void setCreator(Actor creator) {
+				creator = parameters.creator;
+			}
+
+			// The four isValid* hooks are the metamodel's extension points: a specialized
+			// metamodel (see AcmeMetaModel) overrides them to constrain who and what a task
+			// accepts. Open by default.
+
+			public boolean isValidActorType(ActorType actorType) {
+				return true;
+			}
+
+			public boolean isValidActor(Actor actor) {
+				return true;
+			}
+
+			public boolean isValidUsedArtifactType(ArtifactType artifactType) {
+				return true;
+			}
+
+			public boolean isValidProducedArtifactType(ArtifactType artifactType) {
+				return true;
+			}
+
+			public boolean addAllowedActorType(ActorType actorType) {
+				if (this.isValidActorType(parameters.actorType)) {
+					allowedActorTypes.add(parameters.actorType);
+					this.update();
+					return true;
+				}
+				return false;
+			}
+
+			public boolean addAllowedActor(Actor actor) {
+				if (this.isValidActor(parameters.actor)) {
+					allowedActors.add(parameters.actor);
+					this.update();
+					return true;
+				}
+				return false;
+			}
+
+			public boolean addUsedArtifactType(ArtifactType artifactType) {
+				if (this.isValidUsedArtifactType(parameters.artifactType)) {
+					usedArtifactTypes.add(parameters.artifactType);
+					this.update();
+					return true;
+				}
+				return false;
+			}
+
+			public boolean addProducedArtifactType(ArtifactType artifactType) {
+				if (this.isValidProducedArtifactType(parameters.artifactType)) {
+					producedArtifactTypes.add(parameters.artifactType);
+					this.update();
+					return true;
+				}
+				return false;
+			}
+
+			/** An actor is authorized either through one of its types, or by name. */
+			public boolean isAuthorizedActor(Actor actor) {
+				for (ActorType allowedActorType : allowedActorTypes) {
+					if (parameters.actor.hasActorType(allowedActorType)) {
+						return this.isValidActorType(allowedActorType);
+					}
+				}
+				for (Actor allowedActor : allowedActors) {
+					if (parameters.actor == allowedActor) {
+						return this.isValidActor(allowedActor);
+					}
+				}
+				return false;
+			}
+
+			/** Mirror this TaskType as a Task of the given Process. Overridden by Begin / End. */
+			public Task newTask(String name, Process process) {
+				return parameters.process.new Task(parameters.name, this);
+			}
+		}
+
+		/** Entry point of the process definition. Its Task self-completes. */
+		public concept Begin extends TaskType {
+
+			create() {
+				super("Begin");
+			}
+
+			delete() {
+			}
+
+			public Task newTask(String name, Process process) {
+				return parameters.process.new BeginTask(parameters.name, this);
+			}
+		}
+
+		/** Exit point of the process definition. Its Task self-completes and ends the process. */
+		public concept End extends TaskType {
+
+			create() {
+				super("End");
+			}
+
+			delete() {
+			}
+
+			public Task newTask(String name, Process process) {
+				return parameters.process.new EndTask(parameters.name, this);
+			}
+		}
+
+		// -----------------------------------------------------------------------------------
+
+		/**
+		 * Control-flow node. execute() is re-evaluated on the running Process every time a task
+		 * finishes; each subclass decides which downstream tasks that enables.
+		 */
+		public abstract concept Gateway extends Type {
+
+			create(String name) {
+				super(parameters.name);
+			}
+
+			delete() {
+			}
+
+			public void execute(Process process) {
+			}
+		}
+
+		/** A -> B. */
+		public concept Sequencing extends Gateway {
+
+			TaskType _in with ConceptInstance(virtualModelInstance=container.container);
+			TaskType out with ConceptInstance(virtualModelInstance=container.container);
+
+			create() {
+				super("Sequence");
+			}
+
+			delete() {
+			}
+
+			public void execute(Process process) {
+				Task inTask = parameters.process.getTask(_in);
+				if (inTask != null) {
+					if (inTask.completed) {
+						parameters.process.startTaskOfType(out);
+					}
+				}
+			}
+		}
+
+		/** A -> B, C, ... : every branch starts at once. */
+		public concept AndSplit extends Gateway {
+
+			TaskType _in with ConceptInstance(virtualModelInstance=container.container);
+			TaskType[1,*] out with ConceptInstance(virtualModelInstance=container.container);
+
+			create() {
+				super("AndSplit");
+			}
+
+			delete() {
+			}
+
+			public void addOut(TaskType outTaskType) {
+				out.add(parameters.outTaskType);
+			}
+
+			public void execute(Process process) {
+				Task inTask = parameters.process.getTask(_in);
+				if (inTask != null) {
+					if (inTask.completed) {
+						for (TaskType taskType : out) {
+							parameters.process.startTaskOfType(taskType);
+						}
+					}
+				}
+			}
+		}
+
+		/** A -> B | C | ... : branches are offered; which one runs depends on actor assignment. */
+		public concept OrSplit extends Gateway {
+
+			TaskType _in with ConceptInstance(virtualModelInstance=container.container);
+			TaskType[1,*] out with ConceptInstance(virtualModelInstance=container.container);
+
+			create() {
+				super("OrSplit");
+			}
+
+			delete() {
+			}
+
+			public void addOut(TaskType outTaskType) {
+				out.add(parameters.outTaskType);
+			}
+
+			public void execute(Process process) {
+				Task inTask = parameters.process.getTask(_in);
+				if (inTask != null) {
+					if (inTask.completed) {
+						for (TaskType taskType : out) {
+							parameters.process.startTaskOfType(taskType);
+						}
+					}
+				}
+			}
+		}
+
+		/** A, B, ... -> C : C starts only once EVERY incoming task has completed. */
+		public concept AndJoin extends Gateway {
+
+			TaskType[1,*] _in with ConceptInstance(virtualModelInstance=container.container);
+			TaskType out with ConceptInstance(virtualModelInstance=container.container);
+
+			create() {
+				super("AndJoin");
+			}
+
+			delete() {
+			}
+
+			public void addIn(TaskType inTaskType) {
+				_in.add(parameters.inTaskType);
+			}
+
+			public boolean areAllTasksCompleted(Process process) {
+				for (TaskType taskType : _in) {
+					Task inTask = parameters.process.getTask(taskType);
+					if (inTask == null) {
+						return false;
+					}
+					if (!inTask.completed) {
+						return false;
+					}
+				}
+				return true;
+			}
+
+			public void execute(Process process) {
+				if (this.areAllTasksCompleted(parameters.process)) {
+					parameters.process.startTaskOfType(out);
+				}
+			}
+		}
+
+		/** A, B, ... -> C : C starts as soon as ONE incoming task has completed. */
+		public concept OrJoin extends Gateway {
+
+			TaskType[1,*] _in with ConceptInstance(virtualModelInstance=container.container);
+			TaskType out with ConceptInstance(virtualModelInstance=container.container);
+
+			create() {
+				super("OrJoin");
+			}
+
+			delete() {
+			}
+
+			public void addIn(TaskType inTaskType) {
+				_in.add(parameters.inTaskType);
+			}
+
+			/**
+			 * Legacy returned FALSE on the completed branch, so an OrJoin could never fire.
+			 * Fixed: one completed incoming task is enough.
+			 */
+			public boolean isOneTaskCompleted(Process process) {
+				for (TaskType taskType : _in) {
+					Task inTask = parameters.process.getTask(taskType);
+					if (inTask != null) {
+						if (inTask.completed) {
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+
+			public void execute(Process process) {
+				if (this.isOneTaskCompleted(parameters.process)) {
+					parameters.process.startTaskOfType(out);
+				}
+			}
+		}
+	}
+
+	// ---------------------------------------------------------------------------------------
+	// Instance level: a process being run
+	// ---------------------------------------------------------------------------------------
+
+	/**
+	 * A running process. Created from a ProcessType, whose TaskTypes it mirrors one-for-one.
+	 */
+	public concept Process extends Instance {
+
+		ProcessType type with ConceptInstance(virtualModelInstance=container);
+		Task[0,*] tasks with ConceptInstance(virtualModelInstance=container);
+		Task initialTask with ConceptInstance(virtualModelInstance=container);
+		boolean processCompleted;
+		Date startProcessDate;
+		Date completeProcessDate;
+
+		create(String name, ProcessType processType) {
+			super(parameters.name);
+			type = parameters.processType;
+			for (TaskType taskType : parameters.processType.taskTypes) {
+				Task newTask = taskType.newTask(taskType.name, this);
+				tasks.add(newTask);
+			}
+			initialTask = this.getTask(parameters.processType.initialTaskType);
+			processCompleted = false;
+		}
+
+		delete() {
+		}
+
+		/** True when every task of this process can be started (all have a performing actor). */
+		boolean isProcessStartable {
+			boolean get() {
+				for (Task task : tasks) {
+					if (!task.isStartable()) {
+						return false;
+					}
+				}
+				return true;
+			}
+		};
+
+		/**
+		 * The Task mirroring the given TaskType. Walks the tasks role rather than issuing a
+		 * select, so it stays scoped to THIS process - several processes of the same type
+		 * coexist in one VirtualModelInstance.
+		 */
+		public Task getTask(TaskType taskType) {
+			for (Task task : tasks) {
+				if (task.type == parameters.taskType) {
+					return task;
+				}
+			}
+			return null;
+		}
+
+		public Task getTaskNamed(String name) {
+			for (Task task : tasks) {
+				if (task.name == parameters.name) {
+					return task;
+				}
+			}
+			return null;
+		}
+
+		/** Start the task of the given type, if it exists and is ready. Idempotent. */
+		public void startTaskOfType(TaskType taskType) {
+			Task task = this.getTask(parameters.taskType);
+			if (task != null) {
+				if (!task.completed) {
+					if (!task.isActive) {
+						if (task.isStartable()) {
+							task.startTask();
+						}
+					}
+				}
+			}
+		}
+
+		public int completedTaskCount() {
+			int count = 0;
+			for (Task task : tasks) {
+				if (task.completed) {
+					count = count + 1;
+				}
+			}
+			return count;
+		}
+
+		public void startProcess() {
+			log "Starting process " + name;
+			initialTask.startTask();
+			startProcessDate = new Date();
+		}
+
+		public void completeProcess() {
+			log "Process " + name + " has finished";
+			completeProcessDate = new Date();
+			processCompleted = true;
+		}
+
+		/** Re-evaluate every gateway of the definition against this process's current state. */
+		public void executeGateways() {
+			for (Gateway gateway : type.gateways) {
+				gateway.execute(this);
+			}
+		}
+
+		// -----------------------------------------------------------------------------------
+
+		/** One step of a running process. */
+		@Renderer(name)
+		public concept Task extends Instance {
+
+			TaskType type with ConceptInstance(virtualModelInstance=container.container);
+			Actor[0,*] performingActors with ConceptInstance(virtualModelInstance=container.container);
+			Artifact[0,*] usedArtifacts with ConceptInstance(virtualModelInstance=container.container);
+			Artifact[0,*] producedArtifacts with ConceptInstance(virtualModelInstance=container.container);
+			Date beginDate;
+			Date endDate;
+			boolean isActive;
+			boolean completed;
+
+			create(String name, TaskType taskType) {
+				super(parameters.name);
+				type = parameters.taskType;
+				isActive = false;
+				completed = false;
+			}
+
+			delete() {
+			}
+
+			/** A plain task waits for somebody to perform it. */
+			public boolean isStartable() {
+				return performingActors.size > 0;
+			}
+
+			public boolean isAuthorizedActor(Actor actor) {
+				return type.isAuthorizedActor(parameters.actor);
+			}
+
+			/** Assign an actor, enforcing the TaskType's authorization rules. */
+			public void addToPerformingActors(Actor actor) {
+				if (this.isAuthorizedActor(parameters.actor)) {
+					performingActors.add(parameters.actor);
+				}
+				else {
+					log "Actor " + parameters.actor.name + " is NOT authorized for task " + name;
+				}
+			}
+
+			/** Assign an actor unconditionally, bypassing the authorization rules. */
+			public void forceAddToPerformingActors(Actor actor) {
+				performingActors.add(parameters.actor);
+			}
+
+			public boolean isAuthorizedUsedArtifact(Artifact artifact) {
+				for (ArtifactType allowedArtifactType : type.usedArtifactTypes) {
+					if (parameters.artifact.hasArtifactType(allowedArtifactType)) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			public void addToUsedArtifacts(Artifact artifact) {
+				if (this.isAuthorizedUsedArtifact(parameters.artifact)) {
+					usedArtifacts.add(parameters.artifact);
+				}
+				else {
+					log "Used artifact " + parameters.artifact.name + " is NOT authorized for task " + name;
+				}
+			}
+
+			public boolean isAuthorizedProducedArtifact(Artifact artifact) {
+				for (ArtifactType allowedArtifactType : type.producedArtifactTypes) {
+					if (parameters.artifact.hasArtifactType(allowedArtifactType)) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			public void addToProducedArtifacts(Artifact artifact) {
+				if (this.isAuthorizedProducedArtifact(parameters.artifact)) {
+					producedArtifacts.add(parameters.artifact);
+				}
+				else {
+					log "Produced artifact " + parameters.artifact.name + " is NOT authorized for task " + name;
+				}
+			}
+
+			public void startTask() {
+				beginDate = new Date();
+				isActive = true;
+				log "Start task " + name;
+			}
+
+			/** Completing a task is what drives the process forward. */
+			public void finishTask() {
+				isActive = false;
+				completed = true;
+				endDate = new Date();
+				log "Finish task " + name;
+				container.executeGateways();
+			}
+		}
+
+		/** The first task: nobody performs it, it completes as soon as it starts. */
+		public concept BeginTask extends Task {
+
+			create(String name, TaskType taskType) {
+				super(parameters.name, parameters.taskType);
+			}
+
+			delete() {
+			}
+
+			public boolean isStartable() {
+				return true;
+			}
+
+			public void startTask() {
+				super.startTask();
+				this.finishTask();
+			}
+		}
+
+		/** The last task: self-completing, and completing it completes the process. */
+		public concept EndTask extends Task {
+
+			create(String name, TaskType taskType) {
+				super(parameters.name, parameters.taskType);
+			}
+
+			delete() {
+			}
+
+			public boolean isStartable() {
+				return true;
+			}
+
+			public void startTask() {
+				super.startTask();
+				this.finishTask();
+			}
+
+			public void finishTask() {
+				super.finishTask();
+				container.completeProcess();
+			}
+		}
+	}
+}

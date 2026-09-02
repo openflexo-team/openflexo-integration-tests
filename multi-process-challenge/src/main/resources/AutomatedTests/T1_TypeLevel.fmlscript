@@ -1,0 +1,69 @@
+// T1 - build a process DEFINITION from scratch and assert the type-level graph.
+// Nothing runs yet: this is the "what a process looks like" half of the metamodel - actor roles
+// and their specialization hierarchy, and a Build process wired Begin -> Compile -> Test -> End.
+
+metaModel = load -r ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
+assert metaModel != null;
+
+service ResourceCenterService add_temp_rc;
+model = new MetaModel() with (name="T1Model");
+assert model != null;
+
+// --- Actor roles ---------------------------------------------------------------------------
+developer = model.newActorType("Developer");
+seniorDeveloper = model.newActorType("SeniorDeveloper");
+seniorDeveloper.addParentActorType(developer);
+
+assert model.allActorTypes().size == 2;
+assert model.getActorType("Developer") == developer;
+
+// Specialization is transitive and directed: a senior IS a developer, not the other way round.
+assert seniorDeveloper.isOrSpecializesActorType(developer);
+assert seniorDeveloper.isOrSpecializesActorType(seniorDeveloper);
+assert developer.isOrSpecializesActorType(seniorDeveloper) == false;
+
+// --- Actors --------------------------------------------------------------------------------
+alice = model.newActor("Alice");
+alice.addActorType(seniorDeveloper);
+bob = model.newActor("Bob");
+
+assert model.allActors().size == 2;
+assert model.getActor("Alice") == alice;
+// Alice holds SeniorDeveloper, so she satisfies a task open to plain Developers.
+assert alice.hasActorType(developer);
+assert bob.hasActorType(developer) == false;
+
+// --- The process definition ------------------------------------------------------------------
+buildProcess = model.newProcessType("Build");
+begin = buildProcess.newBegin();
+compile = buildProcess.newTaskType("Compile");
+test = buildProcess.newTaskType("Test");
+end = buildProcess.newEnd();
+
+buildProcess.newSequencing(begin, compile);
+buildProcess.newSequencing(compile, test);
+buildProcess.newSequencing(test, end);
+
+assert model.getProcessType("Build") == buildProcess;
+assert buildProcess.taskTypes.size == 4;
+assert buildProcess.gateways.size == 3;
+assert buildProcess.initialTaskType == begin;
+assert buildProcess.finalTaskTypes.size == 1;
+assert buildProcess.getTaskType("Compile") == compile;
+assert buildProcess.getTaskType("Deploy") == null;
+
+// Begin and End are TaskTypes too - that is why the Process mirrors them like any other step.
+assert begin.name == "Begin";
+assert end.name == "End";
+
+// --- Who may perform what --------------------------------------------------------------------
+compile.addAllowedActorType(developer);
+assert compile.allowedActorTypes.size == 1;
+assert compile.isAuthorizedActor(alice);
+assert compile.isAuthorizedActor(bob) == false;
+
+// An actor may also be authorized by name rather than by role.
+test.addAllowedActor(bob);
+assert test.isAuthorizedActor(bob);
+
+log "Test PASSED: T1 - actor hierarchy and the Build process definition (4 task types, 3 gateways)";

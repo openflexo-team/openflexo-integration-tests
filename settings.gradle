@@ -1,5 +1,6 @@
 include 'city-mapping'
 include 'digital-twin-demo'
+include 'multi-process-challenge'
 
 include 'integration-tests-rc'
 include 'integration-tests'

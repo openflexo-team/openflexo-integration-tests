@@ -1,0 +1,229 @@
+/**
+ * MultiProcessChallenge - VirtualModel "AcmeMetaModel".
+ *
+ * Specializes MetaModel for a software-engineering shop. Its whole reason to exist is to show
+ * that the generic process metamodel is EXTENSIBLE: a domain refines the type level (a coding
+ * task, a code artifact, a developer role) and, above all, tightens the isValid* hooks that
+ * MetaModel deliberately left open.
+ *
+ *   MetaModel                        AcmeMetaModel
+ *   ---------                        -------------
+ *   TaskType         <-extends-      SoftwareEngineeringTaskType <-extends- CodingTaskType
+ *   ArtifactType     <-extends-      SoftwareEngineeringArtifactType <-extends- CodeArtifactType
+ *   Artifact         <-extends-      SoftwareEngineeringArtifact <-extends- Code
+ *   ActorType        <-extends-      Developer
+ *   Task             <-extends-      Coding
+ *
+ * A CodingTaskType only accepts Developers and only produces code, and a COBOL coding task
+ * assigns its one COBOL-capable actor by itself. That last rule is the demo's punchline: the
+ * domain metamodel, not the generic one, knows who can write COBOL.
+ *
+ * Migrated from the legacy MULTIProcessChallenge.prj. See MIGRATION.md for what was pruned.
+ */
+
+import ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
+
+@Version("1.0")
+@URI("http://openflexo.org/multi-process-challenge/FML/AcmeMetaModel.fml")
+public model AcmeMetaModel extends MetaModel {
+
+	public ProgrammingLanguage getProgrammingLanguage(String name) {
+		return select unique ProgrammingLanguage from this where (selected.name == parameters.name);
+	}
+
+	// --- Factories for the concepts this metamodel adds ----------------------------------------
+	// The task-type ones take the owning ProcessType explicitly: they inherit from MetaModel's
+	// TaskType, which is nested inside ProcessType, so they must be created INTO a ProcessType
+	// instance rather than into the VirtualModelInstance.
+
+	public ProgrammingLanguage newProgrammingLanguage(String name) {
+		return new ProgrammingLanguage(parameters.name);
+	}
+
+	public Developer newDeveloper(String name) {
+		return new Developer(parameters.name);
+	}
+
+	public SoftwareEngineeringArtifactType newSoftwareEngineeringArtifactType(String name) {
+		return new SoftwareEngineeringArtifactType(parameters.name);
+	}
+
+	public CodeArtifactType newCodeArtifactType(String name) {
+		return new CodeArtifactType(parameters.name);
+	}
+
+	public SoftwareEngineeringTaskType newSoftwareEngineeringTaskType(ProcessType processType, String name) {
+		SoftwareEngineeringTaskType returned = parameters.processType.new SoftwareEngineeringTaskType(parameters.name);
+		parameters.processType.addToTaskTypes(returned);
+		return returned;
+	}
+
+	public CodingTaskType newCodingTaskType(ProcessType processType, String name, ProgrammingLanguage language) {
+		CodingTaskType returned = parameters.processType.new CodingTaskType(parameters.name);
+		returned.language = parameters.language;
+		parameters.processType.addToTaskTypes(returned);
+		return returned;
+	}
+
+	/** A programming language a coding task may be written in. */
+	@Renderer(name)
+	public concept ProgrammingLanguage {
+
+		String name;
+
+		create(String name) {
+			name = parameters.name;
+		}
+
+		delete() {
+		}
+	}
+
+	/** The actor role a coding task requires. */
+	public concept Developer extends ActorType {
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------
+	// Artifacts
+	// -------------------------------------------------------------------------------------------
+
+	/** Anything a software-engineering task hands over, with an owner and a version. */
+	public concept SoftwareEngineeringArtifact extends Artifact {
+
+		Actor responsible with ConceptInstance(virtualModelInstance=container);
+		int versionNumber;
+
+		create(String name) {
+			super(parameters.name);
+			versionNumber = 1;
+		}
+
+		delete() {
+		}
+	}
+
+	/** Source code, in a given programming language. */
+	public concept Code extends SoftwareEngineeringArtifact {
+
+		ProgrammingLanguage programmingLanguage with ConceptInstance(virtualModelInstance=container);
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+	}
+
+	public concept SoftwareEngineeringArtifactType extends ArtifactType {
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+
+		public Artifact newArtifact(String name) {
+			SoftwareEngineeringArtifact returned = new SoftwareEngineeringArtifact(parameters.name);
+			returned.types.add(this);
+			return returned;
+		}
+	}
+
+	public concept CodeArtifactType extends SoftwareEngineeringArtifactType {
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+
+		public Artifact newArtifact(String name) {
+			Code returned = new Code(parameters.name);
+			returned.types.add(this);
+			return returned;
+		}
+	}
+
+	// -------------------------------------------------------------------------------------------
+	// Task types
+	// -------------------------------------------------------------------------------------------
+
+	public concept SoftwareEngineeringTaskType extends TaskType {
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+	}
+
+	/**
+	 * A coding step. Only Developers may perform it, only code may come out of it, and when it
+	 * is a COBOL step the one COBOL-capable actor is assigned without anybody asking.
+	 */
+	public concept CodingTaskType extends SoftwareEngineeringTaskType {
+
+		// container.container, not container: CodingTaskType inherits from MetaModel's TaskType,
+		// which is nested inside ProcessType, so a CodingTaskType instance is contained by a
+		// ProcessType instance and the VirtualModelInstance is one level further up. Nesting is
+		// inherited along with the concept.
+		ProgrammingLanguage language with ConceptInstance(virtualModelInstance=container.container);
+
+		create(String name) {
+			super(parameters.name);
+		}
+
+		delete() {
+		}
+
+		/**
+		 * Legacy tested the FlexoConcept name reflectively (actorType.concept.name == "Developer").
+		 * That idiom is dead in 2.99 - `concept` is now a grammar keyword and cannot appear in a
+		 * binding path - and it was stringly-typed anyway. `instanceof` says the same thing.
+		 */
+		public boolean isValidActorType(ActorType actorType) {
+			return parameters.actorType instanceof Developer;
+		}
+
+		public boolean isValidProducedArtifactType(ArtifactType artifactType) {
+			return parameters.artifactType instanceof CodeArtifactType;
+		}
+
+		/**
+		 * Legacy compared language.concept.name to "COBOL", which could never match: the
+		 * instances were all of concept ProgrammingLanguage, so the branch was dead code and the
+		 * COBOL rule never fired. Fixed by naming the language instance and comparing on name.
+		 */
+		public Task newTask(String name, Process process) {
+			Coding returned = parameters.process.new Coding(parameters.name, this);
+			if (language != null) {
+				if (language.name == "COBOL") {
+					returned.forceAddToPerformingActors(container.container.getActor("Ann Smith"));
+				}
+			}
+			return returned;
+		}
+	}
+
+	/** A running coding step. */
+	public concept Coding extends Task {
+
+		create(String name, TaskType taskType) {
+			super(parameters.name, parameters.taskType);
+		}
+
+		delete() {
+		}
+	}
+}

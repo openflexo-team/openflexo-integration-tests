@@ -1,0 +1,71 @@
+// T3 - run a process and watch the gateways drive it.
+// Completing a task re-evaluates every gateway of the definition (executeGateways), which starts
+// whichever downstream task has become enabled. The process therefore advances on its own - and
+// STOPS on the first task nobody is assigned to. That blocking is the behaviour under test here,
+// not an accident: it is what the use case is meant to demonstrate.
+
+metaModel = load -r ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
+assert metaModel != null;
+
+service ResourceCenterService add_temp_rc;
+model = new MetaModel() with (name="T3Model");
+
+developer = model.newActorType("Developer");
+alice = model.newActor("Alice");
+alice.addActorType(developer);
+bob = model.newActor("Bob");
+bob.addActorType(developer);
+
+buildProcess = model.newProcessType("Build");
+begin = buildProcess.newBegin();
+compile = buildProcess.newTaskType("Compile");
+test = buildProcess.newTaskType("Test");
+end = buildProcess.newEnd();
+buildProcess.newSequencing(begin, compile);
+buildProcess.newSequencing(compile, test);
+buildProcess.newSequencing(test, end);
+compile.addAllowedActorType(developer);
+test.addAllowedActorType(developer);
+
+process = buildProcess.newProcess("Build#1");
+compileTask = process.getTask(compile);
+testTask = process.getTask(test);
+endTask = process.getTask(end);
+
+// --- Step 1: start, and block immediately ----------------------------------------------------
+// The BeginTask self-completes and its sequencing tries to start Compile - but Compile has no
+// actor, so the process goes exactly one step and stops.
+process.startProcess();
+assert process.initialTask.completed;
+assert process.completedTaskCount() == 1;
+assert compileTask.isActive == false;
+assert compileTask.completed == false;
+assert process.processCompleted == false;
+
+// --- Step 2: unblock by assigning an actor ---------------------------------------------------
+compileTask.addToPerformingActors(alice);
+assert compileTask.isStartable();
+// Nothing happens until the gateways are re-evaluated: assignment alone does not start a task.
+assert compileTask.isActive == false;
+process.executeGateways();
+assert compileTask.isActive;
+assert compileTask.completed == false;
+
+// --- Step 3: finishing a task drives the next one --------------------------------------------
+testTask.addToPerformingActors(bob);
+compileTask.finishTask();
+assert compileTask.completed;
+assert process.completedTaskCount() == 2;
+// finishTask() ran the gateways by itself, and Test had an actor waiting, so it started.
+assert testTask.isActive;
+
+// --- Step 4: the end propagates all the way --------------------------------------------------
+testTask.finishTask();
+assert testTask.completed;
+// The EndTask needs nobody: it started, self-completed, and completed the process.
+assert endTask.completed;
+assert process.completedTaskCount() == 4;
+assert process.processCompleted;
+assert process.completeProcessDate != null;
+
+log "Test PASSED: T3 - process blocked on an unassigned task, then ran to completion (4/4 tasks)";
