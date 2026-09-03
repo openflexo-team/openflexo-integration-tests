@@ -1,0 +1,365 @@
+/**
+ * MultiProcessChallenge - VirtualModel "ProcessEditor".
+ *
+ * The diagrammatic editor of the INSTANCE level: given a ProcessType already drawn by
+ * ProcessTypeEditor, it instantiates the process and mirrors it onto its own diagram, one graphical
+ * representation per running Task, gateway and actor assignment. Its creation scheme is the whole
+ * story: instantiate the Process, then walk the type-level graph and draw a counterpart for every
+ * element, laid out to echo the type diagram.
+ *
+ * It reads the type-level editor through an FMLRTModelSlot (processTypeEditor), which is how each
+ * runtime shape finds the type shape it corresponds to.
+ *
+ * Migrated from the legacy MULTIProcessChallenge.prj and rewritten in 2.99 FML. Three deliberate
+ * departures from the legacy, each of which the migration forced or made obvious:
+ *
+ *   - **Connectors are now attached to their shapes.** The legacy created them with a bare
+ *     diagram.AddConnector() and never said between which shapes - it computed the two endpoint GRs,
+ *     logged them, and dropped them. 2.99 validation requires a valid starting and ending shape, so
+ *     the endpoints the legacy had already computed are now actually used.
+ *   - **Shape geometry copying is dropped.** The legacy copied x/y/width/height from the
+ *     corresponding type-level shape onto each runtime shape. That is presentation, not model, and
+ *     it is the same category as the @UI annotations pruned from MetaModel in phase 1.
+ *   - **An abstract TaskBasedGR** gives getTaskGR a real return type. The legacy declared it as
+ *     returning BeginGR while in fact returning any of BeginGR / TaskGR / EndGR.
+ *
+ * One legacy defect is KEPT, and marked below: AndSplitConnectorsGR and AndJoinConnectorsGR assign
+ * their single-valued outConnector / inConnector inside a loop, so only the last one survives.
+ * Making those roles multiple is a modelling decision about what the diagram should show, not a
+ * serialization question.
+ */
+
+use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+import java.lang.String;
+
+import ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
+import ["http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml"];
+import DiagramSpecification PROCESS from ["http://openflexo.org/multi-process-challenge/FML/ProcessEditor.fml/Process.diagramspecification"];
+import Diagram EXAMPLE_DIAGRAM from ["http://openflexo.org/multi-process-challenge/FML/ProcessEditor.fml/Process.diagramspecification/ExampleDiagram.diagram"];
+import DiagramShape PROCESS_SHAPE from [EXAMPLE_DIAGRAM:"SYL-29"];
+import DiagramShape PROCESS_HEADER_SHAPE from [EXAMPLE_DIAGRAM:"SYL-30"];
+import DiagramShape BEGIN_SHAPE from [EXAMPLE_DIAGRAM:"SYL-2"];
+import DiagramShape TASK_SHAPE from [EXAMPLE_DIAGRAM:"SYL-3"];
+import DiagramShape TASK_TITLE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-32"];
+import DiagramShape TASK_ACTORS_SHAPE from [EXAMPLE_DIAGRAM:"SYL-33"];
+import DiagramShape TASK_STATUS_SHAPE from [EXAMPLE_DIAGRAM:"SYL-34"];
+import DiagramShape END_SHAPE from [EXAMPLE_DIAGRAM:"SYL-6"];
+import DiagramShape GATEWAY_SHAPE from [EXAMPLE_DIAGRAM:"SYL-4"];
+import DiagramShape ACTOR_SHAPE from [EXAMPLE_DIAGRAM:"SYL-23"];
+import DiagramConnector SEQUENCING_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-5"];
+import DiagramConnector ACTOR_ASSIGNATION_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-28"];
+
+@Version("1.0")
+@URI("http://openflexo.org/multi-process-challenge/FML/ProcessEditor.fml")
+public model ProcessEditor {
+
+	MetaModel metaModel with FMLRTModelSlot();
+	ProcessTypeEditor processTypeEditor with FMLRTModelSlot();
+	Diagram diagram with TypedDiagram(diagramSpecification=PROCESS, isRequired=true);
+	Process process;
+
+	/**
+	 * Instantiate the process from its type, then draw a counterpart for every element of the
+	 * type-level graph: one shape per task, per gateway and per actor, one connector per sequencing,
+	 * per gateway branch and per actor assignment.
+	 */
+	create::init(MetaModel theMetaModel, ProcessType processType, String processName, ProcessTypeEditor theProcessTypeEditor) {
+		metaModel = parameters.theMetaModel;
+		processTypeEditor = parameters.theProcessTypeEditor;
+		ProcessGR newProcessGR = new ProcessGR::instantiateProcess(parameters.processType, parameters.processName);
+		process = newProcessGR.process;
+		for (Task task : process.tasks) {
+			if (task.type instanceof Begin) {
+				new BeginGR::representTask(task);
+			}
+			else {
+				if (task.type instanceof End) {
+					new EndGR::representTask(task);
+				}
+				else {
+					new TaskGR::representTask(task);
+				}
+			}
+		}
+		for (Gateway gateway : process.type.gateways) {
+			if (gateway instanceof AndSplit) {
+				new GatewayGR::representGateway(gateway, process);
+			}
+			if (gateway instanceof AndJoin) {
+				new GatewayGR::representGateway(gateway, process);
+			}
+		}
+		for (Sequencing sequencing : process.type.sequencingList()) {
+			new SequencingGR::representSequencing(sequencing, process);
+		}
+		for (AndSplit andSplit : process.type.andSplitList()) {
+			new AndSplitConnectorsGR::representAndSplit(andSplit, process);
+		}
+		for (AndJoin andJoin : process.type.andJoinList()) {
+			new AndJoinConnectorsGR::representAndJoin(andJoin, process);
+		}
+		for (Actor actor : metaModel.allActors()) {
+			new ActorGR::representActor(actor);
+		}
+		for (Task task : process.tasks) {
+			for (Actor actor : task.performingActors) {
+				new ActorAssignationGR::representAssignation(actor, task);
+			}
+		}
+	}
+
+	delete() {
+	}
+
+	// --- Lookups: from a runtime object back to the shape that represents it ---------------------
+
+	public ProcessGR getProcessGR(Process theProcess) {
+		return select unique ProcessGR from this where (selected.process == parameters.theProcess);
+	}
+
+	public TaskBasedGR getTaskGR(Task task) {
+		if (parameters.task.type instanceof Begin) {
+			return select unique BeginGR from this where (selected.task == parameters.task);
+		}
+		if (parameters.task.type instanceof End) {
+			return select unique EndGR from this where (selected.task == parameters.task);
+		}
+		return select unique TaskGR from this where (selected.task == parameters.task);
+	}
+
+	public GatewayGR getGatewayGR(Gateway gateway) {
+		return select unique GatewayGR from this where (selected.gateway == parameters.gateway);
+	}
+
+	public ActorGR getActorGR(Actor actor) {
+		return select unique ActorGR from this where (selected.actor == parameters.actor);
+	}
+
+	// --- The process itself ------------------------------------------------------------------------
+
+	public concept ProcessGR {
+
+		DiagramShape shape with ShapeRole(metamodelElement=PROCESS_SHAPE, exampleLabel="Process");
+		DiagramShape header with ShapeRole(metamodelElement=PROCESS_HEADER_SHAPE, exampleLabel="Header");
+		Process process;
+
+		create::instantiateProcess(ProcessType processType, String processName) {
+			process = parameters.processType.newProcess(parameters.processName);
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			header = DIAGRAM::AddShape(container=shape) in (diagram);
+		}
+
+		delete() {
+			shape = null;
+			header = null;
+		}
+
+		public void start() {
+			process.startProcess();
+		}
+	}
+
+	// --- Tasks -------------------------------------------------------------------------------------
+
+	/** Common shape of the three task representations, so getTaskGR has a return type. */
+	public abstract concept TaskBasedGR {
+		abstract DiagramShape shape;
+		abstract Task task;
+	}
+
+	public concept BeginGR extends TaskBasedGR {
+
+		DiagramShape shape with ShapeRole(metamodelElement=BEGIN_SHAPE, exampleLabel="Begin");
+		Task task;
+
+		create::representTask(Task theTask) {
+			task = parameters.theTask;
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept TaskGR extends TaskBasedGR {
+
+		DiagramShape shape with ShapeRole(metamodelElement=TASK_SHAPE, exampleLabel="Task");
+		DiagramShape title with ShapeRole(metamodelElement=TASK_TITLE_SHAPE, exampleLabel="Title");
+		DiagramShape performingActors with ShapeRole(metamodelElement=TASK_ACTORS_SHAPE, exampleLabel="Actors");
+		DiagramShape status with ShapeRole(metamodelElement=TASK_STATUS_SHAPE, exampleLabel="Status");
+		Task task;
+
+		create::representTask(Task theTask) {
+			task = parameters.theTask;
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			title = DIAGRAM::AddShape(container=shape) in (diagram);
+			performingActors = DIAGRAM::AddShape(container=shape) in (diagram);
+			status = DIAGRAM::AddShape(container=shape) in (diagram);
+		}
+
+		delete() {
+			shape = null;
+			title = null;
+			performingActors = null;
+			status = null;
+		}
+
+		public void completeTask() {
+			task.finishTask();
+		}
+	}
+
+	public concept EndGR extends TaskBasedGR {
+
+		DiagramShape shape with ShapeRole(metamodelElement=END_SHAPE, exampleLabel="End");
+		Task task;
+
+		create::representTask(Task theTask) {
+			task = parameters.theTask;
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	// --- Gateways ----------------------------------------------------------------------------------
+
+	public concept GatewayGR {
+
+		DiagramShape shape with ShapeRole(metamodelElement=GATEWAY_SHAPE, exampleLabel="Gateway");
+		Gateway gateway;
+
+		create::representGateway(Gateway theGateway, Process theProcess) {
+			gateway = parameters.theGateway;
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept SequencingGR {
+
+		DiagramConnector connector with ConnectorRole(metamodelElement=SEQUENCING_CONNECTOR);
+		Sequencing sequencing;
+
+		create::representSequencing(Sequencing theSequencing, Process theProcess) {
+			sequencing = parameters.theSequencing;
+			Task startTask = parameters.theProcess.getTask(parameters.theSequencing._in);
+			Task endTask = parameters.theProcess.getTask(parameters.theSequencing.out);
+			TaskBasedGR startTaskGR = container.getTaskGR(startTask);
+			TaskBasedGR endTaskGR = container.getTaskGR(endTask);
+			connector = DIAGRAM::AddConnector(fromShape=startTaskGR.shape, toShape=endTaskGR.shape) in (diagram);
+		}
+
+		delete() {
+			connector = null;
+		}
+	}
+
+	public concept AndSplitConnectorsGR {
+
+		// Legacy defect KEPT: outConnector is single-valued but assigned inside the loop below, so
+		// only the last branch survives. Making it multiple is a modelling decision about what the
+		// diagram should show.
+		DiagramConnector inConnector with ConnectorRole(metamodelElement=SEQUENCING_CONNECTOR);
+		DiagramConnector outConnector with ConnectorRole(metamodelElement=SEQUENCING_CONNECTOR);
+		AndSplit andSplit;
+
+		create::representAndSplit(AndSplit theAndSplit, Process theProcess) {
+			andSplit = parameters.theAndSplit;
+			Task startTask = parameters.theProcess.getTask(parameters.theAndSplit._in);
+			TaskBasedGR startTaskGR = container.getTaskGR(startTask);
+			GatewayGR gatewayGR = container.getGatewayGR(parameters.theAndSplit);
+			inConnector = DIAGRAM::AddConnector(fromShape=startTaskGR.shape, toShape=gatewayGR.shape) in (diagram);
+			for (TaskType taskType : parameters.theAndSplit.out) {
+				Task endTask = parameters.theProcess.getTask(taskType);
+				TaskBasedGR endTaskGR = container.getTaskGR(endTask);
+				outConnector = DIAGRAM::AddConnector(fromShape=gatewayGR.shape, toShape=endTaskGR.shape) in (diagram);
+			}
+		}
+
+		delete() {
+			inConnector = null;
+			outConnector = null;
+		}
+	}
+
+	public concept AndJoinConnectorsGR {
+
+		// Same kept defect, mirrored: inConnector is overwritten once per incoming branch.
+		DiagramConnector inConnector with ConnectorRole(metamodelElement=SEQUENCING_CONNECTOR);
+		DiagramConnector outConnector with ConnectorRole(metamodelElement=SEQUENCING_CONNECTOR);
+		AndJoin andJoin;
+
+		create::representAndJoin(AndJoin theAndJoin, Process theProcess) {
+			andJoin = parameters.theAndJoin;
+			Task endTask = parameters.theProcess.getTask(parameters.theAndJoin.out);
+			TaskBasedGR endTaskGR = container.getTaskGR(endTask);
+			GatewayGR gatewayGR = container.getGatewayGR(parameters.theAndJoin);
+			outConnector = DIAGRAM::AddConnector(fromShape=gatewayGR.shape, toShape=endTaskGR.shape) in (diagram);
+			for (TaskType taskType : parameters.theAndJoin._in) {
+				Task startTask = parameters.theProcess.getTask(taskType);
+				TaskBasedGR startTaskGR = container.getTaskGR(startTask);
+				inConnector = DIAGRAM::AddConnector(fromShape=startTaskGR.shape, toShape=gatewayGR.shape) in (diagram);
+			}
+		}
+
+		delete() {
+			inConnector = null;
+			outConnector = null;
+		}
+	}
+
+	// --- Actors ------------------------------------------------------------------------------------
+
+	public concept ActorGR {
+
+		DiagramShape shape with ShapeRole(metamodelElement=ACTOR_SHAPE, exampleLabel="Actor");
+		Actor actor;
+
+		create::representActor(Actor theActor) {
+			actor = parameters.theActor;
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+		}
+
+		dropActorGRAtTopLevel(String name) with DropScheme(targetType=ProcessEditor) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			actor = metaModel.newActor(parameters.name);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept ActorAssignationGR {
+
+		DiagramConnector connector with ConnectorRole(metamodelElement=ACTOR_ASSIGNATION_CONNECTOR);
+
+		create::representAssignation(Actor actor, Task task) {
+			ActorGR actorGR = container.getActorGR(parameters.actor);
+			TaskBasedGR taskGR = container.getTaskGR(parameters.task);
+			connector = DIAGRAM::AddConnector(fromShape=actorGR.shape, toShape=taskGR.shape) in (diagram);
+		}
+
+		linkActorGRToTaskGR() with LinkScheme(fromType=ActorGR,toType=TaskGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			toTarget.task.addToPerformingActors(fromTarget.actor);
+		}
+
+		delete() {
+			connector = null;
+		}
+	}
+}

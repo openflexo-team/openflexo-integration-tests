@@ -341,6 +341,23 @@ public model MetaModel {
 			gateways.remove(parameters.gateway);
 		}
 
+		// --- Derived views of the gateway graph ------------------------------------------
+		// Reinstated for the diagrammatic editors (ProcessEditor iterates them to lay out
+		// connectors). Semantics kept from the legacy model: these select over the whole
+		// VirtualModelInstance, exactly as container.SelectFlexoConceptInstance(type=X) did.
+
+		public List<Sequencing> sequencingList() {
+			return select Sequencing from container;
+		}
+
+		public List<AndSplit> andSplitList() {
+			return select AndSplit from container;
+		}
+
+		public List<AndJoin> andJoinList() {
+			return select AndJoin from container;
+		}
+
 		public TaskType getTaskType(String name) {
 			for (TaskType taskType : taskTypes) {
 				if (taskType.name == parameters.name) {

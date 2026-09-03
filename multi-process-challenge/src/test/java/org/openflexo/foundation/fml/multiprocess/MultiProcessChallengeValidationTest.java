@@ -73,6 +73,7 @@ public class MultiProcessChallengeValidationTest extends OpenflexoTestCase {
 	static final String METAMODEL_URI = "http://openflexo.org/multi-process-challenge/FML/MetaModel.fml";
 	static final String ACME_URI = "http://openflexo.org/multi-process-challenge/FML/AcmeMetaModel.fml";
 	static final String PROCESS_TYPE_EDITOR_URI = "http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml";
+	static final String PROCESS_EDITOR_URI = "http://openflexo.org/multi-process-challenge/FML/ProcessEditor.fml";
 
 	static VirtualModelLibrary vmLibrary;
 
@@ -100,6 +101,12 @@ public class MultiProcessChallengeValidationTest extends OpenflexoTestCase {
 	@TestOrder(4)
 	public void processTypeEditorIsFMLValid() throws Exception {
 		assertNoValidationError(PROCESS_TYPE_EDITOR_URI);
+	}
+
+	@Test
+	@TestOrder(5)
+	public void processEditorIsFMLValid() throws Exception {
+		assertNoValidationError(PROCESS_EDITOR_URI);
 	}
 
 	private static void assertNoValidationError(String vmURI) throws Exception {

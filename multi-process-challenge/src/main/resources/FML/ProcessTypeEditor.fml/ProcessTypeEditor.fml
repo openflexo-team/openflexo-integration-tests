@@ -89,6 +89,17 @@ public model ProcessTypeEditor {
 		return select unique ActorGR from this where (selected.actor == parameters.actor);
 	}
 
+	/** Any shape-based gateway representation, whichever kind of gateway it is. */
+	public ShapeBasedGR getGatewayGR(Gateway gateway) {
+		if (parameters.gateway instanceof AndSplit) {
+			return select unique AndSplitGR from this where (selected.andSplit == parameters.gateway);
+		}
+		if (parameters.gateway instanceof AndJoin) {
+			return select unique AndJoinGR from this where (selected.andJoin == parameters.gateway);
+		}
+		return null;
+	}
+
 	public AndSplitGR getAndSplitGR(AndSplit andSplit) {
 		return select unique AndSplitGR from this where (selected.andSplit == parameters.andSplit);
 	}
