@@ -67,6 +67,40 @@ public model ProcessTypeEditor {
 	MetaModel metaModel with FMLRTModelSlot();
 	Diagram diagram with TypedDiagram(diagramSpecification=PROCESS_TYPE, isRequired=true);
 
+	// --- Counting queries, so a script can assert what a stored instance holds -------------------
+
+	public List<TaskTypeGR> allTaskTypeGRs() {
+		return select TaskTypeGR from this;
+	}
+
+	public List<ActorTypeGR> allActorTypeGRs() {
+		return select ActorTypeGR from this;
+	}
+
+	public List<ArtifactTypeGR> allArtifactTypeGRs() {
+		return select ArtifactTypeGR from this;
+	}
+
+	public List<ActorGR> allActorGRs() {
+		return select ActorGR from this;
+	}
+
+	public List<SequencingGR> allSequencingGRs() {
+		return select SequencingGR from this;
+	}
+
+	public List<ProducedArtefactType> allProducedArtefactLinks() {
+		return select ProducedArtefactType from this;
+	}
+
+	public List<AllowedActorTypeGR> allAllowedActorTypeLinks() {
+		return select AllowedActorTypeGR from this;
+	}
+
+	public List<HasActorTypeGR> allHasActorTypeLinks() {
+		return select HasActorTypeGR from this;
+	}
+
 	// --- Lookups: from a model object back to the shape that represents it -----------------------
 
 	public ProcessTypeGR getProcessTypeGR(ProcessType processType) {
