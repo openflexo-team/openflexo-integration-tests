@@ -54,6 +54,7 @@ import org.openflexo.foundation.fml.cli.command.fml.FMLAssertException;
 import org.openflexo.foundation.fml.cli.test.FMLScriptParserTestCase;
 import org.openflexo.pamela.exceptions.ModelDefinitionException;
 import org.openflexo.rm.Resource;
+import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.rm.ResourceLocator;
 import org.openflexo.rm.Resources;
 
@@ -102,7 +103,7 @@ public class MultiProcessChallengeAutomatedTests extends FMLScriptParserTestCase
 	}
 
 	public void initServiceManager() throws ParseException, ModelDefinitionException, IOException {
-		instanciateTestServiceManager();
+		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 
 		editor = new DefaultFlexoEditor(null, serviceManager);
 		assertNotNull(editor);

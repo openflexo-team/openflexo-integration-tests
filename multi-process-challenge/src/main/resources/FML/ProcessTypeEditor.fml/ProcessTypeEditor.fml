@@ -1,0 +1,467 @@
+/**
+ * MultiProcessChallenge - VirtualModel "ProcessTypeEditor".
+ *
+ * The diagrammatic editor of the TYPE level: it projects a ProcessType and its graph - task types,
+ * gateways, actor types, artifact types - onto a diagram, and lets the graph be built by dropping
+ * shapes and drawing connectors. Every GR concept ("graphical representation") pairs one diagram
+ * element with the MetaModel object it stands for, so the diagram is a VIEW, never the source of
+ * truth: dropping a shape creates the model object, drawing a connector wires the model.
+ *
+ * Migrated from the legacy MULTIProcessChallenge.prj and rewritten in 2.99 FML. The legacy idioms
+ * that no longer exist:
+ *   - @DropScheme / @LinkScheme became "with DropScheme(targetType=...)" and
+ *     "with LinkScheme(fromType=..., toType=...)" - note fromTarget/toTarget still exist on
+ *     LinkScheme but are @Deprecated @FMLMigration String leftovers, not the FML-facing properties;
+ *   - diagram.AddShape() / AddConnector() became the technology actions DIAGRAM::AddShape(...) and
+ *     DIAGRAM::AddConnector(...);
+ *   - SelectUniqueFlexoConceptInstance(type=X, where=...) became "select unique X from this where (...)";
+ *   - the reflective x.concept.name tests became instanceof ("concept" is now a grammar keyword).
+ *
+ * The FMLRT model slot is called metaModel, not model: "model" is a grammar keyword in 2.99 and
+ * cannot name a property (same trap as "concept"). Same for the Begin and End roles, renamed
+ * beginTaskType / endTaskType: "begin" and "end" are keywords too, from the match family
+ * (begin match ... / end match ...), and for EndGR's second shape, renamed insideShape because
+ * "inside" is a keyword as well (the inside_clause of a model/concept declaration). The keyword
+ * traps met while migrating this file: model, concept, begin, end, inside, in.
+ *
+ * MetaModel nests TaskType, Begin, End and the gateways inside ProcessType, so those objects are
+ * created IN a ProcessType instance (target.processType.new Begin(), not new Begin()).
+ */
+
+use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+import java.lang.String;
+
+import ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
+import DiagramSpecification PROCESS_TYPE from ["http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml/ProcessType.diagramspecification"];
+
+@Version("1.0")
+@URI("http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml")
+public model ProcessTypeEditor {
+
+	MetaModel metaModel with FMLRTModelSlot();
+	Diagram diagram with TypedDiagram(diagramSpecification=PROCESS_TYPE, isRequired=true);
+
+	// --- Lookups: from a model object back to the shape that represents it -----------------------
+
+	public ProcessTypeGR getProcessTypeGR(ProcessType processType) {
+		return select unique ProcessTypeGR from this where (selected.processType == parameters.processType);
+	}
+
+	public TaskTypeGR getTaskTypeGR(TaskType taskType) {
+		return select unique TaskTypeGR from this where (selected.taskType == parameters.taskType);
+	}
+
+	public BeginGR getBeginGR(Begin beginTaskType) {
+		return select unique BeginGR from this where (selected.beginTaskType == parameters.beginTaskType);
+	}
+
+	public EndGR getEndGR(End endTaskType) {
+		return select unique EndGR from this where (selected.endTaskType == parameters.endTaskType);
+	}
+
+	public ActorGR getActorGR(Actor actor) {
+		return select unique ActorGR from this where (selected.actor == parameters.actor);
+	}
+
+	public AndSplitGR getAndSplitGR(AndSplit andSplit) {
+		return select unique AndSplitGR from this where (selected.andSplit == parameters.andSplit);
+	}
+
+	public AndJoinGR getAndJoinGR(AndJoin andJoin) {
+		return select unique AndJoinGR from this where (selected.andJoin == parameters.andJoin);
+	}
+
+	// --- The process type itself -----------------------------------------------------------------
+
+	public concept ProcessTypeGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="ProcessType");
+		DiagramShape header with ShapeRole(exampleLabel="Header");
+		ProcessType processType;
+
+		dropProcessTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			header = DIAGRAM::AddShape(container=shape) in (diagram);
+			processType = metaModel.newProcessType(parameters.name);
+		}
+
+		delete() {
+			shape = null;
+			header = null;
+		}
+	}
+
+	// --- Task types ------------------------------------------------------------------------------
+
+	public concept TaskTypeGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="TaskType");
+		TaskType taskType;
+
+		dropTaskTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeGR) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			taskType = target.processType.newTaskType(parameters.name);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept BeginGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="Begin");
+		Begin beginTaskType;
+
+		dropBeginNodeAtTopLevel() with DropScheme(targetType=ProcessTypeGR) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			beginTaskType = target.processType.newBegin();
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept EndGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="End");
+		DiagramShape insideShape with ShapeRole(exampleLabel="");
+		End endTaskType;
+
+		dropEndGRAtTopLevel() with DropScheme(targetType=ProcessTypeGR) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			insideShape = DIAGRAM::AddShape(container=shape) in (diagram);
+			endTaskType = target.processType.newEnd();
+		}
+
+		delete() {
+			shape = null;
+			insideShape = null;
+		}
+	}
+
+	// --- Gateways --------------------------------------------------------------------------------
+
+	public abstract concept ShapeBasedGR {
+		abstract DiagramShape shape;
+	}
+
+	public concept AndSplitGR extends ShapeBasedGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="AndSplit");
+		AndSplit andSplit;
+
+		dropAndSplitGRAtTopLevel() with DropScheme(targetType=ProcessTypeGR) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			andSplit = target.processType.newAndSplit(null);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept AndJoinGR extends ShapeBasedGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="AndJoin");
+		AndJoin andJoin;
+
+		dropAndJoinGRAtTopLevel() with DropScheme(targetType=ProcessTypeGR) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			andJoin = target.processType.newAndJoin(null);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	// --- Sequencing connectors -------------------------------------------------------------------
+
+	public concept StartSequencingGR {
+
+		DiagramConnector connector with ConnectorRole();
+		Sequencing sequencing;
+
+		linkBeginGRToTaskTypeGR() with LinkScheme(fromType=BeginGR,toType=TaskTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			sequencing = fromTarget.beginTaskType.container.newSequencing(fromTarget.beginTaskType, toTarget.taskType);
+		}
+
+		delete() {
+			connector = null;
+		}
+	}
+
+	public concept SequencingGR {
+
+		DiagramConnector connector with ConnectorRole();
+		Sequencing sequencing;
+
+		linkTaskTypeGRToTaskTypeGR() with LinkScheme(fromType=TaskTypeGR,toType=TaskTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			sequencing = fromTarget.taskType.container.newSequencing(fromTarget.taskType, toTarget.taskType);
+		}
+
+		delete() {
+			connector = null;
+		}
+	}
+
+	public concept EndSequencingGR {
+
+		DiagramConnector connector with ConnectorRole();
+		Sequencing sequencing;
+
+		linkTaskTypeGRtoEndGR() with LinkScheme(fromType=TaskTypeGR,toType=EndGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			sequencing = fromTarget.taskType.container.newSequencing(fromTarget.taskType, toTarget.endTaskType);
+		}
+
+		delete() {
+			connector = null;
+		}
+	}
+
+	// --- Gateway wiring --------------------------------------------------------------------------
+
+	public concept InAndSplitGR {
+
+		DiagramConnector connector with ConnectorRole();
+		TaskType taskType;
+		AndSplit andSplit;
+
+		linkTaskTypeGRToAndSplitGR() with LinkScheme(fromType=TaskTypeGR,toType=AndSplitGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			taskType = fromTarget.taskType;
+			andSplit = toTarget.andSplit;
+			andSplit._in = taskType;
+		}
+
+		delete() {
+			connector = null;
+			andSplit._in = null;
+		}
+	}
+
+	public concept OutAndSplitGR {
+
+		DiagramConnector connector with ConnectorRole();
+		AndSplit andSplit;
+		TaskType taskType;
+
+		linkAndSplitGRToTaskTypeGR() with LinkScheme(fromType=AndSplitGR,toType=TaskTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			andSplit = fromTarget.andSplit;
+			taskType = toTarget.taskType;
+			andSplit.out.add(taskType);
+		}
+
+		delete() {
+			connector = null;
+			andSplit.out.remove(taskType);
+		}
+	}
+
+	public concept InAndJoinGR {
+
+		DiagramConnector connector with ConnectorRole();
+		TaskType taskType;
+		AndJoin andJoin;
+
+		linkTaskTypeGRToAndJoinGR() with LinkScheme(fromType=TaskTypeGR,toType=AndJoinGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			taskType = fromTarget.taskType;
+			andJoin = toTarget.andJoin;
+			andJoin._in.add(taskType);
+		}
+
+		delete() {
+			connector = null;
+			andJoin._in.remove(taskType);
+		}
+	}
+
+	public concept OutAndJoinGR {
+
+		DiagramConnector connector with ConnectorRole();
+		AndJoin andJoin;
+		TaskType taskType;
+
+		linkAndJoinGRToTaskTypeGR() with LinkScheme(fromType=AndJoinGR,toType=TaskTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			andJoin = fromTarget.andJoin;
+			taskType = toTarget.taskType;
+			andJoin.out = taskType;
+		}
+
+		delete() {
+			connector = null;
+			andJoin.out = null;
+		}
+	}
+
+	// --- Artifact types --------------------------------------------------------------------------
+
+	public concept ArtifactTypeGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="ArtifactType");
+		ArtifactType artifactType;
+
+		dropArtifactTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			artifactType = metaModel.newArtifactType(parameters.name);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept UsedArtefactType {
+
+		DiagramConnector connector with ConnectorRole();
+		TaskType taskType;
+		ArtifactType artefactType;
+
+		linkArtifactTypeGRToTaskTypeGR() with LinkScheme(fromType=ArtifactTypeGR,toType=TaskTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			taskType = toTarget.taskType;
+			artefactType = fromTarget.artifactType;
+			taskType.usedArtifactTypes.add(artefactType);
+		}
+
+		delete() {
+			connector = null;
+			taskType.usedArtifactTypes.remove(artefactType);
+		}
+	}
+
+	public concept ProducedArtefactType {
+
+		DiagramConnector connector with ConnectorRole();
+		TaskType taskType;
+		ArtifactType artefactType;
+
+		linkTaskTypeGRToArtifactTypeGR() with LinkScheme(fromType=TaskTypeGR,toType=ArtifactTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			taskType = fromTarget.taskType;
+			artefactType = toTarget.artifactType;
+			taskType.producedArtifactTypes.add(artefactType);
+		}
+
+		delete() {
+			connector = null;
+			taskType.producedArtifactTypes.remove(artefactType);
+		}
+	}
+
+	// --- Actors and actor types --------------------------------------------------------------------
+
+	public concept ActorTypeGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="ActorType");
+		ActorType actorType;
+
+		dropActorTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			actorType = metaModel.newActorType(parameters.name);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept ActorGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="Actor");
+		Actor actor;
+
+		dropActorGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
+			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
+			actor = metaModel.newActor(parameters.name);
+		}
+
+		delete() {
+			shape = null;
+		}
+	}
+
+	public concept HasActorTypeGR {
+
+		DiagramConnector connector with ConnectorRole();
+		Actor actor;
+		ActorType actorType;
+
+		linkActorGRToActorTypeGR() with LinkScheme(fromType=ActorGR,toType=ActorTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			actor = fromTarget.actor;
+			actorType = toTarget.actorType;
+			actor.addActorType(actorType);
+		}
+
+		delete() {
+			connector = null;
+			actor.removeActorType(actorType);
+		}
+	}
+
+	public concept ParentActorTypeGR {
+
+		DiagramConnector connector with ConnectorRole();
+
+		linkActorTypeGRToActorTypeGR() with LinkScheme(fromType=ActorTypeGR,toType=ActorTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			fromTarget.actorType.addParentActorType(toTarget.actorType);
+		}
+
+		delete() {
+			connector = null;
+		}
+	}
+
+	public concept AllowedActorTypeGR {
+
+		DiagramConnector connector with ConnectorRole();
+		TaskType taskType;
+		ActorType actorType;
+
+		linkActorTypeGRToTaskTypeGR() with LinkScheme(fromType=ActorTypeGR,toType=TaskTypeGR) {
+			taskType = toTarget.taskType;
+			actorType = fromTarget.actorType;
+			if (taskType.addAllowedActorType(actorType)) {
+				connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			}
+			else {
+				log "Invalid ActorType";
+			}
+		}
+
+		delete() {
+			connector = null;
+			taskType.allowedActorTypes.remove(actorType);
+		}
+	}
+
+	public concept AllowedActorGR {
+
+		DiagramConnector connector with ConnectorRole();
+
+		linkActorGRToTaskTypeGR() with LinkScheme(fromType=ActorGR,toType=TaskTypeGR) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
+			toTarget.taskType.addAllowedActor(fromTarget.actor);
+		}
+
+		delete() {
+			connector = null;
+		}
+	}
+}

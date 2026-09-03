@@ -38,6 +38,7 @@ package org.openflexo.foundation.fml.multiprocess;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,6 +51,7 @@ import org.openflexo.pamela.validation.ValidationIssue;
 import org.openflexo.pamela.validation.ValidationModel;
 import org.openflexo.pamela.validation.ValidationReport;
 import org.openflexo.pamela.validation.ValidationWarning;
+import org.openflexo.technologyadapter.diagram.DiagramTechnologyAdapter;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
@@ -70,13 +72,14 @@ public class MultiProcessChallengeValidationTest extends OpenflexoTestCase {
 
 	static final String METAMODEL_URI = "http://openflexo.org/multi-process-challenge/FML/MetaModel.fml";
 	static final String ACME_URI = "http://openflexo.org/multi-process-challenge/FML/AcmeMetaModel.fml";
+	static final String PROCESS_TYPE_EDITOR_URI = "http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml";
 
 	static VirtualModelLibrary vmLibrary;
 
 	@Test
 	@TestOrder(1)
 	public void loadServiceManager() throws Exception {
-		instanciateTestServiceManager();
+		instanciateTestServiceManager(DiagramTechnologyAdapter.class);
 		vmLibrary = serviceManager.getVirtualModelLibrary();
 		assertNotNull(vmLibrary);
 	}
@@ -91,6 +94,34 @@ public class MultiProcessChallengeValidationTest extends OpenflexoTestCase {
 	@TestOrder(3)
 	public void acmeMetaModelIsFMLValid() throws Exception {
 		assertNoValidationError(ACME_URI);
+	}
+
+	/**
+	 * ProcessTypeEditor does not yet validate clean, and the gap is precise: each of its ShapeRoles and
+	 * ConnectorRoles must name the diagram element it renders (metamodelElement), and that wiring has not been
+	 * migrated yet. The legacy .fml.xml DOES carry the information - 19 metamodelElementReference entries pointing
+	 * into ProcessType.diagramspecification/ExampleDiagram.diagram - so this is transcription work, not a design
+	 * question.
+	 *
+	 * Rather than assert a count that would rot, this asserts the SHAPE of what remains: every error is a missing
+	 * metamodelElement. Anything else appearing turns it red.
+	 */
+	@Test
+	@TestOrder(4)
+	public void processTypeEditorOnlyMissesItsDiagramElementWiring() throws Exception {
+		VirtualModel vm = vmLibrary.getVirtualModel(PROCESS_TYPE_EDITOR_URI);
+		assertNotNull("VirtualModel not found by URI " + PROCESS_TYPE_EDITOR_URI, vm);
+		assertFalse("ProcessTypeEditor declares no concept: it most likely failed to PARSE", vm.getFlexoConcepts().isEmpty());
+
+		ValidationModel validationModel = vmLibrary.getFMLValidationModel();
+		ValidationReport report = validationModel.validate(vm.getCompilationUnit());
+
+		for (ValidationError<?, ?> error : report.getAllErrors()) {
+			String message = validationModel.localizedIssueMessage(error);
+			assertTrue("unexpected validation error, only missing metamodelElement is tolerated here: " + message,
+					message.contains("metamodelElement"));
+		}
+		System.out.println("ProcessTypeEditor: " + report.getErrorsCount() + " errors, all of them a missing metamodelElement");
 	}
 
 	private static void assertNoValidationError(String vmURI) throws Exception {

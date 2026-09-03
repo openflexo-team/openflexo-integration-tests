@@ -5,11 +5,10 @@
 // declared by META-INF/resourceCenters with base URI http://openflexo.org/multi-process-challenge)
 // AND the tests that exercise it (src/test/java). No separate -rc project.
 //
-// Phase 1 (this module) covers the model layer only: MetaModel, its AcmeMetaModel specialization
-// and the stored FML-RT instances. Neither VirtualModel declares a single model slot - the whole
-// use case is pure FML - so NO technology adapter is needed here. The diagrammatic editors
-// (ProcessEditor / ProcessTypeEditor and their diagram specifications) are a separate phase and
-// will add diagramConnector() when they land.
+// Phase 1 covers the model layer: MetaModel, its AcmeMetaModel specialization and the stored FML-RT
+// instances - all pure FML, no model slot. Phase 2 adds the diagrammatic editors (ProcessEditor /
+// ProcessTypeEditor and their diagram specifications), which mount a TypedDiagramModelSlot: hence
+// diagramConnector() below.
 //
 // fml-cli is a test dependency because the tests are FML-scripts.
 
@@ -19,4 +18,5 @@ dependencies {
     testImplementation flexoFoundationTest()
     testImplementation fmlCli()
     testImplementation fmlCliTest()
+    testImplementation diagramConnector()
 }

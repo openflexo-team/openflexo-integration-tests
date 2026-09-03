@@ -1,0 +1,37 @@
+// T5 - the stored XSure instance loads against the rewritten MetaModel and still holds its data.
+//
+// XSure is one of the two FML-RT fixtures migrated out of MULTIProcessChallenge.prj. Migrating it
+// was not a base-URI rewrite: the rewritten MetaModel NESTS TaskType inside ProcessType, so
+// "#TaskType" became "#ProcessType#TaskType" in every flexoConceptURI. The legacy file also stored
+// roleName="in" while its own metamodel declared the role as "_in" - a dangling reference since day
+// one, repaired on the way.
+//
+// It asserts business values, not merely that the file parses: an insurance claim-handling process
+// with its actors, actor types and artifact types.
+
+xsure = load -r ["http://openflexo.org/multi-process-challenge/XSure.fml.rt"];
+assert xsure != null;
+
+// The process definition itself.
+assert xsure.allProcessTypes().size == 1;
+claimHandling = xsure.getProcessType("Claim Handling");
+assert claimHandling != null;
+assert claimHandling.name == "Claim Handling";
+
+// Who may act: three actors, five roles they can hold.
+assert xsure.allActors().size == 3;
+assert xsure.getActor("Ben Boss") != null;
+assert xsure.getActor("John Smith") != null;
+assert xsure.getActor("Paul Alter") != null;
+
+assert xsure.allActorTypes().size == 5;
+assert xsure.getActorType("Claim handling manager") != null;
+assert xsure.getActorType("Financial officer") != null;
+assert xsure.getActorType("Senior Manager") != null;
+
+// What the process handles.
+assert xsure.allArtifactTypes().size == 2;
+assert xsure.getArtifactType("Claim") != null;
+assert xsure.getArtifactType("Claim payment decision") != null;
+
+log "Test PASSED: T5 - the stored XSure instance loads and keeps its business data";
