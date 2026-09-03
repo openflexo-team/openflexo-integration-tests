@@ -39,6 +39,26 @@ import java.lang.String;
 
 import ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
 import DiagramSpecification PROCESS_TYPE from ["http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml/ProcessType.diagramspecification"];
+import Diagram EXAMPLE_DIAGRAM from ["http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml/ProcessType.diagramspecification/ExampleDiagram.diagram"];
+import DiagramShape BEGIN_SHAPE from [EXAMPLE_DIAGRAM:"SYL-2"];
+import DiagramShape TASK_TYPE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-3"];
+import DiagramShape AND_SPLIT_SHAPE from [EXAMPLE_DIAGRAM:"SYL-4"];
+import DiagramShape END_SHAPE from [EXAMPLE_DIAGRAM:"SYL-6"];
+import DiagramShape END_INSIDE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-7"];
+import DiagramShape AND_JOIN_SHAPE from [EXAMPLE_DIAGRAM:"SYL-13"];
+import DiagramShape ARTIFACT_TYPE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-19"];
+import DiagramShape ACTOR_TYPE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-22"];
+import DiagramShape ACTOR_SHAPE from [EXAMPLE_DIAGRAM:"SYL-23"];
+import DiagramShape PROCESS_TYPE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-29"];
+import DiagramShape PROCESS_TYPE_HEADER_SHAPE from [EXAMPLE_DIAGRAM:"SYL-30"];
+import DiagramConnector SEQUENCING_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-5"];
+import DiagramConnector GATEWAY_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-8"];
+import DiagramConnector PRODUCED_ARTIFACT_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-20"];
+import DiagramConnector USED_ARTIFACT_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-21"];
+import DiagramConnector HAS_ACTOR_TYPE_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-24"];
+import DiagramConnector PARENT_ACTOR_TYPE_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-26"];
+import DiagramConnector ALLOWED_ACTOR_TYPE_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-27"];
+import DiagramConnector ALLOWED_ACTOR_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-28"];
 
 @Version("1.0")
 @URI("http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml")
@@ -81,8 +101,8 @@ public model ProcessTypeEditor {
 
 	public concept ProcessTypeGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="ProcessType");
-		DiagramShape header with ShapeRole(exampleLabel="Header");
+		DiagramShape shape with ShapeRole(metamodelElement=PROCESS_TYPE_SHAPE, exampleLabel="ProcessType");
+		DiagramShape header with ShapeRole(metamodelElement=PROCESS_TYPE_HEADER_SHAPE, exampleLabel="Header");
 		ProcessType processType;
 
 		dropProcessTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
@@ -101,7 +121,7 @@ public model ProcessTypeEditor {
 
 	public concept TaskTypeGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="TaskType");
+		DiagramShape shape with ShapeRole(metamodelElement=TASK_TYPE_SHAPE, exampleLabel="TaskType");
 		TaskType taskType;
 
 		dropTaskTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeGR) {
@@ -116,7 +136,7 @@ public model ProcessTypeEditor {
 
 	public concept BeginGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="Begin");
+		DiagramShape shape with ShapeRole(metamodelElement=BEGIN_SHAPE, exampleLabel="Begin");
 		Begin beginTaskType;
 
 		dropBeginNodeAtTopLevel() with DropScheme(targetType=ProcessTypeGR) {
@@ -131,8 +151,8 @@ public model ProcessTypeEditor {
 
 	public concept EndGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="End");
-		DiagramShape insideShape with ShapeRole(exampleLabel="");
+		DiagramShape shape with ShapeRole(metamodelElement=END_SHAPE, exampleLabel="End");
+		DiagramShape insideShape with ShapeRole(metamodelElement=END_INSIDE_SHAPE, exampleLabel="");
 		End endTaskType;
 
 		dropEndGRAtTopLevel() with DropScheme(targetType=ProcessTypeGR) {
@@ -155,7 +175,7 @@ public model ProcessTypeEditor {
 
 	public concept AndSplitGR extends ShapeBasedGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="AndSplit");
+		DiagramShape shape with ShapeRole(metamodelElement=AND_SPLIT_SHAPE, exampleLabel="AndSplit");
 		AndSplit andSplit;
 
 		dropAndSplitGRAtTopLevel() with DropScheme(targetType=ProcessTypeGR) {
@@ -170,7 +190,7 @@ public model ProcessTypeEditor {
 
 	public concept AndJoinGR extends ShapeBasedGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="AndJoin");
+		DiagramShape shape with ShapeRole(metamodelElement=AND_JOIN_SHAPE, exampleLabel="AndJoin");
 		AndJoin andJoin;
 
 		dropAndJoinGRAtTopLevel() with DropScheme(targetType=ProcessTypeGR) {
@@ -187,7 +207,7 @@ public model ProcessTypeEditor {
 
 	public concept StartSequencingGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=SEQUENCING_CONNECTOR);
 		Sequencing sequencing;
 
 		linkBeginGRToTaskTypeGR() with LinkScheme(fromType=BeginGR,toType=TaskTypeGR) {
@@ -202,7 +222,7 @@ public model ProcessTypeEditor {
 
 	public concept SequencingGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=SEQUENCING_CONNECTOR);
 		Sequencing sequencing;
 
 		linkTaskTypeGRToTaskTypeGR() with LinkScheme(fromType=TaskTypeGR,toType=TaskTypeGR) {
@@ -217,7 +237,7 @@ public model ProcessTypeEditor {
 
 	public concept EndSequencingGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=SEQUENCING_CONNECTOR);
 		Sequencing sequencing;
 
 		linkTaskTypeGRtoEndGR() with LinkScheme(fromType=TaskTypeGR,toType=EndGR) {
@@ -234,7 +254,7 @@ public model ProcessTypeEditor {
 
 	public concept InAndSplitGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=GATEWAY_CONNECTOR);
 		TaskType taskType;
 		AndSplit andSplit;
 
@@ -253,7 +273,7 @@ public model ProcessTypeEditor {
 
 	public concept OutAndSplitGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=GATEWAY_CONNECTOR);
 		AndSplit andSplit;
 		TaskType taskType;
 
@@ -272,7 +292,7 @@ public model ProcessTypeEditor {
 
 	public concept InAndJoinGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=GATEWAY_CONNECTOR);
 		TaskType taskType;
 		AndJoin andJoin;
 
@@ -291,7 +311,7 @@ public model ProcessTypeEditor {
 
 	public concept OutAndJoinGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=GATEWAY_CONNECTOR);
 		AndJoin andJoin;
 		TaskType taskType;
 
@@ -312,7 +332,7 @@ public model ProcessTypeEditor {
 
 	public concept ArtifactTypeGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="ArtifactType");
+		DiagramShape shape with ShapeRole(metamodelElement=ARTIFACT_TYPE_SHAPE, exampleLabel="ArtifactType");
 		ArtifactType artifactType;
 
 		dropArtifactTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
@@ -327,7 +347,7 @@ public model ProcessTypeEditor {
 
 	public concept UsedArtefactType {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=USED_ARTIFACT_CONNECTOR);
 		TaskType taskType;
 		ArtifactType artefactType;
 
@@ -346,7 +366,7 @@ public model ProcessTypeEditor {
 
 	public concept ProducedArtefactType {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=PRODUCED_ARTIFACT_CONNECTOR);
 		TaskType taskType;
 		ArtifactType artefactType;
 
@@ -367,7 +387,7 @@ public model ProcessTypeEditor {
 
 	public concept ActorTypeGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="ActorType");
+		DiagramShape shape with ShapeRole(metamodelElement=ACTOR_TYPE_SHAPE, exampleLabel="ActorType");
 		ActorType actorType;
 
 		dropActorTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
@@ -382,7 +402,7 @@ public model ProcessTypeEditor {
 
 	public concept ActorGR {
 
-		DiagramShape shape with ShapeRole(exampleLabel="Actor");
+		DiagramShape shape with ShapeRole(metamodelElement=ACTOR_SHAPE, exampleLabel="Actor");
 		Actor actor;
 
 		dropActorGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
@@ -397,7 +417,7 @@ public model ProcessTypeEditor {
 
 	public concept HasActorTypeGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=HAS_ACTOR_TYPE_CONNECTOR);
 		Actor actor;
 		ActorType actorType;
 
@@ -416,7 +436,7 @@ public model ProcessTypeEditor {
 
 	public concept ParentActorTypeGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=PARENT_ACTOR_TYPE_CONNECTOR);
 
 		linkActorTypeGRToActorTypeGR() with LinkScheme(fromType=ActorTypeGR,toType=ActorTypeGR) {
 			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);
@@ -430,7 +450,7 @@ public model ProcessTypeEditor {
 
 	public concept AllowedActorTypeGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=ALLOWED_ACTOR_TYPE_CONNECTOR);
 		TaskType taskType;
 		ActorType actorType;
 
@@ -453,7 +473,7 @@ public model ProcessTypeEditor {
 
 	public concept AllowedActorGR {
 
-		DiagramConnector connector with ConnectorRole();
+		DiagramConnector connector with ConnectorRole(metamodelElement=ALLOWED_ACTOR_CONNECTOR);
 
 		linkActorGRToTaskTypeGR() with LinkScheme(fromType=ActorGR,toType=TaskTypeGR) {
 			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape) in (diagram);

@@ -96,32 +96,10 @@ public class MultiProcessChallengeValidationTest extends OpenflexoTestCase {
 		assertNoValidationError(ACME_URI);
 	}
 
-	/**
-	 * ProcessTypeEditor does not yet validate clean, and the gap is precise: each of its ShapeRoles and
-	 * ConnectorRoles must name the diagram element it renders (metamodelElement), and that wiring has not been
-	 * migrated yet. The legacy .fml.xml DOES carry the information - 19 metamodelElementReference entries pointing
-	 * into ProcessType.diagramspecification/ExampleDiagram.diagram - so this is transcription work, not a design
-	 * question.
-	 *
-	 * Rather than assert a count that would rot, this asserts the SHAPE of what remains: every error is a missing
-	 * metamodelElement. Anything else appearing turns it red.
-	 */
 	@Test
 	@TestOrder(4)
-	public void processTypeEditorOnlyMissesItsDiagramElementWiring() throws Exception {
-		VirtualModel vm = vmLibrary.getVirtualModel(PROCESS_TYPE_EDITOR_URI);
-		assertNotNull("VirtualModel not found by URI " + PROCESS_TYPE_EDITOR_URI, vm);
-		assertFalse("ProcessTypeEditor declares no concept: it most likely failed to PARSE", vm.getFlexoConcepts().isEmpty());
-
-		ValidationModel validationModel = vmLibrary.getFMLValidationModel();
-		ValidationReport report = validationModel.validate(vm.getCompilationUnit());
-
-		for (ValidationError<?, ?> error : report.getAllErrors()) {
-			String message = validationModel.localizedIssueMessage(error);
-			assertTrue("unexpected validation error, only missing metamodelElement is tolerated here: " + message,
-					message.contains("metamodelElement"));
-		}
-		System.out.println("ProcessTypeEditor: " + report.getErrorsCount() + " errors, all of them a missing metamodelElement");
+	public void processTypeEditorIsFMLValid() throws Exception {
+		assertNoValidationError(PROCESS_TYPE_EDITOR_URI);
 	}
 
 	private static void assertNoValidationError(String vmURI) throws Exception {
