@@ -38,8 +38,8 @@ import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 import java.lang.String;
 
 import ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
-import DiagramSpecification PROCESS_TYPE from ["http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml/ProcessType.diagramspecification"];
-import Diagram EXAMPLE_DIAGRAM from ["http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml/ProcessType.diagramspecification/ExampleDiagram.diagram"];
+import DiagramSpecification PROCESS_TYPE from ["http://openflexo.org/multi-process-challenge/Diagrams/ProcessType.diagramspecification"];
+import Diagram EXAMPLE_DIAGRAM from ["http://openflexo.org/multi-process-challenge/Diagrams/ProcessType.diagramspecification/ExampleDiagram.diagram"];
 import DiagramShape BEGIN_SHAPE from [EXAMPLE_DIAGRAM:"SYL-2"];
 import DiagramShape TASK_TYPE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-3"];
 import DiagramShape AND_SPLIT_SHAPE from [EXAMPLE_DIAGRAM:"SYL-4"];

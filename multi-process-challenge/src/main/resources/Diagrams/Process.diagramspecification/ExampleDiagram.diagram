@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Diagram id="0" diagramSpecificationURI="http://openflexo.org/multi-process-challenge/FML/ProcessEditor.fml/Process.diagramspecification" uri="http://openflexo.org/multi-process-challenge/FML/ProcessEditor.fml/Process.diagramspecification/ExampleDiagram.diagram" name="ExampleDiagram.diagram" userID="SYL" flexoID="1">
+<Diagram id="0" diagramSpecificationURI="http://openflexo.org/multi-process-challenge/Diagrams/Process.diagramspecification" uri="http://openflexo.org/multi-process-challenge/Diagrams/Process.diagramspecification/ExampleDiagram.diagram" name="ExampleDiagram.diagram" userID="SYL" flexoID="1">
   <Connector id="1" name="Connector5" userID="SYL" flexoID="5">
     <StartShape idref="2" />
     <EndShape idref="13" />
@@ -263,7 +263,7 @@
       <ShadowStyle id="195" drawShadow="false" />
       <FocusedForegroundStyle id="196" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
       <SelectedForegroundStyle id="197" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
-      <ImageBackgroundStyle id="198" fitToShape="true" imageFile="../../../Diagrams/Actor.gif" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <ImageBackgroundStyle id="198" fitToShape="true" imageFile="../Actor.gif" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
       <RectangleShape id="199" />
       <TextStyle id="200" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
     </ShapeGraphicalRepresentation>

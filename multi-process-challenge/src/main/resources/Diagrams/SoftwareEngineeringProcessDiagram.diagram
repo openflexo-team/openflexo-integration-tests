@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Diagram id="0" diagramSpecificationURI="http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml/ProcessType.diagramspecification" uri="http://openflexo.org/multi-process-challenge/SoftwareEngineeringProcessDiagram.diagram" name="SoftwareEngineeringProcessDiagram.diagram" userID="SYL" flexoID="1">
+<Diagram id="0" diagramSpecificationURI="http://openflexo.org/multi-process-challenge/Diagrams/ProcessType.diagramspecification" uri="http://openflexo.org/multi-process-challenge/SoftwareEngineeringProcessDiagram.diagram" name="SoftwareEngineeringProcessDiagram.diagram" userID="SYL" flexoID="1">
   <Connector id="1" name="Connector49" text="produces" userID="SYL" flexoID="49">
     <StartShape idref="2" />
     <EndShape idref="13" />

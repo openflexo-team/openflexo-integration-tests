@@ -40,8 +40,8 @@ import java.lang.String;
 
 import ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
 import ["http://openflexo.org/multi-process-challenge/FML/ProcessTypeEditor.fml"];
-import DiagramSpecification PROCESS from ["http://openflexo.org/multi-process-challenge/FML/ProcessEditor.fml/Process.diagramspecification"];
-import Diagram EXAMPLE_DIAGRAM from ["http://openflexo.org/multi-process-challenge/FML/ProcessEditor.fml/Process.diagramspecification/ExampleDiagram.diagram"];
+import DiagramSpecification PROCESS from ["http://openflexo.org/multi-process-challenge/Diagrams/Process.diagramspecification"];
+import Diagram EXAMPLE_DIAGRAM from ["http://openflexo.org/multi-process-challenge/Diagrams/Process.diagramspecification/ExampleDiagram.diagram"];
 import DiagramShape PROCESS_SHAPE from [EXAMPLE_DIAGRAM:"SYL-29"];
 import DiagramShape PROCESS_HEADER_SHAPE from [EXAMPLE_DIAGRAM:"SYL-30"];
 import DiagramShape BEGIN_SHAPE from [EXAMPLE_DIAGRAM:"SYL-2"];
