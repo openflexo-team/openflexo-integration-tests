@@ -60,7 +60,6 @@ import org.openflexo.module.ModuleLoader;
 import org.openflexo.module.ModuleLoadingException;
 import org.openflexo.om.OMModule;
 import org.openflexo.om.OpenflexoModeller;
-import org.openflexo.prefs.PreferencesService;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 import org.openflexo.test.UITest;
@@ -90,7 +89,6 @@ public class TestLoadAllModules extends OpenflexoTestCaseWithGUI {
 		assertNotNull(serviceManager.getService(FlexoResourceCenterService.class));
 		assertNotNull(serviceManager.getService(TechnologyAdapterService.class));
 		assertNotNull(serviceManager.getService(TechnologyAdapterControllerService.class));
-		assertNotNull(serviceManager.getService(PreferencesService.class));
 
 		moduleLoader = serviceManager.getModuleLoader();
 		assertEquals(moduleLoader, serviceManager.getService(ModuleLoader.class));

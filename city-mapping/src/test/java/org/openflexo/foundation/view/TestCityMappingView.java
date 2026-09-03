@@ -94,7 +94,7 @@ public class TestCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 		log("test0InstantiateResourceCenter()");
 
 		// We are connected directely to the resource center embedded in a jar in the classpath
-		// We use the ResourceCenter deployed in integration-tests-rc
+		// We use the ResourceCenter deployed in this very project (city-mapping/src/main/resources)
 		instanciateTestServiceManager(FMLTechnologyAdapter.class, FMLRTTechnologyAdapter.class, EMFTechnologyAdapter.class);
 	}
 

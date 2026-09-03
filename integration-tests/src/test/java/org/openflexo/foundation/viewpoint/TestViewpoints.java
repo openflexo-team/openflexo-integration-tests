@@ -48,6 +48,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.fml.VirtualModel;
 import org.openflexo.foundation.fml.rm.CompilationUnitResource;
+import org.openflexo.foundation.resource.FlexoResource;
 import org.openflexo.foundation.test.OpenflexoTestCase;
 import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
@@ -70,6 +71,10 @@ public class TestViewpoints extends OpenflexoTestCase {
 
 	}
 
+	/**
+	 * Load the VirtualModel identified by supplied URI, as well as all the VirtualModels it contains (typically the DiagramSpecification of a
+	 * diagram editor), and assert that each of them is valid.
+	 */
 	private VirtualModel testLoadViewPoint(String viewPointURI) {
 
 		log("Testing ViewPoint loading: " + viewPointURI);
@@ -81,6 +86,19 @@ public class TestViewpoints extends OpenflexoTestCase {
 
 		VirtualModel vp = vpRes.getCompilationUnit().getVirtualModel();
 		assertTrue(vpRes.isLoaded());
+
+		for (FlexoResource<?> r : vpRes.getContents()) {
+			assertTrue(r instanceof CompilationUnitResource);
+			CompilationUnitResource vmRes = (CompilationUnitResource) r;
+			VirtualModel vm = vmRes.getCompilationUnit().getVirtualModel();
+			assertNotNull(vm);
+			assertTrue(vmRes.isLoaded());
+
+			System.out.println("Loaded VirtualModel " + vm.getName());
+			System.out.println(vm.getFMLPrettyPrint());
+
+			assertVirtualModelIsValid(vm);
+		}
 
 		return vp;
 
