@@ -1,8 +1,11 @@
-
 /**
- * 
- * @version 0.1
+ * OrganizationalMap - maps organizational units and the positions they involve.
+ *
+ * Container view point: it only holds the DiagramSpecification virtual model.
+ * Migrated from the deprecated .fml.xml serialization.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl")
-public class OrganizationalMap {
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl")
+@Version("0.1")
+public model OrganizationalMap {
 }

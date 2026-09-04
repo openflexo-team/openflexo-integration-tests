@@ -1,181 +1,226 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the Benefits Dependency Network editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Notes on the translation:
+ *   - each role's inline graphical representation was copied into BenefitDependancyNetwork.diagram
+ *     as a dedicated element (userID "SYL") and is referenced through metamodelElement;
+ *   - the legacy ParentShapeRole (a reference from the "label" sub-shape to the "shape" role of
+ *     the same concept) becomes the containerElement attribute of ShapeRole; three of the five
+ *     column concepts additionally read container=topLevel when adding that sub-shape, which
+ *     contradicts the assertion, so all five now add it inside their own shape;
+ *   - data property assertions nested in AddOWLIndividual become explicit AddDataPropertyStatement
+ *     actions, object property assertions become AddObjectPropertyStatement;
+ *   - the DropScheme "target" URI becomes targetType;
+ *   - concept inspectors are dropped, and the URI widget becomes a plain @UI text field.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_94 conformTo="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification/DiagramSpecification.diagramspecification" as BDN_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class ITEnablers {  
-  
-    FlexoRole itEnablers as Individual conformTo ITEnablers from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole label as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    ITEnablers:dropITEnablersAtTopLevel(String uri) {    
-      itEnablers = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = "IT Enablers";      
-      };    
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class EnablingChanges {  
-  
-    FlexoRole enablingChanges as Individual conformTo EnablingChanges from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole label as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    EnablingChanges:dropEnablingChangesAtTopLevel(String uri) {    
-      enablingChanges = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = "Enabling Changes";      
-      };    
-    }    
-  
-  }  
+import java.lang.String;
 
-  @FlexoConcept  
-  public class BusinessChanges {  
-  
-    FlexoRole businessChanges as Individual conformTo BusinessChanges from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole label as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    BusinessChanges:dropBusinessChangesAtTopLevel(String uri) {    
-      businessChanges = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = "Business Changes";      
-      };    
-    }    
-  
-  }  
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.owl.model.OWLDataProperty;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
-  @FlexoConcept  
-  public class Benefits {  
-  
-    FlexoRole benefits as Individual conformTo Benefits from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole label as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    Benefits:dropBenefitsAtTopLevel(String uri) {    
-      benefits = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = "Benefits";      
-      };    
-    }    
-  
-  }  
+import OWLOntology BDN from ["http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/BenefitDependancyNetwork.owl"];
+import OWLClass IT_ENABLERS from [BDN:"ITEnablers"];
+import OWLClass ENABLING_CHANGES from [BDN:"EnablingChanges"];
+import OWLClass BUSINESS_CHANGES from [BDN:"BusinessChanges"];
+import OWLClass BENEFITS from [BDN:"Benefits"];
+import OWLClass INVESTMENT_OBJECTIVES from [BDN:"InvestmentObjectives"];
+import OWLClass BDN_ITEM from [BDN:"BDNItem"];
+import OWLDataProperty ITEM_NAME from [BDN:"itemName"];
+import OWLObjectProperty IS_CONTAINED_IN_GROUP from [BDN:"isContainedInGroup"];
+import OWLObjectProperty CONTAINS_ITEM from [BDN:"containsItem"];
+import OWLObjectProperty DEPENDS_OF from [BDN:"dependsOf"];
 
-  @FlexoConcept  
-  public class InvestmentObjectives {  
-  
-    FlexoRole investmentObjectives as Individual conformTo InvestmentObjectives from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole label as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    InvestmentObjectives:dropInvestmentObjectivesAtTopLevel(String uri) {    
-      investmentObjectives = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = "Investment Objectives";      
-      };    
-    }    
-  
-  }  
+import DiagramSpecification BDN_DIAGRAM_SPEC from [BDN_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [BDN_DIAGRAM_SPECIFICATION + "/BenefitDependancyNetwork.diagram"];
+import DiagramShape IT_ENABLERS_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1001"];
+import DiagramShape IT_ENABLERS_LABEL from [EXAMPLE_DIAGRAM:"SYL-1002"];
+import DiagramShape ENABLING_CHANGES_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1003"];
+import DiagramShape ENABLING_CHANGES_LABEL from [EXAMPLE_DIAGRAM:"SYL-1004"];
+import DiagramShape BUSINESS_CHANGES_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1005"];
+import DiagramShape BUSINESS_CHANGES_LABEL from [EXAMPLE_DIAGRAM:"SYL-1006"];
+import DiagramShape BENEFITS_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1007"];
+import DiagramShape BENEFITS_LABEL from [EXAMPLE_DIAGRAM:"SYL-1008"];
+import DiagramShape INVESTMENT_OBJECTIVES_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1009"];
+import DiagramShape INVESTMENT_OBJECTIVES_LABEL from [EXAMPLE_DIAGRAM:"SYL-1010"];
+import DiagramShape BDN_ITEM_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1011"];
+import DiagramConnector ITEM_DEPENDANCY_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1012"];
 
-  @FlexoConcept  
-  public class BDNItem {  
-  
-    FlexoRole bdnItem as Individual conformTo BDNItem from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:containsItem containsItem;  
-  
-    @DropScheme    
-    BDNItem:dropBDNItemInITEnablers(String uri) {    
-      bdnItem = owl.AddOWLIndividual();      
-      containsItem = target.itEnablers.containsItem = bdnItem;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = bdnItem.uriName;      
-      };    
-    }    
-  
-    @DropScheme    
-    BDNItem:dropBDNItemInEnablingChanges(String uri) {    
-      bdnItem = owl.AddOWLIndividual();      
-      containsItem = target.enablingChanges.containsItem = bdnItem;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = bdnItem.uriName;      
-      };    
-    }    
-  
-    @DropScheme    
-    BDNItem:dropBDNItemInBusinessChanges(String uri) {    
-      bdnItem = owl.AddOWLIndividual();      
-      containsItem = target.businessChanges.containsItem = bdnItem;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = bdnItem.uriName;      
-      };    
-    }    
-  
-    @DropScheme    
-    BDNItem:dropBDNItemInBenefits(String uri) {    
-      bdnItem = owl.AddOWLIndividual();      
-      containsItem = target.benefits.containsItem = bdnItem;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = bdnItem.uriName;      
-      };    
-    }    
-  
-    @DropScheme    
-    BDNItem:dropBDNItemInInvestmentObjectives(String uri) {    
-      bdnItem = owl.AddOWLIndividual();      
-      containsItem = target.investmentObjectives.containsItem = bdnItem;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = bdnItem.uriName;      
-      };    
-    }    
-  
-  }  
+@URI("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
 
-  @FlexoConcept  
-  public class ItemDependancy {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:dependsOf dependsOfStatement;  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-  
-    @LinkScheme    
-    ItemDependancy:linkBDNItemToBDNItem() {    
-      dependsOfStatement = toTarget.bdnItem.dependsOf = fromTarget.bdnItem;;      
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-      };    
-    }    
-  
-  }  
+	OWLOntology owl with OWLModelSlot(importedOntology=BDN);
 
+	Diagram diagram with TypedDiagram(diagramSpecification=BDN_DIAGRAM_SPEC, isRequired=true);
+
+	public concept ITEnablers {
+
+		OWLIndividual itEnablers with OWLIndividualRole(type=IT_ENABLERS);
+		DiagramShape shape with ShapeRole(exampleLabel="", metamodelElement=IT_ENABLERS_SHAPE);
+		DiagramShape label with ShapeRole(exampleLabel="IT Enablers", metamodelElement=IT_ENABLERS_LABEL,
+			containerElement=shape, label="IT Enablers");
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		ITEnablers dropITEnablersAtTopLevel(required String uri) with DropScheme() {
+			itEnablers = OWL::AddOWLIndividual(ontologyClass=IT_ENABLERS, individualName=parameters.uri) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+			label = DIAGRAM::AddShape(container=shape);
+		}
+	}
+
+	public concept EnablingChanges {
+
+		OWLIndividual enablingChanges with OWLIndividualRole(type=ENABLING_CHANGES);
+		DiagramShape shape with ShapeRole(exampleLabel="", metamodelElement=ENABLING_CHANGES_SHAPE);
+		DiagramShape label with ShapeRole(exampleLabel="Enabling Changes", metamodelElement=ENABLING_CHANGES_LABEL,
+			containerElement=shape, label="Enabling Changes");
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		EnablingChanges dropEnablingChangesAtTopLevel(required String uri) with DropScheme() {
+			enablingChanges = OWL::AddOWLIndividual(ontologyClass=ENABLING_CHANGES, individualName=parameters.uri) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+			label = DIAGRAM::AddShape(container=shape);
+		}
+	}
+
+	public concept BusinessChanges {
+
+		OWLIndividual businessChanges with OWLIndividualRole(type=BUSINESS_CHANGES);
+		DiagramShape shape with ShapeRole(exampleLabel="", metamodelElement=BUSINESS_CHANGES_SHAPE);
+		DiagramShape label with ShapeRole(exampleLabel="Business Changes", metamodelElement=BUSINESS_CHANGES_LABEL,
+			containerElement=shape, label="Business Changes");
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		BusinessChanges dropBusinessChangesAtTopLevel(required String uri) with DropScheme() {
+			businessChanges = OWL::AddOWLIndividual(ontologyClass=BUSINESS_CHANGES, individualName=parameters.uri) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+			label = DIAGRAM::AddShape(container=shape);
+		}
+	}
+
+	public concept Benefits {
+
+		OWLIndividual benefits with OWLIndividualRole(type=BENEFITS);
+		DiagramShape shape with ShapeRole(exampleLabel="", metamodelElement=BENEFITS_SHAPE);
+		DiagramShape label with ShapeRole(exampleLabel="Benefits", metamodelElement=BENEFITS_LABEL,
+			containerElement=shape, label="Benefits");
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		Benefits dropBenefitsAtTopLevel(required String uri) with DropScheme() {
+			benefits = OWL::AddOWLIndividual(ontologyClass=BENEFITS, individualName=parameters.uri) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+			label = DIAGRAM::AddShape(container=shape);
+		}
+	}
+
+	public concept InvestmentObjectives {
+
+		OWLIndividual investmentObjectives with OWLIndividualRole(type=INVESTMENT_OBJECTIVES);
+		DiagramShape shape with ShapeRole(exampleLabel="", metamodelElement=INVESTMENT_OBJECTIVES_SHAPE);
+		DiagramShape label with ShapeRole(exampleLabel="Investment Objectives", metamodelElement=INVESTMENT_OBJECTIVES_LABEL,
+			containerElement=shape, label="Investment Objectives");
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		InvestmentObjectives dropInvestmentObjectivesAtTopLevel(required String uri) with DropScheme() {
+			investmentObjectives = OWL::AddOWLIndividual(ontologyClass=INVESTMENT_OBJECTIVES, individualName=parameters.uri) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+			label = DIAGRAM::AddShape(container=shape);
+		}
+	}
+
+	public concept BDNItem {
+
+		OWLIndividual bdnItem with OWLIndividualRole(type=BDN_ITEM);
+		ObjectPropertyStatement containsItem with ObjectPropertyStatementRole(objectProperty=CONTAINS_ITEM);
+		DiagramShape shape with ShapeRole(exampleLabel="Item", metamodelElement=BDN_ITEM_SHAPE, label=bdnItem.uriName);
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		BDNItem dropBDNItemInITEnablers(required String uri) with DropScheme(targetType=ITEnablers) {
+			bdnItem = OWL::AddOWLIndividual(ontologyClass=BDN_ITEM, individualName=parameters.uri) in owl;
+			OWL::AddDataPropertyStatement(subject=bdnItem, value="Item", dataProperty=ITEM_NAME) in owl;
+			OWL::AddObjectPropertyStatement(subject=bdnItem, object=target.itEnablers, objectProperty=IS_CONTAINED_IN_GROUP) in owl;
+			containsItem = OWL::AddObjectPropertyStatement(subject=target.itEnablers, object=bdnItem) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape);
+		}
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		BDNItem dropBDNItemInEnablingChanges(required String uri) with DropScheme(targetType=EnablingChanges) {
+			bdnItem = OWL::AddOWLIndividual(ontologyClass=BDN_ITEM, individualName=parameters.uri) in owl;
+			OWL::AddDataPropertyStatement(subject=bdnItem, value="Item", dataProperty=ITEM_NAME) in owl;
+			OWL::AddObjectPropertyStatement(subject=bdnItem, object=target.enablingChanges, objectProperty=IS_CONTAINED_IN_GROUP) in owl;
+			containsItem = OWL::AddObjectPropertyStatement(subject=target.enablingChanges, object=bdnItem) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape);
+		}
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		BDNItem dropBDNItemInBusinessChanges(required String uri) with DropScheme(targetType=BusinessChanges) {
+			bdnItem = OWL::AddOWLIndividual(ontologyClass=BDN_ITEM, individualName=parameters.uri) in owl;
+			OWL::AddDataPropertyStatement(subject=bdnItem, value="Item", dataProperty=ITEM_NAME) in owl;
+			OWL::AddObjectPropertyStatement(subject=bdnItem, object=target.businessChanges, objectProperty=IS_CONTAINED_IN_GROUP) in owl;
+			containsItem = OWL::AddObjectPropertyStatement(subject=target.businessChanges, object=bdnItem) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape);
+		}
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		BDNItem dropBDNItemInBenefits(required String uri) with DropScheme(targetType=Benefits) {
+			bdnItem = OWL::AddOWLIndividual(ontologyClass=BDN_ITEM, individualName=parameters.uri) in owl;
+			OWL::AddDataPropertyStatement(subject=bdnItem, value="Item", dataProperty=ITEM_NAME) in owl;
+			OWL::AddObjectPropertyStatement(subject=bdnItem, object=target.benefits, objectProperty=IS_CONTAINED_IN_GROUP) in owl;
+			containsItem = OWL::AddObjectPropertyStatement(subject=target.benefits, object=bdnItem) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape);
+		}
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		BDNItem dropBDNItemInInvestmentObjectives(required String uri) with DropScheme(targetType=InvestmentObjectives) {
+			bdnItem = OWL::AddOWLIndividual(ontologyClass=BDN_ITEM, individualName=parameters.uri) in owl;
+			OWL::AddDataPropertyStatement(subject=bdnItem, value="Item", dataProperty=ITEM_NAME) in owl;
+			OWL::AddObjectPropertyStatement(subject=bdnItem, object=target.investmentObjectives, objectProperty=IS_CONTAINED_IN_GROUP) in owl;
+			containsItem = OWL::AddObjectPropertyStatement(subject=target.investmentObjectives, object=bdnItem) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape);
+		}
+	}
+
+	public concept ItemDependancy {
+
+		ObjectPropertyStatement dependsOfStatement with ObjectPropertyStatementRole(objectProperty=DEPENDS_OF);
+		DiagramConnector connector with ConnectorRole(exampleLabel="", metamodelElement=ITEM_DEPENDANCY_CONNECTOR);
+
+		ItemDependancy linkBDNItemToBDNItem() with LinkScheme(fromType=BDNItem, toType=BDNItem) {
+			dependsOfStatement = OWL::AddObjectPropertyStatement(subject=toTarget.bdnItem, object=fromTarget.bdnItem) in owl;
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+		}
+	}
 }

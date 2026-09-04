@@ -1,120 +1,224 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the organization tree editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Notes on the translation:
+ *   - each role's inline graphical representation was copied into OrganizationExample1.diagram
+ *     as a dedicated element (userID "SYL") and is referenced through metamodelElement;
+ *   - behaviour names are lowercased (FML behaviour names are lidentifiers);
+ *   - "conditional" on an edition action has no textual form: each conditional action becomes
+ *     an if statement, and "=" in those legacy conditions becomes "==";
+ *   - data property assertions nested in AddOWLIndividual become ontology bindings, object
+ *     property assertions become explicit AddObjectPropertyStatement actions;
+ *   - concept inspectors are dropped, and URI / checkbox widgets become plain @UI fields;
+ *   - the ontologies this view point needs (BasicOrganizationTreeEditor.owl and the
+ *     BasicOrganizationTree.owl it imports) now live under /Ontologies in this resource center.
+ *
+ * One measured gap. A data property inherited across the ontology import boundary is not offered
+ * as a binding path element: from an individual of BOTCompany (declared in the editor ontology as
+ * a subclass of BasicOrganizationTree:Company) "company.companyName" does not resolve, and neither
+ * does "roleName" from BOTManager / BOTWorker - while "name" does resolve from BOTDepartment and
+ * BOTSubDepartment. Writing those properties still works through AddDataPropertyStatement, which
+ * names the property explicitly; only the three shape labels that READ them had to fall back to
+ * uriName. Restore them to companyName / roleName once the OWL binding factory resolves inherited
+ * properties across imported ontologies.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot basicOrg type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_96 conformTo="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl" required=true readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification" as ORGANIZATION_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class BOTCompany {  
-  
-    FlexoRole company as Individual conformTo BOTCompany from basicOrg ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    BOTCompany:DropBOTCompanyAtTopLevel(String companyName, String companyURI) {    
-      company = basicOrg.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = company.companyName;      
-      };    
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class BOTDepartment {  
-  
-    FlexoRole department as Individual conformTo BOTDepartment from basicOrg ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    BOTDepartment:DropBOTDepartmentInBOTCompany(String departmentName, String departmentURI) {    
-      department = basicOrg.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = department.name;      
-      };    
-    }    
-  
-  }  
+import java.lang.String;
+import java.lang.Boolean;
 
-  /**  
-   * <html>  
-    <head>  
-  
-    </head>  
-    <body>  
-      <p style="margin-top: 0">  
-          
-      </p>  
-    </body>  
-  </html>  
-   *   
-   */  
-  @FlexoConcept  
-  public class BOTSubDepartment {  
-  
-    FlexoRole subDepartment as Individual conformTo BOTSubDepartment from basicOrg ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    BOTSubDepartment:DropBOTSubDepartmentInBOTDepartment(String subDepartmentName, String subDepartmentURI) {    
-      subDepartment = basicOrg.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = subDepartment.name;      
-      };    
-    }    
-  
-  }  
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.owl.model.OWLDataProperty;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
-  @FlexoConcept  
-  public class Employee {  
-  
-    FlexoRole employeeAsManager as Individual conformTo BOTManager from basicOrg ;  
-    FlexoRole employeeAsWorker as Individual conformTo BOTWorker from basicOrg ;  
-    FlexoRole person as Individual conformTo BOTPerson from basicOrg ;  
-    FlexoRole managerAsShape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole workerAsShape as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    Employee:DropEmployeeInOrganization(String roleName, String employeeURI, Boolean isManager, Boolean isHeadOfOrganization, Boolean assignPerson, String employeeFirstName, String employeeLastName, String personURI) {    
-      employeeAsManager = basicOrg.AddOWLIndividual();      
-      employeeAsWorker = basicOrg.AddOWLIndividual();      
-      person = basicOrg.AddOWLIndividual();      
-      managerAsShape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = employeeAsManager.roleName;      
-      };      
-      workerAsShape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = employeeAsWorker.roleName;      
-      };    
-    }    
-  
-  }  
+import OWLOntology BOT_EDITOR from ["http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl"];
+import OWLClass BOT_COMPANY from [BOT_EDITOR:"BOTCompany"];
+import OWLClass BOT_DEPARTMENT from [BOT_EDITOR:"BOTDepartment"];
+import OWLClass BOT_SUB_DEPARTMENT from [BOT_EDITOR:"BOTSubDepartment"];
+import OWLClass BOT_MANAGER from [BOT_EDITOR:"BOTManager"];
+import OWLClass BOT_WORKER from [BOT_EDITOR:"BOTWorker"];
+import OWLClass BOT_PERSON from [BOT_EDITOR:"BOTPerson"];
 
-  @FlexoConcept  
-  public class EmployeeHierarchicalRelationship {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:isResponsibleOf isResponsibleOf;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:isUnderResponsabilityOf isUnderResponsabilityOf;  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-  
-    @LinkScheme    
-    EmployeeHierarchicalRelationship:LinkTwoEmployeesByHierarchicalRelationship(Boolean makeInverseRelationship) {    
-      isResponsibleOf = fromTarget.employeeAsManager.isResponsibleOf = toTarget.employeeAsWorker;;      
-      isUnderResponsabilityOf = toTarget.employeeAsWorker.isUnderResponsabilityOf = fromTarget.employeeAsManager;;      
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_93 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "is responsible of";      
-      };    
-    }    
-  
-  }  
+import OWLOntology BOT from ["http://www.openflexo.org/openflexo/ontologies/OrganizationTree/BasicOrganizationTree.owl"];
+import OWLDataProperty COMPANY_NAME from [BOT:"companyName"];
+import OWLDataProperty NAME from [BOT:"name"];
+import OWLDataProperty ROLE_NAME from [BOT:"roleName"];
+import OWLDataProperty PERSON_NAME from [BOT:"personName"];
+import OWLDataProperty PERSON_FIRST_NAME from [BOT:"personFirstName"];
+import OWLObjectProperty IS_CONTAINED_IN from [BOT:"isContainedIn"];
+import OWLObjectProperty WORKS_IN from [BOT:"worksIn"];
+import OWLObjectProperty IS_HEAD_OF from [BOT:"isHeadOf"];
+import OWLObjectProperty JOB_PERFORMED_BY from [BOT:"jobPerformedBy"];
+import OWLObjectProperty WORKS_AS from [BOT:"worksAs"];
+import OWLObjectProperty IS_RESPONSIBLE_OF from [BOT:"isResponsibleOf"];
+import OWLObjectProperty IS_UNDER_RESPONSABILITY_OF from [BOT:"isUnderResponsabilityOf"];
 
+import DiagramSpecification ORGANIZATION_DIAGRAM_SPEC from [ORGANIZATION_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [ORGANIZATION_DIAGRAM_SPECIFICATION + "/OrganizationExample1.diagram"];
+import DiagramShape COMPANY_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1001"];
+import DiagramShape DEPARTMENT_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1002"];
+import DiagramShape SUB_DEPARTMENT_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1003"];
+import DiagramShape MANAGER_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1004"];
+import DiagramShape WORKER_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1005"];
+import DiagramConnector HIERARCHY_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1006"];
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
+
+	OWLOntology basicOrg with OWLModelSlot(importedOntology=BOT_EDITOR, isRequired=true);
+
+	Diagram diagram with TypedDiagram(
+		diagramSpecification=ORGANIZATION_DIAGRAM_SPEC,
+		paletteElementBindings={
+			PaletteElementBinding:(call=new BOTCompany::dropBOTCompanyAtTopLevel(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Company"),
+			PaletteElementBinding:(call=new BOTDepartment::dropBOTDepartmentInBOTCompany(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Department"),
+			PaletteElementBinding:(call=new BOTSubDepartment::dropBOTSubDepartmentInBOTDepartment(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Organization.palette#Sub-department"),
+			PaletteElementBinding:(call=new Employee::dropEmployeeInOrganization(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#CEO"),
+			PaletteElementBinding:(call=new Employee::dropEmployeeInOrganization(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/People.palette#Marketing executive")
+		},
+		isRequired=true);
+
+	public concept BOTCompany {
+
+		OWLIndividual company with OWLIndividualRole(type=BOT_COMPANY);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=COMPANY_SHAPE, label=company.uriName);
+
+		@UI(
+			@TextField(value="companyName", label="companyName")
+			@TextField(value="companyURI", label="companyURI")
+		)
+		BOTCompany dropBOTCompanyAtTopLevel(String companyName="My Company", required String companyURI)
+				with DropScheme(skipConfirmationPanel=false) {
+			company = OWL::AddOWLIndividual(ontologyClass=BOT_COMPANY, individualName=parameters.companyURI) in basicOrg;
+			OWL::AddDataPropertyStatement(subject=company, value=parameters.companyName, dataProperty=COMPANY_NAME) in basicOrg;
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+	}
+
+	public concept BOTDepartment {
+
+		OWLIndividual department with OWLIndividualRole(type=BOT_DEPARTMENT);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=DEPARTMENT_SHAPE, label=department.name);
+
+		@UI(
+			@TextField(value="departmentName", label="departmentName")
+			@TextField(value="departmentURI", label="departmentURI")
+		)
+		BOTDepartment dropBOTDepartmentInBOTCompany(String departmentName="My Department", required String departmentURI)
+				with DropScheme(targetType=BOTCompany) {
+			department = OWL::AddOWLIndividual(ontologyClass=BOT_DEPARTMENT, individualName=parameters.departmentURI) in basicOrg;
+			OWL::AddDataPropertyStatement(subject=department, value=parameters.departmentName, dataProperty=NAME) in basicOrg;
+			OWL::AddObjectPropertyStatement(subject=department, object=target.company, objectProperty=IS_CONTAINED_IN) in basicOrg;
+			shape = DIAGRAM::AddShape(container=target.shape);
+		}
+	}
+
+	public concept BOTSubDepartment {
+
+		OWLIndividual subDepartment with OWLIndividualRole(type=BOT_SUB_DEPARTMENT);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=SUB_DEPARTMENT_SHAPE, label=subDepartment.name);
+
+		@UI(
+			@TextField(value="subDepartmentName", label="subDepartmentName")
+			@TextField(value="subDepartmentURI", label="subDepartmentURI")
+		)
+		BOTSubDepartment dropBOTSubDepartmentInBOTDepartment(String subDepartmentName="My sub-department",
+				required String subDepartmentURI) with DropScheme(targetType=BOTDepartment, skipConfirmationPanel=false) {
+			subDepartment = OWL::AddOWLIndividual(ontologyClass=BOT_SUB_DEPARTMENT, individualName=parameters.subDepartmentURI) in basicOrg;
+			OWL::AddDataPropertyStatement(subject=subDepartment, value=parameters.subDepartmentName, dataProperty=NAME) in basicOrg;
+			OWL::AddObjectPropertyStatement(subject=subDepartment, object=target.department, objectProperty=IS_CONTAINED_IN) in basicOrg;
+			shape = DIAGRAM::AddShape(container=target.shape);
+		}
+	}
+
+	public concept Employee {
+
+		OWLIndividual employeeAsManager with OWLIndividualRole(type=BOT_MANAGER);
+		OWLIndividual employeeAsWorker with OWLIndividualRole(type=BOT_WORKER);
+		OWLIndividual person with OWLIndividualRole(type=BOT_PERSON);
+		DiagramShape managerAsShape with ShapeRole(exampleLabel="label", metamodelElement=MANAGER_SHAPE, label=employeeAsManager.uriName);
+		DiagramShape workerAsShape with ShapeRole(exampleLabel="label", metamodelElement=WORKER_SHAPE, label=employeeAsWorker.uriName);
+
+		@UI(
+			@TextField(value="roleName", label="roleName")
+			@TextField(value="employeeURI", label="employeeURI")
+			@CheckBox(value="isManager", label="isManager")
+			@CheckBox(value="isHeadOfOrganization", label="isHeadOfOrganization")
+			@CheckBox(value="assignPerson", label="assignPerson")
+			@TextField(value="employeeFirstName", label="employeeFirstName")
+			@TextField(value="employeeLastName", label="employeeLastName")
+			@TextField(value="personURI", label="personURI")
+		)
+		Employee dropEmployeeInOrganization(String roleName, required String employeeURI,
+				Boolean isManager=false, Boolean isHeadOfOrganization=false, Boolean assignPerson=false,
+				String employeeFirstName, String employeeLastName, required String personURI)
+				with DropScheme(targetType=BOTDepartment, skipConfirmationPanel=false) {
+			if (parameters.isManager == true) {
+				employeeAsManager = OWL::AddOWLIndividual(ontologyClass=BOT_MANAGER, individualName=parameters.employeeURI) in basicOrg;
+				OWL::AddDataPropertyStatement(subject=employeeAsManager, value=parameters.roleName, dataProperty=ROLE_NAME) in basicOrg;
+				OWL::AddObjectPropertyStatement(subject=employeeAsManager, object=target.department, objectProperty=WORKS_IN) in basicOrg;
+				if (parameters.isHeadOfOrganization == true) {
+					OWL::AddObjectPropertyStatement(subject=employeeAsManager, object=target.department, objectProperty=IS_HEAD_OF) in basicOrg;
+				}
+				if (parameters.assignPerson == true) {
+					OWL::AddObjectPropertyStatement(subject=employeeAsManager, object=person, objectProperty=JOB_PERFORMED_BY) in basicOrg;
+				}
+			}
+			if (parameters.isManager == false) {
+				employeeAsWorker = OWL::AddOWLIndividual(ontologyClass=BOT_WORKER, individualName=parameters.employeeURI) in basicOrg;
+				OWL::AddDataPropertyStatement(subject=employeeAsWorker, value=parameters.roleName, dataProperty=ROLE_NAME) in basicOrg;
+				OWL::AddObjectPropertyStatement(subject=employeeAsWorker, object=target.department, objectProperty=WORKS_IN) in basicOrg;
+				if (parameters.assignPerson == true) {
+					OWL::AddObjectPropertyStatement(subject=employeeAsWorker, object=person, objectProperty=JOB_PERFORMED_BY) in basicOrg;
+				}
+			}
+			if (parameters.assignPerson == true) {
+				person = OWL::AddOWLIndividual(ontologyClass=BOT_PERSON, individualName=parameters.personURI) in basicOrg;
+				OWL::AddDataPropertyStatement(subject=person, value=parameters.employeeFirstName, dataProperty=PERSON_FIRST_NAME) in basicOrg;
+				OWL::AddDataPropertyStatement(subject=person, value=parameters.employeeLastName, dataProperty=PERSON_NAME) in basicOrg;
+				if (parameters.isManager == true) {
+					OWL::AddObjectPropertyStatement(subject=person, object=employeeAsManager, objectProperty=WORKS_AS) in basicOrg;
+				}
+				if (parameters.isManager == false) {
+					OWL::AddObjectPropertyStatement(subject=person, object=employeeAsWorker, objectProperty=WORKS_AS) in basicOrg;
+				}
+			}
+			if (parameters.isManager == true) {
+				managerAsShape = DIAGRAM::AddShape(container=target.shape);
+			}
+			if (parameters.isManager == false) {
+				workerAsShape = DIAGRAM::AddShape(container=target.shape);
+			}
+		}
+	}
+
+	public concept EmployeeHierarchicalRelationship {
+
+		ObjectPropertyStatement isResponsibleOf with ObjectPropertyStatementRole(objectProperty=IS_RESPONSIBLE_OF);
+		ObjectPropertyStatement isUnderResponsabilityOf with ObjectPropertyStatementRole(objectProperty=IS_UNDER_RESPONSABILITY_OF);
+		DiagramConnector connector with ConnectorRole(exampleLabel="label", metamodelElement=HIERARCHY_CONNECTOR, label="is responsible of");
+
+		@UI(
+			@CheckBox(value="makeInverseRelationship", label="makeInverseRelationship")
+		)
+		EmployeeHierarchicalRelationship linkTwoEmployeesByHierarchicalRelationship(Boolean makeInverseRelationship)
+				with LinkScheme(fromType=Employee, toType=Employee, skipConfirmationPanel=false) {
+			isResponsibleOf = OWL::AddObjectPropertyStatement(subject=fromTarget.employeeAsManager, object=toTarget.employeeAsWorker) in basicOrg;
+			if (parameters.makeInverseRelationship == true) {
+				isUnderResponsabilityOf = OWL::AddObjectPropertyStatement(subject=toTarget.employeeAsWorker, object=fromTarget.employeeAsManager) in basicOrg;
+			}
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.managerAsShape, toShape=toTarget.workerAsShape);
+		}
+	}
 }

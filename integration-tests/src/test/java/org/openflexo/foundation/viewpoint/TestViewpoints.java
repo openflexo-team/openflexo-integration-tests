@@ -97,6 +97,13 @@ public class TestViewpoints extends OpenflexoTestCase {
 			System.out.println("Loaded VirtualModel " + vm.getName());
 			System.out.println(vm.getFMLPrettyPrint());
 
+			// A failed parse leaves an EMPTY compilation unit behind, and an empty unit validates
+			// with zero errors - so assertVirtualModelIsValid() alone proves nothing. Every
+			// virtual model contained in these view points declares concepts: assert they are
+			// there before trusting the validation below.
+			assertFalse("VirtualModel " + vm.getName() + " has no FlexoConcept: it most probably "
+					+ "parsed to an empty compilation unit", vm.getFlexoConcepts().isEmpty());
+
 			assertVirtualModelIsValid(vm);
 		}
 

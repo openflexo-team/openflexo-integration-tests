@@ -1,224 +1,311 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the organizational unit definition editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Notes on the translation:
+ *   - each role's inline graphical representation was copied into OrganizationalStructure1.diagram
+ *     as a dedicated element (userID "SYL") and is referenced through metamodelElement; the
+ *     PositionTask "shape" role carried none, so a plain rounded rectangle was added for it
+ *     (SYL-1012) - a ShapeRole cannot be declared without a metamodelElement;
+ *   - the legacy ParentShapeRole becomes containerElement; the sub-shapes whose AddShape read
+ *     container=topLevel, contradicting that assertion, now add themselves inside their container;
+ *   - behaviour names are lowercased (FML behaviour names are lidentifiers);
+ *   - "conditional" on an edition action becomes an if statement, "=" becomes "==";
+ *   - data property assertions nested in AddOWLIndividual become explicit AddDataPropertyStatement
+ *     actions, object property assertions become AddObjectPropertyStatement;
+ *   - concept inspectors are dropped, and URI / text-area / custom widgets become plain @UI fields.
+ *
+ * One legacy defect repaired: the two behaviours that draw an already existing unit or position
+ * assigned "mission = organizationUnit" (resp. "mission = position"), putting an OrganizationalUnit
+ * individual into a mission role. The intent, which the rest of the body makes plain, is the unit's
+ * own mission; they now read organizationUnit.hasOrgUnitMission / position.hasPositionMission.
+ *
+ * Four navigation schemes did not survive: NavigationScheme carries no @FML annotation and its
+ * targetObject no @FMLAttribute, so it cannot be declared in textual FML. All four were dangling in
+ * the legacy anyway - their targets ("process", "activity", "macroProcess") name roles this virtual
+ * model never declared - so they are dropped rather than kept as empty action schemes.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_99 conformTo="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification/DiagramSpecification.diagramspecification" as OUD_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class OrganizationalUnit {  
-  
-    FlexoRole organizationUnit as Individual conformTo OrganizationalUnit from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasSubOrgUnit hasSubOrgUnit;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole mission as Individual conformTo OrganizationalUnitMission from owl ;  
-    FlexoRole missionContainer as ShapeSpecification from DiagramSpecification;  
-    FlexoRole missionName as ShapeSpecification from DiagramSpecification;  
-    FlexoRole missionDescription as ShapeSpecification from DiagramSpecification;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasOrgUnitMission hasOrgUnitMission;  
-  
-    @DropScheme    
-    OrganizationalUnit:DropOrganizationalUnitInOrganizationalUnit(String organizationUnitName, String organizationUnitURI, String organizationUnitDescription, String missionName, String missionURI, String missionDescription) {    
-      mission = owl.AddOWLIndividual();      
-      organizationUnit = owl.AddOWLIndividual();      
-      hasOrgUnitMission = organizationUnit.hasOrgUnitMission = mission;;      
-      hasSubOrgUnit = target.organizationUnit.hasSubOrgUnit = organizationUnit;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = organizationUnit.organizationUnitName;      
-      };      
-      missionContainer = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      missionName = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionName;      
-      };      
-      missionDescription = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionDescription;      
-      };    
-    }    
-  
-    @DropScheme    
-    OrganizationalUnit:DropOrganizationalUnitInTopLevel(String organizationUnitName, String organizationUnitURI, String organizationUnitDescription, String missionName, String missionURI, String missionDescription) {    
-      mission = owl.AddOWLIndividual();      
-      organizationUnit = owl.AddOWLIndividual();      
-      hasOrgUnitMission = organizationUnit.hasOrgUnitMission = mission;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = organizationUnit.organizationUnitName;      
-      };      
-      missionContainer = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      missionName = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionName;      
-      };      
-      missionDescription = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionDescription;      
-      };    
-    }    
-  
-    @DropScheme    
-    OrganizationalUnit:DrawOrganizationalUnitInOrganizationalUnit(IFlexoOntologyIndividual organizationalUnit) {    
-      organizationUnit = parameters.organizationalUnit;      
-      mission = organizationUnit;      
-      mission = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = organizationUnit.organizationUnitName;      
-      };      
-      missionContainer = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      missionName = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionName;      
-      };      
-      missionDescription = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionDescription;      
-      };    
-    }    
-  
-    @NavigationScheme    
-    void OpenRelatedProcess() {    
-      
-    }    
-  
-    @NavigationScheme    
-    void OpenRelatedActivity() {    
-      
-    }    
-  
-    @CreationScheme    
-    OrganizationalUnit:CreateDiagramFromOrganizationUnit(IFlexoOntologyIndividual organizationalUnit) {    
-      organizationUnit = parameters.organizationalUnit;      
-      mission = organizationUnit;      
-      mission = owl.AddOWLIndividual();      
-      hasOrgUnitMission = organizationUnit.hasOrgUnitMission = mission;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = organizationUnit.organizationUnitName;      
-      };      
-      missionContainer = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      missionName = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionName;      
-      };      
-      missionDescription = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionDescription;      
-      };      
-      shape.x=10.01      
-      shape.y=25.01      
-      shape.width=500.01      
-      shape.height=400.01    
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class OrganizationalUnitObjective {  
-  
-    FlexoRole objective as Individual conformTo Objective from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasObjective hasObjective;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    OrganizationalUnitObjective:DropObjectiveInOrganizationalUnit(String objectiveName, String objectiveURI, String objectiveDescription) {    
-      objective = owl.AddOWLIndividual();      
-      hasObjective = target.organizationUnit.hasObjective = objective;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = objective.objectiveName;      
-      };    
-    }    
-  
-    @NavigationScheme    
-    void OpenRelatedMacroProcess() {    
-      
-    }    
-  
-    @NavigationScheme    
-    void OpenRelatedProcess() {    
-      
-    }    
-  
-  }  
+import java.lang.String;
 
-  @FlexoConcept  
-  public class OrganizationalUnitPosition {  
-  
-    FlexoRole position as Individual conformTo Position from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:containsPosition containsPosition;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole missionShape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole mission as Individual conformTo PositionMission from owl ;  
-    FlexoRole icon as ShapeSpecification from DiagramSpecification;  
-    FlexoRole label as ShapeSpecification from DiagramSpecification;  
-    FlexoRole missionLabel as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    OrganizationalUnitPosition:DropPositionInOrganizationalUnit(String positionName, String positionURI, String missionName, String missionURI, String missionDescription) {    
-      mission = owl.AddOWLIndividual();      
-      position = owl.AddOWLIndividual();      
-      containsPosition = target.organizationUnit.containsPosition = position;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      missionShape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionName;      
-      };      
-      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = position.uriName;      
-      };      
-      missionLabel = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionName;      
-      };    
-    }    
-  
-    @DropScheme    
-    OrganizationalUnitPosition:DrawPositionInOrganizationalUnit(IFlexoOntologyIndividual positionToRepresent) {    
-      position = parameters.positionToRepresent;      
-      mission = position;      
-      mission = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      missionShape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionName;      
-      };      
-      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = position.uriName;      
-      };      
-      missionLabel = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = mission.missionName;      
-      };    
-    }    
-  
-  }  
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.owl.model.OWLDataProperty;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
-  @FlexoConcept  
-  public class PositionTask {  
-  
-    FlexoRole task as Individual conformTo Task from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasTask hasTask;  
-    FlexoRole hasTaskConnector as ConnectorSpecification from DiagramSpecification;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    PositionTask:DropTaskForPosition(String taskName, String taskURI, String taskDescription) {    
-      task = owl.AddOWLIndividual();      
-      hasTask = target.position.hasTask = task;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      hasTaskConnector = AddConnector$AddConnectorImpl_$$_jvste0e_97 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-      };    
-    }    
-  
-  }  
+import OWLOntology OUSD from ["http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl"];
+import OWLClass OUSD_ORGANIZATIONAL_UNIT from [OUSD:"OrganizationalUnit"];
+import OWLClass OUSD_ORGANIZATIONAL_UNIT_MISSION from [OUSD:"OrganizationalUnitMission"];
+import OWLClass OUSD_OBJECTIVE from [OUSD:"Objective"];
+import OWLClass OUSD_POSITION from [OUSD:"Position"];
+import OWLClass OUSD_POSITION_MISSION from [OUSD:"PositionMission"];
+import OWLClass OUSD_TASK from [OUSD:"Task"];
+import OWLDataProperty ORGANIZATION_UNIT_NAME from [OUSD:"organizationUnitName"];
+import OWLDataProperty ORGANIZATION_UNIT_DESCRIPTION from [OUSD:"organizationUnitDescription"];
+import OWLDataProperty MISSION_NAME from [OUSD:"missionName"];
+import OWLDataProperty MISSION_DESCRIPTION from [OUSD:"missionDescription"];
+import OWLDataProperty OBJECTIVE_NAME from [OUSD:"objectiveName"];
+import OWLDataProperty OBJECTIVE_DESCRIPTION from [OUSD:"objectiveDescription"];
+import OWLDataProperty POSITION_NAME from [OUSD:"positionName"];
+import OWLDataProperty TASK_NAME from [OUSD:"taskName"];
+import OWLDataProperty TASK_DESCRIPTION from [OUSD:"taskDescription"];
+import OWLObjectProperty HAS_SUB_ORG_UNIT from [OUSD:"hasSubOrgUnit"];
+import OWLObjectProperty HAS_PARENT_ORG_UNIT from [OUSD:"hasParentOrgUnit"];
+import OWLObjectProperty HAS_ORG_UNIT_MISSION from [OUSD:"hasOrgUnitMission"];
+import OWLObjectProperty HAS_OBJECTIVE from [OUSD:"hasObjective"];
+import OWLObjectProperty CONTAINS_POSITION from [OUSD:"containsPosition"];
+import OWLObjectProperty HAS_POSITION_MISSION from [OUSD:"hasPositionMission"];
+import OWLObjectProperty HAS_TASK from [OUSD:"hasTask"];
 
+import DiagramSpecification OUD_DIAGRAM_SPEC from [OUD_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [OUD_DIAGRAM_SPECIFICATION + "/OrganizationalStructure1.diagram"];
+import DiagramShape OU_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1001"];
+import DiagramShape OU_MISSION_CONTAINER from [EXAMPLE_DIAGRAM:"SYL-1002"];
+import DiagramShape OU_MISSION_NAME from [EXAMPLE_DIAGRAM:"SYL-1003"];
+import DiagramShape OU_MISSION_DESCRIPTION from [EXAMPLE_DIAGRAM:"SYL-1004"];
+import DiagramShape OBJECTIVE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1005"];
+import DiagramShape POSITION_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1006"];
+import DiagramShape POSITION_MISSION_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1007"];
+import DiagramShape POSITION_ICON from [EXAMPLE_DIAGRAM:"SYL-1008"];
+import DiagramShape POSITION_LABEL from [EXAMPLE_DIAGRAM:"SYL-1009"];
+import DiagramShape POSITION_MISSION_LABEL from [EXAMPLE_DIAGRAM:"SYL-1010"];
+import DiagramConnector HAS_TASK_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1011"];
+import DiagramShape TASK_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1012"];
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
+
+	OWLOntology owl with OWLModelSlot(importedOntology=OUSD);
+
+	Diagram diagram with TypedDiagram(diagramSpecification=OUD_DIAGRAM_SPEC, isRequired=true);
+
+	public concept OrganizationalUnit {
+
+		OWLIndividual organizationUnit with OWLIndividualRole(type=OUSD_ORGANIZATIONAL_UNIT);
+		OWLIndividual mission with OWLIndividualRole(type=OUSD_ORGANIZATIONAL_UNIT_MISSION);
+		ObjectPropertyStatement hasSubOrgUnit with ObjectPropertyStatementRole(objectProperty=HAS_SUB_ORG_UNIT);
+		ObjectPropertyStatement hasOrgUnitMission with ObjectPropertyStatementRole(objectProperty=HAS_ORG_UNIT_MISSION);
+		DiagramShape shape with ShapeRole(exampleLabel="Organization Unit", metamodelElement=OU_SHAPE,
+			label=organizationUnit.organizationUnitName);
+		DiagramShape missionContainer with ShapeRole(exampleLabel="", metamodelElement=OU_MISSION_CONTAINER,
+			containerElement=shape);
+		DiagramShape missionName with ShapeRole(exampleLabel="Mission", metamodelElement=OU_MISSION_NAME,
+			containerElement=missionContainer, label=mission.missionName);
+		DiagramShape missionDescription with ShapeRole(exampleLabel="<Describe the mission here>",
+			metamodelElement=OU_MISSION_DESCRIPTION, containerElement=missionContainer, label=mission.missionDescription);
+
+		@UI(
+			@TextField(value="organizationUnitName", label="organizationUnitName")
+			@TextField(value="organizationUnitURI", label="organizationUnitURI")
+			@TextArea(value="organizationUnitDescription", label="organizationUnitDescription")
+			@TextField(value="missionName", label="missionName")
+			@TextField(value="missionURI", label="missionURI")
+			@TextArea(value="missionDescription", label="missionDescription")
+		)
+		OrganizationalUnit dropOrganizationalUnitInOrganizationalUnit(
+				String organizationUnitName="Organization unit", required String organizationUnitURI,
+				String organizationUnitDescription="Please describe here the organizational unit",
+				String missionName="Mission", required String missionURI,
+				String missionDescription="Please describe here the mission of organizational unit")
+				with DropScheme(targetType=OrganizationalUnit) {
+			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION, individualName=parameters.missionURI) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionName, dataProperty=MISSION_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
+			organizationUnit = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT, individualName=parameters.organizationUnitURI) in owl;
+			OWL::AddDataPropertyStatement(subject=organizationUnit, value=parameters.organizationUnitName, dataProperty=ORGANIZATION_UNIT_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=organizationUnit, value=parameters.organizationUnitDescription, dataProperty=ORGANIZATION_UNIT_DESCRIPTION) in owl;
+			OWL::AddObjectPropertyStatement(subject=organizationUnit, object=target.organizationUnit, objectProperty=HAS_PARENT_ORG_UNIT) in owl;
+			hasOrgUnitMission = OWL::AddObjectPropertyStatement(subject=organizationUnit, object=mission) in owl;
+			hasSubOrgUnit = OWL::AddObjectPropertyStatement(subject=target.organizationUnit, object=organizationUnit) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape);
+			missionContainer = DIAGRAM::AddShape(container=shape);
+			missionName = DIAGRAM::AddShape(container=missionContainer);
+			missionDescription = DIAGRAM::AddShape(container=missionContainer);
+		}
+
+		@UI(
+			@TextField(value="organizationUnitName", label="organizationUnitName")
+			@TextField(value="organizationUnitURI", label="organizationUnitURI")
+			@TextArea(value="organizationUnitDescription", label="organizationUnitDescription")
+			@TextField(value="missionName", label="missionName")
+			@TextField(value="missionURI", label="missionURI")
+			@TextArea(value="missionDescription", label="missionDescription")
+		)
+		OrganizationalUnit dropOrganizationalUnitInTopLevel(
+				String organizationUnitName="Organization Unit", required String organizationUnitURI,
+				String organizationUnitDescription="Please describe here the organizational unit",
+				String missionName="Mission", required String missionURI,
+				String missionDescription="Please describe here the mission of organizational unit")
+				with DropScheme(skipConfirmationPanel=false) {
+			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION, individualName=parameters.missionURI) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionName, dataProperty=MISSION_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
+			organizationUnit = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT, individualName=parameters.organizationUnitURI) in owl;
+			OWL::AddDataPropertyStatement(subject=organizationUnit, value=parameters.organizationUnitName, dataProperty=ORGANIZATION_UNIT_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=organizationUnit, value=parameters.organizationUnitDescription, dataProperty=ORGANIZATION_UNIT_DESCRIPTION) in owl;
+			hasOrgUnitMission = OWL::AddObjectPropertyStatement(subject=organizationUnit, object=mission) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+			missionContainer = DIAGRAM::AddShape(container=shape);
+			missionName = DIAGRAM::AddShape(container=missionContainer);
+			missionDescription = DIAGRAM::AddShape(container=missionContainer);
+		}
+
+		OrganizationalUnit drawOrganizationalUnitInOrganizationalUnit(
+				OWLIndividual organizationalUnit) with DropScheme(skipConfirmationPanel=false) {
+			// The parameter can only be declared OWLIndividual (a behaviour parameter takes a
+			// reference_type, and the typedef alias that would carry the precise individual type gets
+			// substituted into every role of that type, where it then hides the OWL binding path
+			// elements). Re-selecting the individual gives the role its properly typed value.
+			organizationUnit = select unique OWLIndividualType(owlClass=OUSD_ORGANIZATIONAL_UNIT) from owl
+				where (selected.uri == parameters.organizationalUnit.URI);
+			mission = organizationUnit.hasOrgUnitMission;
+			if (organizationUnit.hasOrgUnitMission == null) {
+				mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION,
+					individualName=(organizationUnit.uriName + "Mission")) in owl;
+				OWL::AddDataPropertyStatement(subject=mission, value="Mission", dataProperty=MISSION_NAME) in owl;
+				OWL::AddDataPropertyStatement(subject=mission, value="<Describe the mission here>", dataProperty=MISSION_DESCRIPTION) in owl;
+			}
+			shape = DIAGRAM::AddShape(container=topLevel);
+			missionContainer = DIAGRAM::AddShape(container=shape);
+			missionName = DIAGRAM::AddShape(container=missionContainer);
+			missionDescription = DIAGRAM::AddShape(container=missionContainer);
+		}
+
+		create::createDiagramFromOrganizationUnit(OWLIndividual organizationalUnit) {
+			// The parameter can only be declared OWLIndividual (a behaviour parameter takes a
+			// reference_type, and the typedef alias that would carry the precise individual type gets
+			// substituted into every role of that type, where it then hides the OWL binding path
+			// elements). Re-selecting the individual gives the role its properly typed value.
+			organizationUnit = select unique OWLIndividualType(owlClass=OUSD_ORGANIZATIONAL_UNIT) from owl
+				where (selected.uri == parameters.organizationalUnit.URI);
+			mission = organizationUnit.hasOrgUnitMission;
+			if (organizationUnit.hasOrgUnitMission == null) {
+				mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION,
+					individualName=(organizationUnit.uriName + "Mission")) in owl;
+				OWL::AddDataPropertyStatement(subject=mission, value="Mission", dataProperty=MISSION_NAME) in owl;
+				OWL::AddDataPropertyStatement(subject=mission, value="<Describe the mission here>", dataProperty=MISSION_DESCRIPTION) in owl;
+			}
+			hasOrgUnitMission = OWL::AddObjectPropertyStatement(subject=organizationUnit, object=mission) in owl;
+			// A creation scheme has no "topLevel" binding (the legacy read the model slot itself
+			// here); the shape goes into the diagram.
+			shape = DIAGRAM::AddShape(container=diagram);
+			missionContainer = DIAGRAM::AddShape(container=shape);
+			missionName = DIAGRAM::AddShape(container=missionContainer);
+			missionDescription = DIAGRAM::AddShape(container=missionContainer);
+		}
+	}
+
+	public concept OrganizationalUnitObjective {
+
+		OWLIndividual objective with OWLIndividualRole(type=OUSD_OBJECTIVE);
+		ObjectPropertyStatement hasObjective with ObjectPropertyStatementRole(objectProperty=HAS_OBJECTIVE);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=OBJECTIVE_SHAPE,
+			label=objective.objectiveName);
+
+		@UI(
+			@TextField(value="objectiveName", label="objectiveName")
+			@TextField(value="objectiveURI", label="objectiveURI")
+			@TextArea(value="objectiveDescription", label="objectiveDescription")
+		)
+		OrganizationalUnitObjective dropObjectiveInOrganizationalUnit(String objectiveName="Objective",
+				required String objectiveURI, String objectiveDescription)
+				with DropScheme(targetType=OrganizationalUnit) {
+			objective = OWL::AddOWLIndividual(ontologyClass=OUSD_OBJECTIVE, individualName=parameters.objectiveURI) in owl;
+			OWL::AddDataPropertyStatement(subject=objective, value=parameters.objectiveName, dataProperty=OBJECTIVE_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=objective, value=parameters.objectiveDescription, dataProperty=OBJECTIVE_DESCRIPTION) in owl;
+			hasObjective = OWL::AddObjectPropertyStatement(subject=target.organizationUnit, object=objective) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape);
+		}
+	}
+
+	public concept OrganizationalUnitPosition {
+
+		OWLIndividual position with OWLIndividualRole(type=OUSD_POSITION);
+		OWLIndividual mission with OWLIndividualRole(type=OUSD_POSITION_MISSION);
+		ObjectPropertyStatement containsPosition with ObjectPropertyStatementRole(objectProperty=CONTAINS_POSITION);
+		DiagramShape shape with ShapeRole(exampleLabel="", metamodelElement=POSITION_SHAPE);
+		DiagramShape missionShape with ShapeRole(exampleLabel="<describe mission here>",
+			metamodelElement=POSITION_MISSION_SHAPE, containerElement=shape, label=mission.missionName);
+		DiagramShape icon with ShapeRole(exampleLabel="", metamodelElement=POSITION_ICON, containerElement=shape);
+		DiagramShape label with ShapeRole(exampleLabel="label", metamodelElement=POSITION_LABEL,
+			containerElement=shape, label=position.uriName);
+		DiagramShape missionLabel with ShapeRole(exampleLabel="Mission", metamodelElement=POSITION_MISSION_LABEL,
+			containerElement=shape, label=mission.missionName);
+
+		@UI(
+			@TextField(value="positionName", label="positionName")
+			@TextField(value="positionURI", label="positionURI")
+			@TextField(value="missionName", label="missionName")
+			@TextField(value="missionURI", label="missionURI")
+			@TextArea(value="missionDescription", label="missionDescription")
+		)
+		OrganizationalUnitPosition dropPositionInOrganizationalUnit(String positionName="Position",
+				required String positionURI, String missionName="Mission", required String missionURI,
+				String missionDescription) with DropScheme(targetType=OrganizationalUnit, skipConfirmationPanel=false) {
+			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_POSITION_MISSION, individualName=parameters.missionURI) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionName, dataProperty=MISSION_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
+			position = OWL::AddOWLIndividual(ontologyClass=OUSD_POSITION, individualName=parameters.positionURI) in owl;
+			OWL::AddDataPropertyStatement(subject=position, value=parameters.positionName, dataProperty=POSITION_NAME) in owl;
+			OWL::AddObjectPropertyStatement(subject=position, object=mission, objectProperty=HAS_POSITION_MISSION) in owl;
+			containsPosition = OWL::AddObjectPropertyStatement(subject=target.organizationUnit, object=position) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape);
+			icon = DIAGRAM::AddShape(container=shape);
+			missionShape = DIAGRAM::AddShape(container=shape);
+			label = DIAGRAM::AddShape(container=shape);
+			missionLabel = DIAGRAM::AddShape(container=shape);
+		}
+
+		OrganizationalUnitPosition drawPositionInOrganizationalUnit(OWLIndividual positionToRepresent)
+				with DropScheme(targetType=OrganizationalUnit, skipConfirmationPanel=false) {
+			// See the comment in drawOrganizationalUnitInOrganizationalUnit.
+			position = select unique OWLIndividualType(owlClass=OUSD_POSITION) from owl
+				where (selected.uri == parameters.positionToRepresent.URI);
+			mission = position.hasPositionMission;
+			if (position.hasPositionMission == null) {
+				mission = OWL::AddOWLIndividual(ontologyClass=OUSD_POSITION_MISSION,
+					individualName=(position.uriName + "Mission")) in owl;
+				OWL::AddDataPropertyStatement(subject=mission, value="Mission", dataProperty=MISSION_NAME) in owl;
+				OWL::AddDataPropertyStatement(subject=mission, value="Please define position mission", dataProperty=MISSION_DESCRIPTION) in owl;
+			}
+			shape = DIAGRAM::AddShape(container=target.shape);
+			icon = DIAGRAM::AddShape(container=shape);
+			missionShape = DIAGRAM::AddShape(container=shape);
+			label = DIAGRAM::AddShape(container=shape);
+			missionLabel = DIAGRAM::AddShape(container=shape);
+		}
+	}
+
+	public concept PositionTask {
+
+		OWLIndividual task with OWLIndividualRole(type=OUSD_TASK);
+		ObjectPropertyStatement hasTask with ObjectPropertyStatementRole(objectProperty=HAS_TASK);
+		DiagramShape shape with ShapeRole(exampleLabel="Task", metamodelElement=TASK_SHAPE);
+		DiagramConnector hasTaskConnector with ConnectorRole(exampleLabel="", metamodelElement=HAS_TASK_CONNECTOR);
+
+		@UI(
+			@TextField(value="taskName", label="taskName")
+			@TextField(value="taskURI", label="taskURI")
+			@TextArea(value="taskDescription", label="taskDescription")
+		)
+		PositionTask dropTaskForPosition(String taskName="Task", required String taskURI, String taskDescription)
+				with DropScheme(targetType=OrganizationalUnitPosition) {
+			task = OWL::AddOWLIndividual(ontologyClass=OUSD_TASK, individualName=parameters.taskURI) in owl;
+			OWL::AddDataPropertyStatement(subject=task, value=parameters.taskName, dataProperty=TASK_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=task, value=parameters.taskDescription, dataProperty=TASK_DESCRIPTION) in owl;
+			hasTask = OWL::AddObjectPropertyStatement(subject=target.position, object=task) in owl;
+			shape = DIAGRAM::AddShape(container=target.shape.parent);
+			hasTaskConnector = DIAGRAM::AddConnector(fromShape=target.icon, toShape=shape);
+		}
+	}
 }

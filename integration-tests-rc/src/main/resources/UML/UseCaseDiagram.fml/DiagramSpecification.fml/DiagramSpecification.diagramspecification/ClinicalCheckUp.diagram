@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Diagram id="1" name="ClinicalCheckUp" uri="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/ClinicalCheckUp" userID="FLX">
+<Diagram id="1" name="ClinicalCheckUp.diagram" uri="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/ClinicalCheckUp.diagram" userID="FLX">
   <DrawingGraphicalRepresentation id="2" width="1000.0" height="1000.0" drawWorkingArea="true" selectionColor="0,0,255" focusColor="255,0,0" backgroundColor="255,255,255" isMultilineAllowed="false" isReadOnly="false" isSelectable="true" isFocusable="true" relativeTextX="0.5" relativeTextY="0.5" absoluteTextX="0.0" absoluteTextY="0.0" textAlignment="CENTER" userID="FLX">
     <TextStyle id="3" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
   </DrawingGraphicalRepresentation>
@@ -155,5 +155,40 @@
     </ConnectorGraphicalRepresentation>
     <StartShape idref="36" userID="FLX" />
     <EndShape idref="60" userID="FLX" />
+  </Connector>
+  <Shape id="118" name="Actor_shape" userID="SYL" flexoID="1001">
+    <ShapeGraphicalRepresentation id="108" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="140.0" y="38.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="68.0" height="43.06896551724138" identifier="object_0" absoluteTextY="-8.0" absoluteTextX="27.0" layer="1" text="label">
+      <SelectedImageBackgroundStyle id="109" scaleX="1.8888888888888888" scaleY="0.9163609684519443" fitToShape="true" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <ForegroundStyle id="110" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="111" scaleX="1.8888888888888888" scaleY="0.9163609684519443" fitToShape="true" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <ShadowStyle id="112" drawShadow="false" />
+      <FocusedForegroundStyle id="113" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="114" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <ImageBackgroundStyle id="115" scaleX="1.8888888888888888" scaleY="0.9163609684519443" fitToShape="true" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <RectangleShape id="116" />
+      <TextStyle id="117" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="129" name="UseCase_shape" userID="SYL" flexoID="1002">
+    <ShapeGraphicalRepresentation id="119" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" adaptBoundsToContents="false" x="130.0" y="34.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="139.85915492957744" height="50.0" identifier="object_0" layer="1">
+      <SelectedColorBackgroundStyle id="120" color="249,244,205" transparencyLevel="0.5" />
+      <ForegroundStyle id="121" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="122" color="249,244,205" transparencyLevel="0.5" />
+      <ShadowStyle id="123" />
+      <FocusedForegroundStyle id="124" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="125" color="0,0,0" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <ColorBackgroundStyle id="126" color="249,244,205" transparencyLevel="0.5" />
+      <OvalShape id="127" />
+      <TextStyle id="128" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Connector id="136" name="ActorUseCaseAssociation_connector" userID="SYL" flexoID="1003">
+    <ConnectorGraphicalRepresentation id="130" identifier="object_2" layer="64">
+      <LineConnectorSpecification id="131" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+      <ForegroundStyle id="132" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="2.100000001490116" />
+      <FocusedForegroundStyle id="133" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="2.100000001490116" />
+      <SelectedForegroundStyle id="134" color="102,102,102" joinStyle="JOIN_MITER" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" lineWidth="2.100000001490116" />
+      <TextStyle id="135" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ConnectorGraphicalRepresentation>
   </Connector>
 </Diagram>

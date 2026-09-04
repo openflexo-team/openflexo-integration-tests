@@ -1,0 +1,12 @@
+/**
+ * BasicOrganizationTreeEditor - an organization tree editor over the BasicOrganizationTree
+ * ontology.
+ *
+ * Container view point: it only holds the DiagramSpecification virtual model.
+ * Migrated from the deprecated .fml.xml serialization.
+ */
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor")
+@Version("0.1")
+public model BasicOrganizationTreeEditor {
+}

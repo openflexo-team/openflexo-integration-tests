@@ -1,65 +1,115 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the organizational chart editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Notes on the translation:
+ *   - each role's inline graphical representation was copied into Examples.diagram as a dedicated
+ *     element (userID "SYL") and is referenced through metamodelElement;
+ *   - the legacy ParentShapeRole becomes the containerElement attribute of ShapeRole; the two
+ *     sub-shapes whose AddShape read container=topLevel, contradicting that assertion, now add
+ *     themselves inside the actor shape;
+ *   - data property assertions nested in AddOWLIndividual become explicit AddDataPropertyStatement
+ *     actions, object property assertions become AddObjectPropertyStatement;
+ *   - the model slot declared the same palette element binding ten times, all pointing at
+ *     Actors.palette#Actor and at the same drop scheme; one is kept;
+ *   - concept inspectors are dropped, and URI / custom widgets become plain @UI text fields.
+ *
+ * Two things did not survive:
+ *   - the NavigationScheme "OpenOwnedProcess": NavigationScheme carries no @FML annotation and its
+ *     targetObject no @FMLAttribute, so it cannot be declared in textual FML. It was dangling in
+ *     the legacy anyway - its target binding "ownedProcess" names a role this virtual model never
+ *     declared - so it is dropped rather than kept as an empty action scheme;
+ *   - "conditional" on that scheme, which has no textual form either.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_94 conformTo="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification" as ORGANIZATIONAL_CHART_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class Actor {  
-  
-    FlexoRole actor as Individual conformTo Actor from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole icon as ShapeSpecification from DiagramSpecification;  
-    FlexoRole nameLabel as ShapeSpecification from DiagramSpecification;  
-    FlexoRole positionLabel as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    Actor:dropActorAtTopLevel(String firstName, String lastName, String uri, IFlexoOntologyIndividual position) {    
-      actor = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      positionLabel = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = actor.hasPosition.uriName;      
-      };      
-      nameLabel = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = ((actor.firstName + " ") + actor.lastName);      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };    
-    }    
-  
-    @NavigationScheme    
-    void OpenOwnedProcess() {    
-      
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class CollaboratorLink {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasCollaborator hasCollaboratorStatement;  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasManager hasManagerStatement;  
-  
-    @LinkScheme    
-    CollaboratorLink:linkActorToActor() {    
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-      };      
-      hasCollaboratorStatement = fromTarget.actor.hasCollaborator = toTarget.actor;;      
-      hasManagerStatement = toTarget.actor.hasManager = fromTarget.actor;;    
-    }    
-  
-  }  
+import java.lang.String;
 
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.owl.model.OWLDataProperty;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+
+import OWLOntology OUSD from ["http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl"];
+import OWLClass OUSD_ACTOR from [OUSD:"Actor"];
+import OWLClass OUSD_POSITION from [OUSD:"Position"];
+import OWLDataProperty FIRST_NAME from [OUSD:"firstName"];
+import OWLDataProperty LAST_NAME from [OUSD:"lastName"];
+import OWLObjectProperty HAS_POSITION from [OUSD:"hasPosition"];
+import OWLObjectProperty HAS_COLLABORATOR from [OUSD:"hasCollaborator"];
+import OWLObjectProperty HAS_MANAGER from [OUSD:"hasManager"];
+
+import DiagramSpecification ORGANIZATIONAL_CHART_DIAGRAM_SPEC from [ORGANIZATIONAL_CHART_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [ORGANIZATIONAL_CHART_DIAGRAM_SPECIFICATION + "/Examples.diagram"];
+import DiagramShape ACTOR_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1001"];
+import DiagramShape ACTOR_ICON from [EXAMPLE_DIAGRAM:"SYL-1002"];
+import DiagramShape ACTOR_NAME_LABEL from [EXAMPLE_DIAGRAM:"SYL-1003"];
+import DiagramShape ACTOR_POSITION_LABEL from [EXAMPLE_DIAGRAM:"SYL-1004"];
+import DiagramConnector COLLABORATOR_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1005"];
+
+// A behaviour parameter takes a reference_type, not the technology-specific type form, so the
+// Position individual type a parameter needs has to be reached through an alias.
+typedef OWLIndividualType(owlClass=OUSD_POSITION) as OrganizationalPosition;
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
+
+	OWLOntology owl with OWLModelSlot(importedOntology=OUSD);
+
+	Diagram diagram with TypedDiagram(
+		diagramSpecification=ORGANIZATIONAL_CHART_DIAGRAM_SPEC,
+		paletteElementBindings={
+			PaletteElementBinding:(call=new Actor::dropActorAtTopLevel(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl/DiagramSpecification/DiagramSpecification.diagramspecification/Actors.palette#Actor")
+		},
+		isRequired=true);
+
+	public concept Actor {
+
+		OWLIndividual actor with OWLIndividualRole(type=OUSD_ACTOR);
+		DiagramShape shape with ShapeRole(exampleLabel="", metamodelElement=ACTOR_SHAPE);
+		DiagramShape icon with ShapeRole(exampleLabel="", metamodelElement=ACTOR_ICON, containerElement=shape);
+		DiagramShape nameLabel with ShapeRole(exampleLabel="Name", metamodelElement=ACTOR_NAME_LABEL,
+			containerElement=shape, label=((actor.firstName + " ") + actor.lastName));
+		DiagramShape positionLabel with ShapeRole(exampleLabel="Title", metamodelElement=ACTOR_POSITION_LABEL,
+			containerElement=shape, label=actor.hasPosition.uriName);
+
+		@UI(
+			@TextField(value="firstName", label="firstName")
+			@TextField(value="lastName", label="lastName")
+			@TextField(value="uri", label="uri")
+		)
+		Actor dropActorAtTopLevel(String firstName, String lastName, required String uri,
+				OrganizationalPosition position) with DropScheme(skipConfirmationPanel=false) {
+			actor = OWL::AddOWLIndividual(ontologyClass=OUSD_ACTOR, individualName=parameters.uri) in owl;
+			OWL::AddDataPropertyStatement(subject=actor, value=parameters.firstName, dataProperty=FIRST_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=actor, value=parameters.lastName, dataProperty=LAST_NAME) in owl;
+			OWL::AddObjectPropertyStatement(subject=actor, object=parameters.position, objectProperty=HAS_POSITION) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+			positionLabel = DIAGRAM::AddShape(container=shape);
+			nameLabel = DIAGRAM::AddShape(container=shape);
+			icon = DIAGRAM::AddShape(container=shape);
+		}
+	}
+
+	public concept CollaboratorLink {
+
+		ObjectPropertyStatement hasCollaboratorStatement with ObjectPropertyStatementRole(objectProperty=HAS_COLLABORATOR);
+		ObjectPropertyStatement hasManagerStatement with ObjectPropertyStatementRole(objectProperty=HAS_MANAGER);
+		DiagramConnector connector with ConnectorRole(exampleLabel="", metamodelElement=COLLABORATOR_CONNECTOR);
+
+		CollaboratorLink linkActorToActor() with LinkScheme(fromType=Actor, toType=Actor) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			hasCollaboratorStatement = OWL::AddObjectPropertyStatement(subject=fromTarget.actor, object=toTarget.actor) in owl;
+			hasManagerStatement = OWL::AddObjectPropertyStatement(subject=toTarget.actor, object=fromTarget.actor) in owl;
+		}
+	}
 }

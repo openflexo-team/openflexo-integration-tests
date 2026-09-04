@@ -1,106 +1,157 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the UML use case diagram editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Notes on the translation:
+ *   - each role's inline graphical representation was copied into ClinicalCheckUp.diagram as a
+ *     dedicated element (userID "SYL") and is referenced here through metamodelElement;
+ *   - the model slot named typedDiagramModelSlot is renamed diagram;
+ *   - concept inspectors are dropped (FlexoConceptInspector is deprecated and has no textual
+ *     form), and the URI / custom widgets of behaviour parameters become plain text fields;
+ *   - data property assertions nested in AddOWLIndividual become ontology bindings, object
+ *     property assertions become explicit AddObjectPropertyStatement actions;
+ *   - the legacy AddConnector read "fromShape=fromTarget" instead of "fromTarget.shape", which
+ *     2.99 rejects as a type error; repaired here;
+ *   - behaviour names are lowercased (DropNewActor -> dropNewActor): FML behaviour names are
+ *     lidentifiers, and an uppercase one does not parse in "new Concept::behaviour()".
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_96 conformTo="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification" as USE_CASE_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class Actor {  
-  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole package as Individual conformTo Package from owl ;  
-    FlexoRole actor as Individual conformTo Actor from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:packagedElement packagedElement;  
-  
-    @DropScheme    
-    Actor:DropNewActor(String name, String uri, IFlexoOntologyIndividual packageParameter) {    
-      package = parameters.packageParameter;      
-      actor = owl.AddOWLIndividual();      
-      packagedElement = package.packagedElement = actor;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = actor.name;      
-      };    
-    }    
-  
-    @DeletionScheme    
-    Void deleteActor() {    
-      delete shape      
-      delete actor      
-      package = null;      
-      packagedElement = null;    
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class UseCase {  
-  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole package as Individual conformTo Package from owl ;  
-    FlexoRole useCase as Individual conformTo UseCase from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:packagedElement packagedElement;  
-  
-    @DropScheme    
-    UseCase:DropNewUseCase(String name, String uri, IFlexoOntologyIndividual packageParameter) {    
-      package = parameters.packageParameter;      
-      useCase = owl.AddOWLIndividual();      
-      packagedElement = package.packagedElement = useCase;;      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = useCase.name;      
-      };    
-    }    
-  
-    @DeletionScheme    
-    Void deleteUseCase() {    
-      delete shape      
-      delete useCase      
-      package = null;    
-    }    
-  
-  }  
+import java.lang.String;
 
-  @FlexoConcept  
-  public class ActorUseCaseAssociation {  
-  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-    FlexoRole actor as Individual conformTo Actor from owl ;  
-    FlexoRole useCase as Individual conformTo UseCase from owl ;  
-    FlexoRole association as Individual conformTo Association from owl ;  
-    FlexoRole package as Individual conformTo Package from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:packagedElement packagedElement;  
-    FlexoRole actorProperty as Individual conformTo Property from owl ;  
-    FlexoRole useCaseProperty as Individual conformTo Property from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:ownedEnd ownedEndForActor;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:ownedEnd ownedEndForUseCase;  
-  
-    @LinkScheme    
-    ActorUseCaseAssociation:associateActorToUseCase(IFlexoOntologyIndividual packageParameter, String associationURI, String actorPropertyURI, String useCasePropertyURI) {    
-      actor = fromTarget;      
-      useCase = toTarget;      
-      package = parameters.packageParameter;      
-      association = owl.AddOWLIndividual();      
-      packagedElement = package.packagedElement = association;;      
-      actorProperty = owl.AddOWLIndividual();      
-      useCaseProperty = owl.AddOWLIndividual();      
-      ownedEndForActor = association.ownedEnd = actorProperty;;      
-      ownedEndForUseCase = association.ownedEnd = useCaseProperty;;      
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_91 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-      };    
-    }    
-  
-  }  
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
+import OWLOntology UML2 from ["http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl"];
+import OWLClass PACKAGE from [UML2:"Package"];
+import OWLClass ACTOR from [UML2:"Actor"];
+import OWLClass USE_CASE from [UML2:"UseCase"];
+import OWLClass ASSOCIATION from [UML2:"Association"];
+import OWLClass PROPERTY from [UML2:"Property"];
+import OWLObjectProperty PACKAGED_ELEMENT from [UML2:"packagedElement"];
+import OWLObjectProperty OWNED_END from [UML2:"ownedEnd"];
+import OWLObjectProperty ASSOCIATION_PROP from [UML2:"association"];
+import OWLObjectProperty TYPE_PROP from [UML2:"type"];
+
+
+import DiagramSpecification USE_CASE_DIAGRAM_SPEC from [USE_CASE_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [USE_CASE_DIAGRAM_SPECIFICATION + "/ClinicalCheckUp.diagram"];
+import DiagramShape ACTOR_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1001"];
+import DiagramShape USE_CASE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1002"];
+import DiagramConnector ASSOCIATION_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1003"];
+
+// A behaviour parameter takes a reference_type, not the technology-specific type form, so the
+// Package individual type a parameter needs has to be reached through an alias.
+typedef OWLIndividualType(owlClass=PACKAGE) as UMLPackage;
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
+
+	OWLOntology owl with OWLModelSlot(importedOntology=UML2);
+
+	Diagram diagram with TypedDiagram(
+		diagramSpecification=USE_CASE_DIAGRAM_SPEC,
+		paletteElementBindings={
+			PaletteElementBinding:(call=new Actor::dropNewActor(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#Actor"),
+			PaletteElementBinding:(call=new UseCase::dropNewUseCase(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#UseCase")
+		},
+		isRequired=true);
+
+	public concept Actor {
+
+		OWLIndividual package with OWLIndividualRole(type=PACKAGE);
+		OWLIndividual actor with OWLIndividualRole(type=ACTOR);
+		ObjectPropertyStatement packagedElement with ObjectPropertyStatementRole(objectProperty=PACKAGED_ELEMENT);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=ACTOR_SHAPE, label=actor.name);
+
+		@UI(
+			@TextField(value="name", label="name")
+			@TextField(value="uri", label="uri")
+		)
+		Actor dropNewActor(required String name="Actor", required String uri,
+				UMLPackage packageParameter) with DropScheme() {
+			package = parameters.packageParameter;
+			actor = OWL::AddOWLIndividual(ontologyClass=ACTOR, individualName=parameters.uri) in owl;
+			actor.name = parameters.name;
+			packagedElement = OWL::AddObjectPropertyStatement(subject=package, object=actor) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+
+		delete::deleteActor() {
+		}
+	}
+
+	public concept UseCase {
+
+		OWLIndividual package with OWLIndividualRole(type=PACKAGE);
+		OWLIndividual useCase with OWLIndividualRole(type=USE_CASE);
+		ObjectPropertyStatement packagedElement with ObjectPropertyStatementRole(objectProperty=PACKAGED_ELEMENT);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=USE_CASE_SHAPE, label=useCase.name);
+
+		@UI(
+			@TextField(value="name", label="name")
+			@TextField(value="uri", label="uri")
+		)
+		UseCase dropNewUseCase(String name="Use Case", required String uri,
+				UMLPackage packageParameter) with DropScheme() {
+			package = parameters.packageParameter;
+			useCase = OWL::AddOWLIndividual(ontologyClass=USE_CASE, individualName=parameters.uri) in owl;
+			useCase.name = parameters.name;
+			packagedElement = OWL::AddObjectPropertyStatement(subject=package, object=useCase) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+
+		delete::deleteUseCase() {
+		}
+	}
+
+	public concept ActorUseCaseAssociation {
+
+		OWLIndividual actor with OWLIndividualRole(type=ACTOR);
+		OWLIndividual useCase with OWLIndividualRole(type=USE_CASE);
+		OWLIndividual association with OWLIndividualRole(type=ASSOCIATION);
+		OWLIndividual package with OWLIndividualRole(type=PACKAGE);
+		OWLIndividual actorProperty with OWLIndividualRole(type=PROPERTY);
+		OWLIndividual useCaseProperty with OWLIndividualRole(type=PROPERTY);
+		ObjectPropertyStatement packagedElement with ObjectPropertyStatementRole(objectProperty=PACKAGED_ELEMENT);
+		ObjectPropertyStatement ownedEndForActor with ObjectPropertyStatementRole(objectProperty=OWNED_END);
+		ObjectPropertyStatement ownedEndForUseCase with ObjectPropertyStatementRole(objectProperty=OWNED_END);
+		DiagramConnector connector with ConnectorRole(exampleLabel="label", metamodelElement=ASSOCIATION_CONNECTOR);
+
+		@UI(
+			@TextField(value="associationURI", label="associationURI")
+			@TextField(value="actorPropertyURI", label="actorPropertyURI")
+			@TextField(value="useCasePropertyURI", label="useCasePropertyURI")
+		)
+		ActorUseCaseAssociation associateActorToUseCase(
+				UMLPackage packageParameter,
+				required String associationURI,
+				required String actorPropertyURI,
+				required String useCasePropertyURI) with LinkScheme(fromType=Actor, toType=UseCase) {
+			actor = fromTarget.actor;
+			useCase = toTarget.useCase;
+			package = parameters.packageParameter;
+			association = OWL::AddOWLIndividual(ontologyClass=ASSOCIATION, individualName=parameters.associationURI) in owl;
+			packagedElement = OWL::AddObjectPropertyStatement(subject=package, object=association) in owl;
+			actorProperty = OWL::AddOWLIndividual(ontologyClass=PROPERTY, individualName=parameters.actorPropertyURI) in owl;
+			OWL::AddObjectPropertyStatement(subject=actorProperty, object=association, objectProperty=ASSOCIATION_PROP) in owl;
+			OWL::AddObjectPropertyStatement(subject=actorProperty, object=actor, objectProperty=TYPE_PROP) in owl;
+			useCaseProperty = OWL::AddOWLIndividual(ontologyClass=PROPERTY, individualName=parameters.useCasePropertyURI) in owl;
+			OWL::AddObjectPropertyStatement(subject=useCaseProperty, object=association, objectProperty=ASSOCIATION_PROP) in owl;
+			OWL::AddObjectPropertyStatement(subject=useCaseProperty, object=useCase, objectProperty=TYPE_PROP) in owl;
+			ownedEndForActor = OWL::AddObjectPropertyStatement(subject=association, object=actorProperty) in owl;
+			ownedEndForUseCase = OWL::AddObjectPropertyStatement(subject=association, object=useCaseProperty) in owl;
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+		}
+	}
 }

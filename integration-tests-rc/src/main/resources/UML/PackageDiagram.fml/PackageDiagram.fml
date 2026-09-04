@@ -1,8 +1,11 @@
-
 /**
- * 
- * @version 0.1
+ * PackageDiagram - UML package diagram editor.
+ *
+ * Container view point: it only holds the DiagramSpecification virtual model.
+ * Migrated from the deprecated .fml.xml serialization.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl")
-public class PackageDiagram {
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl")
+@Version("0.1")
+public model PackageDiagram {
 }
