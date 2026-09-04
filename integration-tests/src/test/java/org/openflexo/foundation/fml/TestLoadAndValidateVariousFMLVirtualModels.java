@@ -36,7 +36,7 @@
  * 
  */
 
-package org.openflexo.foundation.viewpoint;
+package org.openflexo.foundation.fml;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -54,9 +54,9 @@ import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
 @RunWith(OrderedRunner.class)
-public class TestViewpoints extends OpenflexoTestCase {
+public class TestLoadAndValidateVariousFMLVirtualModels extends OpenflexoTestCase {
 
-	protected static final Logger logger = Logger.getLogger(TestViewpoints.class.getPackage().getName());
+	protected static final Logger logger = Logger.getLogger(TestLoadAndValidateVariousFMLVirtualModels.class.getPackage().getName());
 
 	/**
 	 * Instantiate test resource center

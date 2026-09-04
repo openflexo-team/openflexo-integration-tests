@@ -37,7 +37,7 @@
  * 
  */
 
-package org.openflexo.foundation.view;
+package org.openflexo.foundation.fml.rt;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -69,13 +69,13 @@ import org.openflexo.test.OrderedRunner;
 import org.openflexo.test.TestOrder;
 
 @RunWith(OrderedRunner.class)
-public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCase {
+public class TestBasicOntologyEditor extends OpenflexoProjectAtRunTimeTestCase {
 
 	public static FlexoProject<File> project;
 	private static FlexoEditor editor;
 	private static VirtualModel basicOntologyEditor;
-	private static RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> viewFolder;
-	private static FMLRTVirtualModelInstance view;
+	private static RepositoryFolder<FMLRTVirtualModelInstanceResource, ?> vmiFolder;
+	private static FMLRTVirtualModelInstance vmi;
 
 	/**
 	 * Instantiate test resource center
@@ -133,14 +133,14 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		addRepositoryFolder.setNewFolderName("NewViewFolder");
 		addRepositoryFolder.doAction();
 		assertTrue(addRepositoryFolder.hasActionExecutionSucceeded());
-		viewFolder = addRepositoryFolder.getNewFolder();
-		assertTrue(((File) viewFolder.getSerializationArtefact()).exists());
+		vmiFolder = addRepositoryFolder.getNewFolder();
+		assertTrue(((File) vmiFolder.getSerializationArtefact()).exists());
 	}
 
 	@Test
 	@TestOrder(5)
 	public void test4CreateView() {
-		CreateBasicVirtualModelInstance addView = CreateBasicVirtualModelInstance.actionType.makeNewAction(viewFolder, null, editor);
+		CreateBasicVirtualModelInstance addView = CreateBasicVirtualModelInstance.actionType.makeNewAction(vmiFolder, null, editor);
 		addView.setNewVirtualModelInstanceName("TestNewView");
 		addView.setNewVirtualModelInstanceTitle("A nice title for a new view");
 		addView.setVirtualModel(basicOntologyEditor);
@@ -163,16 +163,16 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 		project = (FlexoProject<File>) editor.getProject();
 		assertNotNull(project.getVirtualModelInstanceRepository());
 		assertEquals(1, project.getVirtualModelInstanceRepository().getRootFolder().getChildren().size());
-		viewFolder = project.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
-		assertEquals(1, viewFolder.getResources().size());
-		FMLRTVirtualModelInstanceResource viewRes = viewFolder.getResources().get(0);
+		vmiFolder = project.getVirtualModelInstanceRepository().getRootFolder().getChildren().get(0);
+		assertEquals(1, vmiFolder.getResources().size());
+		FMLRTVirtualModelInstanceResource viewRes = vmiFolder.getResources().get(0);
 		assertEquals(viewRes, project.getVirtualModelInstanceRepository().getResource(viewRes.getURI()));
 		assertNotNull(viewRes);
 		assertFalse(viewRes.isLoaded());
-		view = viewRes.getVirtualModelInstance();
+		vmi = viewRes.getVirtualModelInstance();
 		assertTrue(viewRes.isLoaded());
-		assertNotNull(view);
-		assertEquals(project.getDelegateResourceCenter(), ((FMLRTVirtualModelInstanceResource) view.getResource()).getResourceCenter());
+		assertNotNull(vmi);
+		assertEquals(project.getDelegateResourceCenter(), ((FMLRTVirtualModelInstanceResource) vmi.getResource()).getResourceCenter());
 	}
 
 	/*public void test6CreateVirtualModel() {
@@ -192,7 +192,7 @@ public class TestBasicOntologyEditorView extends OpenflexoProjectAtRunTimeTestCa
 	}*/
 
 	public void test6CreateDiagram() {
-		System.out.println("Create diagram, view=" + view + " editor=" + editor);
+		System.out.println("Create diagram, view=" + vmi + " editor=" + editor);
 		System.out.println("editor project = " + editor.getProject());
 		DiagramTechnologyAdapter diagramTA = serviceManager.getTechnologyAdapterService()
 				.getTechnologyAdapter(DiagramTechnologyAdapter.class);
