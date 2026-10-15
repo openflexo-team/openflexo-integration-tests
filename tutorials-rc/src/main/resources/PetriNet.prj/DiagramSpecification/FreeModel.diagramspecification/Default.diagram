@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram id="0" diagramSpecificationURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification" uri="http://www.openflexo.org/test/PetriNet.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Default.diagram" name="Default.diagram" userID="SYL" flexoID="1">
+  <Connector id="1" name="InputEdgeGR" userID="SYL" flexoID="5">
+    <StartShape idref="2" />
+    <EndShape idref="13" />
+    <ConnectorGraphicalRepresentation id="24" identifier="6231fe6f" layer="64" verticalTextAlignment="BOTTOM">
+      <ArcConnector id="25" curveConnectorType="CUBIC_CURVE" cp2Position="0.6664531562911118,0.6452149086024768" cp1Position="0.3070191130070169,0.6221379855255537" middleSymbol="NONE" startSymbol="NONE" endSymbol="FILLED_ARROW" />
+      <ForegroundStyle id="26" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedForegroundStyle id="27" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="28" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <TextStyle id="29" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ConnectorGraphicalRepresentation>
+  </Connector>
+  <Connector id="30" name="OutputEdgeGR" userID="SYL" flexoID="6">
+    <StartShape idref="13" />
+    <EndShape idref="2" />
+    <ConnectorGraphicalRepresentation id="31" identifier="654d9de6" layer="64" verticalTextAlignment="BOTTOM">
+      <ArcConnector id="32" curveConnectorType="CUBIC_CURVE" cp2Position="0.5828770957276803,0.6479661813551862" cp1Position="0.2241251866830511,0.6400296734186782" middleSymbol="NONE" startSymbol="NONE" endSymbol="FILLED_ARROW" />
+      <ForegroundStyle id="33" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedForegroundStyle id="34" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="35" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <TextStyle id="36" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ConnectorGraphicalRepresentation>
+  </Connector>
+  <Shape id="37" name="NoneGR" userID="SYL" flexoID="2">
+    <ShapeGraphicalRepresentation id="38" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" identifier="4fda04ea">
+      <RectangleShape id="39" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="2" name="PlaceGR" userID="SYL" flexoID="3">
+    <ShapeGraphicalRepresentation id="3" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" isFloatingLabel="false" allowToLeaveBounds="false" adaptBoundsToContents="false" layoutManagerIdentifier="palette-wrap-flow" x="10.0" y="10.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="45.0" height="45.0" identifier="7155a73f" layer="1" text="P">
+      <SelectedColorBackgroundStyle id="4" color="254,247,217" transparencyLevel="0.5" />
+      <ForegroundStyle id="5" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="6" color="254,247,217" transparencyLevel="0.5" />
+      <ShadowStyle id="7" />
+      <FocusedForegroundStyle id="8" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="9" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <ColorBackgroundStyle id="10" color="255,204,204" transparencyLevel="0.5" />
+      <CircleShape id="11" />
+      <TextStyle id="12" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="13" name="TransitionGR" userID="SYL" flexoID="4">
+    <ShapeGraphicalRepresentation id="14" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" allowToLeaveBounds="false" adaptBoundsToContents="false" layoutManagerIdentifier="palette-wrap-flow" x="10.0" y="10.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="14.788732394366196" height="45.0" identifier="726cfbf4" absoluteTextY="-19.0" absoluteTextX="5.444444444444445" layer="1" text="t">
+      <SelectedColorBackgroundStyle id="15" color="254,247,217" transparencyLevel="0.5" />
+      <ForegroundStyle id="16" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedColorBackgroundStyle id="17" color="254,247,217" transparencyLevel="0.5" />
+      <ShadowStyle id="18" drawShadow="false" />
+      <FocusedForegroundStyle id="19" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="20" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <ColorBackgroundStyle id="21" color="0,0,0" transparencyLevel="0.5" />
+      <RectangleShape id="22" />
+      <TextStyle id="23" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans Regular,0,14" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+</Diagram>

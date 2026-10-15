@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlexoProject id="0" creationUserId="SYL" uri="http://www.openflexo.org/test/PetriNet.prj" creationDate="dd/MM/yy HH:mm,14/10/26 16:04" userID="SYL" flexoID="1">
+  <FreeModellingProjectNature id="1" userID="SYL" flexoID="2">
+    <FMESampleData id="2" virtualModelInstanceURI="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt" userID="SYL" flexoID="6" />
+    <FMEConceptualModel id="3" virtualModelURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml" userID="SYL" flexoID="5" />
+    <FMEDiagramFreeModel id="4" virtualModelURI="http://www.openflexo.org/test/PetriNet.prj/FreeModel.fml" userID="SYL" flexoID="3">
+      <FMEDiagramFreeModelInstance id="5" virtualModelInstanceURI="http://www.openflexo.org/test/PetriNet.prj/Example.fml.rt" userID="SYL" flexoID="4" />
+      <FMEDiagramFreeModelInstance id="6" virtualModelInstanceURI="http://www.openflexo.org/test/PetriNet.prj/Example2.fml.rt" userID="SYL" flexoID="7" />
+      <FMESampleData idref="2" />
+      <FMEConceptualModel idref="3" />
+    </FMEDiagramFreeModel>
+  </FreeModellingProjectNature>
+</FlexoProject>

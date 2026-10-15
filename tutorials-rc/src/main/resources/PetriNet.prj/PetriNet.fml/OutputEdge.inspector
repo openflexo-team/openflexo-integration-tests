@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Inspector id="0" align="left" borderTop="0" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" layout="twocols" borderRight="0" controllerClassName="org.openflexo.inspector.FIBInspectorController" name="outputEdgeInspector">
+  <Label id="1" label="transition" align="left" constraints="twocols(expandHorizontally=false;expandVertically=false;location=left)" name="transitionLabel" />
+  <Custom id="2" componentClassName="org.openflexo.fml.rt.controller.widget.FIBFlexoConceptInstanceSelector" dataClassForComponent="org.openflexo.foundation.fml.rt.FlexoConceptInstance" manageDynamicModel="true" data="data.transition" constraints="twocols(expandHorizontally=true;expandVertically=false;location=right)" name="transitionSelector">
+    <Assignment id="3" variable="component.expectedType" mandatory="true" />
+    <Assignment id="4" variable="component.expectedFlexoConceptType" mandatory="true" />
+    <Assignment id="5" variable="component.project" mandatory="true" />
+    <Assignment id="6" variable="component.flexoController" mandatory="true" />
+    <Assignment id="7" variable="component.selectableCondition" mandatory="true" />
+    <Assignment id="8" variable="component.serviceManager" mandatory="true" value="controller.flexoController.applicationContext" />
+    <Assignment id="9" variable="component.virtualModelInstance" mandatory="true" value="data.container" />
+    <Assignment id="10" variable="component.expectedFlexoConceptTypeURI" mandatory="true" value="&quot;http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Transition&quot;" />
+  </Custom>
+  <Label id="11" label="place" align="left" constraints="twocols(expandHorizontally=false;expandVertically=false;location=left)" name="placeLabel" />
+  <Custom id="12" componentClassName="org.openflexo.fml.rt.controller.widget.FIBFlexoConceptInstanceSelector" dataClassForComponent="org.openflexo.foundation.fml.rt.FlexoConceptInstance" manageDynamicModel="true" data="data.place" constraints="twocols(expandHorizontally=true;expandVertically=false;location=right)" name="placeSelector">
+    <Assignment id="13" variable="component.expectedType" mandatory="true" />
+    <Assignment id="14" variable="component.expectedFlexoConceptType" mandatory="true" />
+    <Assignment id="15" variable="component.project" mandatory="true" />
+    <Assignment id="16" variable="component.flexoController" mandatory="true" />
+    <Assignment id="17" variable="component.selectableCondition" mandatory="true" />
+    <Assignment id="18" variable="component.serviceManager" mandatory="true" value="controller.flexoController.applicationContext" />
+    <Assignment id="19" variable="component.virtualModelInstance" mandatory="true" value="data.container" />
+    <Assignment id="20" variable="component.expectedFlexoConceptTypeURI" mandatory="true" value="&quot;http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Place&quot;" />
+  </Custom>
+  <Label id="21" label="weight" align="left" constraints="twocols(expandHorizontally=false;expandVertically=false;location=left)" name="weightLabel" />
+  <Number id="22" numberType="IntegerType" columns="4" data="data.weight" constraints="twocols(expandHorizontally=false;expandVertically=false;location=right)" name="weightNumber" />
+  <FIBVariable id="23" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#OutputEdge&gt;" name="data" />
+</Inspector>

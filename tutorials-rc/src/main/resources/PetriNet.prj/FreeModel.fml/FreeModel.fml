@@ -1,0 +1,103 @@
+namespace "http://www.openflexo.org/test/PetriNet.prj" as PETRINETPRJ;
+
+use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+import java.lang.String;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+
+import [PETRINETPRJ + "/PetriNet.fml"];
+import DiagramSpecification FREE_MODEL from [PETRINETPRJ + "/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification"];
+import Diagram DEFAULT from [PETRINETPRJ + "/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Default.diagram"];
+import DiagramShape DIAGRAM_SHAPE from [DEFAULT:"SYL-2"];
+import DiagramShape DIAGRAM_SHAPE2 from [DEFAULT:"SYL-3"];
+import DiagramShape DIAGRAM_SHAPE3 from [DEFAULT:"SYL-4"];
+import DiagramConnector DIAGRAM_CONNECTOR from [DEFAULT:"SYL-5"];
+import DiagramConnector DIAGRAM_CONNECTOR2 from [DEFAULT:"SYL-6"];
+
+@URI("http://www.openflexo.org/test/PetriNet.prj/FreeModel.fml")
+public model FreeModel {
+	PetriNet sampleData with ModelInstance();
+	Diagram diagram with TypedDiagram(diagramSpecification=FREE_MODEL,paletteElementBindings={PaletteElementBinding:(call=new PlaceGR::drop(null), paletteElementId="http://www.openflexo.org/test/PetriNet.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Concepts.palette#Place"), PaletteElementBinding:(call=new TransitionGR::drop(null), paletteElementId="http://www.openflexo.org/test/PetriNet.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Concepts.palette#Transition")});
+
+	create(PetriNet sampleData, Diagram diagram) {
+		sampleData = parameters.sampleData;
+		diagram = parameters.diagram;
+	}
+
+	@Inspector("NoneGR.inspector")
+	public concept NoneGR {
+		String name;
+		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE,container=diagram,label=name);
+		public delete() {
+			delete shape;
+		}
+		NoneGR drop(String conceptName="conceptName") with DropScheme(skipConfirmationPanel=false,targetType=FreeModel) {
+			name = parameters.conceptName;
+			shape = DIAGRAM::AddShape(container=diagram) in diagram;
+		}
+	}
+
+	@Renderer(instance.representedConcept.stringRepresentation)
+	@Inspector(derived=representedConcept)
+	public concept PlaceGR {
+		Place representedConcept with ConceptInstance(virtualModelInstance=sampleData);
+		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE2,container=diagram,label=representedConcept.render);
+		public delete() {
+			delete representedConcept;
+			delete shape;
+		}
+		PlaceGR drop(String conceptName="Place") with DropScheme(skipConfirmationPanel=false,targetType=FreeModel) {
+			representedConcept = sampleData.new Place(parameters.conceptName);
+			shape = DIAGRAM::AddShape(container=diagram) in diagram;
+		}
+	}
+
+	@Renderer(instance.representedConcept.stringRepresentation)
+	@Inspector(derived=representedConcept)
+	public concept TransitionGR {
+		Transition representedConcept with ConceptInstance(virtualModelInstance=sampleData);
+		DiagramShape shape with ShapeRole(metamodelElement=DIAGRAM_SHAPE3,container=diagram,label=representedConcept.render);
+		public delete() {
+			delete representedConcept;
+			delete shape;
+		}
+		TransitionGR drop(String conceptName="Transition") with DropScheme(skipConfirmationPanel=false,targetType=FreeModel) {
+			representedConcept = sampleData.new Transition(parameters.conceptName);
+			shape = DIAGRAM::AddShape(container=diagram) in diagram;
+		}
+	}
+
+	@Renderer(instance.representedConcept.stringRepresentation)
+	@Inspector(derived=representedConcept)
+	public concept InputEdgeGR {
+		InputEdge representedConcept with ConceptInstance(virtualModelInstance=sampleData);
+		DiagramConnector connector with ConnectorRole(metamodelElement=DIAGRAM_CONNECTOR,container=diagram,label=representedConcept.render);
+		public delete() {
+			delete representedConcept;
+			delete connector;
+		}
+		InputEdgeGR link() with LinkScheme(fromType=PlaceGR,toType=TransitionGR) {
+			representedConcept = sampleData.new InputEdge(fromTarget.representedConcept,toTarget.representedConcept);
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape,toShape=toTarget.shape) in diagram;
+		}
+	}
+
+	@Renderer(instance.representedConcept.stringRepresentation)
+	@Inspector(derived=representedConcept)
+	public concept OutputEdgeGR {
+		OutputEdge representedConcept with ConceptInstance(virtualModelInstance=sampleData);
+		DiagramConnector connector with ConnectorRole(metamodelElement=DIAGRAM_CONNECTOR2,container=diagram,label=representedConcept.render);
+		public delete() {
+			delete representedConcept;
+			delete connector;
+		}
+		OutputEdgeGR link() with LinkScheme(fromType=TransitionGR,toType=PlaceGR) {
+			representedConcept = sampleData.new OutputEdge(fromTarget.representedConcept,toTarget.representedConcept);
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape,toShape=toTarget.shape) in diagram;
+		}
+	}
+}

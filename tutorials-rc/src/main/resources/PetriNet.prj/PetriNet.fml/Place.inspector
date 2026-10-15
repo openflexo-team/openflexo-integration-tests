@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Inspector id="0" align="left" borderTop="0" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" layout="twocols" borderRight="0" controllerClassName="org.openflexo.inspector.FIBInspectorController" name="placeInspector">
+  <Label id="1" label="name" align="left" constraints="twocols(expandHorizontally=false;expandVertically=false;location=left)" name="nameLabel" />
+  <TextField id="2" data="data.name" constraints="twocols(expandHorizontally=true;expandVertically=false;location=right)" name="nameTextField" />
+  <Label id="3" label="tokens" align="left" constraints="twocols(expandHorizontally=false;expandVertically=false;location=left)" name="tokensLabel" />
+  <Number id="4" numberType="IntegerType" columns="4" data="data.tokens" constraints="twocols(expandHorizontally=false;expandVertically=false;location=right)" name="tokensNumber" />
+  <Label id="5" label="description" align="left" constraints="twocols(expandHorizontally=false;expandVertically=false;location=left)" name="descriptionLabel" />
+  <TextArea id="6" validateOnReturn="true" data="data.description" useScrollBar="true" verticalScrollbarPolicy="VERTICAL_SCROLLBAR_AS_NEEDED" constraints="twocols(expandHorizontally=true;expandVertically=true;location=right)" horizontalScrollbarPolicy="HORIZONTAL_SCROLLBAR_AS_NEEDED" name="descriptionTextArea" />
+  <FIBVariable id="7" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Place&gt;" name="data" />
+</Inspector>
