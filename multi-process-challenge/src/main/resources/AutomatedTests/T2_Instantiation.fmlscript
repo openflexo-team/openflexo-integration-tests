@@ -1,0 +1,81 @@
+// T2 - instantiating a ProcessType mirrors it, one Task per TaskType.
+// This is the hinge of the metamodel: the type level describes, the instance level runs, and
+// newProcess() is what crosses from one to the other. Begin and End get SPECIALIZED mirrors
+// (BeginTask / EndTask), which is why they are startable while an ordinary task is not.
+
+metaModel = load -r ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
+assert metaModel != null;
+
+service ResourceCenterService add_temp_rc;
+model = new MetaModel() with (name="T2Model");
+
+developer = model.newActorType("Developer");
+alice = model.newActor("Alice");
+alice.addActorType(developer);
+
+buildProcess = model.newProcessType("Build");
+begin = buildProcess.newBegin();
+compile = buildProcess.newTaskType("Compile");
+test = buildProcess.newTaskType("Test");
+end = buildProcess.newEnd();
+buildProcess.newSequencing(begin, compile);
+buildProcess.newSequencing(compile, test);
+buildProcess.newSequencing(test, end);
+compile.addAllowedActorType(developer);
+
+// --- Instantiate -----------------------------------------------------------------------------
+process = buildProcess.newProcess("Build#1");
+assert process != null;
+assert process.name == "Build#1";
+assert process.type == buildProcess;
+assert model.allProcesses().size == 1;
+assert model.getProcess("Build#1") == process;
+
+// One Task per TaskType, no more, no less.
+assert process.tasks.size == 4;
+assert process.completedTaskCount() == 0;
+assert process.processCompleted == false;
+
+// Each Task points back at the TaskType it mirrors, and getTask() navigates that link.
+compileTask = process.getTask(compile);
+assert compileTask != null;
+assert compileTask.type == compile;
+assert compileTask.name == "Compile";
+testTask = process.getTaskNamed("Test");
+assert testTask.type == test;
+
+// The initial task is the mirror of the definition's Begin.
+assert process.initialTask != null;
+assert process.initialTask.type == begin;
+
+// --- Startability: the whole didactic point --------------------------------------------------
+// BeginTask and EndTask are self-completing, so they are startable with nobody assigned.
+// NB: bind the task to a variable first. Chaining an FML behaviour call onto the result of
+// another one - process.getTask(end).isStartable() - does not resolve: Connie looks for a JAVA
+// method isStartable() on the untyped result and quietly yields null.
+assert process.initialTask.isStartable();
+endTask = process.getTask(end);
+assert endTask.isStartable();
+// An ordinary task is NOT startable until somebody is assigned to perform it.
+assert compileTask.isStartable() == false;
+assert compileTask.performingActors.size == 0;
+assert process.isProcessStartable == false;
+
+// Assigning an authorized actor is what makes it startable.
+compileTask.addToPerformingActors(alice);
+assert compileTask.performingActors.size == 1;
+assert compileTask.isStartable();
+
+// Nothing has run yet: instantiation creates, it does not execute.
+assert compileTask.isActive == false;
+assert compileTask.completed == false;
+assert process.initialTask.completed == false;
+
+// Two processes of the same definition are independent.
+otherProcess = buildProcess.newProcess("Build#2");
+assert model.allProcesses().size == 2;
+otherCompileTask = otherProcess.getTask(compile);
+assert otherCompileTask != compileTask;
+assert otherCompileTask.performingActors.size == 0;
+
+log "Test PASSED: T2 - Build#1 mirrors 4 task types into 4 tasks; only Begin/End start unassigned";

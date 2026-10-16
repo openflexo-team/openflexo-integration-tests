@@ -1,99 +1,140 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the organizational map editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Notes on the translation:
+ *   - each role's inline graphical representation was copied into CarRental.diagram as a
+ *     dedicated element (userID "SYL") and is referenced through metamodelElement;
+ *   - the legacy ParentShapeRole (a reference from a sub-shape to its parent shape role) becomes
+ *     the containerElement attribute of ShapeRole; the AddShape of the "label" sub-shape read
+ *     container=topLevel, contradicting that assertion, and is repaired to container=shape;
+ *   - data property assertions nested in AddOWLIndividual become ontology bindings, object
+ *     property assertions become explicit AddObjectPropertyStatement actions;
+ *   - concept inspectors and the DoubleClick GraphicalElementAction on the OrganizationalUnit
+ *     shape are dropped: neither has a textual FML form.
+ *
+ * Two things could not be carried over, both platform gaps rather than choices:
+ *   - NavigationScheme carries no @FML annotation and its targetObject no @FMLAttribute, so
+ *     "openDetails" cannot be declared as a navigation scheme; it is kept as a plain action
+ *     scheme so the behaviour still exists by name;
+ *   - consequently the DiagramRole "flexoBehaviourInstance", whose only purpose was to be that
+ *     scheme's target, is dropped (a DiagramRole would additionally require a metamodelElement,
+ *     which the legacy did not provide).
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_9a conformTo="http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification/DiagramSpecification.diagramspecification" as ORGANIZATIONAL_MAP_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class OrganizationalUnit {  
-  
-    FlexoRole organizationalUnit as Individual conformTo OrganizationalUnit from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole flexoBehaviourInstance as Diagram conform to null;  
-  
-    @DropScheme    
-    OrganizationalUnit:dropOrganizationalUnitAtTopLevel(String organizationName) {    
-      organizationalUnit = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = organizationalUnit.organizationUnitName;      
-      };    
-    }    
-  
-    @NavigationScheme    
-    void openDetails() {    
-      
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class SubOrganizationUnitLink {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasSubOrgUnit hasSubOrgUnitStatement;  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasParentOrgUnit hasParentOrgUnitStatement;  
-  
-    @LinkScheme    
-    SubOrganizationUnitLink:linkOrganizationalUnitToOrganizationalUnit() {    
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_96 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-      };      
-      hasSubOrgUnitStatement = fromTarget.organizationalUnit.hasSubOrgUnit = toTarget.organizationalUnit;;      
-      hasParentOrgUnitStatement = toTarget.organizationalUnit.hasParentOrgUnit = fromTarget.organizationalUnit;;    
-    }    
-  
-  }  
+import java.lang.String;
 
-  @FlexoConcept  
-  public class Position {  
-  
-    FlexoRole position as Individual conformTo Position from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole icon as ShapeSpecification from DiagramSpecification;  
-    FlexoRole label as ShapeSpecification from DiagramSpecification;  
-    FlexoRole mission as Individual conformTo PositionMission from owl ;  
-  
-    @DropScheme    
-    Position:dropPositionAtTopLevel(String mission, String position) {    
-      mission = owl.AddOWLIndividual();      
-      position = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };      
-      label = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = position.positionName;      
-      };      
-      icon = typedDiagramModelSlot.DIAGRAM::AddShape {      
-      };    
-    }    
-  
-  }  
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
-  @FlexoConcept  
-  public class ContainsPositionLink {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:containsPosition containsPositionStatement;  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:isInvolvedInOrganizationUnit isInvolvedInOrganizationUnitStatement;  
-  
-    @LinkScheme    
-    ContainsPositionLink:linkOrganizationalUnitToPosition() {    
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_96 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-      };      
-      containsPositionStatement = fromTarget.organizationalUnit.containsPosition = toTarget.position;;      
-      isInvolvedInOrganizationUnitStatement = toTarget.position.isInvolvedInOrganizationUnit = fromTarget.organizationalUnit;;    
-    }    
-  
-  }  
+import OWLOntology OUSD from ["http://www.openflexo.org/openflexo/ontologies/ScopeDefinition/OrganizationalUnitScopeDefinition.owl"];
+import OWLClass ORGANIZATIONAL_UNIT from [OUSD:"OrganizationalUnit"];
+import OWLClass POSITION from [OUSD:"Position"];
+import OWLClass POSITION_MISSION from [OUSD:"PositionMission"];
+import OWLObjectProperty HAS_POSITION_MISSION from [OUSD:"hasPositionMission"];
+import OWLObjectProperty HAS_SUB_ORG_UNIT from [OUSD:"hasSubOrgUnit"];
+import OWLObjectProperty HAS_PARENT_ORG_UNIT from [OUSD:"hasParentOrgUnit"];
+import OWLObjectProperty CONTAINS_POSITION from [OUSD:"containsPosition"];
+import OWLObjectProperty IS_INVOLVED_IN_ORGANIZATION_UNIT from [OUSD:"isInvolvedInOrganizationUnit"];
 
+import DiagramSpecification ORGANIZATIONAL_MAP_DIAGRAM_SPEC from [ORGANIZATIONAL_MAP_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [ORGANIZATIONAL_MAP_DIAGRAM_SPECIFICATION + "/CarRental.diagram"];
+import DiagramShape ORGANIZATIONAL_UNIT_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1001"];
+import DiagramConnector SUB_ORGANIZATION_UNIT_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1002"];
+import DiagramShape POSITION_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1003"];
+import DiagramShape POSITION_ICON from [EXAMPLE_DIAGRAM:"SYL-1004"];
+import DiagramShape POSITION_LABEL from [EXAMPLE_DIAGRAM:"SYL-1005"];
+import DiagramConnector CONTAINS_POSITION_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1006"];
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalMap.owl/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
+
+	OWLOntology owl with OWLModelSlot(importedOntology=OUSD);
+
+	Diagram diagram with TypedDiagram(diagramSpecification=ORGANIZATIONAL_MAP_DIAGRAM_SPEC, isRequired=true);
+
+	public concept OrganizationalUnit {
+
+		OWLIndividual organizationalUnit with OWLIndividualRole(type=ORGANIZATIONAL_UNIT);
+		DiagramShape shape with ShapeRole(exampleLabel="Organizational Unit",
+			metamodelElement=ORGANIZATIONAL_UNIT_SHAPE, label=organizationalUnit.organizationUnitName);
+
+		@UI(
+			@TextField(value="organizationName", label="organizationName")
+		)
+		OrganizationalUnit dropOrganizationalUnitAtTopLevel(String organizationName) with DropScheme() {
+			organizationalUnit = OWL::AddOWLIndividual(ontologyClass=ORGANIZATIONAL_UNIT, individualName=parameters.organizationName) in owl;
+			organizationalUnit.organizationUnitName = parameters.organizationName;
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+
+		// Was a NavigationScheme targeting the "flexoBehaviourInstance" DiagramRole - see the
+		// header: neither the scheme kind nor its target survives in textual FML.
+		void openDetails() {
+		}
+	}
+
+	public concept SubOrganizationUnitLink {
+
+		ObjectPropertyStatement hasSubOrgUnitStatement with ObjectPropertyStatementRole(objectProperty=HAS_SUB_ORG_UNIT);
+		ObjectPropertyStatement hasParentOrgUnitStatement with ObjectPropertyStatementRole(objectProperty=HAS_PARENT_ORG_UNIT);
+		DiagramConnector connector with ConnectorRole(exampleLabel="", metamodelElement=SUB_ORGANIZATION_UNIT_CONNECTOR);
+
+		SubOrganizationUnitLink linkOrganizationalUnitToOrganizationalUnit()
+				with LinkScheme(fromType=OrganizationalUnit, toType=OrganizationalUnit) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			hasSubOrgUnitStatement = OWL::AddObjectPropertyStatement(subject=fromTarget.organizationalUnit, object=toTarget.organizationalUnit) in owl;
+			hasParentOrgUnitStatement = OWL::AddObjectPropertyStatement(subject=toTarget.organizationalUnit, object=fromTarget.organizationalUnit) in owl;
+		}
+	}
+
+	public concept Position {
+
+		OWLIndividual position with OWLIndividualRole(type=POSITION);
+		OWLIndividual mission with OWLIndividualRole(type=POSITION_MISSION);
+		DiagramShape shape with ShapeRole(exampleLabel="", metamodelElement=POSITION_SHAPE);
+		DiagramShape icon with ShapeRole(exampleLabel="", metamodelElement=POSITION_ICON, containerElement=shape);
+		DiagramShape label with ShapeRole(exampleLabel="Position", metamodelElement=POSITION_LABEL,
+			containerElement=shape, label=position.positionName);
+
+		@UI(
+			@TextField(value="mission", label="mission")
+			@TextField(value="position", label="position")
+		)
+		Position dropPositionAtTopLevel(String mission, String position) with DropScheme() {
+			mission = OWL::AddOWLIndividual(ontologyClass=POSITION_MISSION, individualName=parameters.mission) in owl;
+			mission.missionName = parameters.mission;
+			position = OWL::AddOWLIndividual(ontologyClass=POSITION, individualName=parameters.position) in owl;
+			position.positionName = parameters.position;
+			OWL::AddObjectPropertyStatement(subject=position, object=mission, objectProperty=HAS_POSITION_MISSION) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+			label = DIAGRAM::AddShape(container=shape);
+			icon = DIAGRAM::AddShape(container=shape);
+		}
+	}
+
+	public concept ContainsPositionLink {
+
+		ObjectPropertyStatement containsPositionStatement with ObjectPropertyStatementRole(objectProperty=CONTAINS_POSITION);
+		ObjectPropertyStatement isInvolvedInOrganizationUnitStatement with ObjectPropertyStatementRole(objectProperty=IS_INVOLVED_IN_ORGANIZATION_UNIT);
+		DiagramConnector connector with ConnectorRole(exampleLabel="label", metamodelElement=CONTAINS_POSITION_CONNECTOR);
+
+		ContainsPositionLink linkOrganizationalUnitToPosition()
+				with LinkScheme(fromType=OrganizationalUnit, toType=Position) {
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			containsPositionStatement = OWL::AddObjectPropertyStatement(subject=fromTarget.organizationalUnit, object=toTarget.position) in owl;
+			isInvolvedInOrganizationUnitStatement = OWL::AddObjectPropertyStatement(subject=toTarget.position, object=fromTarget.organizationalUnit) in owl;
+		}
+	}
 }

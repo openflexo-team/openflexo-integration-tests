@@ -1,8 +1,11 @@
-
 /**
- * 
- * @version 0.1
+ * OrganizationalChart - an organizational chart of actors and their collaborations.
+ *
+ * Container view point: it only holds the DiagramSpecification virtual model.
+ * Migrated from the deprecated .fml.xml serialization.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl")
-public class OrganizationalChart {
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalChart.owl")
+@Version("0.1")
+public model OrganizationalChart {
 }

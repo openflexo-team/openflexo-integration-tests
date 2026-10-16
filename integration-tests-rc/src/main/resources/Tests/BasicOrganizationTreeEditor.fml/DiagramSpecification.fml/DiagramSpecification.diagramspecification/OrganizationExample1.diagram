@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Diagram id="1" name="OrganizationExample1" uri="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/OrganizationExample1" userID="FLX">
+<Diagram id="1" name="OrganizationExample1.diagram" uri="http://www.openflexo.org/openflexo/ViewPoints/Tests/BasicOrganizationTreeEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/OrganizationExample1.diagram" userID="FLX">
   <DrawingGraphicalRepresentation id="2" width="1000.0" height="1000.0" drawWorkingArea="true" selectionColor="0,0,255" focusColor="255,0,0" backgroundColor="255,255,255" isMultilineAllowed="false" isReadOnly="false" isSelectable="true" isFocusable="true" relativeTextX="0.5" relativeTextY="0.5" absoluteTextX="0.0" absoluteTextY="0.0" textAlignment="CENTER" userID="FLX">
     <TextStyle id="3" font="Lucida Sans,0,11" color="0,0,0" orientation="0" isBackgroundColored="false" backgroundColor="255,255,255" userID="FLX" />
   </DrawingGraphicalRepresentation>
@@ -263,4 +263,78 @@
       </ShapeGraphicalRepresentation>
     </Shape>
   </Shape>
+  <Shape id="222" name="BOTCompany_shape" userID="SYL" flexoID="1001">
+    <ShapeGraphicalRepresentation id="212" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="123.0" y="9.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="224.79787851510477" height="90.9883344883345" identifier="object_0" absoluteTextY="13.0" absoluteTextX="115.0" layer="1" text="label">
+      <SelectedColorGradientBackgroundStyle id="213" color1="255,255,102" color2="255,204,204" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.5" />
+      <ForegroundStyle id="214" joinStyle="JOIN_MITER" color="102,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedColorGradientBackgroundStyle id="215" color1="255,255,102" color2="255,204,204" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.5" />
+      <ShadowStyle id="216" />
+      <FocusedForegroundStyle id="217" joinStyle="JOIN_MITER" color="102,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="218" joinStyle="JOIN_MITER" color="102,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <ColorGradientBackgroundStyle id="219" color1="255,255,102" color2="255,204,204" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.5" />
+      <RectangleShape id="220" isRounded="true" arcSize="15.0" />
+      <TextStyle id="221" backgroundColor="255,255,255" color="102,0,0" font="SansSerif,0,11" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="233" name="BOTDepartment_shape" userID="SYL" flexoID="1002">
+    <ShapeGraphicalRepresentation id="223" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="163.0" y="27.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="176.0" height="58.0" identifier="object_0" absoluteTextY="16.0" absoluteTextX="89.0" layer="1" text="label">
+      <SelectedColorGradientBackgroundStyle id="224" color1="0,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+      <ForegroundStyle id="225" joinStyle="JOIN_MITER" color="0,102,102" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedColorGradientBackgroundStyle id="226" color1="0,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+      <ShadowStyle id="227" />
+      <FocusedForegroundStyle id="228" joinStyle="JOIN_MITER" color="0,102,102" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="229" joinStyle="JOIN_MITER" color="0,102,102" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <ColorGradientBackgroundStyle id="230" color1="0,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+      <RectangleShape id="231" isRounded="true" arcSize="15.0" />
+      <TextStyle id="232" backgroundColor="255,255,255" color="0,51,51" font="SansSerif,0,11" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="244" name="BOTSubDepartment_shape" userID="SYL" flexoID="1003">
+    <ShapeGraphicalRepresentation id="234" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="147.0" y="28.0" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="176.0" height="58.0" identifier="object_0" absoluteTextY="15.0" absoluteTextX="87.0" layer="1" text="label">
+      <SelectedColorGradientBackgroundStyle id="235" color1="255,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+      <ForegroundStyle id="236" joinStyle="JOIN_MITER" color="102,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedColorGradientBackgroundStyle id="237" color1="255,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+      <ShadowStyle id="238" />
+      <FocusedForegroundStyle id="239" joinStyle="JOIN_MITER" color="102,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="240" joinStyle="JOIN_MITER" color="102,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <ColorGradientBackgroundStyle id="241" color1="255,153,153" color2="255,255,255" direction="NORTH_WEST_SOUTH_EAST" useTransparency="true" transparencyLevel="0.2" />
+      <RectangleShape id="242" isRounded="true" arcSize="15.0" />
+      <TextStyle id="243" backgroundColor="255,255,255" color="102,0,0" font="SansSerif,0,11" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="255" name="Employee_managerAsShape" userID="SYL" flexoID="1004">
+    <ShapeGraphicalRepresentation id="245" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="227.0" y="42.03462386947115" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="173.0" height="38.96537613052885" identifier="object_0" absoluteTextY="36.0" absoluteTextX="23.0" layer="1" text="label">
+      <SelectedImageBackgroundStyle id="246" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <ForegroundStyle id="247" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="248" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <ShadowStyle id="249" drawShadow="false" />
+      <FocusedForegroundStyle id="250" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="251" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <ImageBackgroundStyle id="252" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <RectangleShape id="253" />
+      <TextStyle id="254" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Shape id="266" name="Employee_workerAsShape" userID="SYL" flexoID="1005">
+    <ShapeGraphicalRepresentation id="256" relativeTextY="0.5" locationConstraints="FREELY_MOVABLE" adaptBoundsToContents="false" x="136.0" y="41.03462386947115" relativeTextX="0.5" dimensionConstraints="FREELY_RESIZABLE" width="165.0" height="38.96537613052885" identifier="object_1" absoluteTextY="36.0" absoluteTextX="23.0" layer="1" text="label">
+      <SelectedImageBackgroundStyle id="257" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <ForegroundStyle id="258" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <FocusedImageBackgroundStyle id="259" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <ShadowStyle id="260" drawShadow="false" />
+      <FocusedForegroundStyle id="261" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="262" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" noStroke="true" capStyle="CAP_SQUARE" />
+      <ImageBackgroundStyle id="263" imageBackgroundColor="255,255,255" imageBackgroundType="TRANSPARENT" transparencyLevel="0.5" />
+      <RectangleShape id="264" />
+      <TextStyle id="265" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ShapeGraphicalRepresentation>
+  </Shape>
+  <Connector id="273" name="EmployeeHierarchicalRelationship_connector" userID="SYL" flexoID="1006">
+    <ConnectorGraphicalRepresentation id="267" identifier="object_2" absoluteTextY="-14.0" absoluteTextX="-2.0" layer="64" text="label">
+      <LineConnectorSpecification id="268" lineConnectorType="MINIMAL_LENGTH" startSymbol="NONE" middleSymbol="NONE" endSymbol="NONE" />
+      <ForegroundStyle id="269" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <FocusedForegroundStyle id="270" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <SelectedForegroundStyle id="271" joinStyle="JOIN_MITER" color="0,0,0" dashStyle="PLAIN_STROKE" capStyle="CAP_SQUARE" />
+      <TextStyle id="272" backgroundColor="255,255,255" color="0,0,0" font="Lucida Sans,0,11" />
+    </ConnectorGraphicalRepresentation>
+  </Connector>
 </Diagram>

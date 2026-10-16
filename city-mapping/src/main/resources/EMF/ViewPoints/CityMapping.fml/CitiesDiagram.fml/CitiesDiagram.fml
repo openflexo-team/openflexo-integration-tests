@@ -1,0 +1,58 @@
+/**
+ * CitiesDiagram - mirrors the City instances federated by the Mapping virtual model.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Two defects of the legacy model were
+ * repaired rather than carried over:
+ *   - the "mappingmodel" receiver was used by the synchronization scheme but no model slot ever
+ *     declared it; it is now a proper FMLRTModelSlot typed by the Mapping virtual model;
+ *   - CityGR assigned and deleted a "shape" role that this virtual model never declared (there is
+ *     no diagram model slot here at all), leaving dangling bindings. Those statements are dropped.
+ */
+
+use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
+
+import java.lang.String;
+
+import ["http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml"];
+
+@URI("http://www.thalesgroup.com/openflexo/emf/CityMapping/CitiesDiagram.fml")
+@Version("0.1")
+public model CitiesDiagram {
+
+	Mapping mappingmodel with FMLRTModelSlot();
+
+	// One CityGR per City federated in the Mapping model.
+	synchronize() {
+		for (City cityFC : select City from mappingmodel) {
+			match CityGR from this where (city=cityFC) unmatched: new CityGR::creation(cityFC);
+		}
+	}
+
+	delete::deletion() {
+	}
+
+	public concept CityGR {
+
+		City city;
+
+		create::creation(City city) {
+			city = parameters.city;
+		}
+
+		delete::deletion() {
+		}
+
+		void synchronizeThatCity() {
+			city.generateModel1FromModel2();
+			city.generateModel2FromModel1();
+		}
+
+		@UI(
+			@TextField(value="newName")
+		)
+		void changeTheName(String newName) {
+			city.cityInModel1.name = parameters.newName;
+			city.cityInModel2.name = parameters.newName;
+		}
+	}
+}

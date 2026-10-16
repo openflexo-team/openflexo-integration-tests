@@ -1,0 +1,4 @@
+@URI("http://www.thalesgroup.com/openflexo/emf/CityMapping")
+@Version("0.1")
+model CityMapping {
+}

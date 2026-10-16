@@ -1,8 +1,11 @@
-
 /**
- * 
- * @version 0.1
+ * BenefitDependancyNetwork - a Benefits Dependency Network editor.
+ *
+ * Container view point: it only holds the DiagramSpecification virtual model.
+ * Migrated from the deprecated .fml.xml serialization.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl")
-public class BenefitDependancyNetwork {
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/BenefitDependancyNetwork.owl")
+@Version("0.1")
+public model BenefitDependancyNetwork {
 }

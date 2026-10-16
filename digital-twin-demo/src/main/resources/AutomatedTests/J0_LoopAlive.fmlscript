@@ -1,0 +1,14 @@
+// J0 - Execution loop smoke test.
+// Goal: prove the FML-script driven test harness parses, executes and asserts.
+// No model is loaded yet; real resource loading starts at J1.
+
+service ResourceCenterService status;
+resources;
+context;
+
+log "J0: DigitalTwinDemo execution loop is alive";
+
+// Trivial executable assertion: the harness reaches and evaluates asserts.
+assert true;
+
+log "Test PASSED: J0 loop alive";

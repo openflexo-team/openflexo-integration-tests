@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FMLRTVirtualModelInstance id="0" virtualModelURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml" modelVersion="1.0" title="MyPetriNet" version="0.1" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml" userID="SYL" flexoID="1">
+  <FlexoConceptInstance id="1" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Place" userID="SYL" flexoID="2">
+    <PrimitiveActorReference id="2" valueAsString="P1" roleName="name" userID="SYL" flexoID="7" />
+    <PrimitiveActorReference id="3" valueAsString="0" roleName="tokens" userID="SYL" flexoID="60" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="4" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Transition" userID="SYL" flexoID="3">
+    <PrimitiveActorReference id="5" valueAsString="t" roleName="name" userID="SYL" flexoID="8" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="6" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Place" userID="SYL" flexoID="4">
+    <PrimitiveActorReference id="7" valueAsString="P2" roleName="name" userID="SYL" flexoID="9" />
+    <PrimitiveActorReference id="8" valueAsString="4" roleName="tokens" userID="SYL" flexoID="52" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="9" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#InputEdge" userID="SYL" flexoID="5">
+    <ModelObjectActorReference id="10" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_2" roleName="place" userID="SYL" flexoID="10" />
+    <ModelObjectActorReference id="11" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_3" roleName="transition" userID="SYL" flexoID="11" />
+    <PrimitiveActorReference id="12" valueAsString="1" roleName="weight" userID="SYL" flexoID="12" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="13" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#OutputEdge" userID="SYL" flexoID="6">
+    <ModelObjectActorReference id="14" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_3" roleName="transition" userID="SYL" flexoID="13" />
+    <ModelObjectActorReference id="15" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_4" roleName="place" userID="SYL" flexoID="14" />
+    <PrimitiveActorReference id="16" valueAsString="1" roleName="weight" userID="SYL" flexoID="15" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="17" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Place" userID="SYL" flexoID="16">
+    <PrimitiveActorReference id="18" valueAsString="0" roleName="tokens" userID="SYL" flexoID="29" />
+    <PrimitiveActorReference id="19" valueAsString="P1" roleName="name" userID="SYL" flexoID="30" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="20" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Transition" userID="SYL" flexoID="17">
+    <PrimitiveActorReference id="21" valueAsString="t1" roleName="name" userID="SYL" flexoID="31" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="22" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#InputEdge" userID="SYL" flexoID="18">
+    <ModelObjectActorReference id="23" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_16" roleName="place" userID="SYL" flexoID="32" />
+    <ModelObjectActorReference id="24" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_17" roleName="transition" userID="SYL" flexoID="33" />
+    <PrimitiveActorReference id="25" valueAsString="1" roleName="weight" userID="SYL" flexoID="53" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="26" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Place" userID="SYL" flexoID="19">
+    <PrimitiveActorReference id="27" valueAsString="4" roleName="tokens" userID="SYL" flexoID="34" />
+    <PrimitiveActorReference id="28" valueAsString="P2" roleName="name" userID="SYL" flexoID="35" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="29" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#OutputEdge" userID="SYL" flexoID="20">
+    <ModelObjectActorReference id="30" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_17" roleName="transition" userID="SYL" flexoID="36" />
+    <ModelObjectActorReference id="31" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_19" roleName="place" userID="SYL" flexoID="37" />
+    <PrimitiveActorReference id="32" valueAsString="1" roleName="weight" userID="SYL" flexoID="54" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="33" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Transition" userID="SYL" flexoID="21">
+    <PrimitiveActorReference id="34" valueAsString="t2" roleName="name" userID="SYL" flexoID="38" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="35" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#InputEdge" userID="SYL" flexoID="22">
+    <ModelObjectActorReference id="36" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_19" roleName="place" userID="SYL" flexoID="39" />
+    <ModelObjectActorReference id="37" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_21" roleName="transition" userID="SYL" flexoID="40" />
+    <PrimitiveActorReference id="38" valueAsString="1" roleName="weight" userID="SYL" flexoID="55" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="39" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Place" userID="SYL" flexoID="23">
+    <PrimitiveActorReference id="40" valueAsString="2" roleName="tokens" userID="SYL" flexoID="41" />
+    <PrimitiveActorReference id="41" valueAsString="P3" roleName="name" userID="SYL" flexoID="42" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="42" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#OutputEdge" userID="SYL" flexoID="24">
+    <ModelObjectActorReference id="43" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_21" roleName="transition" userID="SYL" flexoID="43" />
+    <ModelObjectActorReference id="44" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_23" roleName="place" userID="SYL" flexoID="44" />
+    <PrimitiveActorReference id="45" valueAsString="1" roleName="weight" userID="SYL" flexoID="56" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="46" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#Transition" userID="SYL" flexoID="25">
+    <PrimitiveActorReference id="47" valueAsString="t3" roleName="name" userID="SYL" flexoID="45" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="48" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#InputEdge" userID="SYL" flexoID="26">
+    <ModelObjectActorReference id="49" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_19" roleName="place" userID="SYL" flexoID="46" />
+    <ModelObjectActorReference id="50" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_25" roleName="transition" userID="SYL" flexoID="47" />
+    <PrimitiveActorReference id="51" valueAsString="1" roleName="weight" userID="SYL" flexoID="57" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="52" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#OutputEdge" userID="SYL" flexoID="27">
+    <ModelObjectActorReference id="53" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_25" roleName="transition" userID="SYL" flexoID="48" />
+    <ModelObjectActorReference id="54" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_23" roleName="place" userID="SYL" flexoID="49" />
+    <PrimitiveActorReference id="55" valueAsString="1" roleName="weight" userID="SYL" flexoID="58" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="56" flexoConceptURI="http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml#OutputEdge" userID="SYL" flexoID="28">
+    <ModelObjectActorReference id="57" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_17" roleName="transition" userID="SYL" flexoID="50" />
+    <ModelObjectActorReference id="58" objectReference="http://www.openflexo.org/test/PetriNet.prj/MyPetriNet.fml.rt#SYL_23" roleName="place" userID="SYL" flexoID="51" />
+    <PrimitiveActorReference id="59" valueAsString="1" roleName="weight" userID="SYL" flexoID="59" />
+  </FlexoConceptInstance>
+</FMLRTVirtualModelInstance>

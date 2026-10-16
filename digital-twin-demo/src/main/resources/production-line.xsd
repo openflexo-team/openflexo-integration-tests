@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.dke.de/CAEX"
+           targetNamespace="http://www.dke.de/CAEX"
+           elementFormDefault="qualified">
+
+  <!-- ============================================================
+       Sous-ensemble CAEX / AutomationML utilise pour la demo
+       jumeau numerique - ligne de conditionnement L2.
+       Sans espace de noms, pour rester lisible en projection.
+       ============================================================ -->
+
+  <xs:element name="CAEXFile" type="CAEXFileType">
+
+    <!-- Unicite des identifiants d'equipement -->
+    <xs:key name="InternalElementKey">
+      <xs:selector xpath="InstanceHierarchy/InternalElement"/>
+      <xs:field xpath="@ID"/>
+    </xs:key>
+
+    <!-- Unicite des identifiants d'interface -->
+    <xs:key name="ExternalInterfaceKey">
+      <xs:selector xpath="InstanceHierarchy/InternalElement/ExternalInterface"/>
+      <xs:field xpath="@ID"/>
+    </xs:key>
+
+    <!-- Integrite referentielle des liaisons -->
+    <xs:keyref name="InternalLinkSideARef" refer="ExternalInterfaceKey">
+      <xs:selector xpath="InstanceHierarchy/InternalLink"/>
+      <xs:field xpath="@RefPartnerSideA"/>
+    </xs:keyref>
+
+    <xs:keyref name="InternalLinkSideBRef" refer="ExternalInterfaceKey">
+      <xs:selector xpath="InstanceHierarchy/InternalLink"/>
+      <xs:field xpath="@RefPartnerSideB"/>
+    </xs:keyref>
+
+  </xs:element>
+
+  <!-- ============================================================ -->
+
+  <xs:complexType name="CAEXFileType">
+    <xs:sequence>
+      <xs:element name="InstanceHierarchy" type="InstanceHierarchyType"
+                  minOccurs="1" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="SchemaVersion" type="xs:string" use="required"/>
+    <xs:attribute name="FileName" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="InstanceHierarchyType">
+    <xs:sequence>
+      <xs:element name="InternalElement" type="InternalElementType"
+                  minOccurs="1" maxOccurs="unbounded"/>
+      <xs:element name="InternalLink" type="InternalLinkType"
+                  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="InternalElementType">
+    <xs:sequence>
+      <xs:element name="Attribute" type="AttributeType"
+                  minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ExternalInterface" type="ExternalInterfaceType"
+                  minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="ID" type="xs:string" use="required"/>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="AttributeType">
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="Value" type="xs:string" use="required"/>
+    <xs:attribute name="Unit" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="ExternalInterfaceType">
+    <xs:attribute name="ID" type="xs:string" use="required"/>
+    <xs:attribute name="Name" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="InternalLinkType">
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="RefPartnerSideA" type="xs:string" use="required"/>
+    <xs:attribute name="RefPartnerSideB" type="xs:string" use="required"/>
+  </xs:complexType>
+
+</xs:schema>

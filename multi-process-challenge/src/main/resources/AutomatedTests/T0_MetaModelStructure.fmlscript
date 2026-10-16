@@ -1,0 +1,28 @@
+// T0 - the MetaModel loads and has the shape the rest of the suite relies on.
+// Nothing business-level yet: this is the smoke test that says the resource center is wired,
+// the VirtualModel parses, and the concept hierarchy survived the migration off the .fml.xml.
+
+metaModel = load -r ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
+assert metaModel != null;
+assert metaModel.name == "MetaModel";
+
+// The 22 concepts of the metamodel, and the nesting that states ownership.
+assert metaModel.getFlexoConcept("ProcessType") != null;
+assert metaModel.getFlexoConcept("Process") != null;
+assert metaModel.getFlexoConcept("ModelingElement").isAbstract;
+
+// TaskType is nested inside ProcessType, Task inside Process. Nesting states ownership, but it
+// does NOT hide the concept: getFlexoConcept resolves a nested concept by its simple name from the
+// model too, which is exactly why AcmeMetaModel can write "concept CodingTaskType extends TaskType"
+// without qualifying it. Both paths reach the same concept.
+assert metaModel.getFlexoConcept("ProcessType").getEmbeddedFlexoConcept("TaskType") != null;
+assert metaModel.getFlexoConcept("TaskType") == metaModel.getFlexoConcept("ProcessType").getEmbeddedFlexoConcept("TaskType");
+assert metaModel.getFlexoConcept("Task").getContainerFlexoConcept() == metaModel.getFlexoConcept("Process");
+assert metaModel.getFlexoConcept("Sequencing").getContainerFlexoConcept() == metaModel.getFlexoConcept("ProcessType");
+
+// The type-level hierarchy.
+assert metaModel.getFlexoConcept("Type").isSuperConceptOf(metaModel.getFlexoConcept("ActorType"));
+assert metaModel.getFlexoConcept("Type").isSuperConceptOf(metaModel.getFlexoConcept("ProcessType"));
+assert metaModel.getFlexoConcept("MultiInstance").isSuperConceptOf(metaModel.getFlexoConcept("Actor"));
+
+log "Test PASSED: T0 - MetaModel loaded, 22 concepts, nesting and hierarchy intact";

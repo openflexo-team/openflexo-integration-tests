@@ -1,0 +1,76 @@
+// T4 - AcmeMetaModel tightens what MetaModel left open.
+// MetaModel's isValid* hooks return true for everything on purpose: the generic metamodel has no
+// opinion on who may perform a task or what may come out of it. A domain metamodel does. Here a
+// coding task accepts Developers and nothing else, produces code and nothing else, and - the
+// punchline - a COBOL coding task assigns its one COBOL-capable actor without anybody asking.
+
+acmeMetaModel = load -r ["http://openflexo.org/multi-process-challenge/FML/AcmeMetaModel.fml"];
+assert acmeMetaModel != null;
+assert acmeMetaModel.name == "AcmeMetaModel";
+
+service ResourceCenterService add_temp_rc;
+model = new AcmeMetaModel() with (name="AcmeModel");
+assert model != null;
+
+// --- Everything MetaModel declares is still there ---------------------------------------------
+manager = model.newActorType("Manager");
+assert manager != null;
+assert model.allActorTypes().size == 1;
+
+// --- What Acme adds ----------------------------------------------------------------------------
+cobol = model.newProgrammingLanguage("COBOL");
+java = model.newProgrammingLanguage("Java");
+assert model.getProgrammingLanguage("COBOL") == cobol;
+
+developer = model.newDeveloper("Developer");
+// A Developer IS an ActorType: the inherited query sees it alongside the plain one.
+assert model.allActorTypes().size == 2;
+assert model.getActorType("Developer") == developer;
+
+codeArtifactType = model.newCodeArtifactType("CodeArtifactType");
+documentation = model.newArtifactType("Documentation");
+
+// --- The specialized constraints ----------------------------------------------------------------
+softwareEngineering = model.newProcessType("SoftwareEngineering");
+begin = softwareEngineering.newBegin();
+cobolCoding = model.newCodingTaskType(softwareEngineering, "COBOLCoding", cobol);
+javaCoding = model.newCodingTaskType(softwareEngineering, "JavaCoding", java);
+
+assert softwareEngineering.taskTypes.size == 3;
+assert cobolCoding.language == cobol;
+
+// Only Developers, only code. This is what MetaModel would have accepted unconditionally.
+assert cobolCoding.isValidActorType(developer);
+assert cobolCoding.isValidActorType(manager) == false;
+assert cobolCoding.isValidProducedArtifactType(codeArtifactType);
+assert cobolCoding.isValidProducedArtifactType(documentation) == false;
+
+// The constraint is enforced, not merely advertised: a rejected role is not added.
+assert cobolCoding.addAllowedActorType(developer);
+assert cobolCoding.allowedActorTypes.size == 1;
+assert cobolCoding.addAllowedActorType(manager) == false;
+assert cobolCoding.allowedActorTypes.size == 1;
+
+// --- The COBOL rule ------------------------------------------------------------------------------
+ann = model.newActor("Ann Smith");
+ann.addActorType(developer);
+bob = model.newActor("Bob");
+bob.addActorType(developer);
+
+process = softwareEngineering.newProcess("SEP#1");
+assert process.tasks.size == 3;
+
+// The COBOL task assigned itself the one actor who can write COBOL.
+cobolTask = process.getTask(cobolCoding);
+assert cobolTask != null;
+assert cobolTask.performingActors.size == 1;
+assert cobolTask.performingActors.get(0) == ann;
+assert cobolTask.isStartable();
+
+// The Java task got nobody: the rule is about COBOL, not about coding in general.
+javaTask = process.getTask(javaCoding);
+assert javaTask != null;
+assert javaTask.performingActors.size == 0;
+assert javaTask.isStartable() == false;
+
+log "Test PASSED: T4 - Acme constrains actors and artifacts, and the COBOL task self-assigns Ann Smith";

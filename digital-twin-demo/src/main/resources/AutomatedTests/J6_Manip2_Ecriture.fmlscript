@@ -1,0 +1,40 @@
+// J6 / Manipulation 2 - liveness and write-back (specification-demo.md section 5).
+// Add a vibration reading 4.9 mm/s on CONV03: 4.9 > 4.5, so CONV03 goes from "under watch"
+// to "threshold exceeded". Then the twin projects the effective criticity into Assets column H.
+// Everything in memory; the artifacts stay untouched.
+
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance.xlsx"];
+service ResourceCenterService add_temp_rc;
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="lineL2");
+
+conv = line.getEquipmentByCode("CONV03");
+
+// --- Before ---
+log "BEFORE thresholdRatio=" + conv.thresholdRatio + " statut=" + conv.thresholdStatus + " readings=" + conv.readings.size;
+assert conv.lastVibration == 4.2;
+assert conv.readings.size == 14;
+assert conv.thresholdRatio < 1.0;
+assert conv.thresholdStatus == "WATCH";
+
+// --- Manipulation: the equipment records one more vibration reading ---
+// The row is appended to the workbook and the structure re-attached, so the new reading enters
+// this equipment's "readings" role. Nothing else is refreshed by hand.
+conv.addVibrationReading(4.9, "MPR");
+
+// --- After: every derived value followed on its own ---
+log "AFTER  thresholdRatio=" + conv.thresholdRatio + " statut=" + conv.thresholdStatus + " readings=" + conv.readings.size;
+assert conv.readings.size == 15;
+assert conv.lastVibration == 4.9;
+assert conv.thresholdRatio > 1.0;
+assert conv.thresholdStatus == "EXCEEDED";
+// still the critical bottleneck in drift
+assert conv.effectiveCriticity == "CRITICAL_BOTTLENECK";
+
+// --- Write-back into Assets!H : a projection SINK, never a source of truth ---
+conv.writeCriticityToAssetRecord();
+log "Assets!H CONV03 = " + conv.assetRecord.criticity;
+assert conv.assetRecord.criticity == "CRITICAL_BOTTLENECK";
+
+log "Test PASSED: J6 Manip2 - alert rises to DEPASSEMENT, criticity projected into Assets!H";

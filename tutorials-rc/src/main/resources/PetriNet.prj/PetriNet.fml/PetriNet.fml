@@ -1,0 +1,134 @@
+use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
+
+import java.lang.String;
+
+@URI("http://www.openflexo.org/test/PetriNet.prj/PetriNet.fml")
+@Description("Conceptual model for PetriNet")
+public model PetriNet {
+
+	@Description("Represent a place in a Petri Net")
+	@Renderer(instance.tokens.toString)
+	@Inspector("Place.inspector")
+	public concept Place {
+
+      String name;
+		String description;
+		@Description("This is the number of tokens beeing present in this place")
+		int tokens = 0;
+      
+		create(String conceptName) {
+			name = parameters.conceptName;
+		}
+     
+		delete() {
+		}
+	}
+
+	@Description("Represent a transition in a Petri Net")
+	@Renderer(instance.name)
+	@Inspector("Transition.inspector")
+	public concept Transition {
+      
+		String name;
+		String description;
+      List<InputEdge> inputEdges {
+         List<InputEdge> get() {
+            return select InputEdge from container where (selected.transition == this);
+         }
+      };
+      List<OutputEdge> outputEdges {
+         List<OutputEdge> get() {
+            return select OutputEdge from container where (selected.transition == this);
+         }
+      };
+      
+      create(String conceptName) {
+			name = parameters.conceptName;
+		}
+
+      boolean isFireable() {
+         for (InputEdge e : inputEdges) {
+            if (!e.isTriggerable()) {
+               return false;
+            }
+         }
+         return true;
+      }
+
+      @Enable(this.isFireable())
+      public fireTransition() {
+         if (this.isFireable()) {
+            for (InputEdge e : inputEdges) {
+               e.trigger();
+            }
+            for (OutputEdge e : outputEdges) {
+               e.trigger();
+            }
+         }
+         else {
+            log "This transition is not fireable";
+         }
+      }
+      
+		delete() {
+		}
+	}
+
+   @Description("Common super concept for edges")
+   public abstract concept Edge {
+      @Description("This is the weight of the edge which corresponds to the number of tokens beeing created when the edge is triggered")
+      int weight = 1;
+
+      // Abstract method used to trigger an edge
+      abstract trigger();
+   }
+
+	@Inspector("Edge.inspector")
+	@Renderer((this.weight != 1 ? this.weight.toString : ""))
+	public concept InputEdge extends Edge {
+
+      Place place with ConceptInstance(virtualModelInstance=container);
+      Transition transition with ConceptInstance(virtualModelInstance=container);
+      
+		create(Place place, Transition transition) {
+			place = parameters.place;
+			transition = parameters.transition;
+		}
+
+      // This edge is triggerable if the number of tokens in source place exceed required weight
+      boolean isTriggerable() {
+         return place.tokens >= this.weight; 
+      }
+
+      // Trigger that edge : remove required tokens from source place
+      trigger() {
+         place.tokens = place.tokens - this.weight;
+      }
+     
+		delete() {
+		}
+	}
+
+	@Inspector("OutputEdge.inspector")
+   @Renderer((this.weight != 1 ? this.weight.toString : ""))
+	public concept OutputEdge extends Edge {
+
+      Transition transition with ConceptInstance(virtualModelInstance=container);
+		Place place with ConceptInstance(virtualModelInstance=container);
+    
+      create(Transition transition, Place place) {
+			transition = parameters.transition;
+			place = parameters.place;
+		}
+
+      // Trigger that edge : add tokens to destination place
+      trigger() {
+          place.tokens = place.tokens + this.weight;           
+      }
+      
+		delete() {
+		}
+	}
+
+
+}

@@ -1,157 +1,257 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the SKOS thesaurus editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Notes on the translation:
+ *   - each role's inline graphical representation was copied into RecipeThesaurus.diagram as a
+ *     dedicated element (userID "SYL") and is referenced through metamodelElement;
+ *   - behaviour names are lowercased (FML behaviour names are lidentifiers);
+ *   - the "match" parameter is renamed isMatch: "match" is an FML keyword;
+ *   - "conditional" on an edition action has no textual form: each conditional action becomes an
+ *     if statement, "=" becomes "==" and the legacy bitwise "&" becomes "&&";
+ *   - data property assertions nested in AddOWLIndividual become explicit AddDataPropertyStatement
+ *     actions naming their dataProperty, object property assertions become AddObjectPropertyStatement;
+ *   - concept inspectors are dropped, and URI / checkbox widgets become plain @UI fields;
+ *   - the ConceptScheme shape lost its label: see the comment on that role.
+ *
+ * One legacy defect repaired: the drop scheme of Concept assigned its new individual to a role
+ * named "concept", which this virtual model never declared (the role is "ontologyConcept"), so the
+ * assignation dangled.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_95 conformTo="http://www.w3.org/2004/02/skos/core" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification" as SKOS_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class ConceptScheme {  
-  
-    FlexoRole conceptScheme as Individual conformTo ConceptScheme from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    ConceptScheme:DropConceptSchemeAtTopLevel(String conceptSchemeName, String conceptSchemeURI, String preferedLabel, String alternativeLabel) {    
-      conceptScheme = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = conceptScheme.uriName;      
-      };    
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class Concept {  
-  
-    FlexoRole ontologyConcept as Individual conformTo Concept from owl ;  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-  
-    @DropScheme    
-    Concept:DropConceptAtTopLevel(String conceptName, String conceptURI, IFlexoOntologyIndividual conceptScheme, String preferedLabel, String alternativeLabel) {    
-      ontologyConcept = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = ontologyConcept.uriName;      
-      };    
-    }    
-  
-  }  
+import java.lang.String;
+import java.lang.Boolean;
 
-  @FlexoConcept  
-  public class ConceptToConceptSchemeRelationship {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:topConceptOf topConceptOf;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:hasTopConcept hasTopConcept;  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-  
-    @LinkScheme    
-    ConceptToConceptSchemeRelationship:LinkAConceptToAConceptScheme(Boolean makeInverseRelationship) {    
-      topConceptOf = fromTarget.ontologyConcept.topConceptOf = toTarget.conceptScheme;;      
-      hasTopConcept = toTarget.conceptScheme.hasTopConcept = fromTarget.ontologyConcept;;      
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "top concept of";      
-      };    
-    }    
-  
-  }  
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.owl.model.OWLDataProperty;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
-  @FlexoConcept  
-  public class ConceptSpecialization {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:broader broader;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:broadMatch broadMatch;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:narrower narrower;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:narrowMatch narrowMatch;  
-    FlexoRole broaderConnector as ConnectorSpecification from DiagramSpecification;  
-    FlexoRole broadMatchConnector as ConnectorSpecification from DiagramSpecification;  
-  
-    @LinkScheme    
-    ConceptSpecialization:SpecializeAConcept(Boolean match, Boolean makeInverseRelationship) {    
-      broader = fromTarget.ontologyConcept.broader = toTarget.ontologyConcept;;      
-      broadMatch = fromTarget.ontologyConcept.broadMatch = toTarget.ontologyConcept;;      
-      narrower = toTarget.ontologyConcept.narrower = fromTarget.ontologyConcept;;      
-      narrowMatch = toTarget.ontologyConcept.narrowMatch = fromTarget.ontologyConcept;;      
-      broaderConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "broader";      
-      };      
-      broadMatchConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "broader match";      
-      };    
-    }    
-  
-  }  
+import OWLOntology SKOS from ["http://www.w3.org/2004/02/skos/core"];
+import OWLClass SKOS_CONCEPT_SCHEME from [SKOS:"ConceptScheme"];
+import OWLClass SKOS_CONCEPT from [SKOS:"Concept"];
+import OWLDataProperty PREF_LABEL from [SKOS:"prefLabel"];
+import OWLDataProperty ALT_LABEL from [SKOS:"altLabel"];
+import OWLObjectProperty IN_SCHEME from [SKOS:"inScheme"];
+import OWLObjectProperty TOP_CONCEPT_OF from [SKOS:"topConceptOf"];
+import OWLObjectProperty HAS_TOP_CONCEPT from [SKOS:"hasTopConcept"];
+import OWLObjectProperty BROADER from [SKOS:"broader"];
+import OWLObjectProperty BROAD_MATCH from [SKOS:"broadMatch"];
+import OWLObjectProperty NARROWER from [SKOS:"narrower"];
+import OWLObjectProperty NARROW_MATCH from [SKOS:"narrowMatch"];
+import OWLObjectProperty RELATED from [SKOS:"related"];
+import OWLObjectProperty RELATED_MATCH from [SKOS:"relatedMatch"];
 
-  @FlexoConcept  
-  public class ConceptGeneralization {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:narrower narrower;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:narrowMatch narrowMatch;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:broader broader;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:broadMatch broadMatch;  
-    FlexoRole narrowerConnector as ConnectorSpecification from DiagramSpecification;  
-    FlexoRole narrowMatchConnector as ConnectorSpecification from DiagramSpecification;  
-  
-    @LinkScheme    
-    ConceptGeneralization:GeneralizeAConcept(Boolean match, Boolean makeInverseRelationship) {    
-      narrower = fromTarget.ontologyConcept.narrower = toTarget.ontologyConcept;;      
-      narrowMatch = fromTarget.ontologyConcept.narrowMatch = toTarget.ontologyConcept;;      
-      broader = toTarget.ontologyConcept.broader = fromTarget.ontologyConcept;;      
-      broadMatch = toTarget.ontologyConcept.broadMatch = fromTarget.ontologyConcept;;      
-      narrowerConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "narrower";      
-      };      
-      narrowMatchConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "narrow match";      
-      };    
-    }    
-  
-  }  
+import OWLOntology RDFS from ["http://www.w3.org/2000/01/rdf-schema"];
+import OWLDataProperty RDFS_LABEL from [RDFS:"label"];
 
-  @FlexoConcept  
-  public class ConceptRelatedRelationship {  
-  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:related related1;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:related related2;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:relatedMatch relatedMatch1;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:relatedMatch relatedMatch2;  
-    FlexoRole relatedConnector as ConnectorSpecification from DiagramSpecification;  
-    FlexoRole relatedMatchConnector as ConnectorSpecification from DiagramSpecification;  
-  
-    @LinkScheme    
-    ConceptRelatedRelationship:MakeTwoConceptRelatedToEachOther(Boolean match) {    
-      related1 = fromTarget.ontologyConcept.related = toTarget.ontologyConcept;;      
-      related2 = toTarget.ontologyConcept.related = fromTarget.ontologyConcept;;      
-      relatedMatch1 = fromTarget.ontologyConcept.relatedMatch = toTarget.ontologyConcept;;      
-      relatedMatch2 = toTarget.ontologyConcept.relatedMatch = fromTarget.ontologyConcept;;      
-      relatedConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "related";      
-      };      
-      relatedMatchConnector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "related match";      
-      };    
-    }    
-  
-  }  
+import DiagramSpecification SKOS_DIAGRAM_SPEC from [SKOS_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [SKOS_DIAGRAM_SPECIFICATION + "/RecipeThesaurus.diagram"];
+import DiagramShape CONCEPT_SCHEME_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1001"];
+import DiagramShape CONCEPT_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1002"];
+import DiagramConnector TOP_CONCEPT_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1003"];
+import DiagramConnector BROADER_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1004"];
+import DiagramConnector BROAD_MATCH_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1005"];
+import DiagramConnector NARROWER_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1006"];
+import DiagramConnector NARROW_MATCH_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1007"];
+import DiagramConnector RELATED_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1008"];
+import DiagramConnector RELATED_MATCH_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1009"];
 
+// A behaviour parameter takes a reference_type, not the technology-specific type form, so the
+// concept-scheme individual type a parameter needs has to be reached through an alias.
+typedef OWLIndividualType(owlClass=SKOS_CONCEPT_SCHEME) as SKOSConceptScheme;
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
+
+	OWLOntology owl with OWLModelSlot(importedOntology=SKOS);
+
+	Diagram diagram with TypedDiagram(
+		diagramSpecification=SKOS_DIAGRAM_SPEC,
+		paletteElementBindings={
+			PaletteElementBinding:(call=new ConceptScheme::dropConceptSchemeAtTopLevel(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/SKOS.palette#Concept Scheme"),
+			PaletteElementBinding:(call=new Concept::dropConceptAtTopLevel(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl/DiagramSpecification/DiagramSpecification.diagramspecification/SKOS.palette#Concept")
+		},
+		isRequired=true);
+
+	public concept ConceptScheme {
+
+		OWLIndividual conceptScheme with OWLIndividualRole(type=SKOS_CONCEPT_SCHEME);
+		// The legacy label read conceptScheme.uriName. The role's type is substituted by the
+		// SKOSConceptScheme alias declared above, and an aliased individual type no longer offers
+		// the OWL binding path elements, so that binding no longer resolves. Restore the label
+		// once an alias keeps the underlying OWLIndividualType visible to the binding factory.
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=CONCEPT_SCHEME_SHAPE);
+
+		@UI(
+			@TextField(value="conceptSchemeName", label="conceptSchemeName")
+			@TextField(value="conceptSchemeURI", label="conceptSchemeURI")
+			@TextField(value="preferedLabel", label="preferedLabel")
+			@TextField(value="alternativeLabel", label="alternativeLabel")
+		)
+		ConceptScheme dropConceptSchemeAtTopLevel(String conceptSchemeName, required String conceptSchemeURI,
+				String preferedLabel, String alternativeLabel) with DropScheme() {
+			conceptScheme = OWL::AddOWLIndividual(ontologyClass=SKOS_CONCEPT_SCHEME, individualName=parameters.conceptSchemeURI) in owl;
+			OWL::AddDataPropertyStatement(subject=conceptScheme, value=parameters.conceptSchemeName, dataProperty=RDFS_LABEL) in owl;
+			OWL::AddDataPropertyStatement(subject=conceptScheme, value=parameters.preferedLabel, dataProperty=PREF_LABEL) in owl;
+			OWL::AddDataPropertyStatement(subject=conceptScheme, value=parameters.alternativeLabel, dataProperty=ALT_LABEL) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+	}
+
+	public concept Concept {
+
+		OWLIndividual ontologyConcept with OWLIndividualRole(type=SKOS_CONCEPT);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=CONCEPT_SHAPE,
+			label=ontologyConcept.uriName);
+
+		@UI(
+			@TextField(value="conceptName", label="conceptName")
+			@TextField(value="conceptURI", label="conceptURI")
+			@TextField(value="preferedLabel", label="preferedLabel")
+			@TextField(value="alternativeLabel", label="alternativeLabel")
+		)
+		Concept dropConceptAtTopLevel(String conceptName, required String conceptURI,
+				SKOSConceptScheme conceptScheme, String preferedLabel, String alternativeLabel) with DropScheme() {
+			ontologyConcept = OWL::AddOWLIndividual(ontologyClass=SKOS_CONCEPT, individualName=parameters.conceptURI) in owl;
+			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=parameters.conceptName, dataProperty=RDFS_LABEL) in owl;
+			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=parameters.preferedLabel, dataProperty=PREF_LABEL) in owl;
+			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=parameters.alternativeLabel, dataProperty=ALT_LABEL) in owl;
+			OWL::AddObjectPropertyStatement(subject=ontologyConcept, object=parameters.conceptScheme, objectProperty=IN_SCHEME) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+	}
+
+	public concept ConceptToConceptSchemeRelationship {
+
+		ObjectPropertyStatement topConceptOf with ObjectPropertyStatementRole(objectProperty=TOP_CONCEPT_OF);
+		ObjectPropertyStatement hasTopConcept with ObjectPropertyStatementRole(objectProperty=HAS_TOP_CONCEPT);
+		DiagramConnector connector with ConnectorRole(exampleLabel="label", metamodelElement=TOP_CONCEPT_CONNECTOR,
+			label="top concept of");
+
+		@UI(
+			@CheckBox(value="makeInverseRelationship", label="makeInverseRelationship")
+		)
+		ConceptToConceptSchemeRelationship linkAConceptToAConceptScheme(Boolean makeInverseRelationship=true)
+				with LinkScheme(fromType=Concept, toType=ConceptScheme) {
+			topConceptOf = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.conceptScheme) in owl;
+			if (parameters.makeInverseRelationship == true) {
+				hasTopConcept = OWL::AddObjectPropertyStatement(subject=toTarget.conceptScheme, object=fromTarget.ontologyConcept) in owl;
+			}
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+		}
+	}
+
+	public concept ConceptSpecialization {
+
+		ObjectPropertyStatement broader with ObjectPropertyStatementRole(objectProperty=BROADER);
+		ObjectPropertyStatement broadMatch with ObjectPropertyStatementRole(objectProperty=BROAD_MATCH);
+		ObjectPropertyStatement narrower with ObjectPropertyStatementRole(objectProperty=NARROWER);
+		ObjectPropertyStatement narrowMatch with ObjectPropertyStatementRole(objectProperty=NARROW_MATCH);
+		DiagramConnector broaderConnector with ConnectorRole(exampleLabel="label", metamodelElement=BROADER_CONNECTOR, label="broader");
+		DiagramConnector broadMatchConnector with ConnectorRole(exampleLabel="label", metamodelElement=BROAD_MATCH_CONNECTOR, label="broader match");
+
+		@UI(
+			@CheckBox(value="isMatch", label="isMatch")
+			@CheckBox(value="makeInverseRelationship", label="makeInverseRelationship")
+		)
+		ConceptSpecialization specializeAConcept(Boolean isMatch=false, Boolean makeInverseRelationship=true)
+				with LinkScheme(fromType=Concept, toType=Concept) {
+			if (parameters.isMatch == false) {
+				broader = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
+			}
+			if (parameters.isMatch == true) {
+				broadMatch = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
+			}
+			if ((parameters.isMatch == false) && (parameters.makeInverseRelationship == true)) {
+				narrower = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
+			}
+			if ((parameters.isMatch == true) && (parameters.makeInverseRelationship == true)) {
+				narrowMatch = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
+			}
+			if (parameters.isMatch == false) {
+				broaderConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			}
+			if (parameters.isMatch == true) {
+				broadMatchConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			}
+		}
+	}
+
+	public concept ConceptGeneralization {
+
+		ObjectPropertyStatement narrower with ObjectPropertyStatementRole(objectProperty=NARROWER);
+		ObjectPropertyStatement narrowMatch with ObjectPropertyStatementRole(objectProperty=NARROW_MATCH);
+		ObjectPropertyStatement broader with ObjectPropertyStatementRole(objectProperty=BROADER);
+		ObjectPropertyStatement broadMatch with ObjectPropertyStatementRole(objectProperty=BROAD_MATCH);
+		DiagramConnector narrowerConnector with ConnectorRole(exampleLabel="label", metamodelElement=NARROWER_CONNECTOR, label="narrower");
+		DiagramConnector narrowMatchConnector with ConnectorRole(exampleLabel="label", metamodelElement=NARROW_MATCH_CONNECTOR, label="narrow match");
+
+		@UI(
+			@CheckBox(value="isMatch", label="isMatch")
+			@CheckBox(value="makeInverseRelationship", label="makeInverseRelationship")
+		)
+		ConceptGeneralization generalizeAConcept(Boolean isMatch=false, Boolean makeInverseRelationship=true)
+				with LinkScheme(fromType=Concept, toType=Concept) {
+			if (parameters.isMatch == false) {
+				narrower = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
+			}
+			if (parameters.isMatch == true) {
+				narrowMatch = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
+			}
+			if ((parameters.isMatch == false) && (parameters.makeInverseRelationship == true)) {
+				broader = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
+			}
+			if ((parameters.isMatch == true) && (parameters.makeInverseRelationship == true)) {
+				broadMatch = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
+			}
+			if (parameters.isMatch == false) {
+				narrowerConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			}
+			if (parameters.isMatch == true) {
+				narrowMatchConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			}
+		}
+	}
+
+	public concept ConceptRelatedRelationship {
+
+		ObjectPropertyStatement related1 with ObjectPropertyStatementRole(objectProperty=RELATED);
+		ObjectPropertyStatement related2 with ObjectPropertyStatementRole(objectProperty=RELATED);
+		ObjectPropertyStatement relatedMatch1 with ObjectPropertyStatementRole(objectProperty=RELATED_MATCH);
+		ObjectPropertyStatement relatedMatch2 with ObjectPropertyStatementRole(objectProperty=RELATED_MATCH);
+		DiagramConnector relatedConnector with ConnectorRole(exampleLabel="label", metamodelElement=RELATED_CONNECTOR, label="related");
+		DiagramConnector relatedMatchConnector with ConnectorRole(exampleLabel="label", metamodelElement=RELATED_MATCH_CONNECTOR, label="related match");
+
+		@UI(
+			@CheckBox(value="isMatch", label="isMatch")
+		)
+		ConceptRelatedRelationship makeTwoConceptRelatedToEachOther(Boolean isMatch=false)
+				with LinkScheme(fromType=Concept, toType=Concept) {
+			if (parameters.isMatch == false) {
+				related1 = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
+				related2 = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
+			}
+			if (parameters.isMatch == true) {
+				relatedMatch1 = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
+				relatedMatch2 = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
+			}
+			if (parameters.isMatch == false) {
+				relatedConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			}
+			if (parameters.isMatch == true) {
+				relatedMatchConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+			}
+		}
+	}
 }

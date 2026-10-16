@@ -1,0 +1,161 @@
+/**
+ * CityDiagram - a diagram view of one federated City and of the houses attached to it.
+ *
+ * Migrated from the deprecated .fml.xml serialization to textual FML. What was recovered or
+ * repaired, and why:
+ *   - every MatchFlexoConceptInstance had lost its target concept, its matching criteria and its
+ *     creation scheme on load; they were recovered from the legacy XML;
+ *   - the synchronization scheme iterated over "cityMapping", a receiver no model slot ever
+ *     declared; it is now a proper FMLRTModelSlot typed by the Mapping virtual model;
+ *   - empty HTML @Description annotations were dropped.
+ *
+ * One legacy defect is KEPT: the five ShapeRoles below carry no metamodelElement, because the
+ * legacy ShapeRole elements carry no metamodelElementReference at all. Validation asks for one.
+ * Choosing which shape of CityDiagram.diagramspecification each role should point at is a design
+ * decision about what the diagram renders, not a serialization question, so it is left open here.
+ */
+
+use org.openflexo.foundation.fml.rt.FMLRTModelSlot as FMLRT;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
+
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+import java.lang.String;
+
+import ["http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml"];
+import DiagramSpecification CITY_DIAGRAM from ["http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram/CityDiagram.diagramspecification"];
+
+@URI("http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram.fml")
+@Version("0.1")
+public model CityDiagram {
+
+	Mapping cityMapping with FMLRTModelSlot();
+	City city;
+	CityGR cityGR;
+
+	Diagram typedDiagramModelSlot with TypedDiagram(
+		diagramSpecification=CITY_DIAGRAM,
+		isRequired=true,
+		paletteElementBindings={
+			PaletteElementBinding:(
+				call=new CityGR::dropCityGRAtTopLevel(null),
+				paletteElementId="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram/CityDiagram.diagramspecification/Palette.palette#City"),
+			PaletteElementBinding:(
+				call=new MansionGR::dropMansionInCity(),
+				paletteElementId="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram/CityDiagram.diagramspecification/Palette.palette#Mansion"),
+			PaletteElementBinding:(
+				call=new AppartmentGR::dropAppartmentGRAtTopLevel(),
+				paletteElementId="http://www.thalesgroup.com/openflexo/emf/CityMapping/CityDiagram/CityDiagram.diagramspecification/Palette.palette#Appartment")
+		});
+
+	create::createNewDiagramWithSuppliedCity(required City cityParameter) {
+		city = parameters.cityParameter;
+	}
+
+	@UI(
+		@TextField(value="newCityName")
+		@TextArea(value="description")
+	)
+	create::createNewDiagramRepresentingNewCity(String newCityName="valeur2", String description="coucou") {
+		City myNewCity = new City::createANewOne(parameters.newCityName);
+		new CityGR::createCityGR(myNewCity);
+	}
+
+	// Mirrors the federated city and every house attached to it.
+	synchronization() {
+		cityGR = match CityGR from this where (city=city) unmatched: new CityGR::createCityGR(city);
+		for (Appartment appartment : select Appartment from cityMapping where (selected.city == city)) {
+			match AppartmentGR from this where (appartment=appartment) unmatched: new AppartmentGR::createAppartmentGR(appartment);
+		}
+		for (Mansion mansion : select Mansion from cityMapping where (selected.city == city)) {
+			match MansionGR from this where (mansion=mansion) unmatched: new MansionGR::createMansionGR(mansion);
+		}
+	}
+
+	delete::deletion() {
+	}
+
+	public concept CityGR {
+
+		DiagramShape containerShape with ShapeRole(exampleLabel="");
+		DiagramShape icon with ShapeRole(exampleLabel="");
+		DiagramShape label with ShapeRole(exampleLabel="My city", label=city.render);
+		City city;
+
+		CityGR dropCityGRAtTopLevel(required City city) with DropScheme(skipConfirmationPanel=false, targetType=CityDiagram) {
+			containerShape = DIAGRAM::AddShape(container=topLevel) in typedDiagramModelSlot;
+			label = DIAGRAM::AddShape(container=containerShape) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=containerShape) in typedDiagramModelSlot;
+			city = parameters.city;
+		}
+
+		create::createCityGR(City cityParameter) {
+			containerShape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
+			label = DIAGRAM::AddShape(container=containerShape) in typedDiagramModelSlot;
+			icon = DIAGRAM::AddShape(container=containerShape) in typedDiagramModelSlot;
+			city = parameters.cityParameter;
+		}
+
+		delete::deletionFromDiagram() {
+			delete icon;
+			delete label;
+			delete containerShape;
+		}
+
+		delete::deletionFromModel() {
+			delete icon;
+			delete label;
+			delete containerShape;
+			delete city;
+		}
+	}
+
+	public concept MansionGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="Mansion", label=mansion.render);
+		Mansion mansion;
+
+		MansionGR dropMansionInCity() with DropScheme(skipConfirmationPanel=false, targetType=CityGR) {
+			shape = DIAGRAM::AddShape(container=target.containerShape) in typedDiagramModelSlot;
+		}
+
+		create::createMansionGR(Mansion mansionParam) {
+			mansion = parameters.mansionParam;
+			shape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
+		}
+
+		delete::deletionFromDiagram() {
+			delete shape;
+		}
+
+		delete::deletionFromModel() {
+			delete shape;
+			delete mansion;
+		}
+	}
+
+	public concept AppartmentGR {
+
+		DiagramShape shape with ShapeRole(exampleLabel="Appartment", label=appartment.render);
+		Appartment appartment;
+
+		AppartmentGR dropAppartmentGRAtTopLevel() with DropScheme(skipConfirmationPanel=false, targetType=CityDiagram) {
+			shape = DIAGRAM::AddShape(container=topLevel) in typedDiagramModelSlot;
+		}
+
+		create::createAppartmentGR(Appartment appartmentParam) {
+			appartment = parameters.appartmentParam;
+			shape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
+		}
+
+		delete::deletionFromDiagram() {
+			delete shape;
+		}
+
+		delete::deletionFromModel() {
+			delete shape;
+			delete appartment;
+		}
+	}
+}

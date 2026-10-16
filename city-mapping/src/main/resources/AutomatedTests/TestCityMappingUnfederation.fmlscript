@@ -1,0 +1,70 @@
+// TestCityMappingUnfederation - a mapping follows the models in BOTH directions. What appeared is
+// federated (TestCityMappingSynchronization); what is no longer backed by either model stops being
+// federated. That is the job of the end-match clauses closing synchronization().
+//
+// Regression witness for two things at once:
+//   - the end match actually fires (drop it and the stale instance survives forever);
+//   - it unfederates and nothing more. 'unmatched: delete()' runs the concept's DEFAULT deletion
+//     scheme, so if someone gives City a deletion scheme that deletes cityInModel1/cityInModel2 and
+//     declares it first, this synchronization starts ERASING the two source artifacts. The
+//     city1Cities() assertions below are what catches that.
+
+vm = load -r ["http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml"];
+assert vm != null;
+city1 = load -r ["http://openflexo.org/city-mapping/EMF/Model/city1/my.city1"];
+city2 = load -r ["http://openflexo.org/city-mapping/EMF/Model/city2/first.city2"];
+
+service ResourceCenterService add_temp_rc;
+mapping = new Mapping::defaultCreationScheme(city1.resource, city2.resource) with (name="cityMapping");
+mapping.synchronization();
+
+assert mapping.allCities().size == 5;
+// The city1 artifact holds 4 cities, and must still hold 4 at the end of this script.
+assert mapping.city1Cities().size == 4;
+
+// --- Case 1: a stale instance that still HOLDS both individuals ---
+// Duplicating the Lampaul-Plouarzel federation gives two instances carrying the same two
+// individuals. synchronization() matches one of them and leaves the other unmatched, so the end
+// match unfederates an instance whose roles are NOT null - which is the case that matters: the
+// deletion scheme assigns null to each role, and this is what proves that releasing a role
+// releases the reference WITHOUT deleting the EMF individual behind it.
+lampaul = mapping.cityOfModel1Named("Lampaul-Plouarzel");
+duplicate = mapping.new City::createFromEMF(lampaul.cityInModel1, lampaul.cityInModel2);
+assert duplicate != null;
+assert duplicate.cityInModel1 != null;
+assert duplicate.cityInModel2 != null;
+assert mapping.allCities().size == 6;
+
+mapping.synchronization();
+
+assert mapping.allCities().size == 5;
+// The two artifacts still hold everything they held: 4 cities in city1, 3 in city2.
+assert mapping.city1Cities().size == 4;
+assert mapping.city2Cities().size == 3;
+// And Lampaul-Plouarzel is still federated on both sides - the surviving instance kept its feet.
+assert mapping.cityOfModel1Named("Lampaul-Plouarzel") != null;
+assert mapping.cityOfModel1Named("Lampaul-Plouarzel").cityInModel2 != null;
+
+// --- Case 2: a stale instance with no foot left at all ---
+// The shape an instance takes once the individuals that justified it are gone. No loop of
+// synchronization() can match it: every match keys on a non-null individual.
+ghost = mapping.new City::createFromEMF(null, null);
+assert ghost != null;
+assert mapping.allCities().size == 6;
+
+mapping.synchronization();
+
+assert mapping.allCities().size == 5;
+assert mapping.matchedCities().size == 2;
+assert mapping.citiesMissingInModel2().size == 2;
+assert mapping.citiesMissingInModel1().size == 1;
+assert mapping.cityOfModel1Named("Paris") != null;
+assert mapping.cityOfModel2Named("Lannilis") != null;
+assert mapping.city1Cities().size == 4;
+assert mapping.city2Cities().size == 3;
+
+// Houses and residents keep their own matching sets, closed the same way.
+assert mapping.allHouses().size == 3;
+assert mapping.allResidents().size == 3;
+
+log "Test PASSED: CityMappingUnfederation - stale instances dropped, both EMF models untouched";

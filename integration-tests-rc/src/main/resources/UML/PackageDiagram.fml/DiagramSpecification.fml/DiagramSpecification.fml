@@ -1,54 +1,100 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the UML package diagram editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. Notes on the translation:
+ *   - the inline ShapeGraphicalRepresentation / ConnectorGraphicalRepresentation each role
+ *     carried has no textual FML form; each was copied into the example diagram as a
+ *     dedicated element (userID "SYL") and is referenced here through metamodelElement;
+ *   - the "import" role is renamed packageImportStatement: "import" is an FML keyword;
+ *   - the model slot named typedDiagramModelSlot is renamed diagram (no stored instance
+ *     refers to it);
+ *   - the concept inspectors are dropped: FlexoConceptInspector is deprecated in 2.99 and
+ *     has no textual FML form;
+ *   - the uri parameters used the URI widget, which has no textual FML form; they are plain
+ *     text fields now.
+ *
+ * Data property assertions become ontology bindings (package.name = ...); object property
+ * assertions become explicit AddObjectPropertyStatement actions naming their objectProperty.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot owl type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_96 conformTo="http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl" required=false readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification" as PACKAGE_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class Package {  
-  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole package as Individual conformTo Package from owl ;  
-  
-    @DropScheme    
-    Package:drop(String name, String uri) {    
-      package = owl.AddOWLIndividual();      
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = package.name;      
-      };    
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class ImportPackage {  
-  
-    FlexoRole package as Individual conformTo Package from owl ;  
-    FlexoRole importedPackage as Individual conformTo Package from owl ;  
-    FlexoRole packageImport as Individual conformTo PackageImport from owl ;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:packageImport import;  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-  
-    @LinkScheme    
-    ImportPackage:ImportPackage(String uri) {    
-      package = fromTarget;      
-      importedPackage = toTarget;      
-      packageImport = owl.AddOWLIndividual();      
-      import = package.packageImport = packageImport;;      
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_91 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "import";      
-      };    
-    }    
-  
-  }  
+import java.lang.String;
 
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLIndividual;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
+
+import OWLOntology UML2 from ["http://www.openflexo.org/openflexo/ontologies/UML/UML2.owl"];
+import OWLClass PACKAGE from [UML2:"Package"];
+import OWLClass PACKAGE_IMPORT from [UML2:"PackageImport"];
+import OWLObjectProperty PACKAGE_IMPORT_PROP from [UML2:"packageImport"];
+import OWLObjectProperty IMPORTED_PACKAGE_PROP from [UML2:"importedPackage"];
+
+import DiagramSpecification PACKAGE_DIAGRAM_SPEC from [PACKAGE_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [PACKAGE_DIAGRAM_SPECIFICATION + "/PackageDiagram.diagram"];
+import DiagramShape PACKAGE_SHAPE from [EXAMPLE_DIAGRAM:"SYL-1001"];
+import DiagramConnector IMPORT_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-1002"];
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
+
+	OWLOntology owl with OWLModelSlot(importedOntology=UML2);
+
+	Diagram diagram with TypedDiagram(
+		diagramSpecification=PACKAGE_DIAGRAM_SPEC,
+		paletteElementBindings={
+			PaletteElementBinding:(call=new Package::drop(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/UML/PackageDiagram.owl/DiagramSpecification/DiagramSpecification.diagramspecification/DefaultPalette.palette#Package")
+		},
+		isRequired=true);
+
+	public concept Package {
+
+		OWLIndividual package with OWLIndividualRole(type=PACKAGE);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=PACKAGE_SHAPE, label=package.name);
+
+		@UI(
+			@TextField(value="name", label="name")
+			@TextField(value="uri", label="uri")
+		)
+		Package drop(String name="Package", required String uri) with DropScheme() {
+			package = OWL::AddOWLIndividual(ontologyClass=PACKAGE, individualName=parameters.uri) in owl;
+			package.name = parameters.name;
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+	}
+
+	public concept ImportPackage {
+
+		OWLIndividual package with OWLIndividualRole(type=PACKAGE);
+		OWLIndividual importedPackage with OWLIndividualRole(type=PACKAGE);
+		OWLIndividual packageImport with OWLIndividualRole(type=PACKAGE_IMPORT);
+		ObjectPropertyStatement packageImportStatement with ObjectPropertyStatementRole(objectProperty=PACKAGE_IMPORT_PROP);
+		DiagramConnector connector with ConnectorRole(exampleLabel="label", metamodelElement=IMPORT_CONNECTOR, label="import");
+
+		@UI(
+			@TextField(value="uri", label="uri")
+		)
+		ImportPackage createImport(required String uri) with LinkScheme(fromType=Package, toType=Package) {
+			// the legacy assigned the Package *concept instances* to these OWL individual roles
+			// ("package = fromTarget"), which 2.99 rejects as a type error; the individual each
+			// dropped Package carries is what was meant.
+			package = fromTarget.package;
+			importedPackage = toTarget.package;
+			packageImport = OWL::AddOWLIndividual(ontologyClass=PACKAGE_IMPORT, individualName=parameters.uri) in owl;
+			OWL::AddObjectPropertyStatement(subject=packageImport, object=importedPackage, objectProperty=IMPORTED_PACKAGE_PROP) in owl;
+			packageImportStatement = OWL::AddObjectPropertyStatement(subject=package, object=packageImport) in owl;
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+		}
+	}
 }

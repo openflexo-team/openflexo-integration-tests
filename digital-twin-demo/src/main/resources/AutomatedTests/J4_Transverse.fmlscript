@@ -1,0 +1,72 @@
+// J4 - Transverse derivations: the XML threshold meets the Excel measurement.
+// Expected business values (specification-demo.md sections 3 and 4):
+//   thresholdRatio CONV03 = 4.2/4.5 = 0.933 ; ETI04A = 6.5/7.0 = 0.929  -> both ~93% (deliberate tie)
+//   thresholdRatio DEP01 = 4.1/6.0 = 0.68 ; REM02 = 0.52 ; ENC05 = 0.60 (< 0.8)
+//   isDrifting TRUE for CONV03 and ETI04A, FALSE for DEP01/REM02/ENC05
+//   effectiveCriticity: CONV03 = CRITIQUE_GOULOT ; ETI04A = A_SURVEILLER (drifting, not critical)
+
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance.xlsx"];
+service ResourceCenterService add_temp_rc;
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="lineL2");
+
+conv = line.getEquipmentByCode("CONV03");
+eti = line.getEquipmentByCode("ETI04A");
+dep = line.getEquipmentByCode("DEP01");
+rem = line.getEquipmentByCode("REM02");
+enc = line.getEquipmentByCode("ENC05");
+
+log "lastVibration CONV03=" + conv.lastVibration + " ETI04A=" + eti.lastVibration;
+log "thresholdRatio CONV03=" + conv.thresholdRatio + " ETI04A=" + eti.thresholdRatio + " DEP01=" + dep.thresholdRatio;
+log "effectiveCriticity CONV03=" + conv.effectiveCriticity + " ETI04A=" + eti.effectiveCriticity;
+
+// The measurement comes from the workbook, the threshold from the XML.
+assert conv.lastVibration == 4.2;
+assert conv.vibrationThreshold == 4.5;
+assert eti.lastVibration == 6.5;
+assert eti.vibrationThreshold == 7.0;
+
+// thresholdRatio: the deliberate ~93% tie (CONV03 0.933, ETI04A 0.929)
+assert conv.thresholdRatio > 0.93;
+assert conv.thresholdRatio < 0.94;
+assert eti.thresholdRatio > 0.92;
+assert eti.thresholdRatio < 0.93;
+// CONV03 marginally above ETI04A - far too close to decide anything on
+assert conv.thresholdRatio > eti.thresholdRatio;
+
+// background equipments, well below the 0.8 alert band
+assert dep.thresholdRatio < 0.7;
+assert rem.thresholdRatio < 0.6;
+assert enc.thresholdRatio < 0.7;
+
+// A SECOND indicator, on another physical quantity, corroborates CONV03 without taking part in
+// the verdict: the bearing also runs at 95% of its temperature threshold.
+log "temperature CONV03=" + conv.lastBearingTemperature + "/" + conv.bearingTemperatureThreshold
+	+ " -> " + conv.temperatureRatio;
+assert conv.bearingTemperatures.size == 7;
+assert conv.lastBearingTemperature == 57.0;
+assert conv.bearingTemperatureThreshold == 60.0;
+assert conv.temperatureRatio > 0.94;
+assert conv.temperatureRatio < 0.96;
+// ETI04A is simply not monitored on temperature: the model tolerates the missing data
+assert eti.bearingTemperatures.size == 0;
+assert eti.lastBearingTemperature == null;
+assert eti.temperatureRatio == null;
+
+// isDrifting = rising over the last 4 readings AND already at 80% of the threshold
+assert conv.isRising == true;
+assert conv.isDrifting == true;
+assert eti.isDrifting == true;
+assert dep.isDrifting == false;
+assert rem.isDrifting == false;
+assert enc.isDrifting == false;
+
+// effectiveCriticity : topology is what separates the bottleneck from the lure
+assert conv.effectiveCriticity == "CRITICAL_BOTTLENECK";
+assert eti.effectiveCriticity == "TO_WATCH";
+assert dep.effectiveCriticity == "NORMAL";
+assert rem.effectiveCriticity == "NORMAL";
+assert enc.effectiveCriticity == "NORMAL";
+
+log "Test PASSED: J4 - ~93% tie, isDrifting, effectiveCriticity (CONV03 aggravated, ETI04A only watched)";

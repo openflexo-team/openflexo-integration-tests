@@ -1,65 +1,91 @@
-use org.openflexo.technologyadapter.owl.OWLModelSlot;
-use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot;
-
 /**
- * 
- * @version 0.1
+ * DiagramSpecification - the basic ontology editor itself.
+ *
+ * Migrated from the deprecated .fml.xml serialization. This is the only view point of the set
+ * whose roles already referenced diagram elements (Animals.diagram, userID "SYL"), so nothing had
+ * to be injected here. Notes on the translation:
+ *   - the model slot named typedDiagramModelSlot is renamed diagram, and basicOntologyi is
+ *     renamed owl;
+ *   - behaviour names are lowercased: FML behaviour names are lidentifiers;
+ *   - concept inspectors are dropped (FlexoConceptInspector is deprecated, no textual form);
+ *   - the model slot's templateDiagramReference (Animals.diagram#FLX_1, the diagram a new
+ *     instance was initialized from) has no @FMLAttribute in TypedDiagramModelSlot and is lost.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml")
-public class DiagramSpecification {
 
-  ModelSlot basicOntologyi type=OWLModelSlot$OWLModelSlotImpl_$$_jvste0e_95 conformTo="http://www.openflexo.org/openflexo/ViewPoints/BasicOntology.owl" required=true readOnly=false;
-  @TypedDiagramModelSlot(metamodel="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification",cardinality=ZeroOne,readOnly=false)  
-  public DiagramType<DiagramSpecification> typedDiagramModelSlot;
+namespace "http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification" as BASIC_ONTOLOGY_DIAGRAM_SPECIFICATION;
 
-  @FlexoConcept  
-  public class Concept {  
-  
-    FlexoRole shape as ShapeSpecification from DiagramSpecification;  
-    FlexoRole individual as Individual conformTo Concept from basicOntologyi ;  
-  
-    @DropScheme    
-    Concept:DropConceptAtTopLevel(String name) {    
-      shape = typedDiagramModelSlot.DIAGRAM::AddShape {      
-        label = individual.name;      
-      };      
-      individual = basicOntologyi.AddOWLIndividual();    
-    }    
-  
-  }  
+use org.openflexo.technologyadapter.owl.OWLModelSlot as OWL;
+use org.openflexo.technologyadapter.diagram.TypedDiagramModelSlot as DIAGRAM;
 
-  @FlexoConcept  
-  public class IsARelationship {  
-  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:semanticRelation isA;  
-  
-    @LinkScheme    
-    IsARelationship:LinkTwoConceptByIsARelationShip() {    
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "is a";      
-      };      
-      isA = fromTarget.individual.semanticRelation = toTarget.individual;;    
-    }    
-  
-  }  
+import java.lang.String;
 
-  @FlexoConcept  
-  public class HasRelationship {  
-  
-    FlexoRole connector as ConnectorSpecification from DiagramSpecification;  
-    @ObjectPropertyStatementRole(cardinality=ZeroOne,readOnly=false)    
-    public Statement:has has;  
-  
-    @LinkScheme    
-    HasRelationship:LinkTwoConceptByHasRelationShip() {    
-      connector = AddConnector$AddConnectorImpl_$$_jvste0e_92 conformTo ConnectorSpecification from typedDiagramModelSlot {      
-        label = "has";      
-      };      
-      has = fromTarget.individual.has = toTarget.individual;;    
-    }    
-  
-  }  
+import org.openflexo.technologyadapter.owl.model.OWLOntology;
+import org.openflexo.technologyadapter.owl.model.OWLClass;
+import org.openflexo.technologyadapter.owl.model.OWLObjectProperty;
+import org.openflexo.technologyadapter.owl.model.ObjectPropertyStatement;
+import org.openflexo.technologyadapter.diagram.model.Diagram;
+import org.openflexo.technologyadapter.diagram.model.DiagramShape;
+import org.openflexo.technologyadapter.diagram.model.DiagramConnector;
+import org.openflexo.technologyadapter.diagram.metamodel.DiagramSpecification;
 
+import OWLOntology OWL_ONTOLOGY from ["http://www.w3.org/2002/07/owl"];
+import OWLClass THING from [OWL_ONTOLOGY:"Thing"];
+import OWLOntology BASIC_ONTOLOGY from ["http://www.openflexo.org/openflexo/ViewPoints/BasicOntology.owl"];
+import OWLObjectProperty SEMANTIC_RELATION from [BASIC_ONTOLOGY:"semanticRelation"];
+import OWLObjectProperty HAS from [BASIC_ONTOLOGY:"has"];
+
+import DiagramSpecification BASIC_ONTOLOGY_DIAGRAM_SPEC from [BASIC_ONTOLOGY_DIAGRAM_SPECIFICATION];
+import Diagram EXAMPLE_DIAGRAM from [BASIC_ONTOLOGY_DIAGRAM_SPECIFICATION + "/Animals.diagram"];
+import DiagramShape CONCEPT_SHAPE from [EXAMPLE_DIAGRAM:"SYL-21"];
+import DiagramConnector IS_A_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-22"];
+import DiagramConnector HAS_CONNECTOR from [EXAMPLE_DIAGRAM:"SYL-23"];
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification.fml")
+@Version("0.1")
+public model DiagramSpecification {
+
+	OWLOntology owl with OWLModelSlot(importedOntology=OWL_ONTOLOGY, isRequired=true);
+
+	Diagram diagram with TypedDiagram(
+		diagramSpecification=BASIC_ONTOLOGY_DIAGRAM_SPEC,
+		paletteElementBindings={
+			PaletteElementBinding:(call=new Concept::dropConceptAtTopLevel(), paletteElementId="http://www.openflexo.org/openflexo/ViewPoints/Basic/BasicOntologyEditor.fml/DiagramSpecification/DiagramSpecification.diagramspecification/BasicOntology.palette#Concept")
+		},
+		isRequired=true);
+
+	public concept Concept {
+
+		OWLIndividual individual with OWLIndividualRole(type=THING);
+		DiagramShape shape with ShapeRole(exampleLabel="label", metamodelElement=CONCEPT_SHAPE, label=individual.name);
+
+		@UI(
+			@TextField(value="name", label="name")
+		)
+		Concept dropConceptAtTopLevel(String name) with DropScheme() {
+			individual = OWL::AddOWLIndividual(ontologyClass=THING, individualName=parameters.name) in owl;
+			shape = DIAGRAM::AddShape(container=topLevel);
+		}
+	}
+
+	public concept IsARelationship {
+
+		ObjectPropertyStatement isA with ObjectPropertyStatementRole(objectProperty=SEMANTIC_RELATION);
+		DiagramConnector connector with ConnectorRole(exampleLabel="label", metamodelElement=IS_A_CONNECTOR, label="is a");
+
+		IsARelationship linkTwoConceptByIsARelationShip() with LinkScheme(fromType=Concept, toType=Concept) {
+			isA = OWL::AddObjectPropertyStatement(subject=fromTarget.individual, object=toTarget.individual) in owl;
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+		}
+	}
+
+	public concept HasRelationship {
+
+		ObjectPropertyStatement has with ObjectPropertyStatementRole(objectProperty=HAS);
+		DiagramConnector connector with ConnectorRole(exampleLabel="label", metamodelElement=HAS_CONNECTOR, label="has");
+
+		HasRelationship linkTwoConceptByHasRelationShip() with LinkScheme(fromType=Concept, toType=Concept) {
+			has = OWL::AddObjectPropertyStatement(subject=fromTarget.individual, object=toTarget.individual) in owl;
+			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
+		}
+	}
 }

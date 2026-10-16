@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Inspector id="0" align="left" borderTop="0" borderLeft="0" trackViewPortHeight="true" trackViewPortWidth="true" borderBottom="0" border="empty" sizeAdjustment="OriginalSize" layout="twocols" borderRight="0" controllerClassName="org.openflexo.inspector.FIBInspectorController" name="noneGRInspector">
+  <Label id="1" label="Type" align="left" constraints="twocols(expandHorizontally=false;expandVertically=false;location=left)" name="typeLabel" />
+  <TextField id="2" readOnly="true" data="&quot;Unclassified&quot;" constraints="twocols(expandHorizontally=true;expandVertically=false;location=right)" name="typeTextField" />
+  <Label id="3" label="name" align="left" constraints="twocols(expandHorizontally=false;expandVertically=false;location=left)" name="nameLabel" />
+  <TextField id="4" data="data.name" constraints="twocols(expandHorizontally=true;expandVertically=false;location=right)" name="nameTextField" />
+  <FIBVariable id="5" type="org.openflexo.foundation.fml.FlexoConceptInstanceType&lt;http://www.openflexo.org/test/PetriNet.prj/FreeModel.fml#NoneGR&gt;" name="data" />
+</Inspector>

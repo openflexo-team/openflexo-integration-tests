@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CAEXFile SchemaVersion="3.0" FileName="production-line.xml"
+          xmlns="http://www.dke.de/CAEX"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.dke.de/CAEX production-line.xsd">
+
+  <InstanceHierarchy Name="PackagingLine_L2">
+
+    <InternalElement ID="EQ-DEP-01" Name="Depalletizer">
+      <Attribute Name="Type" Value="Depalletizer"/>
+      <Attribute Name="NominalRate" Unit="u/h" Value="1200"/>
+      <Attribute Name="VibrationThreshold" Unit="mm/s" Value="6.0"/>
+      <Attribute Name="BearingTemperatureThreshold" Unit="°C" Value="70"/>
+      <ExternalInterface ID="EQ-DEP-01:OUT" Name="MaterialOut"/>
+    </InternalElement>
+
+    <InternalElement ID="EQ-REM-02" Name="RotaryFiller">
+      <Attribute Name="Type" Value="Filler"/>
+      <Attribute Name="NominalRate" Unit="u/h" Value="1100"/>
+      <Attribute Name="VibrationThreshold" Unit="mm/s" Value="5.0"/>
+      <Attribute Name="BearingTemperatureThreshold" Unit="°C" Value="65"/>
+      <ExternalInterface ID="EQ-REM-02:IN" Name="MaterialIn"/>
+      <ExternalInterface ID="EQ-REM-02:OUT" Name="MaterialOut"/>
+    </InternalElement>
+
+    <InternalElement ID="EQ-CONV-03" Name="TransferConveyor">
+      <Attribute Name="Type" Value="Conveyor"/>
+      <Attribute Name="NominalRate" Unit="u/h" Value="950"/>
+      <Attribute Name="VibrationThreshold" Unit="mm/s" Value="4.5"/>
+      <Attribute Name="BearingTemperatureThreshold" Unit="°C" Value="60"/>
+      <ExternalInterface ID="EQ-CONV-03:IN" Name="MaterialIn"/>
+      <ExternalInterface ID="EQ-CONV-03:OUT" Name="MaterialOut"/>
+    </InternalElement>
+
+    <InternalElement ID="EQ-ETI-04A" Name="LabellerA">
+      <Attribute Name="Type" Value="Labeller"/>
+      <Attribute Name="NominalRate" Unit="u/h" Value="600"/>
+      <Attribute Name="VibrationThreshold" Unit="mm/s" Value="7.0"/>
+      <Attribute Name="BearingTemperatureThreshold" Unit="°C" Value="75"/>
+      <ExternalInterface ID="EQ-ETI-04A:IN" Name="MaterialIn"/>
+      <ExternalInterface ID="EQ-ETI-04A:OUT" Name="MaterialOut"/>
+    </InternalElement>
+
+    <InternalElement ID="EQ-ETI-04B" Name="LabellerB">
+      <Attribute Name="Type" Value="Labeller"/>
+      <Attribute Name="NominalRate" Unit="u/h" Value="600"/>
+      <Attribute Name="VibrationThreshold" Unit="mm/s" Value="7.0"/>
+      <Attribute Name="BearingTemperatureThreshold" Unit="°C" Value="75"/>
+      <ExternalInterface ID="EQ-ETI-04B:IN" Name="MaterialIn"/>
+      <ExternalInterface ID="EQ-ETI-04B:OUT" Name="MaterialOut"/>
+    </InternalElement>
+
+    <InternalElement ID="EQ-ENC-05" Name="CasePacker">
+      <Attribute Name="Type" Value="CasePacker"/>
+      <Attribute Name="NominalRate" Unit="u/h" Value="1000"/>
+      <Attribute Name="VibrationThreshold" Unit="mm/s" Value="5.5"/>
+      <Attribute Name="BearingTemperatureThreshold" Unit="°C" Value="70"/>
+      <ExternalInterface ID="EQ-ENC-05:IN" Name="MaterialIn"/>
+    </InternalElement>
+
+    <InternalLink Name="L1" RefPartnerSideA="EQ-DEP-01:OUT"  RefPartnerSideB="EQ-REM-02:IN"/>
+    <InternalLink Name="L2" RefPartnerSideA="EQ-REM-02:OUT"  RefPartnerSideB="EQ-CONV-03:IN"/>
+    <InternalLink Name="L3" RefPartnerSideA="EQ-CONV-03:OUT" RefPartnerSideB="EQ-ETI-04A:IN"/>
+    <InternalLink Name="L4" RefPartnerSideA="EQ-CONV-03:OUT" RefPartnerSideB="EQ-ETI-04B:IN"/>
+    <InternalLink Name="L5" RefPartnerSideA="EQ-ETI-04A:OUT" RefPartnerSideB="EQ-ENC-05:IN"/>
+    <InternalLink Name="L6" RefPartnerSideA="EQ-ETI-04B:OUT" RefPartnerSideB="EQ-ENC-05:IN"/>
+
+  </InstanceHierarchy>
+
+</CAEXFile>

@@ -1,0 +1,22 @@
+// MultiProcessChallenge - a process metamodel (ProcessType / TaskType / Gateway / Actor / Artifact)
+// and its instantiation as running processes, migrated out of the legacy MULTIProcessChallenge.prj.
+//
+// Self-contained use-case project: it carries BOTH its resource center (src/main/resources,
+// declared by META-INF/resourceCenters with base URI http://openflexo.org/multi-process-challenge)
+// AND the tests that exercise it (src/test/java). No separate -rc project.
+//
+// Phase 1 covers the model layer: MetaModel, its AcmeMetaModel specialization and the stored FML-RT
+// instances - all pure FML, no model slot. Phase 2 adds the diagrammatic editors (ProcessEditor /
+// ProcessTypeEditor and their diagram specifications), which mount a TypedDiagramModelSlot: hence
+// diagramConnector() below.
+//
+// fml-cli is a test dependency because the tests are FML-scripts.
+
+dependencies {
+    testImplementation testUtils()
+    testImplementation flexoFoundation()
+    testImplementation flexoFoundationTest()
+    testImplementation fmlCli()
+    testImplementation fmlCliTest()
+    testImplementation diagramConnector()
+}

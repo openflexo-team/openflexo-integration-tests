@@ -1,0 +1,51 @@
+// TestCityMappingGeneration - the other half of a mapping: not only observing the correspondence,
+// but repairing it. A city known to one model only is federated with a null counterpart; the two
+// synchronizeModelXFromModelY() behaviours walk those half-empty federations and create the
+// missing individual on the other side.
+//
+// New coverage: the JUnit tests load these two behaviours and check the shape of their control
+// graph (TestCityMappingBindingModel), but none of them ever runs one.
+
+vm = load -r ["http://www.thalesgroup.com/openflexo/emf/CityMapping/Mapping.fml"];
+assert vm != null;
+city1 = load -r ["http://openflexo.org/city-mapping/EMF/Model/city1/my.city1"];
+city2 = load -r ["http://openflexo.org/city-mapping/EMF/Model/city2/first.city2"];
+
+service ResourceCenterService add_temp_rc;
+mapping = new Mapping::defaultCreationScheme(city1.resource, city2.resource) with (name="cityMapping");
+mapping.synchronization();
+
+// Starting point: Paris and Bordeaux are unknown to city2, Lannilis is unknown to city1.
+assert mapping.allCities().size == 5;
+assert mapping.matchedCities().size == 2;
+assert mapping.citiesMissingInModel2().size == 2;
+assert mapping.citiesMissingInModel1().size == 1;
+
+// --- Generate the missing city2 individuals ---
+mapping.synchronizeModel2FromModel1();
+assert mapping.citiesMissingInModel2().size == 0;
+assert mapping.matchedCities().size == 4;
+// The generation fills an empty foot, it never federates a new city.
+assert mapping.allCities().size == 5;
+
+paris = mapping.cityOfModel1Named("Paris");
+assert paris != null;
+assert paris.cityInModel2 != null;
+
+// --- And the other way round: Lannilis gets its city1 individual ---
+mapping.synchronizeModel1FromModel2();
+assert mapping.citiesMissingInModel1().size == 0;
+assert mapping.matchedCities().size == 5;
+assert mapping.allCities().size == 5;
+
+lannilis = mapping.cityOfModel2Named("Lannilis");
+assert lannilis != null;
+assert lannilis.cityInModel1 != null;
+
+// The generated counterpart is an EMPTY individual: generateModelXFromModelY() creates the object
+// through EMF::AddEMFObject, it does not carry the name over. Asserted so that the day the demo
+// propagates the name, this test says so.
+assert paris.cityInModel2.name == null;
+assert lannilis.cityInModel1.name == null;
+
+log "Test PASSED: CityMappingGeneration - every federated city now has both feet";

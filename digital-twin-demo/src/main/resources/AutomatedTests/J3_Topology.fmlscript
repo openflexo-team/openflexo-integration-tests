@@ -1,0 +1,56 @@
+// J3 - Topology as instantiated MaterialLink objects, and what it derives: isCritical, isBottleneck.
+// Expected business values (specification-demo.md section 4):
+//   entry = DEP01, exit = ENC05
+//   isCritical TRUE for DEP01, REM02, CONV03, ENC05
+//   isCritical FALSE for ETI04A and ETI04B (parallel branch: each bypassable by the other)
+//   isBottleneck: CONV03 (minimal nominal cadence 950 among the critical equipments)
+
+vm = load -r ["http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml"];
+xmlRes = load -r ["http://openflexo.org/digital-twin-demo/production-line.xml"];
+xlsxRes = load -r ["http://openflexo.org/digital-twin-demo/maintenance.xlsx"];
+service ResourceCenterService add_temp_rc;
+line = new ProductionLine(xmlRes.resource, xlsxRes.resource) with (name="lineL2");
+
+// --- The graph is made of objects, not of parsed strings ---
+assert line.getMaterialLinks().size == 6;
+
+// The ends of a MaterialLink are Equipment instances, not parsed strings. NB: a 'select' returns the
+// instances in no particular order, so navigate the graph rather than index into the list.
+dep = line.getEquipmentByCode("DEP01");
+assert dep.successors.size == 1;
+assert dep.successors.get(0).code == "REM02";
+
+conv = line.getEquipmentByCode("CONV03");
+// CONV03 feeds BOTH labellers: this is the fork that makes ETI04A dispensable.
+assert conv.successors.size == 2;
+assert conv.predecessors.size == 1;
+assert conv.predecessors.get(0).code == "REM02";
+
+// Entry and exit are derived, not declared
+log "entry=" + line.getEntry().code + " sortie=" + line.getExit().code;
+assert line.getEntry().code == "DEP01";
+assert line.getExit().code == "ENC05";
+assert line.getEntry().isEntry == true;
+assert conv.isEntry == false;
+
+// isCritical - derived from the topology, never declared anywhere
+assert dep.isCritical == true;
+assert line.getEquipmentByCode("REM02").isCritical == true;
+assert conv.isCritical == true;
+assert line.getEquipmentByCode("ETI04A").isCritical == false;
+assert line.getEquipmentByCode("ETI04B").isCritical == false;
+assert line.getEquipmentByCode("ENC05").isCritical == true;
+
+// isBottleneck - minimal nominal cadence among the critical equipments = CONV03 (950)
+log "cadences DEP01=" + dep.nominalRate
+	+ " REM02=" + line.getEquipmentByCode("REM02").nominalRate
+	+ " CONV03=" + conv.nominalRate
+	+ " ENC05=" + line.getEquipmentByCode("ENC05").nominalRate;
+log "bottleneck=" + line.getBottleneck().code;
+assert conv.nominalRate == 950.0;
+assert line.getBottleneck().code == "CONV03";
+assert conv.isBottleneck == true;
+assert dep.isBottleneck == false;
+assert line.getEquipmentByCode("ETI04A").isBottleneck == false;
+
+log "Test PASSED: J3 - MaterialLink graph, isCritical + isBottleneck (CONV03 critical bottleneck, 950)";

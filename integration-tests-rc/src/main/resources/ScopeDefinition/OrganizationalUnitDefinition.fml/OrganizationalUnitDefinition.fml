@@ -1,8 +1,12 @@
-
 /**
- * 
- * @version 0.1
+ * OrganizationalUnitDefinition - defines organizational units, their missions, objectives,
+ * positions and tasks.
+ *
+ * Container view point: it only holds the DiagramSpecification virtual model.
+ * Migrated from the deprecated .fml.xml serialization.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl")
-public class OrganizationalUnitDefinition {
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/ScopeDefinition/OrganizationalUnitDefinition.owl")
+@Version("0.1")
+public model OrganizationalUnitDefinition {
 }

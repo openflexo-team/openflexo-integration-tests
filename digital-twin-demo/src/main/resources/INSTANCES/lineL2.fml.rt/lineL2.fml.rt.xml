@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FMLRTVirtualModelInstance id="0" virtualModelURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml" modelVersion="1.0" title="lineL2" version="0.1" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml" userID="FLX" flexoID="1">
+  <FlexoConceptInstance id="1" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#Equipment" userID="FLX" flexoID="6">
+    <XMLActorReference id="2" objectURI="xmlpath:/0/1" roleName="xmlElement" userID="FLX" flexoID="8" />
+    <XLSObjectActorReference id="3" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#AssetRecord" key="5" roleName="assetRecord" userID="FLX" flexoID="9" />
+    <XLSObjectActorReference id="4" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="2" roleName="readings" userID="FLX" flexoID="10" />
+    <XLSObjectActorReference id="5" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="9" roleName="readings" userID="FLX" flexoID="11" />
+    <XLSObjectActorReference id="6" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="15" roleName="readings" userID="FLX" flexoID="12" />
+    <XLSObjectActorReference id="7" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="17" roleName="readings" userID="FLX" flexoID="13" />
+    <XLSObjectActorReference id="8" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="24" roleName="readings" userID="FLX" flexoID="14" />
+    <XLSObjectActorReference id="9" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="30" roleName="readings" userID="FLX" flexoID="15" />
+    <XLSObjectActorReference id="10" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="32" roleName="readings" userID="FLX" flexoID="16" />
+    <XLSObjectActorReference id="11" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="39" roleName="readings" userID="FLX" flexoID="17" />
+    <XLSObjectActorReference id="12" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="45" roleName="readings" userID="FLX" flexoID="18" />
+    <XLSObjectActorReference id="13" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="48" roleName="readings" userID="FLX" flexoID="19" />
+    <XLSObjectActorReference id="14" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Intervention" key="4" roleName="interventions" userID="FLX" flexoID="20" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="15" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#Equipment" userID="FLX" flexoID="4">
+    <XMLActorReference id="16" objectURI="xmlpath:/0/2" roleName="xmlElement" userID="FLX" flexoID="21" />
+    <XLSObjectActorReference id="17" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#AssetRecord" key="6" roleName="assetRecord" userID="FLX" flexoID="22" />
+    <XLSObjectActorReference id="18" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="3" roleName="readings" userID="FLX" flexoID="23" />
+    <XLSObjectActorReference id="19" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="6" roleName="readings" userID="FLX" flexoID="24" />
+    <XLSObjectActorReference id="20" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="10" roleName="readings" userID="FLX" flexoID="25" />
+    <XLSObjectActorReference id="21" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="13" roleName="readings" userID="FLX" flexoID="26" />
+    <XLSObjectActorReference id="22" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="18" roleName="readings" userID="FLX" flexoID="27" />
+    <XLSObjectActorReference id="23" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="21" roleName="readings" userID="FLX" flexoID="28" />
+    <XLSObjectActorReference id="24" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="25" roleName="readings" userID="FLX" flexoID="29" />
+    <XLSObjectActorReference id="25" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="28" roleName="readings" userID="FLX" flexoID="30" />
+    <XLSObjectActorReference id="26" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="33" roleName="readings" userID="FLX" flexoID="31" />
+    <XLSObjectActorReference id="27" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="36" roleName="readings" userID="FLX" flexoID="32" />
+    <XLSObjectActorReference id="28" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="40" roleName="readings" userID="FLX" flexoID="33" />
+    <XLSObjectActorReference id="29" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="43" roleName="readings" userID="FLX" flexoID="34" />
+    <XLSObjectActorReference id="30" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="49" roleName="readings" userID="FLX" flexoID="35" />
+    <XLSObjectActorReference id="31" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="52" roleName="readings" userID="FLX" flexoID="36" />
+    <XLSObjectActorReference id="32" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Intervention" key="1" roleName="interventions" userID="FLX" flexoID="37" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="33" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#Equipment" userID="FLX" flexoID="5">
+    <XMLActorReference id="34" objectURI="xmlpath:/0/4" roleName="xmlElement" userID="FLX" flexoID="38" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="35" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#Equipment" userID="FLX" flexoID="3">
+    <XMLActorReference id="36" objectURI="xmlpath:/0/5" roleName="xmlElement" userID="FLX" flexoID="39" />
+    <XLSObjectActorReference id="37" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#AssetRecord" key="8" roleName="assetRecord" userID="FLX" flexoID="40" />
+    <XLSObjectActorReference id="38" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="5" roleName="readings" userID="FLX" flexoID="41" />
+    <XLSObjectActorReference id="39" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="12" roleName="readings" userID="FLX" flexoID="42" />
+    <XLSObjectActorReference id="40" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="20" roleName="readings" userID="FLX" flexoID="43" />
+    <XLSObjectActorReference id="41" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="27" roleName="readings" userID="FLX" flexoID="44" />
+    <XLSObjectActorReference id="42" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="35" roleName="readings" userID="FLX" flexoID="45" />
+    <XLSObjectActorReference id="43" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="42" roleName="readings" userID="FLX" flexoID="46" />
+    <XLSObjectActorReference id="44" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="51" roleName="readings" userID="FLX" flexoID="47" />
+    <XLSObjectActorReference id="45" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Intervention" key="5" roleName="interventions" userID="FLX" flexoID="48" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="46" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#Equipment" userID="FLX" flexoID="7">
+    <XMLActorReference id="47" objectURI="xmlpath:/0/0" roleName="xmlElement" userID="FLX" flexoID="49" />
+    <XLSObjectActorReference id="48" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#AssetRecord" key="4" roleName="assetRecord" userID="FLX" flexoID="50" />
+    <XLSObjectActorReference id="49" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="1" roleName="readings" userID="FLX" flexoID="51" />
+    <XLSObjectActorReference id="50" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="7" roleName="readings" userID="FLX" flexoID="52" />
+    <XLSObjectActorReference id="51" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="8" roleName="readings" userID="FLX" flexoID="53" />
+    <XLSObjectActorReference id="52" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="16" roleName="readings" userID="FLX" flexoID="54" />
+    <XLSObjectActorReference id="53" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="22" roleName="readings" userID="FLX" flexoID="55" />
+    <XLSObjectActorReference id="54" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="23" roleName="readings" userID="FLX" flexoID="56" />
+    <XLSObjectActorReference id="55" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="31" roleName="readings" userID="FLX" flexoID="57" />
+    <XLSObjectActorReference id="56" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="37" roleName="readings" userID="FLX" flexoID="58" />
+    <XLSObjectActorReference id="57" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="38" roleName="readings" userID="FLX" flexoID="59" />
+    <XLSObjectActorReference id="58" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="47" roleName="readings" userID="FLX" flexoID="60" />
+    <XLSObjectActorReference id="59" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="53" roleName="readings" userID="FLX" flexoID="61" />
+    <XLSObjectActorReference id="60" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Intervention" key="2" roleName="interventions" userID="FLX" flexoID="62" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="61" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#Equipment" userID="FLX" flexoID="2">
+    <XMLActorReference id="62" objectURI="xmlpath:/0/3" roleName="xmlElement" userID="FLX" flexoID="63" />
+    <XLSObjectActorReference id="63" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#AssetRecord" key="7" roleName="assetRecord" userID="FLX" flexoID="64" />
+    <XLSObjectActorReference id="64" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="4" roleName="readings" userID="FLX" flexoID="65" />
+    <XLSObjectActorReference id="65" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="11" roleName="readings" userID="FLX" flexoID="66" />
+    <XLSObjectActorReference id="66" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="14" roleName="readings" userID="FLX" flexoID="67" />
+    <XLSObjectActorReference id="67" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="19" roleName="readings" userID="FLX" flexoID="68" />
+    <XLSObjectActorReference id="68" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="26" roleName="readings" userID="FLX" flexoID="69" />
+    <XLSObjectActorReference id="69" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="29" roleName="readings" userID="FLX" flexoID="70" />
+    <XLSObjectActorReference id="70" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="34" roleName="readings" userID="FLX" flexoID="71" />
+    <XLSObjectActorReference id="71" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="41" roleName="readings" userID="FLX" flexoID="72" />
+    <XLSObjectActorReference id="72" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="44" roleName="readings" userID="FLX" flexoID="73" />
+    <XLSObjectActorReference id="73" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Reading" key="50" roleName="readings" userID="FLX" flexoID="74" />
+    <XLSObjectActorReference id="74" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Intervention" key="3" roleName="interventions" userID="FLX" flexoID="75" />
+    <XLSObjectActorReference id="75" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/MaintenanceRecords.fml#Intervention" key="6" roleName="interventions" userID="FLX" flexoID="76" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="76" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#MaterialLink" userID="FLX" flexoID="80">
+    <XMLActorReference id="77" objectURI="xmlpath:/0/10" roleName="xmlLink" userID="FLX" flexoID="77" />
+    <ModelObjectActorReference id="78" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_2" roleName="source" userID="FLX" flexoID="78" />
+    <ModelObjectActorReference id="79" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_3" roleName="target" userID="FLX" flexoID="79" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="80" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#MaterialLink" userID="FLX" flexoID="84">
+    <XMLActorReference id="81" objectURI="xmlpath:/0/8" roleName="xmlLink" userID="FLX" flexoID="81" />
+    <ModelObjectActorReference id="82" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_4" roleName="source" userID="FLX" flexoID="82" />
+    <ModelObjectActorReference id="83" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_2" roleName="target" userID="FLX" flexoID="83" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="84" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#MaterialLink" userID="FLX" flexoID="88">
+    <XMLActorReference id="85" objectURI="xmlpath:/0/11" roleName="xmlLink" userID="FLX" flexoID="85" />
+    <ModelObjectActorReference id="86" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_5" roleName="source" userID="FLX" flexoID="86" />
+    <ModelObjectActorReference id="87" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_3" roleName="target" userID="FLX" flexoID="87" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="88" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#MaterialLink" userID="FLX" flexoID="92">
+    <XMLActorReference id="89" objectURI="xmlpath:/0/7" roleName="xmlLink" userID="FLX" flexoID="89" />
+    <ModelObjectActorReference id="90" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_6" roleName="source" userID="FLX" flexoID="90" />
+    <ModelObjectActorReference id="91" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_4" roleName="target" userID="FLX" flexoID="91" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="92" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#MaterialLink" userID="FLX" flexoID="96">
+    <XMLActorReference id="93" objectURI="xmlpath:/0/9" roleName="xmlLink" userID="FLX" flexoID="93" />
+    <ModelObjectActorReference id="94" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_4" roleName="source" userID="FLX" flexoID="94" />
+    <ModelObjectActorReference id="95" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_5" roleName="target" userID="FLX" flexoID="95" />
+  </FlexoConceptInstance>
+  <FlexoConceptInstance id="96" flexoConceptURI="http://openflexo.org/digital-twin-demo/FML/ProductionLine.fml#MaterialLink" userID="FLX" flexoID="100">
+    <XMLActorReference id="97" objectURI="xmlpath:/0/6" roleName="xmlLink" userID="FLX" flexoID="97" />
+    <ModelObjectActorReference id="98" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_7" roleName="source" userID="FLX" flexoID="98" />
+    <ModelObjectActorReference id="99" objectReference="http://openflexo.org/digital-twin-demo/lineL2.fml.rt#FLX_6" roleName="target" userID="FLX" flexoID="99" />
+  </FlexoConceptInstance>
+  <TypeAwareModelSlotInstance id="100" modelURI="http://openflexo.org/digital-twin-demo/production-line.xml" modelSlotName="ligneXml" roleName="ligneXml" userID="FLX" flexoID="101" />
+  <ReflectedFMLRTModelSlotInstance id="101" reflectedResourceURI="http://openflexo.org/digital-twin-demo/maintenance.xlsx" modelSlotName="maintenance" roleName="maintenance" userID="FLX" flexoID="102" />
+</FMLRTVirtualModelInstance>

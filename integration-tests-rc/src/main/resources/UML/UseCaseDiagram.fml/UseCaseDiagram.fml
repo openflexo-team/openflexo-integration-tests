@@ -1,8 +1,11 @@
-
 /**
- * 
- * @version 0.1
+ * UseCaseDiagram - UML use case diagram editor.
+ *
+ * Container view point: it only holds the DiagramSpecification virtual model.
+ * Migrated from the deprecated .fml.xml serialization.
  */
-@VirtualModel(uri="http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl")
-public class UseCaseDiagram {
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/UML/UseCaseDiagram.owl")
+@Version("0.1")
+public model UseCaseDiagram {
 }

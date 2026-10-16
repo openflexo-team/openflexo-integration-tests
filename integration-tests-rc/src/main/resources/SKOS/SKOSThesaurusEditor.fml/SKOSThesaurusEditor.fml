@@ -1,0 +1,11 @@
+/**
+ * SKOSThesaurusEditor - a thesaurus editor over the SKOS core vocabulary.
+ *
+ * Container view point: it only holds the DiagramSpecification virtual model.
+ * Migrated from the deprecated .fml.xml serialization.
+ */
+
+@URI("http://www.openflexo.org/openflexo/ViewPoints/SKOS/SKOSThesaurusEditor.owl")
+@Version("0.1")
+public model SKOSThesaurusEditor {
+}
