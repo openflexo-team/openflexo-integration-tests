@@ -78,8 +78,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.emf.fml.editionaction.SelectEMFObjectIndividual.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.AddFlexoConceptInstance.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.SelectFlexoConceptInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.ontology.fml.editionaction.SelectIndividual.class) != null);
@@ -89,8 +87,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.DeleteFlexoConceptInstance.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.AbstractCreationScheme.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.editionaction.AddToListAction.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.AddFlexoConceptInstanceParameter.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
@@ -129,8 +125,6 @@ public class TestFMLValidationModelInIntegrationContext extends OpenflexoTestCas
 				.getModelEntity(org.openflexo.foundation.fml.FlexoBehaviourParameter.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.foundation.fml.rt.editionaction.DeleteFlexoConceptInstanceParameter.class) != null);
-		assertTrue(validationModel.getValidationModelFactory().getModelContext()
-				.getModelEntity(org.openflexo.foundation.fml.editionaction.RemoveFromListAction.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
 				.getModelEntity(org.openflexo.technologyadapter.excel.fml.editionaction.AddExcelRow.class) != null);
 		assertTrue(validationModel.getValidationModelFactory().getModelContext()
