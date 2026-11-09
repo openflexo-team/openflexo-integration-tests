@@ -230,13 +230,13 @@ public class TestEMFCityMappingView extends OpenflexoProjectAtRunTimeTestCase {
 				null, editor);
 		DropScheme cityDropScheme = cityDropSchemes.get(0);
 		cityDropSchemeAction.setDropScheme(cityDropScheme);
-		FlexoBehaviourParameter cityNameParameter = cityDropScheme.getParameter("name");
+		FlexoBehaviourArgument cityNameParameter = cityDropScheme.getParameter("name");
 		assertNotNull(cityNameParameter);
 		cityDropSchemeAction.setParameterValue(cityNameParameter, "Brest");
-		FlexoBehaviourParameter cityCity1UriParameter = cityDropScheme.getParameter("city1Uri");
+		FlexoBehaviourArgument cityCity1UriParameter = cityDropScheme.getParameter("city1Uri");
 		assertNotNull(cityCity1UriParameter);
 		cityDropSchemeAction.setParameterValue(cityCity1UriParameter, "city1");
-		FlexoBehaviourParameter cityCity2UriParameter = cityDropScheme.getParameter("city2Uri");
+		FlexoBehaviourArgument cityCity2UriParameter = cityDropScheme.getParameter("city2Uri");
 		assertNotNull(cityCity2UriParameter);
 		cityDropSchemeAction.setParameterValue(cityCity2UriParameter, "city2");
 		assertEquals("Brest", cityDropSchemeAction.getParameterValue(cityNameParameter));

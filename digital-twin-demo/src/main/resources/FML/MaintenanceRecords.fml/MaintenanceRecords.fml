@@ -36,7 +36,7 @@ public model MaintenanceRecords {
 		@Property(col="2")
 		String quantity;
 		// Primitive 'double', not the wrapper Double: only Java primitives (and String/Date) map to a
-		// PrimitiveRole, which is what the reflected cell read/write binds to (a wrapper -> JavaRole -> null).
+		// PrimitiveRole, which is what the reflected cell read/write binds to (a wrapper -> FMLVariable -> null).
 		@Property(col="3")
 		double value;
 		@Property(col="4")
