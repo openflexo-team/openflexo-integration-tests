@@ -144,9 +144,8 @@ public model Mapping {
 		// roles and nothing else. Unfederating is therefore all that happens here, and neither EMF
 		// model is ever written to; TestCityMappingUnfederation.fmlscript asserts precisely that,
 		// and fails both if this clause turns destructive and if it stops running at all.
-		// Naming the scheme ("unmatched: someScheme();") would remove the question altogether, but
-		// the parser accepts that form and then IGNORES it (see EndMatchActionNode), leaving the
-		// end match a silent no-op - delete() is the only clause that actually runs.
+		// Naming the scheme ("unmatched: someScheme();") would remove the question altogether: that
+		// form runs the scheme named (CORE-D-2); delete() is the default deletion scheme.
 		end match Appartment in appartmentMatching unmatched: delete();
 		end match Mansion in mansionMatching unmatched: delete();
 		end match Resident in residentMatching unmatched: delete();
