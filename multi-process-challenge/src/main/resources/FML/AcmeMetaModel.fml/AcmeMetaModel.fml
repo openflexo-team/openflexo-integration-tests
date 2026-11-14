@@ -136,7 +136,7 @@ public model AcmeMetaModel extends MetaModel {
 		}
 
 		public Artifact newArtifact(String name) {
-			SoftwareEngineeringArtifact returned = new SoftwareEngineeringArtifact(parameters.name);
+			SoftwareEngineeringArtifact returned = container.new SoftwareEngineeringArtifact(parameters.name);
 			returned.types.add(this);
 			return returned;
 		}
@@ -152,7 +152,7 @@ public model AcmeMetaModel extends MetaModel {
 		}
 
 		public Artifact newArtifact(String name) {
-			Code returned = new Code(parameters.name);
+			Code returned = container.new Code(parameters.name);
 			returned.types.add(this);
 			return returned;
 		}
