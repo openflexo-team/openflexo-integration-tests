@@ -360,7 +360,7 @@ public model MetaModel {
 
 		public TaskType getTaskType(String name) {
 			for (TaskType taskType : taskTypes) {
-				if (taskType.name == parameters.name) {
+				if (taskType != null && taskType.name == parameters.name) {
 					return taskType;
 				}
 			}

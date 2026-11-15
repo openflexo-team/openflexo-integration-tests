@@ -203,11 +203,11 @@ public model Mapping {
 	}
 
 	public City cityOfModel1Named(String cityName) {
-		return select unique City from this where (selected.cityInModel1.name == parameters.cityName);
+		return select unique City from this where (selected.cityInModel1 != null && selected.cityInModel1.name == parameters.cityName);
 	}
 
 	public City cityOfModel2Named(String cityName) {
-		return select unique City from this where (selected.cityInModel2.name == parameters.cityName);
+		return select unique City from this where (selected.cityInModel2 != null && selected.cityInModel2.name == parameters.cityName);
 	}
 
 	// House is abstract: this returns the Appartment and Mansion instances together.
