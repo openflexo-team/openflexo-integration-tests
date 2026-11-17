@@ -100,8 +100,8 @@ public model DiagramSpecification {
 		)
 		BOTCompany dropBOTCompanyAtTopLevel(String companyName="My Company", required String companyURI)
 				with DropScheme(skipConfirmationPanel=false) {
-			company = OWL::AddOWLIndividual(ontologyClass=BOT_COMPANY, individualName=parameters.companyURI) in basicOrg;
-			OWL::AddDataPropertyStatement(subject=company, value=parameters.companyName, dataProperty=COMPANY_NAME) in basicOrg;
+			company = OWL::AddOWLIndividual(ontologyClass=BOT_COMPANY, individualName=companyURI) in basicOrg;
+			OWL::AddDataPropertyStatement(subject=company, value=companyName, dataProperty=COMPANY_NAME) in basicOrg;
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
 	}
@@ -117,8 +117,8 @@ public model DiagramSpecification {
 		)
 		BOTDepartment dropBOTDepartmentInBOTCompany(String departmentName="My Department", required String departmentURI)
 				with DropScheme(targetType=BOTCompany) {
-			department = OWL::AddOWLIndividual(ontologyClass=BOT_DEPARTMENT, individualName=parameters.departmentURI) in basicOrg;
-			OWL::AddDataPropertyStatement(subject=department, value=parameters.departmentName, dataProperty=NAME) in basicOrg;
+			department = OWL::AddOWLIndividual(ontologyClass=BOT_DEPARTMENT, individualName=departmentURI) in basicOrg;
+			OWL::AddDataPropertyStatement(subject=department, value=departmentName, dataProperty=NAME) in basicOrg;
 			OWL::AddObjectPropertyStatement(subject=department, object=target.company, objectProperty=IS_CONTAINED_IN) in basicOrg;
 			shape = DIAGRAM::AddShape(container=target.shape);
 		}
@@ -135,8 +135,8 @@ public model DiagramSpecification {
 		)
 		BOTSubDepartment dropBOTSubDepartmentInBOTDepartment(String subDepartmentName="My sub-department",
 				required String subDepartmentURI) with DropScheme(targetType=BOTDepartment, skipConfirmationPanel=false) {
-			subDepartment = OWL::AddOWLIndividual(ontologyClass=BOT_SUB_DEPARTMENT, individualName=parameters.subDepartmentURI) in basicOrg;
-			OWL::AddDataPropertyStatement(subject=subDepartment, value=parameters.subDepartmentName, dataProperty=NAME) in basicOrg;
+			subDepartment = OWL::AddOWLIndividual(ontologyClass=BOT_SUB_DEPARTMENT, individualName=subDepartmentURI) in basicOrg;
+			OWL::AddDataPropertyStatement(subject=subDepartment, value=subDepartmentName, dataProperty=NAME) in basicOrg;
 			OWL::AddObjectPropertyStatement(subject=subDepartment, object=target.department, objectProperty=IS_CONTAINED_IN) in basicOrg;
 			shape = DIAGRAM::AddShape(container=target.shape);
 		}
@@ -164,40 +164,40 @@ public model DiagramSpecification {
 				Boolean isManager=false, Boolean isHeadOfOrganization=false, Boolean assignPerson=false,
 				String employeeFirstName, String employeeLastName, required String personURI)
 				with DropScheme(targetType=BOTDepartment, skipConfirmationPanel=false) {
-			if (parameters.isManager == true) {
-				employeeAsManager = OWL::AddOWLIndividual(ontologyClass=BOT_MANAGER, individualName=parameters.employeeURI) in basicOrg;
-				OWL::AddDataPropertyStatement(subject=employeeAsManager, value=parameters.roleName, dataProperty=ROLE_NAME) in basicOrg;
+			if (isManager == true) {
+				employeeAsManager = OWL::AddOWLIndividual(ontologyClass=BOT_MANAGER, individualName=employeeURI) in basicOrg;
+				OWL::AddDataPropertyStatement(subject=employeeAsManager, value=roleName, dataProperty=ROLE_NAME) in basicOrg;
 				OWL::AddObjectPropertyStatement(subject=employeeAsManager, object=target.department, objectProperty=WORKS_IN) in basicOrg;
-				if (parameters.isHeadOfOrganization == true) {
+				if (isHeadOfOrganization == true) {
 					OWL::AddObjectPropertyStatement(subject=employeeAsManager, object=target.department, objectProperty=IS_HEAD_OF) in basicOrg;
 				}
-				if (parameters.assignPerson == true) {
+				if (assignPerson == true) {
 					OWL::AddObjectPropertyStatement(subject=employeeAsManager, object=person, objectProperty=JOB_PERFORMED_BY) in basicOrg;
 				}
 			}
-			if (parameters.isManager == false) {
-				employeeAsWorker = OWL::AddOWLIndividual(ontologyClass=BOT_WORKER, individualName=parameters.employeeURI) in basicOrg;
-				OWL::AddDataPropertyStatement(subject=employeeAsWorker, value=parameters.roleName, dataProperty=ROLE_NAME) in basicOrg;
+			if (isManager == false) {
+				employeeAsWorker = OWL::AddOWLIndividual(ontologyClass=BOT_WORKER, individualName=employeeURI) in basicOrg;
+				OWL::AddDataPropertyStatement(subject=employeeAsWorker, value=roleName, dataProperty=ROLE_NAME) in basicOrg;
 				OWL::AddObjectPropertyStatement(subject=employeeAsWorker, object=target.department, objectProperty=WORKS_IN) in basicOrg;
-				if (parameters.assignPerson == true) {
+				if (assignPerson == true) {
 					OWL::AddObjectPropertyStatement(subject=employeeAsWorker, object=person, objectProperty=JOB_PERFORMED_BY) in basicOrg;
 				}
 			}
-			if (parameters.assignPerson == true) {
-				person = OWL::AddOWLIndividual(ontologyClass=BOT_PERSON, individualName=parameters.personURI) in basicOrg;
-				OWL::AddDataPropertyStatement(subject=person, value=parameters.employeeFirstName, dataProperty=PERSON_FIRST_NAME) in basicOrg;
-				OWL::AddDataPropertyStatement(subject=person, value=parameters.employeeLastName, dataProperty=PERSON_NAME) in basicOrg;
-				if (parameters.isManager == true) {
+			if (assignPerson == true) {
+				person = OWL::AddOWLIndividual(ontologyClass=BOT_PERSON, individualName=personURI) in basicOrg;
+				OWL::AddDataPropertyStatement(subject=person, value=employeeFirstName, dataProperty=PERSON_FIRST_NAME) in basicOrg;
+				OWL::AddDataPropertyStatement(subject=person, value=employeeLastName, dataProperty=PERSON_NAME) in basicOrg;
+				if (isManager == true) {
 					OWL::AddObjectPropertyStatement(subject=person, object=employeeAsManager, objectProperty=WORKS_AS) in basicOrg;
 				}
-				if (parameters.isManager == false) {
+				if (isManager == false) {
 					OWL::AddObjectPropertyStatement(subject=person, object=employeeAsWorker, objectProperty=WORKS_AS) in basicOrg;
 				}
 			}
-			if (parameters.isManager == true) {
+			if (isManager == true) {
 				managerAsShape = DIAGRAM::AddShape(container=target.shape);
 			}
-			if (parameters.isManager == false) {
+			if (isManager == false) {
 				workerAsShape = DIAGRAM::AddShape(container=target.shape);
 			}
 		}
@@ -215,7 +215,7 @@ public model DiagramSpecification {
 		EmployeeHierarchicalRelationship linkTwoEmployeesByHierarchicalRelationship(Boolean makeInverseRelationship)
 				with LinkScheme(fromType=Employee, toType=Employee, skipConfirmationPanel=false) {
 			isResponsibleOf = OWL::AddObjectPropertyStatement(subject=fromTarget.employeeAsManager, object=toTarget.employeeAsWorker) in basicOrg;
-			if (parameters.makeInverseRelationship == true) {
+			if (makeInverseRelationship == true) {
 				isUnderResponsabilityOf = OWL::AddObjectPropertyStatement(subject=toTarget.employeeAsWorker, object=fromTarget.employeeAsManager) in basicOrg;
 			}
 			connector = DIAGRAM::AddConnector(fromShape=fromTarget.managerAsShape, toShape=toTarget.workerAsShape);

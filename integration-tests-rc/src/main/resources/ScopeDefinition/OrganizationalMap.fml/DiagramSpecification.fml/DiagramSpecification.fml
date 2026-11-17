@@ -74,8 +74,8 @@ public model DiagramSpecification {
 			@TextField(value="organizationName", label="organizationName")
 		)
 		OrganizationalUnit dropOrganizationalUnitAtTopLevel(String organizationName) with DropScheme() {
-			organizationalUnit = OWL::AddOWLIndividual(ontologyClass=ORGANIZATIONAL_UNIT, individualName=parameters.organizationName) in owl;
-			organizationalUnit.organizationUnitName = parameters.organizationName;
+			organizationalUnit = OWL::AddOWLIndividual(ontologyClass=ORGANIZATIONAL_UNIT, individualName=organizationName) in owl;
+			organizationalUnit.organizationUnitName = organizationName;
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
 
@@ -113,11 +113,11 @@ public model DiagramSpecification {
 			@TextField(value="position", label="position")
 		)
 		Position dropPositionAtTopLevel(String mission, String position) with DropScheme() {
-			mission = OWL::AddOWLIndividual(ontologyClass=POSITION_MISSION, individualName=parameters.mission) in owl;
-			mission.missionName = parameters.mission;
-			position = OWL::AddOWLIndividual(ontologyClass=POSITION, individualName=parameters.position) in owl;
-			position.positionName = parameters.position;
-			OWL::AddObjectPropertyStatement(subject=position, object=mission, objectProperty=HAS_POSITION_MISSION) in owl;
+			this.mission = OWL::AddOWLIndividual(ontologyClass=POSITION_MISSION, individualName=mission) in owl;
+			this.mission.missionName = mission;
+			this.position = OWL::AddOWLIndividual(ontologyClass=POSITION, individualName=position) in owl;
+			this.position.positionName = position;
+			OWL::AddObjectPropertyStatement(subject=this.position, object=this.mission, objectProperty=HAS_POSITION_MISSION) in owl;
 			shape = DIAGRAM::AddShape(container=topLevel);
 			label = DIAGRAM::AddShape(container=shape);
 			icon = DIAGRAM::AddShape(container=shape);

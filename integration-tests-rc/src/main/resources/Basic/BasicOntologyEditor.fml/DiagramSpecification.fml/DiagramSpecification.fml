@@ -62,7 +62,7 @@ public model DiagramSpecification {
 			@TextField(value="name", label="name")
 		)
 		Concept dropConceptAtTopLevel(String name) with DropScheme() {
-			individual = OWL::AddOWLIndividual(ontologyClass=THING, individualName=parameters.name) in owl;
+			individual = OWL::AddOWLIndividual(ontologyClass=THING, individualName=name) in owl;
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
 	}

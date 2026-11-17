@@ -104,42 +104,42 @@ public model ProcessTypeEditor {
 	// --- Lookups: from a model object back to the shape that represents it -----------------------
 
 	public ProcessTypeGR getProcessTypeGR(ProcessType processType) {
-		return select unique ProcessTypeGR from this where (selected.processType == parameters.processType);
+		return select unique ProcessTypeGR from this where (selected.processType == processType);
 	}
 
 	public TaskTypeGR getTaskTypeGR(TaskType taskType) {
-		return select unique TaskTypeGR from this where (selected.taskType == parameters.taskType);
+		return select unique TaskTypeGR from this where (selected.taskType == taskType);
 	}
 
 	public BeginGR getBeginGR(Begin beginTaskType) {
-		return select unique BeginGR from this where (selected.beginTaskType == parameters.beginTaskType);
+		return select unique BeginGR from this where (selected.beginTaskType == beginTaskType);
 	}
 
 	public EndGR getEndGR(End endTaskType) {
-		return select unique EndGR from this where (selected.endTaskType == parameters.endTaskType);
+		return select unique EndGR from this where (selected.endTaskType == endTaskType);
 	}
 
 	public ActorGR getActorGR(Actor actor) {
-		return select unique ActorGR from this where (selected.actor == parameters.actor);
+		return select unique ActorGR from this where (selected.actor == actor);
 	}
 
 	/** Any shape-based gateway representation, whichever kind of gateway it is. */
 	public ShapeBasedGR getGatewayGR(Gateway gateway) {
-		if (parameters.gateway instanceof AndSplit) {
-			return select unique AndSplitGR from this where (selected.andSplit == parameters.gateway);
+		if (gateway instanceof AndSplit) {
+			return select unique AndSplitGR from this where (selected.andSplit == gateway);
 		}
-		if (parameters.gateway instanceof AndJoin) {
-			return select unique AndJoinGR from this where (selected.andJoin == parameters.gateway);
+		if (gateway instanceof AndJoin) {
+			return select unique AndJoinGR from this where (selected.andJoin == gateway);
 		}
 		return null;
 	}
 
 	public AndSplitGR getAndSplitGR(AndSplit andSplit) {
-		return select unique AndSplitGR from this where (selected.andSplit == parameters.andSplit);
+		return select unique AndSplitGR from this where (selected.andSplit == andSplit);
 	}
 
 	public AndJoinGR getAndJoinGR(AndJoin andJoin) {
-		return select unique AndJoinGR from this where (selected.andJoin == parameters.andJoin);
+		return select unique AndJoinGR from this where (selected.andJoin == andJoin);
 	}
 
 	// --- The process type itself -----------------------------------------------------------------
@@ -153,7 +153,7 @@ public model ProcessTypeEditor {
 		dropProcessTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
 			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
 			header = DIAGRAM::AddShape(container=shape) in (diagram);
-			processType = metaModel.newProcessType(parameters.name);
+			processType = metaModel.newProcessType(name);
 		}
 
 		delete() {
@@ -171,7 +171,7 @@ public model ProcessTypeEditor {
 
 		dropTaskTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeGR) {
 			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
-			taskType = target.processType.newTaskType(parameters.name);
+			taskType = target.processType.newTaskType(name);
 		}
 
 		delete() {
@@ -382,7 +382,7 @@ public model ProcessTypeEditor {
 
 		dropArtifactTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
 			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
-			artifactType = metaModel.newArtifactType(parameters.name);
+			artifactType = metaModel.newArtifactType(name);
 		}
 
 		delete() {
@@ -437,7 +437,7 @@ public model ProcessTypeEditor {
 
 		dropActorTypeGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
 			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
-			actorType = metaModel.newActorType(parameters.name);
+			actorType = metaModel.newActorType(name);
 		}
 
 		delete() {
@@ -452,7 +452,7 @@ public model ProcessTypeEditor {
 
 		dropActorGRAtTopLevel(String name) with DropScheme(targetType=ProcessTypeEditor) {
 			shape = DIAGRAM::AddShape(container=diagram) in (diagram);
-			actor = metaModel.newActor(parameters.name);
+			actor = metaModel.newActor(name);
 		}
 
 		delete() {

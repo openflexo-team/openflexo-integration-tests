@@ -80,9 +80,9 @@ public model DiagramSpecification {
 		)
 		Actor dropNewActor(required String name="Actor", required String uri,
 				UMLPackage packageParameter) with DropScheme() {
-			package = parameters.packageParameter;
-			actor = OWL::AddOWLIndividual(ontologyClass=ACTOR, individualName=parameters.uri) in owl;
-			actor.name = parameters.name;
+			package = packageParameter;
+			actor = OWL::AddOWLIndividual(ontologyClass=ACTOR, individualName=uri) in owl;
+			actor.name = name;
 			packagedElement = OWL::AddObjectPropertyStatement(subject=package, object=actor) in owl;
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
@@ -104,9 +104,9 @@ public model DiagramSpecification {
 		)
 		UseCase dropNewUseCase(String name="Use Case", required String uri,
 				UMLPackage packageParameter) with DropScheme() {
-			package = parameters.packageParameter;
-			useCase = OWL::AddOWLIndividual(ontologyClass=USE_CASE, individualName=parameters.uri) in owl;
-			useCase.name = parameters.name;
+			package = packageParameter;
+			useCase = OWL::AddOWLIndividual(ontologyClass=USE_CASE, individualName=uri) in owl;
+			useCase.name = name;
 			packagedElement = OWL::AddObjectPropertyStatement(subject=package, object=useCase) in owl;
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
@@ -140,13 +140,13 @@ public model DiagramSpecification {
 				required String useCasePropertyURI) with LinkScheme(fromType=Actor, toType=UseCase) {
 			actor = fromTarget.actor;
 			useCase = toTarget.useCase;
-			package = parameters.packageParameter;
-			association = OWL::AddOWLIndividual(ontologyClass=ASSOCIATION, individualName=parameters.associationURI) in owl;
+			package = packageParameter;
+			association = OWL::AddOWLIndividual(ontologyClass=ASSOCIATION, individualName=associationURI) in owl;
 			packagedElement = OWL::AddObjectPropertyStatement(subject=package, object=association) in owl;
-			actorProperty = OWL::AddOWLIndividual(ontologyClass=PROPERTY, individualName=parameters.actorPropertyURI) in owl;
+			actorProperty = OWL::AddOWLIndividual(ontologyClass=PROPERTY, individualName=actorPropertyURI) in owl;
 			OWL::AddObjectPropertyStatement(subject=actorProperty, object=association, objectProperty=ASSOCIATION_PROP) in owl;
 			OWL::AddObjectPropertyStatement(subject=actorProperty, object=actor, objectProperty=TYPE_PROP) in owl;
-			useCaseProperty = OWL::AddOWLIndividual(ontologyClass=PROPERTY, individualName=parameters.useCasePropertyURI) in owl;
+			useCaseProperty = OWL::AddOWLIndividual(ontologyClass=PROPERTY, individualName=useCasePropertyURI) in owl;
 			OWL::AddObjectPropertyStatement(subject=useCaseProperty, object=association, objectProperty=ASSOCIATION_PROP) in owl;
 			OWL::AddObjectPropertyStatement(subject=useCaseProperty, object=useCase, objectProperty=TYPE_PROP) in owl;
 			ownedEndForActor = OWL::AddObjectPropertyStatement(subject=association, object=actorProperty) in owl;

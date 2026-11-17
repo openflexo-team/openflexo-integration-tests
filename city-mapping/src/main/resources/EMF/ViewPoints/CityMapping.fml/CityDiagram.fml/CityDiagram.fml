@@ -50,7 +50,7 @@ public model CityDiagram {
 		});
 
 	create::createNewDiagramWithSuppliedCity(required City cityParameter) {
-		city = parameters.cityParameter;
+		city = cityParameter;
 	}
 
 	@UI(
@@ -58,7 +58,7 @@ public model CityDiagram {
 		@TextArea(value="description")
 	)
 	create::createNewDiagramRepresentingNewCity(String newCityName="valeur2", String description="coucou") {
-		City myNewCity = new City::createANewOne(parameters.newCityName);
+		City myNewCity = new City::createANewOne(newCityName);
 		new CityGR::createCityGR(myNewCity);
 	}
 
@@ -87,14 +87,14 @@ public model CityDiagram {
 			containerShape = DIAGRAM::AddShape(container=topLevel) in typedDiagramModelSlot;
 			label = DIAGRAM::AddShape(container=containerShape) in typedDiagramModelSlot;
 			icon = DIAGRAM::AddShape(container=containerShape) in typedDiagramModelSlot;
-			city = parameters.city;
+			this.city = city;
 		}
 
 		create::createCityGR(City cityParameter) {
 			containerShape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
 			label = DIAGRAM::AddShape(container=containerShape) in typedDiagramModelSlot;
 			icon = DIAGRAM::AddShape(container=containerShape) in typedDiagramModelSlot;
-			city = parameters.cityParameter;
+			city = cityParameter;
 		}
 
 		delete::deletionFromDiagram() {
@@ -121,7 +121,7 @@ public model CityDiagram {
 		}
 
 		create::createMansionGR(Mansion mansionParam) {
-			mansion = parameters.mansionParam;
+			mansion = mansionParam;
 			shape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
 		}
 
@@ -145,7 +145,7 @@ public model CityDiagram {
 		}
 
 		create::createAppartmentGR(Appartment appartmentParam) {
-			appartment = parameters.appartmentParam;
+			appartment = appartmentParam;
 			shape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
 		}
 

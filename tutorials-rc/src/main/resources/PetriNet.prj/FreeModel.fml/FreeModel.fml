@@ -24,8 +24,8 @@ public model FreeModel {
 	Diagram diagram with TypedDiagram(diagramSpecification=FREE_MODEL,paletteElementBindings={PaletteElementBinding:(call=new PlaceGR::drop(null), paletteElementId="http://www.openflexo.org/test/PetriNet.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Concepts.palette#Place"), PaletteElementBinding:(call=new TransitionGR::drop(null), paletteElementId="http://www.openflexo.org/test/PetriNet.prj/PetriNet.prj/DiagramSpecification/FreeModel.diagramspecification/Concepts.palette#Transition")});
 
 	create(PetriNet sampleData, Diagram diagram) {
-		sampleData = parameters.sampleData;
-		diagram = parameters.diagram;
+		this.sampleData = sampleData;
+		this.diagram = diagram;
 	}
 
 	@Inspector("NoneGR.inspector")
@@ -36,7 +36,7 @@ public model FreeModel {
 			delete shape;
 		}
 		NoneGR drop(String conceptName="conceptName") with DropScheme(skipConfirmationPanel=false,targetType=FreeModel) {
-			name = parameters.conceptName;
+			name = conceptName;
 			shape = DIAGRAM::AddShape(container=diagram) in diagram;
 		}
 	}
@@ -51,7 +51,7 @@ public model FreeModel {
 			delete shape;
 		}
 		PlaceGR drop(String conceptName="Place") with DropScheme(skipConfirmationPanel=false,targetType=FreeModel) {
-			representedConcept = sampleData.new Place(parameters.conceptName);
+			representedConcept = sampleData.new Place(conceptName);
 			shape = DIAGRAM::AddShape(container=diagram) in diagram;
 		}
 	}
@@ -66,7 +66,7 @@ public model FreeModel {
 			delete shape;
 		}
 		TransitionGR drop(String conceptName="Transition") with DropScheme(skipConfirmationPanel=false,targetType=FreeModel) {
-			representedConcept = sampleData.new Transition(parameters.conceptName);
+			representedConcept = sampleData.new Transition(conceptName);
 			shape = DIAGRAM::AddShape(container=diagram) in diagram;
 		}
 	}

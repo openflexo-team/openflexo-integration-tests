@@ -68,8 +68,8 @@ public model DiagramSpecification {
 			@TextField(value="uri", label="uri")
 		)
 		Package drop(String name="Package", required String uri) with DropScheme() {
-			package = OWL::AddOWLIndividual(ontologyClass=PACKAGE, individualName=parameters.uri) in owl;
-			package.name = parameters.name;
+			package = OWL::AddOWLIndividual(ontologyClass=PACKAGE, individualName=uri) in owl;
+			package.name = name;
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
 	}
@@ -91,7 +91,7 @@ public model DiagramSpecification {
 			// dropped Package carries is what was meant.
 			package = fromTarget.package;
 			importedPackage = toTarget.package;
-			packageImport = OWL::AddOWLIndividual(ontologyClass=PACKAGE_IMPORT, individualName=parameters.uri) in owl;
+			packageImport = OWL::AddOWLIndividual(ontologyClass=PACKAGE_IMPORT, individualName=uri) in owl;
 			OWL::AddObjectPropertyStatement(subject=packageImport, object=importedPackage, objectProperty=IMPORTED_PACKAGE_PROP) in owl;
 			packageImportStatement = OWL::AddObjectPropertyStatement(subject=package, object=packageImport) in owl;
 			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);

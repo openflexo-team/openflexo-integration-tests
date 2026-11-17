@@ -101,10 +101,10 @@ public model DiagramSpecification {
 		)
 		ConceptScheme dropConceptSchemeAtTopLevel(String conceptSchemeName, required String conceptSchemeURI,
 				String preferedLabel, String alternativeLabel) with DropScheme() {
-			conceptScheme = OWL::AddOWLIndividual(ontologyClass=SKOS_CONCEPT_SCHEME, individualName=parameters.conceptSchemeURI) in owl;
-			OWL::AddDataPropertyStatement(subject=conceptScheme, value=parameters.conceptSchemeName, dataProperty=RDFS_LABEL) in owl;
-			OWL::AddDataPropertyStatement(subject=conceptScheme, value=parameters.preferedLabel, dataProperty=PREF_LABEL) in owl;
-			OWL::AddDataPropertyStatement(subject=conceptScheme, value=parameters.alternativeLabel, dataProperty=ALT_LABEL) in owl;
+			conceptScheme = OWL::AddOWLIndividual(ontologyClass=SKOS_CONCEPT_SCHEME, individualName=conceptSchemeURI) in owl;
+			OWL::AddDataPropertyStatement(subject=conceptScheme, value=conceptSchemeName, dataProperty=RDFS_LABEL) in owl;
+			OWL::AddDataPropertyStatement(subject=conceptScheme, value=preferedLabel, dataProperty=PREF_LABEL) in owl;
+			OWL::AddDataPropertyStatement(subject=conceptScheme, value=alternativeLabel, dataProperty=ALT_LABEL) in owl;
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
 	}
@@ -123,11 +123,11 @@ public model DiagramSpecification {
 		)
 		Concept dropConceptAtTopLevel(String conceptName, required String conceptURI,
 				SKOSConceptScheme conceptScheme, String preferedLabel, String alternativeLabel) with DropScheme() {
-			ontologyConcept = OWL::AddOWLIndividual(ontologyClass=SKOS_CONCEPT, individualName=parameters.conceptURI) in owl;
-			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=parameters.conceptName, dataProperty=RDFS_LABEL) in owl;
-			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=parameters.preferedLabel, dataProperty=PREF_LABEL) in owl;
-			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=parameters.alternativeLabel, dataProperty=ALT_LABEL) in owl;
-			OWL::AddObjectPropertyStatement(subject=ontologyConcept, object=parameters.conceptScheme, objectProperty=IN_SCHEME) in owl;
+			ontologyConcept = OWL::AddOWLIndividual(ontologyClass=SKOS_CONCEPT, individualName=conceptURI) in owl;
+			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=conceptName, dataProperty=RDFS_LABEL) in owl;
+			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=preferedLabel, dataProperty=PREF_LABEL) in owl;
+			OWL::AddDataPropertyStatement(subject=ontologyConcept, value=alternativeLabel, dataProperty=ALT_LABEL) in owl;
+			OWL::AddObjectPropertyStatement(subject=ontologyConcept, object=conceptScheme, objectProperty=IN_SCHEME) in owl;
 			shape = DIAGRAM::AddShape(container=topLevel);
 		}
 	}
@@ -145,7 +145,7 @@ public model DiagramSpecification {
 		ConceptToConceptSchemeRelationship linkAConceptToAConceptScheme(Boolean makeInverseRelationship=true)
 				with LinkScheme(fromType=Concept, toType=ConceptScheme) {
 			topConceptOf = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.conceptScheme) in owl;
-			if (parameters.makeInverseRelationship == true) {
+			if (makeInverseRelationship == true) {
 				hasTopConcept = OWL::AddObjectPropertyStatement(subject=toTarget.conceptScheme, object=fromTarget.ontologyConcept) in owl;
 			}
 			connector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
@@ -167,22 +167,22 @@ public model DiagramSpecification {
 		)
 		ConceptSpecialization specializeAConcept(Boolean isMatch=false, Boolean makeInverseRelationship=true)
 				with LinkScheme(fromType=Concept, toType=Concept) {
-			if (parameters.isMatch == false) {
+			if (isMatch == false) {
 				broader = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
 			}
-			if (parameters.isMatch == true) {
+			if (isMatch == true) {
 				broadMatch = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
 			}
-			if ((parameters.isMatch == false) && (parameters.makeInverseRelationship == true)) {
+			if ((isMatch == false) && (makeInverseRelationship == true)) {
 				narrower = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
 			}
-			if ((parameters.isMatch == true) && (parameters.makeInverseRelationship == true)) {
+			if ((isMatch == true) && (makeInverseRelationship == true)) {
 				narrowMatch = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
 			}
-			if (parameters.isMatch == false) {
+			if (isMatch == false) {
 				broaderConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
 			}
-			if (parameters.isMatch == true) {
+			if (isMatch == true) {
 				broadMatchConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
 			}
 		}
@@ -203,22 +203,22 @@ public model DiagramSpecification {
 		)
 		ConceptGeneralization generalizeAConcept(Boolean isMatch=false, Boolean makeInverseRelationship=true)
 				with LinkScheme(fromType=Concept, toType=Concept) {
-			if (parameters.isMatch == false) {
+			if (isMatch == false) {
 				narrower = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
 			}
-			if (parameters.isMatch == true) {
+			if (isMatch == true) {
 				narrowMatch = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
 			}
-			if ((parameters.isMatch == false) && (parameters.makeInverseRelationship == true)) {
+			if ((isMatch == false) && (makeInverseRelationship == true)) {
 				broader = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
 			}
-			if ((parameters.isMatch == true) && (parameters.makeInverseRelationship == true)) {
+			if ((isMatch == true) && (makeInverseRelationship == true)) {
 				broadMatch = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
 			}
-			if (parameters.isMatch == false) {
+			if (isMatch == false) {
 				narrowerConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
 			}
-			if (parameters.isMatch == true) {
+			if (isMatch == true) {
 				narrowMatchConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
 			}
 		}
@@ -238,18 +238,18 @@ public model DiagramSpecification {
 		)
 		ConceptRelatedRelationship makeTwoConceptRelatedToEachOther(Boolean isMatch=false)
 				with LinkScheme(fromType=Concept, toType=Concept) {
-			if (parameters.isMatch == false) {
+			if (isMatch == false) {
 				related1 = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
 				related2 = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
 			}
-			if (parameters.isMatch == true) {
+			if (isMatch == true) {
 				relatedMatch1 = OWL::AddObjectPropertyStatement(subject=fromTarget.ontologyConcept, object=toTarget.ontologyConcept) in owl;
 				relatedMatch2 = OWL::AddObjectPropertyStatement(subject=toTarget.ontologyConcept, object=fromTarget.ontologyConcept) in owl;
 			}
-			if (parameters.isMatch == false) {
+			if (isMatch == false) {
 				relatedConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
 			}
-			if (parameters.isMatch == true) {
+			if (isMatch == true) {
 				relatedMatchConnector = DIAGRAM::AddConnector(fromShape=fromTarget.shape, toShape=toTarget.shape);
 			}
 		}

@@ -89,10 +89,10 @@ public model DiagramSpecification {
 		)
 		Actor dropActorAtTopLevel(String firstName, String lastName, required String uri,
 				OrganizationalPosition position) with DropScheme(skipConfirmationPanel=false) {
-			actor = OWL::AddOWLIndividual(ontologyClass=OUSD_ACTOR, individualName=parameters.uri) in owl;
-			OWL::AddDataPropertyStatement(subject=actor, value=parameters.firstName, dataProperty=FIRST_NAME) in owl;
-			OWL::AddDataPropertyStatement(subject=actor, value=parameters.lastName, dataProperty=LAST_NAME) in owl;
-			OWL::AddObjectPropertyStatement(subject=actor, object=parameters.position, objectProperty=HAS_POSITION) in owl;
+			actor = OWL::AddOWLIndividual(ontologyClass=OUSD_ACTOR, individualName=uri) in owl;
+			OWL::AddDataPropertyStatement(subject=actor, value=firstName, dataProperty=FIRST_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=actor, value=lastName, dataProperty=LAST_NAME) in owl;
+			OWL::AddObjectPropertyStatement(subject=actor, object=position, objectProperty=HAS_POSITION) in owl;
 			shape = DIAGRAM::AddShape(container=topLevel);
 			positionLabel = DIAGRAM::AddShape(container=shape);
 			nameLabel = DIAGRAM::AddShape(container=shape);

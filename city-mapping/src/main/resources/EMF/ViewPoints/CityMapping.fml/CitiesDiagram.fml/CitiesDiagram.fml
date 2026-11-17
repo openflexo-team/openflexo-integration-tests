@@ -36,7 +36,7 @@ public model CitiesDiagram {
 		City city;
 
 		create::creation(City city) {
-			city = parameters.city;
+			this.city = city;
 		}
 
 		delete::deletion() {
@@ -51,8 +51,8 @@ public model CitiesDiagram {
 			@TextField(value="newName")
 		)
 		void changeTheName(String newName) {
-			city.cityInModel1.name = parameters.newName;
-			city.cityInModel2.name = parameters.newName;
+			city.cityInModel1.name = newName;
+			city.cityInModel2.name = newName;
 		}
 	}
 }

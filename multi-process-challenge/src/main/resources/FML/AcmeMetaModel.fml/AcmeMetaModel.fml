@@ -32,7 +32,7 @@ import ["http://openflexo.org/multi-process-challenge/FML/MetaModel.fml"];
 public model AcmeMetaModel extends MetaModel {
 
 	public ProgrammingLanguage getProgrammingLanguage(String name) {
-		return select unique ProgrammingLanguage from this where (selected.name == parameters.name);
+		return select unique ProgrammingLanguage from this where (selected.name == name);
 	}
 
 	// --- Factories for the concepts this metamodel adds ----------------------------------------
@@ -41,31 +41,31 @@ public model AcmeMetaModel extends MetaModel {
 	// instance rather than into the VirtualModelInstance.
 
 	public ProgrammingLanguage newProgrammingLanguage(String name) {
-		return new ProgrammingLanguage(parameters.name);
+		return new ProgrammingLanguage(name);
 	}
 
 	public Developer newDeveloper(String name) {
-		return new Developer(parameters.name);
+		return new Developer(name);
 	}
 
 	public SoftwareEngineeringArtifactType newSoftwareEngineeringArtifactType(String name) {
-		return new SoftwareEngineeringArtifactType(parameters.name);
+		return new SoftwareEngineeringArtifactType(name);
 	}
 
 	public CodeArtifactType newCodeArtifactType(String name) {
-		return new CodeArtifactType(parameters.name);
+		return new CodeArtifactType(name);
 	}
 
 	public SoftwareEngineeringTaskType newSoftwareEngineeringTaskType(ProcessType processType, String name) {
-		SoftwareEngineeringTaskType returned = parameters.processType.new SoftwareEngineeringTaskType(parameters.name);
-		parameters.processType.addToTaskTypes(returned);
+		SoftwareEngineeringTaskType returned = processType.new SoftwareEngineeringTaskType(name);
+		processType.addToTaskTypes(returned);
 		return returned;
 	}
 
 	public CodingTaskType newCodingTaskType(ProcessType processType, String name, ProgrammingLanguage language) {
-		CodingTaskType returned = parameters.processType.new CodingTaskType(parameters.name);
-		returned.language = parameters.language;
-		parameters.processType.addToTaskTypes(returned);
+		CodingTaskType returned = processType.new CodingTaskType(name);
+		returned.language = language;
+		processType.addToTaskTypes(returned);
 		return returned;
 	}
 
@@ -76,7 +76,7 @@ public model AcmeMetaModel extends MetaModel {
 		String name;
 
 		create(String name) {
-			name = parameters.name;
+			this.name = name;
 		}
 
 		delete() {
@@ -87,7 +87,7 @@ public model AcmeMetaModel extends MetaModel {
 	public concept Developer extends ActorType {
 
 		create(String name) {
-			super(parameters.name);
+			super(name);
 		}
 
 		delete() {
@@ -105,7 +105,7 @@ public model AcmeMetaModel extends MetaModel {
 		int versionNumber;
 
 		create(String name) {
-			super(parameters.name);
+			super(name);
 			versionNumber = 1;
 		}
 
@@ -119,7 +119,7 @@ public model AcmeMetaModel extends MetaModel {
 		ProgrammingLanguage programmingLanguage with ConceptInstance(virtualModelInstance=container);
 
 		create(String name) {
-			super(parameters.name);
+			super(name);
 		}
 
 		delete() {
@@ -129,14 +129,14 @@ public model AcmeMetaModel extends MetaModel {
 	public concept SoftwareEngineeringArtifactType extends ArtifactType {
 
 		create(String name) {
-			super(parameters.name);
+			super(name);
 		}
 
 		delete() {
 		}
 
 		public Artifact newArtifact(String name) {
-			SoftwareEngineeringArtifact returned = container.new SoftwareEngineeringArtifact(parameters.name);
+			SoftwareEngineeringArtifact returned = container.new SoftwareEngineeringArtifact(name);
 			returned.types.add(this);
 			return returned;
 		}
@@ -145,14 +145,14 @@ public model AcmeMetaModel extends MetaModel {
 	public concept CodeArtifactType extends SoftwareEngineeringArtifactType {
 
 		create(String name) {
-			super(parameters.name);
+			super(name);
 		}
 
 		delete() {
 		}
 
 		public Artifact newArtifact(String name) {
-			Code returned = container.new Code(parameters.name);
+			Code returned = container.new Code(name);
 			returned.types.add(this);
 			return returned;
 		}
@@ -165,7 +165,7 @@ public model AcmeMetaModel extends MetaModel {
 	public concept SoftwareEngineeringTaskType extends TaskType {
 
 		create(String name) {
-			super(parameters.name);
+			super(name);
 		}
 
 		delete() {
@@ -185,7 +185,7 @@ public model AcmeMetaModel extends MetaModel {
 		ProgrammingLanguage language with ConceptInstance(virtualModelInstance=container.container);
 
 		create(String name) {
-			super(parameters.name);
+			super(name);
 		}
 
 		delete() {
@@ -197,11 +197,11 @@ public model AcmeMetaModel extends MetaModel {
 		 * binding path - and it was stringly-typed anyway. `instanceof` says the same thing.
 		 */
 		public boolean isValidActorType(ActorType actorType) {
-			return parameters.actorType instanceof Developer;
+			return actorType instanceof Developer;
 		}
 
 		public boolean isValidProducedArtifactType(ArtifactType artifactType) {
-			return parameters.artifactType instanceof CodeArtifactType;
+			return artifactType instanceof CodeArtifactType;
 		}
 
 		/**
@@ -210,7 +210,7 @@ public model AcmeMetaModel extends MetaModel {
 		 * COBOL rule never fired. Fixed by naming the language instance and comparing on name.
 		 */
 		public Task newTask(String name, Process process) {
-			Coding returned = parameters.process.new Coding(parameters.name, this);
+			Coding returned = process.new Coding(name, this);
 			if (language != null) {
 				if (language.name == "COBOL") {
 					returned.forceAddToPerformingActors(container.container.getActor("Ann Smith"));
@@ -224,7 +224,7 @@ public model AcmeMetaModel extends MetaModel {
 	public concept Coding extends Task {
 
 		create(String name, TaskType taskType) {
-			super(parameters.name, parameters.taskType);
+			super(name, taskType);
 		}
 
 		delete() {

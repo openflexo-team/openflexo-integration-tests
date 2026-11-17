@@ -118,19 +118,19 @@ public model DiagramSpecification {
 				String missionName="Mission", required String missionURI,
 				String missionDescription="Please describe here the mission of organizational unit")
 				with DropScheme(targetType=OrganizationalUnit) {
-			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION, individualName=parameters.missionURI) in owl;
-			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionName, dataProperty=MISSION_NAME) in owl;
-			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
-			organizationUnit = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT, individualName=parameters.organizationUnitURI) in owl;
-			OWL::AddDataPropertyStatement(subject=organizationUnit, value=parameters.organizationUnitName, dataProperty=ORGANIZATION_UNIT_NAME) in owl;
-			OWL::AddDataPropertyStatement(subject=organizationUnit, value=parameters.organizationUnitDescription, dataProperty=ORGANIZATION_UNIT_DESCRIPTION) in owl;
+			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION, individualName=missionURI) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=missionName, dataProperty=MISSION_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
+			organizationUnit = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT, individualName=organizationUnitURI) in owl;
+			OWL::AddDataPropertyStatement(subject=organizationUnit, value=organizationUnitName, dataProperty=ORGANIZATION_UNIT_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=organizationUnit, value=organizationUnitDescription, dataProperty=ORGANIZATION_UNIT_DESCRIPTION) in owl;
 			OWL::AddObjectPropertyStatement(subject=organizationUnit, object=target.organizationUnit, objectProperty=HAS_PARENT_ORG_UNIT) in owl;
 			hasOrgUnitMission = OWL::AddObjectPropertyStatement(subject=organizationUnit, object=mission) in owl;
 			hasSubOrgUnit = OWL::AddObjectPropertyStatement(subject=target.organizationUnit, object=organizationUnit) in owl;
 			shape = DIAGRAM::AddShape(container=target.shape);
 			missionContainer = DIAGRAM::AddShape(container=shape);
-			missionName = DIAGRAM::AddShape(container=missionContainer);
-			missionDescription = DIAGRAM::AddShape(container=missionContainer);
+			this.missionName = DIAGRAM::AddShape(container=missionContainer);
+			this.missionDescription = DIAGRAM::AddShape(container=missionContainer);
 		}
 
 		@UI(
@@ -147,17 +147,17 @@ public model DiagramSpecification {
 				String missionName="Mission", required String missionURI,
 				String missionDescription="Please describe here the mission of organizational unit")
 				with DropScheme(skipConfirmationPanel=false) {
-			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION, individualName=parameters.missionURI) in owl;
-			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionName, dataProperty=MISSION_NAME) in owl;
-			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
-			organizationUnit = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT, individualName=parameters.organizationUnitURI) in owl;
-			OWL::AddDataPropertyStatement(subject=organizationUnit, value=parameters.organizationUnitName, dataProperty=ORGANIZATION_UNIT_NAME) in owl;
-			OWL::AddDataPropertyStatement(subject=organizationUnit, value=parameters.organizationUnitDescription, dataProperty=ORGANIZATION_UNIT_DESCRIPTION) in owl;
+			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION, individualName=missionURI) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=missionName, dataProperty=MISSION_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
+			organizationUnit = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT, individualName=organizationUnitURI) in owl;
+			OWL::AddDataPropertyStatement(subject=organizationUnit, value=organizationUnitName, dataProperty=ORGANIZATION_UNIT_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=organizationUnit, value=organizationUnitDescription, dataProperty=ORGANIZATION_UNIT_DESCRIPTION) in owl;
 			hasOrgUnitMission = OWL::AddObjectPropertyStatement(subject=organizationUnit, object=mission) in owl;
 			shape = DIAGRAM::AddShape(container=topLevel);
 			missionContainer = DIAGRAM::AddShape(container=shape);
-			missionName = DIAGRAM::AddShape(container=missionContainer);
-			missionDescription = DIAGRAM::AddShape(container=missionContainer);
+			this.missionName = DIAGRAM::AddShape(container=missionContainer);
+			this.missionDescription = DIAGRAM::AddShape(container=missionContainer);
 		}
 
 		OrganizationalUnit drawOrganizationalUnitInOrganizationalUnit(
@@ -167,7 +167,7 @@ public model DiagramSpecification {
 			// substituted into every role of that type, where it then hides the OWL binding path
 			// elements). Re-selecting the individual gives the role its properly typed value.
 			organizationUnit = select unique OWLIndividualType(owlClass=OUSD_ORGANIZATIONAL_UNIT) from owl
-				where (selected.uri == parameters.organizationalUnit.URI);
+				where (selected.uri == organizationalUnit.URI);
 			mission = organizationUnit.hasOrgUnitMission;
 			if (organizationUnit.hasOrgUnitMission == null) {
 				mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION,
@@ -187,7 +187,7 @@ public model DiagramSpecification {
 			// substituted into every role of that type, where it then hides the OWL binding path
 			// elements). Re-selecting the individual gives the role its properly typed value.
 			organizationUnit = select unique OWLIndividualType(owlClass=OUSD_ORGANIZATIONAL_UNIT) from owl
-				where (selected.uri == parameters.organizationalUnit.URI);
+				where (selected.uri == organizationalUnit.URI);
 			mission = organizationUnit.hasOrgUnitMission;
 			if (organizationUnit.hasOrgUnitMission == null) {
 				mission = OWL::AddOWLIndividual(ontologyClass=OUSD_ORGANIZATIONAL_UNIT_MISSION,
@@ -220,9 +220,9 @@ public model DiagramSpecification {
 		OrganizationalUnitObjective dropObjectiveInOrganizationalUnit(String objectiveName="Objective",
 				required String objectiveURI, String objectiveDescription)
 				with DropScheme(targetType=OrganizationalUnit) {
-			objective = OWL::AddOWLIndividual(ontologyClass=OUSD_OBJECTIVE, individualName=parameters.objectiveURI) in owl;
-			OWL::AddDataPropertyStatement(subject=objective, value=parameters.objectiveName, dataProperty=OBJECTIVE_NAME) in owl;
-			OWL::AddDataPropertyStatement(subject=objective, value=parameters.objectiveDescription, dataProperty=OBJECTIVE_DESCRIPTION) in owl;
+			objective = OWL::AddOWLIndividual(ontologyClass=OUSD_OBJECTIVE, individualName=objectiveURI) in owl;
+			OWL::AddDataPropertyStatement(subject=objective, value=objectiveName, dataProperty=OBJECTIVE_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=objective, value=objectiveDescription, dataProperty=OBJECTIVE_DESCRIPTION) in owl;
 			hasObjective = OWL::AddObjectPropertyStatement(subject=target.organizationUnit, object=objective) in owl;
 			shape = DIAGRAM::AddShape(container=target.shape);
 		}
@@ -252,11 +252,11 @@ public model DiagramSpecification {
 		OrganizationalUnitPosition dropPositionInOrganizationalUnit(String positionName="Position",
 				required String positionURI, String missionName="Mission", required String missionURI,
 				String missionDescription) with DropScheme(targetType=OrganizationalUnit, skipConfirmationPanel=false) {
-			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_POSITION_MISSION, individualName=parameters.missionURI) in owl;
-			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionName, dataProperty=MISSION_NAME) in owl;
-			OWL::AddDataPropertyStatement(subject=mission, value=parameters.missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
-			position = OWL::AddOWLIndividual(ontologyClass=OUSD_POSITION, individualName=parameters.positionURI) in owl;
-			OWL::AddDataPropertyStatement(subject=position, value=parameters.positionName, dataProperty=POSITION_NAME) in owl;
+			mission = OWL::AddOWLIndividual(ontologyClass=OUSD_POSITION_MISSION, individualName=missionURI) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=missionName, dataProperty=MISSION_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=mission, value=missionDescription, dataProperty=MISSION_DESCRIPTION) in owl;
+			position = OWL::AddOWLIndividual(ontologyClass=OUSD_POSITION, individualName=positionURI) in owl;
+			OWL::AddDataPropertyStatement(subject=position, value=positionName, dataProperty=POSITION_NAME) in owl;
 			OWL::AddObjectPropertyStatement(subject=position, object=mission, objectProperty=HAS_POSITION_MISSION) in owl;
 			containsPosition = OWL::AddObjectPropertyStatement(subject=target.organizationUnit, object=position) in owl;
 			shape = DIAGRAM::AddShape(container=target.shape);
@@ -270,7 +270,7 @@ public model DiagramSpecification {
 				with DropScheme(targetType=OrganizationalUnit, skipConfirmationPanel=false) {
 			// See the comment in drawOrganizationalUnitInOrganizationalUnit.
 			position = select unique OWLIndividualType(owlClass=OUSD_POSITION) from owl
-				where (selected.uri == parameters.positionToRepresent.URI);
+				where (selected.uri == positionToRepresent.URI);
 			mission = position.hasPositionMission;
 			if (position.hasPositionMission == null) {
 				mission = OWL::AddOWLIndividual(ontologyClass=OUSD_POSITION_MISSION,
@@ -300,9 +300,9 @@ public model DiagramSpecification {
 		)
 		PositionTask dropTaskForPosition(String taskName="Task", required String taskURI, String taskDescription)
 				with DropScheme(targetType=OrganizationalUnitPosition) {
-			task = OWL::AddOWLIndividual(ontologyClass=OUSD_TASK, individualName=parameters.taskURI) in owl;
-			OWL::AddDataPropertyStatement(subject=task, value=parameters.taskName, dataProperty=TASK_NAME) in owl;
-			OWL::AddDataPropertyStatement(subject=task, value=parameters.taskDescription, dataProperty=TASK_DESCRIPTION) in owl;
+			task = OWL::AddOWLIndividual(ontologyClass=OUSD_TASK, individualName=taskURI) in owl;
+			OWL::AddDataPropertyStatement(subject=task, value=taskName, dataProperty=TASK_NAME) in owl;
+			OWL::AddDataPropertyStatement(subject=task, value=taskDescription, dataProperty=TASK_DESCRIPTION) in owl;
 			hasTask = OWL::AddObjectPropertyStatement(subject=target.position, object=task) in owl;
 			shape = DIAGRAM::AddShape(container=target.shape.parent);
 			hasTaskConnector = DIAGRAM::AddConnector(fromShape=target.icon, toShape=shape);

@@ -17,7 +17,7 @@ public model PetriNet {
 		int tokens = 0;
       
 		create(String conceptName) {
-			name = parameters.conceptName;
+			name = conceptName;
 		}
      
 		delete() {
@@ -43,7 +43,7 @@ public model PetriNet {
       };
       
       create(String conceptName) {
-			name = parameters.conceptName;
+			name = conceptName;
 		}
 
       boolean isFireable() {
@@ -91,8 +91,8 @@ public model PetriNet {
       Transition transition with ConceptInstance(virtualModelInstance=container);
       
 		create(Place place, Transition transition) {
-			place = parameters.place;
-			transition = parameters.transition;
+			this.place = place;
+			this.transition = transition;
 		}
 
       // This edge is triggerable if the number of tokens in source place exceed required weight
@@ -117,8 +117,8 @@ public model PetriNet {
 		Place place with ConceptInstance(virtualModelInstance=container);
     
       create(Transition transition, Place place) {
-			transition = parameters.transition;
-			place = parameters.place;
+			this.transition = transition;
+			this.place = place;
 		}
 
       // Trigger that edge : add tokens to destination place

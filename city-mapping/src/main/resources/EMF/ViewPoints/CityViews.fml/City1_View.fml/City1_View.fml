@@ -95,13 +95,13 @@ public model City1_View {
 			shape = DIAGRAM::AddShape(container=topLevel) in typedDiagramModelSlot;
 			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
 			city = EMF::AddEMFObject(individualName="ANewCity", ontologyClass=CITY1_CITY) in city1model;
-			city.name = parameters.name;
+			city.name = name;
 		}
 
 		create::createFromEMF(required City1City indiv) {
 			shape = DIAGRAM::AddShape(container=typedDiagramModelSlot) in typedDiagramModelSlot;
 			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
-			city = parameters.indiv;
+			city = indiv;
 		}
 
 		delete::deletion() {
@@ -123,14 +123,14 @@ public model City1_View {
 		)
 		HouseGR dropHouseInCity(String information) with DropScheme(skipConfirmationPanel=false, targetType=CityGR) {
 			house = EMF::AddEMFObject(container=target.city.houses, individualName="A New House", ontologyClass=CITY1_HOUSE) in city1model;
-			house.info = parameters.information;
+			house.info = information;
 			shape = DIAGRAM::AddShape(container=target.shape) in typedDiagramModelSlot;
 			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
 		}
 
 		create::createFromEMF(City1House indiv, CityGR inCity) {
-			house = parameters.indiv;
-			shape = DIAGRAM::AddShape(container=parameters.inCity.shape) in typedDiagramModelSlot;
+			house = indiv;
+			shape = DIAGRAM::AddShape(container=inCity.shape) in typedDiagramModelSlot;
 			icon = DIAGRAM::AddShape(container=shape) in typedDiagramModelSlot;
 		}
 
@@ -152,13 +152,13 @@ public model City1_View {
 		)
 		ResidentGR dropResident(String name) with DropScheme(skipConfirmationPanel=false, targetType=CityGR) {
 			resident = EMF::AddEMFObject(container=target.city.residents, individualName="Resident", ontologyClass=CITY1_RESIDENT) in city1model;
-			resident.name = parameters.name;
+			resident.name = name;
 			shape = DIAGRAM::AddShape(container=target.shape) in typedDiagramModelSlot;
 		}
 
 		create::createFromEMF(City1Resident indiv, CityGR cityFCI) {
-			resident = parameters.indiv;
-			shape = DIAGRAM::AddShape(container=parameters.cityFCI.shape) in typedDiagramModelSlot;
+			resident = indiv;
+			shape = DIAGRAM::AddShape(container=cityFCI.shape) in typedDiagramModelSlot;
 		}
 
 		delete::deletion() {

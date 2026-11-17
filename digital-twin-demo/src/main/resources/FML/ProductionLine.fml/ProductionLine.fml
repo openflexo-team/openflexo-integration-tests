@@ -65,8 +65,8 @@ public model ProductionLine {
 	MaintenanceRecords maintenance with FMLExcelModelSlot();
 
 	create(Resource<XMLModel> xmlResource, Resource<ExcelWorkbook> xlsxResource) {
-		connect ligneXml using parameters.xmlResource;
-		connect maintenance using parameters.xlsxResource;
+		connect ligneXml using xmlResource;
+		connect maintenance using xlsxResource;
 		this.synchronize();
 	}
 
@@ -162,7 +162,7 @@ public model ProductionLine {
 
 	// --- Excel side (typed through the MaintenanceRecords reflected VMI) ---
 	public AssetRecord getAssetRecord(String code) {
-		return select unique AssetRecord from maintenance where (selected.code == parameters.code);
+		return select unique AssetRecord from maintenance where (selected.code == code);
 	}
 
 	public List<Intervention> getInterventions() {
@@ -172,7 +172,7 @@ public model ProductionLine {
 	// Join rule EQ-DEP-01 <-> DEP01 : drop the "EQ-" prefix and all dashes (spec section 2).
 	// Behaviour parameters are read via "parameters.".
 	public String codeFromXmlId(String xmlId) {
-		String withoutPrefix = parameters.xmlId.replace("EQ-","");
+		String withoutPrefix = xmlId.replace("EQ-","");
 		return withoutPrefix.replace("-","");
 	}
 
@@ -182,7 +182,7 @@ public model ProductionLine {
 	}
 
 	public Equipment getEquipmentByCode(String code) {
-		return select unique Equipment from this where (selected.code == parameters.code);
+		return select unique Equipment from this where (selected.code == code);
 	}
 
 	// =========================================================================
@@ -192,8 +192,8 @@ public model ProductionLine {
 
 	// Equipment code owning an interface id, e.g. "EQ-CONV-03:OUT" -> "CONV03".
 	public String codeFromInterface(String iface) {
-		int idx = parameters.iface.indexOf(":");
-		String xmlId = parameters.iface.substring(0,idx);
+		int idx = iface.indexOf(":");
+		String xmlId = iface.substring(0,idx);
 		return this.codeFromXmlId(xmlId);
 	}
 
@@ -212,7 +212,7 @@ public model ProductionLine {
 		List<Equipment> seen = new ArrayList();
 		List<Equipment> current = new ArrayList();
 		Equipment entry = this.getEntry();
-		if (entry != parameters.avoided) {
+		if (entry != avoided) {
 			seen.add(entry);
 			current.add(entry);
 		}
@@ -220,7 +220,7 @@ public model ProductionLine {
 			List<Equipment> next = new ArrayList();
 			for (Equipment e : current) {
 				for (Equipment s : e.successors) {
-					if (s != parameters.avoided) {
+					if (s != avoided) {
 						if (!seen.contains(s)) {
 							seen.add(s);
 							next.add(s);
@@ -259,9 +259,9 @@ public model ProductionLine {
 	// =========================================================================
 	// Is a ranked above b? Rank first, then how close to its own threshold.
 	public Boolean hasHigherPriorityThan(Equipment a, Equipment b) {
-		if (parameters.a.priorityRank > parameters.b.priorityRank) { return true; }
-		if (parameters.a.priorityRank < parameters.b.priorityRank) { return false; }
-		return parameters.a.ratioOrZero > parameters.b.ratioOrZero;
+		if (a.priorityRank > b.priorityRank) { return true; }
+		if (a.priorityRank < b.priorityRank) { return false; }
+		return a.ratioOrZero > b.ratioOrZero;
 	}
 
 	// The maintenance list, most urgent first: each equipment slots in behind everyone already
@@ -345,7 +345,7 @@ public model ProductionLine {
 		Equipment target with ConceptInstance();
 
 		create(required InternalLink l) {
-			xmlLink = parameters.l;
+			xmlLink = l;
 		}
 
 		delete() {
@@ -374,7 +374,7 @@ public model ProductionLine {
 		Intervention[0,*] interventions with ConceptInstance();
 
 		create(required InternalElement e) {
-			xmlElement = parameters.e;
+			xmlElement = e;
 		}
 
 		// Stale equipements are removed from the federation; the artifacts are never touched.
@@ -395,7 +395,7 @@ public model ProductionLine {
 				String tn = "" + child.type.name;
 				if (tn == "AttributeType") {
 					String n = "" + child.getPropertyValue("Name");
-					if (n == parameters.attrName) {
+					if (n == attrName) {
 						return "" + child.getPropertyValue("Value");
 					}
 				}
@@ -612,9 +612,9 @@ public model ProductionLine {
 			Reading r = (Reading)xls.createReflectedInstance("Reading");
 			r.code = this.code;
 			r.quantity = "Vibration";
-			r.value = parameters.value;
+			r.value = value;
 			r.unit = "mm/s";
-			r.operator = parameters.operator;
+			r.operator = operator;
 			this.container.synchronize();
 		}
 
