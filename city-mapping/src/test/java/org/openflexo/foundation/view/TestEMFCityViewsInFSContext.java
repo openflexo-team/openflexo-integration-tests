@@ -50,7 +50,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.openflexo.foundation.FlexoEditor;
-import org.openflexo.foundation.FlexoException;
+import org.openflexo.foundation.OpenflexoRuntimeException;
 import org.openflexo.foundation.FlexoProject;
 import org.openflexo.foundation.action.AddRepositoryFolder;
 import org.openflexo.foundation.fml.VirtualModel;
@@ -205,7 +205,7 @@ public class TestEMFCityViewsInFSContext extends OpenflexoProjectAtRunTimeTestCa
 	@Test
 	@TestOrder(5)
 	@Category(UITest.class)
-	public void testCreateVirtualModelInstance() throws FileNotFoundException, ResourceLoadingCancelledException, FlexoException {
+	public void testCreateVirtualModelInstance() throws FileNotFoundException, ResourceLoadingCancelledException, OpenflexoRuntimeException {
 
 		log("test3CreateVirtualModelInstance()");
 
