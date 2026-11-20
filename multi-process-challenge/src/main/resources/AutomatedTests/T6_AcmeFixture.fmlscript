@@ -39,18 +39,19 @@ assert acme.allArtifactTypes().size == 4;
 assert acme.getArtifactType("Code") != null;
 assert acme.getArtifactType("Test Report") != null;
 
-// --- What does NOT come back, pinned as measured -------------------------------------------------
-// Two links involving the Begin instance (SYL_45) stay empty after load, while the counts above
-// show it IS among the 8 task types and the gateways DO reference it through their _in role:
-//   - the single-valued initialTaskType role comes back null;
-//   - getTaskType("Begin") finds nothing, i.e. that instance answers no name.
-// Everything multi-valued and every other named lookup resolves. The file order is unchanged from
-// the legacy project, so the migration did not introduce this. Not root-caused: the script surface
-// cannot introspect a role's contents (binding a list to a script variable loses its type, and
-// sep.taskTypes.get(0).name does not resolve either), so this needs a Java-side probe.
-// Both assertions below state the CURRENT behaviour - invert them if FML-RT deserialization is fixed.
-assert sep.initialTaskType == null;
-assert sep.getTaskType("Begin") == null;
-assert sep.getTaskType("Requirement analysis") == null;
+// The programming language of the stored COBOL coding task type is an instance of the concept
+// ProgrammingLanguage (it was stored as an enum value, which that concept is not).
+assert acme.getProgrammingLanguage("COBOL") != null;
+
+// --- The Begin instance -------------------------------------------------------------------------
+// The first task type (SYL_45) used to come back empty: initialTaskType was null and the lookup by
+// name found nothing, although the 8 task types and the gateways referencing it were all there.
+// The cause was elsewhere in the file: the language of the stored COBOL coding task type was
+// stored as an enum value (ProgrammingLanguage is a concept, not an enum), which failed the load of
+// the instances stored after it. It is now stored as an instance of ProgrammingLanguage (ITEST-D-1),
+// and the whole wiring resolves.
+assert sep.initialTaskType != null;
+assert sep.getTaskType("Begin") != null;
+assert sep.getTaskType("Requirement analysis") != null;
 
 log "Test PASSED: T6 - the stored Acme instance loads, across both metamodels, with its wiring intact";

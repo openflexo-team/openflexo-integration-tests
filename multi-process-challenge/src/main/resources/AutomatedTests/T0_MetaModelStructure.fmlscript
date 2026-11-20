@@ -13,7 +13,7 @@ assert metaModel.getFlexoConcept("ModelingElement").isAbstract;
 
 // TaskType is nested inside ProcessType, Task inside Process. Nesting states ownership, but it
 // does NOT hide the concept: getFlexoConcept resolves a nested concept by its simple name from the
-// model too, which is exactly why AcmeMetaModel can write "concept CodingTaskType extends TaskType"
+// model too, which is why AcmeMetaModel can write "concept SoftwareEngineeringTaskType extends TaskType" inside AcmeProcessType
 // without qualifying it. Both paths reach the same concept.
 assert metaModel.getFlexoConcept("ProcessType").getEmbeddedFlexoConcept("TaskType") != null;
 assert metaModel.getFlexoConcept("TaskType") == metaModel.getFlexoConcept("ProcessType").getEmbeddedFlexoConcept("TaskType");

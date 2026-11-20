@@ -31,7 +31,7 @@ codeArtifactType = model.newCodeArtifactType("CodeArtifactType");
 documentation = model.newArtifactType("Documentation");
 
 // --- The specialized constraints ----------------------------------------------------------------
-softwareEngineering = model.newProcessType("SoftwareEngineering");
+softwareEngineering = model.newAcmeProcessType("SoftwareEngineering");
 begin = softwareEngineering.newBegin();
 cobolCoding = model.newCodingTaskType(softwareEngineering, "COBOLCoding", cobol);
 javaCoding = model.newCodingTaskType(softwareEngineering, "JavaCoding", java);

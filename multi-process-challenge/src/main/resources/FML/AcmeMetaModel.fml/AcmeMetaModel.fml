@@ -8,11 +8,18 @@
  *
  *   MetaModel                        AcmeMetaModel
  *   ---------                        -------------
- *   TaskType         <-extends-      SoftwareEngineeringTaskType <-extends- CodingTaskType
+ *   ProcessType      <-extends-      AcmeProcessType, which CONTAINS:
+ *   TaskType         <-extends-        SoftwareEngineeringTaskType <-extends- CodingTaskType
  *   ArtifactType     <-extends-      SoftwareEngineeringArtifactType <-extends- CodeArtifactType
  *   Artifact         <-extends-      SoftwareEngineeringArtifact <-extends- Code
  *   ActorType        <-extends-      Developer
- *   Task             <-extends-      Coding
+ *   Process          <-extends-      AcmeProcess, which CONTAINS:
+ *   Task             <-extends-        Coding
+ *
+ * Containment: TaskType is nested in ProcessType and Task in Process, so a concept extending one of
+ * them is declared in a subtype of that container (here AcmeProcessType and AcmeProcess), not at the
+ * root of the model: the instances of a CodingTaskType live in an AcmeProcessType instance. That is
+ * why the Acme process types and processes are created with newAcmeProcessType (whose newProcess creates an AcmeProcess).
  *
  * A CodingTaskType only accepts Developers and only produces code, and a COBOL coding task
  * assigns its one COBOL-capable actor by itself. That last rule is the demo's punchline: the
@@ -36,9 +43,9 @@ public model AcmeMetaModel extends MetaModel {
 	}
 
 	// --- Factories for the concepts this metamodel adds ----------------------------------------
-	// The task-type ones take the owning ProcessType explicitly: they inherit from MetaModel's
-	// TaskType, which is nested inside ProcessType, so they must be created INTO a ProcessType
-	// instance rather than into the VirtualModelInstance.
+	// The task-type ones take the owning AcmeProcessType explicitly: they inherit from MetaModel's
+	// TaskType, which is nested inside ProcessType, so they are nested in AcmeProcessType and must be
+	// created INTO an AcmeProcessType instance rather than into the VirtualModelInstance.
 
 	public ProgrammingLanguage newProgrammingLanguage(String name) {
 		return new ProgrammingLanguage(name);
@@ -56,13 +63,26 @@ public model AcmeMetaModel extends MetaModel {
 		return new CodeArtifactType(name);
 	}
 
-	public SoftwareEngineeringTaskType newSoftwareEngineeringTaskType(ProcessType processType, String name) {
+	/** A process type that may hold the software-engineering task types, and whose processes hold coding tasks. */
+	public AcmeProcessType newAcmeProcessType(String name) {
+		return new AcmeProcessType(name);
+	}
+
+	/**
+	 * The generic factory, which the process type editor calls, creates an Acme process type here: a plain ProcessType
+	 * could not hold the software-engineering task types.
+	 */
+	public ProcessType newProcessType(String name) {
+		return new AcmeProcessType(name);
+	}
+
+	public SoftwareEngineeringTaskType newSoftwareEngineeringTaskType(AcmeProcessType processType, String name) {
 		SoftwareEngineeringTaskType returned = processType.new SoftwareEngineeringTaskType(name);
 		processType.addToTaskTypes(returned);
 		return returned;
 	}
 
-	public CodingTaskType newCodingTaskType(ProcessType processType, String name, ProgrammingLanguage language) {
+	public CodingTaskType newCodingTaskType(AcmeProcessType processType, String name, ProgrammingLanguage language) {
 		CodingTaskType returned = processType.new CodingTaskType(name);
 		returned.language = language;
 		processType.addToTaskTypes(returned);
@@ -162,27 +182,11 @@ public model AcmeMetaModel extends MetaModel {
 	// Task types
 	// -------------------------------------------------------------------------------------------
 
-	public concept SoftwareEngineeringTaskType extends TaskType {
-
-		create(String name) {
-			super(name);
-		}
-
-		delete() {
-		}
-	}
-
 	/**
-	 * A coding step. Only Developers may perform it, only code may come out of it, and when it
-	 * is a COBOL step the one COBOL-capable actor is assigned without anybody asking.
+	 * A process type of the software-engineering shop. It contains the software-engineering task types: they extend MetaModel's
+	 * TaskType, nested in ProcessType, so they are declared in a subtype of ProcessType.
 	 */
-	public concept CodingTaskType extends SoftwareEngineeringTaskType {
-
-		// container.container, not container: CodingTaskType inherits from MetaModel's TaskType,
-		// which is nested inside ProcessType, so a CodingTaskType instance is contained by a
-		// ProcessType instance and the VirtualModelInstance is one level further up. Nesting is
-		// inherited along with the concept.
-		ProgrammingLanguage language with ConceptInstance(virtualModelInstance=container.container);
+	public concept AcmeProcessType extends ProcessType {
 
 		create(String name) {
 			super(name);
@@ -191,43 +195,88 @@ public model AcmeMetaModel extends MetaModel {
 		delete() {
 		}
 
-		/**
-		 * Legacy tested the FlexoConcept name reflectively (actorType.concept.name == "Developer").
-		 * That idiom is dead in 2.99 - `concept` is now a grammar keyword and cannot appear in a
-		 * binding path - and it was stringly-typed anyway. `instanceof` says the same thing.
-		 */
-		public boolean isValidActorType(ActorType actorType) {
-			return actorType instanceof Developer;
+		/** The processes of an Acme process type are AcmeProcess, which hold the coding tasks. */
+		public Process newProcess(String name) {
+			return container.new AcmeProcess(name, this);
 		}
 
-		public boolean isValidProducedArtifactType(ArtifactType artifactType) {
-			return artifactType instanceof CodeArtifactType;
-		}
+		public concept SoftwareEngineeringTaskType extends TaskType {
 
-		/**
-		 * Legacy compared language.concept.name to "COBOL", which could never match: the
-		 * instances were all of concept ProgrammingLanguage, so the branch was dead code and the
-		 * COBOL rule never fired. Fixed by naming the language instance and comparing on name.
-		 */
-		public Task newTask(String name, Process process) {
-			Coding returned = process.new Coding(name, this);
-			if (language != null) {
-				if (language.name == "COBOL") {
-					returned.forceAddToPerformingActors(container.container.getActor("Ann Smith"));
-				}
+			create(String name) {
+				super(name);
 			}
-			return returned;
+
+			delete() {
+			}
+		}
+
+		/**
+		 * A coding step. Only Developers may perform it, only code may come out of it, and when it
+		 * is a COBOL step the one COBOL-capable actor is assigned without anybody asking.
+		 */
+		public concept CodingTaskType extends SoftwareEngineeringTaskType {
+
+			// container.container, not container: CodingTaskType is nested in AcmeProcessType, so a
+			// CodingTaskType instance is contained by an AcmeProcessType instance and the
+			// VirtualModelInstance is one level further up.
+			ProgrammingLanguage language with ConceptInstance(virtualModelInstance=container.container);
+
+			create(String name) {
+				super(name);
+			}
+
+			delete() {
+			}
+
+			/**
+			 * Legacy tested the FlexoConcept name reflectively (actorType.concept.name == "Developer").
+			 * That idiom is dead in 2.99 - `concept` is now a grammar keyword and cannot appear in a
+			 * binding path - and it was stringly-typed anyway. `instanceof` says the same thing.
+			 */
+			public boolean isValidActorType(ActorType actorType) {
+				return actorType instanceof Developer;
+			}
+
+			public boolean isValidProducedArtifactType(ArtifactType artifactType) {
+				return artifactType instanceof CodeArtifactType;
+			}
+
+			/**
+			 * Legacy compared language.concept.name to "COBOL", which could never match: the
+			 * instances were all of concept ProgrammingLanguage, so the branch was dead code and the
+			 * COBOL rule never fired. Fixed by naming the language instance and comparing on name.
+			 */
+			public Task newTask(String name, Process process) {
+				Coding returned = process.new Coding(name, this);
+				if (language != null) {
+					if (language.name == "COBOL") {
+						returned.forceAddToPerformingActors(container.container.getActor("Ann Smith"));
+					}
+				}
+				return returned;
+			}
 		}
 	}
 
-	/** A running coding step. */
-	public concept Coding extends Task {
+	/** A running process of the software-engineering shop: it contains the coding tasks (Task is nested in Process). */
+	public concept AcmeProcess extends Process {
 
-		create(String name, TaskType taskType) {
-			super(name, taskType);
+		create(String name, ProcessType processType) {
+			super(name, processType);
 		}
 
 		delete() {
+		}
+
+		/** A running coding step. */
+		public concept Coding extends Task {
+
+			create(String name, TaskType taskType) {
+				super(name, taskType);
+			}
+
+			delete() {
+			}
 		}
 	}
 }
