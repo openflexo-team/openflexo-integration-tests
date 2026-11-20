@@ -102,7 +102,7 @@ public class TestLoadAndValidateVariousFMLVirtualModels extends OpenflexoTestCas
 			// virtual model contained in these view points declares concepts: assert they are
 			// there before trusting the validation below.
 			assertFalse("VirtualModel " + vm.getName() + " has no FlexoConcept: it most probably "
-					+ "parsed to an empty compilation unit", vm.getFlexoConcepts().isEmpty());
+					+ "parsed to an empty compilation unit", vm.getAllFlexoConcepts().isEmpty());
 
 			assertVirtualModelIsValid(vm);
 		}

@@ -117,7 +117,7 @@ public class MultiProcessChallengeValidationTest extends OpenflexoTestCase {
 		// errors - so "0 errors" alone proves nothing. Demand that the concepts actually got parsed.
 		assertFalse("VirtualModel " + vm.getName() + " declares no concept: it most likely failed to PARSE "
 				+ "(look for 'ParserException token:... line:N' in the log). A failed parse validates clean.",
-				vm.getFlexoConcepts().isEmpty());
+				vm.getAllFlexoConcepts().isEmpty());
 
 		ValidationModel validationModel = vmLibrary.getFMLValidationModel();
 		ValidationReport report = validationModel.validate(vm.getCompilationUnit());
